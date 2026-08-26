@@ -55,3 +55,21 @@
 - **Decisões Registradas:** ADR-012 (Proibição de Foundation 04 por inércia e autorização do Simple Loop MVP).
 - **Resultado:** `COMPLETE`.
 - **Evidência:** Execução do validador de inteligência e aprovação de 17 testes de continuidade e inteligência.
+
+---
+
+### [MS-003.1] Institucionalização Constitucional (Missão 03.1)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Ingerir e institucionalizar a *Constituição Mestra de Construção de Projetos v1.0* (derivada do FioOS) sem criar burocracia, sem reabrir a Foundation e sem contaminar o IEE com detalhes de kernel do FioOS.
+- **O que Mudou:**
+  - Preservação do texto integral em `docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md` com hash SHA-256 fixado (`5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468`).
+  - Criação da Doutrina Operacional canônica em `docs/doctrine/OPERATING-DOCTRINE.md`.
+  - Elaboração da `CONSTITUTION-APPLICABILITY-MATRIX.md` (reconciliando 150 princípios em Universal, IEE Now, IEE Later, FioOS Specific, Conditional, Already Institutionalized).
+  - Elaboração do `CONSTITUTIONAL-MATURITY-MAP.md` rastreando a maturidade operacional das regras.
+  - Atualização do `TASK-CONTRACT.md` com campos de anti-círculo (`target_uncertainty`, `target_decision`, `expected_decision_delta`).
+  - Criação da suíte de testes em `tests/doctrine/test_constitutional_doctrine.py`.
+  - Criação do Checkpoint `CP-20260826-003`.
+- **Decisões Registradas:** ADR-013 (Institucionalização da Doutrina Operacional) e ADR-014 (Exigência de Incerteza Alvo e Stop Condition).
+- **Resultado:** `COMPLETE`.
+- **Evidência:** Execução de 24 testes automatizados (continuidade, inteligência e doutrina) com 100% de aprovação.

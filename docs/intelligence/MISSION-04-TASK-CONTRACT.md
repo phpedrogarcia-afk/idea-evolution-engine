@@ -10,6 +10,9 @@
 - **task_id:** `MISSION-04-MVP-SIMPLE-LOOP`
 - **objective:** Implementar o protótipo executável do **Simple Idea Evolution Loop** que automatiza o ciclo manual de transportar uma ideia humana entre funções dirigidas de IA, gerando uma representação refinada e testável com estado compartilhado estruturado.
 - **why_now:** As três fundações (Constituição, Continuidade e Inteligência) estão completas. A aplicação do princípio *Reality Over Deliberation* exige que o próximo avanço de conhecimento venha da construção e teste do primeiro loop prático, em vez de mais discussões documentais.
+- **target_uncertainty:** Demonstrar empiricamente se um pipeline heurístico sequencial de 6 estágios dirigidos é capaz de maturar ideias cruas sem dependência de orquestradores complexos ou frameworks multiagente.
+- **target_decision:** Validar a viabilidade do Single Agent Pipeline antes de avaliar necessidade de DCE com múltiplos agentes.
+- **expected_decision_delta:** `IMPLEMENTED_CAPABILITY`
 - **task_type:** `IMPLEMENTATION`
 - **risk_level:** `HIGH`
 - **context_profile:** `IMPLEMENTATION_ENTRY`
@@ -17,6 +20,7 @@
   - [`AI-START-HERE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/AI-START-HERE.md)
   - [`docs/context/CONTINUITY-CAPSULE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTINUITY-CAPSULE.md)
   - [`docs/foundations/PROBLEM-DEFINITION.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/foundations/PROBLEM-DEFINITION.md)
+  - [`docs/doctrine/OPERATING-DOCTRINE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/doctrine/OPERATING-DOCTRINE.md)
   - [`docs/intelligence/WORK-PROTOCOL.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/WORK-PROTOCOL.md)
 
 ---

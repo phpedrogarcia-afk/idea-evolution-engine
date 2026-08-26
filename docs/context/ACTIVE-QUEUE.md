@@ -6,15 +6,15 @@
 ---
 
 ## 🟢 NOW (Trabalho Atual — Máximo 1–2 tarefas)
-- [x] **TASK-003:** Conclusão da Missão Mestre 03 (Agent Intelligence Architecture):
-  - [x] Criação de `docs/intelligence/` e protocolos canônicos.
-  - [x] Criação de `intelligence-manifest.json` e `foundation-readiness.json`.
-  - [x] Criação de `tools/intelligence/validate_intelligence.py` e `build_context_pack.py`.
-  - [x] Criação da suíte de testes adversariais (`tests/intelligence/test_intelligence.py`).
-  - [x] Cálculo e aprovação do Foundation Ready Gate (`FOUNDATION_READY = TRUE`).
-  - [x] Registro do [ADR-012](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-012) (Proibição de Foundation 04 por inércia).
-  - [x] Preparação do `MISSION-04-TASK-CONTRACT.md`.
-  - [x] Emissão do checkpoint `CP-20260826-002`.
+- [x] **TASK-003.1:** Conclusão da Missão 03.1 (Constitutional Institutionalization):
+  - [x] Preservação da fonte original `docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md` com hash SHA-256 fixado.
+  - [x] Criação de `docs/doctrine/OPERATING-DOCTRINE.md` e `docs/OPERATING-DOCTRINE.md`.
+  - [x] Criação de `docs/doctrine/CONSTITUTION-APPLICABILITY-MATRIX.md`.
+  - [x] Criação de `docs/doctrine/CONSTITUTIONAL-MATURITY-MAP.md`.
+  - [x] Registro de [ADR-013](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-013) e [ADR-014](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-014).
+  - [x] Atualização de `TASK-CONTRACT.md` e `MISSION-04-TASK-CONTRACT.md` com campos de anti-círculo.
+  - [x] Criação da suíte de testes em `tests/doctrine/test_constitutional_doctrine.py`.
+  - [x] Emissão do checkpoint `CP-20260826-003`.
 - [ ] **TASK-000:** Gate de Governança: Parada mandatória para auditoria humana e autorização para execução da Missão 04 (Simple Idea Evolution Loop MVP).
 
 ---

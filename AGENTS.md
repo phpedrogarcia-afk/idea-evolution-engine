@@ -5,10 +5,11 @@
 ---
 
 ## 1. Regra Fundamental de Operação
-1. **Leia [`AI-START-HERE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/AI-START-HERE.md)** antes de realizar qualquer modificação ou análise.
-2. **Respeite a fase ativa:** Atualmente estamos na **FASE 0 — FUNDAÇÃO**. Não gere código de produto, servidores, rotas, bancos de dados ou interfaces visuais.
-3. **Não confunda TARGET com CURRENT:** Se um documento descreve um módulo futuro do DCE ou do IdeaGenome, ele é um alvo arquitetural, não código existente.
-4. **Propostas, não mutações diretas:** IAs propõem artefatos, schemas ou patches; a autoridade de aceitação e as invariantes constitucionais são verificadas por regras determinísticas e supervisão humana.
+1. **Leia [`AI-START-HERE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/AI-START-HERE.md)** e siga a [`docs/doctrine/OPERATING-DOCTRINE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/doctrine/OPERATING-DOCTRINE.md) antes de qualquer modificação.
+2. **Execute o Ciclo de Trabalho em 12 Etapas:** Siga rigorosamente o [`docs/intelligence/WORK-PROTOCOL.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/WORK-PROTOCOL.md) (*Orient $\to$ Classify $\to$ Recon $\to$ Hypothesize $\to$ Attack $\to$ Plan $\to$ Act $\to$ Verify $\to$ Record $\to$ Checkpoint*).
+3. **Respeite a fase ativa:** A Fase de Fundação está concluída (`FOUNDATION_READY = TRUE`). O próximo produto é o *Simple Idea Evolution Loop MVP*. Não gere código de produto sem autorização humana formal.
+4. **Não confunda TARGET com CURRENT:** Se um documento descreve um módulo futuro do DCE ou do IdeaGenome, ele é um alvo arquitetural, não código existente.
+5. **Propostas, não mutações diretas:** IAs propõem artefatos, schemas ou patches; a autoridade de aceitação e as invariantes constitucionais são verificadas por regras determinísticas e supervisão humana.
 
 ---
 

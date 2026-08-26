@@ -17,6 +17,8 @@
 - [ADR-010: Separação entre Regimes de Bootstrap e Investigação Decisional](#adr-010)
 - [ADR-011: Sistema de Continuidade Cognitiva, Checkpoints e Validação Determinística](#adr-011)
 - [ADR-012: Proibição de Missões de Fundação por Inércia e Transição Obrigatória para o MVP](#adr-012)
+- [ADR-013: Institucionalização da Doutrina Operacional de Construção e Preservação de Fonte](#adr-013)
+- [ADR-014: Exigência Obrigatória de Target Uncertainty e Stop Condition em Contratos de Tarefa](#adr-014)
 
 ---
 
@@ -125,3 +127,21 @@
 - **Contexto:** Risco de "paralisia por fundação", acumulando dezenas de documentos teóricos sem nunca testar o produto na prática.
 - **Decisão:** Aplicar o princípio *Reality Over Deliberation* ao próprio projeto (Meta-Ready-To-Test). A Fundação 03 encerra o ciclo de fundação prévia. Nenhuma nova missão de fundação (ex: Foundation 04) pode ser criada por inércia; a próxima missão autorizada deve ser a implementação do *Simple Idea Evolution Loop MVP*. Uma nova fundação só poderá existir se for detectado um bloqueador empírico concreto durante a construção e houver autorização humana expressa.
 - **Consequências:** Encerramento definitivo da fase pré-código e foco estrito na validação experimental do primeiro produto.
+
+---
+
+### <a id="adr-013"></a> ADR-013: Institucionalização da Doutrina Operacional de Construção e Preservação de Fonte
+- **Data:** 2026-08-26
+- **Status:** `ACCEPTED`
+- **Contexto:** Ingestão da *Constituição Mestra de Construção de Projetos v1.0* (derivada do FioOS) contendo 150 princípios de inteligência operacional, epistemologia e governança.
+- **Decisão:** Adotar a diretriz *"Preserve the doctrine. Adapt the application."* Preservar o texto integral da fonte com hash criptográfico SHA-256 fixado em `docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md` e criar a `docs/doctrine/OPERATING-DOCTRINE.md` como casa canônica da filosofia operacional do IEE. Isolar mecanismos específicos de kernel do FioOS (leases, territory, workload identity) e reforçar princípios universais (*Truth over agreement*, *Progress over appearance*, *Deterministic first*, *Simple before platform*).
+- **Consequências:** A doutrina orienta o raciocínio dos agentes sem criar burocracia ou poluição ontológica no IEE.
+
+---
+
+### <a id="adr-014"></a> ADR-014: Exigência Obrigatória de Target Uncertainty e Stop Condition em Contratos de Tarefa
+- **Data:** 2026-08-26
+- **Status:** `ACCEPTED`
+- **Contexto:** Agentes autônomos tendem a entrar em ciclos infinitos de pesquisa ou refatoração sem redução concreta de incerteza (*Anti-Circle Rule*).
+- **Decisão:** Todo `TaskContract` (v0.1+) deve declarar compulsoriamente os campos: `target_uncertainty` (qual incerteza estamos pagando para reduzir agora), `target_decision` (qual decisão será destravada), `stop_condition` (condição estrita de parada) e `decision_delta` esperado.
+- **Consequências:** Elimina tarefas circulares sem valor decisório (*Do not pay twice for the same uncertainty*).

@@ -1,0 +1,80 @@
+{
+  "checkpoint_id": "CP-20260826-003",
+  "created_at": "2026-08-26T12:51:50-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_0_FOUNDATION",
+  "objective": "Mission 03.1 Complete: Constitutional Institutionalization of Construction Constitution v1.0",
+  "repository": {
+    "branch": "master",
+    "commit": "bf83608",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001: Fundação Conceitual, Constitucional e Arquitetural v0.1",
+    "TASK-002: Endurecimento de Inteligência e Continuidade Cognitiva (Fase 02)",
+    "TASK-003: Arquitetura de Inteligência de Agentes e Foundation Ready Gate (Fase 03)",
+    "TASK-003.1: Institucionalização Constitucional da Constituição Mestra v1.0"
+  ],
+  "changed_files": [
+    "docs/DECISIONS-LEDGER.md",
+    "docs/CURRENT-STATE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "AI-START-HERE.md",
+    "AGENTS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/DECISIONS-SUMMARY.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/checkpoints/CP-20260826-003.json",
+    "docs/context/checkpoints/CP-20260826-003.md",
+    "docs/doctrine/INDEX.md",
+    "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md",
+    "docs/doctrine/OPERATING-DOCTRINE.md",
+    "docs/doctrine/CONSTITUTION-APPLICABILITY-MATRIX.md",
+    "docs/doctrine/CONSTITUTIONAL-MATURITY-MAP.md",
+    "docs/OPERATING-DOCTRINE.md",
+    "docs/intelligence/TASK-CONTRACT.md",
+    "docs/intelligence/MISSION-04-TASK-CONTRACT.md",
+    "tools/context/validate_context.py",
+    "tests/doctrine/__init__.py",
+    "tests/doctrine/test_constitutional_doctrine.py",
+    "docs/CONSTITUTION-INTEGRATION-REPORT.md"
+  ],
+  "new_decisions": [
+    "ADR-013: Institucionalização da Doutrina Operacional de Construção e Preservação de Fonte",
+    "ADR-014: Exigência Obrigatória de Target Uncertainty e Stop Condition em Contratos de Tarefa"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "test_continuity.py (7 passed)",
+    "test_intelligence.py (10 passed)",
+    "test_constitutional_doctrine.py (7 passed)",
+    "Total: 24/24 tests passing"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Risco de iniciar o código da Mission 04 antes de autorização humana explícita"
+  ],
+  "blockers": [],
+  "next_exact_action": "TASK-000: Gate de Governança — Aguardar aprovação humana formal para execução da Missão 04 (Simple Idea Evolution Loop MVP)",
+  "authorized_next_scope": [
+    "Aguardar autorização humana para MISSION-04-MVP-SIMPLE-LOOP",
+    "Proibida criação de Foundation 04 por inércia (ADR-012)"
+  ],
+  "do_not_repeat": [
+    "Não recriar ou redefinir documentos das fundações 01, 02 ou 03",
+    "Não reabrir a fundação para mais documentos doutrinários sem bloqueador empírico real"
+  ],
+  "recovery_notes": "Execute python tools/context/project_status.py e consulte docs/doctrine/OPERATING-DOCTRINE.md e docs/intelligence/MISSION-04-TASK-CONTRACT.md."
+}

@@ -52,13 +52,16 @@ Não carregue o repositório inteiro. Escolha o perfil exato para a sua missão:
 
 ---
 
-## 4. Invariantes Constitucionais Inegociáveis
-1. **Progress over prose:** Aumento de texto não é progresso. Progresso exige alteração em claim, evidência, premissa ou teste.
-2. **Capability != Authority:** O humano detém autoridade exclusiva sobre intenção, valores e *Protected Cores*.
-3. **Memory != Evidence:** Histórico de chat ou suposição de LLM não é evidência; toda evidência requer proveniência.
-4. **Deterministic First:** O kernel determinístico valida; a IA atua nas bordas semânticas como proponente via `GenomePatch`.
-5. **Reality over Deliberation:** Quando um teste empírico no mundo real tiver maior valor epistêmico, a deliberação cessa (`READY_TO_TEST`).
-6. **Multi-Agent is Not Default:** Deliberação multiagente só é ativada se houver alto valor de coordenação (`coordination_value`).
+## 4. Invariantes Constitucionais & Doutrina Operacional
+> **Doutrina Operacional Canônica:** [`docs/doctrine/OPERATING-DOCTRINE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/doctrine/OPERATING-DOCTRINE.md) (v1.0)  
+> **Protocolo de Trabalho em 12 Etapas:** [`docs/intelligence/WORK-PROTOCOL.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/WORK-PROTOCOL.md)
+
+1. **Truth over agreement:** Melhorar a qualidade da decisão, nunca maximizar concordância artificial.
+2. **Progress over appearance (Progress over prose / Decision Delta):** Progresso exige mudança real em evidência, decisão ou redução de incerteza.
+3. **Capability != Authority:** O humano detém autoridade exclusiva sobre intenção, valores e *Protected Cores*.
+4. **Memory != Evidence:** Histórico de chat ou suposição de LLM não é evidência; toda evidência requer proveniência.
+5. **Deterministic First:** O kernel determinístico valida; a IA atua nas bordas semânticas como proponente via `GenomePatch`.
+6. **Reality over Deliberation (Proven Enough $\to$ Freeze & Use):** Quando a incerteza for respondida, congele e use. Não pague duas vezes pela mesma incerteza.
 7. **State must survive the model:** O estado do projeto reside no repositório imutável e em checkpoints, nunca na memória efêmera da IA.
 
 ---

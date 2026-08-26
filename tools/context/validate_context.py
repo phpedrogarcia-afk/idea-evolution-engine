@@ -48,9 +48,14 @@ REQUIRED_FILES = [
     REPO_ROOT / "docs" / "intelligence" / "EVIDENCE-POLICY.md",
     REPO_ROOT / "docs" / "intelligence" / "HYPOTHESIS-PROTOCOL.md",
     REPO_ROOT / "docs" / "intelligence" / "BASELINE-POLICY.md",
-    REPO_ROOT / "docs" / "intelligence" / "ADVERSARIAL-REVIEW.md",
     REPO_ROOT / "docs" / "intelligence" / "FOUNDATION-READINESS.md",
     REPO_ROOT / "docs" / "intelligence" / "MISSION-04-TASK-CONTRACT.md",
+    REPO_ROOT / "docs" / "doctrine" / "INDEX.md",
+    REPO_ROOT / "docs" / "doctrine" / "source" / "CONSTRUCTION-CONSTITUTION-v1.0.md",
+    REPO_ROOT / "docs" / "doctrine" / "OPERATING-DOCTRINE.md",
+    REPO_ROOT / "docs" / "doctrine" / "CONSTITUTION-APPLICABILITY-MATRIX.md",
+    REPO_ROOT / "docs" / "doctrine" / "CONSTITUTIONAL-MATURITY-MAP.md",
+    REPO_ROOT / "docs" / "OPERATING-DOCTRINE.md",
     MANIFEST_PATH,
 ]
 
