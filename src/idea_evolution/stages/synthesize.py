@@ -32,7 +32,9 @@ class SynthesizeStage(BaseStage):
 
     def apply_output_to_state(self, state: SimpleIdeaState, output: SynthesizeOutput) -> str:
         state.current_idea = output.refined_idea
+        state.core_mechanism = output.core_mechanism
         state.accepted_changes = output.accepted_changes
+        state.candidate_extensions = output.candidate_possibilities
         state.rejected_changes = [
             RejectedProposal(
                 proposal=r.proposal,
@@ -45,4 +47,4 @@ class SynthesizeStage(BaseStage):
         state.known_risks = output.known_risks
         state.recommended_next_step = output.recommended_next_step
 
-        return f"Síntese concluída: {len(output.accepted_changes)} aceitas, {len(output.rejected_changes)} rejeitadas."
+        return f"Síntese concluída: {len(output.accepted_changes)} aceitas, {len(output.candidate_possibilities)} candidatas, {len(output.rejected_changes)} rejeitadas."

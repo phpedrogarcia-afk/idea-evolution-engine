@@ -198,10 +198,15 @@ class FakeModelRunner(ModelRunner):
         if schema == SynthesizeOutput:
             return SynthesizeOutput(
                 refined_idea="Idea Evolution Engine (Simple Loop): Motor sequencial CLI que recebe uma ideia humana crua, submete a 6 estágios dirigidos, valida esquemas e devolve um pacote de maturação estruturado com rastreabilidade total.",
+                core_mechanism="Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
                 accepted_changes=[
                     "Implementação de contratos Pydantic estritos para cada estágio.",
                     "Isolamento do kernel determinístico contra alucinações de estado.",
                     "Preservação imutável da ideia original.",
+                ],
+                candidate_possibilities=[
+                    "Modo de auditoria interativo com checkpoints gráficos no terminal.",
+                    "Suporte a plugins de exportação para ferramentas de issue tracking.",
                 ],
                 rejected_changes=[
                     RejectedItem(
@@ -221,6 +226,7 @@ class FakeModelRunner(ModelRunner):
                 return FinalReviewOutput(
                     material_issues_remaining=["Persistem dúvidas sobre o limite de reconstrução no pipeline."],
                     essence_drift_detected=False,
+                    speculative_accretion_detected=False,
                     unresolved_critical_issue=True,
                     recommendation="RECONSTRUCT",
                     review_summary="Recomendada uma rodada adicional de reconstrução para sanar a ambiguidade de limites.",
@@ -231,15 +237,17 @@ class FakeModelRunner(ModelRunner):
                 return FinalReviewOutput(
                     material_issues_remaining=[],
                     essence_drift_detected=True,
-                    drift_explanation="A síntese transformou um aplicativo de bookmarks em um sistema operacional distribuído.",
+                    speculative_accretion_detected=True,
+                    drift_explanation="A síntese transformou um aplicativo de bookmarks em um sistema operacional distribuído com blockchain.",
                     unresolved_critical_issue=True,
                     recommendation="RECONSTRUCT",
-                    review_summary="Desvio de essência crítico detectado.",
+                    review_summary="Desvio de essência crítico e inchaço especulativo detectados.",
                 )
 
             return FinalReviewOutput(
                 material_issues_remaining=[],
                 essence_drift_detected=False,
+                speculative_accretion_detected=False,
                 drift_explanation="",
                 unresolved_critical_issue=False,
                 recommendation="REFINED_IDEA_READY",

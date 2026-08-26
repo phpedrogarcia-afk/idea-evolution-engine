@@ -89,7 +89,9 @@ class SimpleIdeaState(BaseModel):
     candidate_tests: List[str] = Field(default_factory=list)
 
     # Síntese e Revisão
+    core_mechanism: str = ""
     accepted_changes: List[str] = Field(default_factory=list)
+    candidate_extensions: List[str] = Field(default_factory=list)
     rejected_changes: List[RejectedProposal] = Field(default_factory=list)
     remaining_uncertainties: List[str] = Field(default_factory=list)
     known_risks: List[str] = Field(default_factory=list)
@@ -99,6 +101,7 @@ class SimpleIdeaState(BaseModel):
     reconstruction_count: int = 0
     max_reconstructions: int = 1
     essence_drift_detected: bool = False
+    speculative_accretion_detected: bool = False
     human_intervention: bool = False
     stage_history: List[StageHistoryEntry] = Field(default_factory=list)
 
@@ -170,8 +173,14 @@ class SimpleIdeaState(BaseModel):
                     md.append(f"   - *Tradeoffs:* {', '.join(alt.tradeoffs)}")
             md.append("\n")
 
+        if self.candidate_extensions:
+            md.append("## 6. Possibilidades Candidatas (Não Incorporadas ao Core)\n")
+            for idx, cand in enumerate(self.candidate_extensions, 1):
+                md.append(f"{idx}. *[CANDIDATE]* {cand}")
+            md.append("\n")
+
         if self.rejected_changes:
-            md.append("## 6. Propostas Rejeitadas (com Justificativa)\n")
+            md.append("## 7. Propostas Rejeitadas (com Justificativa)\n")
             for rej in self.rejected_changes:
                 md.append(f"- **Rejeitado:** {rej.proposal} (Origem: {rej.source_stage})")
                 md.append(f"  *Motivo:* {rej.reason_rejected}")

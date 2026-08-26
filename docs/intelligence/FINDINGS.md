@@ -90,5 +90,15 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O IEE é capaz de operar com inteligência gratuita sob a política `FREE_ONLY` e diagnosticar modelos obsoletos via `iee providers doctor`.
 - **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
 
+---
+
+### [FINDING-009] Prevenção de Inchaço Especulativo Exige Isolamento de Três Camadas (CORE vs CANDIDATE)
+- **Claim:** Modelos tendem a confundir alternativas geradas com requisitos obrigatórios do produto, inflando a ideia humana com arquiteturas desnecessárias (*Speculative Feature Accretion*). A instrução de síntese permissiva ("integrate the best mechanisms") é a causa raiz desse vazamento. Exigir que a síntese refine o `CORE` e isole possibilidades conceituais em `candidate_extensions` (não incorporadas ao core sem justificativa humana) restaura a fidelidade à intenção original.
+- **Evidence:** Autópsia causal da Missão 05.1 e testes adversariais `test_adversarial_essence_drift.py`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** O IEE mantém criatividade exploratória sem permitir que alucinações arquiteturais desfigurem a ideia humana.
+- **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
+
+
 
 

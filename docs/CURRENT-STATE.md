@@ -5,30 +5,25 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP Concluído & Governança de Custo FREE_ONLY (M06.1)
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Preservação de Essência (M05.1)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do MVP:** `IMPLEMENTED_AND_TESTED` (Software funcional, 61 testes verdes)
-- **Status do Roteamento Multi-Modelo:** `MULTI_MODEL_READY_OFFLINE = TRUE`
-- **Status da Política de Custo:** `FREE_ONLY_POLICY = INSTITUTIONALIZED` (Paid fallback proibido)
+- **Status do MVP:** `IMPLEMENTED_AND_TESTED` (Software funcional, 63 testes verdes)
+- **Status da Preservação de Essência:** `HARDENED` (Isolamento de `candidate_extensions` e detecção de `Speculative Feature Accretion`)
+- **Status de Roteamento & Custo:** `MULTI_MODEL_READY_OFFLINE = TRUE` | `FREE_ONLY_POLICY = INSTITUTIONALIZED`
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
-- **Varredura de Segredos:** `SECRET_SCAN: PASS` (Zero segredos ou chaves no repositório)
-- **Status do Canário Real (M05):** `BLOCKED_PROVIDER_CREDENTIAL_OR_COST` (Aguardando configuração de API key pelo operador)
-- **Último Checkpoint Imutável:** [`CP-20260826-007`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-007.md)
+- **Varredura de Segredos:** `SECRET_SCAN: PASS`
+- **Último Checkpoint Imutável:** [`CP-20260826-008`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-008.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
 - [x] Motor executável Python em `src/idea_evolution/` com CLI (`iee evolve`, `compare`, `inspect-run`, `providers doctor`, `routes show`).
-- [x] Catálogo vivo de modelos em `src/idea_evolution/config/catalog.py` e `config/model_catalog.json`.
-- [x] Camada de roteamento multi-modelo com validação de elegibilidade e custos (`src/idea_evolution/config/routing.py` e `src/idea_evolution/providers/router.py`).
-- [x] Adaptadores atualizados com modelos ativos para Groq (`openai/gpt-oss-120b`), Gemini (`gemini-3.7-flash`), OpenAI e Anthropic.
-- [x] Estado compartilhado estruturado `SimpleIdeaState` com proveniência multi-modelo e imutabilidade de `original_idea`.
-- [x] Suíte de 61 testes automatizados cobrindo continuidade, inteligência, doutrina, domínio, contratos, roteamento, catálogo de modelos, governança de custos e testes adversariais.
+- [x] Contratos e prompts endurecidos contra inchaço especulativo em `prompts/synthesize_v0_1.md` e `prompts/final_review_v0_1.md`.
+- [x] Suíte de 63 testes automatizados cobrindo continuidade, inteligência, doutrina, domínio, contratos, roteamento, catálogo de modelos, governança de custos e testes adversariais de essence drift.
 
 ---
 
 ## 3. O que NÃO Existe (Explicitamente Não Implementado)
-- ❌ Zero credenciais ou chaves hardcoded no código.
-- ❌ Zero inferência real executada (mantida bloqueada).
+- ❌ Zero credenciais hardcoded.
+- ❌ Zero promoção automática de alternativas para o core da ideia sem justificativa.
 - ❌ Zero fallback silencioso para modelos pagos.
-- ❌ Zero runtime de FioOS clonado no IEE.

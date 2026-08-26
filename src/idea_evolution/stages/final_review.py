@@ -29,9 +29,10 @@ class FinalReviewStage(BaseStage):
         return FinalReviewOutput
 
     def apply_output_to_state(self, state: SimpleIdeaState, output: FinalReviewOutput) -> str:
-        state.essence_drift_detected = output.essence_drift_detected
+        state.essence_drift_detected = output.essence_drift_detected or output.speculative_accretion_detected
+        state.speculative_accretion_detected = output.speculative_accretion_detected
 
-        if output.essence_drift_detected:
-            state.remaining_uncertainties.append(f"ALERTA DE ESSENCE DRIFT: {output.drift_explanation}")
+        if output.essence_drift_detected or output.speculative_accretion_detected:
+            state.remaining_uncertainties.append(f"ALERTA DE ESSENCE DRIFT / ACCRETION: {output.drift_explanation}")
 
-        return f"Review Final: recomendação='{output.recommendation}', essence_drift={output.essence_drift_detected}."
+        return f"Review Final: recomendação='{output.recommendation}', essence_drift={state.essence_drift_detected}, accretion={output.speculative_accretion_detected}."

@@ -1,7 +1,7 @@
-# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.3)
+# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.4)
 
 > **ESTRUTURA DE TESTES, COBERTURA DE RISCOS E EXECUÇÃO DETERMINÍSTICA.**
-> *Total de Testes: 61 testes distribuídos em 12 módulos (100% automatizados e offline).*
+> *Total de Testes: 63 testes distribuídos em 13 módulos (100% automatizados e offline).*
 
 ---
 
@@ -23,6 +23,7 @@
 | **Adversarial MVP** | `tests/adversarial/test_adversarial_mvp.py` | 3 | Adversarial (<50ms) | Ataques de schema corrompido, parada ruidosa (*fail-closed*), detecção de *essence drift* e injeção. |
 | **Adversarial Multi-Model** | `tests/adversarial/test_adversarial_multi_model.py` | 4 | Adversarial (<50ms) | Anti-sequestro de rotas, isolamento de segredos, isolamento de falhas sem fallback silencioso. |
 | **Adversarial Catálogo & Custos** | `tests/adversarial/test_adversarial_catalog.py` | 4 | Adversarial (<50ms) | Injeção de modelos pagos sob `FREE_ONLY`, bloqueio de modelos descontinuados e integridade experimental no-fallback. |
+| **Adversarial Essence Drift** | `tests/adversarial/test_adversarial_essence_drift.py` | 2 | Adversarial (<50ms) | Isolamento de *Speculative Feature Accretion* no Synthesis e acionamento de `RECONSTRUCT` no Final Review. |
 | **Experimento A/B/C** | `tests/experiment/test_comparison_packet.py` | 1 | Experimental (<50ms) | Execução sobre as 3 fixtures padronizadas e geração do pacote de avaliação cega mascarado. |
 
 ---
@@ -30,7 +31,7 @@
 ## ⚡ Como Executar Todos os Testes
 
 ```bash
-# Executar a suíte completa de 61 testes
+# Executar a suíte completa de 63 testes
 python -m unittest discover -s tests -p "test_*.py" -v
 
 # Executar validação de contexto e integridade documental

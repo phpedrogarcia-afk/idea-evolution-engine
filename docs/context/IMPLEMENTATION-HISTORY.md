@@ -146,3 +146,19 @@
   - Emissão do Checkpoint `CP-20260826-007`.
 - **Resultado:** `COMPLETE_OFFLINE` | `FREE_ONLY_POLICY = INSTITUTIONALIZED` | `MULTI_MODEL_READY_OFFLINE = TRUE`.
 - **Evidência:** 61/61 testes automatizados aprovados, CLI doctor validado sem chamadas reais.
+
+---
+
+### [MS-005.1] First Real Canary Autopsy & Essence-Preservation Hardening (Missão 05.1)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Conduzir autópsia causal sobre a proliferação especulativa de features (*Speculative Feature Accretion*) identificada no primeiro canário real, formalizar a separação em 3 camadas de estado (`CORE`, `DERIVED`, `CANDIDATE`), atualizar os contratos e prompts de síntese/revisão final, e adicionar testes adversariais para garantir que possibilidades geradas por modelos não desfigurem a ideia humana original.
+- **O que Mudou:**
+  - Autópsia causal da linhagem de conceitos (local AI, federated backend, blockchain, gamification).
+  - Atualização dos contratos `SynthesizeOutput` e `FinalReviewOutput` com `candidate_possibilities` e `speculative_accretion_detected`.
+  - Atualização de `SimpleIdeaState` com `core_mechanism` e `candidate_extensions` isoladas do core.
+  - Atualização dos prompts `prompts/synthesize_v0_1.md` e `prompts/final_review_v0_1.md` proibindo que a síntese absorva automaticamente alternativas especulativas para o core da ideia.
+  - Criação de 2 novos testes adversariais em `tests/adversarial/test_adversarial_essence_drift.py` (totalizando 63 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-008`.
+- **Resultado:** `COMPLETE_OFFLINE` | `ESSENCE_PRESERVATION = HARDENED` | `SPECULATIVE_ACCRETION_BLOCKED = TRUE`.
+- **Evidência:** 63/63 testes automatizados aprovados.

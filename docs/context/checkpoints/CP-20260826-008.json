@@ -1,0 +1,82 @@
+{
+  "checkpoint_id": "CP-20260826-008",
+  "created_at": "2026-08-26T15:10:45-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission 05.1 Complete: First Real Canary Autopsy, Three-Layer State Isolation (Core vs Candidate), Synthesis Hardening, and 63 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-006.1: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06 e Catálogo M06.1",
+    "TASK-005.1-A: Autópsia Causal de Proliferação de Features e Linhagem de Conceitos",
+    "TASK-005.1-B: Formalização das 3 Camadas de Estado (CORE, DERIVED, CANDIDATE)",
+    "TASK-005.1-C: Atualização dos Contratos SynthesizeOutput e FinalReviewOutput",
+    "TASK-005.1-D: Atualização dos Prompts SYNTHESIZE e FINAL_REVIEW",
+    "TASK-005.1-E: 2 Novos Testes Adversariais de Essence Drift (totalizando 63 testes verdes)"
+  ],
+  "changed_files": [
+    "src/idea_evolution/stages/contracts.py",
+    "src/idea_evolution/domain/state.py",
+    "src/idea_evolution/stages/synthesize.py",
+    "src/idea_evolution/stages/final_review.py",
+    "src/idea_evolution/providers/fake.py",
+    "prompts/synthesize_v0_1.md",
+    "prompts/final_review_v0_1.md",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "tests/adversarial/test_adversarial_essence_drift.py"
+  ],
+  "new_decisions": [
+    "THREE_LAYER_IDEA_STATE: Ideias são compostas por CORE (imutável/humano), DERIVED (implicações diretas) e CANDIDATES (possibilidades isoladas que não se tornam requisitos silenciosamente)",
+    "SYNTHESIS_GOVERNANCE: O estágio SYNTHESIZE refina o núcleo essencial e isola mecanismos especulativos em candidate_possibilities",
+    "FINAL_REVIEW_ACCRETION_DETECTION: O estágio FINAL_REVIEW avalia explicitamente se houve inchaço arquitetural especulativo e exige reconstrução se detectado"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "63/63 tests passing across continuity, intelligence, doctrine, unit, integration, adversarial, multi-model, catalog and essence drift"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Modelos de alta temperatura ainda podem tentar desviar o foco do prompt sem validação pós-síntese"
+  ],
+  "blockers": [
+    "M05_REAL_MODEL_CANARY: BLOCKED_PROVIDER_CREDENTIAL_OR_COST (Aguardando chave gratuita no .env local)"
+  ],
+  "readiness_verdict": {
+    "MULTI_MODEL_READY_OFFLINE": true,
+    "FREE_ONLY_POLICY_INSTITUTIONALIZED": true,
+    "ESSENCE_PRESERVATION_HARDENED": true,
+    "REAL_SINGLE_MODEL_EXECUTION": "NOT_YET_PROVEN",
+    "REAL_MULTI_MODEL_EXECUTION": "NOT_EXECUTED"
+  },
+  "next_exact_action": "Configuração da chave de API gratuita pelo operador humano no arquivo local .env para disparar o Real Model Canary (M05-B) com o prompt corrigido",
+  "authorized_next_scope": [
+    "M05-B: Execução do Real Model Canary sobre 1 ideia crua com modelo gratuito e prompt blindado contra inchaço"
+  ],
+  "do_not_repeat": [
+    "Não instruir o sintetizador a mesclar todas as alternativas no core",
+    "Não tratar candidatos de modelo como intenção do usuário"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade da suíte."
+}
