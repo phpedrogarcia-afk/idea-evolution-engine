@@ -1,0 +1,27 @@
+{
+  "step_number": 6,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.01,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=False, accretion=False.",
+  "raw_response": "{\n  \"material_issues_remaining\": [],\n  \"essence_drift_detected\": false,\n  \"speculative_accretion_detected\": false,\n  \"drift_explanation\": \"\",\n  \"unresolved_critical_issue\": false,\n  \"recommendation\": \"REFINED_IDEA_READY\",\n  \"review_summary\": \"O loop concluiu com sucesso todas as etapas de maturação sem desvio de essência.\"\n}",
+  "parsed_output": {
+    "material_issues_remaining": [],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "O loop concluiu com sucesso todas as etapas de maturação sem desvio de essência."
+  },
+  "error": null,
+  "timestamp": "2026-08-26T16:01:56.899544"
+}
