@@ -1,18 +1,18 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-006
+> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-007
 
 ---
 
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (MOTOR EXECUTÁVEL MULTI-MODELO PREPARADO OFFLINE)
+- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (FREE-ONLY MODEL CATALOG & COST GOVERNANCE HARDENING)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Produto:** `SIMPLE IDEA EVOLUTION LOOP` implementado com Condição B e Condição C, CLI, suíte de 49 testes verdes e camada de roteamento multi-modelo (`ModelRoutingConfig` + `RunnerRouter`).
+- **Status do Produto:** `SIMPLE IDEA EVOLUTION LOOP` com governança de custo `FREE_ONLY`, catálogo vivo `ModelCatalog`, 61 testes verdes e proteção estrita contra fallbacks pagos.
 - **Status da Missão 05:** `REAL_MODEL_CANARY = BLOCKED_PROVIDER_CREDENTIAL_OR_COST` (Incerteza real mantida honestamente bloqueada por ausência de chaves de API).
-- **Status da Missão 06:** `MULTI_MODEL_INTEGRATION_READINESS = COMPLETE_OFFLINE` (`MULTI_MODEL_READY_OFFLINE = TRUE`).
+- **Status da Missão 06.1:** `FREE_ONLY_MODEL_CATALOG_HARDENING = COMPLETE_OFFLINE` (`MULTI_MODEL_READY_OFFLINE = TRUE`, `FREE_ONLY_POLICY = INSTITUTIONALIZED`).
 - **Reconciliação do Repositório Remoto:**
   - `DEFAULT_BRANCH`: `main`
   - `REMOTE_REPOSITORY`: `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
@@ -21,39 +21,39 @@
   - `REAL_SINGLE_MODEL_EXECUTION`: `BLOCKED_PROVIDER_CREDENTIAL_OR_COST` (Aguardando configuração de API key).
   - `REAL_CROSS_PROVIDER_VALIDATED`: `FALSE`
   - `REAL_MULTI_MODEL_DELIBERATION`: `NOT_EXECUTED`
-  - `OFFLINE_SIMULATION_RUN`: 100% operacional com múltiplos fake runners (49/49 testes verdes).
-- **Último Checkpoint Imutável:** [`CP-20260826-006`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-006.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260826-006`
+  - `OFFLINE_SIMULATION_RUN`: 100% operacional com múltiplos fake runners (61/61 testes verdes).
+- **Último Checkpoint Imutável:** [`CP-20260826-007`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-007.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260826-007`
 - **Git Branch:** `main`
 - **Worktree Status:** CLEAN
 
 ---
 
-## 2. Matriz de Adaptadores de Provedor (Provider Capability Matrix)
+## 2. Matriz de Adaptadores e Catálogo de Modelos (Seed Ativo)
 
-| Provedor | Adaptador Implementado | Modo Structured Output | Credential Env | Testado Real? |
-| :--- | :---: | :--- | :--- | :---: |
-| **Groq** | `Sim (NativeModelRunner)` | `native_json_object` | `GROQ_API_KEY` | `NÃO (Aguardando chave)` |
-| **OpenAI** | `Sim (NativeModelRunner)` | `native_json_object` | `OPENAI_API_KEY` | `NÃO (Aguardando chave)` |
-| **Google Gemini** | `Sim (NativeModelRunner)` | `native_response_mime_type` | `GEMINI_API_KEY` | `NÃO (Aguardando chave)` |
-| **Anthropic** | `Sim (NativeModelRunner)` | `prompted_json_validation` | `ANTHROPIC_API_KEY` | `NÃO (Aguardando chave)` |
-| **Fake Runners** | `Sim (FakeModelRunner)` | `local_pydantic_mock` | Nenhuma | `SIM (100% offline)` |
+| Provedor | Modelo Ativo Padrão | Status Catálogo | Classe de Custo | Elegível sob FREE_ONLY? | Nota de Privacidade |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **Groq** | `openai/gpt-oss-120b` | `ACTIVE` | `FREE_TIER` | `SIM` | Standard Privacy |
+| **Google Gemini** | `gemini-3.7-flash` | `ACTIVE` | `FREE_TIER` | `SIM` | Free tier permite melhoria de produto pelo provedor |
+| **OpenAI** | `gpt-4o-mini` | `ACTIVE` | `PAID` | `NÃO` | Bloqueado sob FREE_ONLY |
+| **Anthropic** | `claude-3-5-haiku-20241022`| `ACTIVE` | `PROMOTIONAL_CREDIT` | `NÃO` | Permitido apenas sob ALLOW_PROMOTIONAL |
+| **Fake Local** | `default-model` | `ACTIVE` | `LOCAL_ZERO_MARGINAL_API_COST` | `SIM` | Air-gapped local |
 
 ---
 
 ## 3. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Missão 06: Implementação completa da infraestrutura de roteamento multi-modelo por estágio (`src/idea_evolution/config/routing.py`, `src/idea_evolution/providers/router.py`), suporte nativo ao Anthropic, comando `iee providers doctor`, comando `iee routes show`, flag `--dry-run`, exemplos em `config/` e 49 testes automatizados aprovados.
+  - Missão 06.1: Resolução de model-catalog drift (remoção de `llama-3.3-70b-versatile` e `gemini-2.0-flash`), criação do `ModelCatalog` (`src/idea_evolution/config/catalog.py`, `config/model_catalog.json`), política `FREE_ONLY`, regras de fallback diferenciadas (`EXPERIMENTAL_PINNED` vs `FREE_POOL_OPERATIONAL`), expansão do `iee providers doctor` e aprovação de 61 testes automatizados.
 - **Tarefa Ativa Atual:**
-  - `TASK-000`: Gate de Governança — Apresentação do relatório da Missão 06 e parada mandatória (*STOP*).
+  - `TASK-000`: Gate de Governança — Apresentação do relatório da Missão 06.1 e parada mandatória (*STOP*).
 - **Próximo Passo Exato:**
-  - Configuração da chave de API pelo operador humano no arquivo local `.env` para desbloqueio do primeiro *Real Model Canary* (M05-B) e, subsequentemente, da primeira deliberação multi-modelo real (M07).
+  - Configuração da chave de API pelo operador humano no arquivo local `.env` para desbloqueio do primeiro *Real Model Canary* (M05-B) com modelo gratuito ativo (`openai/gpt-oss-120b`).
 
 ---
 
 ## 4. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
 1. ❌ **NÃO** fazer chamadas reais a APIs ou gastar sem autorização/credencial explícita.
-2. ❌ **NÃO** declarar que multi-modelos conversando livremente é superior antes de experimentos empíricos.
-3. ❌ **NÃO** introduzir frameworks de agentes pesados (LangGraph, AutoGen, CrewAI).
-4. ❌ **NÃO** permitir fallback silencioso entre provedores (`NO_CROSS_PROVIDER_FALLBACK`).
+2. ❌ **NÃO** permitir fallback silencioso para modelos pagos (`PAID_FALLBACK: FORBIDDEN`).
+3. ❌ **NÃO** alterar modelos no meio de experimentos científicos controlados (M05).
+4. ❌ **NÃO** clonar ou implementar o runtime complexo do FioOS no IEE.

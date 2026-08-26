@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0.0",
+  "catalog_updated_at": "2026-08-26",
+  "models": [
+    {
+      "provider": "groq",
+      "model_id": "openai/gpt-oss-120b",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 131072 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "1000_req_day_200k_tokens",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-08-26",
+      "verification_source": "GroqCloud Models API & Free Plan Docs"
+    },
+    {
+      "provider": "groq",
+      "model_id": "qwen/qwen3.6-27b",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 32768 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "1000_req_day_200k_tokens",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-08-26",
+      "verification_source": "GroqCloud Models API & Free Plan Docs"
+    },
+    {
+      "provider": "groq",
+      "model_id": "llama-3.3-70b-versatile",
+      "status": "SHUT_DOWN",
+      "capabilities": { "structured_output": true, "reasoning": true },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "none",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-08-26",
+      "verification_source": "GroqCloud Deprecations Notice (August 16, 2026)",
+      "replacement_if_deprecated": "openai/gpt-oss-120b"
+    },
+    {
+      "provider": "gemini",
+      "model_id": "gemini-3.7-flash",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 1048576 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "15_rpm_1500_rpd",
+      "privacy_class": "PROVIDER_MAY_USE_FOR_PRODUCT_IMPROVEMENT",
+      "last_verified": "2026-08-26",
+      "verification_source": "Google AI Studio Pricing & Docs"
+    },
+    {
+      "provider": "gemini",
+      "model_id": "gemini-3.6-flash",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 1048576 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "15_rpm_1500_rpd",
+      "privacy_class": "PROVIDER_MAY_USE_FOR_PRODUCT_IMPROVEMENT",
+      "last_verified": "2026-08-26",
+      "verification_source": "Google AI Studio Pricing & Docs"
+    },
+    {
+      "provider": "gemini",
+      "model_id": "gemini-3.1-flash-lite",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 1048576 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "15_rpm_1500_rpd",
+      "privacy_class": "PROVIDER_MAY_USE_FOR_PRODUCT_IMPROVEMENT",
+      "last_verified": "2026-08-26",
+      "verification_source": "Google AI Studio Pricing & Docs"
+    },
+    {
+      "provider": "gemini",
+      "model_id": "gemini-2.0-flash",
+      "status": "SHUT_DOWN",
+      "capabilities": { "structured_output": true, "reasoning": true },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "none",
+      "privacy_class": "PROVIDER_MAY_USE_FOR_PRODUCT_IMPROVEMENT",
+      "last_verified": "2026-08-26",
+      "verification_source": "Google AI Deprecations Notice (June 1, 2026)",
+      "replacement_if_deprecated": "gemini-3.7-flash"
+    },
+    {
+      "provider": "openai",
+      "model_id": "gpt-4o-mini",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 128000 },
+      "cost_class": "PAID",
+      "free_capacity_type": "none",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-08-26",
+      "verification_source": "OpenAI Platform Pricing"
+    },
+    {
+      "provider": "anthropic",
+      "model_id": "claude-3-5-haiku-20241022",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 200000 },
+      "cost_class": "PROMOTIONAL_CREDIT",
+      "free_capacity_type": "signup_credit_only",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-08-26",
+      "verification_source": "Anthropic Platform Pricing"
+    },
+    {
+      "provider": "openrouter",
+      "model_id": "openrouter/free",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true },
+      "cost_class": "FREE_ROUTER",
+      "free_capacity_type": "50_req_day",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-08-26",
+      "verification_source": "OpenRouter FAQ & Free Tier Docs"
+    },
+    {
+      "provider": "fake",
+      "model_id": "default-model",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true },
+      "cost_class": "LOCAL_ZERO_MARGINAL_API_COST",
+      "free_capacity_type": "unlimited",
+      "privacy_class": "AIR_GAPPED_LOCAL",
+      "last_verified": "2026-08-26",
+      "verification_source": "Internal Local Deterministic Mock"
+    }
+  ]
+}

@@ -203,19 +203,30 @@ def main():
 
     elif args.command == "providers" and args.prov_command == "doctor":
         health = check_providers_health()
-        print("=" * 65)
-        print("          IDEA EVOLUTION ENGINE — PROVIDERS DOCTOR")
-        print("=" * 65)
-        print(f"{'PROVEDOR':<15} {'ADAPTADOR':<12} {'CREDENTIAL ENV':<20} {'PRESENTE':<10}")
-        print("-" * 65)
+        print("=" * 80)
+        print("          IDEA EVOLUTION ENGINE — PROVIDERS DOCTOR & CATALOG HEALTH")
+        print("=" * 80)
+        print(f"{'PROVEDOR':<16} {'ADAPTADOR':<12} {'MODELO PADRÃO':<24} {'STATUS':<10} {'COST CLASS':<14} {'FREE_ONLY':<10}")
+        print("-" * 80)
         for pid, info in health.items():
-            status_str = "[OK] Sim" if info["credential_present"] else "[--] Nao"
-            adapt_str = "Disponivel" if info["adapter_available"] else "Indisponivel"
-            env_str = info["credential_env"] or "(Nenhuma exigida)"
-            print(f"{info['name']:<15} {adapt_str:<12} {env_str:<20} {status_str:<10}")
-        print("-" * 65)
-        print("Nenhum valor secreto é exibido ou gravado.")
-        print("=" * 65)
+            adapt_str = "[OK] Sim" if info["adapter_available"] else "[--] Nao"
+            status_str = info["catalog_status"]
+            cost_str = info["cost_class"]
+            free_str = "[OK] Sim" if info["free_eligible"] else "[X] Nao"
+            print(f"{info['name']:<16} {adapt_str:<12} {info['default_model']:<24} {status_str:<10} {cost_str:<14} {free_str:<10}")
+
+        print("-" * 80)
+        print("NOTAS DE GOVERNANÇA E PRIVACIDADE:")
+        for pid, info in health.items():
+            if info["privacy_class"] == "PROVIDER_MAY_USE_FOR_PRODUCT_IMPROVEMENT":
+                print(f"  * [{info['name']}]: Termos do Free Tier permitem uso de dados pelo provedor para melhoria de produto.")
+            if info["catalog_status"] == "SHUT_DOWN":
+                print(f"  * [ALERTA - {info['name']}]: O modelo '{info['default_model']}' está encerrado! Recomendado: '{info['replacement']}'.")
+            if not info["free_eligible"]:
+                print(f"  * [{info['name']}]: Provedor classificado como {info['cost_class']}. Bloqueado sob política padrão FREE_ONLY.")
+        print("-" * 80)
+        print("Nenhum valor secreto é exibido ou gravado. Zero chamadas de inferência realizadas.")
+        print("=" * 80)
 
     elif args.command == "routes" and args.routes_command == "show":
         if args.model_config:

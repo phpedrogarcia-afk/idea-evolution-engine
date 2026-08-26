@@ -1,0 +1,88 @@
+{
+  "checkpoint_id": "CP-20260826-007",
+  "created_at": "2026-08-26T14:45:10-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission 06.1 Complete: Free-Only Model Catalog, Cost Governance Hardening, Stale Model Removal, and 61 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-006: Fundações 01 a 03.1, MVP M04, Preflight M05 e Roteamento M06",
+    "TASK-006.1-A: Criação do Catálogo Vivo de Modelos (src/idea_evolution/config/catalog.py e config/model_catalog.json)",
+    "TASK-006.1-B: Institucionalização da política FREE_ONLY e regras estritas de fallback",
+    "TASK-006.1-C: Resolução de model drift (Groq openai/gpt-oss-120b, Gemini gemini-3.7-flash)",
+    "TASK-006.1-D: 12 Novos Testes Automatizados (totalizando 61 testes verdes)"
+  ],
+  "changed_files": [
+    "src/idea_evolution/config/catalog.py",
+    "src/idea_evolution/config/routing.py",
+    "src/idea_evolution/providers/router.py",
+    "src/idea_evolution/providers/native.py",
+    "src/idea_evolution/cli/main.py",
+    "config/model_catalog.json",
+    "config/models.example.yaml",
+    "config/models.same_model.yaml",
+    "config/models.multi_provider_fake.yaml",
+    "docs/specs/MODEL-ROUTING.md",
+    "docs/CODE-MAP.md",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "tests/unit/test_model_catalog.py",
+    "tests/adversarial/test_adversarial_catalog.py"
+  ],
+  "new_decisions": [
+    "FREE_ONLY_POLICY: Política padrão do IEE rejeita modelos pagos e proíbe fallback silencioso para cobrança direta",
+    "MODEL_CATALOG_GOVERNANCE: Model IDs não são conhecimento atemporal; modelos SHUT_DOWN são bloqueados com sugestão de substituto",
+    "FALLBACK_GOVERNANCE: No modo EXPERIMENTAL_PINNED (M05), falhas bloqueiam o experimento sem troca de modelo; no modo FREE_POOL_OPERATIONAL, apenas falhas de quota/indisponibilidade acionam próximo free elegível",
+    "FIOOS_BOUNDARY: IEE governa roteamento epistêmico; FioOS governa autoridade de execução e sandboxing quando a ponte for ativada"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "61/61 tests passing across continuity, intelligence, doctrine, unit, integration, adversarial, multi-model, catalog and experiment"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Divergência de suporte a parâmetros avançados entre provedores comerciais quando em modo real"
+  ],
+  "blockers": [
+    "M05_REAL_MODEL_CANARY: BLOCKED_PROVIDER_CREDENTIAL_OR_COST (Chaves de API não configuradas no ambiente local)"
+  ],
+  "readiness_verdict": {
+    "MULTI_MODEL_READY_OFFLINE": true,
+    "FREE_ONLY_POLICY_INSTITUTIONALIZED": true,
+    "REAL_SINGLE_MODEL_EXECUTION": "NOT_YET_PROVEN",
+    "REAL_MULTI_MODEL_EXECUTION": "NOT_EXECUTED"
+  },
+  "next_exact_action": "Configuração da chave de API gratuita pelo operador humano no arquivo local .env para desbloquear o Real Model Canary de custo zero (M05-B) e a primeira deliberação multi-modelo real (M07)",
+  "authorized_next_scope": [
+    "M05-B: Execução do Real Model Canary sobre 1 ideia crua com modelo gratuito",
+    "M07: Primeira deliberação real multi-modelo sob FREE_ONLY"
+  ],
+  "do_not_repeat": [
+    "Não tratar model IDs como constantes atemporais",
+    "Não fazer fallback silencioso para modelos pagos",
+    "Não trocar modelo no meio de experimento científico controlado"
+  ],
+  "recovery_notes": "Execute python -m src.idea_evolution.cli.main providers doctor ou python -m src.idea_evolution.cli.main evolve --dry-run --model-config config/models.example.yaml."
+}

@@ -1,4 +1,4 @@
-# CODE-MAP.md — Mapa da Base de Código (v0.2)
+# CODE-MAP.md — Mapa da Base de Código (v0.3)
 
 > **LOCALIZAÇÃO E PAPEL DE CADA COMPONENTE DE SOFTWARE DO IEE SIMPLE LOOP MVP & MULTI-MODEL ROUTING.**
 > *A inteligência reside nos contratos, nos prompts e na governança de estado; a infraestrutura é estritamente deliberada, tipada e enxuta.*
@@ -13,7 +13,8 @@ src/idea_evolution/
 │
 ├── config/
 │   ├── __init__.py
-│   └── routing.py                  # ModelRoutingConfig, ModelDefinition: mapeamento determinístico de aliases e rotas
+│   ├── catalog.py                  # ModelCatalog, ModelCatalogEntry, CostClass, LifecycleStatus, PrivacyClass, CostPolicy, ExecutionMode
+│   └── routing.py                  # ModelRoutingConfig, ModelDefinition: mapeamento determinístico de aliases, rotas e validação de catálogo
 │
 ├── domain/
 │   └── state.py                    # SimpleIdeaState, RunStatus, CriticalIssue, AlternativeMechanism, RejectedProposal, StageHistoryEntry (com proveniência multi-modelo)
@@ -33,8 +34,8 @@ src/idea_evolution/
 ├── providers/
 │   ├── base.py                     # Interface ModelRunner, ModelResponse e ModelUsage
 │   ├── fake.py                     # FakeModelRunner: simulação determinística offline com identidades multi-provedor (fake_a, fake_b, fake_c)
-│   ├── native.py                   # NativeModelRunner: integração com Groq, OpenAI, Gemini e Anthropic com validação, repair bounded e doctor
-│   └── router.py                   # RunnerRouter: despachador de modelos por estágio conforme ModelRoutingConfig
+│   ├── native.py                   # NativeModelRunner: integração com Groq, OpenAI, Gemini e Anthropic com validação, repair bounded e doctor integrado ao catálogo
+│   └── router.py                   # RunnerRouter: despachador de modelos por estágio e governança de fallback
 │
 ├── orchestration/
 │   ├── simple_loop.py              # SimpleLoopRunner: máquina de estados sequencial, despacho multi-modelo, limites de reconstrução e trace
@@ -49,16 +50,17 @@ src/idea_evolution/
 
 ---
 
-## 📄 Arquivos de Configuração de Modelos (`config/`)
-- `config/models.example.yaml`: Exemplo canônico de roteamento multi-modelo (Groq, Anthropic, OpenAI, Gemini).
-- `config/models.same_model.yaml`: Configuração de modelo único para todas as etapas.
+## 📄 Arquivos de Configuração e Catálogo de Modelos (`config/`)
+- `config/model_catalog.json`: Catálogo de seed versionado com ciclo de vida, classes de custo, capacidades e fontes de verificação.
+- `config/models.example.yaml`: Exemplo canônico de roteamento multi-modelo sob política `FREE_ONLY` (Groq gpt-oss-120b, Groq qwen3.6-27b, Gemini 3.7-flash).
+- `config/models.same_model.yaml`: Configuração de modelo único para todas as etapas (Groq gpt-oss-120b).
 - `config/models.multi_provider_fake.yaml`: Configuração com múltiplos fake runners para testes E2E offline.
 
 ---
 
 ## 🎯 Princípios Arquiteturais Implementados
-1. **Functions are not Models:** Estágios cognitivos são contratos estritos e funções de negócio do kernel, independentes de fornecedores.
-2. **The Kernel is the Mediator:** Modelos não conversam diretamente em chat livre; o kernel orquestra contexto mínimo, valida esquemas e despacha.
-3. **Zero Silent Fallback (`NO_CROSS_PROVIDER_FALLBACK`):** Falhas em um modelo não acionam provedores alternativos silenciosamente.
-4. **Deterministic Routing Hash:** Toda configuração gera um hash canônico SHA-256 gravado nos artefatos de execução.
-5. **Secure Credential Loading:** Carregamento restrito ao ambiente do processo e ao `.env` local do projeto.
+1. **Cost Authority is Authority:** O sistema opera por padrão em `FREE_ONLY`, rejeitando modelos pagos ou não verificados antes da inferência.
+2. **MODEL_ID Is Not Timeless Knowledge:** Modelos encerrados (`SHUT_DOWN`) são bloqueados com sugestão de substituto ativo.
+3. **The Kernel is the Mediator:** Modelos não conversam diretamente em chat livre; o kernel orquestra contexto mínimo, valida esquemas e despacha.
+4. **Zero Silent Fallback (`NO_CROSS_PROVIDER_FALLBACK`):** Falhas em um modelo não acionam provedores alternativos silenciosamente.
+5. **Deterministic Routing Hash:** Toda configuração gera um hash canônico SHA-256 gravado nos artefatos de execução.

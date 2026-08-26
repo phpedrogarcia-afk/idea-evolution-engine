@@ -1,34 +1,36 @@
 schema_version: "1.0.0"
-description: "Exemplo de configuração multi-modelo para o Idea Evolution Engine"
+description: "Exemplo canônico de roteamento multi-modelo sob política FREE_ONLY para o Idea Evolution Engine"
+cost_policy: FREE_ONLY
+execution_mode: EXPERIMENTAL_PINNED
 
 models:
   analyst:
     provider: groq
-    model: llama-3.3-70b-versatile
+    model: openai/gpt-oss-120b
     credential_env: GROQ_API_KEY
     parameters:
       temperature: 0.2
 
   critic:
-    provider: anthropic
-    model: claude-3-5-haiku-20241022
-    credential_env: ANTHROPIC_API_KEY
+    provider: groq
+    model: qwen/qwen3.6-27b
+    credential_env: GROQ_API_KEY
     parameters:
       temperature: 0.3
 
-  synthesizer:
-    provider: openai
-    model: gpt-4o-mini
-    credential_env: OPENAI_API_KEY
-    parameters:
-      temperature: 0.2
-
   reality_checker:
     provider: gemini
-    model: gemini-2.0-flash
+    model: gemini-3.7-flash
     credential_env: GEMINI_API_KEY
     parameters:
       temperature: 0.1
+
+  synthesizer:
+    provider: groq
+    model: openai/gpt-oss-120b
+    credential_env: GROQ_API_KEY
+    parameters:
+      temperature: 0.2
 
 routes:
   understand: analyst

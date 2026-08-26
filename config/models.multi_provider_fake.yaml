@@ -1,5 +1,7 @@
 schema_version: "1.0.0"
 description: "Configuração multi-provedor com Fake Runners para testes offline"
+cost_policy: FREE_ONLY
+execution_mode: EXPERIMENTAL_PINNED
 
 models:
   analyst_fake:

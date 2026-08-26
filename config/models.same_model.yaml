@@ -1,10 +1,12 @@
 schema_version: "1.0.0"
 description: "Configuração de modelo único para todas as etapas (Baseline / Standard Loop)"
+cost_policy: FREE_ONLY
+execution_mode: EXPERIMENTAL_PINNED
 
 models:
   primary:
     provider: groq
-    model: llama-3.3-70b-versatile
+    model: openai/gpt-oss-120b
     credential_env: GROQ_API_KEY
 
 routes:

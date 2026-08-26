@@ -81,4 +81,14 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Experimentos científicos futuros permanecem válidos e isolados.
 - **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
 
+---
+
+### [FINDING-008] Model IDs Não São Conhecimento Atemporal (Model-Catalog Drift)
+- **Claim:** Tratar identificadores de modelos de provedores como constantes estáticas leva a envelhecimento rápido do código (ex: `llama-3.3-70b-versatile` encerrado em 16/08/2026 e `gemini-2.0-flash` encerrado em 01/06/2026). A introdução de um catálogo de modelos versionado com `last_verified`, `status` (`SHUT_DOWN`, `ACTIVE`), classes de custo explícitas (`FREE_TIER`, `PAID`) e validação estrita impede falhas em tempo de execução e gastos acidentais.
+- **Evidence:** Implementação do `ModelCatalog` e 12 novos testes da Missão 06.1 (`test_model_catalog.py`, `test_adversarial_catalog.py`).
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** O IEE é capaz de operar com inteligência gratuita sob a política `FREE_ONLY` e diagnosticar modelos obsoletos via `iee providers doctor`.
+- **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
+
+
 

@@ -129,3 +129,20 @@
   - Emissão do Checkpoint `CP-20260826-006`.
 - **Resultado:** `MULTI_MODEL_READY_OFFLINE = TRUE`.
 - **Evidência:** 49/49 testes automatizados aprovados, execução do dry-run e doctor via CLI.
+
+---
+
+### [MS-006.1] Free-Only Model Catalog & Cost Governance Hardening (Missão 06.1)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Resolver o model-catalog drift detectado nos IDs antigos (`llama-3.3-70b-versatile`, `gemini-2.0-flash`), construir o catálogo vivo `ModelCatalog`, institucionalizar a política `FREE_ONLY` e regras estritas de fallback (`EXPERIMENTAL_PINNED` vs `FREE_POOL_OPERATIONAL`), protegendo o projeto contra custos não autorizados e quebra de experimentos controlados.
+- **O que Mudou:**
+  - Implementação de `src/idea_evolution/config/catalog.py` com `ModelCatalog`, `ModelCatalogEntry`, `CostClass`, `LifecycleStatus`, `PrivacyClass`, `CostPolicy` e `ExecutionMode`.
+  - Criação do catálogo seed versionado em `config/model_catalog.json` com modelos ativos (`openai/gpt-oss-120b`, `qwen/qwen3.6-27b`, `gemini-3.7-flash`, `gemini-3.6-flash`, `openrouter/free`).
+  - Integração de validação de elegibilidade e custos em `src/idea_evolution/config/routing.py` e `src/idea_evolution/providers/router.py`.
+  - Atualização dos arquivos `config/models.example.yaml`, `config/models.same_model.yaml` e defaults de `NativeModelRunner` para modelos ativos.
+  - Expansão do comando `iee providers doctor` para exibir status de ciclo de vida do catálogo, classes de custo, notas de privacidade e recomendações de substituição.
+  - Criação de 12 novos testes automatizados unitários e adversariais em `tests/unit/test_model_catalog.py` e `tests/adversarial/test_adversarial_catalog.py` (totalizando 61 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-007`.
+- **Resultado:** `COMPLETE_OFFLINE` | `FREE_ONLY_POLICY = INSTITUTIONALIZED` | `MULTI_MODEL_READY_OFFLINE = TRUE`.
+- **Evidência:** 61/61 testes automatizados aprovados, CLI doctor validado sem chamadas reais.

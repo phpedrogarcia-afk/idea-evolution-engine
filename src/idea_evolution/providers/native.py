@@ -50,7 +50,16 @@ def get_provider_capabilities() -> Dict[str, Dict[str, Any]]:
             "usage_reporting": True,
             "real_tested": False,
             "credential_env": "GROQ_API_KEY",
-            "default_model": "llama-3.3-70b-versatile",
+            "default_model": "openai/gpt-oss-120b",
+        },
+        "gemini": {
+            "name": "Google Gemini",
+            "implemented": True,
+            "structured_output_mode": "native_response_mime_type",
+            "usage_reporting": True,
+            "real_tested": False,
+            "credential_env": "GEMINI_API_KEY",
+            "default_model": "gemini-3.7-flash",
         },
         "openai": {
             "name": "OpenAI",
@@ -60,15 +69,6 @@ def get_provider_capabilities() -> Dict[str, Dict[str, Any]]:
             "real_tested": False,
             "credential_env": "OPENAI_API_KEY",
             "default_model": "gpt-4o-mini",
-        },
-        "gemini": {
-            "name": "Google Gemini",
-            "implemented": True,
-            "structured_output_mode": "native_response_mime_type",
-            "usage_reporting": True,
-            "real_tested": False,
-            "credential_env": "GEMINI_API_KEY",
-            "default_model": "gemini-2.0-flash",
         },
         "anthropic": {
             "name": "Anthropic Claude",
@@ -86,21 +86,26 @@ def get_provider_capabilities() -> Dict[str, Dict[str, Any]]:
             "usage_reporting": True,
             "real_tested": True,
             "credential_env": None,
-            "default_model": "fake-model-v1",
+            "default_model": "default-model",
         },
     }
 
 
-def check_providers_health() -> Dict[str, Dict[str, Any]]:
+def check_providers_health(catalog: Optional[Any] = None) -> Dict[str, Dict[str, Any]]:
     """
-    Verifica a saúde e a presença de credenciais no ambiente para todos os provedores.
+    Verifica a saúde, credenciais e status de catálogo para todos os provedores.
     NUNCA expõe valores de chaves.
     """
+    from src.idea_evolution.config.catalog import ModelCatalog, LifecycleStatus, CostClass, PrivacyClass
+    cat = catalog or ModelCatalog()
     caps = get_provider_capabilities()
     status = {}
     for prov_id, info in caps.items():
         env_var = info.get("credential_env")
         has_key = bool(env_var and os.environ.get(env_var)) if env_var else True
+        def_model = info["default_model"]
+        cat_entry = cat.get_entry(prov_id, def_model)
+
         status[prov_id] = {
             "name": info["name"],
             "adapter_available": info["implemented"],
@@ -108,7 +113,12 @@ def check_providers_health() -> Dict[str, Dict[str, Any]]:
             "credential_present": has_key,
             "ready": info["implemented"] and has_key,
             "real_tested": info["real_tested"],
-            "default_model": info["default_model"],
+            "default_model": def_model,
+            "catalog_status": cat_entry.status.value if cat_entry else "UNKNOWN",
+            "cost_class": cat_entry.cost_class.value if cat_entry else "UNKNOWN",
+            "free_eligible": cat_entry.cost_class in [CostClass.FREE_TIER, CostClass.FREE_ROUTER, CostClass.LOCAL_ZERO_MARGINAL_API_COST] if cat_entry else False,
+            "privacy_class": cat_entry.privacy_class.value if cat_entry else "UNKNOWN",
+            "replacement": cat_entry.replacement_if_deprecated if cat_entry else None,
         }
     return status
 
