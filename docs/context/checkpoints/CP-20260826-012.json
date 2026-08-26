@@ -1,0 +1,91 @@
+{
+  "checkpoint_id": "CP-20260826-012",
+  "created_at": "2026-08-26T17:13:15-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.1-R4 Complete: Reality Alignment Topology (Synthesize -> RealityCheck), Non-Circular Promotion Authority Basis, 6 Cross-State Invariants, Immutable Collision-Resistant Run IDs, and 86 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-005.1-R3: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Canary Autopsy M05.1, Fronteira M06.2, Pureza/Groq Strict M05.1-R2 e Ontologia M05.1-R3",
+    "TASK-005.1-R4-A: Reordenação Topológica Canônica: SYNTHESIZE -> REALITY_CHECK -> FINAL_REVIEW",
+    "TASK-005.1-R4-B: Formalização da Base de Autoridade (PromotionAuthorityBasis) e veto a promoção circular via MODEL_HYPOTHESIS",
+    "TASK-005.1-R4-C: Implementação de 6 Invariantes Cross-State no FinalReviewStage",
+    "TASK-005.1-R4-D: Implementação da política de Run ID imutável RUN-<UTC>-<UUID> e rastreabilidade de git commit / environment",
+    "TASK-005.1-R4-E: 9 Testes Adversariais de Consistência Ontológica, Alinhamento de Realidade e Imutabilidade de Run ID (total: 86 testes verdes)"
+  ],
+  "changed_files": [
+    "src/idea_evolution/domain/state.py",
+    "src/idea_evolution/stages/contracts.py",
+    "src/idea_evolution/stages/synthesize.py",
+    "src/idea_evolution/stages/reality_check.py",
+    "src/idea_evolution/stages/final_review.py",
+    "src/idea_evolution/orchestration/simple_loop.py",
+    "src/idea_evolution/tracing/tracer.py",
+    "src/idea_evolution/providers/fake.py",
+    "prompts/synthesize_v0_1.md",
+    "prompts/reality_check_v0_1.md",
+    "prompts/final_review_v0_1.md",
+    "tests/integration/test_critique_revision_loop.py",
+    "tests/integration/test_multi_model_e2e.py",
+    "tests/adversarial/test_adversarial_ontology_provenance.py",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "TOPOLOGY_SYNTHESIZE_BEFORE_REALITY_CHECK: O RealityCheck deve operar pós-síntese para testar estritamente o Core aceito",
+    "PROMOTION_AUTHORITY_BASIS_TYPED: A base de promoção ao Core exige autoridade admissível (USER_EXPLICIT, VALID_USER_DERIVATION, EXTERNAL_EVIDENCE, HUMAN_DECISION) e rejeita MODEL_HYPOTHESIS isolada",
+    "FINAL_REVIEW_CROSS_STATE_ENFORCEMENT: O FinalReviewStage audita 6 invariantes determinísticos cross-state antes de emitir REFINED_IDEA_READY",
+    "IMMUTABLE_COLLISION_RESISTANT_RUN_ID: Run IDs seguem o padrão RUN-<UTC>-<UUID> independente do filesystem e imunes a concorrência"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "86/86 tests passing across 16 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Provedores de inferência rápida podem oscilar em latência durante picos de uso gratuito"
+  ],
+  "blockers": [
+    "EXP-M05: Aguardando autorização humana para reattack real com chave configurada"
+  ],
+  "readiness_verdict": {
+    "TOPOLOGY_REALITY_ALIGNMENT_HARDENED": true,
+    "NON_CIRCULAR_PROMOTION_ENFORCED": true,
+    "IMMUTABLE_RUN_IDENTITY_ACTIVE": true,
+    "READY_FOR_NEW_REAL_CANARY": true,
+    "REAL_SINGLE_MODEL_EXECUTION": "OFFLINE_TESTED_READY_FOR_ONLINE",
+    "REAL_MULTI_MODEL_EXECUTION": "NOT_EXECUTED"
+  },
+  "next_exact_action": "Autorização pelo operador humano para disparo do canário real com Groq openai/gpt-oss-120b sob a nova topologia e identidade",
+  "authorized_next_scope": [
+    "M05: Reattack real sobre 1 ideia crua com modelo gratuito e prompt blindado"
+  ],
+  "do_not_repeat": [
+    "Não executar RealityCheck antes da Síntese do Core",
+    "Não promover candidatos ao Core baseando-se unicamente em MODEL_HYPOTHESIS",
+    "Não reutilizar identificadores de run"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 86 testes."
+}

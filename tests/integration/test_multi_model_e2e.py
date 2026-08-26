@@ -76,18 +76,18 @@ class TestMultiModelIntegrationE2E(unittest.TestCase):
         self.assertEqual(stg3.logical_alias, "analyst")
         self.assertEqual(stg3.provider, "fake_a")
 
-        # 4. REALITY_CHECK -> critic / fake_b / claude-3-5-haiku
+        # 4. SYNTHESIZE -> synthesizer / fake_c / gpt-4o-mini
         stg4 = state.stage_history[3]
-        self.assertEqual(stg4.stage_id, "REALITY_CHECK")
-        self.assertEqual(stg4.logical_alias, "critic")
-        self.assertEqual(stg4.provider, "fake_b")
+        self.assertEqual(stg4.stage_id, "SYNTHESIZE")
+        self.assertEqual(stg4.logical_alias, "synthesizer")
+        self.assertEqual(stg4.provider, "fake_c")
+        self.assertEqual(stg4.model, "gpt-4o-mini")
 
-        # 5. SYNTHESIZE -> synthesizer / fake_c / gpt-4o-mini
+        # 5. REALITY_CHECK -> critic / fake_b / claude-3-5-haiku
         stg5 = state.stage_history[4]
-        self.assertEqual(stg5.stage_id, "SYNTHESIZE")
-        self.assertEqual(stg5.logical_alias, "synthesizer")
-        self.assertEqual(stg5.provider, "fake_c")
-        self.assertEqual(stg5.model, "gpt-4o-mini")
+        self.assertEqual(stg5.stage_id, "REALITY_CHECK")
+        self.assertEqual(stg5.logical_alias, "critic")
+        self.assertEqual(stg5.provider, "fake_b")
 
         # 6. FINAL_REVIEW -> critic / fake_b / claude-3-5-haiku
         stg6 = state.stage_history[5]
@@ -103,7 +103,7 @@ class TestMultiModelIntegrationE2E(unittest.TestCase):
         self.assertEqual(len(trace_data["stages"]), 6)
         self.assertEqual(trace_data["stages"][0]["logical_alias"], "analyst")
         self.assertEqual(trace_data["stages"][1]["logical_alias"], "critic")
-        self.assertEqual(trace_data["stages"][4]["logical_alias"], "synthesizer")
+        self.assertEqual(trace_data["stages"][3]["logical_alias"], "synthesizer")
 
         input_data = json.loads((run_folder / "input.json").read_text(encoding="utf-8"))
         self.assertEqual(input_data["metadata"]["routing_config_hash"], config.compute_hash())
@@ -123,8 +123,8 @@ class TestMultiModelIntegrationE2E(unittest.TestCase):
                 "critique_2": "practical_reviewer",
                 "revision_2": "author",
                 "alternatives": "author",
-                "reality_check": "practical_reviewer",
                 "synthesize": "author",
+                "reality_check": "practical_reviewer",
                 "final_review": "logical_reviewer",
             },
             default_model_alias="author",
@@ -148,8 +148,8 @@ class TestMultiModelIntegrationE2E(unittest.TestCase):
             "practical_reviewer",
             "author",
             "author",
-            "practical_reviewer",
             "author",
+            "practical_reviewer",
             "logical_reviewer",
         ]
         self.assertEqual(aliases, expected)

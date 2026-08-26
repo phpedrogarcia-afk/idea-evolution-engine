@@ -6,17 +6,17 @@
 ---
 
 ## 🟢 NOW (Trabalho Atual — Concluído)
-- [x] **TASK-005.1-R3-A:** Autópsia Causal da falha do RUN-009 (Promoção sem proveniência, duplicação ontológica e contaminação de testes do Core).
-- [x] **TASK-005.1-R3-B:** Implementação do modelo `ProposalRecord` e tipos `AcceptedChangeItem` / `core_mechanism_justification`.
-- [x] **TASK-005.1-R3-C:** Isolamento estrito de testes em `candidate_tests` (Core) e `exploratory_candidate_tests` (Exploratório).
-- [x] **TASK-005.1-R3-D:** Implementação da verificação determinística de contradições ontológicas no `FinalReviewStage`.
-- [x] **TASK-005.1-R3-E:** Criação de 4 novos testes em `tests/adversarial/test_adversarial_ontology_provenance.py` (total: 81 testes verdes).
-- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão M05.1-R3 e parada mandatória (*STOP*).
+- [x] **TASK-005.1-R4-A:** Reordenação Topológica Canônica: `SYNTHESIZE` $\to$ `REALITY_CHECK` $\to$ `FINAL_REVIEW`.
+- [x] **TASK-005.1-R4-B:** Formalização da Base de Autoridade (`PromotionAuthorityBasis`) e veto a promoção circular via `MODEL_HYPOTHESIS`.
+- [x] **TASK-005.1-R4-C:** Implementação de 6 Invariantes Cross-State no `FinalReviewStage`.
+- [x] **TASK-005.1-R4-D:** Implementação da política de Run ID imutável `RUN-<UTC>-<UUID>` e rastreabilidade de git commit / environment.
+- [x] **TASK-005.1-R4-E:** Criação de 9 testes adversariais em `tests/adversarial/test_adversarial_ontology_provenance.py` (total: 86 testes verdes).
+- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão M05.1-R4 e parada mandatória (*STOP*).
 
 ---
 
 ## 🟡 NEXT (Próximos Passos — Após autorização e credencial real)
-- [ ] **M05-FINAL-REAL-REATTACK:** Execução do canário real com modelo Groq `openai/gpt-oss-120b` sobre a ideia de clarificação de projetos com a blindagem ontológica completa em vigor.
+- [ ] **M05-FINAL-REAL-REATTACK:** Execução do canário real com modelo Groq `openai/gpt-oss-120b` sobre a ideia de clarificação de projetos com a blindagem ontológica, topológica e de identidade em vigor.
 - [ ] **EXP-M05:** Execução do experimento controlado A/B/C sobre as 3 fixtures.
 
 ---

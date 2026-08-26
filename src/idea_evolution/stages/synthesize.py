@@ -1,11 +1,18 @@
 """
 src/idea_evolution/stages/synthesize.py
-Estágio 5: SYNTHESIZE (v0.1) — Síntese estruturada com linhagem estável de propostas e proveniência de promoção.
+Estágio 4 (na nova topologia): SYNTHESIZE (v0.1) — Síntese estruturada com linhagem estável, proveniência de autoridade e base de decisão tipada.
 """
 
 from typing import Type
 import json
-from src.idea_evolution.domain.state import SimpleIdeaState, RejectedProposal, ProposalRecord, OntologyState
+import hashlib
+from src.idea_evolution.domain.state import (
+    SimpleIdeaState,
+    RejectedProposal,
+    ProposalRecord,
+    OntologyState,
+    PromotionAuthorityBasis,
+)
 from src.idea_evolution.stages.stage_base import BaseStage
 from src.idea_evolution.stages.contracts import SynthesizeOutput
 
@@ -24,7 +31,7 @@ class SynthesizeStage(BaseStage):
         issues_str = json.dumps([ci.issue for ci in state.critical_issues])
         return (
             template
-            + f"\n\nContexto Atual:\n- Intenção: {state.human_intent}\n- Ideia Original: {state.original_idea}\n- Ideia Atual: {state.current_idea}\n- Issues: {issues_str}\n- Alternativas: {alt_str}"
+            + f"\n\nContexto Atual:\n- Intenção Humana: {state.human_intent}\n- Ideia Original: {state.original_idea}\n- Ideia Atual: {state.current_idea}\n- Issues Mapeadas: {issues_str}\n- Alternativas: {alt_str}"
         )
 
     def get_output_schema(self) -> Type[SynthesizeOutput]:
@@ -34,10 +41,23 @@ class SynthesizeStage(BaseStage):
         state.current_idea = output.refined_idea
         state.core_mechanism = output.core_mechanism
         state.core_mechanism_justification = output.core_mechanism_justification
+        
+        # Mapeia basis de autoridade do core
+        try:
+            basis_enum = PromotionAuthorityBasis(output.core_mechanism_basis)
+        except Exception:
+            basis_enum = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+        state.core_mechanism_basis = basis_enum
 
-        # Lista de propostas aceitas (como strings formatadas para compatibilidade)
+        # Computa hash referencial do core aceito
+        if output.core_mechanism:
+            state.core_mechanism_hash = hashlib.sha256(output.core_mechanism.strip().lower().encode("utf-8")).hexdigest()[:16]
+        else:
+            state.core_mechanism_hash = ""
+
+        # Lista de propostas aceitas
         state.accepted_changes = [
-            f"{item.proposal} (Justificativa: {item.promotion_reason})"
+            f"{item.proposal} (Justificativa: {item.promotion_reason} | Base: {item.promotion_basis})"
             for item in output.accepted_changes
         ]
 
@@ -68,16 +88,22 @@ class SynthesizeStage(BaseStage):
                     ontology_state=OntologyState.CORE,
                     source_stage="SYNTHESIZE",
                     promotion_reason=output.core_mechanism_justification,
+                    promotion_basis=basis_enum,
                     evidence_or_decision_basis="Core design selection",
                 )
             )
         for acc in output.accepted_changes:
+            try:
+                acc_basis = PromotionAuthorityBasis(acc.promotion_basis)
+            except Exception:
+                acc_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
             records.append(
                 ProposalRecord(
                     proposal=acc.proposal,
                     ontology_state=OntologyState.DERIVED,
                     source_stage=acc.source_stage or "ALTERNATIVES",
                     promotion_reason=acc.promotion_reason,
+                    promotion_basis=acc_basis,
                     evidence_or_decision_basis=acc.evidence_or_decision_basis,
                 )
             )
@@ -87,6 +113,7 @@ class SynthesizeStage(BaseStage):
                     proposal=cand,
                     ontology_state=OntologyState.CANDIDATE,
                     source_stage="SYNTHESIZE",
+                    promotion_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
                 )
             )
         for rej in output.rejected_changes:
@@ -104,4 +131,4 @@ class SynthesizeStage(BaseStage):
         state.known_risks = output.known_risks
         state.recommended_next_step = output.recommended_next_step
 
-        return f"Síntese concluída: {len(output.accepted_changes)} aceitas com proveniência, {len(cleaned_candidates)} candidatas, {len(output.rejected_changes)} rejeitadas."
+        return f"Síntese concluída: Core '{output.core_mechanism[:40]}...' (hash: {state.core_mechanism_hash}), {len(output.accepted_changes)} aceitas, {len(cleaned_candidates)} candidatas, {len(output.rejected_changes)} rejeitadas."

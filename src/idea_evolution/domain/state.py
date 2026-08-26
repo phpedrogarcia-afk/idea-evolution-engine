@@ -1,6 +1,6 @@
 """
 src/idea_evolution/domain/state.py
-Domínio e Estado Mínimo Compartilhado (SimpleIdeaState) do IEE MVP com ontologia tipada e proveniência de promoção.
+Domínio e Estado Mínimo Compartilhado (SimpleIdeaState) do IEE MVP com ontologia tipada, proveniência de autoridade e linhagem referencial.
 """
 
 from __future__ import annotations
@@ -29,6 +29,15 @@ class OntologyState(str, Enum):
     REJECTED = "REJECTED"
 
 
+class PromotionAuthorityBasis(str, Enum):
+    """Bases de autoridade admissíveis para promoção ao Core ou Derived."""
+    USER_EXPLICIT = "USER_EXPLICIT"
+    VALID_USER_DERIVATION = "VALID_USER_DERIVATION"
+    EXTERNAL_EVIDENCE = "EXTERNAL_EVIDENCE"
+    HUMAN_DECISION = "HUMAN_DECISION"
+    MODEL_HYPOTHESIS = "MODEL_HYPOTHESIS"  # Inadmissível isoladamente para promoção ao CORE
+
+
 class ProposalRecord(BaseModel):
     """
     Registro canônico de uma proposta / mecanismo no pipeline com proveniência e estado ontológico estáveis.
@@ -37,6 +46,7 @@ class ProposalRecord(BaseModel):
     ontology_state: OntologyState = OntologyState.CANDIDATE
     source_stage: str = ""
     promotion_reason: str = ""
+    promotion_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
     rejection_reason: str = ""
     evidence_or_decision_basis: str = ""
 
@@ -46,6 +56,7 @@ class CriticalIssue(BaseModel):
     why_it_matters: str
     severity: str = "MEDIUM"  # HIGH | MEDIUM | LOW
     affected_part: str = ""
+    origin: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
 
 
 class AlternativeMechanism(BaseModel):
@@ -78,7 +89,7 @@ class StageHistoryEntry(BaseModel):
 
 
 class SimpleIdeaState(BaseModel):
-    schema_version: str = "0.2.0"
+    schema_version: str = "0.3.0"
     run_id: str
     status: RunStatus = RunStatus.INITIALIZED
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
@@ -102,16 +113,14 @@ class SimpleIdeaState(BaseModel):
     contradictions: List[str] = Field(default_factory=list)
     failure_modes: List[str] = Field(default_factory=list)
 
-    # Exploração e Realidade (Isolamento Estrito: Core vs Exploratório)
+    # Exploração
     alternatives: List[AlternativeMechanism] = Field(default_factory=list)
-    reality_dependencies: List[str] = Field(default_factory=list)  # Apenas dependências do CORE aceito
-    claims_needing_evidence: List[str] = Field(default_factory=list)
-    candidate_tests: List[str] = Field(default_factory=list)  # Apenas testes do CORE aceito
-    exploratory_candidate_tests: List[str] = Field(default_factory=list)  # Testes de extensões candidatas / rejeitadas
 
     # Síntese e Revisão com Linhagem Estável
     core_mechanism: str = ""
     core_mechanism_justification: str = ""
+    core_mechanism_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    core_mechanism_hash: str = ""  # Hash referencial do core aceito
     proposal_records: List[ProposalRecord] = Field(default_factory=list)
     accepted_changes: List[str] = Field(default_factory=list)
     candidate_extensions: List[str] = Field(default_factory=list)
@@ -119,6 +128,14 @@ class SimpleIdeaState(BaseModel):
     remaining_uncertainties: List[str] = Field(default_factory=list)
     known_risks: List[str] = Field(default_factory=list)
     recommended_next_step: str = ""
+
+    # Realidade Pós-Síntese (Testa estritamente o CORE sintetizado)
+    tested_core_mechanism: str = ""
+    tested_core_hash: str = ""
+    reality_dependencies: List[str] = Field(default_factory=list)  # Apenas dependências do CORE aceito
+    claims_needing_evidence: List[str] = Field(default_factory=list)
+    candidate_tests: List[str] = Field(default_factory=list)  # Apenas testes do CORE aceito
+    exploratory_candidate_tests: List[str] = Field(default_factory=list)  # Testes de extensões candidatas / rejeitadas
 
     # Governança do Loop
     reconstruction_count: int = 0
@@ -180,7 +197,7 @@ class SimpleIdeaState(BaseModel):
         md.append("## 3. Versão Refinada e Mecanismo Proposto\n")
         md.append(f"{self.current_idea or 'Em desenvolvimento'}\n\n")
         if self.core_mechanism_justification:
-            md.append(f"- **Justificativa de Promoção ao Core:** {self.core_mechanism_justification}\n\n")
+            md.append(f"- **Justificativa de Promoção ao Core:** {self.core_mechanism_justification} (Base: `{self.core_mechanism_basis.value}`)\n\n")
 
         if self.critical_issues:
             md.append("## 4. Vulnerabilidades e Críticas Severas Encontradas\n")
@@ -213,7 +230,7 @@ class SimpleIdeaState(BaseModel):
             md.append("\n")
 
         if self.reality_dependencies or self.candidate_tests:
-            md.append("## 8. Dependências da Realidade & Testes Empíricos Necessários (CORE Ativo)\n")
+            md.append(f"## 8. Dependências da Realidade & Testes Empíricos Necessários (CORE: {self.tested_core_mechanism or self.core_mechanism})\n")
             if self.reality_dependencies:
                 md.append("**Dependências Externas do Core:**")
                 for dep in self.reality_dependencies:

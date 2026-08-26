@@ -1,31 +1,35 @@
 """
 src/idea_evolution/orchestration/simple_loop.py
-Orquestrador central do Simple Idea Evolution Loop (Condições B e C) com controle determinístico de estado e roteamento multi-modelo.
+Orquestrador do Simple Idea Evolution Loop (v0.1) com topologia corrigida (Synthesize antes de RealityCheck) e rastreabilidade total.
 """
 
-from __future__ import annotations
-from typing import Optional, Dict, Any, List, Union
+from typing import Dict, Any, Optional, List
 from pathlib import Path
+import json
+
 from src.idea_evolution.domain.state import SimpleIdeaState, RunStatus
-from src.idea_evolution.providers.base import ModelRunner
-from src.idea_evolution.providers.router import RunnerRouter
 from src.idea_evolution.config.routing import ModelRoutingConfig
+from src.idea_evolution.providers.base import ModelRunner
+from src.idea_evolution.providers.fake import FakeModelRunner
+from src.idea_evolution.providers.router import RunnerRouter
 from src.idea_evolution.tracing.tracer import RunTracer
+
 from src.idea_evolution.stages.understand import UnderstandStage
 from src.idea_evolution.stages.attack import AttackStage
-from src.idea_evolution.stages.critique import LogicalCritiqueStage, FeasibilityCritiqueStage
-from src.idea_evolution.stages.revision import RevisionStage
 from src.idea_evolution.stages.alternatives import AlternativesStage
 from src.idea_evolution.stages.reality_check import RealityCheckStage
 from src.idea_evolution.stages.synthesize import SynthesizeStage
 from src.idea_evolution.stages.final_review import FinalReviewStage
+from src.idea_evolution.stages.critique import LogicalCritiqueStage, FeasibilityCritiqueStage
+from src.idea_evolution.stages.revision import RevisionStage
 from src.idea_evolution.stages.contracts import FinalReviewOutput
 
 
 class SimpleLoopRunner:
     """
-    Controlador do Simple Idea Evolution Loop.
-    Garante execução sequencial dos estágios, despacho para os modelos corretos, validação de schemas, persistência e limite de reconstrução.
+    Controlador central de execução do Simple Loop.
+    Suporta topologia padrão (6 estágios) e iterativa (9 estágios).
+    Garante que o kernel determinístico governe o avanço de estado e controle de reconstrução.
     """
 
     def __init__(
@@ -33,11 +37,11 @@ class SimpleLoopRunner:
         runner: Optional[ModelRunner] = None,
         router: Optional[RunnerRouter] = None,
         config: Optional[ModelRoutingConfig] = None,
-        topology: str = "STANDARD_6_STAGE",  # STANDARD_6_STAGE (Cond B) | ITERATIVE_CRITIQUE_REVISION (Cond C)
+        topology: str = "STANDARD_6_STAGE",  # STANDARD_6_STAGE | ITERATIVE_CRITIQUE_REVISION
         stage_models: Optional[Dict[str, str]] = None,
         runs_dir: Optional[Path] = None,
     ):
-        self.topology = topology.upper()
+        self.topology = topology
         self.stage_models = stage_models or {}
         self.runs_dir = runs_dir
 
@@ -46,20 +50,19 @@ class SimpleLoopRunner:
         elif config is not None:
             self.router = RunnerRouter(config=config)
         elif runner is not None:
-            # Compatibilidade backward: envolve runner único no RunnerRouter
-            cfg = ModelRoutingConfig.default_single_model(provider=getattr(runner, "provider", "custom"), model=getattr(runner, "default_model", "default"))
-            self.router = RunnerRouter(config=cfg, custom_runners={"default": runner})
+            self.router = RunnerRouter(
+                config=ModelRoutingConfig.default_single_model(),
+                custom_runners={"default": runner},
+            )
         else:
-            self.router = RunnerRouter()
-
-        # Validação antecipada de rotas para a topologia escolhida
-        required = self.get_required_stages()
-        errors = self.router.config.validate_for_topology(required)
-        if errors:
-            raise ValueError(f"ROUTE_CONFIGURATION_INVALID: Erros na validação de rotas para topologia {self.topology}: {'; '.join(errors)}")
+            fake = FakeModelRunner()
+            self.router = RunnerRouter(
+                config=ModelRoutingConfig.default_single_model(),
+                custom_runners={"default": fake},
+            )
 
     def get_required_stages(self) -> List[str]:
-        """Retorna os nomes canônicos de estágios exigidos pela topologia ativa."""
+        """Retorna os nomes canônicos de estágios exigidos pela topologia ativa (Synthesize -> RealityCheck)."""
         if self.topology == "ITERATIVE_CRITIQUE_REVISION":
             return [
                 "UNDERSTAND",
@@ -68,16 +71,16 @@ class SimpleLoopRunner:
                 "CRITIQUE_2",
                 "REVISION_2",
                 "ALTERNATIVES",
-                "REALITY_CHECK",
                 "SYNTHESIZE",
+                "REALITY_CHECK",
                 "FINAL_REVIEW",
             ]
         return [
             "UNDERSTAND",
             "ATTACK",
             "ALTERNATIVES",
-            "REALITY_CHECK",
             "SYNTHESIZE",
+            "REALITY_CHECK",
             "FINAL_REVIEW",
         ]
 
@@ -186,11 +189,11 @@ class SimpleLoopRunner:
                 tracer.persist_final_state(state)
                 return state
 
-            # 4. REALITY_CHECK
-            reality_stage = RealityCheckStage()
-            r, m, a = self.router.get_runner_for_stage(reality_stage.stage_id)
-            m = self.stage_models.get(reality_stage.stage_id) or m
-            res = reality_stage.execute(state, r, model_name=m, logical_alias=a)
+            # 4. SYNTHESIZE (Seleciona o CORE e define os limites ontológicos)
+            synth_stage = SynthesizeStage()
+            r, m, a = self.router.get_runner_for_stage(synth_stage.stage_id)
+            m = self.stage_models.get(synth_stage.stage_id) or m
+            res = synth_stage.execute(state, r, model_name=m, logical_alias=a)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -198,11 +201,11 @@ class SimpleLoopRunner:
                 tracer.persist_final_state(state)
                 return state
 
-            # 5. SYNTHESIZE
-            synth_stage = SynthesizeStage()
-            r, m, a = self.router.get_runner_for_stage(synth_stage.stage_id)
-            m = self.stage_models.get(synth_stage.stage_id) or m
-            res = synth_stage.execute(state, r, model_name=m, logical_alias=a)
+            # 5. REALITY_CHECK (Testa estritamente o CORE aceito na Síntese)
+            reality_stage = RealityCheckStage()
+            r, m, a = self.router.get_runner_for_stage(reality_stage.stage_id)
+            m = self.stage_models.get(reality_stage.stage_id) or m
+            res = reality_stage.execute(state, r, model_name=m, logical_alias=a)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -233,23 +236,23 @@ class SimpleLoopRunner:
                 state.reconstruction_count += 1
                 state.status = RunStatus.RECONSTRUCTING
 
-                # Reexecutar alternativas -> reality_check -> synthesize -> final_review (attempt=2)
+                # Reexecutar alternativas -> synthesize -> reality_check -> final_review (attempt=2)
                 r, m, a = self.router.get_runner_for_stage(alt_stage.stage_id)
                 m = self.stage_models.get(alt_stage.stage_id) or m
                 res_alt = alt_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
                 tracer.record_stage_result(step_counter, res_alt)
                 step_counter += 1
 
-                r, m, a = self.router.get_runner_for_stage(reality_stage.stage_id)
-                m = self.stage_models.get(reality_stage.stage_id) or m
-                res_real = reality_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
-                tracer.record_stage_result(step_counter, res_real)
-                step_counter += 1
-
                 r, m, a = self.router.get_runner_for_stage(synth_stage.stage_id)
                 m = self.stage_models.get(synth_stage.stage_id) or m
                 res_synth = synth_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
                 tracer.record_stage_result(step_counter, res_synth)
+                step_counter += 1
+
+                r, m, a = self.router.get_runner_for_stage(reality_stage.stage_id)
+                m = self.stage_models.get(reality_stage.stage_id) or m
+                res_real = reality_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
+                tracer.record_stage_result(step_counter, res_real)
                 step_counter += 1
 
                 r, m, a = self.router.get_runner_for_stage(review_stage.stage_id)

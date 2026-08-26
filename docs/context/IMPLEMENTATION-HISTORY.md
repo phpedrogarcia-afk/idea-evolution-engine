@@ -211,3 +211,20 @@
   - Emissão do Checkpoint `CP-20260826-011`.
 - **Resultado:** `COMPLETE_OFFLINE` | `ONTOLOGY_CONSISTENCY = HARDENED` | `PROMOTION_PROVENANCE = ENFORCED` | `READY_FOR_FINAL_REAL_REATTACK = TRUE`.
 - **Evidência:** 81/81 testes automatizados aprovados (100% offline).
+
+---
+
+### [MS-005.1-R4] Reality Alignment, Non-Circular Promotion & Immutable Run Identity (Missão 05.1-R4)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Resolver as 4 falhas reais observadas em execuções no Cloud Shell: (1) Desalinhamento temporal do RealityCheck através da inversão topológica `SYNTHESIZE` $\to$ `REALITY_CHECK`, (2) Bloqueio de autoridade circular (`MODEL_HYPOTHESIS` isoladamente vetada para promoção ao CORE), (3) 6 Invariantes cross-state determinísticos no `FinalReviewStage`, e (4) Política de Run ID imutável `RUN-<UTC>-<UUID>` imune a concorrência e movimentação de diretórios.
+- **O que Mudou:**
+  - Reordenação da topologia em `src/idea_evolution/orchestration/simple_loop.py` e atualização das ordens de execução de estágios.
+  - Criação do enum `PromotionAuthorityBasis` e campos de autoridade/hash (`core_mechanism_basis`, `core_mechanism_hash`, `tested_core_hash`, `target_core_mechanism`).
+  - Implementação de 6 invariantes determinísticos no `FinalReviewStage`.
+  - Atualização do `RunTracer` com `generate_immutable_run_id()` e rastreamento de git commit.
+  - Atualização dos prompts `synthesize_v0_1.md`, `reality_check_v0_1.md` e `final_review_v0_1.md`.
+  - Criação de 9 testes adversariais em `tests/adversarial/test_adversarial_ontology_provenance.py` (totalizando 86 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-012`.
+- **Resultado:** `COMPLETE_OFFLINE` | `TOPOLOGY_REALITY_ALIGNMENT = HARDENED` | `NON_CIRCULAR_PROMOTION = ENFORCED` | `IMMUTABLE_RUN_IDENTITY = ACTIVE` | `READY_FOR_NEW_REAL_CANARY = TRUE`.
+- **Evidência:** 86/86 testes automatizados aprovados (100% offline).

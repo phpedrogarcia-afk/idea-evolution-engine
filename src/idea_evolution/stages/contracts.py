@@ -1,6 +1,6 @@
 """
 src/idea_evolution/stages/contracts.py
-Contratos tipados Pydantic para os outputs estruturados de cada estágio do pipeline com proveniência de promoção e integridade ontológica.
+Contratos tipados Pydantic para os outputs estruturados de cada estágio do pipeline com proveniência de autoridade e linhagem pós-síntese.
 """
 
 from typing import List, Optional
@@ -25,6 +25,7 @@ class IssueDetail(BaseModel):
     why_it_matters: str
     severity: str = "MEDIUM"
     affected_part: str = ""
+    origin: str = "MODEL_HYPOTHESIS"  # USER_EXPLICIT | VALID_USER_DERIVATION | MODEL_HYPOTHESIS | EXTERNAL_EVIDENCE
 
 
 class AttackOutput(BaseModel):
@@ -64,13 +65,12 @@ class AlternativesOutput(BaseModel):
     alternatives: List[AlternativeItem] = Field(default_factory=list)
 
 
-class RealityCheckOutput(BaseModel):
-    feasibility_notes: List[str] = Field(default_factory=list)
-    reality_dependencies: List[str] = Field(default_factory=list)
-    claims_needing_evidence: List[str] = Field(default_factory=list)
-    potential_blockers: List[str] = Field(default_factory=list)
-    candidate_tests: List[str] = Field(default_factory=list)
-    exploratory_candidate_tests: List[str] = Field(default_factory=list)
+class AcceptedChangeItem(BaseModel):
+    proposal: str
+    promotion_reason: str
+    promotion_basis: str = "VALID_USER_DERIVATION"  # USER_EXPLICIT | VALID_USER_DERIVATION | EXTERNAL_EVIDENCE | HUMAN_DECISION | MODEL_HYPOTHESIS
+    source_stage: str = "ALTERNATIVES"
+    evidence_or_decision_basis: str = ""
 
 
 class RejectedItem(BaseModel):
@@ -79,23 +79,27 @@ class RejectedItem(BaseModel):
     source_stage: str = ""
 
 
-class AcceptedChangeItem(BaseModel):
-    proposal: str
-    promotion_reason: str
-    source_stage: str = "ALTERNATIVES"
-    evidence_or_decision_basis: str = ""
-
-
 class SynthesizeOutput(BaseModel):
     refined_idea: str
     core_mechanism: str = ""
     core_mechanism_justification: str = ""
+    core_mechanism_basis: str = "VALID_USER_DERIVATION"  # USER_EXPLICIT | VALID_USER_DERIVATION | EXTERNAL_EVIDENCE | HUMAN_DECISION | MODEL_HYPOTHESIS
     accepted_changes: List[AcceptedChangeItem] = Field(default_factory=list)
     candidate_possibilities: List[str] = Field(default_factory=list)
     rejected_changes: List[RejectedItem] = Field(default_factory=list)
     remaining_uncertainties: List[str] = Field(default_factory=list)
     known_risks: List[str] = Field(default_factory=list)
     recommended_next_step: str = ""
+
+
+class RealityCheckOutput(BaseModel):
+    target_core_mechanism: str = ""  # Referência ao CORE sintetizado exato sendo testado
+    feasibility_notes: List[str] = Field(default_factory=list)
+    reality_dependencies: List[str] = Field(default_factory=list)
+    claims_needing_evidence: List[str] = Field(default_factory=list)
+    potential_blockers: List[str] = Field(default_factory=list)
+    candidate_tests: List[str] = Field(default_factory=list)
+    exploratory_candidate_tests: List[str] = Field(default_factory=list)
 
 
 class FinalReviewOutput(BaseModel):

@@ -135,6 +135,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Eliminação de contradições ontológicas e contenção estrita do plano de testes do Core no IEE.
 - **Related Decisions:** [IEE-FIOOS-PROTOCOL-v1.0.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md)
 
+---
+
+### [FINDING-014] Alinhamento Pós-Síntese de Realidade, Autoridade Não Circular e Imutabilidade de Run ID
+- **Claim:** Para que o `REALITY_CHECK` teste o Core aceito sem desalinhamento temporal, a topologia canônica deve posicionar `SYNTHESIZE` antes de `REALITY_CHECK`. A promoção para o Core exige base de autoridade tipada (`USER_EXPLICIT`, `VALID_USER_DERIVATION`, `EXTERNAL_EVIDENCE`, `HUMAN_DECISION`), proibindo que `MODEL_HYPOTHESIS` (preocupações técnicas auto-geradas por LLMs) redefinam circularmente a essência do produto. Além disso, a identidade do Run ID deve ser imutável (`RUN-<UTC_TIMESTAMP>-<UUID4_HEX8>`), independente do sistema de arquivos e imune a colisões concorrentes.
+- **Evidence:** Autópsia das execuções reais em Cloud Shell e 9 testes determinísticos em `test_adversarial_ontology_provenance.py` (86 testes totais verdes).
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Eliminação definitiva de circularidade epistêmica, garantia de que o plano de testes avalia exatamente o Core aceito e integridade histórica inquestionável de evidências.
+- **Related Decisions:** [OPERATING-DOCTRINE.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/doctrine/OPERATING-DOCTRINE.md)
+
+
 
 
 

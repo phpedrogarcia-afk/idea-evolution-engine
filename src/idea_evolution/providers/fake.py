@@ -187,14 +187,16 @@ class FakeModelRunner(ModelRunner):
 
         if schema == RealityCheckOutput:
             return RealityCheckOutput(
+                target_core_mechanism="Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
                 feasibility_notes=["A camada fina sobre Pydantic roda em < 50ms localmente sem overhead de rede."],
                 reality_dependencies=["Disponibilidade de chave de API para o modo real ou execução offline com mocks."],
                 claims_needing_evidence=["Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline."],
                 potential_blockers=["Falta de conectividade externa em ambientes isolados."],
                 candidate_tests=[
                     "Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.",
-                    "Medir a taxa de conformidade de schema em 100 execuções sucessivas.",
+                    "Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico.",
                 ],
+                exploratory_candidate_tests=[],
             )
 
         if schema == SynthesizeOutput:
@@ -203,22 +205,26 @@ class FakeModelRunner(ModelRunner):
                 refined_idea="Idea Evolution Engine (Simple Loop): Motor sequencial CLI que recebe uma ideia humana crua, submete a 6 estágios dirigidos, valida esquemas e devolve um pacote de maturação estruturado com rastreabilidade total.",
                 core_mechanism="Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
                 core_mechanism_justification="Atende à intenção humana de estruturação com máxima previsibilidade e zero dependências de rede.",
+                core_mechanism_basis="VALID_USER_DERIVATION",
                 accepted_changes=[
                     AcceptedChangeItem(
                         proposal="Implementação de contratos Pydantic estritos para cada estágio.",
                         promotion_reason="Garante contenção total de tipos e validação estrita sem alucinação de dados.",
+                        promotion_basis="VALID_USER_DERIVATION",
                         source_stage="ALTERNATIVES",
                         evidence_or_decision_basis="Contratos determinísticos",
                     ),
                     AcceptedChangeItem(
                         proposal="Isolamento do kernel determinístico contra alucinações de estado.",
                         promotion_reason="Impede mutação arbitrária de campos constitucionais.",
+                        promotion_basis="VALID_USER_DERIVATION",
                         source_stage="ALTERNATIVES",
                         evidence_or_decision_basis="Constituição v1.0",
                     ),
                     AcceptedChangeItem(
                         proposal="Preservação imutável da ideia original.",
                         promotion_reason="Protege a intenção humana inicial contra essence drift.",
+                        promotion_basis="USER_EXPLICIT",
                         source_stage="UNDERSTAND",
                         evidence_or_decision_basis="Regra de fidelidade",
                     ),

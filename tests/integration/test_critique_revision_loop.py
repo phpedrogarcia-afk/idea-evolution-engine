@@ -40,8 +40,8 @@ class TestCritiqueRevisionLoop(unittest.TestCase):
         # 4. CRITIQUE_2
         # 5. REVISION_2
         # 6. ALTERNATIVES
-        # 7. REALITY_CHECK
-        # 8. SYNTHESIZE
+        # 7. SYNTHESIZE
+        # 8. REALITY_CHECK
         # 9. FINAL_REVIEW
         # Total = 9 estágios
         self.assertEqual(len(state.stage_history), 9)
@@ -54,8 +54,8 @@ class TestCritiqueRevisionLoop(unittest.TestCase):
             "CRITIQUE_2",
             "REVISION_2",
             "ALTERNATIVES",
-            "REALITY_CHECK",
             "SYNTHESIZE",
+            "REALITY_CHECK",
             "FINAL_REVIEW",
         ]
         self.assertEqual(executed_stages, expected_stages)
