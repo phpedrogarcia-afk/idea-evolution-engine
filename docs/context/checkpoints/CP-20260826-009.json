@@ -1,0 +1,81 @@
+{
+  "checkpoint_id": "CP-20260826-009",
+  "created_at": "2026-08-26T15:41:25-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission 06.2 Complete: IEE/FioOS Boundary Canonicalization, Protocol V1 Specification, and 74 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-006.1: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1 e Canary Autopsy M05.1",
+    "TASK-006.2-A: Especificação Canônica da Fronteira IEE/FioOS (docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md)",
+    "TASK-006.2-B: Contratos tipados Pydantic em src/idea_evolution/contracts/fioos_protocol.py",
+    "TASK-006.2-C: Atualização de Invariantes Constitucionais (docs/GOVERNANCE-INVARIANTS.md)",
+    "TASK-006.2-D: 11 Novos Testes Determinísticos de Invariantes de Contrato (total: 74 testes verdes)"
+  ],
+  "changed_files": [
+    "docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md",
+    "src/idea_evolution/contracts/fioos_protocol.py",
+    "tests/unit/test_fioos_boundary_contracts.py",
+    "docs/GOVERNANCE-INVARIANTS.md",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "FOUR_LAYER_SOVEREIGNTY: Human owns intent, IEE owns epistemic state, FioOS owns operational governance, No layer silently inherits authority",
+    "READY_TO_TEST_NOT_EXECUTION: READY_TO_TEST é um estado epistêmico que solicita teste sem autorizar execução direta",
+    "ARCHITECTURE_PREPARES_EVIDENCE_EARNS: O protocolo V1 é especificado formalmente enquanto a bridge real permanece não implementada até haver evidência empírica"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "74/74 tests passing across 14 modules"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Integração prematura com FioOS runtime antes da maturação do Simple Loop pode reintroduzir complexidade desnecessária"
+  ],
+  "blockers": [
+    "M05_REAL_MODEL_CANARY: BLOCKED_PROVIDER_CREDENTIAL_OR_COST (Aguardando chave gratuita no .env local)"
+  ],
+  "readiness_verdict": {
+    "IEE_FIOOS_BOUNDARY": "CANONICAL_AND_LOCKED",
+    "IEE_FIOOS_PROTOCOL_V1": "SPECIFIED",
+    "REAL_FIOOS_BRIDGE": "NOT_IMPLEMENTED",
+    "FIOOS_RUNTIME_TOUCHED": "NO",
+    "MULTI_MODEL_READY_OFFLINE": true,
+    "FREE_ONLY_POLICY_INSTITUTIONALIZED": true,
+    "ESSENCE_PRESERVATION_HARDENED": true,
+    "REAL_SINGLE_MODEL_EXECUTION": "NOT_YET_PROVEN",
+    "REAL_MULTI_MODEL_EXECUTION": "NOT_EXECUTED"
+  },
+  "next_exact_action": "Configuração da chave de API gratuita pelo operador humano no arquivo local .env para disparar o Real Model Canary (M05-B) com o prompt corrigido",
+  "authorized_next_scope": [
+    "M05-B: Execução do Real Model Canary sobre 1 ideia crua com modelo gratuito e prompt blindado contra inchaço"
+  ],
+  "do_not_repeat": [
+    "Não implementar bridge de runtime do FioOS sem autorização formal e evidência prévia",
+    "Não incluir segredos ou comandos executáveis dentro do InvestigationIntent"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 74 testes."
+}

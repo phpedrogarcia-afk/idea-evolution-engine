@@ -99,6 +99,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O IEE mantém criatividade exploratória sem permitir que alucinações arquiteturais desfigurem a ideia humana.
 - **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
 
+---
+
+### [FINDING-010] Desacoplamento Estrito de Fronteira IEE/FioOS (Protocol V1)
+- **Claim:** O desacoplamento formal entre Estado Epistêmico (IEE) e Governança Operacional/Execução (FioOS) via contratos tipados (`InvestigationIntent`, `FioOSMissionPlan`, `ExecutionIdentityBinding`, `EvidenceEnvelope`) previne vazamento de autoridade, segredos e comandos de execução no domínio epistemológico, respeitando o princípio de que arquitetura pode se preparar, mas a evidência deve conquistar a integração real.
+- **Evidence:** Especificação canônica [`docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md) e 11 testes determinísticos em `tests/unit/test_fioos_boundary_contracts.py`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** O IEE permanece 100% autônomo e seguro em modo `STANDALONE`, com contratos prontos para integração futura governada pelo FioOS sem modificação do runtime atual.
+- **Related Decisions:** [IEE-FIOOS-PROTOCOL-v1.0.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md)
+
+
 
 
 

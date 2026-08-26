@@ -162,3 +162,19 @@
   - Emissão do Checkpoint `CP-20260826-008`.
 - **Resultado:** `COMPLETE_OFFLINE` | `ESSENCE_PRESERVATION = HARDENED` | `SPECULATIVE_ACCRETION_BLOCKED = TRUE`.
 - **Evidência:** 63/63 testes automatizados aprovados.
+
+---
+
+### [MS-006.2] IEE/FioOS Boundary Canonicalization & Protocol Specification (Missão 06.2)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Institucionalizar formalmente a fronteira arquitetural e os contratos de comunicação entre o Idea Evolution Engine (IEE) e o FioOS, garantindo que o IEE governe o domínio epistemológico e o FioOS governe a execução operacional, sem vazamento de autoridade, segredos ou código de runtime (`REAL_FIOOS_BRIDGE = NOT_IMPLEMENTED`, `FIOOS_RUNTIME_TOUCHED = NO`).
+- **O que Mudou:**
+  - Redação da especificação canônica formal [`docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md).
+  - Implementação dos contratos tipados Pydantic (`InvestigationIntent`, `FioOSMissionPlan`, `ExecutionIdentityBinding`, `EvidenceEnvelope`, `EpistemicUpdate`) em `src/idea_evolution/contracts/fioos_protocol.py`.
+  - Formalização das 5 camadas ontológicas (`CORE`, `DERIVED`, `CANDIDATE`, `DEFERRED`, `REJECTED`) e suas regras determinísticas de transição de estado (`OntologyTransitionValidator`).
+  - Atualização do [`docs/GOVERNANCE-INVARIANTS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/GOVERNANCE-INVARIANTS.md) com a Seção 1.9 e as invariantes técnicas INV-09 a INV-12.
+  - Criação de 11 novos testes determinísticos em `tests/unit/test_fioos_boundary_contracts.py` (totalizando 74 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-009`.
+- **Resultado:** `COMPLETE_OFFLINE` | `IEE_FIOOS_BOUNDARY = CANONICAL_AND_LOCKED` | `PROTOCOL_V1 = SPECIFIED`.
+- **Evidência:** 74/74 testes automatizados aprovados.

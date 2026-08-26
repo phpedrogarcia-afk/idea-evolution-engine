@@ -7,15 +7,15 @@
   "constitution_hash": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468",
   "next_product_target": "SIMPLE_IDEA_EVOLUTION_LOOP",
   "advanced_architecture_status": "TARGET",
-  "fioos_integration_status": "FUTURE_RESEARCH",
+  "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260826-008",
-  "last_known_good_checkpoint": "CP-20260826-008",
-  "current_objective": "Mission 05.1 Complete: First Real Canary Autopsy & Essence-Preservation Hardening (63 testes verdes)",
+  "latest_checkpoint": "CP-20260826-009",
+  "last_known_good_checkpoint": "CP-20260826-009",
+  "current_objective": "Mission 06.2 Complete: IEE/FioOS Boundary Canonicalization & Protocol V1 Specification (74 testes verdes)",
   "current_active_task": "TASK-000",
   "next_authorized_work": "Configuração de chave de API pelo operador humano para execução do Real Canary (M05-B) com prompt corrigido",
-  "updated_at": "2026-08-26T15:10:45-03:00",
+  "updated_at": "2026-08-26T15:41:25-03:00",
   "required_read_order": [
     "AI-START-HERE.md",
     "docs/context/CURRENT-STATE.md",
@@ -24,7 +24,8 @@
     "docs/GOVERNANCE-INVARIANTS.md",
     "docs/CODE-MAP.md",
     "docs/TEST-MAP.md",
-    "docs/specs/MODEL-ROUTING.md"
+    "docs/specs/MODEL-ROUTING.md",
+    "docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md"
   ],
   "canonical_documents": [
     "AI-START-HERE.md",
@@ -84,6 +85,7 @@
     "docs/specs/STALL-POLICY-v0.1.md",
     "docs/specs/AUTHORITY-MATRIX-v0.1.md",
     "docs/specs/MODEL-ROUTING.md",
+    "docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md",
     "docs/experiments/EXPERIMENT-PROTOCOL.md",
     "docs/experiments/EXPERIMENT-BACKLOG.md",
     "docs/experiments/M04-DONOR-HARVEST-SPEC.md"
@@ -110,18 +112,19 @@
     "docs/specs/READY-TO-TEST-POLICY-v0.1.md",
     "docs/specs/STALL-POLICY-v0.1.md",
     "docs/specs/AUTHORITY-MATRIX-v0.1.md",
-    "docs/specs/MODEL-ROUTING.md"
+    "docs/specs/MODEL-ROUTING.md",
+    "docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md"
   ],
   "superseded_documents": [],
   "critical_file_hashes": {
     "AI-START-HERE.md": "f91c8bbb58c8c22a3c15cd3f030df099b57c2e98a332156e6cde47fa019764b0",
     "AGENTS.md": "d680a17192193dce5e9ea485bfe85a44fff3b352c36bb0f4440f7718ac9e6a77",
     "README.md": "17b117e2eabf9c4fa373802046c08a754368f85e5dcad712d1ac6c2e00f35935",
-    "docs/GOVERNANCE-INVARIANTS.md": "744b2a9aaca43c25d50a6f276dee4d36ca9131e72190779f6b50b66d71de40b9",
+    "docs/GOVERNANCE-INVARIANTS.md": "9cce61ce9303dd4a5f2914a2912700b5f4751cfc3607f0b0b22e490f03d47bda",
     "docs/DECISIONS-LEDGER.md": "e34e53a8861692e407d378ff22db30c66d6ba6f08ceaf0cabffa981015c24a79",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "ab9a549f919afe7c5836df3fb65aa590271980c3b6742eeef5e2e4709cf4f585",
-    "docs/context/ACTIVE-QUEUE.md": "675a837a6792527c0e7d93d31eee5416c4a722707f3e85e79afcbfe395f3d5da",
+    "docs/context/CURRENT-STATE.md": "896a526d6cdcc57593d65b841d0cbe55c1637a1241d1918f0aa9890a1d223d11",
+    "docs/context/ACTIVE-QUEUE.md": "573aa2d68dde8027af8149ef7257d762f1aa0d5c59f56b7949a9fe2fbcf49b76",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"

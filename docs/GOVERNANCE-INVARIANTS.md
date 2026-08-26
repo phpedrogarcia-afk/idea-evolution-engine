@@ -45,6 +45,14 @@
 > **Tensões epistêmicas e contradições nunca devem ser "alisadas" ou silenciadas por síntese forçada.**
 - Se dois modelos ou evidências divergirem fundamentalmente, o sistema registra um `TensionRecord` estruturado e preserva a divergência para investigação ou decisão humana.
 
+### 1.9 Fronteira Constitucional com o FioOS (IEE/FioOS Boundary)
+> **Human owns intent. IEE owns epistemic state. FioOS owns operational governance. No layer inherits authority silently.**
+- O IEE governa a representação da intenção, o `IdeaGenome`, hipóteses, claims, incertezas e a lógica de recomendação (`InvestigationIntent`).
+- O FioOS governa a autorização operacional, modelos concretos, ferramentas, orçamentos financeiros, sandboxes e execução.
+- `READY_TO_TEST != EXECUTION_AUTHORITY`. A deliberação cede lugar ao teste de realidade sem executar nada diretamente.
+- O IEE opera em `STANDALONE` por padrão sob política `FREE_ONLY` / `ZERO_INCREMENTAL_SPEND`. No modo `FIOOS_GOVERNED`, delega a execução ao FioOS via protocolo formal.
+- *"Architecture may prepare for FioOS. Evidence must earn the integration."*
+
 ---
 
 ## 2. Invariantes Técnicas e de Dados
@@ -59,3 +67,8 @@
 | **INV-06** | **Separação Epistemológica de Claims** | O status de veracidade de uma claim (`UNTESTED`, `SUPPORTED`, `REFUTED`, `UNCERTAIN`) jamais pode ser misturado com seu ciclo de vida no projeto (`ACTIVE`, `SUPERSEDED`, `DEPRECATED`). |
 | **INV-07** | **Autoridade Externa ao Payload** | O campo `"actor"` ou declaração de quem é o usuário em JSON não confere autoridade. O validador deve receber um `ExecutionContext` externo e confiável. |
 | **INV-08** | **Preservação de Histórico em Branches** | Um pivot ou divergência gera uma nova branch no grafo de linhagem. A linhagem original nunca é sobrescrita ou destruída. |
+| **INV-09** | **Isolamento de Segredos no Intent** | Um `InvestigationIntent` jamais pode conter credenciais, chaves de API, segredos ou código executável de ferramentas. |
+| **INV-10** | **Plano Não É Autorização** | Um `FioOSMissionPlan` representa intenção de agendamento; não concede autoridade de execução (`MISSION_PLAN != AUTHORIZATION`). |
+| **INV-11** | **Observação Não É Verdade Aceita** | O `EvidenceEnvelope` transporta observações brutas e telemetria; não aplica mutações diretas no genoma sem interpretação do IEE. |
+| **INV-12** | **Transição Ontológica Estrita** | Candidatos gerados por IA jamais podem migrar silenciosamente para o `CORE` sem autorização humana soberana expressa. |
+
