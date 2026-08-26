@@ -94,3 +94,19 @@
   - Emissão do Checkpoint `CP-20260826-004`.
 - **Resultado:** `COMPLETE`.
 - **Evidência:** 38/38 testes automatizados aprovados e execução completa da CLI `iee evolve` e `compare`.
+
+---
+
+### [MS-005] Real Model Canary Preflight & Security Audit (Missão 05)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Reconciliar o estado do repositório pós-publicação no GitHub (`main` branch), auditar a segurança contra vazamento de segredos (`SECRET_SCAN: PASS`), expandir o `NativeModelRunner` para carregamento seguro de `.env` e registrar o status do canário real.
+- **O que Mudou:**
+  - Reconciliação do branch `main` e URL do remote GitHub (`https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`).
+  - Execução de varredura estrita de segurança em arquivos rastreados (`SECRET_SCAN: PASS`).
+  - Atualização do `.gitignore` com exclusão rigorosa de `.env`, `.env.*` e diretórios de execução local.
+  - Atualização de `src/idea_evolution/providers/native.py` com carregador seguro de `.env` (sem expor chaves) e suporte a Groq, OpenAI e Gemini via SDK/HTTP.
+  - Atualização do mapa topológico `docs/context/REPOSITORY-MAP.md`.
+  - Criação do Checkpoint `CP-20260826-005`.
+- **Resultado:** `PREFLIGHT_COMPLETE` | `REAL_CANARY = BLOCKED_PROVIDER_CREDENTIAL_OR_COST`.
+- **Evidência:** 38/38 testes automatizados aprovados e varredura de segurança com zero achados.

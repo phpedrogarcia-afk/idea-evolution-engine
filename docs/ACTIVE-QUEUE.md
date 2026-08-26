@@ -4,16 +4,14 @@
 
 ---
 
-## 🚦 Status Atual da Fila: FASE 1 — SIMPLE LOOP MVP CONCLUÍDO & VALIDADO
+## 🚦 Status Atual da Fila: PREFLIGHT DA MISSÃO 05 CONCLUÍDO & AGUARDANDO CREDENCIAIS
 
 ### 📌 Tarefas Concluídas:
-- [x] **TASK-001:** Fundação Conceitual, Constitucional e Arquitetural v0.1.
-- [x] **TASK-002:** Endurecimento de Inteligência e Continuidade Cognitiva (Fase 02).
-- [x] **TASK-003:** Arquitetura de Inteligência de Agentes e Foundation Ready Gate (Fase 03).
-- [x] **TASK-003.1:** Institucionalização Constitucional da Constituição Mestra v1.0.
-- [x] **MISSION-04:** Simple Idea Evolution Loop MVP (software executável, 38 testes aprovados, experimento EXP-M04-001 executado).
+- [x] **TASK-001 a TASK-004:** Fundação, Hardening, Arquitetura de Inteligência, Doutrina e Implementação do MVP (Missões 01 a 04).
+- [x] **TASK-005 (Preflight):** Reconciliação do branch `main`, remote GitHub, varredura de segurança (`SECRET_SCAN: PASS`) e suporte a `.env` seguro no `NativeModelRunner`.
 
 ---
 
-## 🛑 Ponto de Parada Obrigatório (Gate de Governança)
-- **TASK-000:** Pausa mandatória para revisão humana do pacote de comparação (`experiments/MISSION-04/comparison-packet.md`) e autorização da Missão 05.
+## 🛑 Ponto de Bloqueio e Parada Mandatória (STOP)
+- **Status do Canário Real:** `BLOCKED_PROVIDER_CREDENTIAL_OR_COST`.
+- **Ação Necessária:** O operador humano deve configurar a chave de API (ex: `GROQ_API_KEY`) no arquivo `.env` ou nas variáveis de ambiente do sistema conforme instruções fornecidas no relatório.

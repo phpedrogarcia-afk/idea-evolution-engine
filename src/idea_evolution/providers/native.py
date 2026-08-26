@@ -13,6 +13,28 @@ from src.idea_evolution.providers.base import ModelRunner, ModelResponse, ModelU
 T = TypeVar("T", bound=BaseModel)
 
 
+from pathlib import Path
+
+def _load_env_file_safe():
+    """Carrega variáveis do .env no os.environ caso exista localmente ou no home."""
+    candidates = [
+        Path(__file__).resolve().parent.parent.parent.parent / ".env",
+        Path.home() / ".env",
+    ]
+    for env_p in candidates:
+        if env_p.exists():
+            for line in env_p.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k = k.strip()
+                    v = v.strip().strip("'").strip('"')
+                    if k not in os.environ:
+                        os.environ[k] = v
+
+_load_env_file_safe()
+
+
 class NativeModelRunner(ModelRunner):
     """
     Executor para provedores reais de LLM.
@@ -22,7 +44,14 @@ class NativeModelRunner(ModelRunner):
     def __init__(self, provider: str = "groq", api_key: Optional[str] = None, default_model: Optional[str] = None):
         self.provider = provider.lower()
         self.api_key = api_key or os.environ.get(f"{self.provider.upper()}_API_KEY")
-        self.default_model = default_model or ("llama-3.3-70b-versatile" if self.provider == "groq" else "gpt-4o-mini")
+        if self.provider == "groq":
+            self.default_model = default_model or "llama-3.3-70b-versatile"
+        elif self.provider == "openai":
+            self.default_model = default_model or "gpt-4o-mini"
+        elif self.provider == "gemini":
+            self.default_model = default_model or "gemini-2.0-flash"
+        else:
+            self.default_model = default_model or "default-model"
 
     def generate(
         self,
@@ -115,7 +144,6 @@ class NativeModelRunner(ModelRunner):
                 error=f"PROVIDER_EXECUTION_ERROR: {str(e)}",
             )
 
-    def _call_provider(self, system_instruction: str, user_prompt: str, model: str) -> tuple[str, ModelUsage]:
         if self.provider == "groq":
             from groq import Groq
 
@@ -134,6 +162,52 @@ class NativeModelRunner(ModelRunner):
                 prompt_tokens=completion.usage.prompt_tokens if completion.usage else 0,
                 completion_tokens=completion.usage.completion_tokens if completion.usage else 0,
                 total_tokens=completion.usage.total_tokens if completion.usage else 0,
+            )
+            return raw, usage
+
+        if self.provider == "openai":
+            import httpx
+
+            url = "https://api.openai.com/v1/chat/completions"
+            headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+            payload = {
+                "model": model,
+                "messages": [
+                    {"role": "system", "content": system_instruction},
+                    {"role": "user", "content": user_prompt},
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.3,
+            }
+            resp = httpx.post(url, headers=headers, json=payload, timeout=60.0)
+            resp.raise_for_status()
+            data = resp.json()
+            raw = data["choices"][0]["message"]["content"] or ""
+            u = data.get("usage", {})
+            usage = ModelUsage(
+                prompt_tokens=u.get("prompt_tokens", 0),
+                completion_tokens=u.get("completion_tokens", 0),
+                total_tokens=u.get("total_tokens", 0),
+            )
+            return raw, usage
+
+        if self.provider == "gemini":
+            import httpx
+
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={self.api_key}"
+            payload = {
+                "contents": [{"role": "user", "parts": [{"text": f"{system_instruction}\n\n{user_prompt}"}]}],
+                "generationConfig": {"response_mime_type": "application/json", "temperature": 0.3},
+            }
+            resp = httpx.post(url, json=payload, timeout=60.0)
+            resp.raise_for_status()
+            data = resp.json()
+            raw = data["candidates"][0]["content"]["parts"][0]["text"]
+            u = data.get("usageMetadata", {})
+            usage = ModelUsage(
+                prompt_tokens=u.get("promptTokenCount", 0),
+                completion_tokens=u.get("candidatesTokenCount", 0),
+                total_tokens=u.get("totalTokenCount", 0),
             )
             return raw, usage
 

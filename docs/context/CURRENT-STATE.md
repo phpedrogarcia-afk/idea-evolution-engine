@@ -1,22 +1,28 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-004
+> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-005
 
 ---
 
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 1 — SIMPLE LOOP MVP (MOTOR EXECUTÁVEL IMPLEMENTADO E VALIDADO)
+- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (MOTOR EXECUTÁVEL COMPLETO & PRONTO PARA INFERÊNCIA REAL)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status da Missão 04:** `COMPLETE` (Simple Idea Evolution Loop implementado com Condição B e Condição C, CLI, suíte de 38 testes verdes e pacote de comparação experimental gerado)
-- **Status do Executor de Modelos:**
-  - `OFFLINE_FAKE_RUNNER`: 100% testado, determinístico e validado.
-  - `REAL_MODEL_RUN`: `BLOCKED_NO_PROVIDER_CREDENTIAL` (chaves de API não configuradas no ambiente local; sem gastos silenciosos).
-- **Último Checkpoint Imutável:** [`CP-20260826-004`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-004.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260826-004`
-- **Git Branch:** `master`
+- **Status do Produto:** `SIMPLE IDEA EVOLUTION LOOP` implementado com Condição B e Condição C, CLI, suíte de 38 testes verdes e pacote de comparação experimental.
+- **Status da Missão 05:** `PREFLIGHT_AND_SECURITY_SCAN_COMPLETE`
+- **Reconciliação do Repositório Remoto:**
+  - `DEFAULT_BRANCH`: `main`
+  - `REMOTE_REPOSITORY`: `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
+  - `SECRET_SCAN`: `PASS` (0 credenciais ou segredos rastreados no Git)
+- **Status do Executor de Modelos Reais:**
+  - `REAL_MODEL_RUN`: `BLOCKED_PROVIDER_CREDENTIAL_OR_COST` (Nenhuma chave `GROQ_API_KEY`, `OPENAI_API_KEY` ou `GEMINI_API_KEY` configurada no ambiente local).
+  - `OFFLINE_SIMULATION_RUN`: 100% operacional via `FakeModelRunner` (38/38 testes verdes).
+- **Último Checkpoint Imutável:** [`CP-20260826-005`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-005.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260826-005`
+- **Git Branch:** `main`
+- **Git Commit:** `48c766b` $\to$ Próximo commit pós-M05
 - **Worktree Status:** CLEAN
 
 ---
@@ -24,33 +30,26 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Missão Mestre 04: Implementação do **Simple Idea Evolution Loop MVP**:
-    - Arsenal Operacional de Doadores (`DONOR-ARSENAL.md` e `donor-manifest.json`).
-    - Especificação de Colheita de Doadores (`M04-DONOR-HARVEST-SPEC.md`).
-    - Pacote Python `src/idea_evolution/` (domain, stages, contracts, providers, orchestration, tracing, cli).
-    - 10 arquivos de prompts versionados em `prompts/`.
-    - 3 fixtures padronizadas em `fixtures/`.
-    - Suíte completa de 38 testes automatizados aprovados (`python -m unittest discover -s tests`).
-    - Pacote de comparação cega do experimento EXP-M04-001 (`experiments/MISSION-04/comparison-packet.md`).
-    - Documentação de código (`CODE-MAP.md`) e testes (`TEST-MAP.md`).
+  - Missão 04: Implementação completa do Simple Loop MVP, fixtures, experiment packet e 38 testes verdes.
+  - Missão 05 (Preflight & Security): Reconciliação do branch `main`, verificação de remote GitHub, varredura de segurança contra vazamento de segredos (`SECRET_SCAN: PASS`), expansão do `NativeModelRunner` para suporte seguro a `.env` (Groq/OpenAI/Gemini).
 - **Tarefa Ativa Atual:**
-  - `TASK-000`: Gate de Governança — Apresentação do relatório final da Missão 04 ao operador humano e parada mandatória (*STOP*).
-- **Próximo Passo Exato (Aguardando Decisão Humana):**
-  - Revisão humana do pacote de comparação cega (`comparison-packet.md`) e definição do escopo da Missão 05.
+  - `TASK-000`: Gate de Governança — Apresentação do relatório da Missão 05 e instruções seguras para configuração de credencial de provedor real.
+- **Próximo Passo Exato (Aguardando Configuração Humana de Credencial):**
+  - Configuração da chave de API pelo operador humano via protocolo seguro para desbloqueio do primeiro *Real Model Canary* e execução do experimento A/B/C com inferência real.
 
 ---
 
 ## 3. Bloqueadores e Contradições Abertas
 
 - **Bloqueadores Ativos:** 
-  - `REAL_MODEL_RUN = BLOCKED_NO_PROVIDER_CREDENTIAL` (Credenciais de provedores externos não estão no ambiente; infraestrutura pronta para uso quando fornecidas).
+  - `REAL_CANARY = BLOCKED_PROVIDER_CREDENTIAL_OR_COST`: Ausência de chave de API no ambiente local. Conforme regra #7 da Missão 05, o sistema não gasta silenciosamente nem finge determinismo via mocks para responder a qualidade semântica real.
 - **Contradições Abertas Registradas:** 0 contradições críticas ([`docs/context/CONTRADICTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTRADICTIONS.md)).
 - **Dúvidas em Aberto Registradas:** 4 questões mapeadas em [`docs/context/OPEN-QUESTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/OPEN-QUESTIONS.md).
 
 ---
 
 ## 4. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
-1. ❌ **NÃO** iniciar a Mission 05 sem avaliação humana dos resultados da Mission 04.
-2. ❌ **NÃO** construir interfaces web, dashboards ou banco de dados relacional/vetorial sem autorização explícita.
-3. ❌ **NÃO** implementar RL, MCTS ou aprendizado de topologia adaptativa (continua TARGET).
-4. ❌ **NÃO** violar a imutabilidade de `original_idea` no estado compartilhado.
+1. ❌ **NÃO** usar o `FakeModelRunner` como evidência para responder sobre a qualidade semântica da IA real.
+2. ❌ **NÃO** fazer commit de arquivos `.env` ou expor chaves de API nos logs ou no chat.
+3. ❌ **NÃO** inventar provedores complexos ou frameworks intermediários (LiteLLM, LangGraph).
+4. ❌ **NÃO** alterar os prompts versionados após inspecionar saídas (anti-moving goalposts).
