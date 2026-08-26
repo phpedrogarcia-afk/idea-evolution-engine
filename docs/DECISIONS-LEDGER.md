@@ -15,6 +15,7 @@
 - [ADR-008: Adoção de Doadores Orientada a Gaps Receptores](#adr-008)
 - [ADR-009: READY_TO_TEST como Veredito de Próxima Fonte de Conhecimento](#adr-009)
 - [ADR-010: Separação entre Regimes de Bootstrap e Investigação Decisional](#adr-010)
+- [ADR-011: Sistema de Continuidade Cognitiva, Checkpoints e Validação Determinística](#adr-011)
 
 ---
 
@@ -105,3 +106,12 @@
 - **Contexto:** Exigir relevância decisória rigorosa de uma ideia recém-chegada gera estagnação, pois a ideia ainda não possui forma.
 - **Decisão:** Uma ideia recém-chegada entra em `STRUCTURE_BOOTSTRAP` com objetivo de maximizar `StructureGain` (claims, relations, assumptions). Somente após atender deterministicamente à `BootstrapExitPolicy` ela migra para `DECISIONAL_INVESTIGATION`.
 - **Consequências:** Genomas esparsos são tratados como um regime cognitivo natural, não como erro ou deficiência.
+
+---
+
+### <a id="adr-011"></a> ADR-011: Sistema de Continuidade Cognitiva, Checkpoints e Validação Determinística
+- **Data:** 2026-08-26
+- **Status:** `ACCEPTED`
+- **Contexto:** Risco de perda de contexto e desvio de objetivos durante trocas de agentes ou sessões interrompidas.
+- **Decisão:** Criar a infraestrutura de continuidade em `docs/context/` com manifesto machine-readable (`context-manifest.json`), checkpoints imutáveis (`CP-YYYYMMDD-NNN`), regras de *Fail-Closed on Canonical Conflict* e scripts determinísticos de validação (`tools/context/validate_context.py`).
+- **Consequências:** Qualquer nova IA recupera o estado operacional exato em segundos sem depender de histórico de chat.

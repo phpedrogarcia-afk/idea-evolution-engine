@@ -1,0 +1,79 @@
+{
+  "checkpoint_id": "CP-20260826-001",
+  "created_at": "2026-08-26T12:15:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_0_FOUNDATION",
+  "objective": "Foundation Complete & Continuity Hardening",
+  "repository": {
+    "branch": "master",
+    "commit": "ce3552f",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001: Fundação Conceitual, Constitucional e Arquitetural v0.1",
+    "TASK-002: Endurecimento de Inteligência e Continuidade Cognitiva (docs/context, context-manifest, scripts de validação, testes de continuidade)"
+  ],
+  "changed_files": [
+    "AI-START-HERE.md",
+    "AGENTS.md",
+    "README.md",
+    "docs/INDEX.md",
+    "docs/SOURCE-OF-TRUTH.md",
+    "docs/CURRENT-STATE.md",
+    "docs/GOVERNANCE-INVARIANTS.md",
+    "docs/DECISIONS-LEDGER.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/TERMINOLOGY.md",
+    "docs/TARGET-ARCHITECTURE.md",
+    "docs/context/INDEX.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/CONTINUITY-CAPSULE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/DECISIONS-SUMMARY.md",
+    "docs/context/OPEN-QUESTIONS.md",
+    "docs/context/CONTRADICTIONS.md",
+    "docs/context/RESEARCH-BACKLOG.md",
+    "docs/context/REPOSITORY-MAP.md",
+    "docs/context/CONTEXT-PROTOCOL.md",
+    "docs/context/CHECKPOINT-PROTOCOL.md",
+    "docs/context/context-manifest.json",
+    "tools/context/validate_context.py",
+    "tools/context/project_status.py",
+    "tools/context/create_checkpoint.py",
+    "tests/continuity/test_continuity.py"
+  ],
+  "new_decisions": [
+    "ADR-001 a ADR-010 (Fundação e Invariantes)",
+    "ADR-011 (Sistema de Continuidade Cognitiva, Checkpoints e Validação Determinística)"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "test_continuity.py (7 passed)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Risco de tentação de implementar código de produto antes da autorização humana"
+  ],
+  "blockers": [],
+  "next_exact_action": "TASK-000: Gate de Governança: Aguardar autorização humana formal para transição de fase",
+  "authorized_next_scope": [
+    "Auditoria e governança documental",
+    "Aguardar autorização para Fase 1 (Schemas & Validators) ou Simple Loop MVP"
+  ],
+  "do_not_repeat": [
+    "Não recriar ou redefinir documentos da fundação v0.1",
+    "Não recriar ou regerar testes de continuidade já aprovados"
+  ],
+  "recovery_notes": "Leia AI-START-HERE.md, execute tools/context/project_status.py e consulte docs/context/CONTINUITY-CAPSULE.md."
+}
