@@ -1,12 +1,15 @@
 """
 src/idea_evolution/orchestration/simple_loop.py
-Orquestrador central do Simple Idea Evolution Loop (Condições B e C) com controle determinístico de estado.
+Orquestrador central do Simple Idea Evolution Loop (Condições B e C) com controle determinístico de estado e roteamento multi-modelo.
 """
 
-from typing import Optional, Dict, Any, List
+from __future__ import annotations
+from typing import Optional, Dict, Any, List, Union
 from pathlib import Path
 from src.idea_evolution.domain.state import SimpleIdeaState, RunStatus
 from src.idea_evolution.providers.base import ModelRunner
+from src.idea_evolution.providers.router import RunnerRouter
+from src.idea_evolution.config.routing import ModelRoutingConfig
 from src.idea_evolution.tracing.tracer import RunTracer
 from src.idea_evolution.stages.understand import UnderstandStage
 from src.idea_evolution.stages.attack import AttackStage
@@ -22,24 +25,73 @@ from src.idea_evolution.stages.contracts import FinalReviewOutput
 class SimpleLoopRunner:
     """
     Controlador do Simple Idea Evolution Loop.
-    Garante execução sequencial dos estágios, validação de schemas, persistência e limite de reconstrução.
+    Garante execução sequencial dos estágios, despacho para os modelos corretos, validação de schemas, persistência e limite de reconstrução.
     """
 
     def __init__(
         self,
-        runner: ModelRunner,
+        runner: Optional[ModelRunner] = None,
+        router: Optional[RunnerRouter] = None,
+        config: Optional[ModelRoutingConfig] = None,
         topology: str = "STANDARD_6_STAGE",  # STANDARD_6_STAGE (Cond B) | ITERATIVE_CRITIQUE_REVISION (Cond C)
         stage_models: Optional[Dict[str, str]] = None,
         runs_dir: Optional[Path] = None,
     ):
-        self.runner = runner
         self.topology = topology.upper()
         self.stage_models = stage_models or {}
         self.runs_dir = runs_dir
 
+        if router is not None:
+            self.router = router
+        elif config is not None:
+            self.router = RunnerRouter(config=config)
+        elif runner is not None:
+            # Compatibilidade backward: envolve runner único no RunnerRouter
+            cfg = ModelRoutingConfig.default_single_model(provider=getattr(runner, "provider", "custom"), model=getattr(runner, "default_model", "default"))
+            self.router = RunnerRouter(config=cfg, custom_runners={"default": runner})
+        else:
+            self.router = RunnerRouter()
+
+        # Validação antecipada de rotas para a topologia escolhida
+        required = self.get_required_stages()
+        errors = self.router.config.validate_for_topology(required)
+        if errors:
+            raise ValueError(f"ROUTE_CONFIGURATION_INVALID: Erros na validação de rotas para topologia {self.topology}: {'; '.join(errors)}")
+
+    def get_required_stages(self) -> List[str]:
+        """Retorna os nomes canônicos de estágios exigidos pela topologia ativa."""
+        if self.topology == "ITERATIVE_CRITIQUE_REVISION":
+            return [
+                "UNDERSTAND",
+                "CRITIQUE_1",
+                "REVISION_1",
+                "CRITIQUE_2",
+                "REVISION_2",
+                "ALTERNATIVES",
+                "REALITY_CHECK",
+                "SYNTHESIZE",
+                "FINAL_REVIEW",
+            ]
+        return [
+            "UNDERSTAND",
+            "ATTACK",
+            "ALTERNATIVES",
+            "REALITY_CHECK",
+            "SYNTHESIZE",
+            "FINAL_REVIEW",
+        ]
+
     def run(self, original_idea: str, run_id: Optional[str] = None) -> SimpleIdeaState:
         tracer = RunTracer(run_id=run_id, runs_dir=self.runs_dir)
-        tracer.record_input(original_idea, metadata={"topology": self.topology})
+        routing_hash = self.router.config.compute_hash()
+        tracer.record_input(
+            original_idea,
+            metadata={
+                "topology": self.topology,
+                "routing_config_hash": routing_hash,
+                "routing_schema_version": self.router.config.schema_version,
+            },
+        )
 
         state = SimpleIdeaState(
             run_id=tracer.run_id,
@@ -52,8 +104,9 @@ class SimpleLoopRunner:
         try:
             # 1. UNDERSTAND
             understand_stage = UnderstandStage()
-            model = self.stage_models.get(understand_stage.stage_id)
-            res = understand_stage.execute(state, self.runner, model_name=model)
+            runner, model_name, alias = self.router.get_runner_for_stage(understand_stage.stage_id)
+            model = self.stage_models.get(understand_stage.stage_id) or model_name
+            res = understand_stage.execute(state, runner, model_name=model, logical_alias=alias)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -65,7 +118,9 @@ class SimpleLoopRunner:
             if self.topology == "ITERATIVE_CRITIQUE_REVISION":
                 # Condição C: Crítica 1 -> Revisão 1 -> Crítica 2 -> Revisão 2
                 critique1 = LogicalCritiqueStage()
-                res = critique1.execute(state, self.runner, model_name=self.stage_models.get(critique1.stage_id))
+                r, m, a = self.router.get_runner_for_stage(critique1.stage_id)
+                m = self.stage_models.get(critique1.stage_id) or m
+                res = critique1.execute(state, r, model_name=m, logical_alias=a)
                 tracer.record_stage_result(step_counter, res)
                 step_counter += 1
                 if not res.success:
@@ -74,7 +129,9 @@ class SimpleLoopRunner:
                     return state
 
                 rev1 = RevisionStage(revision_index=1)
-                res = rev1.execute(state, self.runner, model_name=self.stage_models.get(rev1.stage_id))
+                r, m, a = self.router.get_runner_for_stage(rev1.stage_id)
+                m = self.stage_models.get(rev1.stage_id) or m
+                res = rev1.execute(state, r, model_name=m, logical_alias=a)
                 tracer.record_stage_result(step_counter, res)
                 step_counter += 1
                 if not res.success:
@@ -83,7 +140,9 @@ class SimpleLoopRunner:
                     return state
 
                 critique2 = FeasibilityCritiqueStage()
-                res = critique2.execute(state, self.runner, model_name=self.stage_models.get(critique2.stage_id))
+                r, m, a = self.router.get_runner_for_stage(critique2.stage_id)
+                m = self.stage_models.get(critique2.stage_id) or m
+                res = critique2.execute(state, r, model_name=m, logical_alias=a)
                 tracer.record_stage_result(step_counter, res)
                 step_counter += 1
                 if not res.success:
@@ -92,7 +151,9 @@ class SimpleLoopRunner:
                     return state
 
                 rev2 = RevisionStage(revision_index=2)
-                res = rev2.execute(state, self.runner, model_name=self.stage_models.get(rev2.stage_id))
+                r, m, a = self.router.get_runner_for_stage(rev2.stage_id)
+                m = self.stage_models.get(rev2.stage_id) or m
+                res = rev2.execute(state, r, model_name=m, logical_alias=a)
                 tracer.record_stage_result(step_counter, res)
                 step_counter += 1
                 if not res.success:
@@ -103,8 +164,9 @@ class SimpleLoopRunner:
             else:
                 # Condição B: ATTACK Padrão
                 attack_stage = AttackStage()
-                model = self.stage_models.get(attack_stage.stage_id)
-                res = attack_stage.execute(state, self.runner, model_name=model)
+                r, m, a = self.router.get_runner_for_stage(attack_stage.stage_id)
+                m = self.stage_models.get(attack_stage.stage_id) or m
+                res = attack_stage.execute(state, r, model_name=m, logical_alias=a)
                 tracer.record_stage_result(step_counter, res)
                 step_counter += 1
                 if not res.success:
@@ -114,7 +176,9 @@ class SimpleLoopRunner:
 
             # 3. ALTERNATIVES
             alt_stage = AlternativesStage()
-            res = alt_stage.execute(state, self.runner, model_name=self.stage_models.get(alt_stage.stage_id))
+            r, m, a = self.router.get_runner_for_stage(alt_stage.stage_id)
+            m = self.stage_models.get(alt_stage.stage_id) or m
+            res = alt_stage.execute(state, r, model_name=m, logical_alias=a)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -124,7 +188,9 @@ class SimpleLoopRunner:
 
             # 4. REALITY_CHECK
             reality_stage = RealityCheckStage()
-            res = reality_stage.execute(state, self.runner, model_name=self.stage_models.get(reality_stage.stage_id))
+            r, m, a = self.router.get_runner_for_stage(reality_stage.stage_id)
+            m = self.stage_models.get(reality_stage.stage_id) or m
+            res = reality_stage.execute(state, r, model_name=m, logical_alias=a)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -134,7 +200,9 @@ class SimpleLoopRunner:
 
             # 5. SYNTHESIZE
             synth_stage = SynthesizeStage()
-            res = synth_stage.execute(state, self.runner, model_name=self.stage_models.get(synth_stage.stage_id))
+            r, m, a = self.router.get_runner_for_stage(synth_stage.stage_id)
+            m = self.stage_models.get(synth_stage.stage_id) or m
+            res = synth_stage.execute(state, r, model_name=m, logical_alias=a)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -144,7 +212,9 @@ class SimpleLoopRunner:
 
             # 6. FINAL_REVIEW
             review_stage = FinalReviewStage()
-            res = review_stage.execute(state, self.runner, model_name=self.stage_models.get(review_stage.stage_id))
+            r, m, a = self.router.get_runner_for_stage(review_stage.stage_id)
+            m = self.stage_models.get(review_stage.stage_id) or m
+            res = review_stage.execute(state, r, model_name=m, logical_alias=a)
             tracer.record_stage_result(step_counter, res)
             step_counter += 1
             if not res.success:
@@ -163,20 +233,28 @@ class SimpleLoopRunner:
                 state.reconstruction_count += 1
                 state.status = RunStatus.RECONSTRUCTING
 
-                # Reexecutar alternativas -> reality_check -> synthesize -> final_review
-                res_alt = alt_stage.execute(state, self.runner, model_name=self.stage_models.get(alt_stage.stage_id))
+                # Reexecutar alternativas -> reality_check -> synthesize -> final_review (attempt=2)
+                r, m, a = self.router.get_runner_for_stage(alt_stage.stage_id)
+                m = self.stage_models.get(alt_stage.stage_id) or m
+                res_alt = alt_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
                 tracer.record_stage_result(step_counter, res_alt)
                 step_counter += 1
 
-                res_real = reality_stage.execute(state, self.runner, model_name=self.stage_models.get(reality_stage.stage_id))
+                r, m, a = self.router.get_runner_for_stage(reality_stage.stage_id)
+                m = self.stage_models.get(reality_stage.stage_id) or m
+                res_real = reality_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
                 tracer.record_stage_result(step_counter, res_real)
                 step_counter += 1
 
-                res_synth = synth_stage.execute(state, self.runner, model_name=self.stage_models.get(synth_stage.stage_id))
+                r, m, a = self.router.get_runner_for_stage(synth_stage.stage_id)
+                m = self.stage_models.get(synth_stage.stage_id) or m
+                res_synth = synth_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
                 tracer.record_stage_result(step_counter, res_synth)
                 step_counter += 1
 
-                res_review2 = review_stage.execute(state, self.runner, model_name=self.stage_models.get(review_stage.stage_id))
+                r, m, a = self.router.get_runner_for_stage(review_stage.stage_id)
+                m = self.stage_models.get(review_stage.stage_id) or m
+                res_review2 = review_stage.execute(state, r, model_name=m, logical_alias=a, attempt=2)
                 tracer.record_stage_result(step_counter, res_review2)
                 step_counter += 1
 

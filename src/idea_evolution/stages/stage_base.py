@@ -20,6 +20,12 @@ PROMPTS_DIR = REPO_ROOT / "prompts"
 class StageExecutionResult(BaseModel):
     stage_id: str
     stage_version: str
+    logical_alias: str = ""
+    provider: str = ""
+    model: str = ""
+    prompt_id: str = ""
+    prompt_version: str = ""
+    attempt: int = 1
     success: bool
     output: Optional[Any] = None
     raw_response: str = ""
@@ -60,9 +66,17 @@ class BaseStage(ABC):
         """Aplica o output estruturado sobre o estado e retorna um resumo do delta."""
         pass
 
-    def execute(self, state: SimpleIdeaState, runner: ModelRunner, model_name: Optional[str] = None) -> StageExecutionResult:
+    def execute(
+        self,
+        state: SimpleIdeaState,
+        runner: ModelRunner,
+        model_name: Optional[str] = None,
+        logical_alias: str = "",
+        attempt: int = 1,
+    ) -> StageExecutionResult:
         prompt_text = self.build_prompt_context(state)
         output_schema = self.get_output_schema()
+        prompt_id = self.prompt_filename or self.stage_id
 
         response: ModelResponse = runner.generate(
             prompt_text=prompt_text,
@@ -78,6 +92,10 @@ class BaseStage(ABC):
                 stage_version=self.stage_version,
                 provider=response.provider,
                 model=response.model,
+                logical_alias=logical_alias,
+                prompt_id=prompt_id,
+                prompt_version=self.stage_version,
+                attempt=attempt,
                 success=False,
                 retry_count=response.retry_count,
                 delta_summary=f"FALHA: {response.error}",
@@ -85,6 +103,12 @@ class BaseStage(ABC):
             return StageExecutionResult(
                 stage_id=self.stage_id,
                 stage_version=self.stage_version,
+                logical_alias=logical_alias,
+                provider=response.provider,
+                model=response.model,
+                prompt_id=prompt_id,
+                prompt_version=self.stage_version,
+                attempt=attempt,
                 success=False,
                 raw_response=response.raw_text,
                 error=response.error,
@@ -98,6 +122,10 @@ class BaseStage(ABC):
             stage_version=self.stage_version,
             provider=response.provider,
             model=response.model,
+            logical_alias=logical_alias,
+            prompt_id=prompt_id,
+            prompt_version=self.stage_version,
+            attempt=attempt,
             success=True,
             retry_count=response.retry_count,
             delta_summary=delta_summary,
@@ -106,6 +134,12 @@ class BaseStage(ABC):
         return StageExecutionResult(
             stage_id=self.stage_id,
             stage_version=self.stage_version,
+            logical_alias=logical_alias,
+            provider=response.provider,
+            model=response.model,
+            prompt_id=prompt_id,
+            prompt_version=self.stage_version,
+            attempt=attempt,
             success=True,
             output=response.parsed,
             raw_response=response.raw_text,

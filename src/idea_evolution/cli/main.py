@@ -2,9 +2,11 @@
 src/idea_evolution/cli/main.py
 Interface de Linha de Comando (CLI) para o Idea Evolution Engine MVP.
 Comandos:
-  iee evolve --idea "..." [--topology STANDARD | CRITIQUE_REVISION]
+  iee evolve --idea "..." [--topology standard | critique_revision] [--model-config path/to/config.yaml] [--dry-run]
   iee compare --fixture-file path/to/fixture.json
   iee inspect-run RUN-YYYYMMDD-NNN
+  iee providers doctor
+  iee routes show [--model-config path/to/config.yaml] [--topology standard | critique_revision]
 """
 
 import sys
@@ -16,7 +18,9 @@ import json
 from src.idea_evolution.orchestration.simple_loop import SimpleLoopRunner
 from src.idea_evolution.orchestration.baseline import BaselineRunner
 from src.idea_evolution.providers.fake import FakeModelRunner
-from src.idea_evolution.providers.native import NativeModelRunner
+from src.idea_evolution.providers.native import NativeModelRunner, check_providers_health
+from src.idea_evolution.config.routing import ModelRoutingConfig
+from src.idea_evolution.providers.router import RunnerRouter
 from src.idea_evolution.domain.state import RunStatus
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
@@ -26,7 +30,7 @@ RUNS_DIR = REPO_ROOT / "runs"
 def parse_args():
     parser = argparse.ArgumentParser(
         prog="iee",
-        description="Idea Evolution Engine — CLI do Simple Loop MVP",
+        description="Idea Evolution Engine — CLI do Simple Loop MVP & Multi-Model Routing",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -44,11 +48,13 @@ def parse_args():
     evolve_p.add_argument(
         "--provider",
         "-p",
-        choices=["fake", "groq", "openai"],
+        choices=["fake", "groq", "openai", "gemini", "anthropic"],
         default="fake",
-        help="Provedor de inferência (padrão: fake offline)",
+        help="Provedor padrão (usado se não houver --model-config)",
     )
-    evolve_p.add_argument("--model", "-m", type=str, default=None, help="Nome do modelo a ser usado")
+    evolve_p.add_argument("--model", "-m", type=str, default=None, help="Nome do modelo padrão")
+    evolve_p.add_argument("--model-config", "-c", type=Path, default=None, help="Caminho para arquivo YAML/JSON de configuração de rotas multi-modelo")
+    evolve_p.add_argument("--dry-run", action="store_true", help="Valida rotas e monta plano de execução sem chamar nenhum modelo")
 
     # COMPARE
     comp_p = subparsers.add_parser("compare", help="Executar comparação experimental (A vs B vs C) sobre uma fixture")
@@ -57,6 +63,18 @@ def parse_args():
     # INSPECT-RUN
     insp_p = subparsers.add_parser("inspect-run", help="Inspecionar detalhes de uma execução passada")
     insp_p.add_argument("run_id", type=str, help="ID da execução (ex: RUN-20260826-001)")
+
+    # PROVIDERS
+    prov_p = subparsers.add_parser("providers", help="Gerenciamento e diagnóstico de provedores de IA")
+    prov_sub = prov_p.add_subparsers(dest="prov_command", required=True)
+    prov_sub.add_parser("doctor", help="Verifica adaptadores instalados e presença de credenciais sem expor valores")
+
+    # ROUTES
+    routes_p = subparsers.add_parser("routes", help="Inspeção de rotas de modelos por estágio")
+    routes_sub = routes_p.add_subparsers(dest="routes_command", required=True)
+    show_p = routes_sub.add_parser("show", help="Exibe o mapeamento de estágios para provedores/modelos")
+    show_p.add_argument("--model-config", "-c", type=Path, default=None, help="Arquivo de configuração de rotas")
+    show_p.add_argument("--topology", "-t", choices=["standard", "critique_revision"], default="standard")
 
     return parser.parse_args()
 
@@ -75,28 +93,56 @@ def main():
                 sys.exit(1)
             idea_text = args.idea_file.read_text(encoding="utf-8")
 
-        if not idea_text:
+        if not idea_text and not args.dry_run:
             print("[ERRO] É necessário fornecer a ideia via --idea ou --idea-file.")
             sys.exit(1)
-
-        # Escolha do runner
-        if args.provider == "fake":
-            runner = FakeModelRunner()
-        else:
-            runner = NativeModelRunner(provider=args.provider, default_model=args.model)
 
         top_map = {
             "standard": "STANDARD_6_STAGE",
             "critique_revision": "ITERATIVE_CRITIQUE_REVISION",
         }
-        loop_runner = SimpleLoopRunner(runner=runner, topology=top_map[args.topology])
+        topology = top_map[args.topology]
+
+        # Carregar ou montar configuração de roteamento
+        if args.model_config:
+            if not args.model_config.exists():
+                print(f"[ERRO] Arquivo de configuração não encontrado: {args.model_config}")
+                sys.exit(1)
+            config = ModelRoutingConfig.from_file(args.model_config)
+        else:
+            config = ModelRoutingConfig.default_single_model(provider=args.provider, model=args.model or "default-model")
+
+        router = RunnerRouter(config=config)
+
+        # DRY RUN
+        if args.dry_run:
+            print("=" * 65)
+            print("       IDEA EVOLUTION ENGINE — DRY RUN / PLAN DE EXECUÇÃO")
+            print("=" * 65)
+            print(f"  Topologia:            {topology}")
+            print(f"  Routing Config Hash:  {config.compute_hash()[:16]}...")
+            print(f"  Schema Version:       {config.schema_version}")
+            print("-" * 65)
+            print("  MAPEAMENTO DE ESTÁGIOS:")
+            temp_runner = SimpleLoopRunner(router=router, topology=topology)
+            for stg in temp_runner.get_required_stages():
+                alias, m_def = config.resolve_stage(stg)
+                print(f"    - {stg:<22} -> [{alias:<12}] {m_def.provider}/{m_def.model}")
+            print("-" * 65)
+            print("[OK] PLAN VALID: Zero chamadas de modelo realizadas no dry-run.")
+            print("=" * 65)
+            sys.exit(0)
+
+        # EXECUÇÃO DO LOOP
+        loop_runner = SimpleLoopRunner(router=router, topology=topology)
 
         print("=" * 65)
         print("          IDEA EVOLUTION ENGINE — SIMPLE LOOP RUNNER")
         print("=" * 65)
         print(f"  Ideia:     {idea_text[:60]}...")
-        print(f"  Topologia: {top_map[args.topology]}")
-        print(f"  Provider:  {args.provider.upper()}")
+        print(f"  Topologia: {topology}")
+        print(f"  Config:    {args.model_config.name if args.model_config else 'default_single_model'}")
+        print(f"  Hash:      {config.compute_hash()[:16]}...")
         print("-" * 65)
         print("Executando estágios dirigidos...")
 
@@ -126,11 +172,11 @@ def main():
         res_a = b_runner.run(idea_text)
 
         # Condição B: Standard Simple Loop
-        loop_b = SimpleLoopRunner(runner, topology="STANDARD_6_STAGE")
+        loop_b = SimpleLoopRunner(runner=runner, topology="STANDARD_6_STAGE")
         res_b = loop_b.run(idea_text)
 
         # Condição C: Iterative Critique-Revision
-        loop_c = SimpleLoopRunner(runner, topology="ITERATIVE_CRITIQUE_REVISION")
+        loop_c = SimpleLoopRunner(runner=runner, topology="ITERATIVE_CRITIQUE_REVISION")
         res_c = loop_c.run(idea_text)
 
         print("\n[OK] Comparação concluída.")
@@ -154,6 +200,46 @@ def main():
             print("\n--- Telemetria do Run ---")
             print(f"Duração Total: {trace.get('total_duration_seconds', 0):.2f}s")
             print(f"Estágios Executados: {trace.get('total_stages_executed', 0)}")
+
+    elif args.command == "providers" and args.prov_command == "doctor":
+        health = check_providers_health()
+        print("=" * 65)
+        print("          IDEA EVOLUTION ENGINE — PROVIDERS DOCTOR")
+        print("=" * 65)
+        print(f"{'PROVEDOR':<15} {'ADAPTADOR':<12} {'CREDENTIAL ENV':<20} {'PRESENTE':<10}")
+        print("-" * 65)
+        for pid, info in health.items():
+            status_str = "[OK] Sim" if info["credential_present"] else "[--] Nao"
+            adapt_str = "Disponivel" if info["adapter_available"] else "Indisponivel"
+            env_str = info["credential_env"] or "(Nenhuma exigida)"
+            print(f"{info['name']:<15} {adapt_str:<12} {env_str:<20} {status_str:<10}")
+        print("-" * 65)
+        print("Nenhum valor secreto é exibido ou gravado.")
+        print("=" * 65)
+
+    elif args.command == "routes" and args.routes_command == "show":
+        if args.model_config:
+            config = ModelRoutingConfig.from_file(args.model_config)
+        else:
+            config = ModelRoutingConfig.default_single_model()
+
+        top_map = {
+            "standard": "STANDARD_6_STAGE",
+            "critique_revision": "ITERATIVE_CRITIQUE_REVISION",
+        }
+        topology = top_map[args.topology]
+        runner = SimpleLoopRunner(config=config, topology=topology)
+
+        print("=" * 65)
+        print("          IDEA EVOLUTION ENGINE — ROUTES INSPECTOR")
+        print("=" * 65)
+        print(f"  Topologia:            {topology}")
+        print(f"  Routing Config Hash:  {config.compute_hash()[:16]}...")
+        print("-" * 65)
+        for stg in runner.get_required_stages():
+            alias, m_def = config.resolve_stage(stg)
+            print(f"  {stg:<22} -> [{alias:<12}] {m_def.provider}/{m_def.model}")
+        print("=" * 65)
 
 
 if __name__ == "__main__":

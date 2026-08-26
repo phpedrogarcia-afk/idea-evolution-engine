@@ -1,29 +1,31 @@
 """
 src/idea_evolution/providers/native.py
-Executor Nativo de Modelos via SDK/HTTP (Groq, OpenAI, etc.) com preservação de raw output e repair bounded.
+Executor Nativo de Modelos via SDK/HTTP (Groq, OpenAI, Gemini, Anthropic) com preservação de raw output e repair bounded.
 """
 
+from __future__ import annotations
 from typing import Type, TypeVar, Optional, Dict, Any
 import os
 import time
 import json
+from pathlib import Path
 from pydantic import BaseModel, ValidationError
 from src.idea_evolution.providers.base import ModelRunner, ModelResponse, ModelUsage
 
 T = TypeVar("T", bound=BaseModel)
 
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
-from pathlib import Path
 
 def _load_env_file_safe():
-    """Carrega variáveis do .env no os.environ caso exista localmente ou no home."""
-    candidates = [
-        Path(__file__).resolve().parent.parent.parent.parent / ".env",
-        Path.home() / ".env",
-    ]
-    for env_p in candidates:
-        if env_p.exists():
-            for line in env_p.read_text(encoding="utf-8").splitlines():
+    """
+    Carrega variáveis exclusivamente do arquivo .env da raiz do projeto, se existir.
+    Não varre diretórios globais (~/.env) para evitar contaminação acidental de credenciais.
+    """
+    env_path = REPO_ROOT / ".env"
+    if env_path.exists():
+        try:
+            for line in env_path.read_text(encoding="utf-8").splitlines():
                 line = line.strip()
                 if line and not line.startswith("#") and "=" in line:
                     k, v = line.split("=", 1)
@@ -31,27 +33,103 @@ def _load_env_file_safe():
                     v = v.strip().strip("'").strip('"')
                     if k not in os.environ:
                         os.environ[k] = v
+        except Exception:
+            pass
+
 
 _load_env_file_safe()
+
+
+def get_provider_capabilities() -> Dict[str, Dict[str, Any]]:
+    """Retorna a matriz de capacidades dos provedores suportados no IEE."""
+    return {
+        "groq": {
+            "name": "Groq",
+            "implemented": True,
+            "structured_output_mode": "native_json_object",
+            "usage_reporting": True,
+            "real_tested": False,
+            "credential_env": "GROQ_API_KEY",
+            "default_model": "llama-3.3-70b-versatile",
+        },
+        "openai": {
+            "name": "OpenAI",
+            "implemented": True,
+            "structured_output_mode": "native_json_object",
+            "usage_reporting": True,
+            "real_tested": False,
+            "credential_env": "OPENAI_API_KEY",
+            "default_model": "gpt-4o-mini",
+        },
+        "gemini": {
+            "name": "Google Gemini",
+            "implemented": True,
+            "structured_output_mode": "native_response_mime_type",
+            "usage_reporting": True,
+            "real_tested": False,
+            "credential_env": "GEMINI_API_KEY",
+            "default_model": "gemini-2.0-flash",
+        },
+        "anthropic": {
+            "name": "Anthropic Claude",
+            "implemented": True,
+            "structured_output_mode": "prompted_json_validation",
+            "usage_reporting": True,
+            "real_tested": False,
+            "credential_env": "ANTHROPIC_API_KEY",
+            "default_model": "claude-3-5-haiku-20241022",
+        },
+        "fake": {
+            "name": "Deterministic Fake Runner",
+            "implemented": True,
+            "structured_output_mode": "local_pydantic_mock",
+            "usage_reporting": True,
+            "real_tested": True,
+            "credential_env": None,
+            "default_model": "fake-model-v1",
+        },
+    }
+
+
+def check_providers_health() -> Dict[str, Dict[str, Any]]:
+    """
+    Verifica a saúde e a presença de credenciais no ambiente para todos os provedores.
+    NUNCA expõe valores de chaves.
+    """
+    caps = get_provider_capabilities()
+    status = {}
+    for prov_id, info in caps.items():
+        env_var = info.get("credential_env")
+        has_key = bool(env_var and os.environ.get(env_var)) if env_var else True
+        status[prov_id] = {
+            "name": info["name"],
+            "adapter_available": info["implemented"],
+            "credential_env": env_var,
+            "credential_present": has_key,
+            "ready": info["implemented"] and has_key,
+            "real_tested": info["real_tested"],
+            "default_model": info["default_model"],
+        }
+    return status
 
 
 class NativeModelRunner(ModelRunner):
     """
     Executor para provedores reais de LLM.
-    Suporta Groq / OpenAI compatível com Structured Output JSON e 1 tentativa de repair.
+    Suporta Groq, OpenAI, Gemini e Anthropic com Structured Output JSON e 1 tentativa de repair.
     """
 
     def __init__(self, provider: str = "groq", api_key: Optional[str] = None, default_model: Optional[str] = None):
         self.provider = provider.lower()
-        self.api_key = api_key or os.environ.get(f"{self.provider.upper()}_API_KEY")
-        if self.provider == "groq":
-            self.default_model = default_model or "llama-3.3-70b-versatile"
-        elif self.provider == "openai":
-            self.default_model = default_model or "gpt-4o-mini"
-        elif self.provider == "gemini":
-            self.default_model = default_model or "gemini-2.0-flash"
-        else:
-            self.default_model = default_model or "default-model"
+        caps = get_provider_capabilities()
+        if self.provider not in caps and not self.provider.startswith("fake"):
+            raise ValueError(f"UNSUPPORTED_PROVIDER: Provedor '{self.provider}' não reconhecido.")
+
+        env_name = caps.get(self.provider, {}).get("credential_env")
+        self.api_key = api_key or (os.environ.get(env_name) if env_name else None)
+
+        def_model = caps.get(self.provider, {}).get("default_model", "default-model")
+        self.default_model = default_model or def_model
 
     def generate(
         self,
@@ -69,7 +147,7 @@ class NativeModelRunner(ModelRunner):
                 raw_text="",
                 provider=self.provider,
                 model=model,
-                error=f"PROVIDER_CREDENTIAL_MISSING: Chave {self.provider.upper()}_API_KEY não encontrada no ambiente.",
+                error=f"PROVIDER_CREDENTIAL_MISSING: Chave para provedor '{self.provider}' não configurada.",
             )
 
         start_time = time.time()
@@ -144,6 +222,7 @@ class NativeModelRunner(ModelRunner):
                 error=f"PROVIDER_EXECUTION_ERROR: {str(e)}",
             )
 
+    def _call_provider(self, system_instruction: str, user_prompt: str, model: str) -> tuple[str, ModelUsage]:
         if self.provider == "groq":
             from groq import Groq
 
@@ -211,7 +290,35 @@ class NativeModelRunner(ModelRunner):
             )
             return raw, usage
 
-        raise NotImplementedError(f"Provider {self.provider} não implementado no NativeModelRunner.")
+        if self.provider == "anthropic":
+            import httpx
+
+            url = "https://api.anthropic.com/v1/messages"
+            headers = {
+                "x-api-key": self.api_key,
+                "anthropic-version": "2023-06-01",
+                "Content-Type": "application/json",
+            }
+            payload = {
+                "model": model,
+                "max_tokens": 4096,
+                "system": system_instruction,
+                "messages": [{"role": "user", "content": user_prompt}],
+                "temperature": 0.3,
+            }
+            resp = httpx.post(url, headers=headers, json=payload, timeout=60.0)
+            resp.raise_for_status()
+            data = resp.json()
+            raw = data["content"][0]["text"]
+            u = data.get("usage", {})
+            usage = ModelUsage(
+                prompt_tokens=u.get("input_tokens", 0),
+                completion_tokens=u.get("output_tokens", 0),
+                total_tokens=(u.get("input_tokens", 0) + u.get("output_tokens", 0)),
+            )
+            return raw, usage
+
+        raise NotImplementedError(f"UNSUPPORTED_PROVIDER: Provider '{self.provider}' não implementado.")
 
     def _clean_and_parse_json(self, raw_text: str) -> dict:
         text = raw_text.strip()

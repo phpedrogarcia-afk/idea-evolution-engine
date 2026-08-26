@@ -34,11 +34,15 @@ class FakeModelRunner(ModelRunner):
 
     def __init__(
         self,
+        provider: str = "fake",
+        default_model: str = "fake-model-v1",
         custom_responses: Optional[Dict[str, Any]] = None,
         should_fail_schema_stages: Optional[Dict[str, int]] = None,
         trigger_reconstruction: bool = False,
         trigger_essence_drift: bool = False,
     ):
+        self.provider = provider
+        self.default_model = default_model
         self.custom_responses = custom_responses or {}
         self.should_fail_schema_stages = should_fail_schema_stages or {}
         self.trigger_reconstruction = trigger_reconstruction
@@ -65,8 +69,8 @@ class FakeModelRunner(ModelRunner):
                 return ModelResponse(
                     parsed=None,
                     raw_text=raw_invalid,
-                    provider="fake",
-                    model=model_name or "fake-model-v1",
+                    provider=self.provider,
+                    model=model_name or self.default_model,
                     retry_count=call_idx,
                     error=f"JSONDecodeError: invalid format on {stage_name}",
                 )
@@ -81,8 +85,8 @@ class FakeModelRunner(ModelRunner):
                 return ModelResponse(
                     parsed=parsed,
                     raw_text=json.dumps(data, indent=2),
-                    provider="fake",
-                    model=model_name or "fake-model-v1",
+                    provider=self.provider,
+                    model=model_name or self.default_model,
                     usage=ModelUsage(prompt_tokens=150, completion_tokens=100, total_tokens=250),
                 )
 
@@ -92,8 +96,8 @@ class FakeModelRunner(ModelRunner):
         return ModelResponse(
             parsed=default_obj,
             raw_text=raw_text,
-            provider="fake",
-            model=model_name or "fake-model-v1",
+            provider=self.provider,
+            model=model_name or self.default_model,
             usage=ModelUsage(prompt_tokens=200, completion_tokens=150, total_tokens=350),
             latency_seconds=0.01,
         )

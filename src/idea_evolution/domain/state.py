@@ -48,6 +48,10 @@ class StageHistoryEntry(BaseModel):
     executed_at: str
     provider: str
     model: str
+    logical_alias: str = ""
+    prompt_id: str = ""
+    prompt_version: str = ""
+    attempt: int = 1
     success: bool
     retry_count: int = 0
     delta_summary: str = ""
@@ -105,6 +109,10 @@ class SimpleIdeaState(BaseModel):
         provider: str,
         model: str,
         success: bool,
+        logical_alias: str = "",
+        prompt_id: str = "",
+        prompt_version: str = "",
+        attempt: int = 1,
         retry_count: int = 0,
         delta_summary: str = "",
     ):
@@ -115,6 +123,10 @@ class SimpleIdeaState(BaseModel):
                 executed_at=datetime.now().isoformat(),
                 provider=provider,
                 model=model,
+                logical_alias=logical_alias,
+                prompt_id=prompt_id,
+                prompt_version=prompt_version,
+                attempt=attempt,
                 success=success,
                 retry_count=retry_count,
                 delta_summary=delta_summary,

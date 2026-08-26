@@ -60,6 +60,7 @@ REQUIRED_FILES = [
     REPO_ROOT / "docs" / "TEST-MAP.md",
     REPO_ROOT / "docs" / "research" / "DONOR-ARSENAL.md",
     REPO_ROOT / "docs" / "experiments" / "M04-DONOR-HARVEST-SPEC.md",
+    REPO_ROOT / "docs" / "specs" / "MODEL-ROUTING.md",
     MANIFEST_PATH,
 ]
 

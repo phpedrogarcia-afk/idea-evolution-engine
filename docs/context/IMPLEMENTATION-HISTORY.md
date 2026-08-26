@@ -110,3 +110,22 @@
   - Criação do Checkpoint `CP-20260826-005`.
 - **Resultado:** `PREFLIGHT_COMPLETE` | `REAL_CANARY = BLOCKED_PROVIDER_CREDENTIAL_OR_COST`.
 - **Evidência:** 38/38 testes automatizados aprovados e varredura de segurança com zero achados.
+
+---
+
+### [MS-006] Multi-Model Integration Readiness (Missão 06)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Implementar e validar deterministicamente offline a camada de roteamento multi-modelo por estágio (`MODEL-ROUTING.md`), proveniência completa, isolamento de falhas e ferramentas CLI (`doctor`, `routes show`, `--dry-run`), deixando o sistema pronto para inferência real.
+- **O que Mudou:**
+  - Criação da especificação canônica em `docs/specs/MODEL-ROUTING.md`.
+  - Implementação de `ModelRoutingConfig` em `src/idea_evolution/config/routing.py` com hash canônico SHA-256 e validação de rotas.
+  - Implementação de `RunnerRouter` em `src/idea_evolution/providers/router.py` para despacho desacoplado por estágio.
+  - Atualização de `src/idea_evolution/domain/state.py` e `src/idea_evolution/tracing/tracer.py` com campos de proveniência (`logical_alias`, `provider`, `model`, `prompt_id`, `prompt_version`, `attempt`, `routing_config_hash`).
+  - Atualização do `NativeModelRunner` para suporte nativo ao Anthropic, exclusão de carregamento global de `~/.env` e função de diagnóstico `check_providers_health()`.
+  - Atualização da CLI `src/idea_evolution/cli/main.py` com `providers doctor`, `routes show`, `--model-config` e `--dry-run`.
+  - Criação de 3 arquivos de configuração em `config/` (`models.example.yaml`, `models.same_model.yaml`, `models.multi_provider_fake.yaml`).
+  - Criação de 11 novos testes automatizados unitários, de integração multi-modelo e adversariais (totalizando 49 testes).
+  - Emissão do Checkpoint `CP-20260826-006`.
+- **Resultado:** `MULTI_MODEL_READY_OFFLINE = TRUE`.
+- **Evidência:** 49/49 testes automatizados aprovados, execução do dry-run e doctor via CLI.

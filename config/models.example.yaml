@@ -1,0 +1,45 @@
+schema_version: "1.0.0"
+description: "Exemplo de configuração multi-modelo para o Idea Evolution Engine"
+
+models:
+  analyst:
+    provider: groq
+    model: llama-3.3-70b-versatile
+    credential_env: GROQ_API_KEY
+    parameters:
+      temperature: 0.2
+
+  critic:
+    provider: anthropic
+    model: claude-3-5-haiku-20241022
+    credential_env: ANTHROPIC_API_KEY
+    parameters:
+      temperature: 0.3
+
+  synthesizer:
+    provider: openai
+    model: gpt-4o-mini
+    credential_env: OPENAI_API_KEY
+    parameters:
+      temperature: 0.2
+
+  reality_checker:
+    provider: gemini
+    model: gemini-2.0-flash
+    credential_env: GEMINI_API_KEY
+    parameters:
+      temperature: 0.1
+
+routes:
+  understand: analyst
+  attack: critic
+  critique_1: critic
+  revision_1: analyst
+  critique_2: critic
+  revision_2: analyst
+  alternatives: analyst
+  reality_check: reality_checker
+  synthesize: synthesizer
+  final_review: critic
+
+default_model_alias: analyst

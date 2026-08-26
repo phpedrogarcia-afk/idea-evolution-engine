@@ -10,12 +10,12 @@
   "fioos_integration_status": "FUTURE_RESEARCH",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260826-005",
-  "last_known_good_checkpoint": "CP-20260826-005",
-  "current_objective": "Mission 05 Preflight: Aguardando configuração de credencial pelo operador para execução do Real Model Canary",
+  "latest_checkpoint": "CP-20260826-006",
+  "last_known_good_checkpoint": "CP-20260826-006",
+  "current_objective": "Mission 06 Complete: Multi-Model Integration Readiness Offline Validada (49 testes verdes)",
   "current_active_task": "TASK-000",
-  "next_authorized_work": "REAL_MODEL_CANARY: Execução com inferência real após configuração de API key",
-  "updated_at": "2026-08-26T14:24:20-03:00",
+  "next_authorized_work": "Configuração de chave de API pelo operador humano para execução do Real Canary (M05-B) e Multi-Model Real (M07)",
+  "updated_at": "2026-08-26T14:33:15-03:00",
   "required_read_order": [
     "AI-START-HERE.md",
     "docs/context/CURRENT-STATE.md",
@@ -23,7 +23,8 @@
     "docs/doctrine/OPERATING-DOCTRINE.md",
     "docs/GOVERNANCE-INVARIANTS.md",
     "docs/CODE-MAP.md",
-    "docs/TEST-MAP.md"
+    "docs/TEST-MAP.md",
+    "docs/specs/MODEL-ROUTING.md"
   ],
   "canonical_documents": [
     "AI-START-HERE.md",
@@ -82,6 +83,7 @@
     "docs/specs/READY-TO-TEST-POLICY-v0.1.md",
     "docs/specs/STALL-POLICY-v0.1.md",
     "docs/specs/AUTHORITY-MATRIX-v0.1.md",
+    "docs/specs/MODEL-ROUTING.md",
     "docs/experiments/EXPERIMENT-PROTOCOL.md",
     "docs/experiments/EXPERIMENT-BACKLOG.md",
     "docs/experiments/M04-DONOR-HARVEST-SPEC.md"
@@ -107,7 +109,8 @@
     "docs/specs/DECISION-RELEVANCE-POLICY-v0.1.md",
     "docs/specs/READY-TO-TEST-POLICY-v0.1.md",
     "docs/specs/STALL-POLICY-v0.1.md",
-    "docs/specs/AUTHORITY-MATRIX-v0.1.md"
+    "docs/specs/AUTHORITY-MATRIX-v0.1.md",
+    "docs/specs/MODEL-ROUTING.md"
   ],
   "superseded_documents": [],
   "critical_file_hashes": {
@@ -117,8 +120,8 @@
     "docs/GOVERNANCE-INVARIANTS.md": "744b2a9aaca43c25d50a6f276dee4d36ca9131e72190779f6b50b66d71de40b9",
     "docs/DECISIONS-LEDGER.md": "e34e53a8861692e407d378ff22db30c66d6ba6f08ceaf0cabffa981015c24a79",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "56259434bfe50ac902096cfe7f156547608a2229b373414413e32116785a22ec",
-    "docs/context/ACTIVE-QUEUE.md": "e78e8779cb104f374ef204bc60cdf42e3a78e72f7eb49934eef8708c8e5fb780",
+    "docs/context/CURRENT-STATE.md": "cf9fe8868aebb0c4cfe34f06161f09f5385ad0f82d8c53a1935a84e1b362decd",
+    "docs/context/ACTIVE-QUEUE.md": "7f361e8391e8d0eaedd03b80593384428ede69cef307ad4ffd69f6d404514435",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"

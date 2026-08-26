@@ -63,3 +63,22 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O loop do MVP atinge 100% de previsibilidade de fluxo com zero risco de divergência não controlada.
 - **Related Decisions:** [ADR-014](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-014)
 
+---
+
+### [FINDING-006] Roteamento Multi-Modelo Não Exige Frameworks Pesados de Grafo
+- **Claim:** A separação estrita entre contratos de estágio (`Stage contracts`) e despachadores de modelo (`RunnerRouter` via `ModelRoutingConfig`) permite rotear diferentes provedores/modelos por estágio através de uma camada fina nativa em Python, sem necessidade de dependências complexas como LangGraph ou LiteLLM.
+- **Evidence:** Implementação e suíte de 49 testes automatizados da Missão 06 (`test_model_routing.py`, `test_multi_model_e2e.py`).
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Mantém a base de código ultra-leve, determinística e facilmente auditável.
+- **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
+
+---
+
+### [FINDING-007] Isolamento Rígido de Falha Impede Contaminação de Custo e Experimento
+- **Claim:** Proibir explicitamente fallback silencioso entre provedores (`NO_CROSS_PROVIDER_FALLBACK`) garante que uma falha de API interrompa o fluxo com status `FAILED` e preserve o estado original sem distorcer medições empíricas ou gerar custos inesperados.
+- **Evidence:** Teste adversarial `test_03_provider_failure_isolation_no_cross_fallback`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Experimentos científicos futuros permanecem válidos e isolados.
+- **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
+
+

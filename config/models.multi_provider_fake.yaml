@@ -1,0 +1,29 @@
+schema_version: "1.0.0"
+description: "Configuração multi-provedor com Fake Runners para testes offline"
+
+models:
+  analyst_fake:
+    provider: fake_a
+    model: mock-llama-70b
+
+  critic_fake:
+    provider: fake_b
+    model: mock-claude-haiku
+
+  synthesizer_fake:
+    provider: fake_c
+    model: mock-gpt-4o-mini
+
+routes:
+  understand: analyst_fake
+  attack: critic_fake
+  critique_1: critic_fake
+  revision_1: analyst_fake
+  critique_2: critic_fake
+  revision_2: analyst_fake
+  alternatives: analyst_fake
+  reality_check: critic_fake
+  synthesize: synthesizer_fake
+  final_review: critic_fake
+
+default_model_alias: analyst_fake

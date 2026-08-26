@@ -5,27 +5,22 @@
 
 ---
 
-## 🟢 NOW (Trabalho Atual — Máximo 1–2 tarefas)
-- [x] **TASK-005.1:** Reconciliação do Repositório (`main` branch, remote GitHub origin, `.gitignore` hardening).
-- [x] **TASK-005.2:** Execução de Varredura de Segurança (`SECRET_SCAN: PASS`).
-- [x] **TASK-005.3:** Preflight de Provedores e atualização do `NativeModelRunner` (suporte a `.env` seguro para Groq/OpenAI/Gemini).
-- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão 05, registro do blocker honesto de credencial (`BLOCKED_PROVIDER_CREDENTIAL_OR_COST`) e parada mandatória (*STOP*).
+## 🟢 NOW (Trabalho Atual — Concluído)
+- [x] **TASK-006.1:** Criação da Especificação de Roteamento (`docs/specs/MODEL-ROUTING.md`).
+- [x] **TASK-006.2:** Implementação de `ModelRoutingConfig` e `RunnerRouter` com proveniência completa e hash determinístico.
+- [x] **TASK-006.3:** Reconciliação do Anthropic e sanitização de carregamento de `.env` (exclusão de `~/.env`).
+- [x] **TASK-006.4:** Implementação dos comandos `iee providers doctor`, `iee routes show` e `--dry-run`.
+- [x] **TASK-006.5:** Criação e aprovação de 11 novos testes automatizados (total: 49 testes verdes).
+- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão 06 e parada mandatória (*STOP*).
 
 ---
 
-## 🟡 NEXT (Próximos Passos Imediatos — Desbloqueados após configuração de credencial)
-- [ ] **REAL-CANARY-001:** Execução do primeiro canário real de ponta a ponta sobre 1 ideia (Condição B: Standard Simple Loop) com provedor único (Groq `llama-3.3-70b-versatile` ou OpenAI/Gemini).
-- [ ] **EXP-M05-REAL:** Execução do experimento controlado 3x3 com inferência real (3 fixtures x 3 condições = 9 runs reais) e geração do pacote de comparação cega real.
-
----
-
-## 🔵 LATER (Trabalhos Futuros Planejados)
-- **HUMAN-EVAL:** Avaliação humana cega das saídas reais do experimento.
-- **Fase 4:** Deliberação Multi-Agent Heurística com topologias fixas.
-- **Fase 5:** Experimentos de valor de coordenação (EXP-002 e EXP-003).
-- **Fase 6:** Deliberation Control Engine Adaptativo.
+## 🟡 NEXT (Próximos Passos — Após configuração de credenciais reais)
+- [ ] **M05-B:** Execução do primeiro canário real de modelo único (Groq / OpenAI / Gemini / Anthropic) sobre 1 ideia crua.
+- [ ] **EXP-M05:** Execução do experimento controlado A/B/C sobre as 3 fixtures com inferência real.
+- [ ] **M07:** Primeira deliberação real multi-modelo com roteamento por estágio.
 
 ---
 
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
-- **REAL-CANARY-001 & EXP-M05-REAL:** Bloqueados por ausência de chave de API configurada no ambiente local (`GROQ_API_KEY`, `OPENAI_API_KEY` ou `GEMINI_API_KEY`).
+- **M05-B & M07:** Bloqueados por ausência de chaves de API configuradas no ambiente local.

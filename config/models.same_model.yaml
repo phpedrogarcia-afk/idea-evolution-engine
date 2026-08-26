@@ -1,0 +1,22 @@
+schema_version: "1.0.0"
+description: "Configuração de modelo único para todas as etapas (Baseline / Standard Loop)"
+
+models:
+  primary:
+    provider: groq
+    model: llama-3.3-70b-versatile
+    credential_env: GROQ_API_KEY
+
+routes:
+  understand: primary
+  attack: primary
+  critique_1: primary
+  revision_1: primary
+  critique_2: primary
+  revision_2: primary
+  alternatives: primary
+  reality_check: primary
+  synthesize: primary
+  final_review: primary
+
+default_model_alias: primary
