@@ -1,0 +1,83 @@
+{
+  "checkpoint_id": "CP-20260826-010",
+  "created_at": "2026-08-26T16:26:10-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.1-R2 Complete: Understand Descriptive Purity Hardening, Groq Strict JSON Schema Compliance, Failed Generation Preservation, and 77 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-006.2: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Canary Autopsy M05.1 e Fronteira M06.2",
+    "TASK-005.1-R2-A: Autópsia Causal de Falhas do RUN-008 (Contaminação no UNDERSTAND e Erro 400 no Groq)",
+    "TASK-005.1-R2-B: Invariante UNDERSTAND IS DESCRIPTIVE, NOT GENERATIVE em prompts/understand_v0_1.md",
+    "TASK-005.1-R2-C: Isolamento de Inferred Candidates em UnderstandOutput e understand.py",
+    "TASK-005.1-R2-D: Conversão Recursiva to_strict_json_schema() e Suporte a Groq Strict Mode com bounded repair em native.py",
+    "TASK-005.1-R2-E: 3 Novos Testes Adversariais de Pureza e Strict Schema (total: 77 testes verdes)"
+  ],
+  "changed_files": [
+    "prompts/understand_v0_1.md",
+    "prompts/attack_v0_1.md",
+    "src/idea_evolution/stages/contracts.py",
+    "src/idea_evolution/stages/understand.py",
+    "src/idea_evolution/providers/base.py",
+    "src/idea_evolution/providers/native.py",
+    "src/idea_evolution/providers/fake.py",
+    "tests/adversarial/test_adversarial_understand_and_groq_boundary.py",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "UNDERSTAND_DESCRIPTIVE_PURITY: O estágio UNDERSTAND é estritamente descritivo e fiel à intenção; inferências úteis não explícitas são mantidas como assumptions/candidate_extensions",
+    "GROQ_STRICT_JSON_SCHEMA_MODE: O cliente Groq utiliza json_schema com strict=True e schema normalizado com additionalProperties=False e required universal",
+    "FAILED_GENERATION_PRESERVED: Respostas rejeitadas pelo validador estruturado do provedor são capturadas e preservadas como evidência de falha com 1 tentativa de repair bounded"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "77/77 tests passing across 15 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Provedores de inferência rápida podem oscilar em latência durante picos de uso gratuito"
+  ],
+  "blockers": [
+    "EXP-M05: Aguardando autorização humana para reattack real com chave configurada"
+  ],
+  "readiness_verdict": {
+    "UNDERSTAND_PURITY_HARDENED": true,
+    "GROQ_STRICT_MODE_READY": true,
+    "FAILED_GENERATION_PRESERVED": true,
+    "READY_FOR_REAL_REATTACK": true,
+    "REAL_SINGLE_MODEL_EXECUTION": "OFFLINE_TESTED_READY_FOR_ONLINE",
+    "REAL_MULTI_MODEL_EXECUTION": "NOT_EXECUTED"
+  },
+  "next_exact_action": "Autorização pelo operador humano para disparo do reattack real do Canário M05-B com Groq openai/gpt-oss-120b",
+  "authorized_next_scope": [
+    "M05-B: Reattack real sobre 1 ideia crua com modelo gratuito e prompt blindado"
+  ],
+  "do_not_repeat": [
+    "Não permitir que o UNDERSTAND introduza IA ou mobile silenciosamente no current_idea",
+    "Não enviar schemas frouxos sem strict compliance para o Groq"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 77 testes."
+}

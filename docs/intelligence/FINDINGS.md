@@ -108,6 +108,25 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O IEE permanece 100% autônomo e seguro em modo `STANDALONE`, com contratos prontos para integração futura governada pelo FioOS sem modificação do runtime atual.
 - **Related Decisions:** [IEE-FIOOS-PROTOCOL-v1.0.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md)
 
+---
+
+### [FINDING-011] Pureza Descritiva do UNDERSTAND é a Primeira Linha de Defesa Anti-Drift
+- **Claim:** A contaminação semântica observada no primeiro canário real nasce no estágio `UNDERSTAND` quando o modelo introduz escolhas arquiteturais não solicitadas (ex: "mobile", "IA", "backend"). O estágio `UNDERSTAND` deve ser puramente descritivo e fiel à intenção; inferências úteis não explícitas devem ser isoladas estritamente em `assumptions` ou `candidate_extensions`.
+- **Evidence:** Autópsia do RUN-008 e testes adversariais `test_adversarial_understand_and_groq_boundary.py`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** O `current_idea` permanece fiel ao criador humano desde o estágio inicial, impedindo que o `ATTACK` downstream critique hipóteses não contratadas como fatos de design.
+- **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
+
+---
+
+### [FINDING-012] Groq Structured Outputs Exige Strict JSON Schema Recursivo e Bounded Repair
+- **Claim:** Provedores como Groq (utilizando `openai/gpt-oss-120b`) rejeitam requisições estruturadas com código `json_validate_failed` se o schema não impuser `additionalProperties: false` e listar todas as propriedades em `required`. O uso do `to_strict_json_schema()` com modo `json_schema` strict=True no cliente Groq e a preservação de `failed_generation` com 1 tentativa de bounded repair garantem robustez e rastreabilidade total.
+- **Evidence:** Testes automatizados `test_02_groq_strict_json_schema_compliance_all_stages` e integração do `NativeModelRunner`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Eliminação de erros 400 em provedores de inferência rápida sem enfraquecer o contrato de domínio Pydantic.
+- **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
+
+
 
 
 

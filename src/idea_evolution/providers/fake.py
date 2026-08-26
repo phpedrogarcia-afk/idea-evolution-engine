@@ -107,12 +107,14 @@ class FakeModelRunner(ModelRunner):
             return UnderstandOutput(
                 interpreted_problem="Dificuldade do usuário em organizar e maturar ideias dispersas de forma estruturada.",
                 human_intent="Ajudar seres humanos a transformar ideias cruas em hipóteses acionáveis sem perda de intenção.",
-                proposed_mechanism="Pipeline sequencial dirigido de funções de IA com persistência determinística de estado.",
+                proposed_mechanism="Processo sequencial de clarificação e estruturação de ideias.",
+                explicit_mechanism="Processo sequencial de clarificação e estruturação de ideias.",
+                inferred_candidates=[],
                 actors_or_users=["Criadores", "Engenheiros", "Pesquisadores"],
                 assumptions=["Usuários valorizam rastreabilidade e crítica rigorosa mais do que bajulação."],
                 ambiguities=["Qual o formato ideal de teste de realidade para produtos puramente de software?"],
                 strengths=["Simplicidade arquitetural", "Rastreabilidade completa"],
-                structured_idea="Sistema de evolução de ideias composto por estágios especializados de compreensão, ataque, alternativas e síntese.",
+                structured_idea="Ferramenta de clarificação de ideias que recebe uma formulação vaga e produz uma representação estruturada.",
             )
 
         if schema == AttackOutput:

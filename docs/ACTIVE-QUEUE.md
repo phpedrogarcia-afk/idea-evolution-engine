@@ -4,15 +4,14 @@
 
 ---
 
-## 🚦 Status Atual da Fila: MISSÃO 06.2 CONCLUÍDA & FRONTEIRA IEE/FioOS CANONICALIZADA
+## 🚦 Status Atual da Fila: MISSÃO M05.1-R2 CONCLUÍDA & REPAROS OFFLINE PROVADOS
 
 ### 📌 Tarefas Concluídas:
-- [x] **TASK-001 a TASK-006.1:** Fundações, Hardening, Arquitetura de Inteligência, Doutrina, MVP, Roteamento Multi-Modelo, Governança de Custos e Autópsia do Canário (M05.1).
-- [x] **TASK-006.2 (IEE/FioOS Boundary Canonicalization & Protocol Specification):** Especificação canônica formal do `IEE_FIOOS_PROTOCOL_V1`, contratos tipados Pydantic, atualização de invariantes constitucionais e 74 testes automatizados aprovados (`REAL_BRIDGE = NOT_IMPLEMENTED`, `FIOOS_RUNTIME_TOUCHED = NO`).
+- [x] **TASK-001 a TASK-006.2:** Fundações, Hardening, Arquitetura de Inteligência, Doutrina, MVP, Roteamento Multi-Modelo, Governança de Custos, Autópsia do Canário (M05.1) e Fronteira IEE/FioOS (M06.2).
+- [x] **TASK-005.1-R2 (Understand Purity & Groq Structured Output Hardening):** Pureza descritiva do `UNDERSTAND`, isolamento de inferências em `inferred_candidates`, `to_strict_json_schema()` para Groq Strict Mode, preservação de `failed_generation`, 1 retry de repair bounded, e 77 testes automatizados aprovados (`READY_FOR_REAL_REATTACK = TRUE`).
 
 ---
 
 ## 🛑 Ponto de Parada Mandatório (STOP)
-- **Status do Canário Real (M05):** `BLOCKED_PROVIDER_CREDENTIAL_OR_COST`.
-- **Status da Fronteira IEE/FioOS (M06.2):** `CANONICAL_AND_LOCKED` (74/74 testes verdes).
-- **Ação Necessária:** O operador humano deve configurar a chave de API gratuita no `.env` local para disparar o Real Canary de custo zero (M05-B) ou a primeira deliberação multi-modelo (M07).
+- **Status do Canário Real:** `READY_FOR_REAL_REATTACK` (Reparos comprovados em 77 testes offline).
+- **Ação Necessária:** O operador humano pode autorizar o reattack real online com Groq `openai/gpt-oss-120b`.

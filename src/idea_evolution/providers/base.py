@@ -27,6 +27,7 @@ class ModelResponse(BaseModel):
     latency_seconds: float = 0.0
     retry_count: int = 0
     error: Optional[str] = None
+    failed_generation: Optional[str] = None
 
 
 class ModelRunner(ABC):

@@ -28,9 +28,12 @@ class UnderstandStage(BaseStage):
         state.problem_statement = output.interpreted_problem
         state.human_intent = output.human_intent
         state.current_idea = output.structured_idea
+        state.core_mechanism = output.explicit_mechanism or output.proposed_mechanism
         state.actors_or_users = output.actors_or_users
         state.assumptions = output.assumptions
         state.ambiguities = output.ambiguities
         state.strengths = output.strengths
+        if output.inferred_candidates:
+            state.candidate_extensions.extend(output.inferred_candidates)
 
         return f"Intenção extraída: '{output.human_intent[:60]}...' | {len(output.assumptions)} premissas mapeadas."

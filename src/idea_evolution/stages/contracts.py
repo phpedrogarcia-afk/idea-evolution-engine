@@ -10,7 +10,9 @@ from pydantic import BaseModel, Field
 class UnderstandOutput(BaseModel):
     interpreted_problem: str
     human_intent: str
-    proposed_mechanism: str
+    proposed_mechanism: str = ""
+    explicit_mechanism: str = ""
+    inferred_candidates: List[str] = Field(default_factory=list)
     actors_or_users: List[str] = Field(default_factory=list)
     assumptions: List[str] = Field(default_factory=list)
     ambiguities: List[str] = Field(default_factory=list)

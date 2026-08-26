@@ -1,10 +1,10 @@
 """
 src/idea_evolution/providers/native.py
-Executor Nativo de Modelos via SDK/HTTP (Groq, OpenAI, Gemini, Anthropic) com preservação de raw output e repair bounded.
+Executor Nativo de Modelos via SDK/HTTP (Groq, OpenAI, Gemini, Anthropic) com suporte a Groq Strict Mode, preservação de raw output / failed_generation e bounded repair.
 """
 
 from __future__ import annotations
-from typing import Type, TypeVar, Optional, Dict, Any
+from typing import Type, TypeVar, Optional, Dict, Any, Tuple
 import os
 import time
 import json
@@ -46,7 +46,7 @@ def get_provider_capabilities() -> Dict[str, Dict[str, Any]]:
         "groq": {
             "name": "Groq",
             "implemented": True,
-            "structured_output_mode": "native_json_object",
+            "structured_output_mode": "native_json_schema_strict",
             "usage_reporting": True,
             "real_tested": False,
             "credential_env": "GROQ_API_KEY",
@@ -123,10 +123,40 @@ def check_providers_health(catalog: Optional[Any] = None) -> Dict[str, Dict[str,
     return status
 
 
+def to_strict_json_schema(model: Type[BaseModel]) -> Dict[str, Any]:
+    """
+    Converte um modelo Pydantic para um JSON Schema estritamente compatível com o modo Strict do Groq/OpenAI:
+    - additionalProperties: false em todos os objetos
+    - required contendo TODAS as chaves de properties
+    - $defs e items processados recursivamente
+    """
+    schema = model.model_json_schema()
+
+    def process_object(obj: Any):
+        if not isinstance(obj, dict):
+            return
+        if obj.get("type") == "object" or "properties" in obj:
+            obj["type"] = "object"
+            obj["additionalProperties"] = False
+            props = obj.get("properties", {})
+            if props:
+                obj["required"] = list(props.keys())
+            for p in props.values():
+                process_object(p)
+        if "$defs" in obj:
+            for d in obj["$defs"].values():
+                process_object(d)
+        if "items" in obj:
+            process_object(obj["items"])
+
+    process_object(schema)
+    return schema
+
+
 class NativeModelRunner(ModelRunner):
     """
     Executor para provedores reais de LLM.
-    Suporta Groq, OpenAI, Gemini e Anthropic com Structured Output JSON e 1 tentativa de repair.
+    Suporta Groq, OpenAI, Gemini e Anthropic com Structured Output JSON e bounded repair governado.
     """
 
     def __init__(self, provider: str = "groq", api_key: Optional[str] = None, default_model: Optional[str] = None):
@@ -161,7 +191,8 @@ class NativeModelRunner(ModelRunner):
             )
 
         start_time = time.time()
-        schema_json = json.dumps(output_schema.model_json_schema(), indent=2)
+        strict_schema = to_strict_json_schema(output_schema)
+        schema_json = json.dumps(strict_schema, indent=2)
         system_instruction = (
             f"Você é um módulo cognitivo do Idea Evolution Engine para o estágio {stage_name}.\n"
             f"Sua resposta DEVE ser estritamente um objeto JSON válido correspondente ao seguinte JSON Schema:\n"
@@ -170,8 +201,63 @@ class NativeModelRunner(ModelRunner):
         )
 
         try:
-            raw_text, usage = self._call_provider(system_instruction, prompt_text, model)
+            raw_text, usage, failed_gen = self._call_provider(
+                system_instruction, prompt_text, model, output_schema, stage_name
+            )
             latency = time.time() - start_time
+
+            # Se o provedor falhou antes de retornar texto limpo (ex: json_validate_failed)
+            if failed_gen and not raw_text:
+                if max_repairs > 0:
+                    repair_prompt = (
+                        f"A geração anterior falhou na validação estruturada do provedor.\n"
+                        f"Conteúdo rejeitado (failed_generation):\n{failed_gen}\n\n"
+                        f"Gere um JSON válido em estrita conformidade com o schema:\n{schema_json}"
+                    )
+                    repair_raw, repair_usage, repair_failed = self._call_provider(
+                        system_instruction, repair_prompt, model, output_schema, stage_name
+                    )
+                    total_usage = ModelUsage(
+                        prompt_tokens=(usage.prompt_tokens or 0) + (repair_usage.prompt_tokens or 0),
+                        completion_tokens=(usage.completion_tokens or 0) + (repair_usage.completion_tokens or 0),
+                        total_tokens=(usage.total_tokens or 0) + (repair_usage.total_tokens or 0),
+                    )
+                    if repair_raw:
+                        repaired_data = self._clean_and_parse_json(repair_raw)
+                        repaired_obj = output_schema.model_validate(repaired_data)
+                        return ModelResponse(
+                            parsed=repaired_obj,
+                            raw_text=repair_raw,
+                            provider=self.provider,
+                            model=model,
+                            usage=total_usage,
+                            latency_seconds=time.time() - start_time,
+                            retry_count=1,
+                            failed_generation=failed_gen,
+                        )
+                    else:
+                        return ModelResponse(
+                            parsed=None,
+                            raw_text="",
+                            provider=self.provider,
+                            model=model,
+                            usage=total_usage,
+                            latency_seconds=time.time() - start_time,
+                            retry_count=1,
+                            error="PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+                            failed_generation=repair_failed or failed_gen,
+                        )
+                else:
+                    return ModelResponse(
+                        parsed=None,
+                        raw_text="",
+                        provider=self.provider,
+                        model=model,
+                        usage=usage,
+                        latency_seconds=latency,
+                        error="PROVIDER_STRUCTURED_OUTPUT_FAILED: json_validate_failed",
+                        failed_generation=failed_gen,
+                    )
 
             # Tentativa de Parse Direto
             try:
@@ -188,13 +274,15 @@ class NativeModelRunner(ModelRunner):
                 )
             except (json.JSONDecodeError, ValidationError) as val_err:
                 if max_repairs > 0:
-                    # Tentativa de Repair Bounded (1 tentativa)
+                    # Tentativa de Repair Bounded Local (1 tentativa)
                     repair_prompt = (
                         f"O JSON fornecido falhou na validação com o erro: {str(val_err)}\n"
                         f"Texto recebido anteriormente:\n{raw_text}\n\n"
                         f"Corrija o JSON para conformidade estrita com o schema:\n{schema_json}"
                     )
-                    repair_raw, repair_usage = self._call_provider(system_instruction, repair_prompt, model)
+                    repair_raw, repair_usage, repair_failed = self._call_provider(
+                        system_instruction, repair_prompt, model, output_schema, stage_name
+                    )
                     total_usage = ModelUsage(
                         prompt_tokens=(usage.prompt_tokens or 0) + (repair_usage.prompt_tokens or 0),
                         completion_tokens=(usage.completion_tokens or 0) + (repair_usage.completion_tokens or 0),
@@ -210,6 +298,7 @@ class NativeModelRunner(ModelRunner):
                         usage=total_usage,
                         latency_seconds=time.time() - start_time,
                         retry_count=1,
+                        failed_generation=raw_text,
                     )
                 else:
                     return ModelResponse(
@@ -220,6 +309,7 @@ class NativeModelRunner(ModelRunner):
                         usage=usage,
                         latency_seconds=latency,
                         error=f"SCHEMA_VALIDATION_FAILED: {str(val_err)}",
+                        failed_generation=raw_text,
                     )
 
         except Exception as e:
@@ -232,31 +322,60 @@ class NativeModelRunner(ModelRunner):
                 error=f"PROVIDER_EXECUTION_ERROR: {str(e)}",
             )
 
-    def _call_provider(self, system_instruction: str, user_prompt: str, model: str) -> tuple[str, ModelUsage]:
+    def _call_provider(
+        self,
+        system_instruction: str,
+        user_prompt: str,
+        model: str,
+        output_schema: Type[BaseModel],
+        stage_name: str,
+    ) -> Tuple[str, ModelUsage, Optional[str]]:
+        """
+        Invoca o provedor. Retorna (raw_text, usage, failed_generation).
+        """
         if self.provider == "groq":
             from groq import Groq
 
             client = Groq(api_key=self.api_key)
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": system_instruction},
-                    {"role": "user", "content": user_prompt},
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.3,
-            )
-            raw = completion.choices[0].message.content or ""
-            usage = ModelUsage(
-                prompt_tokens=completion.usage.prompt_tokens if completion.usage else 0,
-                completion_tokens=completion.usage.completion_tokens if completion.usage else 0,
-                total_tokens=completion.usage.total_tokens if completion.usage else 0,
-            )
-            return raw, usage
+            strict_schema = to_strict_json_schema(output_schema)
+            response_format = {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": f"{stage_name.lower()}_output",
+                    "strict": True,
+                    "schema": strict_schema,
+                },
+            }
+
+            try:
+                completion = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": system_instruction},
+                        {"role": "user", "content": user_prompt},
+                    ],
+                    response_format=response_format,
+                    temperature=0.3,
+                )
+                raw = completion.choices[0].message.content or ""
+                usage = ModelUsage(
+                    prompt_tokens=completion.usage.prompt_tokens if completion.usage else 0,
+                    completion_tokens=completion.usage.completion_tokens if completion.usage else 0,
+                    total_tokens=completion.usage.total_tokens if completion.usage else 0,
+                )
+                return raw, usage, None
+            except Exception as groq_err:
+                # Captura failed_generation se a API do Groq retornar erro estruturado 400
+                failed_gen = None
+                if hasattr(groq_err, "body") and isinstance(groq_err.body, dict):
+                    err_info = groq_err.body.get("error", {})
+                    failed_gen = err_info.get("failed_generation")
+                return "", ModelUsage(), (failed_gen or str(groq_err))
 
         if self.provider == "openai":
             import httpx
 
+            strict_schema = to_strict_json_schema(output_schema)
             url = "https://api.openai.com/v1/chat/completions"
             headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
             payload = {
@@ -265,7 +384,14 @@ class NativeModelRunner(ModelRunner):
                     {"role": "system", "content": system_instruction},
                     {"role": "user", "content": user_prompt},
                 ],
-                "response_format": {"type": "json_object"},
+                "response_format": {
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": f"{stage_name.lower()}_output",
+                        "strict": True,
+                        "schema": strict_schema,
+                    },
+                },
                 "temperature": 0.3,
             }
             resp = httpx.post(url, headers=headers, json=payload, timeout=60.0)
@@ -278,7 +404,7 @@ class NativeModelRunner(ModelRunner):
                 completion_tokens=u.get("completion_tokens", 0),
                 total_tokens=u.get("total_tokens", 0),
             )
-            return raw, usage
+            return raw, usage, None
 
         if self.provider == "gemini":
             import httpx
@@ -298,7 +424,7 @@ class NativeModelRunner(ModelRunner):
                 completion_tokens=u.get("candidatesTokenCount", 0),
                 total_tokens=u.get("totalTokenCount", 0),
             )
-            return raw, usage
+            return raw, usage, None
 
         if self.provider == "anthropic":
             import httpx
@@ -326,7 +452,7 @@ class NativeModelRunner(ModelRunner):
                 completion_tokens=u.get("output_tokens", 0),
                 total_tokens=(u.get("input_tokens", 0) + u.get("output_tokens", 0)),
             )
-            return raw, usage
+            return raw, usage, None
 
         raise NotImplementedError(f"UNSUPPORTED_PROVIDER: Provider '{self.provider}' não implementado.")
 

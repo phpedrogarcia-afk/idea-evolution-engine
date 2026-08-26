@@ -10,7 +10,7 @@
   "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260826-009",
+  "latest_checkpoint": "CP-20260826-010",
   "last_known_good_checkpoint": "CP-20260826-009",
   "current_objective": "Mission 06.2 Complete: IEE/FioOS Boundary Canonicalization & Protocol V1 Specification (74 testes verdes)",
   "current_active_task": "TASK-000",
@@ -128,5 +128,6 @@
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"
-  }
+  },
+  "last_updated": "2026-08-26T16:26:20-03:00"
 }

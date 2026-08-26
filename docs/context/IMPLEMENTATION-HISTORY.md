@@ -178,3 +178,20 @@
   - Emissão do Checkpoint `CP-20260826-009`.
 - **Resultado:** `COMPLETE_OFFLINE` | `IEE_FIOOS_BOUNDARY = CANONICAL_AND_LOCKED` | `PROTOCOL_V1 = SPECIFIED`.
 - **Evidência:** 74/74 testes automatizados aprovados.
+
+---
+
+### [MS-005.1-R2] Real Canary Failure Autopsy: Understand Purity + Groq Structured Output Boundary (Missão 05.1-R2)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Conduzir autópsia causal sobre a falha do RUN-008, identificando que a contaminação semântica se origina no estágio `UNDERSTAND` (introdução não-fundamentada de "mobile", "IA", "backend") e que o erro 400 (`json_validate_failed`) no Groq decorria de incompatibilidade com o modo estrito de schema.
+- **O que Mudou:**
+  - Redefinição do prompt `prompts/understand_v0_1.md` sob a invariante "UNDERSTAND IS DESCRIPTIVE, NOT GENERATIVE", isolando inferências em `inferred_candidates`.
+  - Atualização do prompt `prompts/attack_v0_1.md` proibindo tratar suposições não aceitas como fatos decididos de design.
+  - Atualização de `UnderstandOutput` e `understand.py` para isolar `inferred_candidates` em `candidate_extensions` sem poluir `current_idea`.
+  - Implementação da função `to_strict_json_schema()` no `NativeModelRunner`, forçando `additionalProperties: false` e `required` integral para compliance 100% com Groq/OpenAI Strict Mode.
+  - Adição de suporte a captura de `failed_generation` e 1 tentativa de bounded repair.
+  - Criação de 3 novos testes em `tests/adversarial/test_adversarial_understand_and_groq_boundary.py` (totalizando 77 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-010`.
+- **Resultado:** `COMPLETE_OFFLINE` | `UNDERSTAND_PURITY = HARDENED` | `GROQ_STRICT_MODE = IMPLEMENTED` | `READY_FOR_REAL_REATTACK = TRUE`.
+- **Evidência:** 77/77 testes automatizados aprovados (100% offline).
