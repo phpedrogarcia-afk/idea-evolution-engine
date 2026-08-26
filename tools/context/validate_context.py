@@ -42,6 +42,15 @@ REQUIRED_FILES = [
     REPO_ROOT / "docs" / "context" / "REPOSITORY-MAP.md",
     REPO_ROOT / "docs" / "context" / "CONTEXT-PROTOCOL.md",
     REPO_ROOT / "docs" / "context" / "CHECKPOINT-PROTOCOL.md",
+    REPO_ROOT / "docs" / "intelligence" / "INDEX.md",
+    REPO_ROOT / "docs" / "intelligence" / "WORK-PROTOCOL.md",
+    REPO_ROOT / "docs" / "intelligence" / "TASK-CLASSIFICATION.md",
+    REPO_ROOT / "docs" / "intelligence" / "EVIDENCE-POLICY.md",
+    REPO_ROOT / "docs" / "intelligence" / "HYPOTHESIS-PROTOCOL.md",
+    REPO_ROOT / "docs" / "intelligence" / "BASELINE-POLICY.md",
+    REPO_ROOT / "docs" / "intelligence" / "ADVERSARIAL-REVIEW.md",
+    REPO_ROOT / "docs" / "intelligence" / "FOUNDATION-READINESS.md",
+    REPO_ROOT / "docs" / "intelligence" / "MISSION-04-TASK-CONTRACT.md",
     MANIFEST_PATH,
 ]
 

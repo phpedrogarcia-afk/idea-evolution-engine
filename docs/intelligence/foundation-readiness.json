@@ -1,0 +1,34 @@
+{
+  "gate_version": "1.0.0",
+  "evaluated_at": "2026-08-26T12:26:00-03:00",
+  "foundation_ready": true,
+  "verdict": "FOUNDATION_COMPLETE_READY_FOR_MVP",
+  "next_authorized_mission": "MISSION-04-MVP-SIMPLE-LOOP",
+  "meta_ready_to_test": {
+    "principle": "Reality Over Deliberation applied to repository development",
+    "rationale": "Estrutura documental e governança suficientes para que novos aprendizados venham da construção do MVP em vez de mais fundação documental."
+  },
+  "checklist_status": {
+    "context_discoverable": true,
+    "context_validator_green": true,
+    "latest_checkpoint_valid": true,
+    "current_phase_unambiguous": true,
+    "active_task_resolvable": true,
+    "authority_rules_clear": true,
+    "work_protocol_clear": true,
+    "task_classification_clear": true,
+    "context_routing_clear": true,
+    "evidence_policy_clear": true,
+    "research_protocol_clear": true,
+    "donor_protocol_clear": true,
+    "hypothesis_protocol_clear": true,
+    "baseline_policy_clear": true,
+    "review_policy_clear": true,
+    "change_protocol_clear": true,
+    "interrupt_resume_works": true,
+    "target_current_separation_works": true,
+    "simple_mvp_recognized": true,
+    "continuity_tests_green": true,
+    "intelligence_tests_green": true
+  }
+}

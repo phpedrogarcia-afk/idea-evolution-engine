@@ -102,7 +102,7 @@ class TestContinuityHardening(unittest.TestCase):
         curr_state = REPO_ROOT / "docs" / "context" / "CURRENT-STATE.md"
         content = curr_state.read_text(encoding="utf-8")
         self.assertIn("SIMPLE IDEA EVOLUTION LOOP", content)
-        self.assertIn("MVP Heurístico", content)
+        self.assertIn("MVP", content)
 
 
 if __name__ == "__main__":

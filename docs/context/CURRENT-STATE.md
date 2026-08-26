@@ -1,49 +1,51 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-001
+> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-002
 
 ---
 
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 0 — FOUNDATION & CONTINUITY HARDENING (Concluída)
-- **Próximo Alvo de Produto:** SIMPLE IDEA EVOLUTION LOOP (MVP Heurístico)
-- **Status da Arquitetura Avançada (DCE/RL/FioOS):** TARGET / FUTURE RESEARCH (Não implementado)
-- **Último Checkpoint Imutável:** [`CP-20260826-001`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-001.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260826-001`
+- **Fase Ativa:** FASE 0 — FOUNDATION (COMPLETA / PRONTA PARA O MVP)
+- **Status do Foundation Ready Gate:** `FOUNDATION_READY = TRUE` ([`docs/intelligence/FOUNDATION-READINESS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/FOUNDATION-READINESS.md))
+- **Próximo Alvo de Produto Autorizado:** `MISSION 04 — SIMPLE IDEA EVOLUTION LOOP MVP` ([`docs/intelligence/MISSION-04-TASK-CONTRACT.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/MISSION-04-TASK-CONTRACT.md))
+- **Status da Arquitetura Avançada (DCE/RL/FioOS):** TARGET / FUTURE RESEARCH (Não implementar agora)
+- **Último Checkpoint Imutável:** [`CP-20260826-002`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-002.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260826-002`
 - **Git Branch:** `master`
-- **Git Commit:** `ce3552f` (Baseline Inicial) $\to$ Próximo commit pós-Hardening
-- **Worktree Status:** CLEAN após conclusão da Missão Mestre 02
+- **Git Commit:** `4ca9879` $\to$ Próximo commit pós-Foundation 03
+- **Worktree Status:** CLEAN
 
 ---
 
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Missão Mestre 01: Criação da Fundação Conceitual, Constitucional e Arquitetural v0.1.
-  - Missão Mestre 02: Endurecimento de Inteligência e Continuidade Cognitiva (*Intelligence & Continuity Hardening*), criação do sistema de checkpoints, manifesto machine-readable e validador determinístico.
+  - Missão Mestre 01: Fundação Conceitual, Constitucional e Arquitetural v0.1.
+  - Missão Mestre 02: Endurecimento de Inteligência e Continuidade Cognitiva (*Intelligence & Continuity Hardening*).
+  - Missão Mestre 03: Arquitetura de Inteligência de Agentes (*Agent Intelligence Architecture*), Work Protocol em 12 passos, políticas epistêmicas, validadores determinísticos e cálculo do *Foundation Ready Gate*.
 - **Tarefa Ativa Atual:**
-  - `TASK-000`: Pausa de governança / Auditoria e aprovação humana dos relatórios de fundação e endurecimento.
-- **Próximo Passo Exato (Aguardando Aprovação Humana):**
-  - Implementação da Fase 1 (Constitutional Core / Schemas Pydantic & JSON) ou início do *Simple Idea Evolution Loop*.
+  - `TASK-000`: Gate de Governança — Apresentação do fechamento da Fundação 03 e aguardar autorização humana para o início da Missão 04 (Simple Loop MVP).
+- **Próximo Passo Exato (Aguardando Autorização Humana):**
+  - Início da **Missão 04: Simple Idea Evolution Loop MVP** conforme o contrato em [`docs/intelligence/MISSION-04-TASK-CONTRACT.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/MISSION-04-TASK-CONTRACT.md).
 - **Escopo Atualmente Autorizado:**
-  - Estritamente governança, validação determinística, testes de continuidade e documentação. Zero código de produto ou chamadas a provedores de LLM.
+  - Estritamente governança, validação e planejamento. Zero código de produto do Simple Loop até aprovação humana expressa.
 
 ---
 
 ## 3. Bloqueadores e Contradições Abertas
 
 - **Bloqueadores Ativos:** Nenhum bloqueador técnico. Bloqueio formal de governança até aprovação humana para transição de fase.
-- **Contradições Abertas Registradas:** 0 contradições críticas (todas as tensões iniciais foram categorizadas e registradas em [`docs/context/CONTRADICTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTRADICTIONS.md)).
+- **Contradições Abertas Registradas:** 0 contradições críticas ([`docs/context/CONTRADICTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTRADICTIONS.md)).
 - **Dúvidas em Aberto Registradas:** 4 questões mapeadas em [`docs/context/OPEN-QUESTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/OPEN-QUESTIONS.md) (`OQ-001` a `OQ-004`).
 
 ---
 
 ## 4. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
-1. ❌ **NÃO** gerar código de UI, dashboards, servidores web ou rotas HTTP.
-2. ❌ **NÃO** instanciar orquestradores de múltiplos agentes com chamadas reais a APIs de LLMs.
-3. ❌ **NÃO** assumir que o DCE completo ou o FioOS existem ou estão operacionais.
-4. ❌ **NÃO** apagar ou editar silenciosamente checkpoints anteriores.
-5. ❌ **NÃO** avançar para implementação de produto sem autorização humana expressa.
+1. ❌ **NÃO** iniciar a Mission 04 sem autorização humana expressa.
+2. ❌ **NÃO** criar uma "Foundation 04" por inércia documental ([ADR-012](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-012)).
+3. ❌ **NÃO** gerar código de UI, dashboards, servidores web ou rotas HTTP.
+4. ❌ **NÃO** instanciar orquestradores de múltiplos agentes com chamadas reais a APIs de LLMs.
+5. ❌ **NÃO** violar o protocolo canônico de trabalho de 12 etapas.

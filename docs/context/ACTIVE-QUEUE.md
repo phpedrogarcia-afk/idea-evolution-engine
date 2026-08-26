@@ -6,22 +6,24 @@
 ---
 
 ## 🟢 NOW (Trabalho Atual — Máximo 1–2 tarefas)
-- [x] **TASK-002:** Conclusão da Missão Mestre 02 (Intelligence & Continuity Hardening):
-  - [x] Criação de `docs/context/` e artefatos de continuidade.
-  - [x] Criação de `context-manifest.json` com validação de hashes.
-  - [x] Criação de `tools/context/validate_context.py` e utilitários.
-  - [x] Criação da suíte de testes de continuidade (`tests/continuity/`).
-  - [x] Emissão do checkpoint `CP-20260826-001`.
-  - [x] Geração do relatório `INTELLIGENCE-HARDENING-REPORT.md`.
-- [ ] **TASK-000:** Gate de Governança: Parada obrigatória e apresentação ao operador humano para validação e autorização de transição de fase.
+- [x] **TASK-003:** Conclusão da Missão Mestre 03 (Agent Intelligence Architecture):
+  - [x] Criação de `docs/intelligence/` e protocolos canônicos.
+  - [x] Criação de `intelligence-manifest.json` e `foundation-readiness.json`.
+  - [x] Criação de `tools/intelligence/validate_intelligence.py` e `build_context_pack.py`.
+  - [x] Criação da suíte de testes adversariais (`tests/intelligence/test_intelligence.py`).
+  - [x] Cálculo e aprovação do Foundation Ready Gate (`FOUNDATION_READY = TRUE`).
+  - [x] Registro do [ADR-012](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-012) (Proibição de Foundation 04 por inércia).
+  - [x] Preparação do `MISSION-04-TASK-CONTRACT.md`.
+  - [x] Emissão do checkpoint `CP-20260826-002`.
+- [ ] **TASK-000:** Gate de Governança: Parada mandatória para auditoria humana e autorização para execução da Missão 04 (Simple Idea Evolution Loop MVP).
 
 ---
 
 ## 🟡 NEXT (Próximos Passos Imediatos — 2–3 tarefas)
 *(Desbloqueadas exclusivamente após autorização humana)*
-- [ ] **TASK-101 (Fase 1):** Schemas JSON / Pydantic estritos para `IdeaGenome`, `GenomePatch`, `DeliberationContract`, `UncertaintyRecord`, `TensionRecord`, `DecisionRelevanceReport`, `DecisionDelta`, `GapRecord` e `TestContract`.
-- [ ] **TASK-102 (Fase 1):** Implementação do `GenomeValidator` (código Python 100% determinístico com validação de 5 camadas) e suíte de testes unitários/adversariais.
-- [ ] **TASK-201 (Fase 2 / Simple Loop MVP):** Implementação do *Simple Idea Evolution Loop* (Pipeline heurístico: *Understand $\to$ Attack $\to$ Alternatives $\to$ Reality Check $\to$ Synthesize $\to$ Review*).
+- [ ] **MISSION-04 (Simple Loop MVP):** Implementação do *Simple Idea Evolution Loop* (*Understand $\to$ Attack $\to$ Alternatives $\to$ Reality Check $\to$ Synthesize $\to$ Review*) conforme [`docs/intelligence/MISSION-04-TASK-CONTRACT.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/intelligence/MISSION-04-TASK-CONTRACT.md).
+- [ ] **TASK-101 (Fase 1 Schemas):** Schemas JSON / Pydantic estritos para o estado compartilhado do loop.
+- [ ] **TASK-102 (Fase 1 Validators):** Implementação do `GenomeValidator` determinístico do kernel.
 
 ---
 

@@ -16,6 +16,7 @@
 - [ADR-009: READY_TO_TEST como Veredito de Próxima Fonte de Conhecimento](#adr-009)
 - [ADR-010: Separação entre Regimes de Bootstrap e Investigação Decisional](#adr-010)
 - [ADR-011: Sistema de Continuidade Cognitiva, Checkpoints e Validação Determinística](#adr-011)
+- [ADR-012: Proibição de Missões de Fundação por Inércia e Transição Obrigatória para o MVP](#adr-012)
 
 ---
 
@@ -115,3 +116,12 @@
 - **Contexto:** Risco de perda de contexto e desvio de objetivos durante trocas de agentes ou sessões interrompidas.
 - **Decisão:** Criar a infraestrutura de continuidade em `docs/context/` com manifesto machine-readable (`context-manifest.json`), checkpoints imutáveis (`CP-YYYYMMDD-NNN`), regras de *Fail-Closed on Canonical Conflict* e scripts determinísticos de validação (`tools/context/validate_context.py`).
 - **Consequências:** Qualquer nova IA recupera o estado operacional exato em segundos sem depender de histórico de chat.
+
+---
+
+### <a id="adr-012"></a> ADR-012: Proibição de Missões de Fundação por Inércia e Transição Obrigatória para o MVP
+- **Data:** 2026-08-26
+- **Status:** `ACCEPTED`
+- **Contexto:** Risco de "paralisia por fundação", acumulando dezenas de documentos teóricos sem nunca testar o produto na prática.
+- **Decisão:** Aplicar o princípio *Reality Over Deliberation* ao próprio projeto (Meta-Ready-To-Test). A Fundação 03 encerra o ciclo de fundação prévia. Nenhuma nova missão de fundação (ex: Foundation 04) pode ser criada por inércia; a próxima missão autorizada deve ser a implementação do *Simple Idea Evolution Loop MVP*. Uma nova fundação só poderá existir se for detectado um bloqueador empírico concreto durante a construção e houver autorização humana expressa.
+- **Consequências:** Encerramento definitivo da fase pré-código e foco estrito na validação experimental do primeiro produto.

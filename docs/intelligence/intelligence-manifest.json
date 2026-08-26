@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "name": "IEE Agent Intelligence Architecture Manifest",
+  "updated_at": "2026-08-26T12:26:00-03:00",
+  "foundation_ready": true,
+  "protocols": {
+    "work_protocol": "docs/intelligence/WORK-PROTOCOL.md",
+    "task_classification": "docs/intelligence/TASK-CLASSIFICATION.md",
+    "context_routing": "docs/intelligence/CONTEXT-ROUTING.md",
+    "evidence_policy": "docs/intelligence/EVIDENCE-POLICY.md",
+    "hypothesis_protocol": "docs/intelligence/HYPOTHESIS-PROTOCOL.md",
+    "baseline_policy": "docs/intelligence/BASELINE-POLICY.md",
+    "adversarial_review": "docs/intelligence/ADVERSARIAL-REVIEW.md",
+    "governed_change": "docs/intelligence/GOVERNED-CHANGE.md",
+    "findings_registry": "docs/intelligence/FINDINGS.md",
+    "task_contract": "docs/intelligence/TASK-CONTRACT.md",
+    "context_pack": "docs/intelligence/CONTEXT-PACK.md",
+    "checklists": "docs/intelligence/CHECKLISTS.md",
+    "foundation_readiness": "docs/intelligence/FOUNDATION-READINESS.md",
+    "next_mission_task_contract": "docs/intelligence/MISSION-04-TASK-CONTRACT.md"
+  },
+  "invariants": [
+    "Aggressive Epistemics, Conservative Authority",
+    "Producer != Sole Approver",
+    "No Improvement Claim Without Baseline",
+    "Failure Must Become Test Before Memory",
+    "Gap First Before Donor",
+    "No Additional Foundation Mission Without Observed Blocker"
+  ]
+}

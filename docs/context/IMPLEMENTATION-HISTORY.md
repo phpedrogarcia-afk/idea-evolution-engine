@@ -37,3 +37,21 @@
 - **Decisões Registradas:** ADR-011 (Infraestrutura de Continuidade e Validação Determinística de Contexto).
 - **Resultado:** `COMPLETE`.
 - **Evidência:** Execução do validador determinístico e da suíte de testes de continuidade.
+
+---
+
+### [MS-003] Arquitetura de Inteligência de Agentes e Foundation Ready Gate (Fase 03)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Estabelecer o protocolo canônico de raciocínio governado, pesquisa, decisão e teste para agentes, e calcular o Foundation Ready Gate.
+- **O que Mudou:**
+  - Criação do diretório `docs/intelligence/` e de 16 documentos canônicos de inteligência de agentes.
+  - Formalização do `WORK-PROTOCOL.md` em 12 etapas, `TASK-CLASSIFICATION.md`, `EVIDENCE-POLICY.md`, `HYPOTHESIS-PROTOCOL.md`, `BASELINE-POLICY.md` e `ADVERSARIAL-REVIEW.md`.
+  - Criação de `tools/intelligence/validate_intelligence.py` e `build_context_pack.py`.
+  - Implementação da suíte de 10 testes adversariais em `tests/intelligence/test_intelligence.py`.
+  - Cálculo e validação do Foundation Ready Gate (`FOUNDATION_READY = TRUE`).
+  - Preparação do `MISSION-04-TASK-CONTRACT.md` para o Simple Loop MVP.
+  - Criação do Checkpoint `CP-20260826-002`.
+- **Decisões Registradas:** ADR-012 (Proibição de Foundation 04 por inércia e autorização do Simple Loop MVP).
+- **Resultado:** `COMPLETE`.
+- **Evidência:** Execução do validador de inteligência e aprovação de 17 testes de continuidade e inteligência.
