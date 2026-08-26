@@ -144,6 +144,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Eliminação definitiva de circularidade epistêmica, garantia de que o plano de testes avalia exatamente o Core aceito e integridade histórica inquestionável de evidências.
 - **Related Decisions:** [OPERATING-DOCTRINE.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/doctrine/OPERATING-DOCTRINE.md)
 
+---
+
+### [FINDING-015] Prova Determinística de Autoridade e Soberania dos Gates Finais de Status
+- **Claim:** Modelos de linguagem podem cometer *Authority Spoofing* ao alegar falsamente `USER_EXPLICIT` para conceitos não requisitados no input humano (ex: declarar que "mapa mental e criptografia" foram pedidos explícitos do usuário para "organizar ideias vagas"). A introdução do `AuthorityProofValidator` audita deterministicamente provas de ancoragem (`GroundingRecord`), rebaixando alegações espúrias para `MODEL_HYPOTHESIS` e mantendo a proposta como `CANDIDATE`. Além disso, o status final do pipeline é soberanamente governado por `_evaluate_hard_gates`, impedindo categoricamente que `REFINED_IDEA_READY` seja emitido quando houver violação ontológica, essence drift ou rebaixamento de autoridade, mesmo se o modelo de revisão recomendar conclusão.
+- **Evidence:** Autópsia causal do RUN-20260826_202600-6639861f e 21 testes determinísticos em `test_adversarial_ontology_provenance.py` (98 testes totais verdes).
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Eliminação definitiva de apropriação indevida de autoridade humana por LLMs e garantia de que nenhum produto corrompido receba status de pronto.
+- **Related Decisions:** [AGENTS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/AGENTS.md), [GOVERNANCE-INVARIANTS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/GOVERNANCE-INVARIANTS.md)
+
+
 
 
 

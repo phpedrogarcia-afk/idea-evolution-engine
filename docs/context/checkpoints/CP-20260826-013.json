@@ -1,0 +1,81 @@
+{
+  "checkpoint_id": "CP-20260826-013",
+  "created_at": "2026-08-26T17:37:45-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.1-R5 Complete: Authority Proof Validator, Non-Spoofable Grounding, Sovereign Deterministic Final Hard Gates, and 98 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-005.1-R4: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Canary Autopsy M05.1, Fronteira M06.2, Pureza/Groq Strict M05.1-R2, Ontologia M05.1-R3 e Alinhamento Topológico M05.1-R4",
+    "TASK-005.1-R5-A: Criação do módulo determinístico AuthorityProofValidator com auditoria de GroundingRecord",
+    "TASK-005.1-R5-B: Integração da validação de autoridade no SynthesizeStage e FinalReviewStage com rebaixamento para MODEL_HYPOTHESIS / CANDIDATE",
+    "TASK-005.1-R5-C: Implementação de _evaluate_hard_gates no SimpleLoopRunner como autoridade soberana sobre o status final",
+    "TASK-005.1-R5-D: 12 Testes Adversariais de Prova de Autoridade e Enforçamento de Gates Finais (total: 98 testes verdes)"
+  ],
+  "changed_files": [
+    "src/idea_evolution/domain/grounding.py",
+    "src/idea_evolution/stages/synthesize.py",
+    "src/idea_evolution/stages/final_review.py",
+    "src/idea_evolution/orchestration/simple_loop.py",
+    "tests/adversarial/test_adversarial_ontology_provenance.py",
+    "tests/adversarial/test_adversarial_essence_drift.py",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "AUTHORITY_PROOF_GROUNDING_REQUIRED: Declarações de USER_EXPLICIT e derivações exigem prova determinística de ancoragem no input original",
+    "SPOOFING_DOWNGRADE_POLICY: Alegações de autoridade falsificadas são rebaixadas deterministicamente para MODEL_HYPOTHESIS e mantidas como CANDIDATE",
+    "SOVEREIGN_HARD_GATES: O kernel determinístico via _evaluate_hard_gates é a autoridade absoluta sobre o status final, sobrepondo qualquer parecer de LLM"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "98/98 tests passing across 16 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Provedores de inferência rápida podem oscilar em latência durante picos de uso gratuito"
+  ],
+  "blockers": [
+    "EXP-M05: Aguardando autorização humana para reattack real com chave configurada"
+  ],
+  "readiness_verdict": {
+    "AUTHORITY_PROOF_HARDENED": true,
+    "GROUNDING_VALIDATOR_ACTIVE": true,
+    "FINAL_GATE_ENFORCEMENT_SOVEREIGN": true,
+    "READY_FOR_FINAL_REAL_CANARY": true,
+    "REAL_SINGLE_MODEL_EXECUTION": "OFFLINE_TESTED_READY_FOR_ONLINE",
+    "REAL_MULTI_MODEL_EXECUTION": "NOT_EXECUTED"
+  },
+  "next_exact_action": "Autorização pelo operador humano para disparo do canário real com Groq openai/gpt-oss-120b sob as provas de autoridade e gates soberanos",
+  "authorized_next_scope": [
+    "M05: Reattack real sobre 1 ideia crua com modelo gratuito e prompt blindado"
+  ],
+  "do_not_repeat": [
+    "Não aceitar USER_EXPLICIT sem prova de ancoragem no input original",
+    "Não permitir que recomendações de LLMs sobrescrevam gates determinísticos",
+    "Não emitir REFINED_IDEA_READY sob estado contraditório ou de desvio"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 98 testes."
+}

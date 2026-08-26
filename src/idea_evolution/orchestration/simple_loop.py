@@ -1,13 +1,13 @@
 """
 src/idea_evolution/orchestration/simple_loop.py
-Orquestrador do Simple Idea Evolution Loop (v0.1) com topologia corrigida (Synthesize antes de RealityCheck) e rastreabilidade total.
+Orquestrador do Simple Idea Evolution Loop (v0.1) com topologia corrigida, auditoria de autoridade e gate determinístico estrito de finalização.
 """
 
 from typing import Dict, Any, Optional, List
 from pathlib import Path
 import json
 
-from src.idea_evolution.domain.state import SimpleIdeaState, RunStatus
+from src.idea_evolution.domain.state import SimpleIdeaState, RunStatus, PromotionAuthorityBasis
 from src.idea_evolution.config.routing import ModelRoutingConfig
 from src.idea_evolution.providers.base import ModelRunner
 from src.idea_evolution.providers.fake import FakeModelRunner
@@ -83,6 +83,31 @@ class SimpleLoopRunner:
             "REALITY_CHECK",
             "FINAL_REVIEW",
         ]
+
+    def _evaluate_hard_gates(self, state: SimpleIdeaState, review_output: Optional[FinalReviewOutput]) -> bool:
+        """
+        Avalia os gates determinísticos inegociáveis de finalização.
+        Retorna True se o estado estiver 100% livre de bloqueios graves, False caso contrário.
+        """
+        if state.essence_drift_detected:
+            return False
+        if state.ontology_contradiction_detected:
+            return False
+        if state.speculative_accretion_detected:
+            return False
+        if state.core_mechanism_hash and state.tested_core_hash:
+            if state.core_mechanism_hash != state.tested_core_hash:
+                return False
+        if state.core_mechanism and state.core_mechanism_basis == PromotionAuthorityBasis.MODEL_HYPOTHESIS:
+            return False
+        if review_output is not None:
+            if review_output.recommendation != "REFINED_IDEA_READY":
+                return False
+            if review_output.unresolved_critical_issue:
+                return False
+            if review_output.essence_drift_detected or review_output.ontology_contradiction_detected:
+                return False
+        return True
 
     def run(self, original_idea: str, run_id: Optional[str] = None) -> SimpleIdeaState:
         tracer = RunTracer(run_id=run_id, runs_dir=self.runs_dir)
@@ -189,7 +214,7 @@ class SimpleLoopRunner:
                 tracer.persist_final_state(state)
                 return state
 
-            # 4. SYNTHESIZE (Seleciona o CORE e define os limites ontológicos)
+            # 4. SYNTHESIZE (Seleciona o CORE e define os limites ontológicos com validação de autoridade)
             synth_stage = SynthesizeStage()
             r, m, a = self.router.get_runner_for_stage(synth_stage.stage_id)
             m = self.stage_models.get(synth_stage.stage_id) or m
@@ -213,7 +238,7 @@ class SimpleLoopRunner:
                 tracer.persist_final_state(state)
                 return state
 
-            # 6. FINAL_REVIEW
+            # 6. FINAL_REVIEW (Verifica determinísticamente contradições ontológicas e cross-state)
             review_stage = FinalReviewStage()
             r, m, a = self.router.get_runner_for_stage(review_stage.stage_id)
             m = self.stage_models.get(review_stage.stage_id) or m
@@ -227,12 +252,11 @@ class SimpleLoopRunner:
 
             review_output: FinalReviewOutput = res.output
 
+            # Avalia se o estado atende aos gates rígidos
+            passes_hard_gates = self._evaluate_hard_gates(state, review_output)
+
             # VERIFICAÇÃO DE RECONSTRUÇÃO (No máximo 1 ciclo permitido)
-            if (
-                review_output.recommendation == "RECONSTRUCT"
-                or review_output.unresolved_critical_issue
-                or review_output.essence_drift_detected
-            ) and state.reconstruction_count < state.max_reconstructions:
+            if not passes_hard_gates and state.reconstruction_count < state.max_reconstructions:
                 state.reconstruction_count += 1
                 state.status = RunStatus.RECONSTRUCTING
 
@@ -262,11 +286,13 @@ class SimpleLoopRunner:
                 step_counter += 1
 
                 review_output2: FinalReviewOutput = res_review2.output
-                if review_output2.recommendation == "REFINED_IDEA_READY" and not review_output2.essence_drift_detected:
+                passes_hard_gates2 = self._evaluate_hard_gates(state, review_output2)
+
+                if passes_hard_gates2:
                     state.status = RunStatus.REFINED_IDEA_READY
                 else:
                     state.status = RunStatus.REFINEMENT_INCOMPLETE
-            elif review_output.recommendation == "REFINED_IDEA_READY" and not review_output.essence_drift_detected:
+            elif passes_hard_gates:
                 state.status = RunStatus.REFINED_IDEA_READY
             else:
                 state.status = RunStatus.REFINEMENT_INCOMPLETE

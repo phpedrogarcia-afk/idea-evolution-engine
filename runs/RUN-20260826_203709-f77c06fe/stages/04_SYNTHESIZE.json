@@ -1,0 +1,47 @@
+{
+  "step_number": 4,
+  "stage_id": "SYNTHESIZE",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "synthesize_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Síntese concluída: Core 'Motor de perguntas socráticas e sumariza...' (Base: VALID_USER_DERIVATION | Hash: 4c3a3422f06c9f64), 1 aceitas, 2 candidatas, 1 rejeitadas.",
+  "raw_response": "{\n  \"refined_idea\": \"Aplicativo de idea\\u00e7\\u00e3o socr\\u00e1tica que guia o usu\\u00e1rio atrav\\u00e9s de perguntas progressivas de esclarecimento e gera um plano estruturado de projeto.\",\n  \"core_mechanism\": \"Motor de perguntas socr\\u00e1ticas e sumariza\\u00e7\\u00e3o em canvas.\",\n  \"core_mechanism_justification\": \"Atende diretamente \\u00e0 necessidade humana de estrutura\\u00e7\\u00e3o progressiva.\",\n  \"core_mechanism_basis\": \"VALID_USER_DERIVATION\",\n  \"accepted_changes\": [\n    {\n      \"proposal\": \"Suporte a exporta\\u00e7\\u00e3o em Markdown.\",\n      \"promotion_reason\": \"Facilita a portabilidade sem adicionar complexidade t\\u00e9cnica.\",\n      \"source_stage\": \"ALTERNATIVES\",\n      \"evidence_or_decision_basis\": \"Formato aberto padr\\u00e3o\"\n    }\n  ],\n  \"candidate_possibilities\": [\n    \"Valida\\u00e7\\u00e3o comunit\\u00e1ria opcional e rede de mentoria peer-to-peer (CANDIDATE).\",\n    \"Armazenamento local criptografado para privacidade refor\\u00e7ada (CANDIDATE).\"\n  ],\n  \"rejected_changes\": [\n    {\n      \"proposal\": \"Backend federado com gamifica\\u00e7\\u00e3o e tokens.\",\n      \"reason_rejected\": \"Incha\\u00e7o especulativo (Speculative Feature Accretion) n\\u00e3o solicitado pelo usu\\u00e1rio humano.\",\n      \"source_stage\": \"ALTERNATIVES\"\n    }\n  ],\n  \"remaining_uncertainties\": [],\n  \"known_risks\": [],\n  \"recommended_next_step\": \"Testar question\\u00e1rio com 5 usu\\u00e1rios reais.\"\n}",
+  "parsed_output": {
+    "refined_idea": "Aplicativo de ideação socrática que guia o usuário através de perguntas progressivas de esclarecimento e gera um plano estruturado de projeto.",
+    "core_mechanism": "Motor de perguntas socráticas e sumarização em canvas.",
+    "core_mechanism_justification": "Atende diretamente à necessidade humana de estruturação progressiva.",
+    "core_mechanism_basis": "VALID_USER_DERIVATION",
+    "accepted_changes": [
+      {
+        "proposal": "Suporte a exportação em Markdown.",
+        "promotion_reason": "Facilita a portabilidade sem adicionar complexidade técnica.",
+        "promotion_basis": "VALID_USER_DERIVATION",
+        "source_stage": "ALTERNATIVES",
+        "evidence_or_decision_basis": "Formato aberto padrão"
+      }
+    ],
+    "candidate_possibilities": [
+      "Validação comunitária opcional e rede de mentoria peer-to-peer (CANDIDATE).",
+      "Armazenamento local criptografado para privacidade reforçada (CANDIDATE)."
+    ],
+    "rejected_changes": [
+      {
+        "proposal": "Backend federado com gamificação e tokens.",
+        "reason_rejected": "Inchaço especulativo (Speculative Feature Accretion) não solicitado pelo usuário humano.",
+        "source_stage": "ALTERNATIVES"
+      }
+    ],
+    "remaining_uncertainties": [],
+    "known_risks": [],
+    "recommended_next_step": "Testar questionário com 5 usuários reais."
+  },
+  "error": null,
+  "timestamp": "2026-08-26T20:37:09.527610+00:00"
+}

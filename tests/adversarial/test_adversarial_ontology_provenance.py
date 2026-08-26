@@ -1,7 +1,7 @@
 """
 tests/adversarial/test_adversarial_ontology_provenance.py
-Testes determinísticos para proveniência de promoção, autoridade não circular, alinhamento pós-síntese de realidade e identidade imutável de Run ID (M05.1-R3 / M05.1-R4).
-Baseado nos padrões de falha reais observados nas execuções em Cloud Shell.
+Testes determinísticos para proveniência de promoção, autoridade não circular, alinhamento pós-síntese de realidade, identidade imutável de Run ID e validação estrita de autoridade / gates finais (M05.1-R3 / M05.1-R4 / M05.1-R5).
+Baseado nos padrões de falha reais observados nas execuções em Cloud Shell (RUN-009 e RUN-20260826_202600-6639861f).
 """
 
 import unittest
@@ -15,6 +15,7 @@ from src.idea_evolution.domain.state import (
     PromotionAuthorityBasis,
     RunStatus,
 )
+from src.idea_evolution.domain.grounding import AuthorityProofValidator, GroundingRecord
 from src.idea_evolution.stages.contracts import (
     SynthesizeOutput,
     AcceptedChangeItem,
@@ -325,6 +326,228 @@ class TestAdversarialOntologyProvenance(unittest.TestCase):
             second_id = t2.run_id
 
         self.assertNotEqual(first_id, second_id)
+
+    # =========================================================================
+    # M05.1-R5: AUTHORITY PROOF & FINAL GATE ENFORCEMENT ADVERSARIAL TESTS (1-12)
+    # =========================================================================
+
+    def test_10_organize_vague_ideas_cannot_ground_mindmap_as_user_explicit(self):
+        """
+        R5-Test 1: 'organize vague ideas' cannot ground 'mind-map' as USER_EXPLICIT.
+        """
+        orig = "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros."
+        prop = "Interface visual de mapa mental incremental e drag-and-drop"
+        valid, span, reason = AuthorityProofValidator.validate_user_explicit(orig, prop)
+        self.assertFalse(valid)
+        self.assertIn("SPOOFING_DETECTED", reason)
+
+    def test_11_organize_vague_ideas_cannot_ground_encryption_as_user_explicit(self):
+        """
+        R5-Test 2: 'organize vague ideas' cannot ground 'encryption' as USER_EXPLICIT.
+        """
+        orig = "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros."
+        prop = "Armazenamento local criptografado de ponta a ponta com chave assimétrica"
+        valid, span, reason = AuthorityProofValidator.validate_user_explicit(orig, prop)
+        self.assertFalse(valid)
+        self.assertIn("SPOOFING_DETECTED", reason)
+
+    def test_12_model_generated_privacy_concern_cannot_become_user_explicit(self):
+        """
+        R5-Test 3: model-generated privacy concern cannot become USER_EXPLICIT.
+        """
+        orig = "Plataforma web para conectar tutores e alunos de matemática."
+        prop = "Sistema de privacidade e anonimização de dados biométricos"
+        valid, span, reason = AuthorityProofValidator.validate_user_explicit(orig, prop)
+        self.assertFalse(valid)
+        self.assertIn("SPOOFING_DETECTED", reason)
+
+    def test_13_model_cannot_fabricate_human_decision(self):
+        """
+        R5-Test 4: model cannot fabricate HUMAN_DECISION without registered human intervention.
+        """
+        valid, span, reason = AuthorityProofValidator.validate_human_decision(
+            decision_ref="O operador humano decidiu adotar mapa mental",
+            human_intervention_flag=False,  # Nenhuma intervenção real
+        )
+        self.assertFalse(valid)
+        self.assertIn("FABRICATED_HUMAN_DECISION", reason)
+
+    def test_14_external_evidence_requires_real_evidence_reference(self):
+        """
+        R5-Test 5: EXTERNAL_EVIDENCE requires real evidence reference (ID/URL/DOI), not model prose.
+        """
+        # Prosa de modelo sem ID formal -> REJEITADO
+        valid, span, reason = AuthorityProofValidator.validate_external_evidence(
+            "Pesquisas recentes de mercado indicam que usuários preferem mapas mentais"
+        )
+        self.assertFalse(valid)
+        self.assertIn("INVALID_EVIDENCE_REF", reason)
+
+        # Referência a ID auditável -> ACEITO
+        valid_ok, span_ok, reason_ok = AuthorityProofValidator.validate_external_evidence("EXP-20260826-BENCH-001")
+        self.assertTrue(valid_ok)
+
+    def test_15_valid_user_derivation_cannot_be_assigned_solely_for_useful_mechanism(self):
+        """
+        R5-Test 6: VALID_USER_DERIVATION cannot be assigned solely because a mechanism is useful/plausible.
+        """
+        orig = "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros."
+        intent = "Ajudar na clarificação de projetos"
+        prop = "Interface visual de mapa mental"
+        justification = "É uma interface moderna, útil, elegante e recomendada para ideação."
+        valid, span, reason = AuthorityProofValidator.validate_user_derivation(orig, intent, prop, justification)
+        self.assertFalse(valid)
+        self.assertIn("INVALID_DERIVATION", reason)
+
+    def test_16_invalid_authority_keeps_proposal_candidate(self):
+        """
+        R5-Test 7: invalid authority proof downgrades basis to MODEL_HYPOTHESIS and keeps proposal CANDIDATE.
+        """
+        synth_stage = SynthesizeStage()
+        state = SimpleIdeaState(
+            run_id="TEST-R5-P7",
+            original_idea="Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+        )
+        synth_out = SynthesizeOutput(
+            refined_idea="Ideia refinada com mapa mental criptografado",
+            core_mechanism="Interface visual de mapa mental incremental com armazenamento criptografado",
+            core_mechanism_justification="pedido explícito do usuário por organização visual e proteção",
+            core_mechanism_basis="USER_EXPLICIT",  # SPOOFING
+            accepted_changes=[],
+            candidate_possibilities=[],
+            rejected_changes=[],
+        )
+        synth_stage.apply_output_to_state(state, synth_out)
+
+        # Validador deve ter rebaixado a base e o registro ontológico deve ser CANDIDATE
+        self.assertEqual(state.core_mechanism_basis, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
+        self.assertTrue(any("AUTHORITY_SPOOFING_BLOCKED" in u for u in state.remaining_uncertainties))
+        self.assertEqual(state.proposal_records[0].ontology_state, OntologyState.CANDIDATE)
+
+    def test_17_essence_drift_detected_makes_ready_impossible(self):
+        """
+        R5-Test 8: essence_drift_detected=true makes REFINED_IDEA_READY impossible in SimpleLoopRunner.
+        """
+        runner = SimpleLoopRunner()
+        state = SimpleIdeaState(
+            run_id="TEST-R5-P8",
+            original_idea="Ideia original",
+            essence_drift_detected=True,
+            max_reconstructions=0,  # Sem budget
+        )
+        review_out = FinalReviewOutput(
+            material_issues_remaining=[],
+            essence_drift_detected=True,
+            recommendation="REFINED_IDEA_READY",  # Modelo alucina READY
+        )
+        passes = runner._evaluate_hard_gates(state, review_out)
+        self.assertFalse(passes)
+
+    def test_18_ontology_contradiction_detected_makes_ready_impossible(self):
+        """
+        R5-Test 9: ontology_contradiction_detected=true makes REFINED_IDEA_READY impossible.
+        """
+        runner = SimpleLoopRunner()
+        state = SimpleIdeaState(
+            run_id="TEST-R5-P9",
+            original_idea="Ideia original",
+            ontology_contradiction_detected=True,
+            max_reconstructions=0,
+        )
+        review_out = FinalReviewOutput(
+            material_issues_remaining=[],
+            recommendation="REFINED_IDEA_READY",
+        )
+        passes = runner._evaluate_hard_gates(state, review_out)
+        self.assertFalse(passes)
+
+    def test_19_hard_deterministic_gate_overrides_llm_recommendation_of_ready(self):
+        """
+        R5-Test 10: hard deterministic gate overrides an LLM recommendation of READY when core is MODEL_HYPOTHESIS.
+        """
+        runner = SimpleLoopRunner()
+        state = SimpleIdeaState(
+            run_id="TEST-R5-P10",
+            original_idea="Ideia original",
+            core_mechanism="Mapa mental",
+            core_mechanism_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+            max_reconstructions=0,
+        )
+        review_out = FinalReviewOutput(
+            material_issues_remaining=[],
+            essence_drift_detected=False,
+            ontology_contradiction_detected=False,
+            recommendation="REFINED_IDEA_READY",  # LLM aprova
+        )
+        passes = runner._evaluate_hard_gates(state, review_out)
+        self.assertFalse(passes)
+
+    def test_20_reconstruction_occurs_when_budget_remains(self):
+        """
+        R5-Test 11: reconstruction occurs (reconstruction_count increments) when hard gates fail and budget remains.
+        """
+        spoofed_synth = {
+            "SYNTHESIZE": {
+                "refined_idea": "Refinada com mapa mental criptografado",
+                "core_mechanism": "Mapa mental criptografado",
+                "core_mechanism_justification": "Pedido do usuário",
+                "core_mechanism_basis": "USER_EXPLICIT",  # Será rebaixado pelo validador determinístico
+                "accepted_changes": [],
+                "candidate_possibilities": [],
+                "rejected_changes": [],
+                "remaining_uncertainties": [],
+                "known_risks": [],
+                "recommended_next_step": "Testar",
+            },
+            "FINAL_REVIEW": {
+                "material_issues_remaining": [],
+                "essence_drift_detected": False,
+                "speculative_accretion_detected": False,
+                "ontology_contradiction_detected": False,
+                "recommendation": "REFINED_IDEA_READY",
+                "review_summary": "Tudo ok",
+            }
+        }
+        runner = FakeModelRunner(custom_responses=spoofed_synth)
+        loop = SimpleLoopRunner(runner=runner)
+
+        state = loop.run("Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.")
+        # Como o spoofing foi rebaixado e a base do core virou MODEL_HYPOTHESIS, o gate falhou e acionou reconstrução (attempt=2)
+        self.assertEqual(state.reconstruction_count, 1)
+        self.assertEqual(state.status, RunStatus.REFINEMENT_INCOMPLETE)
+
+    def test_21_exhausted_reconstruction_cannot_emit_ready(self):
+        """
+        R5-Test 12: exhausted reconstruction cannot emit READY when hard gates fail; emits REFINEMENT_INCOMPLETE.
+        """
+        spoofed_synth = {
+            "SYNTHESIZE": {
+                "refined_idea": "Refinada com mapa mental criptografado",
+                "core_mechanism": "Mapa mental criptografado",
+                "core_mechanism_justification": "Pedido do usuário",
+                "core_mechanism_basis": "USER_EXPLICIT",
+                "accepted_changes": [],
+                "candidate_possibilities": [],
+                "rejected_changes": [],
+                "remaining_uncertainties": [],
+                "known_risks": [],
+                "recommended_next_step": "Testar",
+            },
+            "FINAL_REVIEW": {
+                "material_issues_remaining": [],
+                "essence_drift_detected": False,
+                "speculative_accretion_detected": False,
+                "ontology_contradiction_detected": False,
+                "recommendation": "REFINED_IDEA_READY",
+                "review_summary": "Tudo ok",
+            }
+        }
+        runner = FakeModelRunner(custom_responses=spoofed_synth)
+        loop = SimpleLoopRunner(runner=runner)
+
+        state = loop.run("Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.")
+        self.assertNotEqual(state.status, RunStatus.REFINED_IDEA_READY)
+        self.assertEqual(state.status, RunStatus.REFINEMENT_INCOMPLETE)
 
 
 if __name__ == "__main__":

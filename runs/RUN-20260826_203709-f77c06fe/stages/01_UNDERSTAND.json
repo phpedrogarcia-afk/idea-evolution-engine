@@ -1,0 +1,37 @@
+{
+  "step_number": 1,
+  "stage_id": "UNDERSTAND",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "understand_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Intenção extraída: 'Transformar ideias vagas em projetos mais claros....' | 1 premissas mapeadas.",
+  "raw_response": "{\n  \"interpreted_problem\": \"Pessoas t\\u00eam ideias difusas e precisam de perguntas guiadas para estrutur\\u00e1-las.\",\n  \"human_intent\": \"Transformar ideias vagas em projetos mais claros.\",\n  \"proposed_mechanism\": \"Question\\u00e1rio socr\\u00e1tico guiado e gera\\u00e7\\u00e3o de canvas estruturado.\",\n  \"actors_or_users\": [\n    \"Criadores\",\n    \"Empreendedores\"\n  ],\n  \"assumptions\": [\n    \"Estrutura\\u00e7\\u00e3o l\\u00f3gica reduz abandono.\"\n  ],\n  \"ambiguities\": [],\n  \"strengths\": [\n    \"Foco direto em clareza.\"\n  ],\n  \"structured_idea\": \"App de perguntas socr\\u00e1ticas para maturar ideias.\"\n}",
+  "parsed_output": {
+    "interpreted_problem": "Pessoas têm ideias difusas e precisam de perguntas guiadas para estruturá-las.",
+    "human_intent": "Transformar ideias vagas em projetos mais claros.",
+    "proposed_mechanism": "Questionário socrático guiado e geração de canvas estruturado.",
+    "explicit_mechanism": "",
+    "inferred_candidates": [],
+    "actors_or_users": [
+      "Criadores",
+      "Empreendedores"
+    ],
+    "assumptions": [
+      "Estruturação lógica reduz abandono."
+    ],
+    "ambiguities": [],
+    "strengths": [
+      "Foco direto em clareza."
+    ],
+    "structured_idea": "App de perguntas socráticas para maturar ideias."
+  },
+  "error": null,
+  "timestamp": "2026-08-26T20:37:09.525149+00:00"
+}

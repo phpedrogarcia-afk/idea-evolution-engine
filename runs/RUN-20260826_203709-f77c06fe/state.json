@@ -1,0 +1,301 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "RUN-20260826_203709-f77c06fe",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-08-26T17:37:09.524722",
+  "updated_at": "2026-08-26T17:37:09.532067",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "current_idea": "Aplicativo de ideação socrática que guia o usuário através de perguntas progressivas de esclarecimento e gera um plano estruturado de projeto.",
+  "human_intent": "Transformar ideias vagas em projetos mais claros.",
+  "problem_statement": "Pessoas têm ideias difusas e precisam de perguntas guiadas para estruturá-las.",
+  "actors_or_users": [
+    "Criadores",
+    "Empreendedores"
+  ],
+  "assumptions": [
+    "Estruturação lógica reduz abandono."
+  ],
+  "ambiguities": [],
+  "strengths": [
+    "Foco direto em clareza."
+  ],
+  "critical_issues": [
+    {
+      "issue": "Risco de sobrecarga de tokens e latência excessiva se o loop não tiver condições de parada estritas.",
+      "why_it_matters": "Pode inviabilizar o custo por ideia processada.",
+      "severity": "HIGH",
+      "affected_part": "Orquestração e limites de ciclo",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Críticas podem se tornar genéricas se os prompts não impuserem Truth Over Agreement.",
+      "why_it_matters": "Reduz o Decision Delta e gera valor perceptual ilusório.",
+      "severity": "MEDIUM",
+      "affected_part": "Prompts de ataque",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Modelos de linguagem respeitam esquemas complexos sem reparo mecânico."
+  ],
+  "contradictions": [],
+  "failure_modes": [
+    "Loop infinito em caso de rejeição perpétua no estágio de revisão final."
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Executar pipeline sequencial determinístico com contratos estritos Pydantic.",
+      "addresses_issues": [
+        "Latência e quebra de schemas"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Menor flexibilidade dinâmica em favor de 100% de previsibilidade."
+      ],
+      "novelty_or_difference": "Separação total entre kernel determinístico e funções semânticas."
+    },
+    {
+      "mechanism": "Utilizar um único modelo com prompt estruturado em múltiplas seções.",
+      "addresses_issues": [
+        "Custo de coordenação"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Menor isolamento de contexto e menor severidade crítica."
+      ],
+      "novelty_or_difference": "Baseline de prompt único."
+    }
+  ],
+  "core_mechanism": "Motor de perguntas socráticas e sumarização em canvas.",
+  "core_mechanism_justification": "Atende diretamente à necessidade humana de estruturação progressiva.",
+  "core_mechanism_basis": "VALID_USER_DERIVATION",
+  "core_mechanism_hash": "4c3a3422f06c9f64",
+  "proposal_records": [
+    {
+      "proposal": "Motor de perguntas socráticas e sumarização em canvas.",
+      "ontology_state": "CORE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Atende diretamente à necessidade humana de estruturação progressiva.",
+      "promotion_basis": "VALID_USER_DERIVATION",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Suporte a exportação em Markdown.",
+      "ontology_state": "DERIVED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Facilita a portabilidade sem adicionar complexidade técnica.",
+      "promotion_basis": "VALID_USER_DERIVATION",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Formato aberto padrão"
+    },
+    {
+      "proposal": "Validação comunitária opcional e rede de mentoria peer-to-peer (CANDIDATE).",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Armazenamento local criptografado para privacidade reforçada (CANDIDATE).",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Backend federado com gamificação e tokens.",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Inchaço especulativo (Speculative Feature Accretion) não solicitado pelo usuário humano.",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Suporte a exportação em Markdown. (Justificativa: Facilita a portabilidade sem adicionar complexidade técnica. | Base: VALID_USER_DERIVATION)"
+  ],
+  "candidate_extensions": [
+    "Validação comunitária opcional e rede de mentoria peer-to-peer (CANDIDATE).",
+    "Armazenamento local criptografado para privacidade reforçada (CANDIDATE)."
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Backend federado com gamificação e tokens.",
+      "reason_rejected": "Inchaço especulativo (Speculative Feature Accretion) não solicitado pelo usuário humano.",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_MISMATCH: O RealityCheck testou 'Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.' (hash: 52b02a020207801b), mas o core aceito na Síntese é 'Motor de perguntas socráticas e sumarização em canvas.' (hash: 4c3a3422f06c9f64).",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_MISMATCH: O RealityCheck testou 'Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.' (hash: 52b02a020207801b), mas o core aceito na Síntese é 'Motor de perguntas socráticas e sumarização em canvas.' (hash: 4c3a3422f06c9f64)."
+  ],
+  "known_risks": [],
+  "recommended_next_step": "Testar questionário com 5 usuários reais.",
+  "tested_core_mechanism": "Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
+  "tested_core_hash": "52b02a020207801b",
+  "reality_dependencies": [
+    "Disponibilidade de chave de API para o modo real ou execução offline com mocks."
+  ],
+  "claims_needing_evidence": [
+    "Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline."
+  ],
+  "candidate_tests": [
+    "Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.",
+    "Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico."
+  ],
+  "exploratory_candidate_tests": [],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.525083",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Transformar ideias vagas em projetos mais claros....' | 1 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.525957",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 vulnerabilidades críticas e 1 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.526621",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.527576",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Motor de perguntas socráticas e sumariza...' (Base: VALID_USER_DERIVATION | Hash: 4c3a3422f06c9f64), 1 aceitas, 2 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.528512",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Pipeline determinístico de 6 estágios em...' (hash: 52b02a020207801b), 1 dependências, 2 testes do Core, 0 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.529221",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.529827",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.530512",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Motor de perguntas socráticas e sumariza...' (Base: VALID_USER_DERIVATION | Hash: 4c3a3422f06c9f64), 1 aceitas, 2 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.531347",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Pipeline determinístico de 6 estágios em...' (hash: 52b02a020207801b), 1 dependências, 2 testes do Core, 0 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T17:37:09.532059",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

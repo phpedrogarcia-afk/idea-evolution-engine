@@ -81,6 +81,15 @@ class TestAdversarialEssenceDrift(unittest.TestCase):
                 "known_risks": [],
                 "recommended_next_step": "Testar questionário com 5 usuários reais.",
             },
+            "REALITY_CHECK": {
+                "target_core_mechanism": "Motor de perguntas socráticas e sumarização em canvas.",
+                "feasibility_notes": ["Questionários socráticos rodam diretamente no cliente com latência zero."],
+                "reality_dependencies": ["Exportador de Markdown"],
+                "claims_needing_evidence": [],
+                "potential_blockers": [],
+                "candidate_tests": ["Testar fluidez do questionário com 5 usuários"],
+                "exploratory_candidate_tests": [],
+            },
             "FINAL_REVIEW": {
                 "material_issues_remaining": [],
                 "essence_drift_detected": False,

@@ -1,0 +1,19 @@
+{
+  "run_id": "RUN-20260826_203709-f77c06fe",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "human_intent": "Transformar ideias vagas em projetos mais claros.",
+  "refined_idea": "Aplicativo de ideação socrática que guia o usuário através de perguntas progressivas de esclarecimento e gera um plano estruturado de projeto.",
+  "core_mechanism": "Motor de perguntas socráticas e sumarização em canvas.",
+  "core_mechanism_basis": "VALID_USER_DERIVATION",
+  "core_mechanism_hash": "4c3a3422f06c9f64",
+  "tested_core_hash": "52b02a020207801b",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 2,
+  "alternatives_count": 2,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Testar questionário com 5 usuários reais."
+}

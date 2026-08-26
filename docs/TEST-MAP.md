@@ -1,7 +1,7 @@
-# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.8)
+# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.9)
 
 > **ESTRUTURA DE TESTES, COBERTURA DE RISCOS E EXECUÇÃO DETERMINÍSTICA.**
-> *Total de Testes: 86 testes distribuídos em 16 módulos (100% automatizados e offline).*
+> *Total de Testes: 98 testes distribuídos em 16 módulos (100% automatizados e offline).*
 
 ---
 
@@ -26,7 +26,7 @@
 | **Adversarial Catálogo & Custos** | `tests/adversarial/test_adversarial_catalog.py` | 4 | Adversarial (<50ms) | Injeção de modelos pagos sob `FREE_ONLY`, bloqueio de modelos descontinuados e integridade experimental no-fallback. |
 | **Adversarial Essence Drift** | `tests/adversarial/test_adversarial_essence_drift.py` | 2 | Adversarial (<50ms) | Isolamento de *Speculative Feature Accretion* no Synthesis e acionamento de `RECONSTRUCT` no Final Review. |
 | **Adversarial Understand & Groq** | `tests/adversarial/test_adversarial_understand_and_groq_boundary.py` | 3 | Adversarial (<50ms) | Pureza descritiva do UNDERSTAND, conformidade total com Groq Strict JSON Schema e preservação de `failed_generation`. |
-| **Adversarial Ontologia, Alinhamento & Run ID (M05.1-R4)** | `tests/adversarial/test_adversarial_ontology_provenance.py` | 9 | Adversarial (<50ms) | Alinhamento do RealityCheck com o Core aceito, bloqueio de promoção circular (MODEL_HYPOTHESIS), 6 invariantes cross-state, e Run IDs imutáveis não reutilizáveis. |
+| **Adversarial Ontologia, Autoridade & Gates (M05.1-R4 / R5)** | `tests/adversarial/test_adversarial_ontology_provenance.py` | 21 | Adversarial (<50ms) | Prova determinística de autoridade (USER_EXPLICIT grounding, VALID_USER_DERIVATION, EXTERNAL_EVIDENCE, HUMAN_DECISION), veto a spoofing de autoridade e gates determinísticos inegociáveis de finalização. |
 | **Experimento A/B/C** | `tests/experiment/test_comparison_packet.py` | 1 | Experimental (<50ms) | Execução sobre as 3 fixtures padronizadas e geração do pacote de avaliação cega mascarado. |
 
 ---
@@ -34,7 +34,7 @@
 ## ⚡ Como Executar Todos os Testes
 
 ```bash
-# Executar a suíte completa de 86 testes
+# Executar a suíte completa de 98 testes
 python -m unittest discover -s tests -p "test_*.py" -v
 
 # Executar validação de contexto e integridade documental

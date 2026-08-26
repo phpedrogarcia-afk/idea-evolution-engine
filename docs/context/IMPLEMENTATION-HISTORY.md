@@ -228,3 +228,19 @@
   - Emissão do Checkpoint `CP-20260826-012`.
 - **Resultado:** `COMPLETE_OFFLINE` | `TOPOLOGY_REALITY_ALIGNMENT = HARDENED` | `NON_CIRCULAR_PROMOTION = ENFORCED` | `IMMUTABLE_RUN_IDENTITY = ACTIVE` | `READY_FOR_NEW_REAL_CANARY = TRUE`.
 - **Evidência:** 86/86 testes automatizados aprovados (100% offline).
+
+---
+
+### [MS-005.1-R5] Authority Proof & Final Gate Enforcement (Missão 05.1-R5)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Resolver as 2 falhas graves observadas no canário `RUN-20260826_202600-6639861f`: (1) *Authority Spoofing* (alegação espúria de `USER_EXPLICIT` para conceitos técnicos nunca solicitados pelo usuário), e (2) *Final Gate Bypass* (emissão de `REFINED_IDEA_READY` mesmo com violações ontológicas e essence drift detectados).
+- **O que Mudou:**
+  - Criação do validador determinístico `AuthorityProofValidator` com auditoria de `GroundingRecord` em `src/idea_evolution/domain/grounding.py`.
+  - Implementação de regras rigorosas de validação de proveniência para `USER_EXPLICIT`, `VALID_USER_DERIVATION`, `EXTERNAL_EVIDENCE` e `HUMAN_DECISION`.
+  - Rebaixamento automático de false attribution para `MODEL_HYPOTHESIS` / `CANDIDATE` no `SynthesizeStage`.
+  - Implementação de `_evaluate_hard_gates` no `SimpleLoopRunner`, tornando o kernel determinístico a autoridade soberana final sobre o status.
+  - Criação de 12 testes adversariais em `tests/adversarial/test_adversarial_ontology_provenance.py` (totalizando 98 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-013`.
+- **Resultado:** `COMPLETE_OFFLINE` | `AUTHORITY_PROOF = HARDENED` | `FINAL_GATE_ENFORCEMENT = SOVEREIGN` | `READY_FOR_FINAL_REAL_CANARY = TRUE`.
+- **Evidência:** 98/98 testes automatizados aprovados (100% offline).

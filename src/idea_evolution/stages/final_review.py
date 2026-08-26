@@ -6,6 +6,7 @@ Estágio 6: FINAL_REVIEW (v0.1) — Detecção de essence drift, speculative acc
 from typing import Type
 import json
 from src.idea_evolution.domain.state import SimpleIdeaState, RunStatus, PromotionAuthorityBasis
+from src.idea_evolution.domain.grounding import AuthorityProofValidator
 from src.idea_evolution.stages.stage_base import BaseStage
 from src.idea_evolution.stages.contracts import FinalReviewOutput
 
@@ -57,7 +58,7 @@ class FinalReviewStage(BaseStage):
                         f"mas o core aceito na Síntese é '{state.core_mechanism}' (hash: {state.core_mechanism_hash})."
                     )
 
-        # Invariante 2: Mecanismo do Core não pode ser promovido isoladamente por MODEL_HYPOTHESIS
+        # Invariante 2: Mecanismo do Core não pode ser promovido isoladamente por MODEL_HYPOTHESIS ou sem prova de autoridade
         if state.core_mechanism:
             if not state.core_mechanism_justification:
                 ontology_contradiction = True

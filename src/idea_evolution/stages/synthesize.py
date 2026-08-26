@@ -1,6 +1,6 @@
 """
 src/idea_evolution/stages/synthesize.py
-Estágio 4 (na nova topologia): SYNTHESIZE (v0.1) — Síntese estruturada com linhagem estável, proveniência de autoridade e base de decisão tipada.
+Estágio 4 (na nova topologia): SYNTHESIZE (v0.1) — Síntese estruturada com validação determinística de autoridade (Grounding Validation) e linhagem referencial.
 """
 
 from typing import Type
@@ -13,6 +13,7 @@ from src.idea_evolution.domain.state import (
     OntologyState,
     PromotionAuthorityBasis,
 )
+from src.idea_evolution.domain.grounding import AuthorityProofValidator
 from src.idea_evolution.stages.stage_base import BaseStage
 from src.idea_evolution.stages.contracts import SynthesizeOutput
 
@@ -41,13 +42,34 @@ class SynthesizeStage(BaseStage):
         state.current_idea = output.refined_idea
         state.core_mechanism = output.core_mechanism
         state.core_mechanism_justification = output.core_mechanism_justification
-        
-        # Mapeia basis de autoridade do core
+
+        # Mapeia basis de autoridade alegada para o Core
         try:
-            basis_enum = PromotionAuthorityBasis(output.core_mechanism_basis)
+            claimed_basis = PromotionAuthorityBasis(output.core_mechanism_basis)
         except Exception:
-            basis_enum = PromotionAuthorityBasis.MODEL_HYPOTHESIS
-        state.core_mechanism_basis = basis_enum
+            claimed_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
+        # 1. Auditoria Determinística de Autoridade do Core
+        if output.core_mechanism:
+            grounding_rec = AuthorityProofValidator.audit_proposal_authority(
+                original_idea=state.original_idea,
+                human_intent=state.human_intent,
+                proposal=output.core_mechanism,
+                claimed_basis=claimed_basis,
+                justification=output.core_mechanism_justification,
+                evidence_or_decision_basis=output.core_mechanism_justification,
+                human_intervention_flag=state.human_intervention,
+            )
+            if not grounding_rec.is_valid:
+                # Rebaixa para MODEL_HYPOTHESIS e registra o alerta
+                state.core_mechanism_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+                state.remaining_uncertainties.append(
+                    f"AUTHORITY_SPOOFING_BLOCKED: A base alegada '{claimed_basis.value}' para o Core foi rejeitada pelo validador determinístico. Motivo: {grounding_rec.failure_reason}"
+                )
+            else:
+                state.core_mechanism_basis = claimed_basis
+        else:
+            state.core_mechanism_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
 
         # Computa hash referencial do core aceito
         if output.core_mechanism:
@@ -79,31 +101,43 @@ class SynthesizeStage(BaseStage):
         ]
         state.candidate_extensions = cleaned_candidates
 
-        # Construção da linhagem estável ProposalRecord
+        # Construção da linhagem estável ProposalRecord com auditoria de autoridade
         records = []
         if output.core_mechanism:
             records.append(
                 ProposalRecord(
                     proposal=output.core_mechanism,
-                    ontology_state=OntologyState.CORE,
+                    ontology_state=OntologyState.CORE if state.core_mechanism_basis != PromotionAuthorityBasis.MODEL_HYPOTHESIS else OntologyState.CANDIDATE,
                     source_stage="SYNTHESIZE",
                     promotion_reason=output.core_mechanism_justification,
-                    promotion_basis=basis_enum,
+                    promotion_basis=state.core_mechanism_basis,
                     evidence_or_decision_basis="Core design selection",
                 )
             )
         for acc in output.accepted_changes:
             try:
-                acc_basis = PromotionAuthorityBasis(acc.promotion_basis)
+                acc_claimed_basis = PromotionAuthorityBasis(acc.promotion_basis)
             except Exception:
-                acc_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+                acc_claimed_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
+            acc_grounding = AuthorityProofValidator.audit_proposal_authority(
+                original_idea=state.original_idea,
+                human_intent=state.human_intent,
+                proposal=acc.proposal,
+                claimed_basis=acc_claimed_basis,
+                justification=acc.promotion_reason,
+                evidence_or_decision_basis=acc.evidence_or_decision_basis,
+                human_intervention_flag=state.human_intervention,
+            )
+            validated_basis = acc_claimed_basis if acc_grounding.is_valid else PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
             records.append(
                 ProposalRecord(
                     proposal=acc.proposal,
-                    ontology_state=OntologyState.DERIVED,
+                    ontology_state=OntologyState.DERIVED if acc_grounding.is_valid else OntologyState.CANDIDATE,
                     source_stage=acc.source_stage or "ALTERNATIVES",
                     promotion_reason=acc.promotion_reason,
-                    promotion_basis=acc_basis,
+                    promotion_basis=validated_basis,
                     evidence_or_decision_basis=acc.evidence_or_decision_basis,
                 )
             )
@@ -127,8 +161,9 @@ class SynthesizeStage(BaseStage):
             )
         state.proposal_records = records
 
-        state.remaining_uncertainties = output.remaining_uncertainties
+        if output.remaining_uncertainties:
+            state.remaining_uncertainties.extend(output.remaining_uncertainties)
         state.known_risks = output.known_risks
         state.recommended_next_step = output.recommended_next_step
 
-        return f"Síntese concluída: Core '{output.core_mechanism[:40]}...' (hash: {state.core_mechanism_hash}), {len(output.accepted_changes)} aceitas, {len(cleaned_candidates)} candidatas, {len(output.rejected_changes)} rejeitadas."
+        return f"Síntese concluída: Core '{output.core_mechanism[:40]}...' (Base: {state.core_mechanism_basis.value} | Hash: {state.core_mechanism_hash}), {len(output.accepted_changes)} aceitas, {len(cleaned_candidates)} candidatas, {len(output.rejected_changes)} rejeitadas."
