@@ -1,0 +1,14 @@
+{
+  "run_id": "RUN-20260826-001",
+  "status": "REFINED_IDEA_READY",
+  "original_idea": "Um gerenciador de tarefas que prioriza por energia mental e nao apenas por horario.",
+  "human_intent": "Ajudar seres humanos a transformar ideias cruas em hipóteses acionáveis sem perda de intenção.",
+  "refined_idea": "Idea Evolution Engine (Simple Loop): Motor sequencial CLI que recebe uma ideia humana crua, submete a 6 estágios dirigidos, valida esquemas e devolve um pacote de maturação estruturado com rastreabilidade total.",
+  "reconstruction_count": 0,
+  "essence_drift_detected": false,
+  "critical_issues_count": 2,
+  "alternatives_count": 2,
+  "accepted_changes_count": 3,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Executar experimento EXP-M04-001 comparando a saída do loop com o baseline de prompt único."
+}

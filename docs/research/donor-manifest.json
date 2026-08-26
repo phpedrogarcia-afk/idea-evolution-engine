@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "name": "IEE Operational Donor Arsenal Manifest",
+  "updated_at": "2026-08-26T13:08:00-03:00",
+  "gap_index": {
+    "critique_revision_depth": [
+      "MULTIAGENT_RESEARCH_IDEATOR",
+      "DCI"
+    ],
+    "structured_output_validation": [
+      "PYDANTIC_AI",
+      "INSTRUCTOR",
+      "OUTLINES"
+    ],
+    "lineage_and_evolution": [
+      "GOOGLE_CO_SCIENTIST"
+    ],
+    "reality_questioning": [
+      "STORM",
+      "CO_STORM"
+    ],
+    "prompt_red_teaming": [
+      "PROMPTFOO"
+    ],
+    "durable_graph_execution": [
+      "LANGGRAPH"
+    ],
+    "multi_provider_routing": [
+      "LITELLM"
+    ],
+    "prompt_optimization": [
+      "DSPY"
+    ],
+    "hypothesis_falsification": [
+      "POPPER"
+    ]
+  },
+  "donors": {
+    "MULTIAGENT_RESEARCH_IDEATOR": {
+      "donor_id": "DONOR-001",
+      "name": "MultiAgent Research Ideator",
+      "tier": "A",
+      "decision": "ADAPT",
+      "phase": "M04",
+      "primary_mechanism": "iterative_critique_revision",
+      "scars": [
+        "parallel_critics_introduce_noise_and_cost",
+        "llm_judge_dependency"
+      ]
+    },
+    "PYDANTIC_AI": {
+      "donor_id": "DONOR-002",
+      "name": "PydanticAI / Instructor",
+      "tier": "A",
+      "decision": "ADAPT",
+      "phase": "M04",
+      "primary_mechanism": "pydantic_schema_validation_and_repair",
+      "scars": [
+        "framework_dependency_bloat",
+        "silent_infinite_retries"
+      ]
+    },
+    "DCI": {
+      "donor_id": "DONOR-003",
+      "name": "Deliberative Council for Ideation",
+      "tier": "A",
+      "decision": "ADAPT",
+      "phase": "M04",
+      "primary_mechanism": "epistemic_speech_acts_and_tension_preservation",
+      "scars": [
+        "62x_token_coordination_overhead"
+      ]
+    },
+    "GOOGLE_CO_SCIENTIST": {
+      "donor_id": "DONOR-004",
+      "name": "Google AI Co-Scientist",
+      "tier": "B",
+      "decision": "ADOPT_CONCEPT",
+      "phase": "M05",
+      "primary_mechanism": "candidate_preservation_and_reflection"
+    },
+    "STORM": {
+      "donor_id": "DONOR-005",
+      "name": "STORM / Co-STORM",
+      "tier": "B",
+      "decision": "ADOPT_CONCEPT",
+      "phase": "M05",
+      "primary_mechanism": "perspective_guided_questioning"
+    },
+    "PROMPTFOO": {
+      "donor_id": "DONOR-006",
+      "name": "Promptfoo",
+      "tier": "B",
+      "decision": "ADAPT",
+      "phase": "M04",
+      "primary_mechanism": "deterministic_fixture_red_teaming"
+    },
+    "LANGGRAPH": {
+      "donor_id": "DONOR-007",
+      "name": "LangGraph",
+      "tier": "C",
+      "decision": "REJECT_NOW",
+      "phase": "LATER",
+      "reopen_condition": "emergent_graph_topology_complexity"
+    }
+  }
+}

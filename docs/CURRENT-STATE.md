@@ -5,37 +5,32 @@
 
 ---
 
-## 1. Fase Ativa: Fase 0 — Fundação Completa, Doutrina Institucionalizada & Pronta para o MVP
-- **Status da Fundação:** `COMPLETE_AND_LOCKED` (Fase 01, 02, 03 e 03.1 concluídas)
-- **Foundation Ready Gate:** `FOUNDATION_READY = TRUE` (21/21 itens satisfeitos)
-- **Status Doutrinário:** `CONSTITUTION_v1.0_INSTITUTIONALIZED` ([`docs/doctrine/OPERATING-DOCTRINE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/doctrine/OPERATING-DOCTRINE.md))
-- **Último Checkpoint Imutável:** [`CP-20260826-003`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-003.md)
-- **Validação Determinística:** 100% íntegra via `tools/context/validate_context.py` e `tools/intelligence/validate_intelligence.py`.
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP Concluído & Validado
+- **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
+- **Status do MVP (Missão 04):** `IMPLEMENTED_AND_TESTED` (Motor executável completo e testado)
+- **Último Checkpoint Imutável:** [`CP-20260826-004`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-004.md)
+- **Suíte Total de Testes:** 38 / 38 testes aprovados (100% OK)
+- **Validação Determinística:** 100% íntegra via `validate_context.py` e `validate_intelligence.py`.
 
 ---
 
-## 2. Reconciliação do Roadmap de Construção
-1. **Fase 0 (Fundações 01, 02, 03 e 03.1):** `COMPLETE`. Toda a base conceitual, constitucional, de continuidade, de inteligência e doutrinária está pronta.
-2. **Próximo Alvo de Produto Autorizado:** `MISSION 04 — SIMPLE IDEA EVOLUTION LOOP MVP` (Pipeline heurístico sequencial: *Understand $\to$ Attack $\to$ Alternatives $\to$ Reality Check $\to$ Synthesize $\to$ Review*).
-3. **Proibição de Fundação por Inércia:** [ADR-012](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-012) proíbe criar Foundation 04 sem bloqueador empírico real.
-4. **Arquitetura Alvo (DCE Avançado):** `TARGET` (especificado para fases posteriores).
-5. **Otimização Adaptativa / RL / FioOS:** `FUTURE RESEARCH` (fases avançadas).
+## 2. O que Existe Fisicamente no Repositório
+- [x] Motor executável Python em `src/idea_evolution/` com CLI (`iee evolve`, `compare`, `inspect-run`).
+- [x] Estado compartilhado estruturado `SimpleIdeaState` com imutabilidade de `original_idea`.
+- [x] Contratos tipados Pydantic e 10 prompts versionados em `prompts/`.
+- [x] 8 estágios cognitivos (`UNDERSTAND`, `ATTACK`, `CRITIQUE_1`, `REVISION_1`, `CRITIQUE_2`, `REVISION_2`, `ALTERNATIVES`, `REALITY_CHECK`, `SYNTHESIZE`, `FINAL_REVIEW`).
+- [x] Topologia padrão de 6 estágios (Condição B) e topologia iterativa de 9 estágios (Condição C).
+- [x] Reconstrução limitada a no máximo 1 ciclo determinístico.
+- [x] Baseline de prompt único (Condição A).
+- [x] 3 fixtures padronizadas (`fixtures/`) e pacote de comparação cega em `experiments/MISSION-04/comparison-packet.md`.
+- [x] Arsenal operacional de doadores (`docs/research/DONOR-ARSENAL.md` e `donor-manifest.json`).
+- [x] Mapa de código (`docs/CODE-MAP.md`) e mapa de testes (`docs/TEST-MAP.md`).
+- [x] Suíte de 38 testes automatizados (continuidade, inteligência, doutrina, unitários, integração, adversariais e experimentais).
 
 ---
 
-## 3. O que Existe Fisicamente no Repositório
-- [x] Infraestrutura documental e constitucional canônica.
-- [x] Subsistema de doutrina operacional em `docs/doctrine/` (Fonte original v1.0, Operating Doctrine, Matriz de Aplicabilidade, Mapa de Maturidade).
-- [x] Subsistema de continuidade em `docs/context/` (Capsule, Queue, History, Open Questions, Contradictions, Checkpoints).
-- [x] Subsistema de inteligência em `docs/intelligence/` (Work Protocol, Task Classification, Evidence Policy, Baseline Policy, Review, Findings, Readiness Gate).
-- [x] Manifesto machine-readable `context-manifest.json` e `intelligence-manifest.json` com validação de hashes criptográficos.
-- [x] Scripts determinísticos de validação e governança em `tools/context/` e `tools/intelligence/`.
-- [x] Suíte de testes de continuidade, inteligência e doutrina em `tests/` (24 testes aprovados).
-- [x] Checkpoint canônico imutável `CP-20260826-003`.
-
----
-
-## 4. O que NÃO Existe (Explicitamente Não Implementado)
-- ❌ Zero código de produto, zero interfaces web/dashboards.
-- ❌ Zero orquestradores de LLM ativos ou chamadas a APIs de IA.
-- ❌ Zero bancos de dados de produção ou runtime gateways.
+## 3. O que NÃO Existe (Explicitamente Não Implementado)
+- ❌ Zero interfaces web, zero dashboards.
+- ❌ Zero banco de dados relacional ou vetorial de produção.
+- ❌ Zero RL, MCTS ou Team Composer adaptativo dinâmico.
+- ❌ Zero acoplamento com kernel do FioOS.

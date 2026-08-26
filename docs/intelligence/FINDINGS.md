@@ -43,3 +43,23 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** LLMs nunca devem ter permissão de escrita direta no grafo imutável do `IdeaGenome`.
 - **Related Decisions:** [ADR-003](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-003), [ADR-004](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-004)
 - **Related Hypotheses:** [HYP-004](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/foundations/SCIENTIFIC-HYPOTHESES.md)
+
+---
+
+### [FINDING-004] Separação de Lentes Críticas (Lógica vs Viabilidade) Melhora Rastreabilidade de Falhas
+- **Claim:** Submeter uma ideia a críticas especializadas sequenciais (`LogicalCritique` $\to$ `Revision` $\to$ `FeasibilityCritique` $\to$ `Revision`) isola falhas causais internas de gargalos práticos do mundo real, evitando que o crítico misture inconsistência conceitual com atrito de adoção.
+- **Evidence:** Autópsia do MultiAgent Research Ideator e execução experimental EXP-M04-001 (Condição C).
+- **Status:** `DESIGN_HYPOTHESIS_FORMALIZED`
+- **Implications:** O IEE deve suportar topologia de crítica/revisão iterativa como opção de alta profundidade.
+- **Related Decisions:** [M04-DONOR-HARVEST-SPEC](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/M04-DONOR-HARVEST-SPEC.md)
+- **Related Hypotheses:** [M04-H1](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/foundations/SCIENTIFIC-HYPOTHESES.md#m04-h1)
+
+---
+
+### [FINDING-005] Kernel Determinístico com Bounded Repair (1 Retry) Evita Travamentos e Loops Infinitos
+- **Claim:** Limitar deterministicamente o reparo mecânico de schemas a no máximo 1 tentativa e os ciclos de reconstrução a no máximo 1 ciclo garante terminação estrita e *fail-closed* ruidoso em caso de saídas corrompidas.
+- **Evidence:** Testes unitários e adversariais da suíte M04 (`test_adversarial_mvp.py`, `test_reconstruction_path.py`).
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** O loop do MVP atinge 100% de previsibilidade de fluxo com zero risco de divergência não controlada.
+- **Related Decisions:** [ADR-014](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-014)
+

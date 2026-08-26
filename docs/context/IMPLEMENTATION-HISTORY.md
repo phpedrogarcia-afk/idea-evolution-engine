@@ -73,3 +73,24 @@
 - **Decisões Registradas:** ADR-013 (Institucionalização da Doutrina Operacional) e ADR-014 (Exigência de Incerteza Alvo e Stop Condition).
 - **Resultado:** `COMPLETE`.
 - **Evidência:** Execução de 24 testes automatizados (continuidade, inteligência e doutrina) com 100% de aprovação.
+
+---
+
+### [MS-004] Simple Idea Evolution Loop MVP (Missão 04)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Construir e testar o primeiro motor de software executável do IEE, automatizando o transporte de uma ideia humana crua através de estágios dirigidos de maturação com estado compartilhado estruturado.
+- **O que Mudou:**
+  - Criação do **Donor Arsenal** (`docs/research/DONOR-ARSENAL.md` e `donor-manifest.json`) e da especificação de colheita (`docs/experiments/M04-DONOR-HARVEST-SPEC.md`).
+  - Registro da hipótese de design `M04-H1` em `docs/foundations/SCIENTIFIC-HYPOTHESES.md`.
+  - Implementação do pacote Python `src/idea_evolution/` (`domain`, `stages`, `contracts`, `providers`, `orchestration`, `tracing`, `cli`).
+  - Criação de 10 arquivos de prompts versionados em `prompts/`.
+  - Suporte a duas topologias: Condição B (Standard 6-Stage) e Condição C (Iterative Critique-Revision).
+  - Implementação de persistência detalhada em `runs/RUN-YYYYMMDD-NNN/` (`input.json`, `state.json`, `stages/`, `final.json`, `final.md`, `trace.json`).
+  - Implementação de 3 fixtures padronizadas em `fixtures/` e execução do experimento `EXP-M04-001`.
+  - Geração do pacote de comparação cega em `experiments/MISSION-04/comparison-packet.md`.
+  - Elaboração de `docs/CODE-MAP.md` e `docs/TEST-MAP.md`.
+  - Criação de 14 novos testes unitários, de integração, adversariais e experimentais (totalizando 38 testes).
+  - Emissão do Checkpoint `CP-20260826-004`.
+- **Resultado:** `COMPLETE`.
+- **Evidência:** 38/38 testes automatizados aprovados e execução completa da CLI `iee evolve` e `compare`.

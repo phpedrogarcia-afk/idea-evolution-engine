@@ -1,0 +1,7 @@
+{
+  "fixture_id": "FIX-003",
+  "name": "B2B Peer Code Review Network",
+  "domain": "BUSINESS_SERVICE",
+  "type": "SYNTHETIC_FIXTURE",
+  "original_idea": "Uma rede de assinatura B2B onde engenheiros de diferentes empresas trocam revisões de código anonimizadas e auditadas por pares especialistas com SLA garantido de 4 horas, em vez de depender apenas de revisores internos sobrecarregados."
+}

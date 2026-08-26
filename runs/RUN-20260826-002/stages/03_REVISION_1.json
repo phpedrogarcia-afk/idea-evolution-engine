@@ -1,0 +1,23 @@
+{
+  "step_number": 3,
+  "stage_id": "REVISION_1",
+  "stage_version": "0.1.0",
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.01,
+  "delta_summary": "Revisão #1: 1 melhorias incorporadas.",
+  "raw_response": "{\n  \"revised_idea\": \"Ideia revisada incorporando filtros de bounded retry e contratos estritos de estágio.\",\n  \"changes_applied\": [\n    \"Adicionado limite mecânico de 1 ciclo de reconstrução.\"\n  ],\n  \"issues_addressed\": [\n    \"Sobrecarga de tokens e latência.\"\n  ],\n  \"intent_preserved\": true,\n  \"justification\": \"Os limites protegem a viabilidade sem comprometer o rigor investigativo.\"\n}",
+  "parsed_output": {
+    "revised_idea": "Ideia revisada incorporando filtros de bounded retry e contratos estritos de estágio.",
+    "changes_applied": [
+      "Adicionado limite mecânico de 1 ciclo de reconstrução."
+    ],
+    "issues_addressed": [
+      "Sobrecarga de tokens e latência."
+    ],
+    "intent_preserved": true,
+    "justification": "Os limites protegem a viabilidade sem comprometer o rigor investigativo."
+  },
+  "error": null,
+  "timestamp": "2026-08-26T13:11:44.750452"
+}

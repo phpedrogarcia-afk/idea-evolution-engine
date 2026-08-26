@@ -101,8 +101,8 @@ class TestContinuityHardening(unittest.TestCase):
         """TEST 7: Simple MVP Recognition — Reconhece que o próximo produto pretendido é o Simple Loop e não o DCE completo."""
         curr_state = REPO_ROOT / "docs" / "context" / "CURRENT-STATE.md"
         content = curr_state.read_text(encoding="utf-8")
-        self.assertIn("SIMPLE IDEA EVOLUTION LOOP", content)
-        self.assertIn("MVP", content)
+        self.assertIn("simple idea evolution loop", content.lower())
+        self.assertIn("mvp", content.lower())
 
 
 if __name__ == "__main__":

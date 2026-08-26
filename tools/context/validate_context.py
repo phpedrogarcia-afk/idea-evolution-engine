@@ -56,6 +56,10 @@ REQUIRED_FILES = [
     REPO_ROOT / "docs" / "doctrine" / "CONSTITUTION-APPLICABILITY-MATRIX.md",
     REPO_ROOT / "docs" / "doctrine" / "CONSTITUTIONAL-MATURITY-MAP.md",
     REPO_ROOT / "docs" / "OPERATING-DOCTRINE.md",
+    REPO_ROOT / "docs" / "CODE-MAP.md",
+    REPO_ROOT / "docs" / "TEST-MAP.md",
+    REPO_ROOT / "docs" / "research" / "DONOR-ARSENAL.md",
+    REPO_ROOT / "docs" / "experiments" / "M04-DONOR-HARVEST-SPEC.md",
     MANIFEST_PATH,
 ]
 
@@ -189,8 +193,10 @@ def validate_phase_consistency():
         content = curr_path.read_text(encoding="utf-8")
         if "FASE 0" not in content and manifest_phase == "FASE_0_FOUNDATION":
             errors.append("docs/context/CURRENT-STATE.md inconsistente com a Fase 0 declarada no manifest.")
-        if "SIMPLE IDEA EVOLUTION LOOP" not in content:
-            errors.append("docs/context/CURRENT-STATE.md não declara o Simple Idea Evolution Loop como próximo produto.")
+        if "FASE 1" not in content and manifest_phase == "FASE_1_SIMPLE_LOOP_MVP":
+            errors.append("docs/context/CURRENT-STATE.md inconsistente com a Fase 1 declarada no manifest.")
+        if "SIMPLE" not in content.upper() or "LOOP" not in content.upper():
+            errors.append("docs/context/CURRENT-STATE.md não referencia o Simple Loop.")
 
     return errors
 

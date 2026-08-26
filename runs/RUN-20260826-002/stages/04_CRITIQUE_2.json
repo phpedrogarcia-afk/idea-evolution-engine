@@ -1,0 +1,30 @@
+{
+  "step_number": 4,
+  "stage_id": "CRITIQUE_2",
+  "stage_version": "0.1.0",
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.01,
+  "delta_summary": "Crítica de Viabilidade: 1 riscos práticos apontados.",
+  "raw_response": "{\n  \"critical_issues\": [\n    {\n      \"issue\": \"Crítica focada (CRITIQUE_2): Premissa de validação sem atrito precisa de teste empírico.\",\n      \"why_it_matters\": \"Pode falhar em situações reais fora do laboratório.\",\n      \"severity\": \"HIGH\",\n      \"affected_part\": \"Viabilidade operacional\"\n    }\n  ],\n  \"fragile_assumptions\": [\n    \"Usuário aceitará críticas severas à sua ideia inicial.\"\n  ],\n  \"contradictions\": [],\n  \"failure_modes\": [\n    \"Rejeição emocional pelo usuário.\"\n  ],\n  \"missing_information\": []\n}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Crítica focada (CRITIQUE_2): Premissa de validação sem atrito precisa de teste empírico.",
+        "why_it_matters": "Pode falhar em situações reais fora do laboratório.",
+        "severity": "HIGH",
+        "affected_part": "Viabilidade operacional"
+      }
+    ],
+    "fragile_assumptions": [
+      "Usuário aceitará críticas severas à sua ideia inicial."
+    ],
+    "contradictions": [],
+    "failure_modes": [
+      "Rejeição emocional pelo usuário."
+    ],
+    "missing_information": []
+  },
+  "error": null,
+  "timestamp": "2026-08-26T13:11:44.751222"
+}

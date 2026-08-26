@@ -1,0 +1,7 @@
+{
+  "fixture_id": "FIX-001",
+  "name": "AI Context Bookmark Manager",
+  "domain": "SOFTWARE_APP",
+  "type": "SYNTHETIC_FIXTURE",
+  "original_idea": "Um aplicativo desktop que grava automaticamente o contexto do que o usuário estava lendo ou programando quando salvou um bookmark, para que 3 meses depois ele consiga lembrar exatamente a linha de raciocínio daquele momento sem esforço."
+}

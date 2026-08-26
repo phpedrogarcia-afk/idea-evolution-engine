@@ -30,3 +30,11 @@ Esta formulação é explicitamente falsificável. O projeto está preparado par
 ### 🧪 Hipótese H4: Preservação de Soberania e Respeito a Protected Cores
 - **Enunciado:** A imposição de validação determinística de autoridade (`AuthorityMatrix`) impede com 100% de confiabilidade o *goal drift* e a alteração indevida da intenção humana sem prejudicar a severidade da crítica adversarial.
 - **Falsificação:** Se o sistema sofrer desvio de intenção ou se a proteção ao núcleo blindar a ideia contra críticas factuais legítimas.
+
+---
+
+### 🧪 Hipótese M04-H1: Profundidade Iterativa vs Largura Paralela na Crítica
+- **Status:** `DESIGN_HYPOTHESIS` (Derivada da autópsia do MultiAgent Research Ideator)
+- **Enunciado:** Em processos de maturação e evolução de ideias, uma sequência iterativa com profundidade de crítica e revisão dirigida (`UNDERSTAND` $\to$ `CRITIQUE_1` $\to$ `REVISION` $\to$ `CRITIQUE_2` $\to$ `REVISION`) produz maior ganho de qualidade, rastreabilidade e detecção de falhas reais do que a mera dispersão em múltiplos críticos paralelos ou uma única solicitação genérica.
+- **Falsificação:** Se o ciclo iterativo aumentar o consumo de tokens e a prolixidade sem superar o Simple Loop fixo (Condição B) ou o baseline de prompt único (Condição A) na detecção de vulnerabilidades reais em fixtures padronizadas.
+
