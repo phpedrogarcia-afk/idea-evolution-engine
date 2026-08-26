@@ -195,3 +195,19 @@
   - Emissão do Checkpoint `CP-20260826-010`.
 - **Resultado:** `COMPLETE_OFFLINE` | `UNDERSTAND_PURITY = HARDENED` | `GROQ_STRICT_MODE = IMPLEMENTED` | `READY_FOR_REAL_REATTACK = TRUE`.
 - **Evidência:** 77/77 testes automatizados aprovados (100% offline).
+
+---
+
+### [MS-005.1-R3] Ontology Consistency & Promotion Provenance Hardening (Missão 05.1-R3)
+- **Data:** 2026-08-26
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Conduzir autópsia causal sobre a falha do RUN-009, institucionalizar a proveniência obrigatória de promoções para o Core/Derived (`AcceptedChangeItem` e `core_mechanism_justification`), garantir exclusão mútua entre propostas candidatas e rejeitadas, isolar testes do Core contra dependências rejeitadas (`exploratory_candidate_tests`), implementar verificação determinística de contradições ontológicas no `FinalReviewStage` e formalizar a linhagem de propostas com `ProposalRecord`.
+- **O que Mudou:**
+  - Criação do modelo `ProposalRecord` e do enum `OntologyState` em `src/idea_evolution/domain/state.py`.
+  - Atualização dos contratos `SynthesizeOutput`, `RealityCheckOutput` e `FinalReviewOutput` em `src/idea_evolution/stages/contracts.py`.
+  - Atualização de `SynthesizeStage`, `RealityCheckStage` e `FinalReviewStage` com regras determinísticas de integridade ontológica e exclusão mútua.
+  - Atualização dos prompts `synthesize_v0_1.md`, `reality_check_v0_1.md` e `final_review_v0_1.md`.
+  - Criação de 4 novos testes em `tests/adversarial/test_adversarial_ontology_provenance.py` (totalizando 81 testes verdes).
+  - Emissão do Checkpoint `CP-20260826-011`.
+- **Resultado:** `COMPLETE_OFFLINE` | `ONTOLOGY_CONSISTENCY = HARDENED` | `PROMOTION_PROVENANCE = ENFORCED` | `READY_FOR_FINAL_REAL_REATTACK = TRUE`.
+- **Evidência:** 81/81 testes automatizados aprovados (100% offline).

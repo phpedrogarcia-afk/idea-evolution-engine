@@ -1,0 +1,8 @@
+{
+  "run_id": "RUN-20260826-009",
+  "status": "REFINED_IDEA_READY",
+  "refined_idea": "Um assistente estruturado de ideação baseado em wizard passo a passo e templates modulares de projeto.",
+  "essence_drift_detected": false,
+  "ontology_inconsistency_detected": false,
+  "diagnostic": "UNJUSTIFIED_PROMOTION_AND_REJECTED_EVIDENCE_CONTAMINATION"
+}

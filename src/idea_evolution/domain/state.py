@@ -1,6 +1,6 @@
 """
 src/idea_evolution/domain/state.py
-Domínio e Estado Mínimo Compartilhado (SimpleIdeaState) do IEE MVP.
+Domínio e Estado Mínimo Compartilhado (SimpleIdeaState) do IEE MVP com ontologia tipada e proveniência de promoção.
 """
 
 from __future__ import annotations
@@ -19,6 +19,26 @@ class RunStatus(str, Enum):
     REFINEMENT_INCOMPLETE = "REFINEMENT_INCOMPLETE"
     FAILED = "FAILED"
     BLOCKED = "BLOCKED"
+
+
+class OntologyState(str, Enum):
+    CORE = "CORE"
+    DERIVED = "DERIVED"
+    CANDIDATE = "CANDIDATE"
+    DEFERRED = "DEFERRED"
+    REJECTED = "REJECTED"
+
+
+class ProposalRecord(BaseModel):
+    """
+    Registro canônico de uma proposta / mecanismo no pipeline com proveniência e estado ontológico estáveis.
+    """
+    proposal: str
+    ontology_state: OntologyState = OntologyState.CANDIDATE
+    source_stage: str = ""
+    promotion_reason: str = ""
+    rejection_reason: str = ""
+    evidence_or_decision_basis: str = ""
 
 
 class CriticalIssue(BaseModel):
@@ -58,7 +78,7 @@ class StageHistoryEntry(BaseModel):
 
 
 class SimpleIdeaState(BaseModel):
-    schema_version: str = "0.1.0"
+    schema_version: str = "0.2.0"
     run_id: str
     status: RunStatus = RunStatus.INITIALIZED
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
@@ -82,14 +102,17 @@ class SimpleIdeaState(BaseModel):
     contradictions: List[str] = Field(default_factory=list)
     failure_modes: List[str] = Field(default_factory=list)
 
-    # Exploração e Realidade
+    # Exploração e Realidade (Isolamento Estrito: Core vs Exploratório)
     alternatives: List[AlternativeMechanism] = Field(default_factory=list)
-    reality_dependencies: List[str] = Field(default_factory=list)
+    reality_dependencies: List[str] = Field(default_factory=list)  # Apenas dependências do CORE aceito
     claims_needing_evidence: List[str] = Field(default_factory=list)
-    candidate_tests: List[str] = Field(default_factory=list)
+    candidate_tests: List[str] = Field(default_factory=list)  # Apenas testes do CORE aceito
+    exploratory_candidate_tests: List[str] = Field(default_factory=list)  # Testes de extensões candidatas / rejeitadas
 
-    # Síntese e Revisão
+    # Síntese e Revisão com Linhagem Estável
     core_mechanism: str = ""
+    core_mechanism_justification: str = ""
+    proposal_records: List[ProposalRecord] = Field(default_factory=list)
     accepted_changes: List[str] = Field(default_factory=list)
     candidate_extensions: List[str] = Field(default_factory=list)
     rejected_changes: List[RejectedProposal] = Field(default_factory=list)
@@ -102,6 +125,7 @@ class SimpleIdeaState(BaseModel):
     max_reconstructions: int = 1
     essence_drift_detected: bool = False
     speculative_accretion_detected: bool = False
+    ontology_contradiction_detected: bool = False
     human_intervention: bool = False
     stage_history: List[StageHistoryEntry] = Field(default_factory=list)
 
@@ -155,6 +179,8 @@ class SimpleIdeaState(BaseModel):
 
         md.append("## 3. Versão Refinada e Mecanismo Proposto\n")
         md.append(f"{self.current_idea or 'Em desenvolvimento'}\n\n")
+        if self.core_mechanism_justification:
+            md.append(f"- **Justificativa de Promoção ao Core:** {self.core_mechanism_justification}\n\n")
 
         if self.critical_issues:
             md.append("## 4. Vulnerabilidades e Críticas Severas Encontradas\n")
@@ -187,18 +213,24 @@ class SimpleIdeaState(BaseModel):
             md.append("\n")
 
         if self.reality_dependencies or self.candidate_tests:
-            md.append("## 7. Dependências da Realidade & Testes Empíricos Necessários\n")
+            md.append("## 8. Dependências da Realidade & Testes Empíricos Necessários (CORE Ativo)\n")
             if self.reality_dependencies:
-                md.append("**Dependências Externas:**")
+                md.append("**Dependências Externas do Core:**")
                 for dep in self.reality_dependencies:
                     md.append(f"- {dep}")
             if self.candidate_tests:
-                md.append("\n**Testes Discriminativos Sugeridos:**")
+                md.append("\n**Testes Discriminativos do Core:**")
                 for tst in self.candidate_tests:
                     md.append(f"- [ ] {tst}")
             md.append("\n")
 
-        md.append("## 8. Próximo Passo Recomendado\n")
+        if self.exploratory_candidate_tests:
+            md.append("## 9. Testes Exploratórios Opcionais (Extensões Candidatas / Não-Core)\n")
+            for tst in self.exploratory_candidate_tests:
+                md.append(f"- [ ] *[EXPLORATÓRIO]* {tst}")
+            md.append("\n")
+
+        md.append("## 10. Próximo Passo Recomendado\n")
         md.append(f"{self.recommended_next_step or 'Definir próximo experimento com usuários.'}\n")
 
         return "\n".join(md)

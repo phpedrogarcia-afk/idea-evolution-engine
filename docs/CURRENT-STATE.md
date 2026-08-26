@@ -5,27 +5,27 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Hardening M05.1-R2
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Hardening M05.1-R3
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
+- **Status da Ontologia & Proveniência:** `HARDENED` (Controle estrito de linhagem `ProposalRecord`, proveniência de promoção obrigatória, isolamento de testes do Core)
 - **Status da Pureza do UNDERSTAND:** `HARDENED` (Descritivo, anti-contaminação semântica)
 - **Status do Provedor Groq:** `STRICT_JSON_SCHEMA_MODE` (Compatibilidade 100% com `openai/gpt-oss-120b`, zero erros 400 por schema)
-- **Status do MVP:** `IMPLEMENTED_AND_TESTED` (Software funcional, 77 testes verdes)
-- **Status da Preservação de Essência:** `HARDENED` (Isolamento de `candidate_extensions` e detecção de `Speculative Feature Accretion`)
+- **Status do MVP:** `IMPLEMENTED_AND_TESTED` (Software funcional, 81 testes verdes)
 - **Status de Roteamento & Custo:** `MULTI_MODEL_READY_OFFLINE = TRUE` | `FREE_ONLY_POLICY = INSTITUTIONALIZED`
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
 - **Varredura de Segredos:** `SECRET_SCAN: PASS`
-- **Último Checkpoint Imutável:** [`CP-20260826-010`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-010.md)
+- **Último Checkpoint Imutável:** [`CP-20260826-011`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-011.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
-- [x] Prompts e contratos blindados contra contaminação precoce em `prompts/understand_v0_1.md` e `prompts/attack_v0_1.md`.
-- [x] Adaptador nativo do Groq com Strict JSON Schema e captura de `failed_generation` em `src/idea_evolution/providers/native.py`.
-- [x] Suíte de 77 testes automatizados cobrindo continuidade, inteligência, doutrina, domínio, contratos, roteamento, catálogo de modelos, governança de custos, essence drift, fronteira com FioOS e pureza do UNDERSTAND / Groq Strict Mode.
+- [x] Contratos e schemas Pydantic tipados com proveniência de promoção (`AcceptedChangeItem`, `ProposalRecord`).
+- [x] Detecção determinística de contradições ontológicas no `FinalReviewStage`.
+- [x] Suíte de 81 testes automatizados cobrindo continuidade, inteligência, doutrina, domínio, contratos, roteamento, catálogo de modelos, governança de custos, essence drift, fronteira com FioOS, pureza do UNDERSTAND, Groq Strict Mode e consistência ontológica.
 
 ---
 
 ## 3. O que NÃO Existe (Explicitamente Não Implementado)
-- ❌ Zero chamadas de rede não autorizadas.
-- ❌ Zero enfraquecimento de contratos de domínio.
-- ❌ Zero mutação silenciosa da intenção humana no estágio inicial.
+- ❌ Zero promoções silenciosas de candidatos para o Core.
+- ❌ Zero contaminação do plano de evidências do Core por itens rejeitados.
+- ❌ Zero mutação de verdade sem validação determinística.

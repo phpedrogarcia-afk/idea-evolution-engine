@@ -126,6 +126,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Eliminação de erros 400 em provedores de inferência rápida sem enfraquecer o contrato de domínio Pydantic.
 - **Related Decisions:** [MODEL-ROUTING.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/MODEL-ROUTING.md)
 
+---
+
+### [FINDING-013] Consistência Ontológica, Proveniência de Promoção e Isolamento de Evidência Rejeitada
+- **Claim:** A evolução de ideias gera contradições semânticas se (1) mecanismos forem promovidos ao Core sem justificativa registrada, (2) propostas rejeitadas permanecerem ativas como candidatas, ou (3) planos de teste do Core exigirem evidências para alternativas descartadas. A introdução do modelo `ProposalRecord`, a exigência de `core_mechanism_justification` / `AcceptedChangeItem`, e o isolamento de `exploratory_candidate_tests` com detecção determinística no `FINAL_REVIEW` garantem integridade total de linhagem.
+- **Evidence:** Autópsia causal do RUN-009 e 4 testes determinísticos em `test_adversarial_ontology_provenance.py`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Eliminação de contradições ontológicas e contenção estrita do plano de testes do Core no IEE.
+- **Related Decisions:** [IEE-FIOOS-PROTOCOL-v1.0.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md)
+
+
 
 
 

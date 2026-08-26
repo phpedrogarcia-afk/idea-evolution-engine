@@ -1,6 +1,6 @@
 """
 src/idea_evolution/stages/contracts.py
-Contratos tipados Pydantic para os outputs estruturados de cada estágio do pipeline.
+Contratos tipados Pydantic para os outputs estruturados de cada estágio do pipeline com proveniência de promoção e integridade ontológica.
 """
 
 from typing import List, Optional
@@ -70,6 +70,7 @@ class RealityCheckOutput(BaseModel):
     claims_needing_evidence: List[str] = Field(default_factory=list)
     potential_blockers: List[str] = Field(default_factory=list)
     candidate_tests: List[str] = Field(default_factory=list)
+    exploratory_candidate_tests: List[str] = Field(default_factory=list)
 
 
 class RejectedItem(BaseModel):
@@ -78,10 +79,18 @@ class RejectedItem(BaseModel):
     source_stage: str = ""
 
 
+class AcceptedChangeItem(BaseModel):
+    proposal: str
+    promotion_reason: str
+    source_stage: str = "ALTERNATIVES"
+    evidence_or_decision_basis: str = ""
+
+
 class SynthesizeOutput(BaseModel):
     refined_idea: str
     core_mechanism: str = ""
-    accepted_changes: List[str] = Field(default_factory=list)
+    core_mechanism_justification: str = ""
+    accepted_changes: List[AcceptedChangeItem] = Field(default_factory=list)
     candidate_possibilities: List[str] = Field(default_factory=list)
     rejected_changes: List[RejectedItem] = Field(default_factory=list)
     remaining_uncertainties: List[str] = Field(default_factory=list)
@@ -93,6 +102,7 @@ class FinalReviewOutput(BaseModel):
     material_issues_remaining: List[str] = Field(default_factory=list)
     essence_drift_detected: bool = False
     speculative_accretion_detected: bool = False
+    ontology_contradiction_detected: bool = False
     drift_explanation: str = ""
     unresolved_critical_issue: bool = False
     recommendation: str = "REFINED_IDEA_READY"  # REFINED_IDEA_READY | RECONSTRUCT

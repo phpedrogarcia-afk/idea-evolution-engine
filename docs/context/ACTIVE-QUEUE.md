@@ -6,17 +6,17 @@
 ---
 
 ## 🟢 NOW (Trabalho Atual — Concluído)
-- [x] **TASK-005.1-R2-A:** Autópsia Causal da falha do RUN-008 (Contaminação Semântica no UNDERSTAND e Erro 400 no Groq Structured Output).
-- [x] **TASK-005.1-R2-B:** Atualização dos prompts `UNDERSTAND` e `ATTACK` garantindo que o UNDERSTAND seja puramente descritivo e não generativo.
-- [x] **TASK-005.1-R2-C:** Atualização do contrato `UnderstandOutput` e do estágio `understand.py` com isolamento de `inferred_candidates`.
-- [x] **TASK-005.1-R2-D:** Implementação do `to_strict_json_schema()` no `NativeModelRunner` (Groq Strict Mode + bounded repair de 1 tentativa + preservação de `failed_generation`).
-- [x] **TASK-005.1-R2-E:** Criação de 3 novos testes em `tests/adversarial/test_adversarial_understand_and_groq_boundary.py` (total: 77 testes verdes).
-- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão M05.1-R2 e parada mandatória (*STOP*).
+- [x] **TASK-005.1-R3-A:** Autópsia Causal da falha do RUN-009 (Promoção sem proveniência, duplicação ontológica e contaminação de testes do Core).
+- [x] **TASK-005.1-R3-B:** Implementação do modelo `ProposalRecord` e tipos `AcceptedChangeItem` / `core_mechanism_justification`.
+- [x] **TASK-005.1-R3-C:** Isolamento estrito de testes em `candidate_tests` (Core) e `exploratory_candidate_tests` (Exploratório).
+- [x] **TASK-005.1-R3-D:** Implementação da verificação determinística de contradições ontológicas no `FinalReviewStage`.
+- [x] **TASK-005.1-R3-E:** Criação de 4 novos testes em `tests/adversarial/test_adversarial_ontology_provenance.py` (total: 81 testes verdes).
+- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão M05.1-R3 e parada mandatória (*STOP*).
 
 ---
 
 ## 🟡 NEXT (Próximos Passos — Após autorização e credencial real)
-- [ ] **M05-REAL-REATTACK:** Execução do canário real com modelo Groq `openai/gpt-oss-120b` sobre a ideia de clarificação de projetos com os dois reparos em vigor.
+- [ ] **M05-FINAL-REAL-REATTACK:** Execução do canário real com modelo Groq `openai/gpt-oss-120b` sobre a ideia de clarificação de projetos com a blindagem ontológica completa em vigor.
 - [ ] **EXP-M05:** Execução do experimento controlado A/B/C sobre as 3 fixtures.
 
 ---

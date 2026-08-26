@@ -198,13 +198,30 @@ class FakeModelRunner(ModelRunner):
             )
 
         if schema == SynthesizeOutput:
+            from src.idea_evolution.stages.contracts import AcceptedChangeItem
             return SynthesizeOutput(
                 refined_idea="Idea Evolution Engine (Simple Loop): Motor sequencial CLI que recebe uma ideia humana crua, submete a 6 estágios dirigidos, valida esquemas e devolve um pacote de maturação estruturado com rastreabilidade total.",
                 core_mechanism="Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
+                core_mechanism_justification="Atende à intenção humana de estruturação com máxima previsibilidade e zero dependências de rede.",
                 accepted_changes=[
-                    "Implementação de contratos Pydantic estritos para cada estágio.",
-                    "Isolamento do kernel determinístico contra alucinações de estado.",
-                    "Preservação imutável da ideia original.",
+                    AcceptedChangeItem(
+                        proposal="Implementação de contratos Pydantic estritos para cada estágio.",
+                        promotion_reason="Garante contenção total de tipos e validação estrita sem alucinação de dados.",
+                        source_stage="ALTERNATIVES",
+                        evidence_or_decision_basis="Contratos determinísticos",
+                    ),
+                    AcceptedChangeItem(
+                        proposal="Isolamento do kernel determinístico contra alucinações de estado.",
+                        promotion_reason="Impede mutação arbitrária de campos constitucionais.",
+                        source_stage="ALTERNATIVES",
+                        evidence_or_decision_basis="Constituição v1.0",
+                    ),
+                    AcceptedChangeItem(
+                        proposal="Preservação imutável da ideia original.",
+                        promotion_reason="Protege a intenção humana inicial contra essence drift.",
+                        source_stage="UNDERSTAND",
+                        evidence_or_decision_basis="Regra de fidelidade",
+                    ),
                 ],
                 candidate_possibilities=[
                     "Modo de auditoria interativo com checkpoints gráficos no terminal.",

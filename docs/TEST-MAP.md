@@ -1,7 +1,7 @@
-# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.6)
+# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.7)
 
 > **ESTRUTURA DE TESTES, COBERTURA DE RISCOS E EXECUÇÃO DETERMINÍSTICA.**
-> *Total de Testes: 77 testes distribuídos em 15 módulos (100% automatizados e offline).*
+> *Total de Testes: 81 testes distribuídos em 16 módulos (100% automatizados e offline).*
 
 ---
 
@@ -26,6 +26,7 @@
 | **Adversarial Catálogo & Custos** | `tests/adversarial/test_adversarial_catalog.py` | 4 | Adversarial (<50ms) | Injeção de modelos pagos sob `FREE_ONLY`, bloqueio de modelos descontinuados e integridade experimental no-fallback. |
 | **Adversarial Essence Drift** | `tests/adversarial/test_adversarial_essence_drift.py` | 2 | Adversarial (<50ms) | Isolamento de *Speculative Feature Accretion* no Synthesis e acionamento de `RECONSTRUCT` no Final Review. |
 | **Adversarial Understand & Groq** | `tests/adversarial/test_adversarial_understand_and_groq_boundary.py` | 3 | Adversarial (<50ms) | Pureza descritiva do UNDERSTAND, conformidade total com Groq Strict JSON Schema e preservação de `failed_generation`. |
+| **Adversarial Ontologia & Proveniência (M05.1-R3)** | `tests/adversarial/test_adversarial_ontology_provenance.py` | 4 | Adversarial (<50ms) | Detecção de promoção sem proveniência, exclusão mútua candidata/rejeitada, isolamento de testes do Core vs exploratórios. |
 | **Experimento A/B/C** | `tests/experiment/test_comparison_packet.py` | 1 | Experimental (<50ms) | Execução sobre as 3 fixtures padronizadas e geração do pacote de avaliação cega mascarado. |
 
 ---
@@ -33,7 +34,7 @@
 ## ⚡ Como Executar Todos os Testes
 
 ```bash
-# Executar a suíte completa de 77 testes
+# Executar a suíte completa de 81 testes
 python -m unittest discover -s tests -p "test_*.py" -v
 
 # Executar validação de contexto e integridade documental

@@ -1,0 +1,171 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "RUN-20260826-009",
+  "status": "REFINED_IDEA_READY",
+  "created_at": "2026-08-26T16:30:00.000000",
+  "updated_at": "2026-08-26T16:30:20.000000",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "current_idea": "Um assistente estruturado de ideação baseado em wizard passo a passo e templates modulares de projeto.",
+  "human_intent": "Ajudar pessoas a transformar ideias vagas em projetos mais claros.",
+  "problem_statement": "Dificuldade de estruturar pensamentos dispersos em etapas acionáveis.",
+  "actors_or_users": [
+    "Criadores",
+    "Estudantes",
+    "Profissionais"
+  ],
+  "assumptions": [
+    "Usuários precisam de direcionamento sequencial."
+  ],
+  "ambiguities": [],
+  "strengths": [
+    "Simplicidade conceitual"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Risco de rigidez excessiva nos templates.",
+      "why_it_matters": "Pode sufocar ideias não convencionais.",
+      "severity": "MEDIUM",
+      "affected_part": "Templates"
+    }
+  ],
+  "fragile_assumptions": [],
+  "contradictions": [],
+  "failure_modes": [],
+  "alternatives": [
+    {
+      "mechanism": "Wizard passo a passo com templates modulares de projeto.",
+      "addresses_issues": [
+        "Rigidez"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Menor personalização livre."
+      ],
+      "novelty_or_difference": "Abordagem guiada."
+    },
+    {
+      "mechanism": "Clarificação interativa em linguagem natural com LLM.",
+      "addresses_issues": [
+        "Flexibilidade"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Custo e variabilidade de respostas."
+      ],
+      "novelty_or_difference": "Conversacional."
+    },
+    {
+      "mechanism": "Mapeamento mental visual (Mind-Map) com nós dinâmicos.",
+      "addresses_issues": [
+        "Visualização"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Complexidade de interface gráfica."
+      ],
+      "novelty_or_difference": "Grafo visual."
+    }
+  ],
+  "reality_dependencies": [
+    "Disponibilidade de APIs de LLM com baixa latência.",
+    "Performance de renderização de grafos de Mind-Map em navegadores móveis."
+  ],
+  "claims_needing_evidence": [
+    "Afirmação de que clarificação interativa por LLM retém 40% mais usuários do que formulários estáticos.",
+    "Afirmação de que renderização de Mind-Maps não trava em dispositivos de entrada."
+  ],
+  "candidate_tests": [
+    "Testar tempo de resposta da API do LLM em horários de pico.",
+    "Medir FPS de animação da biblioteca de Mind-Map em smartphones básicos."
+  ],
+  "core_mechanism": "Wizard passo a passo com templates modulares de projeto.",
+  "accepted_changes": [
+    "Adoção de wizard passo a passo com templates modulares de projeto."
+  ],
+  "candidate_extensions": [
+    "Clarificação interativa em linguagem natural com LLM.",
+    "Mapeamento mental visual (Mind-Map) com nós dinâmicos."
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Clarificação interativa em linguagem natural com LLM.",
+      "reason_rejected": "Alto custo de inferência e risco de alucinação no MVP.",
+      "source_stage": "ALTERNATIVES"
+    },
+    {
+      "proposal": "Mapeamento mental visual (Mind-Map) com nós dinâmicos.",
+      "reason_rejected": "Excesso de complexidade gráfica para o estágio atual.",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [],
+  "known_risks": [],
+  "recommended_next_step": "Desenvolver protótipo do wizard.",
+  "reconstruction_count": 0,
+  "max_reconstructions": 1,
+  "essence_drift_detected": false,
+  "speculative_accretion_detected": false,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T16:30:02.000000",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Pureza descritiva mantida."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T16:30:05.000000",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Crítica ao modelo de templates."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T16:30:09.000000",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Geradas 3 alternativas (Wizard, LLM, Mind-Map)."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T16:30:13.000000",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Contaminação: gerou testes para LLM e Mind-Map rejeitados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T16:30:17.000000",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Inconsistência: promoveu Wizard sem justificativa e duplicou LLM em candidatos e rejeitados."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-26T16:30:20.000000",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review cego: não detectou contradições ontológicas nem contaminação de evidências."
+    }
+  ]
+}

@@ -57,7 +57,15 @@ class TestAdversarialEssenceDrift(unittest.TestCase):
             "SYNTHESIZE": {
                 "refined_idea": "Aplicativo de ideação socrática que guia o usuário através de perguntas progressivas de esclarecimento e gera um plano estruturado de projeto.",
                 "core_mechanism": "Motor de perguntas socráticas e sumarização em canvas.",
-                "accepted_changes": ["Adicionado suporte a exportação em Markdown."],
+                "core_mechanism_justification": "Atende diretamente à necessidade humana de estruturação progressiva.",
+                "accepted_changes": [
+                    {
+                        "proposal": "Suporte a exportação em Markdown.",
+                        "promotion_reason": "Facilita a portabilidade sem adicionar complexidade técnica.",
+                        "source_stage": "ALTERNATIVES",
+                        "evidence_or_decision_basis": "Formato aberto padrão",
+                    }
+                ],
                 "candidate_possibilities": [
                     "Validação comunitária opcional e rede de mentoria peer-to-peer (CANDIDATE).",
                     "Armazenamento local criptografado para privacidade reforçada (CANDIDATE).",
@@ -104,7 +112,15 @@ class TestAdversarialEssenceDrift(unittest.TestCase):
             "SYNTHESIZE": {
                 "refined_idea": "Plataforma de blockchain com IA federada, gamificação de ideias e rede social de validação descentralizada.",
                 "core_mechanism": "Blockchain federado com microserviços.",
-                "accepted_changes": ["Transformado em plataforma Web3."],
+                "core_mechanism_justification": "Mecanismo descentralizado",
+                "accepted_changes": [
+                    {
+                        "proposal": "Transformado em plataforma Web3.",
+                        "promotion_reason": "Descentralização forçada",
+                        "source_stage": "ALTERNATIVES",
+                        "evidence_or_decision_basis": "Hype tecnológico",
+                    }
+                ],
                 "candidate_possibilities": [],
                 "rejected_changes": [],
                 "remaining_uncertainties": [],

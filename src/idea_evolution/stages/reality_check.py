@@ -1,6 +1,6 @@
 """
 src/idea_evolution/stages/reality_check.py
-Estágio 4: REALITY_CHECK (v0.1) — Mapeamento de dependências e testes do mundo real.
+Estágio 4: REALITY_CHECK (v0.1) — Mapeamento de dependências e testes do mundo real com isolamento estrito entre Core e Exploratório.
 """
 
 from typing import Type
@@ -34,4 +34,5 @@ class RealityCheckStage(BaseStage):
         state.reality_dependencies = output.reality_dependencies
         state.claims_needing_evidence = output.claims_needing_evidence
         state.candidate_tests = output.candidate_tests
-        return f"{len(output.reality_dependencies)} dependências empíricas e {len(output.candidate_tests)} testes mapeados."
+        state.exploratory_candidate_tests = output.exploratory_candidate_tests
+        return f"{len(output.reality_dependencies)} dependências do Core, {len(output.candidate_tests)} testes do Core e {len(output.exploratory_candidate_tests)} testes exploratórios mapeados."
