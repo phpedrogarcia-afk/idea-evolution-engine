@@ -216,6 +216,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Estabelece o alicerce teórico e as métricas necessárias para a missão M05.3 de replay offline e calibração de falsos positivos/negativos.
 - **Related Decisions:** [KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md), [FIO-EPISTEMIC-DYNAMICS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md), [FIOED-FORMAL-MODEL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-FORMAL-MODEL.md)
 
+---
+
+### [FINDING-023] Endurecimento Epistêmico, Correção de Metadados de Doadores e Red-Team Formal (FioED-01R1)
+- **Claim:** O endurecimento formal do FioED eliminou com rigor pseudoleis e imprecisões numéricas: (1) correção factual da citação do Arbor (*Toward Generalist Autonomous Research via Hypothesis-Tree Refinement*, arXiv:2606.11926, 10 de Junho de 2026); (2) remoção de precisão numérica arbitrária ($P_e \ge 2$ e $\text{Depth} \ge 2$ reclassificados como `TEST_FIXTURE_THRESHOLD` pendentes de calibração empírica); (3) auditoria e classificação epistemológica de todas as fórmulas em `INVARIANT`, `DEFINITION`, `HEURISTIC` e `OPERATIONAL_POLICY`; (4) distinção explícita entre `EXPLOITATIVE_RENT` e `EXPLORATORY_RENT` para preservar coragem investigativa; (5) registro de metadados de incompletude (`REPRESENTATION_ONLY`) no `AttentionSnapshot`; (6) preservação da soberania da fonte sem obediência a premissas faticamente impossíveis; (7) registro de `DECISION_REGRESSION` e expansão de 5 novos testes determinísticos formais (138 testes verdes).
+- **Evidence:** Documentos revisados em `docs/epistemology/`, `docs/research/FIOED-PRIOR-ART-AUDIT.md` e 12 testes adversariais formais em `tests/adversarial/test_adversarial_fioed.py`.
+- **Status:** `HARDENED_AND_BOUNDED`
+- **Implications:** FioED pronto com máxima integridade para a Missão M05.3 de replay offline e calibração de limiares com dados reais.
+- **Related Decisions:** [FIO-EPISTEMIC-DYNAMICS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md), [FIOED-FORMAL-MODEL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-FORMAL-MODEL.md), [FIOED-PRIOR-ART-AUDIT.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/research/FIOED-PRIOR-ART-AUDIT.md)
+
+
 
 
 

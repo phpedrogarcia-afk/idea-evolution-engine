@@ -37,6 +37,7 @@ class EscalationReason(str, Enum):
 class EpistemicRentDecision(str, Enum):
     """Veredito de aluguel epistêmico para justificar um passo adicional."""
     JUSTIFIED = "JUSTIFIED"
+    EXPLORATORY = "EXPLORATORY"  # Permite ideação aberta sob incerteza com budget limitado
     NOT_JUSTIFIED = "NOT_JUSTIFIED"
     UNKNOWN = "UNKNOWN"
 
@@ -104,7 +105,7 @@ class DecisionDeltaEventType(str, Enum):
     FALSE_REQUIREMENT_PREVENTED = "FALSE_REQUIREMENT_PREVENTED"
     TENSION_CLARIFIED = "TENSION_CLARIFIED"
     NEXT_ACTION_CHANGED = "NEXT_ACTION_CHANGED"
-    # Regressões
+    # Regressões Decisórias
     SOURCE_DRIFT_INCREASED = "SOURCE_DRIFT_INCREASED"
     UNSUPPORTED_REQUIREMENT_ADDED = "UNSUPPORTED_REQUIREMENT_ADDED"
     FALSE_CERTAINTY_CREATED = "FALSE_CERTAINTY_CREATED"
@@ -148,6 +149,7 @@ class AttentionSnapshot(BaseModel):
     """
     Snapshot determinístico do campo global de atenção epistêmica A(X_t).
     Não é um resumo gerado por IA; é um objeto estruturado de dados observáveis.
+    ATTENTION_SNAPSHOT != REALITY (Completeness status é sempre REPRESENTATION_ONLY).
     """
     snapshot_id: str
     source_anchor_refs: List[str] = Field(default_factory=list)
@@ -161,7 +163,9 @@ class AttentionSnapshot(BaseModel):
     source_refresh_required: bool = False
     attachment_risk_detected: bool = False
     drift_risk_vector: List[int] = Field(default_factory=list)
+    completeness_status: str = "REPRESENTATION_ONLY"
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
+
 
 
 class MemoryAdmissionVerdict(str, Enum):

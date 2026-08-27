@@ -373,6 +373,25 @@
 - **Resultado:** `FIOED_FOUNDATION_FORMALIZED` | `PRIOR_ART_BOUNDED` | `133_TESTS_PASSING` | `ZERO_REAL_CALLS`.
 - **Evidência:** 133/133 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-FIOED-01R1] FioED Formal Integrity & Prior-Art Hardening (Endurecimento FioED-01R1)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Endurecer o formalismo do FioED, eliminar precisão numérica arbitrária, corrigir metadados e citações de doadores (Arbor 2026), classificar epistemologicamente todas as fórmulas, distinguir aluguel de exploração vs explotação, e expandir a suíte adversarial formal.
+- **O que Mudou:**
+  - Correção factual da citação do Arbor: *Toward Generalist Autonomous Research via Hypothesis-Tree Refinement* (arXiv:2606.11926, submetido em 10 de Junho de 2026).
+  - Reclassificação de limiares numéricos ($P_e \ge 2$, $\text{Depth} \ge 2$) como `TEST_FIXTURE_THRESHOLD / TO_BE_CALIBRATED`.
+  - Auditoria e classificação taxonômica de todas as fórmulas em `INVARIANT`, `DEFINITION`, `HEURISTIC` e `OPERATIONAL_POLICY`.
+  - Distinção explícita entre `EXPLOITATIVE_RENT` e `EXPLORATORY_RENT` em `src/idea_evolution/domain/early_epistemic_gate.py`.
+  - Inclusão do metadado de incompletude `completeness_status = "REPRESENTATION_ONLY"` no `AttentionSnapshot`.
+  - Formalização de `DECISION_REGRESSION` e expansão de 5 novos testes determinísticos formais em `tests/adversarial/test_adversarial_fioed.py` (total de 138 testes).
+  - Registro do achado `FINDING-023` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-022`.
+- **Resultado:** `FIOED_HARDENED` | `NUMERIC_PRECISION_BOUNDED` | `ARBOR_CITATION_CORRECTED` | `138_TESTS_PASSING`.
+- **Evidência:** 138/138 testes automatizados aprovados (100% offline).
+
+
 
 
 

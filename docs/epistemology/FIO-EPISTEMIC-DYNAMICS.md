@@ -2,8 +2,9 @@
 
 > **DOCUMENTO DOUTRINÁRIO CANÔNICO DE TEORIA, FORMALISMO E ENGENHARIA EPISTÊMICA**
 > **NOME DA TEORIA DE TRABALHO:** *Fio Epistemic Dynamics (FioED)*
-> **STATUS:** `WORKING_THEORY` | `NOT_SCIENTIFICALLY_VALIDATED` | `NO_UNSUPPORTED_NOVELTY_CLAIMS`
+> **STATUS:** `WORKING_RECEIVER_THEORY` | `FORMALIZED_NOT_EMPIRICALLY_VALIDATED` | `NO_UNSUPPORTED_NOVELTY_CLAIMS`
 > **OBJETIVO PRIMÁRIO:** Responder formalmente à questão fundamental: *Como pode um sistema ajudar uma ideia a evoluir profundamente sem se tornar prisioneiro das representações que ele mesmo criou sobre ela?*
+> **META-INVARIANTE:** *O mapa que diz que o mapa não é o território continua sendo um mapa.* O FioED não recebe imunidade constitucional e deve ser revisado se a evidência empírica refutar suas hipóteses.
 
 ---
 
@@ -51,7 +52,7 @@ O estado evolutivo de uma ideia no instante $t$ é definido pela 10-tupla:
 $$X_t = \langle S, R_t, H_t, E_t, U_t, M_t, A_t, T_t, D_t, C_t \rangle$$
 
 Onde:
-- **$S$ (Source Anchors):** Conjunto imutável de artefatos primários de fonte humana e evidências externas primárias ($S_{t+1} \equiv S_t$).
+- **$S$ (Source Anchors):** Conjunto imutável de artefatos primários de fonte humana e evidências externas primárias ($S_{t+1} \equiv S_t$). Eventos posteriores de fonte ($S_1, S_2$) são adicionados cronologicamente sem reescrever $S_0$.
 - **$R_t$ (Representations):** Modelos estruturados, resumos, assinaturas semânticas e interpretações ativas geradas pelo sistema.
 - **$H_t$ (Hypotheses / Candidates):** Mecanismos candidatos e possibilidades técnicas que permanecem estritamente no status `MODEL_HYPOTHESIS` ou `CANDIDATE`.
 - **$E_t$ (Evidence):** Observações auditáveis, resultados de execução, benchmarks e referências empíricas com IDs formais.
@@ -64,156 +65,96 @@ Onde:
 
 ---
 
-## 4. Operadores Fundamentais
+## 4. Auditoria e Classificação Formal de Todas as Fórmulas
 
-```text
-       ┌───────────┐
-       │   HUMAN   │
-       │  SOURCE S │
-       └─────┬─────┘
-             │
-             ▼ O(S)  [Observation Operator: Extracao nao-generativa]
-       ┌───────────┐
-       │ FIELD S_0 │
-       └─────┬─────┘
-             │
-             ▼ I(O(S)) [Interpretation Operator: Geracao de Representacao R_0]
-       ┌───────────┐
-       │ STATE X_0 │
-       └─────┬─────┘
-             │
-      ┌──────┴─────────────────────────────────┐
-      │                                        │
-      ▼ A(X_t) [Attention: Snapshot Global]    │
-┌──────────────┐                               │
-│ SNAPSHOT F_t │                               │
-└──────┬───────┘                               │
-       │                                       │
-       ▼ Γ(F_t) [Early Epistemic Gate]         │
-  ┌────┴──────────────────────────────┐        │
-  │                                   │        │
-  ▼ RETURN / HUMAN / STOP             ▼ ESCALATE [Se Aluguel Justificado]
-┌──────────────────┐            ┌──────────────┐
-│  TERMINAL STATE  │            │ C_h(X_t)     │ [Concentration: 1 Foco]
-└──────────────────┘            └──────┬───────┘
-                                       │
-                                       ▼ A(X_{t+1}) [Re-Attention: Reconciliacao]
-                                ┌──────────────┐
-                                │ STATE X_t+1  │
-                                └──────┬───────┘
-                                       │
-                                       ▼ MemoryAdmission(X_t+1)
-                                ┌──────────────┐
-                                │  MEMÓRIA M   │
-                                └──────────────┘
-```
+Para eliminar confusão entre definições matemáticas, regras arquiteturais e hipóteses empíricas, cada expressão do FioED é formalmente classificada:
 
-### 1. Operador $O(S)$ — Observação Não-Generativa
-Extrai apenas o que a fonte fornece expressamente (termos literais, restrições declaradas, perguntas explícitas). **Não inventa mecanismos nem preenche requisitos ausentes.**
-$$\text{Claim}(c) \in O(S) \implies \text{Provenance}(c) = \text{EXPLICIT\_SOURCE\_SPAN}$$
-
-### 2. Operador $I(O(S))$ — Interpretação Semântica
-Gera representações estruturadas e propõe hipóteses técnicas candidatas.
-$$I(S) \neq S \quad \text{e} \quad \text{Authority}(I(S)) \equiv \text{MODEL\_HYPOTHESIS}$$
-Nenhuma claim em $I(S)$ herda silenciosamente a autoridade da fonte.
-
-### 3. Operador $A(X_t)$ — Atenção Epistêmica Global
-Operação determinística de baixo custo que produz um snapshot integral do campo ($F_t$), verificando coerência entre fontes, representações, hipóteses, autoridade, evidências e tensões.
-
-### 4. Operador $C_h(X_t)$ — Concentração Focada e Delimitada
-Chamada de inferência dirigida para resolver estritamente a incerteza $h$ que justificou o aluguel de complexidade. Exige: alvo fixo, motivo tipado, delta esperado e critério de parada.
-
-### 5. O Ciclo Inegociável $A \to C \to A$ (Attention $\to$ Concentration $\to$ Re-Attention)
-Nenhuma operação focada de concentração ($C_h$) pode promover diretamente seu resultado para conclusão global sem passar pela **Re-Atenção** ($A(X_{t+1})$). A coerência local em $C_h$ não implica validade global em $X_{t+1}$.
+| Fórmula / Expressão | Tipo Epistêmico | Variáveis Envolvidas | Observabilidade | Consequência Operacional | Status Atual | O que Falsificaria |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **$S_{t+1} \equiv S_t$** | `INVARIANT` | $S$ (SourceAnchors) | Direta (hashes de arquivos) | Proíbe mutação retroativa de inputs humanos históricos | `ACTIVE_INVARIANT` | Código permitindo `state.original_idea` ser alterado |
+| **$\text{Authority}(I(S)) \equiv \text{MODEL\_HYPOTHESIS}$** | `INVARIANT` | $I(S)$ (Representações) | Direta (auditoria Pydantic) | Zera autoridade humana sobre termos novos gerados por IA | `ACTIVE_INVARIANT` | Modelo autoatribuindo `USER_EXPLICIT` aceito no Core |
+| **$A(X_t) \to C_h(X_t) \to A(X_{t+1})$** | `INVARIANT` | $A$ (Atenção), $C_h$ (Foco) | Direta (fluxo do runner) | Exige re-atenção determinística após toda chamada de foco | `ACTIVE_INVARIANT` | $C_h$ promovendo conclusão sem passar por $A$ |
+| **$\text{IntermediaryDepth}(c) = \min_{s \in S} \text{dist}_{\mathcal{G}}(s, c)$** | `DEFINITION` | Grafo $\mathcal{G}$, nó $c$, fontes $S$ | Direta (contagem de arestas) | Mede distância de transformação desde a fonte primária | `COMPUTABLE_METRIC` | Grafo de proveniência não-acíclico ou sem raiz |
+| **$\text{SourceRefreshRequired} \iff \text{HighImpact}(c) \land \text{Depth}(c) \ge k$** | `HEURISTIC` | $\text{HighImpact}$, $\text{Depth}$, limiar $k$ | Direta | Exige reancoragem na fonte humana antes de decisão crítica | `TO_BE_CALIBRATED` ($k=2$ fixture) | Reancoragem frequente degradar utilidade sem evitar drift |
+| **$P_e(h, t) = t - \tau_{\text{evidence}}(h)$** | `DEFINITION` | Passos $t$, último evento de evidência | Direta (contador de etapas) | Conta operações consecutivas sem injeção de evidência | `COMPUTABLE_METRIC` | Não aplicável (é definição pura) |
+| **$\text{AttachmentRisk}(h) \iff P_e(h) \ge N \land \Delta D_t = \emptyset$** | `HEURISTIC` | $P_e$, $\Delta D_t$, limiar $N$ | Direta | Dispara alerta de apego e bloqueia chamada automática | `TO_BE_CALIBRATED` ($N=2$ fixture) | Poda prematura de hipóteses férteis em exploração |
+| **$\text{ExpectedDecisionDelta} \ge \text{Cost} + \text{Risk}$** | `HEURISTIC` | Delta decisório, custo, risco | Categórica (`JUSTIFIED` / `NOT`) | Governa permissão de escalação no Early Gate | `OPERATIONAL_POLICY` | Sistema gastar inferência em deltas triviais |
+| **$\mathbf{DriftRisk}(X_t) = [u, d_{\max}, P_{e,\max}, \tau, \text{spoof}]$** | `DEFINITION` | Claims não ancoradas, profundidade, etc. | Direta (vetor de inteiros) | Sumariza integridade global no `AttentionSnapshot` | `COMPUTABLE_METRIC` | Não aplicável (é vetor descritivo) |
 
 ---
 
-## 5. Leis Epistêmicas e Invariantes Formais
+## 5. Auditoria de Precisão Numérica e Limiares
 
-- **LAW-01 (Source Immutability):** $S_{t+1} \equiv S_t$. Mudanças de intenção humana criam novos eventos de fonte ($S_1, S_2$), sem sobrescrever o histórico original.
-- **LAW-02 (Representation Non-Authority):** $\text{Authority}(R) \neq \text{Authority}(S)$. A transformação semântica zera a autoridade humana para termos novos.
-- **LAW-03 (Material Claim Provenance):** Nenhuma proposição é promovida ao Core sem uma rota auditável até um `SourceAnchor` ou evidência externa válida.
-- **LAW-04 (Attention Before Concentration):** $C_h$ só pode ser disparado após avaliação determinística do portão $\Gamma(A(X_t))$.
-- **LAW-05 (Re-Attention After Concentration):** Toda saída de $C_h$ é submetida à reconciliação global $A(X_{t+1})$ antes da finalização.
-- **LAW-06 (Reasoning Rent Required):** Toda chamada adicional de modelo exige um registro explícito de `EpistemicRentRecord` com veredito `JUSTIFIED`.
-- **LAW-07 (Sunk-Cost Immunity):** $C_t(h) > 0 \not\implies \text{Truth}(h) \uparrow$. O custo investido não altera a probabilidade ou o status de verdade de uma hipótese.
-- **LAW-08 (Memory Does Not Create Present Evidence):** A memória técnica informa buscas, mas não substitui a validação de fatos no presente.
-- **LAW-09 (Negative Knowledge Discipline):** Conhecimento negativo exige escopo estrito, o que não repetir e condições claras de reabertura.
-- **LAW-10 (Non-Substitutable Human Authority):** $\lim_{N \to \infty} \text{AI\_Calls}(N) \not\implies \text{HumanAuthority} = \text{True}$. A IA não pode fabricar consentimento normativo.
-- **LAW-11 (Generator Cannot Self-Certify):** O modelo que gerou a hipótese $h$ não pode atuar como autoridade de prova independente de $h$.
-- **LAW-12 (No Useful Work as Success):** Se nenhuma incerteza material exigir escalação, encerrar com `RETURN_NOW` ou `STOP_NO_USEFUL_WORK` é o resultado ótimo.
-- **LAW-13 (Local Improvement != Global Validity):** Otimizar uma parte isolada de uma ideia não autoriza a conclusão se o alinhamento com a fonte for rompido.
-- **LAW-14 (Recurrence != Independence):** Múltiplos agentes ou múltiplas repetições do mesmo modelo repetindo uma afirmação não constituem confirmação independente.
-- **LAW-15 (Donor Knowledge != Receiver Proof):** Um mecanismo comprovado em um doador externo (ex: Arbor, Magentic-One) é apenas hipótese até ser testado no receptor IEE.
+> **REGRA CANÔNICA:** $\text{MEDIÇÃO} \neq \text{LIMIAR}$. Uma métrica computável (ex: profundidade $d$ ou persistência $P_e$) é um fato mensurável; o limiar de corte para disparar ações é uma política a ser calibrada empiricamente no receptor.
+
+1. **Limiar de Persistência sem Evidência ($P_e \ge 2$):**
+   - *Status:* `TEST_FIXTURE_THRESHOLD` / `TO_BE_CALIBRATED_FROM_RECEIVER_DATA`.
+   - *Significado:* Nos testes unitários adversariais, adotamos $N=2$ eventos como fixture determinística para verificar se o detector reage. O limiar canônico de produção será calibrado na missão M05.3 com base no replay de traces históricos.
+2. **Limiar de Profundidade de Intermediário ($\text{IntermediaryDepth} \ge 2$):**
+   - *Status:* `TEST_FIXTURE_THRESHOLD` / `TO_BE_CALIBRATED_FROM_RECEIVER_DATA`.
+   - *Significado:* A necessidade de `SOURCE_REFRESH` é disparada quando uma claim de alto impacto depende exclusivamente de transformações semânticas derivadas sem ancoragem primária comprovada. O número de arestas $k=2$ é uma fixture experimental.
+3. **Invariante de Chamadas ($LEAN\_L1\_MAX\_MODEL\_CALLS = 2$):**
+   - *Status:* `ARCHITECTURAL_INVARIANT` (Rígido para a Candidata L1).
+   - *Significado:* Não é uma estimativa empírica, mas o teto máximo inegociável de complexidade imposto pelo contrato da arquitetura Lean L1. Se uma tarefa exigir $>2$ chamadas, ela não pertence à classe L1.
 
 ---
 
-## 6. Modelos de Quantidades e Variáveis Mensuráveis
+## 6. Red-Team Aprofundado dos Pilares do FioED
 
-### 1. Profundidade de Intermediário (Intermediary Depth)
-Define o número de arestas de transformação semântica entre uma claim $c$ e sua fonte primária de suporte:
-$$\text{IntermediaryDepth}(c) = \text{dist}_{\mathcal{G}}(c, S)$$
-Se $c$ for uma decisão de alto impacto e $\text{IntermediaryDepth}(c) \ge 2$, o sistema dispara um alerta de **`SOURCE_REFRESH_REQUIRED`**, reancorando a decisão diretamente no input humano antes da promoção.
+### 6.1 Red-Team do Decision Delta ($\Delta D_t$)
+- **Vulnerabilidade 1 (Viés de Ação Imediata):** O foco em Decision Delta pode favorecer passos rápidos e pragmáticos de curto prazo, penalizando reflexões conceituais profundas cujo valor decisório é de longo prazo.
+  - *Mitigação:* O FioED reconhece eventos do tipo `ASSUMPTION_EXPOSED` e `TENSION_CLARIFIED` como Decision Deltas positivos de alto valor, mesmo que não gerem código imediato.
+- **Vulnerabilidade 2 (Ilusão de Volume de Opções):** O modelo pode inflar o Decision Delta multiplicando opções fracas (`OPTION_ADDED`).
+  - *Mitigação:* Apenas opções materiais com trade-offs discriminativos contam como progresso. Adições superficiais geram `UNSUPPORTED_REQUIREMENT_ADDED` (regressão).
+- **Vulnerabilidade 3 (Regressão Decisória):** Uma chamada pode degradar a clareza do decisor.
+  - *Mitigação:* O FioED formaliza eventos explícitos de `DECISION_REGRESSION` (`SOURCE_DRIFT_INCREASED`, `FALSE_CERTAINTY_CREATED`, `VALID_OPTION_ERASED`, `TENSION_SILENTLY_REMOVED`).
 
-### 2. Persistência Sem Evidência (Evidence-Free Persistence)
-Mede o número de operações consecutivas de raciocínio que elaboram uma hipótese $h$ sem injeção de nova evidência empírica ou autoridade humana:
-$$P_e(h) = \text{count\_events\_since\_last\_evidence}(h)$$
-Se $P_e(h) \ge 2$ e $\Delta D_t = \emptyset$, o sistema aciona alerta de **`ATTACHMENT_RISK`**, forçando a preservação como mero candidato ou encerramento da esteira.
+### 6.2 Red-Team do Epistemic Rent (Exploitative vs Exploratory Rent)
+- **Vulnerabilidade (Burocracia Anti-Exploração):** Exigir justificativa estrita de Decision Delta pode sufocar a exploração de ideias inovadoras onde o retorno é desconhecido *a priori*.
+  - *Mitigação:* O FioED formaliza explicitamente duas modalidades de aluguel:
+    1. **`EXPLOITATIVE_RENT`:** Aplicado ao refinamento de mecanismo. Exige justificativa determinística estrita baseada em risco ou alternativas conhecidas.
+    2. **`EXPLORATORY_RENT`:** Aplicado à ideação aberta no modo `DEEP_EXPLORATION`. Permite inferência sob incerteza se: (a) houver pergunta de exploração clara; (b) budget de chamadas for explícito e limitado; (c) todos os outputs permanecerem `CANDIDATE`; (d) houver condição determinística de parada.
 
-### 3. Vetor de Risco de Desvio (Drift Risk Vector)
-Em vez de um score escalar arbitrário, o risco de desvio é um vetor determinístico:
-$$\mathbf{DriftRisk}(X_t) = \begin{bmatrix} \text{ungrounded\_material\_claims} \\ \max(\text{intermediary\_depth}) \\ \max(P_e) \\ \text{authority\_mismatch\_count} \\ \text{unresolved\_tensions} \end{bmatrix}$$
+### 6.3 Red-Team do Operador de Atenção ($A(X_t)$)
+- **Vulnerabilidade (A Armadilha do Mapa Total):** O `AttentionSnapshot` pode ser confundido com a realidade completa da ideia, recriando a ilusão de que o sistema "compreendeu o todo".
+  - *Mitigação:* Todo `AttentionSnapshot` carrega metadados de incompletude (`completeness_status: REPRESENTATION_ONLY`) e proveniência estrita. O operador $A$ é não-generativo, determinístico e de custo zero ($0$ chamadas de IA).
 
-### 4. Eventos de Decision Delta ($\Delta D_t$)
-Representado como um conjunto tipado de eventos que alteram a capacidade de ação do tomador de decisão:
-- *Deltas Positivos:* `AMBIGUITY_RESOLVED`, `ASSUMPTION_EXPOSED`, `OPTION_ADDED`, `OPTION_REJECTED`, `TEST_IDENTIFIED`, `HUMAN_DECISION_IDENTIFIED`, `EVIDENCE_CHANGED_DECISION`, `FALSE_REQUIREMENT_PREVENTED`, `NEXT_ACTION_CHANGED`.
-- *Regressões Decisórias:* `SOURCE_DRIFT_INCREASED`, `UNSUPPORTED_REQUIREMENT_ADDED`, `FALSE_CERTAINTY_CREATED`, `VALID_OPTION_ERASED`, `TENSION_SILENTLY_REMOVED`.
+### 6.4 Red-Team da Fidelidade à Fonte vs Obediência Cega
+- **Vulnerabilidade (Literalismo Dogmático):** Preservar a fonte não pode significar que o sistema deve concordar com erros factuais ou premissas absurdas do usuário.
+  - *Mitigação:* **$\text{Preservar a Fonte} \neq \text{Obedecer às Alegações como Fato}$.** O FioIdeias tem o dever de desafiar premissas, expor contradições e propor contra-argumentos, rotulando o desafio como `CRITIQUE` ou `MODEL_HYPOTHESIS`. O que é estritamente proibido é alegar que o usuário pediu o que ele não pediu.
 
----
-
-## 7. Mapeamento dos Doadores no FioED
-
-Os doadores colhidos são operadores condicionais sob demanda, e não estágios fixos:
-
-| Doador | Incerteza / Gap no Receptor | Mecanismo Doado no FioED | Condição de Ativação |
-| :--- | :--- | :--- | :--- |
-| **Arbor** | Ramificação de hipóteses e reparo local | `NegativeKnowledgeRecord`, `IdeaLineageNode`, Hipótese Fixa | Múltiplas hipóteses viáveis com testes discriminativos |
-| **Magentic-One** | Detecção de estagnação e critério de parada | `ProgressLedger`, `StallDetection`, Terminação sem progresso | Segunda chamada não gera novo delta decisório |
-| **DCI** | Preservação de desacordos e tensões | `TensionRecord`, `PRESERVED_DISAGREEMENT` | Conflito de premissas sem base de evidência imediata |
-| **Google Co-Scientist** | Decomposição de premissas concorrentes | `AssumptionDecomposition`, Trade-off comparison | $\ge 2$ mecanismos técnicos viáveis identificados |
-| **Stanford Ideator** | Crítica sequencial focalizada de 1 rodada | `FocusedEscalation` (Max 1 rodada) | Vulnerabilidade de severidade HIGH detectada no Gate |
+### 6.5 Tratamento de Eventos Históricos de Fonte ($S_0, S_1$)
+- Se o usuário expressa uma ideia em $t=0$ ($S_0$) e altera ou refina sua preferência em $t=1$ ($S_1$), ambos permanecem como registros imutáveis de fonte.
+- A decisão em $t=1$ governa a autoridade presente com proveniência explícita (`supersedes: S_0`), sem apagar ou reescrever retroativamente o histórico de $S_0$.
 
 ---
 
-## 8. Auditoria de Arte Prévia e Posicionamento de Novidade
+## 7. Registro Canônico de Dívidas Intelectuais (Intellectual Debt Register)
 
-Para evitar apropriação indevida e falsas alegações de novidade científica, classificamos rigorosamente os conceitos do FioED:
-
-| Conceito FioED | Problema que Resolve | Arte Prévia Existente na Literatura Científica | Relação com FioED | Classificação de Novidade |
-| :--- | :--- | :--- | :--- | :---: |
-| **Epistemic Rent** | Alocação de computação em inferência | Metaraciocínio Racional (Russell & Wefald 1991), Value of Computation (Horvitz 1988) | O FioED adapta o valor da computação para o domínio de evolução de ideias | `KNOWN_CONCEPT_ADAPTED` |
-| **Decision Delta** | Medição de progresso semântico | Value of Information (Howard 1966), Epistemic Utility (Levi 1967) | FioED utiliza eventos discretos de destravamento em vez de probabilidades bayesianas | `KNOWN_CONCEPT_ADAPTED` |
-| **Intermediary Depth** | Telefone sem fio em cadeias de IA | Linhagem de Dados e Proveniência (Buneman et al. 2001, PROV-DM) | Medição de arestas de transformação semântica em grafos de raciocínio | `KNOWN_CONCEPT_ADAPTED` |
-| **Evidence-Free Persistence** | Elaboração circular sem fatos | Truth Maintenance Systems (Doyle 1979), AGM Belief Revision (Alchourrón et al. 1985) | Contagem de passos sem suporte empírico para acionar poda de apego | `RECEIVER_SPECIFIC_SYNTHESIS` |
-| **Negative Knowledge Reopen** | Evitar repetição sem bloquear inovação | Scoped Pruning em Busca Heurística (Pearl 1984), HTR (Arbor 2024) | Memória estruturada com tuplas de falha e condições de reabertura | `COMBINATION_OF_KNOWN_MECHANISMS` |
-| **A $\to$ C $\to$ A Dynamic** | Evitar otimização local míope | Arquiteturas Cognitivas Dual-Process (Kahneman 2011, Evans & Stanovich 2013) | Portão determinístico global intercalado com inferência focada | `RECEIVER_SPECIFIC_SYNTHESIS` |
-| **Source-Anchored Lineage** | Impedir que a IA invente intenção | Ancoragem Semântica e Proveniência Soberana | Integração constitucional: Ancoragem de Origem + Não-Autoridade de Representação | **`POTENTIALLY_DISTINCT_SYNTHESIS`** |
-
-> **Veredito de Novidade:** A singularidade do FioIdeias não reside em equações isoladas, mas na **síntese arquitetural integrada** que une ancoragem imutável de origem humana, disciplina de não-autoridade sobre representações geradas, portão determinístico de custo zero, alocação de inferência governada por aluguel epistêmico e imunidade a custos afundados.
+| Construto no FioED | Arte Prévia Mais Próxima | Mecanismo Emprestado | Adaptação Específica no FioIdeias | Acoplamento Distintivo | Status de Reivindicação |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **Epistemic Rent** | Metaraciocínio Racional (Russell & Wefald 1991), VoC (Horvitz 1988) | A computação deve justificar seu custo de oportunidade | Alocação de chamadas de LLM governada por destravamento de decisões | Acoplado a veto determinístico de custo zero no Early Gate | `KNOWN_CONCEPT_ADAPTED` |
+| **Decision Delta** | Value of Information (Howard 1966), Epistemic Utility (Levi 1967) | Valor de obter nova observação antes da decisão | Modelo discreto de eventos de destravamento e regressão de opções | Acoplado à fronteira prática de decisão humana | `KNOWN_CONCEPT_ADAPTED` |
+| **Intermediary Depth** | Data Provenance (Buneman 2001), W3C PROV-DM (2013) | Rastreabilidade de arestas de transformação em grafos | Contagem de transformações semânticas em trajetórias de IA | Acoplado ao gatilho mecânico de `SOURCE_REFRESH` | `KNOWN_CONCEPT_ADAPTED` |
+| **Negative Knowledge** | Scoped Pruning (Pearl 1984), HTR (*Arbor*, arXiv:2606.11926, 2026) | Poda de ramos que falharam para não repetir buscas | Tupla de falha com escopo delimitado e `can_reopen_under()` | Acoplado à preservação de histórico sem veto dogmático | `COMBINATION_OF_KNOWN_MECHANISMS` |
+| **A $\to$ C $\to$ A Dynamic** | Dual-Process Theory (Kahneman 2011), Plan-Act-Review | Alternância entre checagem ampla e foco executivo | Portão determinístico global $A$ seguido de 1 chamada $C$ e re-atenção $A$ | Acoplado à proibição de recursão $C \to C$ sem re-atenção | `RECEIVER_SPECIFIC_SYNTHESIS` |
+| **Evidence-Free Persistence** | Truth Maintenance (Doyle 1979), AGM (Alchourrón et al. 1985) | Rastreamento de justificações e detecção de crenças sem suporte | Contagem de passos consecutivos sem evidência para acionar poda | Acoplado ao combate ao *Epistemic Waste Before Gate* | `RECEIVER_SPECIFIC_SYNTHESIS` |
+| **Source-Anchored Lineage** | Filosofia Epistêmica / Teoria Constitucional de IA | Separação estrita entre fonte originária e símbolo gerado | Invariante: representações geradas jamais herdam autoridade humana | Acoplado ao validador determinístico `AuthorityProofValidator` | **`POTENTIALLY_DISTINCT_SYNTHESIS`** |
 
 ---
 
-## 9. Red-Team da Teoria e Questões Adversariais
+## 8. O que Realmente Parece Distintivo no FioIdeias
 
-O FioED aplica seu próprio princípio a si mesmo: **O modelo do FioED não é a realidade**.
+A auditoria científica demonstra com clareza: **nenhum primitivo isolado do FioED é uma descoberta sem precedentes**.
 
-1. **E se o baseline de prompt único (Condição A) continuar vencendo na maioria das ideias?**  
-   *Resposta:* Isso confirmará a premissa de que a maioria das ideias é simples e que o Early Epistemic Gate deve escolher `RETURN_NOW` (1 chamada) como rota nominal padrão.
-2. **E se a preservação estrita da fonte matar a criatividade e a exploração de ideias ousadas?**  
-   *Resposta:* O FioED define o modo `DEEP_EXPLORATION`. A IA tem total liberdade para propor novidades arrojadas, desde que sejam tipadas como `MODEL_HYPOTHESIS / CANDIDATE`. A criatividade é incentivada; o que é proibido é a falsificação da intenção do usuário.
-3. **E se a Atenção ($A$) se tornar um portão pesado e caro que recria o desperdício do Simple Loop?**  
-   *Resposta:* O operador $A$ é estritamente determinístico ($0$ chamadas de IA). Ele executa em $<5\text{ms}$ usando matching estrutural, parsing de Pydantic e checagem de hashes.
-4. **E se a intenção do usuário humano mudar ao longo do tempo?**  
-   *Resposta:* Mudanças de intenção são registradas como novos eventos de fonte ($S_1, S_2$). A história antiga é preservada, e a nova decisão humana governa o estado presente explicitamente.
-5. **E se o próprio framework FioED se tornar uma representação dogmática que perseguimos sem evidência?**  
-   *Resposta:* Meta-Atenção ativa: Qualquer métrica ou operador do FioED que aumentar a complexidade sem melhorar a capacidade de decisão do usuário será impiedosamente podado.
+A contribuição singular do FioIdeias reside na **arquitetura de integração constitucional**, que articula de forma coesa e mecanicamente verificável:
+1. Ancoragem de Origem Humana Imutável ($S$);
+2. Não-Autoridade sobre Representações Geradas ($R \neq S$);
+3. Auditoria Determinística de Proveniência (`AuthorityProofValidator`);
+4. Portão Global de Atenção de Custo Zero ($A$);
+5. Concentração Escalonada Condicionada a Aluguel Epistêmico ($C_h$, Max 2 chamadas);
+6. Admissão de Raciocínio Orientada a Delta Decisório ($\Delta D$);
+7. Memória Técnica com Condições Explícitas de Reabertura ($M$);
+8. Preservação de Tensões como Objeto de Primeira Classe ($T$);
+9. Imunidade Rigorosa a Custos Afundados;
+10. Evolução Condicionada a Evidência Empírica.

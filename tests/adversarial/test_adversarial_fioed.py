@@ -241,6 +241,99 @@ class TestAdversarialFioED(unittest.TestCase):
         )
         self.assertEqual(decision_2.decision, MemoryAdmissionVerdict.ADMIT_NEGATIVE_KNOWLEDGE)
 
+    def test_historical_source_events_immutability(self):
+        """Historical Source Events — S0 e S1 são eventos imutáveis distintos; S1 não reescreve S0."""
+        s0 = SourceAnchor.create_human_input_anchor("Quero um app de notas local.", source_id="SRC-S0")
+        s1 = SourceAnchor.create_human_input_anchor("Quero adicionar sincronização P2P opcional.", source_id="SRC-S1")
+
+        self.assertNotEqual(s0.source_id, s1.source_id)
+        self.assertNotEqual(s0.content_hash, s1.content_hash)
+        self.assertEqual(s0.original_content, "Quero um app de notas local.")
+        self.assertEqual(s1.original_content, "Quero adicionar sincronização P2P opcional.")
+
+    def test_attention_snapshot_representation_only(self):
+        """Attention Snapshot — Carrega explicitamente o status REPRESENTATION_ONLY (O mapa não é o território)."""
+        snapshot = AttentionSnapshot(
+            snapshot_id="ATTN-TEST-01",
+            source_anchor_refs=["SRC-01"],
+            material_claims_count=2,
+            grounded_claims_count=1,
+            ungrounded_claims_count=1,
+            max_intermediary_depth=1,
+            evidence_free_elaboration_count=0,
+            authority_spoofing_detected=False,
+            unresolved_tensions_count=0,
+            source_refresh_required=False,
+            attachment_risk_detected=False,
+            drift_risk_vector=[1, 1, 0, 0, 0],
+        )
+        self.assertEqual(snapshot.completeness_status, "REPRESENTATION_ONLY")
+
+    def test_exploratory_epistemic_rent(self):
+        """Epistemic Rent — Suporta modalidade EXPLORATORY para ideação aberta sob incerteza com budget bounded."""
+        rent = EpistemicRentRecord(
+            record_id="RENT-EXPLORE-01",
+            escalation_reason=EscalationReason.COMPETING_MECHANISMS,
+            expected_decision_delta="Explorar arquiteturas alternativas em modo de ideação aberta.",
+            additional_call_cost=1,
+            rent_decision=EpistemicRentDecision.EXPLORATORY,
+            justification_summary="Exploração com escopo delimitado no modo DEEP_EXPLORATION.",
+        )
+        self.assertEqual(rent.rent_decision, EpistemicRentDecision.EXPLORATORY)
+        self.assertEqual(rent.additional_call_cost, 1)
+
+    def test_decision_regression_recording(self):
+        """Decision Delta — Registra eventos de regressão decisória (ex: SOURCE_DRIFT_INCREASED)."""
+        delta = DecisionDeltaRecord(
+            delta_id="DELTA-REG-01",
+            delta_events=[
+                DecisionDeltaEventType.SOURCE_DRIFT_INCREASED,
+                DecisionDeltaEventType.FALSE_CERTAINTY_CREATED,
+            ],
+            before_uncertainties=["Incerteza A"],
+            after_uncertainties=["Incerteza A", "Incerteza B inventada"],
+            resolved_items=[],
+            new_material_options=[],
+            rejected_options=[],
+            human_decision_required=False,
+            next_action_changed=True,
+            created_by_stage="LEAN_FIRST_PASS",
+        )
+        self.assertIn(DecisionDeltaEventType.SOURCE_DRIFT_INCREASED, delta.delta_events)
+        self.assertIn(DecisionDeltaEventType.FALSE_CERTAINTY_CREATED, delta.delta_events)
+
+    def test_preserve_source_allows_challenge_of_error(self):
+        """Preserve Source != Obey Error — O sistema pode desafiar premissas impossíveis sem falsificar a fonte."""
+        impossible_idea = "Quero um motor de moto perpétuo sem consumo de energia."
+        source = SourceAnchor.create_human_input_anchor(impossible_idea)
+
+        # O modelo identifica impossibilidade física e propõe crítica
+        vuln = LeanVulnerability(
+            vulnerability="Violação da Primeira e Segunda Leis da Termodinâmica",
+            why_it_matters="Moto perpétuo é fisicamente impossível.",
+            severity="HIGH",
+            affected_aspect="Viabilidade Fundamental",
+        )
+        first_pass = LeanFirstPassOutput(
+            interpreted_problem="Construir sistema de geração de energia infinita.",
+            human_intent="Obter energia sem consumo.",
+            primary_mechanism=LeanCandidateMechanism(
+                mechanism="Motor magnético perpétuo",
+                is_explicit_in_source=True,
+                claimed_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+                justification="Ideia original do usuário contém premissa termodinamicamente inválida.",
+            ),
+            material_vulnerabilities=[vuln],
+            remaining_uncertainties=["Inviabilidade física fundamental"],
+            proposed_next_action="Expor impossibilidade termodinâmica ao usuário.",
+        )
+
+        gate_res = EarlyEpistemicGate.evaluate(source, first_pass)
+        self.assertEqual(gate_res.outcome, GateOutcome.ESCALATE_FOCUSED)
+        self.assertEqual(gate_res.escalation_reason, EscalationReason.MATERIAL_VULNERABILITY)
+        self.assertEqual(source.original_content, impossible_idea)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+

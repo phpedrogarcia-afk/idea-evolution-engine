@@ -4,10 +4,10 @@
 
 ---
 
-## 🚦 Status Atual da Fila: FORMALIZAÇÃO FIOED-01 CONCLUÍDA | PRÓXIMO: CALIBRAÇÃO M05.3
+## 🚦 Status Atual da Fila: ENDURECIMENTO FIOED-01R1 CONCLUÍDO | PRÓXIMO: CALIBRAÇÃO M05.3
 
 ### 📌 Marco Recém-Concluído:
-- [x] **Fio Epistemic Dynamics Formalization (FioED-01):** Formalização das 4 camadas, 15 leis formais, exegese da fonte primária (1982), ciclo $A \to C \to A$, auditoria de arte prévia e 7 novos testes formais (133 testes verdes).
+- [x] **Fio Epistemic Dynamics Formal Integrity & Hardening (FioED-01R1):** Eliminação de precisão arbitrária, correção de metadados do Arbor, classificação epistêmica de fórmulas, distinção `EXPLOITATIVE` vs `EXPLORATORY` rent, metadados de incompletude no `AttentionSnapshot` e 12 testes formais (138 testes verdes).
 
 ---
 

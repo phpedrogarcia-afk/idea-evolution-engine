@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260827_175927-a7b95906",
+  "created_at": "2026-08-27T17:59:27.756839+00:00",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "metadata": {
+    "topology": "STANDARD_6_STAGE",
+    "routing_config_hash": "a7c63feeec4fe72d4b8e9761460b07f9ad341a5cffd08cb1f018b5be600c4363",
+    "routing_schema_version": "1.0.0",
+    "git_commit": "375c5ffb44fa98365d0b6bb44d0f2de3f999fa27",
+    "environment_pid": 16740
+  }
+}

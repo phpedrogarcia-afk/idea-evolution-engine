@@ -1,28 +1,28 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-08-27 | Checkpoint: CP-20260827-021
+> Atualizado em: 2026-08-27 | Checkpoint: CP-20260827-022
 
 ---
 
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (FORMALIZAÇÃO FIOED-01 & PROTÓTIPO L1 VALIDADOS)
+- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (FORMALIZAÇÃO E ENDURECIMENTO FIOED-01R1 CONCLUÍDOS)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Kernel FioED (Fio Epistemic Dynamics):** `FORMALIZED_AND_VERIFIED_OFFLINE`
+- **Status do Kernel FioED (Fio Epistemic Dynamics):** `HARDENED_AND_VERIFIED_OFFLINE`
   - Doutrina e Exegese: [`docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md) e [`docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md).
   - Modelo Formal e Máquina de Estados: [`docs/epistemology/FIOED-FORMAL-MODEL.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-FORMAL-MODEL.md).
   - Auditoria de Arte Prévia: [`docs/research/FIOED-PRIOR-ART-AUDIT.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/research/FIOED-PRIOR-ART-AUDIT.md).
-  - Suíte de Testes Totais: **133 / 133 testes verdes** (100% offline).
+  - Suíte de Testes Totais: **138 / 138 testes verdes** (100% offline).
 - **Status do Protótipo Lean IEE (L1):** `OFFLINE_PROTOTYPE_VALIDATED` (Invariante `LEAN_L1_MAX_MODEL_CALLS = 2` comprovado).
 - **Status do Simple Loop de Produção:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e 100% inalterado).
 - **Reconciliação do Repositório Remoto:**
   - `DEFAULT_BRANCH`: `main`
   - `REMOTE_REPOSITORY`: `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
   - `SECRET_SCAN`: `PASS` (0 credenciais ou segredos rastreados no Git)
-- **Último Checkpoint Imutável:** [`CP-20260827-021`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-021.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260827-021`
+- **Último Checkpoint Imutável:** [`CP-20260827-022`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-022.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260827-022`
 - **Git Branch:** `main`
 - **Worktree Status:** CLEAN
 
@@ -31,7 +31,7 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Conclusão da Missão FioED-01: Exegese da fonte filosófica primária (Diálogo de 18 de Abril de 1982), formalização matemática das 15 Leis Epistêmicas e do estado $X_t$, definição do ciclo $A \to C \to A$, formalização de métricas (`IntermediaryDepth`, `EvidenceFreePersistence`, `DriftRiskVector`), auditoria de arte prévia e validação de 7 novos testes adversariais em `tests/adversarial/test_adversarial_fioed.py` (total de 133 testes aprovados).
+  - Conclusão da Missão FioED-01R1: Endurecimento formal de FioED, eliminação de precisão numérica arbitrária ($P_e \ge 2$ e $\text{Depth} \ge 2$ reclassificados como `TEST_FIXTURE_THRESHOLD` sujeitos à calibração), correção factual da data do Arbor (arXiv:2606.11926, 10 de Junho de 2026), auditoria e classificação epistemológica de todas as fórmulas, inclusão de `EXPLOITATIVE` vs `EXPLORATORY` rent, metadados de incompletude (`REPRESENTATION_ONLY`) no `AttentionSnapshot`, eventos de `DECISION_REGRESSION` e expansão de 5 novos testes determinísticos formais (total de 138 testes aprovados).
 - **Tarefa Ativa Atual:**
   - `TASK-000`: Transição de Fila — Preparação para a missão M05.3.
 - **Próximo Passo Exato:**

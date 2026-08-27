@@ -1,0 +1,44 @@
+{
+  "step_number": 3,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.01,
+  "delta_summary": "2 mecanismos alternativos gerados.",
+  "raw_response": "{\n  \"alternatives\": [\n    {\n      \"mechanism\": \"Executar pipeline sequencial determinístico com contratos estritos Pydantic.\",\n      \"addresses_issues\": [\n        \"Latência e quebra de schemas\"\n      ],\n      \"preserves_intent\": true,\n      \"tradeoffs\": [\n        \"Menor flexibilidade dinâmica em favor de 100% de previsibilidade.\"\n      ],\n      \"novelty_or_difference\": \"Separação total entre kernel determinístico e funções semânticas.\"\n    },\n    {\n      \"mechanism\": \"Utilizar um único modelo com prompt estruturado em múltiplas seções.\",\n      \"addresses_issues\": [\n        \"Custo de coordenação\"\n      ],\n      \"preserves_intent\": true,\n      \"tradeoffs\": [\n        \"Menor isolamento de contexto e menor severidade crítica.\"\n      ],\n      \"novelty_or_difference\": \"Baseline de prompt único.\"\n    }\n  ]\n}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Executar pipeline sequencial determinístico com contratos estritos Pydantic.",
+        "addresses_issues": [
+          "Latência e quebra de schemas"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Menor flexibilidade dinâmica em favor de 100% de previsibilidade."
+        ],
+        "novelty_or_difference": "Separação total entre kernel determinístico e funções semânticas."
+      },
+      {
+        "mechanism": "Utilizar um único modelo com prompt estruturado em múltiplas seções.",
+        "addresses_issues": [
+          "Custo de coordenação"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Menor isolamento de contexto e menor severidade crítica."
+        ],
+        "novelty_or_difference": "Baseline de prompt único."
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T17:59:26.643365+00:00"
+}

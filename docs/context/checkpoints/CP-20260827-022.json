@@ -1,0 +1,83 @@
+{
+  "checkpoint_id": "CP-20260827-022",
+  "created_at": "2026-08-27T15:00:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission FioED-01R1 FORMAL INTEGRITY & PRIOR-ART HARDENING Complete: Arbor Citation Fixed, Unsupported Precision Removed, Formulas Categorized, Intellectual Debt Canonicalized, 138 Tests Passing, Zero Real Calls",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-FIOED-01: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019, Protótipo Offline Lean L1 CP-020, Formalização FioED CP-021",
+    "TASK-FIOED-HARDENING: Remoção de precisão arbitrária e reclassificação de limiares para TEST_FIXTURE_THRESHOLD",
+    "TASK-FIOED-ARBOR-DATE: Correção factual da citação do Arbor (arXiv:2606.11926, 10 June 2026)",
+    "TASK-FIOED-FORMULA-AUDIT: Auditoria taxonômica de fórmulas em FIO-EPISTEMIC-DYNAMICS.md e FIOED-FORMAL-MODEL.md",
+    "TASK-FIOED-PRIOR-ART-EXPANSION: Aprofundamento do registro de dívidas intelectuais em FIOED-PRIOR-ART-AUDIT.md",
+    "TASK-FIOED-RED-TEAM: Red-Team em Decision Delta (regressões), Epistemic Rent (exploratory), Attention (incompleteness) e Source Fidelity",
+    "TASK-FIOED-CODE-HARDENING: Adição de EXPLORATORY rent e completeness_status no AttentionSnapshot",
+    "TASK-FIOED-ADVERSARIAL-TESTS: Expansão de 5 novos testes adversariais em tests/adversarial/test_adversarial_fioed.py (total 12 testes)",
+    "TASK-FIOED-FINDINGS: Registro de FINDING-023 em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md",
+    "docs/epistemology/FIOED-FORMAL-MODEL.md",
+    "docs/research/FIOED-PRIOR-ART-AUDIT.md",
+    "src/idea_evolution/domain/early_epistemic_gate.py",
+    "tests/adversarial/test_adversarial_fioed.py",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-022.md",
+    "docs/context/checkpoints/CP-20260827-022.json"
+  ],
+  "new_decisions": [
+    "MEASUREMENT_NOT_THRESHOLD_DISCIPLINE: Métricas como profundidade e persistência são fatos observáveis; limiares numéricos são políticas a serem calibradas no receptor",
+    "EXPLORATORY_RENT_ALLOWED: Raciocínio sob incerteza em exploração aberta é permitido se houver pergunta clara, orçamento explícito e saída candidata",
+    "ATTENTION_SNAPSHOT_INCOMPLETENESS: Todo snapshot carrega obrigatoriamente status REPRESENTATION_ONLY",
+    "DECISION_REGRESSION_EVENT_TRACKING: Degradações na fronteira decisória são tipadas explicitamente como regressões"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "138/138 tests passing across 20 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "O modelo conceitual do FioED deve ser testado contra dados históricos no M05.3 para evitar que o framework se torne uma representação dogmática"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "FIOED_HARDENING_COMPLETE": true,
+    "PRIOR_ART_AUDITED": true,
+    "INVARIANTS_TESTED": true,
+    "READY_FOR_OFFLINE_CALIBRATION": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.3 FioED / LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION",
+  "authorized_next_scope": [
+    "Replay offline de dados históricos e calibração de métricas FioED (100% offline, zero chamadas reais)"
+  ],
+  "do_not_repeat": [
+    "Não alterar o SimpleLoopRunner de produção",
+    "Não executar inferência real paga sem calibração prévia offline"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 138 testes."
+}

@@ -5,22 +5,22 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Formalização FioED-01 Concluída
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Endurecimento FioED-01R1 Concluído
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Kernel FioED:** `FORMALIZED_AND_VERIFIED_OFFLINE` ([`docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md))
+- **Status do Kernel FioED:** `HARDENED_AND_VERIFIED_OFFLINE` ([`docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md))
 - **Status do Protótipo Lean IEE (L1):** `OFFLINE_PROTOTYPE_VALIDATED` ([`src/idea_evolution/orchestration/lean_loop.py`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/src/idea_evolution/orchestration/lean_loop.py))
 - **Status do Simple Loop Atual:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e inalterado)
-- **Total de Testes Automatizados:** **133 / 133 testes verdes** (100% offline)
+- **Total de Testes Automatizados:** **138 / 138 testes verdes** (100% offline)
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
 - **Varredura de Segredos:** `SECRET_SCAN: PASS`
-- **Último Checkpoint Imutável:** [`CP-20260827-021`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-021.md)
+- **Último Checkpoint Imutável:** [`CP-20260827-022`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-022.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
 - [x] Exegese do diálogo de 1982 em `docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md`.
 - [x] Doutrina central em `docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md` e modelo formal em `FIOED-FORMAL-MODEL.md`.
-- [x] Auditoria de arte prévia em `docs/research/FIOED-PRIOR-ART-AUDIT.md`.
-- [x] Suíte de 7 novos testes formais FioED em `tests/adversarial/test_adversarial_fioed.py`.
-- [x] Achado `FINDING-022` registrado em `docs/intelligence/FINDINGS.md`.
-- [x] Suíte de 133 testes automatizados e validadores de contexto 100% verdes.
+- [x] Auditoria de arte prévia e registro de dívidas em `docs/research/FIOED-PRIOR-ART-AUDIT.md`.
+- [x] Suíte de 12 testes formais FioED em `tests/adversarial/test_adversarial_fioed.py`.
+- [x] Achados `FINDING-022` e `FINDING-023` registrados em `docs/intelligence/FINDINGS.md`.
+- [x] Suíte de 138 testes automatizados e validadores de contexto 100% verdes.
