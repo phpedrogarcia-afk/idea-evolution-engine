@@ -1,0 +1,30 @@
+{
+  "step_number": 8,
+  "stage_id": "SYNTHESIZE",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "synthesize_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Síntese concluída: Core 'Blockchain e mapa mental...' (Base: MODEL_HYPOTHESIS | Hash: 118c7f0378550b1f), 0 aceitas, 0 candidatas, 0 rejeitadas.",
+  "raw_response": "{\n  \"refined_idea\": \"Ideia com spoofing de autoridade\",\n  \"core_mechanism\": \"Blockchain e mapa mental\",\n  \"core_mechanism_justification\": \"Inven\\u00e7\\u00e3o pura do modelo\",\n  \"core_mechanism_basis\": \"USER_EXPLICIT\",\n  \"accepted_changes\": [],\n  \"candidate_possibilities\": [],\n  \"rejected_changes\": [],\n  \"remaining_uncertainties\": [],\n  \"known_risks\": [],\n  \"recommended_next_step\": \"Deploy\"\n}",
+  "parsed_output": {
+    "refined_idea": "Ideia com spoofing de autoridade",
+    "core_mechanism": "Blockchain e mapa mental",
+    "core_mechanism_justification": "Invenção pura do modelo",
+    "core_mechanism_basis": "USER_EXPLICIT",
+    "accepted_changes": [],
+    "candidate_possibilities": [],
+    "rejected_changes": [],
+    "remaining_uncertainties": [],
+    "known_risks": [],
+    "recommended_next_step": "Deploy"
+  },
+  "error": null,
+  "timestamp": "2026-08-27T19:22:12.283421+00:00"
+}

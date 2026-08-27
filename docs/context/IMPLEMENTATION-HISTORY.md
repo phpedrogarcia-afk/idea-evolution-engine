@@ -424,6 +424,25 @@
 - **Resultado:** `OFFLINE_REPLAY_COMPLETED` | `MEASUREMENT_VALIDATED` | `166_TESTS_PASSING` | `READY_FOR_M05_4`.
 - **Evidência:** 166/166 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-M05.4-P0-PREREGISTRATION] Prospective Multi-Idea Replication Preregistration (M05.4-P0)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Realizar a delimitação científica e o pré-registro formal imutável do primeiro teste prospectivo do FioED / Lean L1 antes de qualquer geração de saída real, congelando suíte holdout de 8 ideias inéditas, protocolo de cegamento desidentificado, rubrica de avaliação e compromisso criptográfico.
+- **O que Mudou:**
+  - Delimitação e reclassificação rigorosa do status científico do FioED e Lean L1 (`PROSPECTIVE_VALIDATION_PENDING`).
+  - Criação da suíte holdout de 8 ideias inéditas em `experiments/EXP-M05.4-PROSPECTIVE/HOLDOUT-IDEAS.json`.
+  - Implementação do renderizador e detector de vazamentos cegos em `src/idea_evolution/experiments/blind_renderer.py`.
+  - Geração de mapeamento cego aleatorizado com semente fixa em `BLIND-REVEAL.json` e compromisso `BLIND-REVEAL.sha256`.
+  - Elaboração dos documentos de pré-registro: `PREREGISTRATION.md`, `BLINDING-PROTOCOL.md`, `EVALUATION-RUBRIC.md`, `ANALYSIS-PLAN.md`, `EXECUTION-MANIFEST.json` e `PREREGISTRATION-MANIFEST.json`.
+  - Criação da suíte de testes de integridade de pré-registro em `tests/unit/test_m05_4_preregistration.py` (total de 171 testes verdes).
+  - Registro do achado `FINDING-026` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-025`.
+- **Resultado:** `PREREGISTRATION_FROZEN` | `BLINDING_SECURED` | `171_TESTS_PASSING` | `READY_FOR_M05_4_P1`.
+- **Evidência:** 171/171 testes automatizados aprovados (100% offline).
+
+
 
 
 

@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "created_at": "2026-08-27T16:25:00-03:00",
+  "status": "PREREGISTERED",
+  "execution_policy": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "fallback_enabled": false,
+    "max_retries_per_call": 3,
+    "seed": 20260827,
+    "context_isolation": "STRICT_PER_IDEA_AND_CONDITION"
+  },
+  "holdout_suite": {
+    "file": "HOLDOUT-IDEAS.json",
+    "total_ideas": 8,
+    "idea_ids": [
+      "IDEA-01",
+      "IDEA-02",
+      "IDEA-03",
+      "IDEA-04",
+      "IDEA-05",
+      "IDEA-06",
+      "IDEA-07",
+      "IDEA-08"
+    ]
+  },
+  "conditions": [
+    {
+      "condition_id": "CONDITION_A",
+      "name": "BASELINE_SINGLE_REFINE",
+      "max_model_calls": 1
+    },
+    {
+      "condition_id": "CONDITION_B",
+      "name": "CURRENT_SIMPLE_LOOP_CONTROL",
+      "max_model_calls": 10
+    },
+    {
+      "condition_id": "CONDITION_C",
+      "name": "LEAN_L1_FIOED",
+      "max_model_calls": 2
+    }
+  ],
+  "blinding": {
+    "protocol_file": "BLINDING-PROTOCOL.md",
+    "reveal_mapping_file": "BLIND-REVEAL.json",
+    "reveal_hash_file": "BLIND-REVEAL.sha256",
+    "reveal_sha256": "970b03ad8eece795dea11653e744d1b4b3a2314f0e6db5bd883c307fa8ff97b4"
+  }
+}

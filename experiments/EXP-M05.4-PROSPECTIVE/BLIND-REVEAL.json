@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "seed": 20260827,
+  "mappings": {
+    "IDEA-01": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_A",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-02": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_A",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-03": {
+      "RESULT_1": "CONDITION_C",
+      "RESULT_2": "CONDITION_A",
+      "RESULT_3": "CONDITION_B"
+    },
+    "IDEA-04": {
+      "RESULT_1": "CONDITION_A",
+      "RESULT_2": "CONDITION_B",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-05": {
+      "RESULT_1": "CONDITION_C",
+      "RESULT_2": "CONDITION_B",
+      "RESULT_3": "CONDITION_A"
+    },
+    "IDEA-06": {
+      "RESULT_1": "CONDITION_A",
+      "RESULT_2": "CONDITION_B",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-07": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_C",
+      "RESULT_3": "CONDITION_A"
+    },
+    "IDEA-08": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_C",
+      "RESULT_3": "CONDITION_A"
+    }
+  }
+}

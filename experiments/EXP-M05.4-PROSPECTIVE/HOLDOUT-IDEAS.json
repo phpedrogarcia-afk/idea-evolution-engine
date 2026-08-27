@@ -1,0 +1,42 @@
+[
+  {
+    "idea_id": "IDEA-01",
+    "suite_class": "SIMPLE_CLEAR_PRODUCT",
+    "raw_idea": "Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos."
+  },
+  {
+    "idea_id": "IDEA-02",
+    "suite_class": "FERTILE_POETIC_IDEA",
+    "raw_idea": "Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento."
+  },
+  {
+    "idea_id": "IDEA-03",
+    "suite_class": "TWO_PLAUSIBLE_MECHANISMS",
+    "raw_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros."
+  },
+  {
+    "idea_id": "IDEA-04",
+    "suite_class": "EXPLICIT_HUMAN_CONSTRAINTS",
+    "raw_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login."
+  },
+  {
+    "idea_id": "IDEA-05",
+    "suite_class": "FACTUAL_REALITY_UNKNOWN",
+    "raw_idea": "Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã."
+  },
+  {
+    "idea_id": "IDEA-06",
+    "suite_class": "NORMATIVE_HUMAN_PREFERENCE",
+    "raw_idea": "Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados."
+  },
+  {
+    "idea_id": "IDEA-07",
+    "suite_class": "ATTRACTIVE_UNSUPPORTED_FEATURE_TRAP",
+    "raw_idea": "Um bloco de notas em linha de comando simples para salvar trechos rápidos de texto em arquivos markdown na pasta pessoal."
+  },
+  {
+    "idea_id": "IDEA-08",
+    "suite_class": "MIXED_UF_UG",
+    "raw_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar."
+  }
+]

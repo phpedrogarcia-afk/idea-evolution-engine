@@ -6,15 +6,16 @@
 ---
 
 ## 🟢 NOW (Próxima Missão Imediata)
-- [ ] **MISSION-M05.4-REAL-REPLICATION:** **M05.4 Multi-Idea Real Replication Experiment (IDEA-01 a IDEA-05)**
-  - **Objetivo:** Executar o experimento real comparando as Condições A (1 chamada), B (10 chamadas) e C (Lean L1 / FioED) em 5 ideias de complexidades variadas, com protocolo de blinding estrito e avaliação humana pré-congelada.
-  - **Diretriz Mandatória:** Definir o protocolo formal de blinding e a suíte de ideias antes de qualquer chamada real com API key.
+- [ ] **MISSION-M05.4-P1-REAL-EXECUTION:** **M05.4-P1 Prospective Multi-Idea Real Execution**
+  - **Objetivo:** Executar as três condições congeladas (A = Baseline 1 chamada, B = Simple Loop 10 chamadas, C = Lean L1 máx 2 chamadas) sobre as 8 ideias da suíte holdout (`HOLDOUT-IDEAS.json`) utilizando Groq / `openai/gpt-oss-120b`, renderizar os pacotes cegos desidentificados via `BlindRenderer` e congelar a avaliação humana antes da revelação.
+  - **Diretriz Mandatória:** Zero alterações de prompt, zero alterações de código ou regras durante a execução.
 
 ---
 
 ## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
-2. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
+1. [ ] **M05.4-P2-HUMAN-REVIEW-AND-REVEAL:** Avaliação humana cega, congelamento do review e abertura de `BLIND-REVEAL.json`.
+2. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
+3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
 
 ---
 

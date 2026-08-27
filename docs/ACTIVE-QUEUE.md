@@ -4,13 +4,13 @@
 
 ---
 
-## 🚦 Status Atual da Fila: REPLAY M05.3 CONCLUÍDO | PRÓXIMO: REPLICAÇÃO REAL M05.4
+## 🚦 Status Atual da Fila: PRÉ-REGISTRO M05.4-P0 CONCLUÍDO | PRÓXIMO: EXECUÇÃO REAL M05.4-P1
 
 ### 📌 Marco Recém-Concluído:
-- [x] **M05.3 FioED / Lean IEE Offline Replay & Adversarial Calibration:** Replay determinístico de M05.2 (A, B e C) via `fioed_replay.py`, confirmação empírica de desperdício em B ($P_e = 9$, regressões, profundidade 5), validação de $Q^*$ e Evidence Spoofing (0 aceitos), e 166 testes verdes (100% offline).
+- [x] **M05.4-P0 Prospective Multi-Idea Replication Preregistration:** Delimitação científica rigorosa, suíte holdout de 8 ideias inéditas (`HOLDOUT-IDEAS.json`), protocolo de cegamento desidentificado (`BlindRenderer`), compromisso criptográfico do reveal (`BLIND-REVEAL.sha256`), pré-registro de 10 predições e manifesto imutável (`PREREGISTRATION-MANIFEST.json`). Total de 171 testes verdes.
 
 ---
 
 ## 🎯 Próxima Missão Imediata:
-- **M05.4 MULTI-IDEA REAL REPLICATION EXPERIMENT:**
-  - *Objetivo:* Desenho e execução da replicação experimental real comparando A (1 chamada), B (10 chamadas) e C (Lean L1 / FioED) em 5 ideias com protocolo de blinding estrito 1-to-1 e avaliação humana pré-congelada.
+- **M05.4-P1 PROSPECTIVE MULTI-IDEA REAL EXECUTION:**
+  - *Objetivo:* Execução das condições congeladas A (Baseline 1 chamada), B (Simple Loop 10 chamadas) e C (Lean L1 máx 2 chamadas) nas 8 ideias inéditas via Groq / `openai/gpt-oss-120b`, gerando os pacotes desidentificados para a avaliação humana cega.

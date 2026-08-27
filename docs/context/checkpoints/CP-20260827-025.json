@@ -1,0 +1,90 @@
+{
+  "checkpoint_id": "CP-20260827-025",
+  "created_at": "2026-08-27T16:30:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.4-P0 PROSPECTIVE MULTI-IDEA REPLICATION PREREGISTRATION Complete: Holdout Suite of 8 Ideas Frozen, Blind Renderer and Sanitizer Built, Cryptographic Reveal Commitment Hashed, Preregistration Manifest Sealed, 171 Tests Passing, Ready for M05.4-P1",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-M05.3: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019, Protótipo Offline Lean L1 CP-020, Formalização FioED CP-021, Endurecimento CP-022, Ecologia de Ideias CP-023, Replay Offline M05.3 CP-024",
+    "TASK-M05.4-HOLDOUT-FREEZE: Elaboração e congelamento de HOLDOUT-IDEAS.json (8 ideias inéditas)",
+    "TASK-M05.4-BLIND-RENDERER: Implementação do renderizador e desidentificador em src/idea_evolution/experiments/blind_renderer.py",
+    "TASK-M05.4-REVEAL-COMMITMENT: Geração de BLIND-REVEAL.json e hash BLIND-REVEAL.sha256",
+    "TASK-M05.4-PREREGISTRATION-DOCS: Elaboração de PREREGISTRATION.md, BLINDING-PROTOCOL.md, EVALUATION-RUBRIC.md, ANALYSIS-PLAN.md, EXECUTION-MANIFEST.json e PREREGISTRATION-MANIFEST.json",
+    "TASK-M05.4-TESTS: Implementação da suíte de integridade em tests/unit/test_m05_4_preregistration.py",
+    "TASK-M05.4-FINDINGS: Registro de FINDING-026 e atualização de FINDING-025 em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.4-PROSPECTIVE/HOLDOUT-IDEAS.json",
+    "experiments/EXP-M05.4-PROSPECTIVE/PREREGISTRATION.md",
+    "experiments/EXP-M05.4-PROSPECTIVE/BLINDING-PROTOCOL.md",
+    "experiments/EXP-M05.4-PROSPECTIVE/EVALUATION-RUBRIC.md",
+    "experiments/EXP-M05.4-PROSPECTIVE/ANALYSIS-PLAN.md",
+    "experiments/EXP-M05.4-PROSPECTIVE/EXECUTION-MANIFEST.json",
+    "experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVEAL.json",
+    "experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVEAL.sha256",
+    "experiments/EXP-M05.4-PROSPECTIVE/PREREGISTRATION-MANIFEST.json",
+    "src/idea_evolution/experiments/blind_renderer.py",
+    "tests/unit/test_m05_4_preregistration.py",
+    "docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-025.md",
+    "docs/context/checkpoints/CP-20260827-025.json"
+  ],
+  "new_decisions": [
+    "SCIENTIFIC_STATUS_BOUNDED: FioED e Lean L1 classificados formalmente como PROSPECTIVE_VALIDATION_PENDING",
+    "HOLDOUT_SUITE_IMMUTABILITY: 8 ideias inéditas congeladas sob hash 8c098995... sem jargão interno",
+    "METADATA_LEAK_ELIMINATION: BlindRenderer sanitiza identificadores e padroniza o envelope de avaliação",
+    "CRYPTOGRAPHIC_REVEAL_COMMITMENT: Hash do reveal congelado antes da execução real",
+    "FROZEN_PREDICTIONS: 10 predições pré-registradas (PRED-01 a PRED-10) com critérios explícitos de vitória e derrota"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "171/171 tests passing across 23 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "A execução M05.4-P1 dependerá da estabilidade da API do Groq para o modelo openai/gpt-oss-120b"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "PREREGISTRATION_COMPLETE": true,
+    "HOLDOUT_SUITE_FROZEN": true,
+    "BLINDING_PROTOCOL_VERIFIED": true,
+    "READY_FOR_REAL_EXECUTION": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.4-P1 PROSPECTIVE MULTI-IDEA REAL EXECUTION",
+  "authorized_next_scope": [
+    "Execução estrita das condições congeladas A, B e C sobre as 8 ideias holdout via Groq / openai/gpt-oss-120b"
+  ],
+  "do_not_repeat": [
+    "Não alterar prompts ou condições durante a execução real",
+    "Não alterar a suíte de ideias",
+    "Não abrir BLIND-REVEAL.json antes de congelar a avaliação humana"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 171 testes."
+}

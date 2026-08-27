@@ -236,12 +236,22 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 
 ---
 
-### [FINDING-025] Validação Empírica de Replay e Calibração FioED (M05.3)
-- **Claim:** O replay determinístico do experimento real M05.2 e das fixtures adversariais confirmou que os sinais observáveis do FioED discriminam com precisão os modos de falha e sucesso epistêmico: (1) O caso de desperdício (Condição B, Simple Loop 10 chamadas) acumulou 9 passos de Persistência Sem Evidência ($P_e = 9$), 3 Regressões Decisórias graves e profundidade de intermediário 5, disparando os alertas de `AttachmentRisk` e `SourceRefresh`; (2) Os casos de alto valor (A=48 e C=44 na avaliação humana) apresentaram baixa persistência sem evidência, alto rendimento de `DecisionDelta` por chamada e zero ou baixa regressão; (3) 0 tentativas de `EvidenceSpoofing` foram admitidas (100% bloqueadas); (4) $Q^*$ demonstrou $0\%$ de falsos positivos com os 5 critérios formais; (5) O harness determinístico `fioed_replay.py` executou 100% offline com 166 testes verdes totais.
+### [FINDING-025] Replay Offline e Consistência Retrospectiva do FioED com M05.2 (M05.3)
+- **Claim:** O replay determinístico do experimento real M05.2 e das fixtures adversariais demonstrou que os sinais observáveis do FioED são retrospectivamente consistentes com os dados conhecidos de M05.2: (1) O caso de desperdício (Condição B, Simple Loop 10 chamadas) acumulou 9 passos de Persistência Sem Evidência ($P_e = 9$), 3 Regressões Decisórias graves e profundidade de intermediário 5, disparando os alertas de `AttachmentRisk` e `SourceRefresh`; (2) Os casos de alto valor (A=48 e C=44 na avaliação humana) apresentaram baixa persistência sem evidência e alto rendimento de `DecisionDelta` por chamada; (3) 0 tentativas de `EvidenceSpoofing` foram admitidas (100% bloqueadas); (4) $Q^*$ demonstrou $0\%$ de falsos positivos com os 5 critérios formais; (5) Ressalva epistêmica: como o FioED foi em parte motivado por M05.2, essa consistência retrospectiva não substitui a validação prospectiva independente.
 - **Evidence:** `docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md`, `src/idea_evolution/experiments/fioed_replay.py` e `tests/unit/test_fioed_replay.py`.
-- **Status:** `EMPIRICALLY_VALIDATED_OFFLINE`
-- **Implications:** O Lean IEE L1 e a teoria FioED estão validados e calibrados para a próxima missão experimental real: M05.4 Replicação Multi-Ideia (IDEA-01 a IDEA-05).
+- **Status:** `MECHANICALLY_VALIDATED_OFFLINE / RETROSPECTIVELY_CONSISTENT_WITH_M05.2 / PROSPECTIVE_VALIDATION_PENDING`
+- **Implications:** FioED e Lean L1 demonstraram conformidade mecânica e consistência retrospectiva, estando prontos para o primeiro teste empírico prospectivo cego em ideias inéditas (M05.4).
 - **Related Decisions:** [M05.3-FIOED-OFFLINE-REPLAY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md)
+
+---
+
+### [FINDING-026] Pré-registro Prospectivo e Congelamento da Suíte Holdout (M05.4-P0)
+- **Claim:** A primeira avaliação empírica prospectiva do FioED / Lean L1 foi formalmente pré-registrada e congelada antes da geração de qualquer saída real: (1) Suíte holdout de 8 ideias inéditas e minimalistas (`HOLDOUT-IDEAS.json`, hash `8c098995...`) cobrindo 8 classes epistêmicas distintas sem jargão interno; (2) Três condições congeladas: A (Baseline 1 chamada), B (Simple Loop controle 10 chamadas) e C (Lean L1 máx 2 chamadas); (3) Desfecho primário definido como Preferência Humana Cega por Ideia, complementado por 10 dimensões secundárias (incluindo Preservação Criativa e Moderação Apropriada); (4) Eliminação total de vazamentos de metadados via `BlindRenderer` determinístico (`src/idea_evolution/experiments/blind_renderer.py`); (5) Mapeamento cego aleatorizado por ideia com compromisso de hash imutável (`BLIND-REVEAL.sha256`); (6) 10 predições pré-registradas (PRED-01 a PRED-10) e critérios explícitos de derrota para C e vitória para A/B; (7) Manifesto de pré-registro congelado (`PREREGISTRATION-MANIFEST.json`) e 171 testes verdes (100% offline).
+- **Evidence:** `experiments/EXP-M05.4-PROSPECTIVE/`, `src/idea_evolution/experiments/blind_renderer.py` e `tests/unit/test_m05_4_preregistration.py`.
+- **Status:** `PREREGISTERED_AND_FROZEN_BEFORE_EXECUTION`
+- **Implications:** O experimento M05.4 está cientificamente protegido contra fitting retrospectivo e p-hacking, pronto para a execução com API key na missão M05.4-P1.
+- **Related Decisions:** [PREREGISTRATION.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/PREREGISTRATION.md), [BLINDING-PROTOCOL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/BLINDING-PROTOCOL.md)
+
 
 
 
