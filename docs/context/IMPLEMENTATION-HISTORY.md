@@ -321,6 +321,24 @@
 - **Resultado:** `M05.2_CLOSED_WITH_SINGLE_CASE_EVIDENCE` | `RUNTIME_UNCHANGED` | `LEAN_REDESIGN_QUEUED`.
 - **Evidência:** 114/114 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-LEAN-IEE-01] Lean IEE Donor-Guided Redesign (Missão Redesenho Lean IEE)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Redesenhar a arquitetura do IEE com base em valor decisório por chamada (*Decision Value per Call*), colhendo mecanismos e cicatrizes de doadores para eliminar desperdício epistêmico pré-gate e selecionar uma candidata minimalista para experimentação futura.
+- **O que Mudou:**
+  - Elaboração da colheita orientada ao receptor em `docs/architecture/LEAN-IEE-DONOR-HARVEST.md` (Arbor, Magentic-One, DCI, Google Co-Scientist, Stanford Ideator).
+  - Especificação arquitetural do Lean IEE em `docs/architecture/LEAN-IEE-DESIGN.md` formalizando `DecisionDelta`, `EpistemicRent` e o `EarlyEpistemicGate`.
+  - Verificação de orçamento de complexidade em `docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md`.
+  - Elaboração do plano experimental de replicação multicaso em `docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md` com 5 hipóteses falsificáveis (H-LEAN-001 a 005) e suíte IDEA-01 a 05.
+  - Registro de `ADR-019` selecionando a Candidata L1 (`Lean IEE + Early Epistemic Gate`) para prototipagem offline e classificando o Simple Loop atual como `REFERENCE_IMPLEMENTATION / CONTROL`.
+  - Zero alteração no runtime de produção e zero inferência real executada.
+  - Emissão do Checkpoint `CP-20260827-019`.
+- **Resultado:** `LEAN_DESIGN_COMPLETE` | `CANDIDATE_L1_SELECTED` | `RUNTIME_UNCHANGED`.
+- **Evidência:** 114/114 testes automatizados aprovados (100% offline).
+
+
 
 
 

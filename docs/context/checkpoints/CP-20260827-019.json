@@ -1,0 +1,76 @@
+{
+  "checkpoint_id": "CP-20260827-019",
+  "created_at": "2026-08-27T13:23:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission LEAN IEE REDESIGN Complete: Donor Harvesting Done, Candidate L1 Selected (ADR-019), Complexity Budget Verified, Replication Plan Drafted, Runtime Unchanged, 114 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-M05.2-POST-REVEAL: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018",
+    "TASK-LEAN-HARVEST: Elaboração de docs/architecture/LEAN-IEE-DONOR-HARVEST.md",
+    "TASK-LEAN-DESIGN: Elaboração de docs/architecture/LEAN-IEE-DESIGN.md formalizando L1, DecisionDelta e EarlyEpistemicGate",
+    "TASK-LEAN-BUDGET: Elaboração de docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md",
+    "TASK-LEAN-PLAN: Elaboração de docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md (H-LEAN-001 a 005 e IDEA-01 a 05)",
+    "TASK-LEAN-ADR-019: Registro de ADR-019 em docs/DECISIONS-LEDGER.md"
+  ],
+  "changed_files": [
+    "docs/architecture/LEAN-IEE-DONOR-HARVEST.md",
+    "docs/architecture/LEAN-IEE-DESIGN.md",
+    "docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md",
+    "docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md",
+    "docs/DECISIONS-LEDGER.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "ADR-019: Seleção da Arquitetura Candidata L1 (Lean IEE + Early Epistemic Gate)",
+    "CURRENT_SIMPLE_LOOP_CLASSIFIED_AS_CONTROL: Simple loop mantido intacto como grupo de controle",
+    "THINK_LITTLE_BY_DEFAULT_PRINCIPLE: Escalação condicional adotada apenas quando o Early Gate detectar incerteza material"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "114/114 tests passing across 18 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Gatilhos do Early Gate devem ser calibrados para evitar falso positivo ou falso negativo de escalação"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "LEAN_DESIGN_COMPLETE": true,
+    "SELECTED_CANDIDATE": "L1 (Lean IEE + Early Epistemic Gate)",
+    "RUNTIME_UNCHANGED": true,
+    "READY_FOR_OFFLINE_PROTOTYPE": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão LEAN IEE MINIMAL OFFLINE PROTOTYPE implementando contratos e runner offline para a Candidata L1",
+  "authorized_next_scope": [
+    "Prototipagem offline e contratos Pydantic para a Candidata L1 (100% offline, sem chamadas reais)"
+  ],
+  "do_not_repeat": [
+    "Não alterar o SimpleLoopRunner de produção atual",
+    "Não disparar inferência real sem protótipo offline testado"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 114 testes."
+}

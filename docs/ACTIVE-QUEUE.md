@@ -4,14 +4,14 @@
 
 ---
 
-## 🚦 Status Atual da Fila: EXPERIMENTO M05.2 ENCERRADO | PRÓXIMO: LEAN IEE REDESIGN
+## 🚦 Status Atual da Fila: REDESENHO LEAN IEE CONCLUÍDO | PRÓXIMO: PROTÓTIPO OFFLINE L1
 
 ### 📌 Marco Recém-Concluído:
-- [x] **M05.2 Pós-Revelação:** Encerramento formal do experimento A/B/C (`POST-REVEAL-ANALYSIS.md`), mapeamento conhecido (`A=48, B=31, C=44`), registro de `ADR-018` e achados `FINDING-019` e `FINDING-020`.
+- [x] **Redesenho Lean IEE (LEAN-IEE-01):** Colheita de doadores (`LEAN-IEE-DONOR-HARVEST.md`), especificação (`LEAN-IEE-DESIGN.md`), orçamento de complexidade (`LEAN-IEE-COMPLEXITY-BUDGET.md`), plano experimental (`LEAN-IEE-EXPERIMENT-PLAN.md`) e decisão `ADR-019` selecionando a Candidata L1.
 
 ---
 
 ## 🎯 Próxima Missão Imediata:
-- **LEAN IEE DONOR-GUIDED REDESIGN:**
-  - *Objetivo:* Projetar a menor arquitetura condicional (`LEAN_FIRST_PASS` + `DETERMINISTIC_AUTHORITY_CHECK` + `CONDITIONAL_ESCALATION`) utilizando inteligência de doadores para evitar desperdício epistêmico pré-gate.
-  - *Regra:* Começar por colheita documental em doadores e design de contratos, sem alterações no código de execução neste primeiro momento.
+- **LEAN IEE MINIMAL OFFLINE PROTOTYPE:**
+  - *Objetivo:* Criar os contratos Pydantic e o executor offline desacoplado da Candidata L1 com testes unitários determinísticos (100% offline).
+  - *Regra:* Preservar intacto o `SimpleLoopRunner` de produção atual como grupo de controle; zero chamadas de inferência real nesta etapa.

@@ -5,18 +5,17 @@
 
 ---
 
-## 🟢 NOW (Próxima Missão de Arquitetura)
-- [ ] **MISSION-LEAN-IEE-01:** **Lean IEE Donor-Guided Redesign**
-  - **Objetivo:** Usar as autópsias de doadores existentes (Arbor, IDEAgent, Magentic-One, DCI, Google Co-Scientist) e as evidências do M05.2 para projetar a menor arquitetura condicional capaz de preservar proteções constitucionais sem pagar o custo de esteira multiestágio fixa.
-  - **Diretriz Mandatória:** Iniciar com colheita em doadores e design de arquitetura; NÃO fazer modificações no código de runtime nesta etapa inicial.
+## 🟢 NOW (Próxima Missão Imediata)
+- [ ] **MISSION-LEAN-PROTOTYPE-01:** **Lean IEE Minimal Offline Prototype**
+  - **Objetivo:** Implementar os contratos offline, schemas Pydantic e o runner desacoplado para a Candidata L1 (`LeanFirstPass` + `EarlyEpistemicGate` + `ConditionalEscalation`), com suíte de testes unitários determinísticos (100% offline).
+  - **Diretriz Mandatória:** NÃO alterar o `SimpleLoopRunner` de produção existente (mantido como Controle). NÃO executar chamadas reais de inferência.
 
 ---
 
 ## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **DONOR-HARVEST-LEAN:** Colheita de mecanismos de escalação condicional em doadores catalogados (`RECEIVER_GAP: DECISION_VALUE_PER_CALL`).
-2. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricos do IEE sob o modelo de linhagem `IdeaLineageNode`.
-3. [ ] **EXP-FLAT-VS-LINEAGE:** Experimento controlado comparando Simple Loop plano vs Simple Loop com contexto de linhagem/memória negativa.
-4. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias profundas de doadores no arsenal.
+1. [ ] **EXP-M05.3-REPLICATION-SETUP:** Preparação do harness de teste da suíte de replicação multicaso (IDEA-01 a IDEA-05).
+2. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricos sob o modelo de linhagem `IdeaLineageNode`.
+3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias profundas de doadores secundários no arsenal.
 
 ---
 

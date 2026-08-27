@@ -182,4 +182,14 @@
 - **Decisão:** Encerrar formalmente o marco M05.2 com a evidência obtida (`M05.2_CLOSED_WITH_SINGLE_CASE_EVIDENCE`) e direcionar a próxima missão para o design arquitetural de um Lean IEE (primeira passada enxuta + verificação determinística de autoridade + escalação condicional orientada por doadores), sem modificar o código de produção nesta etapa.
 - **Consequências:** Foco científico em maximizar o valor de decisão por chamada de modelo (*Decision Value per Call*) sem pagar aluguel de complexidade fixa.
 
+---
+
+### <a id="adr-019"></a> ADR-019: Seleção da Arquitetura Candidata L1 (Lean IEE + Early Epistemic Gate)
+- **Data:** 2026-08-27
+- **Status:** `ACCEPTED` (Classificação: `SELECTED_FOR_EXPERIMENT`)
+- **Contexto:** Conclusão do redesenho arquitetural orientado a doadores (Missão LEAN-IEE-01). O Simple Loop fixo atual foi reclassificado como `REFERENCE_IMPLEMENTATION / CONTROL`.
+- **Decisão:** Selecionar a Candidata **L1 (Lean IEE + Early Gate)** como o alvo de prototipagem offline e teste comparativo futuro (M05.3). A arquitetura executa 1 chamada nominal de primeira passada + validação determinística de autoridade + no máximo 1 chamada de escalação seletiva sob gatilho de risco material.
+- **Consequências:** Redução de 80% a 90% no consumo de inferência para ideias simples, eliminação de desperdício epistêmico pré-gate e preservação estrita de todos os invariantes de autoridade e ontologia.
+
+
 
