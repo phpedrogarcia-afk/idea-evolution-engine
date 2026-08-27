@@ -4,13 +4,13 @@
 
 ---
 
-## 🚦 Status Atual da Fila: ENDURECIMENTO FIOED-01R1 CONCLUÍDO | PRÓXIMO: CALIBRAÇÃO M05.3
+## 🚦 Status Atual da Fila: FIOED-02 CONCLUÍDO (FIOED CONGELADO) | PRÓXIMO: CALIBRAÇÃO M05.3
 
 ### 📌 Marco Recém-Concluído:
-- [x] **Fio Epistemic Dynamics Formal Integrity & Hardening (FioED-01R1):** Eliminação de precisão arbitrária, correção de metadados do Arbor, classificação epistêmica de fórmulas, distinção `EXPLOITATIVE` vs `EXPLORATORY` rent, metadados de incompletude no `AttentionSnapshot` e 12 testes formais (138 testes verdes).
+- [x] **FioED-02 Idea Ecology & Reality Boundary:** Formalização de $U_f$ vs $U_g$, Zona de Incubação $Z_p$, Kernel de Identidade $K$, `PressureReadiness`, 4 verbos operacionais, Questões Discriminativas $Q^*$, 3 Fronteiras da Realidade, `EvidencePassport`, `TestabilityBinding` congelado, `EvidenceAdmissionGate` e 24 novos testes adversariais (162 testes verdes).
 
 ---
 
 ## 🎯 Próxima Missão Imediata:
 - **M05.3 FIOED / LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION:**
-  - *Objetivo:* Replay offline de dados de runs históricas aplicando métricas do FioED para calibração de limiares do Early Gate (100% offline).
+  - *Objetivo:* Replay offline de dados de runs históricas aplicando o modelo FioED congelado para calibração empírica dos limiares de falso positivo/negativo (100% offline).

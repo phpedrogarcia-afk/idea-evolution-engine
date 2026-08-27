@@ -7,8 +7,8 @@
 
 ## 🟢 NOW (Próxima Missão Imediata)
 - [ ] **MISSION-M05.3-CALIBRATION:** **M05.3 FioED / Lean IEE Offline Replay & Adversarial Calibration**
-  - **Objetivo:** Replay offline de dados históricos de execuções do IEE aplicando as métricas do FioED (`IntermediaryDepth`, `EvidenceFreePersistence`, `DriftRiskVector`, `DecisionDeltaRecord`, `MemoryAdmissionDecision`) para calibrar os limiares de falso positivo/falso negativo de escalação do `EarlyEpistemicGate`.
-  - **Diretriz Mandatória:** Execução 100% offline (0 chamadas reais). Preservar o Simple Loop como controle.
+  - **Objetivo:** Replay offline de dados históricos de execuções do IEE aplicando o modelo FioED congelado (`IntermediaryDepth`, `EvidenceFreePersistence`, `DriftRiskVector`, `DecisionDeltaRecord`, `U_f`/`U_g`, $Q^*$, `PressureReadiness`, `EvidenceAdmissionGate`) para calibrar empiricamente os limiares de falso positivo/falso negativo de escalação do `EarlyEpistemicGate`.
+  - **Diretriz Mandatória:** Execução 100% offline (0 chamadas reais). Preservar o Simple Loop como controle. Manter definições do FioED congeladas durante o replay.
 
 ---
 

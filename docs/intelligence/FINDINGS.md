@@ -225,6 +225,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** FioED pronto com máxima integridade para a Missão M05.3 de replay offline e calibração de limiares com dados reais.
 - **Related Decisions:** [FIO-EPISTEMIC-DYNAMICS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md), [FIOED-FORMAL-MODEL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-FORMAL-MODEL.md), [FIOED-PRIOR-ART-AUDIT.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/research/FIOED-PRIOR-ART-AUDIT.md)
 
+---
+
+### [FINDING-024] Institucionalização da Ecologia de Ideias e Fronteira da Realidade (FioED-02)
+- **Claim:** A expansão FioED-02 integrou com sucesso a dimensão da incubação criativa à eficiência epistêmica: (1) Rejeição do modelo 'apenas arena' e formalização de $U_f$ (Fertile Unknown) e $U_g$ (Gap Unknown); (2) Zona de Incubação Protegida ($Z_p$) e Kernel de Identidade ($K(h)$) com isolamento estrito de falhas locais; (3) Vetor estruturado `PressureReadiness` e 4 verbos operacionais (`SEE`, `KEEP`, `PRESS`, `COMMIT`); (4) Questões Discriminativas ($Q^*$) com requisito mandatório de discriminação de estado; (5) As 3 Fronteiras da Realidade (Capacidade, Proveniência e Transição), `EvidencePassport` emitido por canal físico e estado `WAITING_FOR_REALITY`; (6) `TestabilityBinding` pré-declarado e congelado antes da observação; (7) Veto mecânico a `EVIDENCE_SPOOFING` via `EvidenceAdmissionGate` determinístico e validação de 24 novos testes adversariais (total de 162 testes verdes).
+- **Evidence:** `docs/epistemology/FIOED-IDEA-ECOLOGY.md`, `docs/epistemology/FIOED-REALITY-BOUNDARY.md`, `src/idea_evolution/domain/idea_ecology.py`, `src/idea_evolution/domain/evidence_boundary.py` e `tests/adversarial/test_adversarial_idea_ecology.py`.
+- **Status:** `FORMALIZED_AND_VERIFIED_OFFLINE`
+- **Implications:** O modelo epistêmico completo está congelado para a execução da missão M05.3 de replay offline e calibração de limiares com traces reais.
+- **Related Decisions:** [FIOED-IDEA-ECOLOGY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-IDEA-ECOLOGY.md), [FIOED-REALITY-BOUNDARY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-REALITY-BOUNDARY.md)
+
+
 
 
 

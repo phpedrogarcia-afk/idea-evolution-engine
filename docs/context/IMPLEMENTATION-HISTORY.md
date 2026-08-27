@@ -391,6 +391,23 @@
 - **Resultado:** `FIOED_HARDENED` | `NUMERIC_PRECISION_BOUNDED` | `ARBOR_CITATION_CORRECTED` | `138_TESTS_PASSING`.
 - **Evidência:** 138/138 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-FIOED-02] Idea Ecology & Reality Boundary (Ecologia de Ideias e Fronteira da Realidade)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Integrar a dimensão de incubação criativa à eficiência epistêmica, formalizando Fertile Unknowns ($U_f$), Gap Unknowns ($U_g$), Zona de Incubação ($Z_p$), Kernel de Identidade ($K$), PressureReadiness, os 4 verbos operacionais (`SEE`, `KEEP`, `PRESS`, `COMMIT`), Questões Discriminativas ($Q^*$), as 3 Fronteiras da Realidade (Capacidade, Proveniência e Transição), `EvidencePassport` e `EvidenceAdmissionGate` determinístico.
+- **O que Mudou:**
+  - Elaboração de `docs/epistemology/FIOED-IDEA-ECOLOGY.md` e `docs/epistemology/FIOED-REALITY-BOUNDARY.md`.
+  - Implementação de contratos de domínio em `src/idea_evolution/domain/idea_ecology.py` e `src/idea_evolution/domain/evidence_boundary.py`.
+  - Implementação da suíte com 24 testes adversariais em `tests/adversarial/test_adversarial_idea_ecology.py` (total de 162 testes verdes).
+  - Registro do achado `FINDING-024` em `docs/intelligence/FINDINGS.md`.
+  - Congelamento formal do modelo teórico do FioED para a missão M05.3.
+  - Emissão do Checkpoint `CP-20260827-023`.
+- **Resultado:** `IDEA_ECOLOGY_FORMALIZED` | `REALITY_BOUNDARY_ENFORCED` | `162_TESTS_PASSING` | `MODEL_FROZEN_FOR_M05_3`.
+- **Evidência:** 162/162 testes automatizados aprovados (100% offline).
+
+
 
 
 

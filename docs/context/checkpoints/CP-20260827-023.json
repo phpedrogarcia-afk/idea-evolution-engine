@@ -1,0 +1,84 @@
+{
+  "checkpoint_id": "CP-20260827-023",
+  "created_at": "2026-08-27T15:50:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission FioED-02 IDEA ECOLOGY & REALITY BOUNDARY Complete: Fertile Unknowns, Identity Kernel, PressureReadiness, Discriminating Questions Q*, 3 Reality Boundaries, EvidencePassport, Frozen Bindings, EvidenceAdmissionGate, 162 Tests Passing, Model Frozen for M05.3",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-FIOED-01R1: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019, Protótipo Offline Lean L1 CP-020, Formalização FioED CP-021, Endurecimento CP-022",
+    "TASK-FIOED-IDEA-ECOLOGY: Elaboração de docs/epistemology/FIOED-IDEA-ECOLOGY.md e contratos em src/idea_evolution/domain/idea_ecology.py",
+    "TASK-FIOED-REALITY-BOUNDARY: Elaboração de docs/epistemology/FIOED-REALITY-BOUNDARY.md e contratos em src/idea_evolution/domain/evidence_boundary.py",
+    "TASK-FIOED-ADVERSARIAL-ECOLOGY-TESTS: Criação de 24 testes adversariais em tests/adversarial/test_adversarial_idea_ecology.py",
+    "TASK-FIOED-FINDINGS: Registro de FINDING-024 em docs/intelligence/FINDINGS.md",
+    "TASK-FIOED-MODEL-FREEZE: Congelamento formal do modelo FioED para a missão M05.3"
+  ],
+  "changed_files": [
+    "docs/epistemology/FIOED-IDEA-ECOLOGY.md",
+    "docs/epistemology/FIOED-REALITY-BOUNDARY.md",
+    "src/idea_evolution/domain/idea_ecology.py",
+    "src/idea_evolution/domain/evidence_boundary.py",
+    "tests/adversarial/test_adversarial_idea_ecology.py",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-023.md",
+    "docs/context/checkpoints/CP-20260827-023.json"
+  ],
+  "new_decisions": [
+    "ECOLOGICAL_LIFECYCLE_MODEL: Rejeição do modelo apenas-arena em favor de incubação, dormência e coexistência",
+    "FERTILE_UNKNOWN_PROTECTION: U_f preservado em Zona de Incubação Z_p sem exigência de Decision Delta imediato",
+    "LOCAL_PRESSURE_CONTAINMENT: Falhas de mecanismos técnicos h_i são estritamente locais e não invalidam o Kernel K(h)",
+    "THREE_REALITY_BOUNDARIES: Separação de capacidade generativa, atribuição de proveniência por canal físico e veto à promoção unilateral",
+    "FROZEN_BINDING_RULE: Regras de interpretação de teste não podem ser alteradas pós-observação",
+    "SYNTHETIC_EVIDENCE_BOUNDARY: Personas e votos de LLM podem abrir perguntas empíricas, mas jamais fechá-las",
+    "FIOED_THEORY_FROZEN_FOR_CALIBRATION: Modelo FioED formalmente congelado para o replay offline M05.3"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "162/162 tests passing across 21 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "O modelo FioED congelado deve ser avaliado no M05.3 contra dados históricos reais para medir a taxa de falsos positivos/negativos na classificação U_f vs U_g"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "IDEA_ECOLOGY_COMPLETE": true,
+    "REALITY_BOUNDARY_ENFORCED": true,
+    "INVARIANTS_TESTED": true,
+    "READY_FOR_OFFLINE_CALIBRATION": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.3 FioED / LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION",
+  "authorized_next_scope": [
+    "Replay offline de dados históricos e calibração empírica do modelo FioED congelado (100% offline, zero chamadas reais)"
+  ],
+  "do_not_repeat": [
+    "Não alterar o SimpleLoopRunner de produção",
+    "Não alterar as definições conceituais do FioED durante a calibração M05.3",
+    "Não executar inferência real paga sem calibração prévia offline"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 162 testes."
+}
