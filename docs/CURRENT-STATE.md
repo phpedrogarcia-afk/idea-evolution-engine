@@ -5,21 +5,22 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Protótipo Offline Lean IEE L1 Validado
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Formalização FioED-01 Concluída
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
+- **Status do Kernel FioED:** `FORMALIZED_AND_VERIFIED_OFFLINE` ([`docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md))
 - **Status do Protótipo Lean IEE (L1):** `OFFLINE_PROTOTYPE_VALIDATED` ([`src/idea_evolution/orchestration/lean_loop.py`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/src/idea_evolution/orchestration/lean_loop.py))
 - **Status do Simple Loop Atual:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e inalterado)
-- **Invariante de Chamadas:** `LEAN_L1_MAX_MODEL_CALLS = 2` (12/12 testes adversariais aprovados)
-- **Total de Testes Automatizados:** **126 / 126 testes verdes** (100% offline)
+- **Total de Testes Automatizados:** **133 / 133 testes verdes** (100% offline)
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
 - **Varredura de Segredos:** `SECRET_SCAN: PASS`
-- **Último Checkpoint Imutável:** [`CP-20260827-020`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-020.md)
+- **Último Checkpoint Imutável:** [`CP-20260827-021`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-021.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
-- [x] Implementação do `LeanLoopRunner` e `EarlyEpistemicGate` em `src/idea_evolution/`.
-- [x] Suíte adversarial T1-T12 em `tests/adversarial/test_adversarial_lean_iee.py`.
-- [x] Correções epistêmicas aplicadas em `docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md` e `docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md`.
-- [x] Achado `FINDING-021` registrado em `docs/intelligence/FINDINGS.md`.
-- [x] Suíte de 126 testes automatizados e validadores de contexto 100% verdes.
+- [x] Exegese do diálogo de 1982 em `docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md`.
+- [x] Doutrina central em `docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md` e modelo formal em `FIOED-FORMAL-MODEL.md`.
+- [x] Auditoria de arte prévia em `docs/research/FIOED-PRIOR-ART-AUDIT.md`.
+- [x] Suíte de 7 novos testes formais FioED em `tests/adversarial/test_adversarial_fioed.py`.
+- [x] Achado `FINDING-022` registrado em `docs/intelligence/FINDINGS.md`.
+- [x] Suíte de 133 testes automatizados e validadores de contexto 100% verdes.

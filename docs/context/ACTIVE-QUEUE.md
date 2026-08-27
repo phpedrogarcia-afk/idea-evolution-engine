@@ -6,16 +6,16 @@
 ---
 
 ## 🟢 NOW (Próxima Missão Imediata)
-- [ ] **MISSION-M05.3-CALIBRATION:** **M05.3 Lean IEE Offline Replay & Adversarial Calibration**
-  - **Objetivo:** Usar dados de runs históricas do IEE e cenários sintéticos adicionais para calibrar os limiares de falso positivo/falso negativo do `EarlyEpistemicGate`, refinar a representação de `DecisionDeltaRecord` e testar a interação com `NegativeKnowledgeRecord` offline.
-  - **Diretriz Mandatória:** NÃO executar inferência real nesta etapa; calibração 100% offline. Preservar o `SimpleLoopRunner` como grupo de controle.
+- [ ] **MISSION-M05.3-CALIBRATION:** **M05.3 FioED / Lean IEE Offline Replay & Adversarial Calibration**
+  - **Objetivo:** Replay offline de dados históricos de execuções do IEE aplicando as métricas do FioED (`IntermediaryDepth`, `EvidenceFreePersistence`, `DriftRiskVector`, `DecisionDeltaRecord`, `MemoryAdmissionDecision`) para calibrar os limiares de falso positivo/falso negativo de escalação do `EarlyEpistemicGate`.
+  - **Diretriz Mandatória:** Execução 100% offline (0 chamadas reais). Preservar o Simple Loop como controle.
 
 ---
 
 ## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **EXP-M05.4-REAL-REPLICATION:** Execução do experimento de replicação multicaso (IDEA-01 a IDEA-05) contra provedores reais com blinding 1-to-1.
-2. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricas sob o modelo de linhagem `IdeaLineageNode`.
-3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias profundas de doadores secundários no arsenal.
+1. [ ] **EXP-M05.4-REAL-REPLICATION:** Execução da replicação multicaso (IDEA-01 a IDEA-05) contra provedores reais com blinding 1-to-1.
+2. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
+3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
 
 ---
 

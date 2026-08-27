@@ -92,12 +92,33 @@ class FocusedEscalationOutput(BaseModel):
     updated_next_action: str = ""
 
 
+class DecisionDeltaEventType(str, Enum):
+    """Tipos de eventos discretos de destravamento ou regressão da fronteira de decisão."""
+    AMBIGUITY_RESOLVED = "AMBIGUITY_RESOLVED"
+    ASSUMPTION_EXPOSED = "ASSUMPTION_EXPOSED"
+    OPTION_ADDED = "OPTION_ADDED"
+    OPTION_REJECTED = "OPTION_REJECTED"
+    TEST_IDENTIFIED = "TEST_IDENTIFIED"
+    HUMAN_DECISION_IDENTIFIED = "HUMAN_DECISION_IDENTIFIED"
+    EVIDENCE_CHANGED_DECISION = "EVIDENCE_CHANGED_DECISION"
+    FALSE_REQUIREMENT_PREVENTED = "FALSE_REQUIREMENT_PREVENTED"
+    TENSION_CLARIFIED = "TENSION_CLARIFIED"
+    NEXT_ACTION_CHANGED = "NEXT_ACTION_CHANGED"
+    # Regressões
+    SOURCE_DRIFT_INCREASED = "SOURCE_DRIFT_INCREASED"
+    UNSUPPORTED_REQUIREMENT_ADDED = "UNSUPPORTED_REQUIREMENT_ADDED"
+    FALSE_CERTAINTY_CREATED = "FALSE_CERTAINTY_CREATED"
+    VALID_OPTION_ERASED = "VALID_OPTION_ERASED"
+    TENSION_SILENTLY_REMOVED = "TENSION_SILENTLY_REMOVED"
+
+
 class DecisionDeltaRecord(BaseModel):
     """
     Registro estruturado de DecisionDelta (O que mudou que ajuda o humano a decidir o que fazer a seguir).
     NÃO é um score numérico artificial; é um registro factual de deltas.
     """
     delta_id: str
+    delta_events: List[DecisionDeltaEventType] = Field(default_factory=list)
     before_uncertainties: List[str] = Field(default_factory=list)
     after_uncertainties: List[str] = Field(default_factory=list)
     resolved_items: List[str] = Field(default_factory=list)
@@ -123,6 +144,46 @@ class EpistemicRentRecord(BaseModel):
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
 
 
+class AttentionSnapshot(BaseModel):
+    """
+    Snapshot determinístico do campo global de atenção epistêmica A(X_t).
+    Não é um resumo gerado por IA; é um objeto estruturado de dados observáveis.
+    """
+    snapshot_id: str
+    source_anchor_refs: List[str] = Field(default_factory=list)
+    material_claims_count: int = 0
+    grounded_claims_count: int = 0
+    ungrounded_claims_count: int = 0
+    max_intermediary_depth: int = 0
+    evidence_free_elaboration_count: int = 0
+    authority_spoofing_detected: bool = False
+    unresolved_tensions_count: int = 0
+    source_refresh_required: bool = False
+    attachment_risk_detected: bool = False
+    drift_risk_vector: List[int] = Field(default_factory=list)
+    created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
+
+
+class MemoryAdmissionVerdict(str, Enum):
+    ADMIT_NEGATIVE_KNOWLEDGE = "ADMIT_NEGATIVE_KNOWLEDGE"
+    ADMIT_DONOR_KNOWLEDGE = "ADMIT_DONOR_KNOWLEDGE"
+    ADMIT_HUMAN_DECISION = "ADMIT_HUMAN_DECISION"
+    REJECT_EPHEMERAL_SPECULATION = "REJECT_EPHEMERAL_SPECULATION"
+
+
+class MemoryAdmissionDecision(BaseModel):
+    """
+    Decisão determinística de admissão em memória institucional durável.
+    CONVERSATION != DURABLE MEMORY.
+    """
+    decision: MemoryAdmissionVerdict
+    candidate_content: str
+    has_provenance: bool
+    has_scope_and_reopen: bool
+    has_decision_relevance: bool
+    reason: str
+
+
 class GateEvaluationResult(BaseModel):
     """Resultado da avaliação determinística do Early Epistemic Gate."""
     outcome: GateOutcome
@@ -132,7 +193,9 @@ class GateEvaluationResult(BaseModel):
     unsupported_candidate_count: int = 0
     negative_knowledge_match: Optional[str] = None
     rent_record: Optional[EpistemicRentRecord] = None
+    attention_snapshot: Optional[AttentionSnapshot] = None
     explanation: str = ""
+
 
 
 class EarlyEpistemicGate:
@@ -282,7 +345,30 @@ class EarlyEpistemicGate:
                 explanation="Escalação justificada para delineamento de teste empírico da realidade.",
             )
 
-        # 8. Regra Fundamental de Contenção de Desperdício Epistêmico (Epistemic Waste Prevention):
+        # 8. Construir AttentionSnapshot determinístico A(X_t)
+        total_claims = 1 + len(first_pass.competing_alternatives)
+        grounded_count = total_claims - unsupported_count
+        interm_depth = 1 if grounded_count > 0 else 2
+        ev_free_count = 1 if unsupported_count > 0 else 0
+        src_refresh = (interm_depth >= 2 and unsupported_count > 0)
+        attach_risk = (ev_free_count >= 1 and len(first_pass.remaining_uncertainties) == 0 and len(severe_vulns) == 0)
+
+        snapshot = AttentionSnapshot(
+            snapshot_id=f"ATTN-{hashlib.sha256(original_text.encode()).hexdigest()[:8]}",
+            source_anchor_refs=[source_anchor.source_id],
+            material_claims_count=total_claims,
+            grounded_claims_count=grounded_count,
+            ungrounded_claims_count=unsupported_count,
+            max_intermediary_depth=interm_depth,
+            evidence_free_elaboration_count=ev_free_count,
+            authority_spoofing_detected=authority_spoofing,
+            unresolved_tensions_count=len(first_pass.material_ambiguities),
+            source_refresh_required=src_refresh,
+            attachment_risk_detected=attach_risk,
+            drift_risk_vector=[unsupported_count, interm_depth, ev_free_count, len(first_pass.material_ambiguities), 1 if authority_spoofing else 0],
+        )
+
+        # Regra Fundamental de Contenção de Desperdício Epistêmico (Epistemic Waste Prevention):
         # A mera existência de hipóteses inventadas pelo modelo (unsupported_count > 0)
         # NÃO autoriza escalação nem outra chamada de modelo.
         return GateEvaluationResult(
@@ -292,5 +378,7 @@ class EarlyEpistemicGate:
             authority_spoofing_detected=authority_spoofing,
             unsupported_candidate_count=unsupported_count,
             negative_knowledge_match=neg_match,
+            attention_snapshot=snapshot,
             explanation="Ideia suficientemente estruturada sem bloqueios críticos imediatos. Retorno imediato após 1 chamada.",
         )
+

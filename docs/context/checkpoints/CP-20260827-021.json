@@ -1,0 +1,83 @@
+{
+  "checkpoint_id": "CP-20260827-021",
+  "created_at": "2026-08-27T14:14:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission FIO EPISTEMIC DYNAMICS (FioED-01) Complete: Philosophy Exegesis, Formal State Model, 15 Epistemic Laws, A->C->A Cycle, Prior Art Audit, Executable AttentionSnapshot, 133 Tests Passing, Zero Real Calls",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-LEAN-PROTOTYPE-01: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019, Protótipo Offline Lean L1 CP-020",
+    "TASK-FIOED-SOURCE-MAP: Elaboração de docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md",
+    "TASK-FIOED-DOCTRINE: Elaboração de docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md",
+    "TASK-FIOED-FORMAL-MODEL: Elaboração de docs/epistemology/FIOED-FORMAL-MODEL.md",
+    "TASK-FIOED-PRIOR-ART: Elaboração de docs/research/FIOED-PRIOR-ART-AUDIT.md",
+    "TASK-FIOED-EXECUTABLE-COMPONENTS: Implementação de AttentionSnapshot, MemoryAdmissionDecision e DecisionDeltaEventType em src/idea_evolution/domain/early_epistemic_gate.py",
+    "TASK-FIOED-ADVERSARIAL-TESTS: Criação de 7 testes adversariais em tests/adversarial/test_adversarial_fioed.py",
+    "TASK-FIOED-FINDINGS: Registro de FINDING-022 em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md",
+    "docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md",
+    "docs/epistemology/FIOED-FORMAL-MODEL.md",
+    "docs/research/FIOED-PRIOR-ART-AUDIT.md",
+    "src/idea_evolution/domain/early_epistemic_gate.py",
+    "tests/adversarial/test_adversarial_fioed.py",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-021.md",
+    "docs/context/checkpoints/CP-20260827-021.json"
+  ],
+  "new_decisions": [
+    "FOUR_EPISTEMIC_LAYERS_SEPARATION: Separação obrigatória entre Filosofia da Fonte, Engenharia FioIdeias, Arte Prévia Externa e Evidência do Receptor",
+    "A_C_A_CYCLE_INVARIANT: Todo resultado de concentração focada exige re-atenção determinística global antes da conclusão",
+    "NO_UNSUPPORTED_NOVELTY_CLAIMS: Posicionamento rigoroso das dívidas científicas sem falsas alegações de primeira descoberta",
+    "SUNK_COST_IMMUNITY_LAW: Investimento de chamadas/tokens não altera probabilidade ou autoridade de verdade de uma hipótese"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "133/133 tests passing across 20 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "O modelo conceitual do FioED deve ser testado contra dados históricos no M05.3 para evitar que o framework se torne uma representação dogmática"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "FIOED_FORMALIZATION_COMPLETE": true,
+    "PRIOR_ART_AUDITED": true,
+    "INVARIANTS_TESTED": true,
+    "READY_FOR_OFFLINE_CALIBRATION": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.3 FioED / LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION",
+  "authorized_next_scope": [
+    "Replay offline de dados históricos e calibração de métricas FioED (100% offline, zero chamadas reais)"
+  ],
+  "do_not_repeat": [
+    "Não alterar o SimpleLoopRunner de produção",
+    "Não executar inferência real paga sem calibração prévia offline"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 133 testes."
+}

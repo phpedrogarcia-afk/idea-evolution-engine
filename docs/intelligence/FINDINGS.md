@@ -207,6 +207,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Arquitetura candidata L1 pronta para calibração e replay offline (M05.3).
 - **Related Decisions:** [ADR-019](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-019), [LEAN-IEE-DESIGN.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/architecture/LEAN-IEE-DESIGN.md)
 
+---
+
+### [FINDING-022] Formalização Doutrinária e Validação Offline do Fio Epistemic Dynamics (FioED-01)
+- **Claim:** A formalização matemática e filosófica do FioED estruturou com sucesso: (1) a separação rigorosa em 4 camadas epistêmicas (Filosofia da Fonte $\neq$ Engenharia FioIdeias $\neq$ Arte Prévia $\neq$ Evidência do Receptor); (2) as 15 Leis Epistêmicas formais; (3) o ciclo inegociável $A \to C \to A$ onde toda concentração focada exige re-atenção determinística global; (4) métricas computáveis de `IntermediaryDepth`, `EvidenceFreePersistence` e `DriftRiskVector`; (5) admissão seletiva de memória institucional; (6) auditoria de arte prévia delimitando dívidas intelectuais com metaraciocínio racional e TMS sem falsas alegações de primeira descoberta.
+- **Evidence:** Documentos doutrinários em `docs/epistemology/`, auditoria em `docs/research/FIOED-PRIOR-ART-AUDIT.md` e 7 testes adversariais formais em `tests/adversarial/test_adversarial_fioed.py` (total de 133 testes verdes).
+- **Status:** `FORMALIZED_AND_VERIFIED_OFFLINE`
+- **Implications:** Estabelece o alicerce teórico e as métricas necessárias para a missão M05.3 de replay offline e calibração de falsos positivos/negativos.
+- **Related Decisions:** [KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md), [FIO-EPISTEMIC-DYNAMICS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md), [FIOED-FORMAL-MODEL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-FORMAL-MODEL.md)
+
+
 
 
 

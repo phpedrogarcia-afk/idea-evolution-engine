@@ -355,6 +355,25 @@
 - **Resultado:** `LEAN_L1_PROTOTYPE_VALIDATED` | `MAX_CALLS_LE_2_ENFORCED` | `SIMPLE_LOOP_UNCHANGED` | `126_TESTS_PASSING`.
 - **Evidência:** 126/126 testes unitários e adversariais aprovados (100% offline).
 
+---
+
+### [MS-FIOED-01] Fio Epistemic Dynamics Formalization (Formalização FioED)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Formalizar o núcleo filosófico e matemático do FioIdeias (Fonte, Representação, Atenção, Concentração, Aluguel Epistêmico, Não-Apego e Invariantes Executáveis), delimitando fronteiras estritas com a literatura científica existente.
+- **O que Mudou:**
+  - Elaboração de `docs/epistemology/KRISHNAMURTI-OJAI-1982-SOURCE-MAP.md` contendo exegese e rastreabilidade fonte-para-engenharia do diálogo de 18 de Abril de 1982.
+  - Elaboração de `docs/epistemology/FIO-EPISTEMIC-DYNAMICS.md` formalizando os 16 vetos, 15 leis formais e os operadores $O(S)$, $I(S)$, $A(X_t)$, $C_h(X_t)$.
+  - Elaboração de `docs/epistemology/FIOED-FORMAL-MODEL.md` com espaço de estados $X_t$, métricas discretas (`IntermediaryDepth`, $P_e$, $\mathbf{DriftRisk}$) e máquina de estados.
+  - Elaboração de `docs/research/FIOED-PRIOR-ART-AUDIT.md` auditando dívidas com metaraciocínio racional (Russell & Wefald 1991), TMS (Doyle 1979) e proveniência (Buneman 2001).
+  - Implementação de `AttentionSnapshot`, `MemoryAdmissionDecision` e enriquecimento de `DecisionDeltaRecord` em `src/idea_evolution/domain/early_epistemic_gate.py`.
+  - Criação da suíte de 7 testes adversariais em `tests/adversarial/test_adversarial_fioed.py`.
+  - Registro de `FINDING-022` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-021`.
+- **Resultado:** `FIOED_FOUNDATION_FORMALIZED` | `PRIOR_ART_BOUNDED` | `133_TESTS_PASSING` | `ZERO_REAL_CALLS`.
+- **Evidência:** 133/133 testes automatizados aprovados (100% offline).
+
+
 
 
 

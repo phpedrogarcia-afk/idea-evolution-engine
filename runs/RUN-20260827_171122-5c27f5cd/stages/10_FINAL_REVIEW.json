@@ -1,0 +1,28 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\n  \"material_issues_remaining\": [],\n  \"essence_drift_detected\": false,\n  \"speculative_accretion_detected\": false,\n  \"drift_explanation\": \"\",\n  \"unresolved_critical_issue\": false,\n  \"recommendation\": \"REFINED_IDEA_READY\",\n  \"review_summary\": \"Parece \\u00f3timo!\"\n}",
+  "parsed_output": {
+    "material_issues_remaining": [],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "Parece ótimo!"
+  },
+  "error": null,
+  "timestamp": "2026-08-27T17:11:23.436583+00:00"
+}
