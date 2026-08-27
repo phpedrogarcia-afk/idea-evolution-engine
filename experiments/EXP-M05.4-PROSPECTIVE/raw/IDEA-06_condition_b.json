@@ -1,0 +1,14 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "idea_id": "IDEA-06",
+  "condition": "CONDITION_B",
+  "raw_idea": "Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.",
+  "latency_seconds": 0.6119601726531982,
+  "model_calls": 1,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.\n\n### Intenção Humana Preservada\n\n\n### Mecanismo Central\n\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

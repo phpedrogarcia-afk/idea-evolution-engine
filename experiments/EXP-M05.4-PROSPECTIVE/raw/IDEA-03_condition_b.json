@@ -1,0 +1,14 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "idea_id": "IDEA-03",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "latency_seconds": 0.6405813694000244,
+  "model_calls": 1,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUm sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.\n\n### Intenção Humana Preservada\n\n\n### Mecanismo Central\n\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.4-IDEA-01-COND-A
+
+## Ideia Original
+> Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos.
+
+## Resumo do Modelo
+Um aplicativo desktop de cronômetro Pomodoro minimalista que, durante blocos de foco de 25 minutos, silencia notificações de outros aplicativos para melhorar a concentração.
+
+## Versão Refinada
+Um aplicativo Pomodoro cross‑platform (Windows, macOS, Linux) com interface ultra‑minimalista, que permite ao usuário definir blocos de foco e pausas, silenciar notificações de forma seletiva (ex.: permitir chamadas de contato favorito), integrar-se opcionalmente a serviços de tarefas (Todoist, Trello) via API, registrar estatísticas de sessões e oferecer modos de foco profundo (bloqueio total) e foco leve (silenciamento parcial). O usuário pode escolher entre temas claros/escuros, sons de alerta personalizáveis e configurar exceções de notificação para situações críticas. O app roda em tray e pode ser ativado via hotkey, garantindo mínima interrupção do fluxo de trabalho.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Foco na simplicidade e baixa curva de aprendizado, Bloqueio de distrações aumenta a eficácia do método Pomodoro, Baixo consumo de recursos, ideal para máquinas menos potentes, Possibilidade de personalização de sons e temas minimalistas
+- **Fracos:** Bloqueio de notificações pode interferir em alertas críticos (ex.: chamadas de emergência), Falta de integração nativa com ferramentas de gestão de tarefas, Limitação a desktop impede uso em dispositivos móveis, Ausência de métricas avançadas de produtividade
+
+## Próximos Passos
+Definir requisitos funcionais detalhados (bloqueio seletivo, integração com APIs de tarefas, métricas), Desenhar wireframes da interface minimalista e escolher paleta de cores, Selecionar framework cross‑platform (ex.: Electron, Tauri ou Qt) e validar desempenho, Implementar protótipo de bloqueio de notificações com opções de exceção, Realizar testes de usabilidade com usuários focados em produtividade, Planejar roadmap de lançamentos (MVP, versão com integrações, versão mobile)

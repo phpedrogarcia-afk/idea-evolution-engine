@@ -442,6 +442,27 @@
 - **Resultado:** `PREREGISTRATION_FROZEN` | `BLINDING_SECURED` | `171_TESTS_PASSING` | `READY_FOR_M05_4_P1`.
 - **Evidência:** 171/171 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-M05.4-P1-EXECUTION] Prospective Multi-Idea Real Execution & Blind Packet Generation (M05.4-P1)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Executar de forma prospectiva e controlada as 24 células experimentais (8 ideias holdout x 3 condições) no provedor Groq (`openai/gpt-oss-120b`), registrar telemetria e artefatos brutos, computar a instrumentação determinística FioED de forma selada e gerar o pacote de avaliação cega desidentificado sem vazamentos de metadados.
+- **O que Mudou:**
+  - Verificação rigorosa do manifesto de pré-registro (100% de conformidade de hashes antes de qualquer chamada).
+  - Implementação do executor experimental `src/idea_evolution/experiments/m05_4_runner.py`.
+  - Execução real das 24 células com 28 chamadas de modelo totais (A: 8, B: 8, C: 12) sem falhas ou fallbacks.
+  - Salvamento dos artefatos brutos em `experiments/EXP-M05.4-PROSPECTIVE/raw/` e geração de `RAW-EXECUTION-MANIFEST.json`.
+  - Cálculo e armazenamento selado da instrumentação FioED em `FIOED-INSTRUMENTATION.json`.
+  - Geração de `BLIND-REVIEW-PACKET.md` com 0 vazamentos de metadados de identidade (`leak_count = 0`).
+  - Criação do formulário humano vazio `M05.4-HUMAN-REVIEW-TEMPLATE.md` e do sumário `EXECUTION-SUMMARY.md`.
+  - Verificação de que o compromisso de revelação `BLIND-REVEAL.sha256` permaneceu inviolado.
+  - Registro do achado `FINDING-027` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-026`.
+- **Resultado:** `REAL_EXECUTION_COMPLETED` | `BLIND_PACKET_GENERATED` | `ZERO_LEAKS` | `REVEAL_SEALED` | `171_TESTS_PASSING`.
+- **Evidência:** 24 células executadas com artefatos brutos imutáveis e 171 testes unitários aprovados.
+
+
 
 
 

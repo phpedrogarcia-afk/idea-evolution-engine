@@ -1,0 +1,258 @@
+{
+  "IDEA-01": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "gate_outcome": "REQUEST_HUMAN_DECISION",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-02": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 2,
+      "persistence_steps": 1,
+      "intermediary_depth": 2,
+      "gate_outcome": "ESCALATE_FOCUSED",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-03": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "gate_outcome": "REQUEST_HUMAN_DECISION",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-04": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 2,
+      "persistence_steps": 1,
+      "intermediary_depth": 2,
+      "gate_outcome": "ESCALATE_FOCUSED",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-05": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 2,
+      "persistence_steps": 1,
+      "intermediary_depth": 2,
+      "gate_outcome": "ESCALATE_FOCUSED",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-06": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "gate_outcome": "REQUEST_HUMAN_DECISION",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-07": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 2,
+      "persistence_steps": 1,
+      "intermediary_depth": 2,
+      "gate_outcome": "ESCALATE_FOCUSED",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  },
+  "IDEA-08": {
+    "condition_a": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED",
+        "NEXT_ACTION_CHANGED"
+      ],
+      "regressions": []
+    },
+    "condition_b": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "decision_deltas": [
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    },
+    "condition_c": {
+      "calls": 1,
+      "persistence_steps": 0,
+      "intermediary_depth": 1,
+      "gate_outcome": "REQUEST_HUMAN_DECISION",
+      "decision_deltas": [
+        "AMBIGUITY_RESOLVED",
+        "OPTION_ADDED"
+      ],
+      "regressions": []
+    }
+  }
+}

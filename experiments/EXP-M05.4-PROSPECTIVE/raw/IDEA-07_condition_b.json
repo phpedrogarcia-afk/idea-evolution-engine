@@ -1,0 +1,14 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "idea_id": "IDEA-07",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um bloco de notas em linha de comando simples para salvar trechos rápidos de texto em arquivos markdown na pasta pessoal.",
+  "latency_seconds": 0.6156949996948242,
+  "model_calls": 1,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUm bloco de notas em linha de comando simples para salvar trechos rápidos de texto em arquivos markdown na pasta pessoal.\n\n### Intenção Humana Preservada\n\n\n### Mecanismo Central\n\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

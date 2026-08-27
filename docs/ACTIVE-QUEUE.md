@@ -4,13 +4,13 @@
 
 ---
 
-## 🚦 Status Atual da Fila: PRÉ-REGISTRO M05.4-P0 CONCLUÍDO | PRÓXIMO: EXECUÇÃO REAL M05.4-P1
+## 🚦 Status Atual da Fila: EXECUÇÃO M05.4-P1 CONCLUÍDA | AGUARDANDO AVALIAÇÃO HUMANA CEGA
 
 ### 📌 Marco Recém-Concluído:
-- [x] **M05.4-P0 Prospective Multi-Idea Replication Preregistration:** Delimitação científica rigorosa, suíte holdout de 8 ideias inéditas (`HOLDOUT-IDEAS.json`), protocolo de cegamento desidentificado (`BlindRenderer`), compromisso criptográfico do reveal (`BLIND-REVEAL.sha256`), pré-registro de 10 predições e manifesto imutável (`PREREGISTRATION-MANIFEST.json`). Total de 171 testes verdes.
+- [x] **M05.4-P1 Prospective Multi-Idea Real Execution:** 24 células executadas com sucesso no Groq (`openai/gpt-oss-120b`), artefatos brutos salvos e congelados, `BLIND-REVIEW-PACKET.md` gerado com zero vazamentos de metadados, revelação selada e formulário `M05.4-HUMAN-REVIEW-TEMPLATE.md` pronto para preenchimento.
 
 ---
 
-## 🎯 Próxima Missão Imediata:
-- **M05.4-P1 PROSPECTIVE MULTI-IDEA REAL EXECUTION:**
-  - *Objetivo:* Execução das condições congeladas A (Baseline 1 chamada), B (Simple Loop 10 chamadas) e C (Lean L1 máx 2 chamadas) nas 8 ideias inéditas via Groq / `openai/gpt-oss-120b`, gerando os pacotes desidentificados para a avaliação humana cega.
+## 🎯 Próxima Ação Imediata (Humana):
+- **AVALIAÇÃO HUMANA CEGA:**
+  - O operador humano preenche [`experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md) com base no [`BLIND-REVIEW-PACKET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVIEW-PACKET.md) antes de autorizar a revelação (M05.4-P2).

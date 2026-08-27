@@ -1,0 +1,19 @@
+{
+  "step_number": 1,
+  "stage_id": "UNDERSTAND",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "default-model",
+  "prompt_id": "understand_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": false,
+  "retry_count": 1,
+  "latency_seconds": 0.5616576671600342,
+  "delta_summary": "",
+  "raw_response": "",
+  "parsed_output": null,
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "timestamp": "2026-08-27T19:34:10.187838+00:00"
+}

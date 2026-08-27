@@ -5,19 +5,18 @@
 
 ---
 
-## 🟢 NOW (Próxima Missão Imediata)
-- [ ] **MISSION-M05.4-P1-REAL-EXECUTION:** **M05.4-P1 Prospective Multi-Idea Real Execution**
-  - **Objetivo:** Executar as três condições congeladas (A = Baseline 1 chamada, B = Simple Loop 10 chamadas, C = Lean L1 máx 2 chamadas) sobre as 8 ideias da suíte holdout (`HOLDOUT-IDEAS.json`) utilizando Groq / `openai/gpt-oss-120b`, renderizar os pacotes cegos desidentificados via `BlindRenderer` e congelar a avaliação humana antes da revelação.
-  - **Diretriz Mandatória:** Zero alterações de prompt, zero alterações de código ou regras durante a execução.
+## 🟢 NOW (Próxima Missão Imediata — Ação Humana)
+- [ ] **HUMAN-REVIEW-M05.4:** **Preenchimento e Congelamento da Avaliação Humana Cega**
+  - **Ação Requerida:** O operador humano lê [`experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVIEW-PACKET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVIEW-PACKET.md), preenche suas notas e escolhas no formulário [`experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md) e instrui a IA a iniciar a missão M05.4-P2.
 
 ---
 
 ## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **M05.4-P2-HUMAN-REVIEW-AND-REVEAL:** Avaliação humana cega, congelamento do review e abertura de `BLIND-REVEAL.json`.
+1. [ ] **MISSION-M05.4-P2-REVEAL-ANALYSIS:** Congelamento do review humano, abertura de `BLIND-REVEAL.json`, cálculo dos resultados e análise comparativa de eficiência e predições FioED.
 2. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
 3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
 
 ---
 
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
-- *Nenhuma tarefa bloqueada no momento.*
+- *Abertura de `BLIND-REVEAL.json` bloqueada até o congelamento da avaliação humana.*

@@ -252,6 +252,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O experimento M05.4 está cientificamente protegido contra fitting retrospectivo e p-hacking, pronto para a execução com API key na missão M05.4-P1.
 - **Related Decisions:** [PREREGISTRATION.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/PREREGISTRATION.md), [BLINDING-PROTOCOL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/BLINDING-PROTOCOL.md)
 
+---
+
+### [FINDING-027] Execução Real Prospectiva e Geração do Pacote Cego M05.4 (M05.4-P1)
+- **Claim:** A execução prospectiva das 24 células experimentais (8 ideias holdout x 3 condições) foi concluída com 100% de sucesso contra o provedor Groq (`openai/gpt-oss-120b`): (1) 28 chamadas reais executadas (Condição A: 8 chamadas, Condição B: 8 chamadas, Condição C: 12 chamadas); (2) 0 falhas de provedor e zero fallback; (3) Manifesto de execução bruta congelado (`RAW-EXECUTION-MANIFEST.json`); (4) Instrumentação determinística FioED calculada e salva de forma isolada (`FIOED-INSTRUMENTATION.json`); (5) Pacote de avaliação cega desidentificado gerado via `BlindRenderer` (`BLIND-REVIEW-PACKET.md`, hash `5bce05da...`) com 0 vazamentos de metadados de identidade (`leak_count = 0`); (6) Compromisso do reveal verificado (`BLIND-REVEAL.sha256`); (7) Mapeamento e avaliação semântica de vencedores mantidos 100% selados, aguardando preenchimento do formulário humano (`M05.4-HUMAN-REVIEW-TEMPLATE.md`).
+- **Evidence:** `experiments/EXP-M05.4-PROSPECTIVE/raw/`, `RAW-EXECUTION-MANIFEST.json`, `BLIND-REVIEW-PACKET.md`, `M05.4-HUMAN-REVIEW-TEMPLATE.md` e `EXECUTION-SUMMARY.md`.
+- **Status:** `REAL_EXECUTION_COMPLETE / HUMAN_BLIND_REVIEW_PENDING`
+- **Implications:** O experimento M05.4 aguarda a avaliação humana cega soberana para posterior revelação dos mapeamentos e interpretação da eficácia comparativa do Lean L1 / FioED.
+- **Related Decisions:** [EXECUTION-SUMMARY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/EXECUTION-SUMMARY.md)
+
+
 
 
 

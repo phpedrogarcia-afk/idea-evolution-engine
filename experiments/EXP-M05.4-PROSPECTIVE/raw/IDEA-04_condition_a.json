@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "idea_id": "IDEA-04",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login.",
+  "latency_seconds": 19.732598304748535,
+  "model_calls": 1,
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "Um aplicativo web de página única que funciona totalmente offline, permitindo ao usuário importar dados financeiros (CSV, JSON ou entrada manual), armazená‑los localmente via IndexedDB ou LocalStorage, gerar relatórios personalizados com gráficos e tabelas, e exportar o resultado como PDF ou HTML imprimível, tudo sem necessidade de login, servidores ou bancos de dados externos.",
+    "strengths": [
+      "Privacidade total – nenhum dado deixa o dispositivo do usuário",
+      "Instalação zero – basta abrir o arquivo HTML",
+      "Portabilidade – funciona em qualquer navegador moderno",
+      "Baixo custo de desenvolvimento e manutenção",
+      "Facilidade de uso para usuários não técnicos"
+    ],
+    "weaknesses": [
+      "Capacidade de armazenamento limitada ao tamanho permitido pelo navegador",
+      "Funcionalidades avançadas (ex.: integração automática com bancos) não são possíveis sem conexão externa",
+      "Segurança dos dados depende das práticas do usuário (ex.: backups)",
+      "Desempenho pode degradar com grandes volumes de dados",
+      "Atualizações exigem que o usuário substitua o arquivo HTML"
+    ],
+    "refined_version": "Um gerador de relatórios financeiros pessoais offline, implementado como um único arquivo HTML/JavaScript. O usuário carrega seus dados financeiros (planilhas CSV/JSON ou entrada manual), que são armazenados localmente usando IndexedDB. O app processa os dados no navegador, produzindo relatórios detalhados com gráficos interativos, permite a personalização de categorias e períodos, e oferece exportação para PDF ou HTML imprimível. Opcionalmente, pode incluir criptografia local para proteger os arquivos armazenados. Tudo isso sem necessidade de login, servidores ou bancos de dados externos.",
+    "next_steps": [
+      "Definir o modelo de dados (transações, categorias, contas) e o formato de importação suportado",
+      "Projetar a interface de usuário responsiva e fluxos de importação/exportação",
+      "Implementar armazenamento local seguro (IndexedDB) com opção de criptografia",
+      "Desenvolver módulos de cálculo (balanço, fluxo de caixa, indicadores) usando JavaScript ou WebAssembly",
+      "Criar visualizações gráficas com bibliotecas como Chart.js ou D3.js",
+      "Adicionar funcionalidade de exportação para PDF/HTML usando libraries como jsPDF",
+      "Testar o aplicativo em diferentes navegadores e com volumes de dados crescentes",
+      "Documentar o processo de uso, backup e restauração dos dados locais",
+      "Planejar um mecanismo de atualização simples (ex.: download de nova versão do HTML)"
+    ]
+  },
+  "rendered_semantic_text": "### Resumo\nUm aplicativo web de página única que funciona totalmente offline, permitindo ao usuário importar dados financeiros (CSV, JSON ou entrada manual), armazená‑los localmente via IndexedDB ou LocalStorage, gerar relatórios personalizados com gráficos e tabelas, e exportar o resultado como PDF ou HTML imprimível, tudo sem necessidade de login, servidores ou bancos de dados externos.\n\n### Versão Refinada\nUm gerador de relatórios financeiros pessoais offline, implementado como um único arquivo HTML/JavaScript. O usuário carrega seus dados financeiros (planilhas CSV/JSON ou entrada manual), que são armazenados localmente usando IndexedDB. O app processa os dados no navegador, produzindo relatórios detalhados com gráficos interativos, permite a personalização de categorias e períodos, e oferece exportação para PDF ou HTML imprimível. Opcionalmente, pode incluir criptografia local para proteger os arquivos armazenados. Tudo isso sem necessidade de login, servidores ou bancos de dados externos.\n\n### Pontos Fortes e Fracos\n- **Fortes:** Privacidade total – nenhum dado deixa o dispositivo do usuário, Instalação zero – basta abrir o arquivo HTML, Portabilidade – funciona em qualquer navegador moderno, Baixo custo de desenvolvimento e manutenção, Facilidade de uso para usuários não técnicos\n- **Fracos:** Capacidade de armazenamento limitada ao tamanho permitido pelo navegador, Funcionalidades avançadas (ex.: integração automática com bancos) não são possíveis sem conexão externa, Segurança dos dados depende das práticas do usuário (ex.: backups), Desempenho pode degradar com grandes volumes de dados, Atualizações exigem que o usuário substitua o arquivo HTML\n\n### Próximos Passos\nDefinir o modelo de dados (transações, categorias, contas) e o formato de importação suportado, Projetar a interface de usuário responsiva e fluxos de importação/exportação, Implementar armazenamento local seguro (IndexedDB) com opção de criptografia, Desenvolver módulos de cálculo (balanço, fluxo de caixa, indicadores) usando JavaScript ou WebAssembly, Criar visualizações gráficas com bibliotecas como Chart.js ou D3.js, Adicionar funcionalidade de exportação para PDF/HTML usando libraries como jsPDF, Testar o aplicativo em diferentes navegadores e com volumes de dados crescentes, Documentar o processo de uso, backup e restauração dos dados locais, Planejar um mecanismo de atualização simples (ex.: download de nova versão do HTML)"
+}

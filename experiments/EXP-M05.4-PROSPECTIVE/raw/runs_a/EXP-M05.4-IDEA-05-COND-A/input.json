@@ -1,0 +1,10 @@
+{
+  "run_id": "EXP-M05.4-IDEA-05-COND-A",
+  "created_at": "2026-08-27T19:33:57.573782+00:00",
+  "original_idea": "Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "e6e9f9d22649a656095456e5ed74cb7041047b4c",
+    "environment_pid": 19736
+  }
+}

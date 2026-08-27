@@ -1,0 +1,28 @@
+{
+  "run_id": "EXP-M05.4-IDEA-06-COND-B",
+  "status": "FAILED",
+  "total_duration_seconds": 0.6106393337249756,
+  "total_stages_executed": 1,
+  "git_commit": "e6e9f9d22649a656095456e5ed74cb7041047b4c",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "default-model",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 1,
+      "latency_seconds": 0.5774214267730713,
+      "delta_summary": "",
+      "raw_response": "",
+      "parsed_output": null,
+      "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+      "timestamp": "2026-08-27T19:34:51.003144+00:00"
+    }
+  ]
+}

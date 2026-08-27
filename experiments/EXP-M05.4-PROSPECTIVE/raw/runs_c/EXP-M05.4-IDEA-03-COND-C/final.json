@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.4-IDEA-03-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 2,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

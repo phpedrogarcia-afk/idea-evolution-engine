@@ -1,0 +1,205 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "executed_at": "2026-08-27T16:36:43.050605",
+  "total_cells": 24,
+  "total_real_model_calls": 28,
+  "calls_by_condition": {
+    "CONDITION_A": 8,
+    "CONDITION_B": 8,
+    "CONDITION_C": 12
+  },
+  "entries": [
+    {
+      "idea_id": "IDEA-01",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-01_condition_a.json",
+      "sha256": "b5eda77884bde018b102d9fbf11b33b857a961fc20b27aa826f8e940e961d49c",
+      "model_calls": 1,
+      "latency_seconds": 2.021388530731201
+    },
+    {
+      "idea_id": "IDEA-01",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-01_condition_b.json",
+      "sha256": "c56555f112c57bad63359accb3463f20ac87d7662e036998db5db387b3446741",
+      "model_calls": 1,
+      "latency_seconds": 0.6304385662078857
+    },
+    {
+      "idea_id": "IDEA-01",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-01_condition_c.json",
+      "sha256": "74f30e7996be0233aa0574db5deaa315cb8d52ce6af2b123a8a8f50ad02020dc",
+      "model_calls": 1,
+      "latency_seconds": 5.099018812179565
+    },
+    {
+      "idea_id": "IDEA-02",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-02_condition_a.json",
+      "sha256": "9486996c10a0f354bdf257e77b1b8f760a2ae03d1ba456bd0dd54b71db693a0a",
+      "model_calls": 1,
+      "latency_seconds": 2.1190242767333984
+    },
+    {
+      "idea_id": "IDEA-02",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-02_condition_b.json",
+      "sha256": "d7b3ad014465092f825c3ebc90ca215b4eba1148240e68368ba6737403faf93c",
+      "model_calls": 1,
+      "latency_seconds": 0.596041202545166
+    },
+    {
+      "idea_id": "IDEA-02",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-02_condition_c.json",
+      "sha256": "b31a5c914f11e474c7ed2c702e435187a8a0c06d77abc1c93cc06d07b57b11a1",
+      "model_calls": 2,
+      "latency_seconds": 40.58317303657532
+    },
+    {
+      "idea_id": "IDEA-03",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-03_condition_a.json",
+      "sha256": "a72a17f3cb462d2fd960901e8b6bace8feec67fcf89972fdac52e18e6f1760e2",
+      "model_calls": 1,
+      "latency_seconds": 2.2638425827026367
+    },
+    {
+      "idea_id": "IDEA-03",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-03_condition_b.json",
+      "sha256": "902bb2c6e85aea9313cf29502ed3cbefe45d7ccf8f99e8d0477023aafa968770",
+      "model_calls": 1,
+      "latency_seconds": 0.6405813694000244
+    },
+    {
+      "idea_id": "IDEA-03",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-03_condition_c.json",
+      "sha256": "9842155d9582edcf954e7aa350602e4f1bceb3e73efdf34b665e59a2f11683c4",
+      "model_calls": 1,
+      "latency_seconds": 26.26122522354126
+    },
+    {
+      "idea_id": "IDEA-04",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-04_condition_a.json",
+      "sha256": "c170a3164c65455a5d3eb4b80afe47dca6722225c70b58d76932f45a6eecba0b",
+      "model_calls": 1,
+      "latency_seconds": 19.732598304748535
+    },
+    {
+      "idea_id": "IDEA-04",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-04_condition_b.json",
+      "sha256": "d85250596820c71093853e77bdbf1e1e82455af2759d5143aaaa8af2b743d1c3",
+      "model_calls": 1,
+      "latency_seconds": 0.6079730987548828
+    },
+    {
+      "idea_id": "IDEA-04",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-04_condition_c.json",
+      "sha256": "3e2d23bea1b2daf42c70e122b41a38f179338fc121dcad0c16d96096b99bf426",
+      "model_calls": 2,
+      "latency_seconds": 41.51461982727051
+    },
+    {
+      "idea_id": "IDEA-05",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-05_condition_a.json",
+      "sha256": "c6c50d7c133139ef72a69d918f0c755e66543bf58c759fcb69657239ab4f463e",
+      "model_calls": 1,
+      "latency_seconds": 12.051944494247437
+    },
+    {
+      "idea_id": "IDEA-05",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-05_condition_b.json",
+      "sha256": "2aa15e7fb8c0ba99dcb0dcceaf92e79927f383671d3dd9e5f8e1c9b0b01bdeec",
+      "model_calls": 1,
+      "latency_seconds": 0.5955595970153809
+    },
+    {
+      "idea_id": "IDEA-05",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-05_condition_c.json",
+      "sha256": "911c86e40c45b9fdb8044ce15ca2a94bfcb1882a6ff545c0081b7b2044a7a2a7",
+      "model_calls": 2,
+      "latency_seconds": 27.868218898773193
+    },
+    {
+      "idea_id": "IDEA-06",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-06_condition_a.json",
+      "sha256": "90becdb148e6d203bd823d22b6480d59c209690db4b22ae139b4210b00c30c3b",
+      "model_calls": 1,
+      "latency_seconds": 12.332269191741943
+    },
+    {
+      "idea_id": "IDEA-06",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-06_condition_b.json",
+      "sha256": "33b9111036db6bfea0451d4d14262b501c6e86e5f5133152e55060474300487d",
+      "model_calls": 1,
+      "latency_seconds": 0.6119601726531982
+    },
+    {
+      "idea_id": "IDEA-06",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-06_condition_c.json",
+      "sha256": "7c5ef0a52a90e1c1b6bf7748f666187f30d4179bb0bf92e90984ed7b3ce71c1c",
+      "model_calls": 1,
+      "latency_seconds": 15.392756462097168
+    },
+    {
+      "idea_id": "IDEA-07",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-07_condition_a.json",
+      "sha256": "0dcbabec845212f7cc7af4c755391ed79062a117e08f0a0e97c62c2039ee86b2",
+      "model_calls": 1,
+      "latency_seconds": 22.831266403198242
+    },
+    {
+      "idea_id": "IDEA-07",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-07_condition_b.json",
+      "sha256": "37107c8ff8b47855142ebfe49d94100410d87faa4f440ee82de969a3ed27622f",
+      "model_calls": 1,
+      "latency_seconds": 0.6156949996948242
+    },
+    {
+      "idea_id": "IDEA-07",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-07_condition_c.json",
+      "sha256": "ec56a6f801ae449c6cb00030ef1cd57375ebf087f9437712e03fe209448f44d0",
+      "model_calls": 2,
+      "latency_seconds": 39.23193645477295
+    },
+    {
+      "idea_id": "IDEA-08",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "raw\\IDEA-08_condition_a.json",
+      "sha256": "8ab13277ab14e47264bdddf9eacd0a7ba5355b20683ef4879d3ab665003de194",
+      "model_calls": 1,
+      "latency_seconds": 7.037503242492676
+    },
+    {
+      "idea_id": "IDEA-08",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "raw\\IDEA-08_condition_b.json",
+      "sha256": "5c71306e50de045823bdde1b66633cbcbd4a2dbe88b10bbf571344dbcb89ce39",
+      "model_calls": 1,
+      "latency_seconds": 0.5771372318267822
+    },
+    {
+      "idea_id": "IDEA-08",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "raw\\IDEA-08_condition_c.json",
+      "sha256": "d7fa417488eb5a668e4ce3a2d4bbb2c764e730c3dd608903c4635cb80a6bf6d9",
+      "model_calls": 1,
+      "latency_seconds": 26.346176624298096
+    }
+  ]
+}

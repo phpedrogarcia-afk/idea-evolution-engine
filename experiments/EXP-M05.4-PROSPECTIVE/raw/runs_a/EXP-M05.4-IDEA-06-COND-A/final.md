@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.4-IDEA-06-COND-A
+
+## Ideia Original
+> Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.
+
+## Resumo do Modelo
+A community-driven mentorship platform that connects mentors and mentees, offering tiered access: a free basic tier for open participation and a low‑cost premium tier that provides additional commitment mechanisms, exclusive resources, and community recognition.
+
+## Versão Refinada
+The platform will launch with two membership tiers. The free tier grants access to public mentorship sessions, discussion forums, and basic mentor‑mentee matching. The premium tier, priced at a modest monthly fee, unlocks priority matching, private one‑on‑one sessions, advanced learning tracks, and a badge system that highlights committed members. Revenue from the premium tier funds platform maintenance, mentor incentives, and premium content creation, while the free tier ensures inclusivity and network effects. Clear value propositions and transparent pricing encourage both openness and commitment, and a simple onboarding flow guides users to the tier that best fits their goals.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Encourages knowledge sharing and personal growth, Low barrier to entry fosters rapid community growth, Hybrid pricing balances inclusivity with revenue potential, Tiered model incentivizes commitment without excluding newcomers, Scalable matching algorithms can serve diverse topics
+- **Fracos:** Unclear pricing may confuse users and deter early adoption, Risk of creating a perceived two‑class system that alienates free users, Ensuring mentor quality across both tiers can be challenging, Revenue may be insufficient if premium conversion is low, Operational costs (payment processing, moderation) add complexity
+
+## Próximos Passos
+Conduct surveys and focus groups to validate demand for free vs. paid features, Define concrete benefits for each tier and draft pricing strategy, Prototype core matching and communication features, Run a pilot with a small cohort of mentors and mentees across both tiers, Collect usage data and feedback to refine tier differentiation, Develop mentor onboarding and quality‑control guidelines, Implement a secure, low‑fee payment gateway for the premium tier, Create community guidelines and moderation policies, Plan a phased launch marketing campaign highlighting both inclusivity and premium value
