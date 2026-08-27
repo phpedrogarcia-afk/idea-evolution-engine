@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "name": "IEE Operational Donor Arsenal Manifest",
-  "updated_at": "2026-08-26T13:08:00-03:00",
+  "updated_at": "2026-08-27T07:38:00-03:00",
   "gap_index": {
     "critique_revision_depth": [
       "MULTIAGENT_RESEARCH_IDEATOR",
@@ -13,7 +13,8 @@
       "OUTLINES"
     ],
     "lineage_and_evolution": [
-      "GOOGLE_CO_SCIENTIST"
+      "GOOGLE_CO_SCIENTIST",
+      "ARBOR"
     ],
     "reality_questioning": [
       "STORM",
@@ -33,6 +34,9 @@
     ],
     "hypothesis_falsification": [
       "POPPER"
+    ],
+    "evidence_conditioned_lineage_and_scars": [
+      "ARBOR"
     ]
   },
   "donors": {
@@ -102,6 +106,20 @@
       "decision": "REJECT_NOW",
       "phase": "LATER",
       "reopen_condition": "emergent_graph_topology_complexity"
+    },
+    "ARBOR": {
+      "donor_id": "DONOR-011",
+      "name": "Arbor",
+      "tier": "A",
+      "decision": "ADAPT_STRONGLY",
+      "phase": "M05_FOUNDATION",
+      "primary_mechanism": "evidence_conditioned_lineage_and_typed_insights",
+      "scars": [
+        "advisory_merge_threshold_warning_without_hard_block",
+        "unverified_llm_reported_test_score_fallback",
+        "adaptive_holdout_reuse_risk",
+        "historical_future_work_false_completion"
+      ]
     }
   }
 }

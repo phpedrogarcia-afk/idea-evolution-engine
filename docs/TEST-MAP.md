@@ -1,7 +1,7 @@
-# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v0.9)
+# TEST-MAP.md — Mapa da Suíte de Testes Automatizados (v1.0)
 
 > **ESTRUTURA DE TESTES, COBERTURA DE RISCOS E EXECUÇÃO DETERMINÍSTICA.**
-> *Total de Testes: 98 testes distribuídos em 16 módulos (100% automatizados e offline).*
+> *Total de Testes: 109 testes distribuídos em 17 módulos (100% automatizados e offline).*
 
 ---
 
@@ -27,6 +27,7 @@
 | **Adversarial Essence Drift** | `tests/adversarial/test_adversarial_essence_drift.py` | 2 | Adversarial (<50ms) | Isolamento de *Speculative Feature Accretion* no Synthesis e acionamento de `RECONSTRUCT` no Final Review. |
 | **Adversarial Understand & Groq** | `tests/adversarial/test_adversarial_understand_and_groq_boundary.py` | 3 | Adversarial (<50ms) | Pureza descritiva do UNDERSTAND, conformidade total com Groq Strict JSON Schema e preservação de `failed_generation`. |
 | **Adversarial Ontologia, Autoridade & Gates (M05.1-R4 / R5)** | `tests/adversarial/test_adversarial_ontology_provenance.py` | 21 | Adversarial (<50ms) | Prova determinística de autoridade (USER_EXPLICIT grounding, VALID_USER_DERIVATION, EXTERNAL_EVIDENCE, HUMAN_DECISION), veto a spoofing de autoridade e gates determinísticos inegociáveis de finalização. |
+| **Adversarial Fundação Epistêmica & Doadores (EPISTEMIC-DONOR-01)** | `tests/adversarial/test_adversarial_epistemic_donor_foundation.py` | 11 | Adversarial (<50ms) | Imutabilidade do SourceAnchor, Fonte != Representação, Representação != Autoridade, Insight != Evidência, Conhecimento Negativo com escopo/reopen, Multi-parentesco, Doador != Prova Receptor e Ação Prometida != Conclusão. |
 | **Experimento A/B/C** | `tests/experiment/test_comparison_packet.py` | 1 | Experimental (<50ms) | Execução sobre as 3 fixtures padronizadas e geração do pacote de avaliação cega mascarado. |
 
 ---
@@ -34,7 +35,7 @@
 ## ⚡ Como Executar Todos os Testes
 
 ```bash
-# Executar a suíte completa de 98 testes
+# Executar a suíte completa de 109 testes
 python -m unittest discover -s tests -p "test_*.py" -v
 
 # Executar validação de contexto e integridade documental

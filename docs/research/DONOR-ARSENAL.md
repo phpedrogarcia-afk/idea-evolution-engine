@@ -95,3 +95,4 @@
 | `DONOR-008` | **LiteLLM** | Roteamento multi-provider e fallback | `DEFER` | MVP foca em um provider/fake runner inicial com medição limpa. |
 | `DONOR-009` | **POPPER** | Testes sequenciais e e-values | `ADAPT_CONCEPT` | Reality Check formula hipóteses com métrica de falsificação sem statistical machinery. |
 | `DONOR-010` | **DSPy** | Otimização paramétrica de prompts | `DEFER` | Exige dataset e baseline consolidados primeiro. |
+| `DONOR-011` | **Arbor** | Hypothesis Tree Refinement (HTR), Linhagem de Ideias Condicionada a Evidência, Insights Tipados e Memória Negativa | `ADAPT_STRONGLY` | Transplante conceitual de HTR-Lite, insights tipados e lições podadas com escopo (Autópsia em `docs/research/donors/ARBOR-DEEP-AUTOPSY.md`). |

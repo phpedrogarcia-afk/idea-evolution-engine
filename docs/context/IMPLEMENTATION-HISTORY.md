@@ -244,3 +244,20 @@
   - Emissão do Checkpoint `CP-20260826-013`.
 - **Resultado:** `COMPLETE_OFFLINE` | `AUTHORITY_PROOF = HARDENED` | `FINAL_GATE_ENFORCEMENT = SOVEREIGN` | `READY_FOR_FINAL_REAL_CANARY = TRUE`.
 - **Evidência:** 98/98 testes automatizados aprovados (100% offline).
+
+---
+
+### [MS-EPISTEMIC-DONOR-01] Epistemic Foundation, Source Anchoring & Arbor Institutionalization (Missão Epistemic-Donor-01)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Institucionalizar uma base epistêmica durável que impeça o IEE de confundir suas próprias representações com a fonte humana, criando uma memória de Inteligência de Doadores para colheita cirúrgica de mecanismos e incertezas pagas (Arbor HTR-Lite).
+- **O que Mudou:**
+  - Institucionalização dos 10 invariantes canônicos em `docs/epistemology/OBSERVATION-REPRESENTATION-INVARIANTS.md`.
+  - Criação dos contratos epistêmicos (`SourceAnchor`, `RepresentationRecord`, `InsightRecord`, `NegativeKnowledgeRecord`, `IdeaLineageNode`) em `src/idea_evolution/domain/epistemic_contracts.py`.
+  - Criação do catálogo e visualizador determinístico `DonorIntelligenceCatalog` em `src/idea_evolution/domain/donor_intelligence.py`.
+  - Persistência integral da autópsia canônica em `docs/research/donors/ARBOR-DEEP-AUTOPSY.md` e atualização do arsenal/manifesto de doadores.
+  - Criação de 11 novos testes determinísticos em `tests/adversarial/test_adversarial_epistemic_donor_foundation.py` (totalizando 109 testes verdes).
+  - Emissão do Checkpoint `CP-20260827-014`.
+- **Resultado:** `COMPLETE_OFFLINE` | `SOURCE_ANCHORING = ACTIVE` | `DONOR_INTELLIGENCE = INSTITUTIONALIZED` | `FOUNDATION_INSTITUTIONALIZED = TRUE`.
+- **Evidência:** 109/109 testes automatizados aprovados (100% offline).
+

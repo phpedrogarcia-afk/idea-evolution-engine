@@ -10,9 +10,9 @@
   "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260826-013",
-  "last_known_good_checkpoint": "CP-20260826-013",
-  "current_objective": "Mission M05.1-R5 Complete: Authority Proof & Final Gate Enforcement (98 testes verdes)",
+  "latest_checkpoint": "CP-20260827-014",
+  "last_known_good_checkpoint": "CP-20260827-014",
+  "current_objective": "Mission FIOIDEIAS-EPISTEMIC-DONOR-FOUNDATION-01 Complete (109 testes verdes)",
   "current_active_task": "TASK-000",
   "next_authorized_work": "Configuração de chave de API pelo operador humano para execução do Real Canary (M05-B) com prompt corrigido",
   "updated_at": "2026-08-26T15:41:25-03:00",
@@ -88,7 +88,8 @@
     "docs/specs/IEE-FIOOS-PROTOCOL-v1.0.md",
     "docs/experiments/EXPERIMENT-PROTOCOL.md",
     "docs/experiments/EXPERIMENT-BACKLOG.md",
-    "docs/experiments/M04-DONOR-HARVEST-SPEC.md"
+    "docs/experiments/M04-DONOR-HARVEST-SPEC.md",
+    "docs/epistemology/OBSERVATION-REPRESENTATION-INVARIANTS.md"
   ],
   "research_documents": [
     "docs/research/DONOR-AUTOPSY-METHOD.md",
@@ -104,7 +105,8 @@
     "docs/research/donors/AGENTVERSE.md",
     "docs/research/donors/METAGPT.md",
     "docs/research/donors/CK-THEORY.md",
-    "docs/research/donors/TRIZ.md"
+    "docs/research/donors/TRIZ.md",
+    "docs/research/donors/ARBOR-DEEP-AUTOPSY.md"
   ],
   "active_specs": [
     "docs/specs/BOOTSTRAP-EXIT-POLICY-v0.1.md",
@@ -121,13 +123,13 @@
     "AGENTS.md": "d680a17192193dce5e9ea485bfe85a44fff3b352c36bb0f4440f7718ac9e6a77",
     "README.md": "17b117e2eabf9c4fa373802046c08a754368f85e5dcad712d1ac6c2e00f35935",
     "docs/GOVERNANCE-INVARIANTS.md": "9cce61ce9303dd4a5f2914a2912700b5f4751cfc3607f0b0b22e490f03d47bda",
-    "docs/DECISIONS-LEDGER.md": "e34e53a8861692e407d378ff22db30c66d6ba6f08ceaf0cabffa981015c24a79",
+    "docs/DECISIONS-LEDGER.md": "d503cbb12ab52459806d6fe5c0fec9f538cf133b10938a54c2ba52f423cfbf48",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "7ef1e87af15c19e482e8eed6d1c755711bb55c64f9fe83a553233dd434e60b0d",
-    "docs/context/ACTIVE-QUEUE.md": "ca71f9c7dd85705c677a0b48b3465052689911e157ef2d1e20fa5318246a191f",
+    "docs/context/CURRENT-STATE.md": "cb45827906a1f0b231b862cada14779203153ed9bf328a69df1077bc19313d0b",
+    "docs/context/ACTIVE-QUEUE.md": "0733fae8a04ee15ceaebbe7c627a2f2909a57d38d51a79e5c01983b2b5893f35",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"
   },
-  "last_updated": "2026-08-26T17:37:55-03:00"
+  "last_updated": "2026-08-27T07:40:00-03:00"
 }

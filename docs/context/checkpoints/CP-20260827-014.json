@@ -1,0 +1,85 @@
+{
+  "checkpoint_id": "CP-20260827-014",
+  "created_at": "2026-08-27T07:39:40-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission FIOIDEIAS-EPISTEMIC-DONOR-FOUNDATION-01 Complete: Source Anchoring, Representation Discipline, Donor Intelligence, Arbor Autopsy & 109 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-005.1-R5: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Canary Autopsies M05.1-R2 a R5, Fronteira M06.2, Prova de Autoridade R5",
+    "TASK-EPISTEMIC-01-A: Institucionalização de docs/epistemology/OBSERVATION-REPRESENTATION-INVARIANTS.md",
+    "TASK-EPISTEMIC-01-B: Criação dos contratos epistêmicos offline (SourceAnchor, RepresentationRecord, InsightRecord, NegativeKnowledgeRecord, IdeaLineageNode)",
+    "TASK-EPISTEMIC-01-C: Criação do visualizador determinístico DonorIntelligenceCatalog",
+    "TASK-EPISTEMIC-01-D: Persistência integral da autópsia canônica ARBOR-DEEP-AUTOPSY.md e indexação nos catálogos",
+    "TASK-EPISTEMIC-01-E: 11 Testes Adversariais de Fundação Epistêmica e Doadores (total: 109 testes verdes)"
+  ],
+  "changed_files": [
+    "docs/epistemology/OBSERVATION-REPRESENTATION-INVARIANTS.md",
+    "src/idea_evolution/domain/epistemic_contracts.py",
+    "src/idea_evolution/domain/donor_intelligence.py",
+    "docs/research/donors/ARBOR-DEEP-AUTOPSY.md",
+    "docs/research/DONOR-ARSENAL.md",
+    "docs/research/donor-manifest.json",
+    "tests/adversarial/test_adversarial_epistemic_donor_foundation.py",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/DECISIONS-LEDGER.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "ADR-015: Ancoragem de Fonte e Disciplina de Representação (SourceAnchor vs RepresentationRecord)",
+    "ADR-016: Inteligência de Doadores como Memória Institucional, Não Autoridade de Implementação",
+    "ADR-017: Arbor como Doador Primário para Linhagem Condicionada a Evidência (HTR-Lite)"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "109/109 tests passing across 17 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Branching em busca sem evidência discriminatória pode aumentar custo de tokens sem elevar DecisionDelta"
+  ],
+  "blockers": [
+    "EXP-M05: Aguardando autorização humana para reattack real com chave configurada"
+  ],
+  "readiness_verdict": {
+    "SOURCE_ANCHOR_HARDENED": true,
+    "REPRESENTATION_DISCIPLINE_ENFORCED": true,
+    "DONOR_INTELLIGENCE_INSTITUTIONALIZED": true,
+    "ARBOR_AUTOPSY_PERSISTED": true,
+    "FOUNDATION_INSTITUTIONALIZED": true,
+    "READY_FOR_FINAL_REAL_CANARY": true
+  },
+  "next_exact_action": "Autorização pelo operador humano para disparo do canário real com Groq openai/gpt-oss-120b ou execução de experimentos offline HTR-Lite",
+  "authorized_next_scope": [
+    "M05: Reattack real sobre 1 ideia crua com modelo gratuito e prompt blindado",
+    "EXP-HTR-LITE-REPLAY: Replay offline sobre histórico"
+  ],
+  "do_not_repeat": [
+    "Não confundir representações de LLMs com a fonte humana",
+    "Não instanciar runtime completo do Arbor sem necessidade",
+    "Não tratar insights destilados como evidência causal"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 109 testes."
+}

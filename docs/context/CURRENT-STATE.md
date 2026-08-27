@@ -1,16 +1,17 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-08-26 | Checkpoint: CP-20260826-013
+> Atualizado em: 2026-08-27 | Checkpoint: CP-20260827-014
 
 ---
 
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (AUTHORITY PROOF & FINAL GATE ENFORCEMENT)
+- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (EPISTEMIC & DONOR FOUNDATION INSTITUTIONALIZED)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Hardening M05.1-R5:** `AUTHORITY_PROOF = HARDENED` | `GROUNDING_VALIDATOR = ACTIVE` | `FINAL_GATE_ENFORCEMENT = SOVEREIGN` (98 testes verdes).
+- **Status da Fundação Epistêmica (EPISTEMIC-DONOR-01):** `SOURCE_ANCHORING = ACTIVE` | `REPRESENTATION_DISCIPLINE = ENFORCED` | `DONOR_INTELLIGENCE = INSTITUTIONALIZED` | `ARBOR_AUTOPSY = PERSISTED` (109 testes verdes).
+- **Status do Hardening M05.1-R5:** `AUTHORITY_PROOF = HARDENED` | `GROUNDING_VALIDATOR = ACTIVE` | `FINAL_GATE_ENFORCEMENT = SOVEREIGN`.
 - **Status do Hardening M05.1-R4:** `TOPOLOGY_REALITY_ALIGNMENT = HARDENED` | `NON_CIRCULAR_PROMOTION = ENFORCED` | `IMMUTABLE_RUN_IDENTITY = ACTIVE`.
 - **Status do Hardening M05.1-R3:** `ONTOLOGY_CONSISTENCY = HARDENED` | `PROMOTION_PROVENANCE = ENFORCED` | `REJECTED_EVIDENCE_ISOLATED = TRUE`.
 - **Status do Hardening M05.1-R2:** `UNDERSTAND_PURITY = HARDENED` | `GROQ_STRICT_MODE = IMPLEMENTED` | `FAILED_GENERATION_PRESERVED = TRUE`.
@@ -21,8 +22,8 @@
   - `DEFAULT_BRANCH`: `main`
   - `REMOTE_REPOSITORY`: `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
   - `SECRET_SCAN`: `PASS` (0 credenciais ou segredos rastreados no Git)
-- **Último Checkpoint Imutável:** [`CP-20260826-013`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-013.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260826-013`
+- **Último Checkpoint Imutável:** [`CP-20260827-014`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-014.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260827-014`
 - **Git Branch:** `main`
 - **Worktree Status:** CLEAN
 
@@ -31,15 +32,16 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Missão M05.1-R5: Implementação de `AuthorityProofValidator` com prova de ancoragem (`GroundingRecord`), validação estrita de `USER_EXPLICIT`, `VALID_USER_DERIVATION`, `EXTERNAL_EVIDENCE` e `HUMAN_DECISION`, rebaixamento automático de false attribution para `MODEL_HYPOTHESIS` / `CANDIDATE`, soberania determinística de status via `_evaluate_hard_gates` no `SimpleLoopRunner` e 98 testes automatizados aprovados (100% offline).
+  - Missão FIOIDEIAS-EPISTEMIC-DONOR-FOUNDATION-01: Institucionalização de `OBSERVATION-REPRESENTATION-INVARIANTS.md`, criação dos contratos epistêmicos offline (`SourceAnchor`, `RepresentationRecord`, `InsightRecord`, `NegativeKnowledgeRecord`, `IdeaLineageNode`), catálogo determinístico de `DonorIntelligenceCatalog`, persistência integral da autópsia canônica `ARBOR-DEEP-AUTOPSY.md` e 109 testes automatizados aprovados (100% offline).
 - **Tarefa Ativa Atual:**
-  - `TASK-000`: Gate de Governança — Apresentação do relatório da Missão M05.1-R5 e parada mandatória (*STOP*).
+  - `TASK-000`: Gate de Governança — Apresentação do relatório da Missão EPISTEMIC-DONOR-FOUNDATION-01 e parada mandatória (*STOP*).
 - **Próximo Passo Exato:**
-  - Execução do Reattack Real com Groq `openai/gpt-oss-120b` sob a blindagem determinística de prova de autoridade e gates soberanos.
+  - Decisão humana entre (1) Execução do Real Canary (M05-B) com Groq `openai/gpt-oss-120b`, ou (2) Experimento de Replay Offline HTR-Lite sobre runs históricos.
 
 ---
 
 ## 3. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
-1. ❌ **NÃO** aceitar declarações de `USER_EXPLICIT` sem prova determinística de ancoragem no input original.
-2. ❌ **NÃO** permitir que recomendações de LLMs sobrescrevam gates determinísticos rígidos.
-3. ❌ **NÃO** emitir `REFINED_IDEA_READY` quando houver qualquer violação de integridade ou rebaixamento de autoridade.
+1. ❌ **NÃO** confundir representações ou resumos gerados por LLMs com a autoridade da fonte humana.
+2. ❌ **NÃO** instanciar o runtime completo do Arbor ou grafos pesados no Simple Loop.
+3. ❌ **NÃO** tratar insights destilados como prova causal ou evidência empírica.
+4. ❌ **NÃO** ativar inferência real ou paga sem autorização humana formal.

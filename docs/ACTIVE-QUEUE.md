@@ -4,14 +4,14 @@
 
 ---
 
-## 🚦 Status Atual da Fila: MISSÃO M05.1-R5 CONCLUÍDA & PROVADA OFFLINE
+## 🚦 Status Atual da Fila: MISSÃO EPISTEMIC-DONOR-FOUNDATION-01 CONCLUÍDA
 
 ### 📌 Tarefas Concluídas:
-- [x] **TASK-001 a TASK-005.1-R4:** Fundações, Hardening, Arquitetura de Inteligência, Doutrina, MVP, Roteamento Multi-Modelo, Governança de Custos, Autópsias M05.1 / M05.1-R2 / M05.1-R3 / M05.1-R4, Fronteira IEE/FioOS (M06.2).
-- [x] **TASK-005.1-R5 (Authority Proof & Final Gate Enforcement):** `AuthorityProofValidator` com auditoria determinística de ancoragem (`GroundingRecord`), rebaixamento automático de *Authority Spoofing* para `MODEL_HYPOTHESIS` / `CANDIDATE`, soberania determinística de status via `_evaluate_hard_gates` e 98 testes automatizados aprovados (`READY_FOR_FINAL_REAL_CANARY = TRUE`).
+- [x] **TASK-001 a TASK-005.1-R5:** Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira IEE/FioOS (M06.2).
+- [x] **TASK-EPISTEMIC-DONOR-01 (Source Anchoring, Representation Discipline, Donor Intelligence & Arbor Institutionalization):** Invariantes de Ancoragem de Origem (`OBSERVATION-REPRESENTATION-INVARIANTS.md`), contratos tipados de epistemologia (`epistemic_contracts.py`), visualizador de doadores (`donor_intelligence.py`), autópsia integral persistida (`ARBOR-DEEP-AUTOPSY.md`) e 109 testes automatizados aprovados (`FOUNDATION_INSTITUTIONALIZED = TRUE`).
 
 ---
 
 ## 🛑 Ponto de Parada Mandatório (STOP)
-- **Status do Canário Real:** `READY_FOR_FINAL_REAL_CANARY` (Reparos comprovados em 98 testes offline).
-- **Ação Necessária:** O operador humano pode autorizar o reattack real online com Groq `openai/gpt-oss-120b`.
+- **Status da Fundação Epistêmica:** `INSTITUTIONALIZED_AND_LOCKED` (109 testes offline verdes).
+- **Ação Necessária:** O operador humano pode decidir sobre a execução do canário real ou experimentos de replay HTR-Lite.

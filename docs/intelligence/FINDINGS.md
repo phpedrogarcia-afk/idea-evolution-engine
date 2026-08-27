@@ -153,6 +153,25 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Eliminação definitiva de apropriação indevida de autoridade humana por LLMs e garantia de que nenhum produto corrompido receba status de pronto.
 - **Related Decisions:** [AGENTS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/AGENTS.md), [GOVERNANCE-INVARIANTS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/GOVERNANCE-INVARIANTS.md)
 
+---
+
+### [FINDING-016] Fonte != Representação e Disciplina Epistêmica de Ancoragem
+- **Claim:** A confusão cognitiva entre a fonte humana bruta (`SourceAnchor`) e as representações intermediárias geradas por LLMs (`RepresentationRecord`, resumos, taxonomias, embeddings) é a causa primária do desvio de intenção (*essence drift*). A fonte possui autoridade primária imutável; representações geradas são mapas que não herdam autoridade. Insights destilados (`InsightRecord`) auxiliam a busca mas não constituem evidência empírica; promessas de ações futuras não constituem conclusão de execução.
+- **Evidence:** 11 testes determinísticos em `test_adversarial_epistemic_donor_foundation.py` e contratos canônicos em `src/idea_evolution/domain/epistemic_contracts.py`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Proteção absoluta da intenção humana e isolamento formal entre observação primária e hipóteses causais inferidas.
+- **Related Decisions:** [OBSERVATION-REPRESENTATION-INVARIANTS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/OBSERVATION-REPRESENTATION-INVARIANTS.md)
+
+---
+
+### [FINDING-017] Inteligência de Doadores: Colheita de Incertezas Pagas sem Dependência de Runtime (Arbor HTR-Lite)
+- **Claim:** A incorporação de doadores externos (como Arbor / HTR) não deve ocorrer via importação de frameworks ou dependência cega de runtime, mas através da colheita cirúrgica de mecanismos de alto valor (linhagem condicionada a evidência, estado de pesquisa compacto, lições podadas com escopo e condições de reabertura, separação de geração e validação de novidade) combinada com a rejeição explícita de suas cicatrizes (merge threshold não imposto, fallback em score não verificado de LLM, sobreajuste adaptativo e árvore estrita de pai único).
+- **Evidence:** Autópsia canônica em `docs/research/donors/ARBOR-DEEP-AUTOPSY.md` e visualizador determinístico `DonorIntelligenceCatalog`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** Redução agressiva de incertezas sem turismo tecnológico nem inchaço arquitetural.
+- **Related Decisions:** [DONOR-ARSENAL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/research/DONOR-ARSENAL.md)
+
+
 
 
 

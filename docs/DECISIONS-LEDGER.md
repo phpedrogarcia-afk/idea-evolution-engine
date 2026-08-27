@@ -145,3 +145,31 @@
 - **Contexto:** Agentes autônomos tendem a entrar em ciclos infinitos de pesquisa ou refatoração sem redução concreta de incerteza (*Anti-Circle Rule*).
 - **Decisão:** Todo `TaskContract` (v0.1+) deve declarar compulsoriamente os campos: `target_uncertainty` (qual incerteza estamos pagando para reduzir agora), `target_decision` (qual decisão será destravada), `stop_condition` (condição estrita de parada) e `decision_delta` esperado.
 - **Consequências:** Elimina tarefas circulares sem valor decisório (*Do not pay twice for the same uncertainty*).
+
+---
+
+### <a id="adr-015"></a> ADR-015: Ancoragem de Fonte e Disciplina de Representação
+- **Data:** 2026-08-27
+- **Status:** `ACCEPTED`
+- **Contexto:** Modelos de IA confundem suas próprias representações e sínteses com a fonte humana bruta, fabricando premissas e autoridade inexistentes.
+- **Decisão:** O FioIdeias adota representações ancoradas na fonte (`SourceAnchor` vs `RepresentationRecord`). O IEE pode gerar representações ilimitadas, mas nenhuma representação pode alterar silenciosamente a autoridade da fonte.
+- **Consequências:** A autoridade humana original permanece imutável e soberana contra qualquer alucinação de estágio.
+
+---
+
+### <a id="adr-016"></a> ADR-016: Inteligência de Doadores como Memória Institucional, Não Autoridade de Implementação
+- **Data:** 2026-08-27
+- **Status:** `ACCEPTED`
+- **Contexto:** Risco de importação acrítica de frameworks externos complexos (como Arbor, LangGraph, AutoGen) por inércia tecnológica.
+- **Decisão:** O conhecimento de doadores (`Donor Intelligence`) é memória institucional para colher mecanismos, cicatrizes e incertezas pagas antes de inventar, mas não confere autoridade para implementação direta sem experimentos no receptor.
+- **Consequências:** Eliminação do turismo tecnológico e preservação da arquitetura limpa do IEE.
+
+---
+
+### <a id="adr-017"></a> ADR-017: Arbor como Doador Primário para Linhagem Condicionada a Evidência (HTR-Lite)
+- **Data:** 2026-08-27
+- **Status:** `ACCEPTED`
+- **Contexto:** Necessidade de transplante de mecanismos de linhagem de hipóteses e propagação de insights sem importar a dependência pesada de runtime do Arbor.
+- **Decisão:** Registrar a autópsia profunda do Arbor em `docs/research/donors/ARBOR-DEEP-AUTOPSY.md` e adotar o transplante conceitual de HTR-Lite (multi-parentesco, insights tipados, lições podadas com escopo/reopen) sujeito a futuros experimentos no receptor.
+- **Consequências:** O IEE herda as vantagens do HTR sem ser contaminado por suas fraquezas conhecidas.
+
