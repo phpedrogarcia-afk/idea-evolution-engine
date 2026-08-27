@@ -173,3 +173,13 @@
 - **Decisão:** Registrar a autópsia profunda do Arbor em `docs/research/donors/ARBOR-DEEP-AUTOPSY.md` e adotar o transplante conceitual de HTR-Lite (multi-parentesco, insights tipados, lições podadas com escopo/reopen) sujeito a futuros experimentos no receptor.
 - **Consequências:** O IEE herda as vantagens do HTR sem ser contaminado por suas fraquezas conhecidas.
 
+---
+
+### <a id="adr-018"></a> ADR-018: Fechamento Conclusivo do Experimento M05.2 e Direcionamento para Redesenho Lean IEE
+- **Data:** 2026-08-27
+- **Status:** `ACCEPTED`
+- **Contexto:** O Experimento Controlado Real A/B/C (`EXP-M05.2-REAL`) demonstrou que a esteira fixa multiestágio de 10 chamadas (Condição B = 31/65) teve desempenho inferior à baseline de 1 chamada (Condição A = 48/65) e à crítica-revisão de 4 chamadas (Condição C = 44/65), evidenciando desperdício epistêmico pré-gate (*Epistemic Waste Before Gate*).
+- **Decisão:** Encerrar formalmente o marco M05.2 com a evidência obtida (`M05.2_CLOSED_WITH_SINGLE_CASE_EVIDENCE`) e direcionar a próxima missão para o design arquitetural de um Lean IEE (primeira passada enxuta + verificação determinística de autoridade + escalação condicional orientada por doadores), sem modificar o código de produção nesta etapa.
+- **Consequências:** Foco científico em maximizar o valor de decisão por chamada de modelo (*Decision Value per Call*) sem pagar aluguel de complexidade fixa.
+
+

@@ -1,0 +1,72 @@
+{
+  "checkpoint_id": "CP-20260827-018",
+  "created_at": "2026-08-27T13:16:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.2 Closed Post-Reveal: Single-Case Evidence Institutionalized, Winner Condition A Recorded, Complexity Rent Analyzed, Lean Redesign Queued, 114 Tests Passing",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-M05.2-HUMAN-FREEZE: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017",
+    "TASK-M05.2-POST-REVEAL: Persistência imutável de experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md",
+    "TASK-M05.2-ADR-018: Registro de ADR-018 em docs/DECISIONS-LEDGER.md",
+    "TASK-M05.2-FINDINGS: Registro de FINDING-019 (Epistemic Waste Before Gate) e FINDING-020 (Complexity Rent Not Paid) em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md",
+    "docs/DECISIONS-LEDGER.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "ADR-018: Fechamento Conclusivo do Experimento M05.2 e Direcionamento para Redesenho Lean IEE",
+    "M05_2_CLOSED_WITH_SINGLE_CASE_EVIDENCE: O Simple Loop fixo não pagou seu aluguel de complexidade neste caso",
+    "RECEIVER_UNCERTAINTY_FORMALIZED: Criada RU-LEAN-IEE-001 para guiar a colheita em doadores e o design de escalação condicional"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "114/114 tests passing across 18 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Não sobregeneralizar os resultados de uma única execução para todas as ideias ou domínios"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "M05_2_EXPERIMENT_STATUS": "CLOSED_WITH_SINGLE_CASE_EVIDENCE",
+    "OBSERVED_WINNER": "CONDITION_A",
+    "RUNTIME_UNCHANGED": true,
+    "LEAN_REDESIGN_QUEUED": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão LEAN IEE DONOR-GUIDED REDESIGN focando em colheita de mecanismos em doadores catalogados",
+  "authorized_next_scope": [
+    "Colheita de mecanismos de escalação condicional em doadores (Arbor, IDEAgent, Magentic-One, DCI, Google Co-Scientist)"
+  ],
+  "do_not_repeat": [
+    "Não modificar código de runtime sem autorização e design de arquitetura prévio",
+    "Não ignorar a evidência empírica obtida no M05.2"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 114 testes."
+}

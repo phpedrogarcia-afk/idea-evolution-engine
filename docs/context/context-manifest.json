@@ -10,9 +10,9 @@
   "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260827-017",
-  "last_known_good_checkpoint": "CP-20260827-017",
-  "current_objective": "Mission M05.2 Human Review Frozen: Scores Persisted, Reveal Pending",
+  "latest_checkpoint": "CP-20260827-018",
+  "last_known_good_checkpoint": "CP-20260827-018",
+  "current_objective": "Mission M05.2 Closed Post-Reveal: Lean Redesign Queued (114 tests passing)",
   "current_active_task": "TASK-000",
   "next_authorized_work": "Configuração de chave de API pelo operador humano para execução do Real Canary (M05-B) com prompt corrigido",
   "updated_at": "2026-08-26T15:41:25-03:00",
@@ -123,13 +123,13 @@
     "AGENTS.md": "d680a17192193dce5e9ea485bfe85a44fff3b352c36bb0f4440f7718ac9e6a77",
     "README.md": "17b117e2eabf9c4fa373802046c08a754368f85e5dcad712d1ac6c2e00f35935",
     "docs/GOVERNANCE-INVARIANTS.md": "9cce61ce9303dd4a5f2914a2912700b5f4751cfc3607f0b0b22e490f03d47bda",
-    "docs/DECISIONS-LEDGER.md": "d503cbb12ab52459806d6fe5c0fec9f538cf133b10938a54c2ba52f423cfbf48",
+    "docs/DECISIONS-LEDGER.md": "bb1055986849e150e76c5c71c646312e325f7f38ffd542a1b1c8a0e1c622dde8",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "86870b03fa33ef62d0c1f545f91cfcdadb2ee73f8ba9f9570850d632901a5e2c",
-    "docs/context/ACTIVE-QUEUE.md": "1f9cd63b9f175586dfd8921379b7938c3d30fab6a4a1c7a500302d68131b0bc5",
+    "docs/context/CURRENT-STATE.md": "f6cd97f30208b6525789912d3d99b47f6597ae83255394d216d80f0dcc996be7",
+    "docs/context/ACTIVE-QUEUE.md": "b610f3cf76666d4eada621196dd2738596403e3df7628e4ec1fca6159012a242",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"
   },
-  "last_updated": "2026-08-27T13:06:00-03:00"
+  "last_updated": "2026-08-27T13:16:00-03:00"
 }

@@ -306,6 +306,22 @@
 - **Resultado:** `HUMAN_REVIEW_FROZEN` | `REVEAL_PENDING` | `BLINDING_COMPROMISED = TRUE`.
 - **Evidência:** Hash SHA-256 do artefato de avaliação: `9b6f03102d800c59956d759bd251bf31eda4c3c267c14e5bec9f2194bdda331b`.
 
+---
+
+### [MS-M05.2-POST-REVEAL] M05.2 Post-Reveal Closure & Scientific Institutionalization (Missão M05.2 Pós-Revelação)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Encerrar formalmente o experimento A/B/C pós-revelação, registrar as conclusões científicas, formalizar a decisão arquitetural ADR-018 e definir a nova incerteza do receptor para a próxima missão de Lean IEE.
+- **O que Mudou:**
+  - Persistência imutável de `experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md`.
+  - Mapeamento oficial registrado: `A = RESULT 2 (48/65)`, `B = RESULT 1 (31/65)`, `C = RESULT 3 (44/65)`. Vencedor observado: Condição A.
+  - Registro de `ADR-018` e achados empíricos `FINDING-019` e `FINDING-020`.
+  - Formulação de `RU-LEAN-IEE-001` e definição da próxima missão: **LEAN IEE DONOR-GUIDED REDESIGN**.
+  - Emissão do Checkpoint `CP-20260827-018`.
+- **Resultado:** `M05.2_CLOSED_WITH_SINGLE_CASE_EVIDENCE` | `RUNTIME_UNCHANGED` | `LEAN_REDESIGN_QUEUED`.
+- **Evidência:** 114/114 testes automatizados aprovados (100% offline).
+
+
 
 
 

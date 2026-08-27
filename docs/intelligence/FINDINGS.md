@@ -189,6 +189,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** A integridade de autoridade final funciona, mas sugere a necessidade futura de podas antecipadas de hipóteses não-ancoradas antes de estágios aprofundados de síntese/teste.
 - **Related Decisions:** [HUMAN-REVIEW-EVALUATION.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md)
 
+---
+
+### [FINDING-020] Aluguel de Complexidade Não Pago pelo Simple Loop Fixo (EXP-M05.2)
+- **Claim:** Mais estágios e mais chamadas de modelo não se traduzem automaticamente em mais valor de decisão ($\text{More Stages} \neq \text{More Value}$). Na avaliação empírica do `EXP-M05.2`, a baseline de 1 chamada (Condição A = 48/65) e a crítica-revisão de 4 chamadas (Condição C = 44/65) superaram o pipeline fixo de 10 chamadas (Condição B = 31/65). O aluguel de complexidade de uma esteira multiestágio rígida não foi pago nesta execução e requer escalação condicional orientada por gaps.
+- **Evidence:** `POST-REVEAL-ANALYSIS.md` e pontuação da rubrica humana em `HUMAN-REVIEW-EVALUATION.md`.
+- **Status:** `SUPPORTED_BY_SINGLE_RUN` / `REQUIRES_REPLICATION`
+- **Implications:** Direciona a evolução arquitetural para o Lean IEE (primeira passada enxuta + verificação determinística + escalação condicional).
+- **Related Decisions:** [POST-REVEAL-ANALYSIS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md)
+
+
 
 
 

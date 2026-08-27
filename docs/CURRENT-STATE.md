@@ -5,21 +5,23 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Avaliação Humana Congelada
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Experimento M05.2 Encerrado
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Experimento A/B/C:** `HUMAN_REVIEW_FROZEN` | `REVEAL_PENDING` ([`experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md))
-- **Pontuação Humana:** RESULT 1 = 31/65, RESULT 2 = 48/65, RESULT 3 = 44/65
-- **Blinding Status:** `BLINDING_COMPROMISED = TRUE` (Metadata exposta no cabeçalho do RESULT 1)
-- **Achado Registrado:** `FINDING-019` (`EPISTEMIC_WASTE_BEFORE_GATE`)
+- **Status do Experimento A/B/C:** `M05.2_CLOSED_WITH_SINGLE_CASE_EVIDENCE` ([`experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md))
+- **Mapeamento Revelado:** `A = RESULT 2 (48/65)`, `B = RESULT 1 (31/65)`, `C = RESULT 3 (44/65)`
+- **Vencedor Observado:** `CONDIÇÃO A (BASELINE SINGLE REFINE)`
+- **Conclusão Central:** `CURRENT_SIMPLE_LOOP_COMPLEXITY_RENT = NOT_PAID_IN_THIS_CASE`
+- **Nova Incerteza do Receptor:** `RU-LEAN-IEE-001` (`LEAN_FIRST_PASS + CONDITIONAL_ESCALATION`)
+- **Novo Gap Receptor:** `DECISION_VALUE_PER_CALL / CONDITIONAL_ESCALATION`
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
 - **Varredura de Segredos:** `SECRET_SCAN: PASS`
-- **Último Checkpoint Imutável:** [`CP-20260827-017`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-017.md)
+- **Último Checkpoint Imutável:** [`CP-20260827-018`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-018.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
+- [x] Análise pós-revelação completa em `experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md`.
 - [x] Avaliação humana pré-revelação congelada em `experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md`.
-- [x] Artefatos brutos da execução real em `experiments/EXP-M05.2-REAL/raw/`.
-- [x] Pacote de avaliação cega em `experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md`.
-- [x] Arquivo de revelação isolado em `experiments/EXP-M05.2-REAL/BLIND-REVEAL.json` (NÃO REVELADO).
-- [x] Suíte de 114 testes automatizados e validadores de contexto 100% verdes.
+- [x] Arquivo de revelação formal em `experiments/EXP-M05.2-REAL/BLIND-REVEAL.json`.
+- [x] Decisão canônica `ADR-018` e achados empíricos `FINDING-019` e `FINDING-020`.
+- [x] Suíte de 114 testes automatizados e validadores 100% verdes.
