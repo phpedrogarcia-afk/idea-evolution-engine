@@ -1,0 +1,55 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 23.429803133010864,
+  "delta_summary": "RealityCheck concluído: Testando Core 'IA totalmente offline rodando no disposi...' (hash: 7ece521d820d6669), 5 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"IA totalmente offline rodando no dispositivo com templates personalizáveis e criptografia local\",\"feasibility_notes\":[\"Modelos de IA de tamanho moderado podem ser executados em smartphones e laptops modernos sem necessidade de conexão internet\",\"Templates estáticos podem ser armazenados e editados localmente, exigindo apenas espaço de armazenamento proporcional ao número de templates\",\"Criptografia local (AES‑256 ou similar) já é suportada por bibliotecas nativas em iOS, Android e desktop, garantindo confidencialidade dos dados do usuário\"],\"reality_dependencies\":[\"Capacidade de processamento (CPU/GPU) suficiente para inferência em tempo real\",\"Memória RAM disponível para carregar o modelo de IA offline\",\"Armazenamento seguro para guardar modelos, templates e dados criptografados\",\"Bibliotecas criptográficas auditadas e compatíveis com o SO alvo\",\"Sistema operacional que permita execução de código nativo sem restrições de sandbox excessivas\"],\"claims_needing_evidence\":[\"O modelo offline gera planos estruturados com qualidade comparável a soluções baseadas em nuvem\",\"A criptografia local impede totalmente a exposição de dados sensíveis mesmo em caso de comprometimento físico do dispositivo\",\"Templates personalizáveis podem ser criados e reutilizados sem necessidade de atualização remota\"],\"potential_blockers\":[\"Limitações de hardware em dispositivos de baixo custo podem tornar a inferência lenta ou inviável\",\"Tamanho do modelo pode exceder a capacidade de armazenamento ou memória disponível\",\"Restrições de políticas de app stores que limitam o uso de certas bibliotecas de criptografia ou IA\"],\"candidate_tests\":[\"Medir o tempo de inferência do modelo offline em dispositivos representativos (smartphone de gama média, laptop padrão)\",\"Avaliar a clareza e completude dos planos gerados comparando-os com um benchmark humano\",\"Verificar que todos os arquivos de dados permanecem criptografados em repouso usando ferramentas de inspeção de disco\",\"Testar a edição e salvamento de templates localmente e garantir que as alterações persistem após reinício do app\",\"Monitorar consumo de bateria e uso de CPU/GPU durante a geração de um plano completo\"],\"exploratory_candidate_tests\":[\"Implementar um módulo gamificado de feedback incremental e medir engajamento do usuário\",\"Criar uma camada opcional de revisão humana confidencial e avaliar a melhoria na qualidade dos planos\",\"Testar um modelo híbrido onde sugestões de IA são validadas por especialistas externos via contrato de confidencialidade\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "IA totalmente offline rodando no dispositivo com templates personalizáveis e criptografia local",
+    "feasibility_notes": [
+      "Modelos de IA de tamanho moderado podem ser executados em smartphones e laptops modernos sem necessidade de conexão internet",
+      "Templates estáticos podem ser armazenados e editados localmente, exigindo apenas espaço de armazenamento proporcional ao número de templates",
+      "Criptografia local (AES‑256 ou similar) já é suportada por bibliotecas nativas em iOS, Android e desktop, garantindo confidencialidade dos dados do usuário"
+    ],
+    "reality_dependencies": [
+      "Capacidade de processamento (CPU/GPU) suficiente para inferência em tempo real",
+      "Memória RAM disponível para carregar o modelo de IA offline",
+      "Armazenamento seguro para guardar modelos, templates e dados criptografados",
+      "Bibliotecas criptográficas auditadas e compatíveis com o SO alvo",
+      "Sistema operacional que permita execução de código nativo sem restrições de sandbox excessivas"
+    ],
+    "claims_needing_evidence": [
+      "O modelo offline gera planos estruturados com qualidade comparável a soluções baseadas em nuvem",
+      "A criptografia local impede totalmente a exposição de dados sensíveis mesmo em caso de comprometimento físico do dispositivo",
+      "Templates personalizáveis podem ser criados e reutilizados sem necessidade de atualização remota"
+    ],
+    "potential_blockers": [
+      "Limitações de hardware em dispositivos de baixo custo podem tornar a inferência lenta ou inviável",
+      "Tamanho do modelo pode exceder a capacidade de armazenamento ou memória disponível",
+      "Restrições de políticas de app stores que limitam o uso de certas bibliotecas de criptografia ou IA"
+    ],
+    "candidate_tests": [
+      "Medir o tempo de inferência do modelo offline em dispositivos representativos (smartphone de gama média, laptop padrão)",
+      "Avaliar a clareza e completude dos planos gerados comparando-os com um benchmark humano",
+      "Verificar que todos os arquivos de dados permanecem criptografados em repouso usando ferramentas de inspeção de disco",
+      "Testar a edição e salvamento de templates localmente e garantir que as alterações persistem após reinício do app",
+      "Monitorar consumo de bateria e uso de CPU/GPU durante a geração de um plano completo"
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar um módulo gamificado de feedback incremental e medir engajamento do usuário",
+      "Criar uma camada opcional de revisão humana confidencial e avaliar a melhoria na qualidade dos planos",
+      "Testar um modelo híbrido onde sugestões de IA são validadas por especialistas externos via contrato de confidencialidade"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T11:03:12.317105+00:00"
+}

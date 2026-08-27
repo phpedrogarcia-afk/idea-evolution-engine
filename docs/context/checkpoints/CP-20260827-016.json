@@ -1,0 +1,78 @@
+{
+  "checkpoint_id": "CP-20260827-016",
+  "created_at": "2026-08-27T08:10:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.2 Complete Execution: 15 Real Model Calls on Groq openai/gpt-oss-120b, Blinded Review Packet Generated, Reveal Mapping Isolated, Zero Fallback, R$ 0.00 Incremental Spend",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-M05.2-SETUP: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015",
+    "TASK-M05.2-REAL-EXEC: Execução real de 15 chamadas online no Groq openai/gpt-oss-120b (Cond A: 1 chamada, Cond B: 10 chamadas incluindo reconstrução e status honesto REFINEMENT_INCOMPLETE, Cond C: 4 chamadas)",
+    "TASK-M05.2-BLIND-GEN: Geração do pacote de avaliação cega em experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md",
+    "TASK-M05.2-REVEAL-ISO: Isolamento do arquivo de revelação em experiments/EXP-M05.2-REAL/BLIND-REVEAL.json",
+    "TASK-M05.2-DET-COMP: Geração da comparação determinística contábil em experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.md"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.2-REAL/raw/condition_a_raw.json",
+    "experiments/EXP-M05.2-REAL/raw/condition_b_raw.json",
+    "experiments/EXP-M05.2-REAL/raw/condition_c_raw.json",
+    "experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md",
+    "experiments/EXP-M05.2-REAL/BLIND-REVEAL.json",
+    "experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.md",
+    "experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.json",
+    "scripts/run_real_abc_experiment.py",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "A_B_C_REAL_EXECUTION_AUTHENTIC: 15 chamadas reais executadas contra Groq openai/gpt-oss-120b com telemetria preservada",
+    "BLINDING_ISOLATION_ENFORCED: Mapeamento mantido em segredo estrito no BLIND-REVEAL.json até preenchimento humano da rubrica",
+    "EPISTEMIC_HONESTY_VERIFIED: Condição B finalizou com REFINEMENT_INCOMPLETE após detectar desvio e contradição ontológica, comprovando veto ativo dos hard gates R5"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "114/114 tests passing across 18 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "A avaliação humana deve ser preenchida sem conhecimento prévio do mapeamento para manter a validade do teste cego"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "A_B_C_EXECUTION_COMPLETE": true,
+    "REAL_CALLS_EXECUTED": 15,
+    "PAID_CALLS_REUSED": 0,
+    "BLIND_PACKET_READY": true,
+    "HUMAN_BLIND_REVIEW_PENDING": true,
+    "READY_FOR_HUMAN_SCORING": true
+  },
+  "next_exact_action": "Operador humano preencher a rubrica no BLIND-REVIEW-PACKET.md e autorizar a revelação",
+  "authorized_next_scope": [
+    "Avaliação cega humana das 13 dimensões e revelação pós-avaliação"
+  ],
+  "do_not_repeat": [
+    "Não revelar o mapeamento A/B/C para RESULT 1/2/3 no relatório",
+    "Não auto-declarar vencedor sem notas humanas"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 114 testes."
+}

@@ -276,4 +276,21 @@
 - **Resultado:** `HARNESS_READY` | `SPEC_FROZEN` | `REAL_EXECUTION = BLOCKED_BY_MISSING_GROQ_CREDENTIAL` | `HUMAN_BLIND_REVIEW = PENDING`.
 - **Evidência:** 114/114 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-M05.2-REAL-RUN] Controlled Real A/B/C Value Experiment Execution (Missão M05.2 Execução Real)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Executar online o experimento A/B/C contra o Groq (`openai/gpt-oss-120b`) usando credencial recuperada com segurança do Secret Manager, gerando telemetria e o pacote de revisão cega.
+- **O que Mudou:**
+  - Execução de 15 chamadas reais de inferência sem fallback (Condição A: 1 chamada; Condição B: 10 chamadas incluindo 1 reconstrução e status honesto `REFINEMENT_INCOMPLETE`; Condição C: 4 chamadas de crítica-revisão).
+  - Geração imutável dos artefatos em `experiments/EXP-M05.2-REAL/raw/`.
+  - Geração do pacote de avaliação cega em `experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md`.
+  - Isolamento do mapeamento real em `experiments/EXP-M05.2-REAL/BLIND-REVEAL.json`.
+  - Geração da comparação contábil em `experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.md` e `.json`.
+  - Emissão do Checkpoint `CP-20260827-016`.
+- **Resultado:** `A_B_C_EXECUTION_COMPLETE` | `HUMAN_BLIND_REVIEW = PENDING` | `BLINDING_PRESERVED = TRUE`.
+- **Evidência:** 15 chamadas reais registradas; 114/114 testes automatizados aprovados (100% offline).
+
+
 

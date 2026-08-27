@@ -5,33 +5,22 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Experimento Real A/B/C
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Experimento Real A/B/C Concluído
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Experimento A/B/C:** `SPEC_FROZEN_AND_HARNESS_READY` (`ABCExperimentRunner`, `EXPERIMENT-SPEC-M05.2.md`, `PAID-WORK-INVENTORY.md`)
-- **Status da Execução Real:** `BLOCKED_BY_MISSING_GROQ_CREDENTIAL` (Aguardando configuração de `GROQ_API_KEY` pelo operador)
-- **Status de Fundação Epistêmica:** `INSTITUTIONALIZED` (`SourceAnchor`, `RepresentationRecord`, `InsightRecord`, `NegativeKnowledgeRecord`, `IdeaLineageNode`)
-- **Status de Inteligência de Doadores:** `ACTIVE` (`ARBOR-DEEP-AUTOPSY.md`, `DonorIntelligenceCatalog`, `DONOR-ARSENAL.md`)
-- **Status de Prova de Autoridade:** `GROUNDING_VALIDATOR_ACTIVE` (`AuthorityProofValidator` audita deterministicamente provas de ancoragem e veta *Authority Spoofing*)
-- **Status dos Gates de Status:** `SOVEREIGN_HARD_GATES` (`_evaluate_hard_gates` governa soberanamente o status final do pipeline)
-- **Status da Topologia & Realidade:** `HARDENED` (`SYNTHESIZE` $\to$ `REALITY_CHECK` $\to$ `FINAL_REVIEW`)
-- **Status da Identidade de Runs:** `IMMUTABLE_COLLISION_RESISTANT` (`RUN-<UTC>-<UUID>`)
+- **Status do Experimento A/B/C:** `A_B_C_EXECUTION_COMPLETE` (15 chamadas reais executadas contra Groq `openai/gpt-oss-120b`, zero fallback, R$ 0,00 incremental)
+- **Status da Avaliação Humana:** `HUMAN_BLIND_REVIEW = PENDING` ([`experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md))
+- **Mapeamento Cego:** `ISOLATED_IN_BLIND_REVEAL_JSON` (Não revelado no relatório da IA)
+- **Comparação Determinística:** [`experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.md)
 - **Status do MVP:** `IMPLEMENTED_AND_TESTED` (Software funcional, 114 testes verdes)
-- **Status de Roteamento & Custo:** `MULTI_MODEL_READY_OFFLINE = TRUE` | `FREE_ONLY_POLICY = INSTITUTIONALIZED`
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
 - **Varredura de Segredos:** `SECRET_SCAN: PASS`
-- **Último Checkpoint Imutável:** [`CP-20260827-015`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-015.md)
+- **Último Checkpoint Imutável:** [`CP-20260827-016`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-016.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
-- [x] Especificação congelada do experimento em `docs/experiments/EXPERIMENT-SPEC-M05.2.md`.
-- [x] Inventário e auditoria de não-reusabilidade científica de runs pré-R5 em `docs/experiments/PAID-WORK-INVENTORY.md`.
-- [x] Harness de controle e cegueira experimental em `src/idea_evolution/experiments/abc_experiment.py`.
-- [x] Suíte de 114 testes automatizados cobrindo todos os domínios, topologias, ataques, autoridade e controle do experimento A/B/C (100% offline).
-
----
-
-## 3. O que NÃO Existe (Explicitamente Não Implementado)
-- ❌ Zero troca silenciosa de modelo ou provedor por ausência de chave de API.
-- ❌ Zero auto-declaração de vencedor da comparação A/B/C antes da avaliação cega humana.
-- ❌ Zero revelação prematura do mapeamento cego de condições.
+- [x] Artefatos brutos da execução real em `experiments/EXP-M05.2-REAL/raw/` (`condition_a_raw.json`, `condition_b_raw.json`, `condition_c_raw.json`).
+- [x] Pacote de avaliação cega em `experiments/EXP-M05.2-REAL/BLIND-REVIEW-PACKET.md`.
+- [x] Arquivo de revelação isolado em `experiments/EXP-M05.2-REAL/BLIND-REVEAL.json`.
+- [x] Comparação mecânica e determinística em `experiments/EXP-M05.2-REAL/DETERMINISTIC-COMPARISON.md` e `.json`.
+- [x] Suíte de 114 testes automatizados e validadores de contexto 100% verdes.

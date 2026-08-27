@@ -1,0 +1,78 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 27.2185378074646,
+  "delta_summary": "4 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Alta taxa de abandono devido ao fluxo guiado rígido\",\"why_it_matters\":\"Se os usuários sentirem que o processo é demasiado estruturado, abandonarão o app, inviabilizando o modelo de negócio\",\"severity\":\"HIGH\",\"affected_part\":\"Experiência do Usuário\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Sugestões de baixo valor por falta de IA avançada\",\"why_it_matters\":\"Sem IA sofisticada, as recomendações podem ser genéricas, reduzindo o diferencial competitivo frente a ferramentas já consolidadas\",\"severity\":\"MEDIUM\",\"affected_part\":\"Motor de Sugestões\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Erros de captura de voz/texto comprometem a interpretação da ideia\",\"why_it_matters\":\"Transcrições imprecisas podem levar a estruturas equivocadas, gerando frustração e perda de confiança no produto\",\"severity\":\"MEDIUM\",\"affected_part\":\"Entrada de Dados\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Falta de diferenciação clara em relação a concorrentes existentes\",\"why_it_matters\":\"Mercado saturado de ferramentas de organização; sem proposta única, a adoção será limitada\",\"severity\":\"HIGH\",\"affected_part\":\"Viabilidade de Negócio\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Os usuários têm acesso a dispositivos móveis ou computadores\",\"Os usuários desejam organizar suas ideias de forma estruturada\",\"É possível capturar a ideia do usuário em texto ou voz sem IA avançada\",\"Os usuários estão dispostos a seguir um processo guiado\",\"O aplicativo pode oferecer sugestões úteis sem necessidade de IA avançada\"],\"contradictions\":[\"A suposição de que não é necessária IA avançada contradiz a necessidade de sugestões de alta qualidade\",\"A promessa de transformar ideias vagas em projetos claros conflita com a rigidez de um processo guiado que pode limitar a criatividade\"],\"failure_modes\":[\"Abandono precoce do fluxo guiado\",\"Transcrições de voz imprecisas que distorcem a ideia original\",\"Templates genéricos que não se adequam a diferentes tipos de projetos\",\"Perda ou vazamento de dados de ideias dos usuários\"],\"missing_information\":[\"Segmento de mercado alvo e tamanho estimado\",\"Estratégia de monetização (ex.: assinatura, freemium)\",\"Detalhes técnicos do algoritmo de sugestão\",\"Planos de acessibilidade e inclusão\",\"Integrações previstas com outras ferramentas de produtividade\"],\"overclaims\":[\"\\\"Transformar ideias vagas em projetos claros\\\" pode ser exagerado sem suporte de IA avançada\",\"\\\"Oferecer sugestões sem necessidade de IA avançada\\\" subestima a complexidade de gerar recomendações relevantes\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Alta taxa de abandono devido ao fluxo guiado rígido",
+        "why_it_matters": "Se os usuários sentirem que o processo é demasiado estruturado, abandonarão o app, inviabilizando o modelo de negócio",
+        "severity": "HIGH",
+        "affected_part": "Experiência do Usuário",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Sugestões de baixo valor por falta de IA avançada",
+        "why_it_matters": "Sem IA sofisticada, as recomendações podem ser genéricas, reduzindo o diferencial competitivo frente a ferramentas já consolidadas",
+        "severity": "MEDIUM",
+        "affected_part": "Motor de Sugestões",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Erros de captura de voz/texto comprometem a interpretação da ideia",
+        "why_it_matters": "Transcrições imprecisas podem levar a estruturas equivocadas, gerando frustração e perda de confiança no produto",
+        "severity": "MEDIUM",
+        "affected_part": "Entrada de Dados",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Falta de diferenciação clara em relação a concorrentes existentes",
+        "why_it_matters": "Mercado saturado de ferramentas de organização; sem proposta única, a adoção será limitada",
+        "severity": "HIGH",
+        "affected_part": "Viabilidade de Negócio",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Os usuários têm acesso a dispositivos móveis ou computadores",
+      "Os usuários desejam organizar suas ideias de forma estruturada",
+      "É possível capturar a ideia do usuário em texto ou voz sem IA avançada",
+      "Os usuários estão dispostos a seguir um processo guiado",
+      "O aplicativo pode oferecer sugestões úteis sem necessidade de IA avançada"
+    ],
+    "contradictions": [
+      "A suposição de que não é necessária IA avançada contradiz a necessidade de sugestões de alta qualidade",
+      "A promessa de transformar ideias vagas em projetos claros conflita com a rigidez de um processo guiado que pode limitar a criatividade"
+    ],
+    "failure_modes": [
+      "Abandono precoce do fluxo guiado",
+      "Transcrições de voz imprecisas que distorcem a ideia original",
+      "Templates genéricos que não se adequam a diferentes tipos de projetos",
+      "Perda ou vazamento de dados de ideias dos usuários"
+    ],
+    "missing_information": [
+      "Segmento de mercado alvo e tamanho estimado",
+      "Estratégia de monetização (ex.: assinatura, freemium)",
+      "Detalhes técnicos do algoritmo de sugestão",
+      "Planos de acessibilidade e inclusão",
+      "Integrações previstas com outras ferramentas de produtividade"
+    ],
+    "overclaims": [
+      "\"Transformar ideias vagas em projetos claros\" pode ser exagerado sem suporte de IA avançada",
+      "\"Oferecer sugestões sem necessidade de IA avançada\" subestima a complexidade de gerar recomendações relevantes"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T11:05:41.568541+00:00"
+}

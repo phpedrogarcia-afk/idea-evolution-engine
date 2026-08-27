@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 22.60422706604004,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Fluxo adaptativo modular que permite ao ...' (hash: 0c5c1fcb433a7479), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Fluxo adaptativo modular que permite ao usuário escolher, pular ou reorganizar etapas guiadas via um painel de navegação livre\",\"feasibility_notes\":[\"Implementar um painel de navegação livre é viável usando frameworks modernos (React Native, Flutter) que suportam renderização dinâmica de componentes\",\"Modularidade pode ser gerenciada com bibliotecas de estado (Redux, Riverpod) para rastrear progresso e reordenação de etapas\",\"Reordenação em tempo real requer lógica de persistência robusta, mas bibliotecas de drag‑and‑drop já oferecem suporte consolidado\",\"A abordagem adaptativa não exige hardware específico, apenas boas práticas de UI/UX para evitar sobrecarga cognitiva\",\"Escalabilidade do fluxo modular pode ser testada incrementalmente, reduzindo risco de falha total\"] ,\"reality_dependencies\":[\"Framework de UI que permita carregamento dinâmico de módulos (ex.: React Native, Flutter)\",\"Biblioteca de gerenciamento de estado para rastrear ordem e status das etapas\",\"Mecanismo de persistência local (SQLite, Realm, ou storage nativo) para salvar a configuração do usuário\",\"APIs de acessibilidade do sistema operacional para garantir navegação livre a todos os usuários\",\"Ferramentas de análise de usabilidade para medir eficácia do fluxo adaptativo\"] ,\"claims_needing_evidence\":[\"Usuários conseguem compreender e utilizar um painel de navegação livre sem treinamento extensivo\",\"A capacidade de pular ou reorganizar etapas aumenta a clareza e a qualidade do projeto final\",\"A modularidade não degrada a performance percebida em dispositivos de gama média\",\"A flexibilidade do fluxo reduz a taxa de abandono durante a fase de ideação\"] ,\"potential_blockers\":[\"Complexidade de sincronizar estado quando múltiplas etapas são reordenadas simultaneamente\",\"Risco de inconsistência de dados ao salvar configurações personalizadas em diferentes plataformas\",\"Sobrecarga de renderização em dispositivos com recursos limitados ao carregar módulos dinamicamente\",\"Desafios de acessibilidade ao oferecer navegação livre sem perder orientação do usuário\"] ,\"candidate_tests\":[\"Teste de usabilidade: observar usuários reorganizando etapas via painel livre e medir tempo/compreensão\",\"Teste A/B: comparar taxa de conclusão entre fluxo fixo tradicional e fluxo adaptativo modular\",\"Teste de performance: medir tempo de carregamento e uso de memória ao adicionar/remover módulos em tempo real\",\"Teste de consistência de estado: simular reordenação rápida de múltiplas etapas e validar integridade dos dados\"] ,\"exploratory_candidate_tests\":[\"Teste de modo offline: validar persistência local de configurações de fluxo e sincronização pós‑conexão\",\"Teste de recuperação de dados: simular perda de conexão durante reordenação e garantir que não haja corrupção de estado\",\"Teste de integração com serviços de nuvem opcional: avaliar impacto de sincronização híbrida entre local e remoto\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Fluxo adaptativo modular que permite ao usuário escolher, pular ou reorganizar etapas guiadas via um painel de navegação livre",
+    "feasibility_notes": [
+      "Implementar um painel de navegação livre é viável usando frameworks modernos (React Native, Flutter) que suportam renderização dinâmica de componentes",
+      "Modularidade pode ser gerenciada com bibliotecas de estado (Redux, Riverpod) para rastrear progresso e reordenação de etapas",
+      "Reordenação em tempo real requer lógica de persistência robusta, mas bibliotecas de drag‑and‑drop já oferecem suporte consolidado",
+      "A abordagem adaptativa não exige hardware específico, apenas boas práticas de UI/UX para evitar sobrecarga cognitiva",
+      "Escalabilidade do fluxo modular pode ser testada incrementalmente, reduzindo risco de falha total"
+    ],
+    "reality_dependencies": [
+      "Framework de UI que permita carregamento dinâmico de módulos (ex.: React Native, Flutter)",
+      "Biblioteca de gerenciamento de estado para rastrear ordem e status das etapas",
+      "Mecanismo de persistência local (SQLite, Realm, ou storage nativo) para salvar a configuração do usuário",
+      "APIs de acessibilidade do sistema operacional para garantir navegação livre a todos os usuários",
+      "Ferramentas de análise de usabilidade para medir eficácia do fluxo adaptativo"
+    ],
+    "claims_needing_evidence": [
+      "Usuários conseguem compreender e utilizar um painel de navegação livre sem treinamento extensivo",
+      "A capacidade de pular ou reorganizar etapas aumenta a clareza e a qualidade do projeto final",
+      "A modularidade não degrada a performance percebida em dispositivos de gama média",
+      "A flexibilidade do fluxo reduz a taxa de abandono durante a fase de ideação"
+    ],
+    "potential_blockers": [
+      "Complexidade de sincronizar estado quando múltiplas etapas são reordenadas simultaneamente",
+      "Risco de inconsistência de dados ao salvar configurações personalizadas em diferentes plataformas",
+      "Sobrecarga de renderização em dispositivos com recursos limitados ao carregar módulos dinamicamente",
+      "Desafios de acessibilidade ao oferecer navegação livre sem perder orientação do usuário"
+    ],
+    "candidate_tests": [
+      "Teste de usabilidade: observar usuários reorganizando etapas via painel livre e medir tempo/compreensão",
+      "Teste A/B: comparar taxa de conclusão entre fluxo fixo tradicional e fluxo adaptativo modular",
+      "Teste de performance: medir tempo de carregamento e uso de memória ao adicionar/remover módulos em tempo real",
+      "Teste de consistência de estado: simular reordenação rápida de múltiplas etapas e validar integridade dos dados"
+    ],
+    "exploratory_candidate_tests": [
+      "Teste de modo offline: validar persistência local de configurações de fluxo e sincronização pós‑conexão",
+      "Teste de recuperação de dados: simular perda de conexão durante reordenação e garantir que não haja corrupção de estado",
+      "Teste de integração com serviços de nuvem opcional: avaliar impacto de sincronização híbrida entre local e remoto"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T11:06:47.285875+00:00"
+}

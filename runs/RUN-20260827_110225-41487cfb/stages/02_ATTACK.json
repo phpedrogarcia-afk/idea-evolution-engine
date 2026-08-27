@@ -1,0 +1,68 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 2.5927395820617676,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"User disengagement due to low perceived immediate value\",\"why_it_matters\":\"If users do not see quick, tangible benefits, they will abandon the app, rendering the core value proposition ineffective\",\"severity\":\"HIGH\",\"affected_part\":\"User Interaction Flow\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Generated project outlines may be overly generic and not actionable\",\"why_it_matters\":\"Vague output fails to deliver the promised transformation, leading to user frustration and loss of trust\",\"severity\":\"MEDIUM\",\"affected_part\":\"Idea Processing Engine\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Potential privacy breach of proprietary ideas\",\"why_it_matters\":\"Users may share confidential concepts; a breach would cause legal liability and damage reputation\",\"severity\":\"HIGH\",\"affected_part\":\"Data Storage & Transmission\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Os usuários possuem acesso a um dispositivo móvel ou computador\",\"Os usuários desejam clarificar ideias antes de iniciar um projeto\",\"As ideias vagas podem ser articuladas por meio de perguntas ou prompts\",\"Os usuários estão dispostos a interagir com o aplicativo para melhorar suas ideias\"],\"contradictions\":[\"A aplicação promete transformar ideias vagas em projetos claros, mas assume que os usuários já sabem quais aspectos precisam ser clarificados\",\"Assume que os usuários desejam clarificar ideias antes de iniciar um projeto, ao mesmo tempo que pressupõe que eles já estejam prontos para iniciar sem necessidade de validação prévia\"],\"failure_modes\":[\"Abandono precoce da aplicação durante a fase de questionamento\",\"Saídas de texto genéricas que não se traduzem em planos de ação concretos\",\"Interpretação incorreta de entradas vagas levando a recomendações irrelevantes\",\"Vazamento de dados sensíveis devido a armazenamento inadequado\"],\"missing_information\":[\"Mecanismo de avaliação da viabilidade e factibilidade das ideias propostas\",\"Modelo de negócios e estratégia de monetização\",\"Políticas de privacidade e segurança de dados detalhadas\",\"Segmentação de mercado e personas de usuário específicas\"],\"overclaims\":[\"Afirma que o aplicativo \\\"transforma\\\" ideias vagas em projetos bem definidos sem evidenciar como garante a qualidade ou a execução prática das sugestões\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "User disengagement due to low perceived immediate value",
+        "why_it_matters": "If users do not see quick, tangible benefits, they will abandon the app, rendering the core value proposition ineffective",
+        "severity": "HIGH",
+        "affected_part": "User Interaction Flow",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Generated project outlines may be overly generic and not actionable",
+        "why_it_matters": "Vague output fails to deliver the promised transformation, leading to user frustration and loss of trust",
+        "severity": "MEDIUM",
+        "affected_part": "Idea Processing Engine",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Potential privacy breach of proprietary ideas",
+        "why_it_matters": "Users may share confidential concepts; a breach would cause legal liability and damage reputation",
+        "severity": "HIGH",
+        "affected_part": "Data Storage & Transmission",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Os usuários possuem acesso a um dispositivo móvel ou computador",
+      "Os usuários desejam clarificar ideias antes de iniciar um projeto",
+      "As ideias vagas podem ser articuladas por meio de perguntas ou prompts",
+      "Os usuários estão dispostos a interagir com o aplicativo para melhorar suas ideias"
+    ],
+    "contradictions": [
+      "A aplicação promete transformar ideias vagas em projetos claros, mas assume que os usuários já sabem quais aspectos precisam ser clarificados",
+      "Assume que os usuários desejam clarificar ideias antes de iniciar um projeto, ao mesmo tempo que pressupõe que eles já estejam prontos para iniciar sem necessidade de validação prévia"
+    ],
+    "failure_modes": [
+      "Abandono precoce da aplicação durante a fase de questionamento",
+      "Saídas de texto genéricas que não se traduzem em planos de ação concretos",
+      "Interpretação incorreta de entradas vagas levando a recomendações irrelevantes",
+      "Vazamento de dados sensíveis devido a armazenamento inadequado"
+    ],
+    "missing_information": [
+      "Mecanismo de avaliação da viabilidade e factibilidade das ideias propostas",
+      "Modelo de negócios e estratégia de monetização",
+      "Políticas de privacidade e segurança de dados detalhadas",
+      "Segmentação de mercado e personas de usuário específicas"
+    ],
+    "overclaims": [
+      "Afirma que o aplicativo \"transforma\" ideias vagas em projetos bem definidos sem evidenciar como garante a qualidade ou a execução prática das sugestões"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T11:02:30.068692+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "experiment_id": "EXP-M05-ABC-REAL-20260827_110000",
+  "total_real_calls": 15,
+  "condition_a_calls": 1,
+  "condition_b_calls": 10,
+  "condition_c_calls": 4,
+  "reused_calls": 0,
+  "incremental_paid_spend": 0.0,
+  "condition_a_status": "SUCCESS",
+  "condition_b_status": "REFINEMENT_INCOMPLETE",
+  "condition_c_status": "SUCCESS",
+  "b_reconstruction_count": 1,
+  "b_core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "b_essence_drift_detected": true,
+  "b_ontology_contradiction_detected": true,
+  "output_lengths": {
+    "A": 1896,
+    "B": 6112,
+    "C": 3047
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 20.259626626968384,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Execução de modelo de IA totalmente offl...' (hash: b141fbacc5a4cbbb), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Execução de modelo de IA totalmente offline com criptografia de dados para gerar planos estruturados a partir de ideias vagas.\",\"feasibility_notes\":[\"Modelos de linguagem de tamanho moderado podem rodar em CPUs modernas ou GPUs móveis; necessidade de otimização (quantização, pruning) para caber em dispositivos locais\",\"Criptografia de ponta‑a‑ponta pode ser implementada com bibliotecas maduras (ex.: libsodium) sem exigir conexão externa\",\"Processamento offline elimina dependência de conectividade, mas requer armazenamento suficiente para o modelo e dados temporários\"],\"reality_dependencies\":[\"Hardware capaz de executar o modelo offline (CPU/GPU com memória RAM ≥8 GB ou equivalente em dispositivos móveis)\",\"Licença de uso do modelo de IA que permita execução local sem conexão à internet\",\"Bibliotecas criptográficas auditadas e compatíveis com as plataformas alvo\",\"Sistema de arquivos seguro para armazenar chaves e dados temporários criptografados\"],\"claims_needing_evidence\":[\"O modelo offline gera planos estruturados com qualidade comparável a soluções online\",\"A criptografia aplicada aos dados de entrada/saída não introduz latência perceptível ao usuário\",\"A solução mantém total privacidade: nenhum dado deixa o dispositivo durante o processamento\"],\"potential_blockers\":[\"Tamanho do modelo excede a capacidade de armazenamento ou memória dos dispositivos alvo\",\"Restrições de licenciamento que proíbem a distribuição do modelo para uso offline\",\"Implementação de criptografia pode gerar vulnerabilidades se não for corretamente integrada\",\"Desempenho insuficiente para gerar planos em tempo real em hardware de baixa potência\"],\"candidate_tests\":[\"Executar o modelo offline com um conjunto de ideias vagas de teste e comparar o plano gerado com um benchmark humano\",\"Medir o tempo total de geração de plano com e sem criptografia ativada para avaliar impacto de desempenho\",\"Verificar, via monitoramento de rede, que nenhum pacote de dados é enviado durante a geração do plano\",\"Validar a integridade dos planos descriptografados comparando-os com a saída original não criptografada\"],\"exploratory_candidate_tests\":[\"Integrar um módulo de gamificação de micro‑tarefas e medir engajamento do usuário\",\"Desenvolver uma funcionalidade colaborativa de co‑criação com mentoria humana/IA e testar a sincronização de dados criptografados entre usuários\",\"Experimentar um modelo híbrido que combina processamento offline com atualizações periódicas online para melhorar a qualidade dos planos\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Execução de modelo de IA totalmente offline com criptografia de dados para gerar planos estruturados a partir de ideias vagas.",
+    "feasibility_notes": [
+      "Modelos de linguagem de tamanho moderado podem rodar em CPUs modernas ou GPUs móveis; necessidade de otimização (quantização, pruning) para caber em dispositivos locais",
+      "Criptografia de ponta‑a‑ponta pode ser implementada com bibliotecas maduras (ex.: libsodium) sem exigir conexão externa",
+      "Processamento offline elimina dependência de conectividade, mas requer armazenamento suficiente para o modelo e dados temporários"
+    ],
+    "reality_dependencies": [
+      "Hardware capaz de executar o modelo offline (CPU/GPU com memória RAM ≥8 GB ou equivalente em dispositivos móveis)",
+      "Licença de uso do modelo de IA que permita execução local sem conexão à internet",
+      "Bibliotecas criptográficas auditadas e compatíveis com as plataformas alvo",
+      "Sistema de arquivos seguro para armazenar chaves e dados temporários criptografados"
+    ],
+    "claims_needing_evidence": [
+      "O modelo offline gera planos estruturados com qualidade comparável a soluções online",
+      "A criptografia aplicada aos dados de entrada/saída não introduz latência perceptível ao usuário",
+      "A solução mantém total privacidade: nenhum dado deixa o dispositivo durante o processamento"
+    ],
+    "potential_blockers": [
+      "Tamanho do modelo excede a capacidade de armazenamento ou memória dos dispositivos alvo",
+      "Restrições de licenciamento que proíbem a distribuição do modelo para uso offline",
+      "Implementação de criptografia pode gerar vulnerabilidades se não for corretamente integrada",
+      "Desempenho insuficiente para gerar planos em tempo real em hardware de baixa potência"
+    ],
+    "candidate_tests": [
+      "Executar o modelo offline com um conjunto de ideias vagas de teste e comparar o plano gerado com um benchmark humano",
+      "Medir o tempo total de geração de plano com e sem criptografia ativada para avaliar impacto de desempenho",
+      "Verificar, via monitoramento de rede, que nenhum pacote de dados é enviado durante a geração do plano",
+      "Validar a integridade dos planos descriptografados comparando-os com a saída original não criptografada"
+    ],
+    "exploratory_candidate_tests": [
+      "Integrar um módulo de gamificação de micro‑tarefas e medir engajamento do usuário",
+      "Desenvolver uma funcionalidade colaborativa de co‑criação com mentoria humana/IA e testar a sincronização de dados criptografados entre usuários",
+      "Experimentar um modelo híbrido que combina processamento offline com atualizações periódicas online para melhorar a qualidade dos planos"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T11:04:32.986779+00:00"
+}

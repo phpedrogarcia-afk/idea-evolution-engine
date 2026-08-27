@@ -1,0 +1,55 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 22.493276119232178,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Fluxo híbrido de organização que combina...' (hash: 75a55e0a29049b0e), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Fluxo híbrido de organização que combina caminhos guiados opcionais com blocos de construção livres, permitindo ao usuário escolher entre seguir um template estruturado ou montar seu próprio caminho.\",\"feasibility_notes\":[\"A arquitetura deve suportar troca dinâmica entre modo guiado e livre sem recarregar a aplicação\",\"É necessário um motor de fluxo que permita criação, edição e salvamento de caminhos personalizados em tempo real\",\"A UI deve ser suficientemente intuitiva para que usuários não técnicos compreendam a diferença entre os dois modos\",\"A implementação pode reutilizar componentes de drag‑and‑drop existentes, reduzindo esforço de desenvolvimento\"],\"reality_dependencies\":[\"Framework de UI com suporte a drag‑and‑drop e layout flexível (ex.: React DnD, Flutter)\",\"Sistema de persistência de dados (cloud sync ou armazenamento local) para salvar fluxos personalizados\",\"Mecanismo de versionamento de templates guiados para permitir atualizações sem quebrar fluxos existentes\",\"Infraestrutura de backend opcional para sincronização entre dispositivos\"],\"claims_needing_evidence\":[\"Usuários consideram o fluxo híbrido mais produtivo que apenas templates ou apenas construção livre\",\"A opção de escolher entre modos reduz a curva de aprendizado e aumenta a taxa de conclusão de projetos\",\"A presença de caminhos guiados opcionais não impede a criatividade dos usuários que preferem construir livremente\"],\"potential_blockers\":[\"Complexidade de implementar um motor de fluxo que suporte transição fluida entre modos guiado e livre\",\"Risco de sobrecarregar o usuário com muitas opções, levando à indecisão\",\"Desempenho degradado em dispositivos de baixa potência ao renderizar fluxos altamente customizados\",\"Dependência de bibliotecas de terceiros que podem não oferecer a flexibilidade necessária\"],\"candidate_tests\":[\"Desenvolver um protótipo mínimo contendo um template guiado e um editor de blocos livres e medir tempo de criação de projeto por usuários novatos\",\"Realizar teste A/B comparando fluxo híbrido vs. apenas templates guiados para avaliar taxa de conclusão e satisfação\",\"Testar persistência de fluxos personalizados em diferentes dispositivos e condições de rede\",\"Avaliar carga de CPU/memória ao alternar rapidamente entre modos em dispositivos móveis\"],\"exploratory_candidate_tests\":[\"Integrar modelo de linguagem avançado (ex.: GPT‑4) para sugestões contextuais em tempo real e medir impacto na qualidade das ideias\",\"Implementar reconhecimento de voz especializado para captura de brainstorming e avaliar acurácia da transcrição\",\"Criar marketplace de extensões de templates e módulos de IA e conduzir estudo de adoção entre usuários early‑adopters\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Fluxo híbrido de organização que combina caminhos guiados opcionais com blocos de construção livres, permitindo ao usuário escolher entre seguir um template estruturado ou montar seu próprio caminho.",
+    "feasibility_notes": [
+      "A arquitetura deve suportar troca dinâmica entre modo guiado e livre sem recarregar a aplicação",
+      "É necessário um motor de fluxo que permita criação, edição e salvamento de caminhos personalizados em tempo real",
+      "A UI deve ser suficientemente intuitiva para que usuários não técnicos compreendam a diferença entre os dois modos",
+      "A implementação pode reutilizar componentes de drag‑and‑drop existentes, reduzindo esforço de desenvolvimento"
+    ],
+    "reality_dependencies": [
+      "Framework de UI com suporte a drag‑and‑drop e layout flexível (ex.: React DnD, Flutter)",
+      "Sistema de persistência de dados (cloud sync ou armazenamento local) para salvar fluxos personalizados",
+      "Mecanismo de versionamento de templates guiados para permitir atualizações sem quebrar fluxos existentes",
+      "Infraestrutura de backend opcional para sincronização entre dispositivos"
+    ],
+    "claims_needing_evidence": [
+      "Usuários consideram o fluxo híbrido mais produtivo que apenas templates ou apenas construção livre",
+      "A opção de escolher entre modos reduz a curva de aprendizado e aumenta a taxa de conclusão de projetos",
+      "A presença de caminhos guiados opcionais não impede a criatividade dos usuários que preferem construir livremente"
+    ],
+    "potential_blockers": [
+      "Complexidade de implementar um motor de fluxo que suporte transição fluida entre modos guiado e livre",
+      "Risco de sobrecarregar o usuário com muitas opções, levando à indecisão",
+      "Desempenho degradado em dispositivos de baixa potência ao renderizar fluxos altamente customizados",
+      "Dependência de bibliotecas de terceiros que podem não oferecer a flexibilidade necessária"
+    ],
+    "candidate_tests": [
+      "Desenvolver um protótipo mínimo contendo um template guiado e um editor de blocos livres e medir tempo de criação de projeto por usuários novatos",
+      "Realizar teste A/B comparando fluxo híbrido vs. apenas templates guiados para avaliar taxa de conclusão e satisfação",
+      "Testar persistência de fluxos personalizados em diferentes dispositivos e condições de rede",
+      "Avaliar carga de CPU/memória ao alternar rapidamente entre modos em dispositivos móveis"
+    ],
+    "exploratory_candidate_tests": [
+      "Integrar modelo de linguagem avançado (ex.: GPT‑4) para sugestões contextuais em tempo real e medir impacto na qualidade das ideias",
+      "Implementar reconhecimento de voz especializado para captura de brainstorming e avaliar acurácia da transcrição",
+      "Criar marketplace de extensões de templates e módulos de IA e conduzir estudo de adoção entre usuários early‑adopters"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T11:08:09.560254+00:00"
+}

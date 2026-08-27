@@ -5,24 +5,21 @@
 
 ---
 
-## 🟢 NOW (Trabalho Atual — Concluído)
-- [x] **TASK-M05.2-A:** Congelamento da especificação experimental (`docs/experiments/EXPERIMENT-SPEC-M05.2.md`).
-- [x] **TASK-M05.2-B:** Inventário e auditoria de trabalho pago prévio (`docs/experiments/PAID-WORK-INVENTORY.md`).
-- [x] **TASK-M05.2-C:** Implementação do harness `ABCExperimentRunner` com cegueira e accounting (`src/idea_evolution/experiments/abc_experiment.py`).
-- [x] **TASK-M05.2-D:** 5 Testes de controle experimental em `tests/experiment/test_abc_controlled_experiment.py` (total: 114 testes verdes).
-- [ ] **TASK-000:** Gate de Governança: Apresentação do relatório da Missão M05.2 e parada mandatória (*STOP*) por falta de credencial Groq no ambiente.
+## 🟢 NOW (Trabalho Atual — Aguardando Avaliação Humana)
+- [x] **TASK-M05.2-REAL-EXEC:** Execução real online das 3 condições A/B/C contra Groq `openai/gpt-oss-120b` (15 chamadas executadas com sucesso).
+- [x] **TASK-M05.2-BLIND-GEN:** Geração do pacote cego `BLIND-REVIEW-PACKET.md` e revelação isolada em `BLIND-REVEAL.json`.
+- [x] **TASK-M05.2-DET-COMP:** Geração de `DETERMINISTIC-COMPARISON.md` e `DETERMINISTIC-COMPARISON.json`.
+- [ ] **TASK-000 (HUMAN):** Avaliação Cega Humana — Preenchimento da rubrica no `BLIND-REVIEW-PACKET.md`.
 
 ---
 
-## 🟡 NEXT (Próximos Passos — Após export de GROQ_API_KEY pelo operador humano)
-1. [ ] **M05.2-REAL-RUN:** Disparo da execução real das condições A, B e C com Groq `openai/gpt-oss-120b`.
-2. [ ] **M05.2-BLIND-EVAL:** Geração de `BLIND-REVIEW-PACKET.md` e `BLIND-REVEAL.json` para avaliação humana independente.
-3. [ ] **M05.2-HUMAN-SCORING:** Coleta de notas da rubrica pelo operador humano e revelação do mapeamento.
-4. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricos do IEE sob o modelo de linhagem `IdeaLineageNode`.
-5. [ ] **EXP-FLAT-VS-LINEAGE:** Experimento controlado comparando Simple Loop plano vs Simple Loop com contexto de linhagem/memória negativa.
-6. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias profundas de doadores (um doador por vez).
+## 🟡 NEXT (Próximos Passos — Após Avaliação e Revelação Humana)
+1. [ ] **M05.2-REVEAL-ANALYSIS:** Leitura de `BLIND-REVEAL.json` e síntese da resposta à pergunta científica central.
+2. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricos do IEE sob o modelo de linhagem `IdeaLineageNode`.
+3. [ ] **EXP-FLAT-VS-LINEAGE:** Experimento controlado comparando Simple Loop plano vs Simple Loop com contexto de linhagem/memória negativa.
+4. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias profundas de doadores (um doador por vez).
 
 ---
 
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
-- **M05.2-REAL-RUN:** Bloqueado até configuração de `GROQ_API_KEY` no ambiente pelo operador humano (`REAL_EXECUTION_BLOCKED = MISSING_GROQ_CREDENTIAL_OR_PROVIDER`).
+- *Nenhuma tarefa bloqueada no momento.*

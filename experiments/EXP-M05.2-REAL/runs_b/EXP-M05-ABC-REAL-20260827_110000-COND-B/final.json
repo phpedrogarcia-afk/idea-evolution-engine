@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05-ABC-REAL-20260827_110000-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "human_intent": "Criar um aplicativo que auxilie usuários a clarificar e estruturar ideias vagas, convertendo-as em projetos mais definidos.",
+  "refined_idea": "Aplicativo que transforma ideias vagas em projetos claros, oferecendo fluxo híbrido de organização que combina caminhos guiados opcionais e blocos de construção livres, suportado por IA opcional para sugestões inteligentes.",
+  "core_mechanism": "Fluxo híbrido de organização que combina caminhos guiados opcionais com blocos de construção livres, permitindo ao usuário escolher entre seguir um template estruturado ou montar seu próprio caminho.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "75a55e0a29049b0e",
+  "tested_core_hash": "75a55e0a29049b0e",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 4,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Desenvolver um protótipo do fluxo híbrido e conduzir testes de usabilidade com usuários reais para validar a aceitação e identificar ajustes necessários, mantendo a integração de IA como recurso opcional."
+}

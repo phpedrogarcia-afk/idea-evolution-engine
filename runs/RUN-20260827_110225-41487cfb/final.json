@@ -1,0 +1,19 @@
+{
+  "run_id": "RUN-20260827_110225-41487cfb",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "human_intent": "Criar uma ferramenta que auxilie usuários a tornar suas ideias imprecisas em projetos mais claros e estruturados.",
+  "refined_idea": "Um aplicativo que converte ideias vagas em projetos claros, gerando planos estruturados localmente com IA offline e criptografia para garantir privacidade.",
+  "core_mechanism": "Execução de modelo de IA totalmente offline com criptografia de dados para gerar planos estruturados a partir de ideias vagas.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "b141fbacc5a4cbbb",
+  "tested_core_hash": "b141fbacc5a4cbbb",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 0,
+  "recommended_next_step": "Desenvolver um protótipo mínimo viável do mecanismo offline com criptografia, validar a geração de planos em dispositivos típicos e conduzir testes de usabilidade focados na percepção de valor imediato."
+}
