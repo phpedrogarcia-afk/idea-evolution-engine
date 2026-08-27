@@ -180,6 +180,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O harness experimental garante avaliação cega sem auto-justificação do modelo produtor.
 - **Related Decisions:** [EXPERIMENT-PROTOCOL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/EXPERIMENT-PROTOCOL.md)
 
+---
+
+### [FINDING-019] Epistemic Waste Before Gate (Observação Empírica EXP-M05.2)
+- **Claim:** Um sistema cognitivo dotado de *hard gates* determinísticos de proveniência e autoridade (R5) pode vetar com sucesso a promoção de hipóteses não ancoradas na fonte humana ao final da execução (gerando o status correto e honesto `REFINEMENT_INCOMPLETE`), mas ainda despender computação substancial, múltiplas chamadas de modelo e elaboração de hipóteses fracas nos estágios intermediários antes do veto acontecer no gate final (*Epistemic Waste Before Gate*).
+- **Evidence:** Execução real `EXP-M05-ABC-REAL-20260827_110000` (Condição B consumiu 10 estágios/chamadas e reconstrução antes de barrar a promoção) e avaliação humana congelada em `experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md`.
+- **Status:** `OBSERVED_IN_REAL_EXPERIMENT`
+- **Implications:** A integridade de autoridade final funciona, mas sugere a necessidade futura de podas antecipadas de hipóteses não-ancoradas antes de estágios aprofundados de síntese/teste.
+- **Related Decisions:** [HUMAN-REVIEW-EVALUATION.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md)
+
+
 
 
 

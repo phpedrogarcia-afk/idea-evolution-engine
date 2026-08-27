@@ -10,9 +10,9 @@
   "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260827-016",
-  "last_known_good_checkpoint": "CP-20260827-016",
-  "current_objective": "Mission M05.2 Complete: 15 Real Model Calls Executed on Groq (Human Review Pending)",
+  "latest_checkpoint": "CP-20260827-017",
+  "last_known_good_checkpoint": "CP-20260827-017",
+  "current_objective": "Mission M05.2 Human Review Frozen: Scores Persisted, Reveal Pending",
   "current_active_task": "TASK-000",
   "next_authorized_work": "Configuração de chave de API pelo operador humano para execução do Real Canary (M05-B) com prompt corrigido",
   "updated_at": "2026-08-26T15:41:25-03:00",
@@ -125,11 +125,11 @@
     "docs/GOVERNANCE-INVARIANTS.md": "9cce61ce9303dd4a5f2914a2912700b5f4751cfc3607f0b0b22e490f03d47bda",
     "docs/DECISIONS-LEDGER.md": "d503cbb12ab52459806d6fe5c0fec9f538cf133b10938a54c2ba52f423cfbf48",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "25da242a6d830e354e0afb5526fad97c2694cbe1ab9ef78e5005d85337fc1007",
-    "docs/context/ACTIVE-QUEUE.md": "5d24c1a1e07be5994ffb3361379c4125c94a85dc705d72bac7d16ede5d3dca21",
+    "docs/context/CURRENT-STATE.md": "86870b03fa33ef62d0c1f545f91cfcdadb2ee73f8ba9f9570850d632901a5e2c",
+    "docs/context/ACTIVE-QUEUE.md": "1f9cd63b9f175586dfd8921379b7938c3d30fab6a4a1c7a500302d68131b0bc5",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"
   },
-  "last_updated": "2026-08-27T08:10:00-03:00"
+  "last_updated": "2026-08-27T13:06:00-03:00"
 }

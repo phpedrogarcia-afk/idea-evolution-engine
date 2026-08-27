@@ -1,0 +1,69 @@
+{
+  "checkpoint_id": "CP-20260827-017",
+  "created_at": "2026-08-27T13:06:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.2 Human Review Frozen Pre-Reveal: Scores Persisted, Blinding Compromise Recorded, Epistemic Waste Discovery Formalized, Reveal Pending",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-M05.2-REAL-RUN: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016",
+    "TASK-M05.2-HUMAN-FREEZE: Persistência imutável de experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md",
+    "TASK-M05.2-FINDING-19: Formalização de FINDING-019 (EPISTEMIC_WASTE_BEFORE_GATE)"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "HUMAN_REVIEW_PRE_REVEAL_LOCKED: Avaliação humana congelada antes de qualquer inspeção de BLIND-REVEAL.json",
+    "BLINDING_COMPROMISE_HONESTLY_RECORDED: Vazamento de cabeçalho em RESULT 1 registrado formalmente",
+    "EPISTEMIC_WASTE_RECORDED_AS_HYPOTHESIS: Desperdício epistêmico pré-gate registrado como achado empírico para análise pós-revelação"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "114/114 tests passing across 18 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "A revelação das condições deve ocorrer formalmente pelo operador sem contaminação retrospectiva das notas"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "HUMAN_REVIEW_FROZEN": true,
+    "HUMAN_REVIEW_HASH": "9b6f03102d800c59956d759bd251bf31eda4c3c267c14e5bec9f2194bdda331b",
+    "BLINDING_COMPROMISED": true,
+    "EXPERIMENT_STATUS": "HUMAN_REVIEW_FROZEN / REVEAL_PENDING",
+    "READY_FOR_REVEAL": true
+  },
+  "next_exact_action": "Operador humano autorizar a revelação formal de BLIND-REVEAL.json",
+  "authorized_next_scope": [
+    "Abertura de BLIND-REVEAL.json e análise conclusiva do Experimento A/B/C"
+  ],
+  "do_not_repeat": [
+    "Não abrir BLIND-REVEAL.json antes de autorização explícita",
+    "Não alterar as notas humanas congeladas"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 114 testes."
+}

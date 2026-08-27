@@ -292,5 +292,20 @@
 - **Resultado:** `A_B_C_EXECUTION_COMPLETE` | `HUMAN_BLIND_REVIEW = PENDING` | `BLINDING_PRESERVED = TRUE`.
 - **Evidência:** 15 chamadas reais registradas; 114/114 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-M05.2-HUMAN-FREEZE] Freeze Human Pre-Reveal Evaluation & Epistemic Waste Discovery (Missão M05.2 Avaliação Humana)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Registrar e congelar a avaliação humana pré-revelação antes de qualquer abertura de `BLIND-REVEAL.json`, documentar o comprometimento de blinding e formalizar o achado de desperdício epistêmico pré-gate.
+- **O que Mudou:**
+  - Persistência imutável de `experiments/EXP-M05.2-REAL/HUMAN-REVIEW-EVALUATION.md` (RESULT 1 = 31/65, RESULT 2 = 48/65, RESULT 3 = 44/65).
+  - Registro de `BLINDING_COMPROMISED = TRUE` devido a vazamento de metadata no cabeçalho do RESULT 1.
+  - Registro formal do achado `FINDING-019` (`EPISTEMIC_WASTE_BEFORE_GATE`) em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-017`.
+- **Resultado:** `HUMAN_REVIEW_FROZEN` | `REVEAL_PENDING` | `BLINDING_COMPROMISED = TRUE`.
+- **Evidência:** Hash SHA-256 do artefato de avaliação: `9b6f03102d800c59956d759bd251bf31eda4c3c267c14e5bec9f2194bdda331b`.
+
+
 
 
