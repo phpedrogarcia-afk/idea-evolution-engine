@@ -1,0 +1,77 @@
+{
+  "checkpoint_id": "CP-20260827-027",
+  "created_at": "2026-08-27T17:00:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.4-P1A Execution Integrity Audit Complete: Condition B Root-Cause Proven (default-model routing defect in SimpleLoopRunner dispatch caused stage 1 UNDERSTAND failure), Experiment EXP-M05.4-PROSPECTIVE-20260827 Invalidated Before Human Review, Reveal Sealed, Ready for M05.4-P1R Clean Rerun",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-M05.4-P1: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019, Protótipo Offline Lean L1 CP-020, Formalização FioED CP-021, Endurecimento CP-022, Ecologia de Ideias CP-023, Replay Offline M05.3 CP-024, Pré-registro M05.4 CP-025, Execução M05.4-P1 CP-026",
+    "TASK-M05.4-P1A-AUDIT: Auditoria de integridade da telemetria e topologia de execução da Condição B",
+    "TASK-M05.4-P1A-ROOT-CAUSE: Diagnóstico causal comprovado de falha de modelo no runner do Simple Loop",
+    "TASK-M05.4-P1A-FINDINGS: Registro de FINDING-028 e atualização de FINDING-027 em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-027.md",
+    "docs/context/checkpoints/CP-20260827-027.json"
+  ],
+  "new_decisions": [
+    "EXPERIMENT_INVALIDATED_BEFORE_HUMAN_REVIEW: EXP-M05.4-PROSPECTIVE-20260827 classificado como inválido por falha na Condição B",
+    "PRESERVE_ALL_EVIDENCE: Todos os artefatos brutos da execução original preservados intactos",
+    "SEALED_REVEAL_PRESERVED: Mapeamento de revelação nunca exposto nem aberto",
+    "CLEAN_RERUN_AUTHORIZED: Próxima missão executará rerun limpo sob novo ID experimental (M05.4-P1R)"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "171/171 tests passing across 23 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Garantir que o SimpleLoopRunner receba explicitamente a rota do modelo correto em M05.4-P1R"
+  ],
+  "blockers": [
+    "Avaliação humana de EXP-M05.4-PROSPECTIVE-20260827 bloqueada"
+  ],
+  "readiness_verdict": {
+    "AUDIT_COMPLETE": true,
+    "ROOT_CAUSE_PROVEN": true,
+    "REVEAL_SEALED": true,
+    "EXPERIMENT_INVALIDATED": true,
+    "READY_FOR_CLEAN_RERUN": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.4-P1R PROSPECTIVE MULTI-IDEA CLEAN RERUN",
+  "authorized_next_scope": [
+    "Correção da injeção de modelo no runner da Condição B e execução limpa das 24 células com novo ID experimental"
+  ],
+  "do_not_repeat": [
+    "Não realizar avaliação humana sobre o pacote invalidado",
+    "Não abrir BLIND-REVEAL.json",
+    "Não misturar artefatos entre execuções"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 171 testes."
+}

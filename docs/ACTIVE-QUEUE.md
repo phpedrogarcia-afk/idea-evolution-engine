@@ -4,13 +4,13 @@
 
 ---
 
-## 🚦 Status Atual da Fila: EXECUÇÃO M05.4-P1 CONCLUÍDA | AGUARDANDO AVALIAÇÃO HUMANA CEGA
+## 🚦 Status Atual da Fila: AUDITORIA M05.4-P1A CONCLUÍDA | PRÓXIMO: RERUN LIMPO M05.4-P1R
 
 ### 📌 Marco Recém-Concluído:
-- [x] **M05.4-P1 Prospective Multi-Idea Real Execution:** 24 células executadas com sucesso no Groq (`openai/gpt-oss-120b`), artefatos brutos salvos e congelados, `BLIND-REVIEW-PACKET.md` gerado com zero vazamentos de metadados, revelação selada e formulário `M05.4-HUMAN-REVIEW-TEMPLATE.md` pronto para preenchimento.
+- [x] **M05.4-P1A Execution Integrity Audit:** Auditoria de integridade comprovou a causa-raiz da falha na Condição B (injeção de modelo no router do Simple Loop). Experimento `EXP-M05.4-PROSPECTIVE-20260827` classificado formalmente como `CONDITION_B_EXECUTION_INVALID` antes de qualquer inspeção pelo revisor humano.
 
 ---
 
-## 🎯 Próxima Ação Imediata (Humana):
-- **AVALIAÇÃO HUMANA CEGA:**
-  - O operador humano preenche [`experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md) com base no [`BLIND-REVIEW-PACKET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVIEW-PACKET.md) antes de autorizar a revelação (M05.4-P2).
+## 🎯 Próxima Missão Imediata:
+- **M05.4-P1R PROSPECTIVE MULTI-IDEA CLEAN RERUN:**
+  - *Objetivo:* Ajustar o executor experimental para passar a configuração de modelo correta para o `SimpleLoopRunner`, executar as 24 células com a topologia completa de 6 estágios na Condição B sob novo ID de execução, gerar o pacote cego e preparar para o review humano.

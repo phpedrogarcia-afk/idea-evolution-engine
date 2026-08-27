@@ -462,6 +462,23 @@
 - **Resultado:** `REAL_EXECUTION_COMPLETED` | `BLIND_PACKET_GENERATED` | `ZERO_LEAKS` | `REVEAL_SEALED` | `171_TESTS_PASSING`.
 - **Evidência:** 24 células executadas com artefatos brutos imutáveis e 171 testes unitários aprovados.
 
+---
+
+### [MS-M05.4-P1A-AUDIT] Execution Integrity Audit & Condition B Root-Cause Analysis (M05.4-P1A)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Auditar a integridade de execução e telemetria das 24 células de `EXP-M05.4-PROSPECTIVE-20260827` após a anomalia de 1 chamada por ideia na Condição B, comprovar causalmente a causa-raiz, preservar todos os artefatos brutos e classificar o experimento formalmente antes de qualquer avaliação humana.
+- **O que Mudou:**
+  - Diagnóstico causal da falha: `SimpleLoopRunner` foi instanciado sem passar a configuração de modelo explícita, fazendo o `RunnerRouter` resolver o modelo para `"default-model"` em vez de `"openai/gpt-oss-120b"`. A chamada no Groq falhou no estágio 1 (`UNDERSTAND`), abortando os 5 estágios restantes com `terminal_status = FAILED`.
+  - Auditoria simétrica das Condições A e C: integridade 100% confirmada com `openai/gpt-oss-120b`.
+  - Verificação de estado de exposição humana: `BLIND_REVIEW_STARTED = NO`, `HUMAN_SEMANTIC_EXPOSURE = NO`, `REVEAL_STATUS = SEALED`.
+  - Classificação formal do experimento como `CONDITION_B_EXECUTION_INVALID / INVALIDATED_BEFORE_HUMAN_REVIEW`.
+  - Registro do achado `FINDING-028` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-027`.
+- **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
+- **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
+
+
 
 
 

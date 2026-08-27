@@ -5,18 +5,19 @@
 
 ---
 
-## 🟢 NOW (Próxima Missão Imediata — Ação Humana)
-- [ ] **HUMAN-REVIEW-M05.4:** **Preenchimento e Congelamento da Avaliação Humana Cega**
-  - **Ação Requerida:** O operador humano lê [`experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVIEW-PACKET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/BLIND-REVIEW-PACKET.md), preenche suas notas e escolhas no formulário [`experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE/M05.4-HUMAN-REVIEW-TEMPLATE.md) e instrui a IA a iniciar a missão M05.4-P2.
+## 🟢 NOW (Próxima Missão Imediata)
+- [ ] **MISSION-M05.4-P1R-CLEAN-RERUN:** **M05.4-P1R Prospective Multi-Idea Clean Rerun**
+  - **Objetivo:** Corrigir a injeção do modelo `openai/gpt-oss-120b` no construtor de `SimpleLoopRunner` no executor experimental, gerar novo ID de execução (`EXP-M05.4-PROSPECTIVE-RERUN-20260827`), executar as 24 células com a topologia multistage real da Condição B, gerar o novo pacote cego desidentificado e congelar os artefatos antes da avaliação humana.
 
 ---
 
 ## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **MISSION-M05.4-P2-REVEAL-ANALYSIS:** Congelamento do review humano, abertura de `BLIND-REVEAL.json`, cálculo dos resultados e análise comparativa de eficiência e predições FioED.
-2. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
-3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
+1. [ ] **HUMAN-REVIEW-M05.4:** Avaliação humana cega sobre o pacote gerado em M05.4-P1R.
+2. [ ] **MISSION-M05.4-P2-REVEAL-ANALYSIS:** Congelamento do review humano, abertura de `BLIND-REVEAL.json`, cálculo de eficiência e predições FioED.
+3. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
+4. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
 
 ---
 
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
-- *Abertura de `BLIND-REVEAL.json` bloqueada até o congelamento da avaliação humana.*
+- *Avaliação humana de `EXP-M05.4-PROSPECTIVE-20260827` bloqueada (experimento invalidado por falha na Condição B).*

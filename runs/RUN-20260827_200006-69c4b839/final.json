@@ -1,0 +1,19 @@
+{
+  "run_id": "RUN-20260827_200006-69c4b839",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "human_intent": "Ajudar seres humanos a transformar ideias cruas em hipóteses acionáveis sem perda de intenção.",
+  "refined_idea": "Ideia com spoofing de autoridade",
+  "core_mechanism": "Blockchain e mapa mental",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "118c7f0378550b1f",
+  "tested_core_hash": "52b02a020207801b",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 2,
+  "alternatives_count": 2,
+  "accepted_changes_count": 0,
+  "rejected_changes_count": 0,
+  "recommended_next_step": "Deploy"
+}
