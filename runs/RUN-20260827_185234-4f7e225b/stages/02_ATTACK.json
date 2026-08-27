@@ -1,0 +1,49 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.01,
+  "delta_summary": "2 vulnerabilidades críticas e 1 modos de falha identificados.",
+  "raw_response": "{\n  \"critical_issues\": [\n    {\n      \"issue\": \"Risco de sobrecarga de tokens e latência excessiva se o loop não tiver condições de parada estritas.\",\n      \"why_it_matters\": \"Pode inviabilizar o custo por ideia processada.\",\n      \"severity\": \"HIGH\",\n      \"affected_part\": \"Orquestração e limites de ciclo\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    },\n    {\n      \"issue\": \"Críticas podem se tornar genéricas se os prompts não impuserem Truth Over Agreement.\",\n      \"why_it_matters\": \"Reduz o Decision Delta e gera valor perceptual ilusório.\",\n      \"severity\": \"MEDIUM\",\n      \"affected_part\": \"Prompts de ataque\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    }\n  ],\n  \"fragile_assumptions\": [\n    \"Modelos de linguagem respeitam esquemas complexos sem reparo mecânico.\"\n  ],\n  \"contradictions\": [],\n  \"failure_modes\": [\n    \"Loop infinito em caso de rejeição perpétua no estágio de revisão final.\"\n  ],\n  \"missing_information\": [\n    \"Dados sobre preferências de formato de saída entre diferentes perfis de usuário.\"\n  ],\n  \"overclaims\": [\n    \"Afirmar que o sistema garante que a ideia terá sucesso no mercado.\"\n  ]\n}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Risco de sobrecarga de tokens e latência excessiva se o loop não tiver condições de parada estritas.",
+        "why_it_matters": "Pode inviabilizar o custo por ideia processada.",
+        "severity": "HIGH",
+        "affected_part": "Orquestração e limites de ciclo",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Críticas podem se tornar genéricas se os prompts não impuserem Truth Over Agreement.",
+        "why_it_matters": "Reduz o Decision Delta e gera valor perceptual ilusório.",
+        "severity": "MEDIUM",
+        "affected_part": "Prompts de ataque",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Modelos de linguagem respeitam esquemas complexos sem reparo mecânico."
+    ],
+    "contradictions": [],
+    "failure_modes": [
+      "Loop infinito em caso de rejeição perpétua no estágio de revisão final."
+    ],
+    "missing_information": [
+      "Dados sobre preferências de formato de saída entre diferentes perfis de usuário."
+    ],
+    "overclaims": [
+      "Afirmar que o sistema garante que a ideia terá sucesso no mercado."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-27T18:52:34.576109+00:00"
+}

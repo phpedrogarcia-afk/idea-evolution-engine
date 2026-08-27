@@ -234,6 +234,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** O modelo epistêmico completo está congelado para a execução da missão M05.3 de replay offline e calibração de limiares com traces reais.
 - **Related Decisions:** [FIOED-IDEA-ECOLOGY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-IDEA-ECOLOGY.md), [FIOED-REALITY-BOUNDARY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/epistemology/FIOED-REALITY-BOUNDARY.md)
 
+---
+
+### [FINDING-025] Validação Empírica de Replay e Calibração FioED (M05.3)
+- **Claim:** O replay determinístico do experimento real M05.2 e das fixtures adversariais confirmou que os sinais observáveis do FioED discriminam com precisão os modos de falha e sucesso epistêmico: (1) O caso de desperdício (Condição B, Simple Loop 10 chamadas) acumulou 9 passos de Persistência Sem Evidência ($P_e = 9$), 3 Regressões Decisórias graves e profundidade de intermediário 5, disparando os alertas de `AttachmentRisk` e `SourceRefresh`; (2) Os casos de alto valor (A=48 e C=44 na avaliação humana) apresentaram baixa persistência sem evidência, alto rendimento de `DecisionDelta` por chamada e zero ou baixa regressão; (3) 0 tentativas de `EvidenceSpoofing` foram admitidas (100% bloqueadas); (4) $Q^*$ demonstrou $0\%$ de falsos positivos com os 5 critérios formais; (5) O harness determinístico `fioed_replay.py` executou 100% offline com 166 testes verdes totais.
+- **Evidence:** `docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md`, `src/idea_evolution/experiments/fioed_replay.py` e `tests/unit/test_fioed_replay.py`.
+- **Status:** `EMPIRICALLY_VALIDATED_OFFLINE`
+- **Implications:** O Lean IEE L1 e a teoria FioED estão validados e calibrados para a próxima missão experimental real: M05.4 Replicação Multi-Ideia (IDEA-01 a IDEA-05).
+- **Related Decisions:** [M05.3-FIOED-OFFLINE-REPLAY.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md)
+
+
 
 
 

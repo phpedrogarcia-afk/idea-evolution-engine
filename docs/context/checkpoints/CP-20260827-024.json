@@ -1,0 +1,80 @@
+{
+  "checkpoint_id": "CP-20260827-024",
+  "created_at": "2026-08-27T15:56:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.3 FioED / LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION Complete: Deterministic Replay of M05.2 (A, B, C), Waste Identified in Condition B (Pe=9, 3 Regressions, Depth 5), Zero Spoofing Accepted, Q* Fully Formed, 166 Tests Passing, Ready for M05.4",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-FIOED-02: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019, Protótipo Offline Lean L1 CP-020, Formalização FioED CP-021, Endurecimento CP-022, Ecologia de Ideias e Fronteira CP-023",
+    "TASK-M05.3-REPLAY-HARNESS: Criação do harness determinístico em src/idea_evolution/experiments/fioed_replay.py",
+    "TASK-M05.3-REPLAY-REPORT: Elaboração de docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md",
+    "TASK-M05.3-TESTS: Implementação da suíte de testes em tests/unit/test_fioed_replay.py",
+    "TASK-M05.3-FINDINGS: Registro de FINDING-025 em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "src/idea_evolution/domain/idea_ecology.py",
+    "src/idea_evolution/experiments/fioed_replay.py",
+    "tests/unit/test_fioed_replay.py",
+    "tests/adversarial/test_adversarial_idea_ecology.py",
+    "docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-024.md",
+    "docs/context/checkpoints/CP-20260827-024.json"
+  ],
+  "new_decisions": [
+    "QSTAR_CANONICAL_RECONCILIATION: State discrimination is necessary but not sufficient alone; all 5 conditions required",
+    "HISTORICAL_REPLAY_VALIDATED: Condition B waste is empirically identified by Pe=9, 3 regressions, and depth 5",
+    "SPOOFING_MECHANICALLY_CONTAINED: Zero evidence spoofing admitted across all fixtures",
+    "ADVANCE_TO_M05_4: Architecture validated offline and ready for multi-idea real replication"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "166/166 tests passing across 22 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Limiares numéricos de Pe e Profundidade devem ser calibrados com a suíte multi-ideia M05.4"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "REPLAY_CALIBRATION_COMPLETE": true,
+    "MEASUREMENTS_VALIDATED": true,
+    "ZERO_SPOOFING_ACCEPTED": true,
+    "READY_FOR_M05_4": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.4 MULTI-IDEA REAL REPLICATION EXPERIMENT",
+  "authorized_next_scope": [
+    "Desenho do protocolo de replicação experimental real em 5 ideias (IDEA-01 a IDEA-05)"
+  ],
+  "do_not_repeat": [
+    "Não alterar o SimpleLoopRunner de produção",
+    "Não alterar dados brutos históricos",
+    "Não chamar inferência real sem autorização formal do protocolo M05.4"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 166 testes."
+}

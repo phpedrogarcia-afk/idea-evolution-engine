@@ -1,0 +1,30 @@
+{
+  "step_number": 8,
+  "stage_id": "SYNTHESIZE",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "fake",
+  "model": "default-model",
+  "prompt_id": "synthesize_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Síntese concluída: Core 'Mapa mental criptografado...' (Base: MODEL_HYPOTHESIS | Hash: eb534053a554e2f6), 0 aceitas, 0 candidatas, 0 rejeitadas.",
+  "raw_response": "{\n  \"refined_idea\": \"Refinada com mapa mental criptografado\",\n  \"core_mechanism\": \"Mapa mental criptografado\",\n  \"core_mechanism_justification\": \"Pedido do usu\\u00e1rio\",\n  \"core_mechanism_basis\": \"USER_EXPLICIT\",\n  \"accepted_changes\": [],\n  \"candidate_possibilities\": [],\n  \"rejected_changes\": [],\n  \"remaining_uncertainties\": [],\n  \"known_risks\": [],\n  \"recommended_next_step\": \"Testar\"\n}",
+  "parsed_output": {
+    "refined_idea": "Refinada com mapa mental criptografado",
+    "core_mechanism": "Mapa mental criptografado",
+    "core_mechanism_justification": "Pedido do usuário",
+    "core_mechanism_basis": "USER_EXPLICIT",
+    "accepted_changes": [],
+    "candidate_possibilities": [],
+    "rejected_changes": [],
+    "remaining_uncertainties": [],
+    "known_risks": [],
+    "recommended_next_step": "Testar"
+  },
+  "error": null,
+  "timestamp": "2026-08-27T18:54:05.462056+00:00"
+}

@@ -77,9 +77,11 @@ class TestAdversarialIdeaEcology(unittest.TestCase):
         """ECO-04: Q* Requires State Discrimination — Se todos os desfechos levam à mesma ação, falha e não vira Q*."""
         q = DiscriminatingQuestion(
             question_id="Q-02",
-            question_text="Devemos usar cor azul ou verde na interface?",
+            question_text="Devemos usar paleta fria (azul) ou quente (verde) na interface para reduzir fadiga?",
             kind=QuestionKind.QUESTION_CANDIDATE,
+            observable_contrast="Tempo médio de leitura e taxa de fadiga visual reportada",
             possible_outcomes=["AZUL", "VERDE"],
+            pressure_scope="LOCAL",
         )
         # Se ambas as respostas levam à mesma ação, não há discriminação de estado
         outcome_map_useless = {"AZUL": "CONTINUAR_IGUAL", "VERDE": "CONTINUAR_IGUAL"}

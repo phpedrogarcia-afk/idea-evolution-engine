@@ -145,19 +145,32 @@ class DiscriminatingQuestion(BaseModel):
 
     def validate_state_discrimination(self, outcome_action_map: Dict[str, str]) -> bool:
         """
-        Uma questão é discriminativa SSE pelo menos dois desfechos legítimos
-        resultam em transições de estado materialmente distintas.
+        Condição necessária de discriminação de estado:
+        Pelo menos dois desfechos legítimos devem resultar em transições de estado materialmente distintas.
         """
         if len(self.possible_outcomes) < 2:
             self.has_state_discrimination = False
             return False
         
         distinct_actions = set(outcome_action_map.get(out, "") for out in self.possible_outcomes if out in outcome_action_map)
-        # Se todos os desfechos mapeiam para a mesma ação, não há discriminação de estado
         self.has_state_discrimination = (len(distinct_actions) >= 2)
-        if self.has_state_discrimination:
+        if self.has_state_discrimination and self.is_fully_formed_qstar():
             self.kind = QuestionKind.DISCRIMINATING_QUESTION
         return self.has_state_discrimination
+
+    def is_fully_formed_qstar(self) -> bool:
+        """
+        Q* Canônico = Question + ObservableContrast + EvidencePath + StateDiscrimination + LocalScope.
+        A discriminação de estado é necessária, mas não suficiente sozinha.
+        """
+        return bool(
+            self.question_text
+            and self.observable_contrast
+            and self.required_evidence_class
+            and self.pressure_scope.upper() == "LOCAL"
+            and self.has_state_discrimination
+        )
+
 
 
 class HumanIncubationOverride(BaseModel):

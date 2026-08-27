@@ -4,13 +4,13 @@
 
 ---
 
-## 🚦 Status Atual da Fila: FIOED-02 CONCLUÍDO (FIOED CONGELADO) | PRÓXIMO: CALIBRAÇÃO M05.3
+## 🚦 Status Atual da Fila: REPLAY M05.3 CONCLUÍDO | PRÓXIMO: REPLICAÇÃO REAL M05.4
 
 ### 📌 Marco Recém-Concluído:
-- [x] **FioED-02 Idea Ecology & Reality Boundary:** Formalização de $U_f$ vs $U_g$, Zona de Incubação $Z_p$, Kernel de Identidade $K$, `PressureReadiness`, 4 verbos operacionais, Questões Discriminativas $Q^*$, 3 Fronteiras da Realidade, `EvidencePassport`, `TestabilityBinding` congelado, `EvidenceAdmissionGate` e 24 novos testes adversariais (162 testes verdes).
+- [x] **M05.3 FioED / Lean IEE Offline Replay & Adversarial Calibration:** Replay determinístico de M05.2 (A, B e C) via `fioed_replay.py`, confirmação empírica de desperdício em B ($P_e = 9$, regressões, profundidade 5), validação de $Q^*$ e Evidence Spoofing (0 aceitos), e 166 testes verdes (100% offline).
 
 ---
 
 ## 🎯 Próxima Missão Imediata:
-- **M05.3 FIOED / LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION:**
-  - *Objetivo:* Replay offline de dados de runs históricas aplicando o modelo FioED congelado para calibração empírica dos limiares de falso positivo/negativo (100% offline).
+- **M05.4 MULTI-IDEA REAL REPLICATION EXPERIMENT:**
+  - *Objetivo:* Desenho e execução da replicação experimental real comparando A (1 chamada), B (10 chamadas) e C (Lean L1 / FioED) em 5 ideias com protocolo de blinding estrito 1-to-1 e avaliação humana pré-congelada.

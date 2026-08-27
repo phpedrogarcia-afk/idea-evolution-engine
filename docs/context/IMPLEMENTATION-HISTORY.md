@@ -407,6 +407,24 @@
 - **Resultado:** `IDEA_ECOLOGY_FORMALIZED` | `REALITY_BOUNDARY_ENFORCED` | `162_TESTS_PASSING` | `MODEL_FROZEN_FOR_M05_3`.
 - **Evidência:** 162/162 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-M05.3-CALIBRATION] FioED / Lean IEE Offline Replay & Adversarial Calibration (M05.3)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Executar o replay offline determinístico do experimento real M05.2 (Condições A, B e C) e calibrar os sinais observáveis do FioED congelado, medindo persistência sem evidência ($P_e$), regressões decisórias, profundidade de intermediário, $Q^*$ e contenção de Evidence Spoofing.
+- **O que Mudou:**
+  - Reconciliação definicional de $Q^*$ (State Discrimination como condição necessária, mas exigindo todos os 5 critérios).
+  - Criação do harness determinístico `src/idea_evolution/experiments/fioed_replay.py`.
+  - Elaboração do relatório canônico de replay em `docs/experiments/M05.3-FIOED-OFFLINE-REPLAY.md`.
+  - Criação da suíte de testes de replay em `tests/unit/test_fioed_replay.py` (total de 166 testes verdes).
+  - Demonstração empírica de que os sinais do FioED ($P_e = 9$, 3 regressões) explicam perfeitamente a degradação da Condição B em M05.2.
+  - Registro do achado `FINDING-025` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-024`.
+- **Resultado:** `OFFLINE_REPLAY_COMPLETED` | `MEASUREMENT_VALIDATED` | `166_TESTS_PASSING` | `READY_FOR_M05_4`.
+- **Evidência:** 166/166 testes automatizados aprovados (100% offline).
+
+
 
 
 
