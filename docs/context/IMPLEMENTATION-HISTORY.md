@@ -261,3 +261,19 @@
 - **Resultado:** `COMPLETE_OFFLINE` | `SOURCE_ANCHORING = ACTIVE` | `DONOR_INTELLIGENCE = INSTITUTIONALIZED` | `FOUNDATION_INSTITUTIONALIZED = TRUE`.
 - **Evidência:** 109/109 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-M05.2-EXP] Controlled Real A/B/C Value Experiment Setup & Blinding Harness (Missão M05.2)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Estabelecer o protocolo experimental e o harness para o experimento de valor A/B/C (A: Baseline Single Refine, B: IEE Simple Loop, C: Critique-Revision 4-step) com blinding total 1-to-1, especificação congelada e auditoria de trabalho pago anterior.
+- **O que Mudou:**
+  - Congelamento formal da especificação experimental em `docs/experiments/EXPERIMENT-SPEC-M05.2.md`.
+  - Elaboração do inventário de proveniência em `docs/experiments/PAID-WORK-INVENTORY.md` comprovando não-reusabilidade científica de runs pré-R5.
+  - Implementação do harness `ABCExperimentRunner` com blinding rigoroso em `src/idea_evolution/experiments/abc_experiment.py`.
+  - Criação de 5 testes de controle experimental em `tests/experiment/test_abc_controlled_experiment.py` (totalizando 114 testes verdes).
+  - Emissão do Checkpoint `CP-20260827-015`.
+- **Resultado:** `HARNESS_READY` | `SPEC_FROZEN` | `REAL_EXECUTION = BLOCKED_BY_MISSING_GROQ_CREDENTIAL` | `HUMAN_BLIND_REVIEW = PENDING`.
+- **Evidência:** 114/114 testes automatizados aprovados (100% offline).
+
+

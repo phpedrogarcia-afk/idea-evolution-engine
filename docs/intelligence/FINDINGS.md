@@ -171,6 +171,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Redução agressiva de incertezas sem turismo tecnológico nem inchaço arquitetural.
 - **Related Decisions:** [DONOR-ARSENAL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/research/DONOR-ARSENAL.md)
 
+---
+
+### [FINDING-018] Protocolo Experimental A/B/C Controlado (EXP-M05.2) e Auditoria de Proveniência Real
+- **Claim:** A comparação de valor entre o IEE (Condição B), um modelo único (Condição A) e um loop de crítica-revisão (Condição C) exige rigor experimental absoluto: especificação congelada antes da inspeção dos resultados, proibição de troca de modelo/fallback, blinding total (A/B/C mapeados para RESULT 1/2/3 sem vazar identidades) e auditoria de trabalho pago prévio (`PAID-WORK-INVENTORY.md`). Runs históricos pré-R5 não são cientificamente reusáveis devido a falhas de autoridade e ontologia anteriores à ativação do `AuthorityProofValidator`.
+- **Evidence:** `PAID-WORK-INVENTORY.md`, `EXPERIMENT-SPEC-M05.2.md` e 5 testes de controle em `tests/experiment/test_abc_controlled_experiment.py`.
+- **Status:** `CONFIRMED_BY_TESTS`
+- **Implications:** O harness experimental garante avaliação cega sem auto-justificação do modelo produtor.
+- **Related Decisions:** [EXPERIMENT-PROTOCOL.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/EXPERIMENT-PROTOCOL.md)
+
+
 
 
 

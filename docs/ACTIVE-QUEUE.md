@@ -4,14 +4,14 @@
 
 ---
 
-## 🚦 Status Atual da Fila: MISSÃO EPISTEMIC-DONOR-FOUNDATION-01 CONCLUÍDA
+## 🚦 Status Atual da Fila: EXPERIMENTO M05.2 PREPARADO & BLOQUEADO POR CREDENCIAL
 
 ### 📌 Tarefas Concluídas:
-- [x] **TASK-001 a TASK-005.1-R5:** Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira IEE/FioOS (M06.2).
-- [x] **TASK-EPISTEMIC-DONOR-01 (Source Anchoring, Representation Discipline, Donor Intelligence & Arbor Institutionalization):** Invariantes de Ancoragem de Origem (`OBSERVATION-REPRESENTATION-INVARIANTS.md`), contratos tipados de epistemologia (`epistemic_contracts.py`), visualizador de doadores (`donor_intelligence.py`), autópsia integral persistida (`ARBOR-DEEP-AUTOPSY.md`) e 109 testes automatizados aprovados (`FOUNDATION_INSTITUTIONALIZED = TRUE`).
+- [x] **TASK-001 a TASK-EPISTEMIC-DONOR-01:** Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira IEE/FioOS (M06.2), Fundação Epistêmica e Arbor (CP-014).
+- [x] **TASK-M05.2 (Controlled Real A/B/C Value Experiment):** Especificação congelada (`EXPERIMENT-SPEC-M05.2.md`), inventário de trabalho pago (`PAID-WORK-INVENTORY.md`), harness com blinding 1-to-1 (`abc_experiment.py`) e 114 testes automatizados aprovados (`HARNESS_READY = TRUE`).
 
 ---
 
 ## 🛑 Ponto de Parada Mandatório (STOP)
-- **Status da Fundação Epistêmica:** `INSTITUTIONALIZED_AND_LOCKED` (109 testes offline verdes).
-- **Ação Necessária:** O operador humano pode decidir sobre a execução do canário real ou experimentos de replay HTR-Lite.
+- **Status da Execução Real:** `REAL_EXECUTION_BLOCKED = MISSING_GROQ_CREDENTIAL_OR_PROVIDER`.
+- **Ação Necessária:** O operador humano deve configurar a variável de ambiente `GROQ_API_KEY` para permitir o disparo real online das 3 condições.

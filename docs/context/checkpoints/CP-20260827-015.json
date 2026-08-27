@@ -1,0 +1,79 @@
+{
+  "checkpoint_id": "CP-20260827-015",
+  "created_at": "2026-08-27T07:50:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission M05.2 Complete: Frozen ABC Experiment Spec, Paid Work Inventory, Blinded Review Harness, and 114 Tests Passing (Real Inference Blocked by Missing Groq Key)",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-EPISTEMIC-DONOR-01: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Canary Autopsies M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014",
+    "TASK-M05.2-A: Congelamento da especificação experimental em docs/experiments/EXPERIMENT-SPEC-M05.2.md",
+    "TASK-M05.2-B: Inventário de proveniência de trabalho pago em docs/experiments/PAID-WORK-INVENTORY.md",
+    "TASK-M05.2-C: Implementação do harness ABCExperimentRunner em src/idea_evolution/experiments/abc_experiment.py",
+    "TASK-M05.2-D: 5 Testes de controle experimental em tests/experiment/test_abc_controlled_experiment.py (total: 114 testes verdes)"
+  ],
+  "changed_files": [
+    "docs/experiments/EXPERIMENT-SPEC-M05.2.md",
+    "docs/experiments/PAID-WORK-INVENTORY.md",
+    "src/idea_evolution/experiments/abc_experiment.py",
+    "tests/experiment/test_abc_controlled_experiment.py",
+    "docs/TEST-MAP.md",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json"
+  ],
+  "new_decisions": [
+    "EXP_M05_2_FROZEN_SPEC: Especificação experimental A/B/C congelada antes de qualquer inspeção de saída",
+    "PAID_RUNS_PRE_R5_NON_REUSABLE: Runs reais anteriores ao R5 são cientificamente não-reusáveis devido a ausência de prova determinística de autoridade",
+    "BLINDING_ISOLATION_RULE: A avaliação humana deve ocorrer exclusivamente via BLIND-REVIEW-PACKET.md com reveal isolado em BLIND-REVEAL.json"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "114/114 tests passing across 18 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "A ausência de credencial no ambiente impede a execução online imediata sem ação do operador"
+  ],
+  "blockers": [
+    "EXP-M05.2-REAL-RUN: REAL_EXECUTION_BLOCKED = MISSING_GROQ_CREDENTIAL_OR_PROVIDER (Requer export GROQ_API_KEY pelo operador)"
+  ],
+  "readiness_verdict": {
+    "EXPERIMENT_SPEC_FROZEN": true,
+    "HARNESS_READY": true,
+    "BLINDING_PREPARED": true,
+    "PAID_WORK_INVENTORIED": true,
+    "READY_FOR_ONLINE_EXECUTION": false,
+    "REAL_EXECUTION_BLOCKED": "MISSING_GROQ_CREDENTIAL_OR_PROVIDER"
+  },
+  "next_exact_action": "Operador humano configurar GROQ_API_KEY no ambiente para disparo do experimento A/B/C real online",
+  "authorized_next_scope": [
+    "EXP-M05.2: Disparo das condições A, B e C com Groq openai/gpt-oss-120b sob harness congelado"
+  ],
+  "do_not_repeat": [
+    "Não trocar silenciosamente de provedor na ausência de credencial",
+    "Não alterar prompts após ver resultados",
+    "Não revelar mapeamento cego antes do preenchimento humano da rubrica"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 114 testes."
+}
