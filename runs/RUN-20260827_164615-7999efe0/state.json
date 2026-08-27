@@ -1,0 +1,260 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "RUN-20260827_164615-7999efe0",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-08-27T13:46:15.338197",
+  "updated_at": "2026-08-27T13:46:15.344759",
+  "original_idea": "Um aplicativo que ajuda pessoas a transformar ideias vagas em projetos mais claros.",
+  "current_idea": "Ideia com spoofing de autoridade",
+  "human_intent": "Ajudar seres humanos a transformar ideias cruas em hipóteses acionáveis sem perda de intenção.",
+  "problem_statement": "Dificuldade do usuário em organizar e maturar ideias dispersas de forma estruturada.",
+  "actors_or_users": [
+    "Criadores",
+    "Engenheiros",
+    "Pesquisadores"
+  ],
+  "assumptions": [
+    "Usuários valorizam rastreabilidade e crítica rigorosa mais do que bajulação."
+  ],
+  "ambiguities": [
+    "Qual o formato ideal de teste de realidade para produtos puramente de software?"
+  ],
+  "strengths": [
+    "Simplicidade arquitetural",
+    "Rastreabilidade completa"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Risco de sobrecarga de tokens e latência excessiva se o loop não tiver condições de parada estritas.",
+      "why_it_matters": "Pode inviabilizar o custo por ideia processada.",
+      "severity": "HIGH",
+      "affected_part": "Orquestração e limites de ciclo",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Críticas podem se tornar genéricas se os prompts não impuserem Truth Over Agreement.",
+      "why_it_matters": "Reduz o Decision Delta e gera valor perceptual ilusório.",
+      "severity": "MEDIUM",
+      "affected_part": "Prompts de ataque",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Modelos de linguagem respeitam esquemas complexos sem reparo mecânico."
+  ],
+  "contradictions": [],
+  "failure_modes": [
+    "Loop infinito em caso de rejeição perpétua no estágio de revisão final."
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Executar pipeline sequencial determinístico com contratos estritos Pydantic.",
+      "addresses_issues": [
+        "Latência e quebra de schemas"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Menor flexibilidade dinâmica em favor de 100% de previsibilidade."
+      ],
+      "novelty_or_difference": "Separação total entre kernel determinístico e funções semânticas."
+    },
+    {
+      "mechanism": "Utilizar um único modelo com prompt estruturado em múltiplas seções.",
+      "addresses_issues": [
+        "Custo de coordenação"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Menor isolamento de contexto e menor severidade crítica."
+      ],
+      "novelty_or_difference": "Baseline de prompt único."
+    }
+  ],
+  "core_mechanism": "Blockchain e mapa mental",
+  "core_mechanism_justification": "Invenção pura do modelo",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "118c7f0378550b1f",
+  "proposal_records": [
+    {
+      "proposal": "Blockchain e mapa mental",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Invenção pura do modelo",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    }
+  ],
+  "accepted_changes": [],
+  "candidate_extensions": [],
+  "rejected_changes": [],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [blockchain, mapa, mental].",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_MISMATCH: O RealityCheck testou 'Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.' (hash: 52b02a020207801b), mas o core aceito na Síntese é 'Blockchain e mapa mental' (hash: 118c7f0378550b1f).; CIRCULAR_PROMOTION: Mecanismo 'Blockchain e mapa mental' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [blockchain, mapa, mental].",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_MISMATCH: O RealityCheck testou 'Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.' (hash: 52b02a020207801b), mas o core aceito na Síntese é 'Blockchain e mapa mental' (hash: 118c7f0378550b1f).; CIRCULAR_PROMOTION: Mecanismo 'Blockchain e mapa mental' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade."
+  ],
+  "known_risks": [],
+  "recommended_next_step": "Deploy",
+  "tested_core_mechanism": "Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
+  "tested_core_hash": "52b02a020207801b",
+  "reality_dependencies": [
+    "Disponibilidade de chave de API para o modo real ou execução offline com mocks."
+  ],
+  "claims_needing_evidence": [
+    "Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline."
+  ],
+  "candidate_tests": [
+    "Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.",
+    "Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico."
+  ],
+  "exploratory_candidate_tests": [],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.338594",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Ajudar seres humanos a transformar ideias cruas em hipóteses...' | 1 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.339401",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 vulnerabilidades críticas e 1 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.340088",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.340928",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Blockchain e mapa mental...' (Base: MODEL_HYPOTHESIS | Hash: 118c7f0378550b1f), 0 aceitas, 0 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.341575",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Pipeline determinístico de 6 estágios em...' (hash: 52b02a020207801b), 1 dependências, 2 testes do Core, 0 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.342190",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.342792",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.343515",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Blockchain e mapa mental...' (Base: MODEL_HYPOTHESIS | Hash: 118c7f0378550b1f), 0 aceitas, 0 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.344157",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Pipeline determinístico de 6 estágios em...' (hash: 52b02a020207801b), 1 dependências, 2 testes do Core, 0 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-27T13:46:15.344750",
+      "provider": "fake",
+      "model": "default-model",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

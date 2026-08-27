@@ -26,5 +26,6 @@
 
 ## 2. Veredito do Orçamento
 - O Lean IEE opera em **1 chamada nominal** (custo idêntico ao Baseline A) e **máximo 2 chamadas** quando ocorre escalação justificada por risco material.
-- Redução de complexidade de chamadas de **$10 \to 1$ ou $2$** (economia de 80% a 90% em tokens comparado ao Simple Loop fixo).
+- **Redução de Chamadas Projetada:** Redução nominal de $10 \to 1$ ou $2$ chamadas de modelo (`EXPECTED_CALL_REDUCTION: PROJECTED_FROM_TOPOLOGY, NOT_RECEIVER_PROVEN`). Economia real de tokens sujeita à calibração experimental no receptor.
 - 100% dos componentes determinísticos de segurança e autoridade são mantidos a custo zero de inferência.
+

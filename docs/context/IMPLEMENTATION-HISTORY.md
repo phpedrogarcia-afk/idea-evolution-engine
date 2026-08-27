@@ -338,6 +338,24 @@
 - **Resultado:** `LEAN_DESIGN_COMPLETE` | `CANDIDATE_L1_SELECTED` | `RUNTIME_UNCHANGED`.
 - **Evidência:** 114/114 testes automatizados aprovados (100% offline).
 
+---
+
+### [MS-LEAN-PROTOTYPE-01] Lean IEE Minimal Offline Prototype (Protótipo Offline L1)
+- **Data:** 2026-08-27
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Objetivo:** Implementar e validar deterministicamente o protótipo offline da Candidata L1 (`Lean IEE + Early Epistemic Gate`) sem chamadas reais de modelo, sem alterar o Simple Loop de produção, e impondo o invariante estrito de $LEAN\_L1\_MAX\_MODEL\_CALLS \le 2$.
+- **O que Mudou:**
+  - Correção de alegações de precisão não comprovadas em `LEAN-IEE-EXPERIMENT-PLAN.md` e `LEAN-IEE-COMPLEXITY-BUDGET.md` (rebaixadas para projeções topológicas e hipóteses para calibração).
+  - Implementação de `src/idea_evolution/domain/early_epistemic_gate.py` contendo `LeanFirstPassOutput`, `FocusedEscalationOutput`, `DecisionDeltaRecord`, `EpistemicRentRecord` e o validador determinístico `EarlyEpistemicGate` (custo = 0 chamadas).
+  - Implementação do orquestrador desacoplado `src/idea_evolution/orchestration/lean_loop.py` com invariante `LEAN_L1_MAX_MODEL_CALLS = 2`.
+  - Atualização do `FakeModelRunner` para suporte direto aos contratos Lean.
+  - Criação da suíte adversarial `tests/adversarial/test_adversarial_lean_iee.py` cobrindo 12 cenários rigorosos (T1 a T12).
+  - Registro do achado `FINDING-021` em `docs/intelligence/FINDINGS.md`.
+  - Emissão do Checkpoint `CP-20260827-020`.
+- **Resultado:** `LEAN_L1_PROTOTYPE_VALIDATED` | `MAX_CALLS_LE_2_ENFORCED` | `SIMPLE_LOOP_UNCHANGED` | `126_TESTS_PASSING`.
+- **Evidência:** 126/126 testes unitários e adversariais aprovados (100% offline).
+
+
 
 
 

@@ -6,15 +6,15 @@
 ---
 
 ## 🟢 NOW (Próxima Missão Imediata)
-- [ ] **MISSION-LEAN-PROTOTYPE-01:** **Lean IEE Minimal Offline Prototype**
-  - **Objetivo:** Implementar os contratos offline, schemas Pydantic e o runner desacoplado para a Candidata L1 (`LeanFirstPass` + `EarlyEpistemicGate` + `ConditionalEscalation`), com suíte de testes unitários determinísticos (100% offline).
-  - **Diretriz Mandatória:** NÃO alterar o `SimpleLoopRunner` de produção existente (mantido como Controle). NÃO executar chamadas reais de inferência.
+- [ ] **MISSION-M05.3-CALIBRATION:** **M05.3 Lean IEE Offline Replay & Adversarial Calibration**
+  - **Objetivo:** Usar dados de runs históricas do IEE e cenários sintéticos adicionais para calibrar os limiares de falso positivo/falso negativo do `EarlyEpistemicGate`, refinar a representação de `DecisionDeltaRecord` e testar a interação com `NegativeKnowledgeRecord` offline.
+  - **Diretriz Mandatória:** NÃO executar inferência real nesta etapa; calibração 100% offline. Preservar o `SimpleLoopRunner` como grupo de controle.
 
 ---
 
 ## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **EXP-M05.3-REPLICATION-SETUP:** Preparação do harness de teste da suíte de replicação multicaso (IDEA-01 a IDEA-05).
-2. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricos sob o modelo de linhagem `IdeaLineageNode`.
+1. [ ] **EXP-M05.4-REAL-REPLICATION:** Execução do experimento de replicação multicaso (IDEA-01 a IDEA-05) contra provedores reais com blinding 1-to-1.
+2. [ ] **EXP-HTR-LITE-REPLAY:** Replay offline de runs históricas sob o modelo de linhagem `IdeaLineageNode`.
 3. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias profundas de doadores secundários no arsenal.
 
 ---

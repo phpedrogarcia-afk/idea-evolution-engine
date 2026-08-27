@@ -198,6 +198,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Direciona a evolução arquitetural para o Lean IEE (primeira passada enxuta + verificação determinística + escalação condicional).
 - **Related Decisions:** [POST-REVEAL-ANALYSIS.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.2-REAL/POST-REVEAL-ANALYSIS.md)
 
+---
+
+### [FINDING-021] Validação Adversarial Offline do Lean IEE L1 e Invariante de 2 Chamadas
+- **Claim:** O Lean IEE com Early Epistemic Gate (L1) provou offline que: (1) ideias simples e bem ancoradas terminam após 1 chamada nominal; (2) invenções de hipóteses por modelos não autorizam escalação automática nem geram desperdício epistêmico; (3) autoridade normativa humana é respeitada com saída antecipada (`REQUEST_HUMAN_DECISION`) sem substituição por raciocínio de IA; (4) incertezas materiais reais disparam no máximo 1 escalação focada; (5) nenhuma condição ou saída de modelo ultrapassa o limite rígido de 2 chamadas de modelo (`LEAN_L1_MAX_MODEL_CALLS = 2`).
+- **Evidence:** 12 cenários adversariais determinísticos em `tests/adversarial/test_adversarial_lean_iee.py` e implementação desacoplada em `src/idea_evolution/orchestration/lean_loop.py` e `src/idea_evolution/domain/early_epistemic_gate.py`.
+- **Status:** `CONFIRMED_BY_OFFLINE_ADVERSARIAL_TESTS`
+- **Implications:** Arquitetura candidata L1 pronta para calibração e replay offline (M05.3).
+- **Related Decisions:** [ADR-019](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md#adr-019), [LEAN-IEE-DESIGN.md](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/architecture/LEAN-IEE-DESIGN.md)
+
+
 
 
 

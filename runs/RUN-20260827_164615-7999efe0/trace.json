@@ -1,0 +1,379 @@
+{
+  "run_id": "RUN-20260827_164615-7999efe0",
+  "status": "REFINEMENT_INCOMPLETE",
+  "total_duration_seconds": 0.044236183166503906,
+  "total_stages_executed": 10,
+  "git_commit": "6d4ed70b6696df35e50d9aea4a2b0d2156cbf0bd",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.01,
+      "delta_summary": "Intenção extraída: 'Ajudar seres humanos a transformar ideias cruas em hipóteses...' | 1 premissas mapeadas.",
+      "raw_response": "{\n  \"interpreted_problem\": \"Dificuldade do usuário em organizar e maturar ideias dispersas de forma estruturada.\",\n  \"human_intent\": \"Ajudar seres humanos a transformar ideias cruas em hipóteses acionáveis sem perda de intenção.\",\n  \"proposed_mechanism\": \"Processo sequencial de clarificação e estruturação de ideias.\",\n  \"explicit_mechanism\": \"Processo sequencial de clarificação e estruturação de ideias.\",\n  \"inferred_candidates\": [],\n  \"actors_or_users\": [\n    \"Criadores\",\n    \"Engenheiros\",\n    \"Pesquisadores\"\n  ],\n  \"assumptions\": [\n    \"Usuários valorizam rastreabilidade e crítica rigorosa mais do que bajulação.\"\n  ],\n  \"ambiguities\": [\n    \"Qual o formato ideal de teste de realidade para produtos puramente de software?\"\n  ],\n  \"strengths\": [\n    \"Simplicidade arquitetural\",\n    \"Rastreabilidade completa\"\n  ],\n  \"structured_idea\": \"Ferramenta de clarificação de ideias que recebe uma formulação vaga e produz uma representação estruturada.\"\n}",
+      "parsed_output": {
+        "interpreted_problem": "Dificuldade do usuário em organizar e maturar ideias dispersas de forma estruturada.",
+        "human_intent": "Ajudar seres humanos a transformar ideias cruas em hipóteses acionáveis sem perda de intenção.",
+        "proposed_mechanism": "Processo sequencial de clarificação e estruturação de ideias.",
+        "explicit_mechanism": "Processo sequencial de clarificação e estruturação de ideias.",
+        "inferred_candidates": [],
+        "actors_or_users": [
+          "Criadores",
+          "Engenheiros",
+          "Pesquisadores"
+        ],
+        "assumptions": [
+          "Usuários valorizam rastreabilidade e crítica rigorosa mais do que bajulação."
+        ],
+        "ambiguities": [
+          "Qual o formato ideal de teste de realidade para produtos puramente de software?"
+        ],
+        "strengths": [
+          "Simplicidade arquitetural",
+          "Rastreabilidade completa"
+        ],
+        "structured_idea": "Ferramenta de clarificação de ideias que recebe uma formulação vaga e produz uma representação estruturada."
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.338660+00:00"
+    },
+    {
+      "step_number": 2,
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.01,
+      "delta_summary": "2 vulnerabilidades críticas e 1 modos de falha identificados.",
+      "raw_response": "{\n  \"critical_issues\": [\n    {\n      \"issue\": \"Risco de sobrecarga de tokens e latência excessiva se o loop não tiver condições de parada estritas.\",\n      \"why_it_matters\": \"Pode inviabilizar o custo por ideia processada.\",\n      \"severity\": \"HIGH\",\n      \"affected_part\": \"Orquestração e limites de ciclo\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    },\n    {\n      \"issue\": \"Críticas podem se tornar genéricas se os prompts não impuserem Truth Over Agreement.\",\n      \"why_it_matters\": \"Reduz o Decision Delta e gera valor perceptual ilusório.\",\n      \"severity\": \"MEDIUM\",\n      \"affected_part\": \"Prompts de ataque\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    }\n  ],\n  \"fragile_assumptions\": [\n    \"Modelos de linguagem respeitam esquemas complexos sem reparo mecânico.\"\n  ],\n  \"contradictions\": [],\n  \"failure_modes\": [\n    \"Loop infinito em caso de rejeição perpétua no estágio de revisão final.\"\n  ],\n  \"missing_information\": [\n    \"Dados sobre preferências de formato de saída entre diferentes perfis de usuário.\"\n  ],\n  \"overclaims\": [\n    \"Afirmar que o sistema garante que a ideia terá sucesso no mercado.\"\n  ]\n}",
+      "parsed_output": {
+        "critical_issues": [
+          {
+            "issue": "Risco de sobrecarga de tokens e latência excessiva se o loop não tiver condições de parada estritas.",
+            "why_it_matters": "Pode inviabilizar o custo por ideia processada.",
+            "severity": "HIGH",
+            "affected_part": "Orquestração e limites de ciclo",
+            "origin": "MODEL_HYPOTHESIS"
+          },
+          {
+            "issue": "Críticas podem se tornar genéricas se os prompts não impuserem Truth Over Agreement.",
+            "why_it_matters": "Reduz o Decision Delta e gera valor perceptual ilusório.",
+            "severity": "MEDIUM",
+            "affected_part": "Prompts de ataque",
+            "origin": "MODEL_HYPOTHESIS"
+          }
+        ],
+        "fragile_assumptions": [
+          "Modelos de linguagem respeitam esquemas complexos sem reparo mecânico."
+        ],
+        "contradictions": [],
+        "failure_modes": [
+          "Loop infinito em caso de rejeição perpétua no estágio de revisão final."
+        ],
+        "missing_information": [
+          "Dados sobre preferências de formato de saída entre diferentes perfis de usuário."
+        ],
+        "overclaims": [
+          "Afirmar que o sistema garante que a ideia terá sucesso no mercado."
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.339441+00:00"
+    },
+    {
+      "step_number": 3,
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.01,
+      "delta_summary": "2 mecanismos alternativos gerados.",
+      "raw_response": "{\n  \"alternatives\": [\n    {\n      \"mechanism\": \"Executar pipeline sequencial determinístico com contratos estritos Pydantic.\",\n      \"addresses_issues\": [\n        \"Latência e quebra de schemas\"\n      ],\n      \"preserves_intent\": true,\n      \"tradeoffs\": [\n        \"Menor flexibilidade dinâmica em favor de 100% de previsibilidade.\"\n      ],\n      \"novelty_or_difference\": \"Separação total entre kernel determinístico e funções semânticas.\"\n    },\n    {\n      \"mechanism\": \"Utilizar um único modelo com prompt estruturado em múltiplas seções.\",\n      \"addresses_issues\": [\n        \"Custo de coordenação\"\n      ],\n      \"preserves_intent\": true,\n      \"tradeoffs\": [\n        \"Menor isolamento de contexto e menor severidade crítica.\"\n      ],\n      \"novelty_or_difference\": \"Baseline de prompt único.\"\n    }\n  ]\n}",
+      "parsed_output": {
+        "alternatives": [
+          {
+            "mechanism": "Executar pipeline sequencial determinístico com contratos estritos Pydantic.",
+            "addresses_issues": [
+              "Latência e quebra de schemas"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Menor flexibilidade dinâmica em favor de 100% de previsibilidade."
+            ],
+            "novelty_or_difference": "Separação total entre kernel determinístico e funções semânticas."
+          },
+          {
+            "mechanism": "Utilizar um único modelo com prompt estruturado em múltiplas seções.",
+            "addresses_issues": [
+              "Custo de coordenação"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Menor isolamento de contexto e menor severidade crítica."
+            ],
+            "novelty_or_difference": "Baseline de prompt único."
+          }
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.340120+00:00"
+    },
+    {
+      "step_number": 4,
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "Síntese concluída: Core 'Blockchain e mapa mental...' (Base: MODEL_HYPOTHESIS | Hash: 118c7f0378550b1f), 0 aceitas, 0 candidatas, 0 rejeitadas.",
+      "raw_response": "{\n  \"refined_idea\": \"Ideia com spoofing de autoridade\",\n  \"core_mechanism\": \"Blockchain e mapa mental\",\n  \"core_mechanism_justification\": \"Inven\\u00e7\\u00e3o pura do modelo\",\n  \"core_mechanism_basis\": \"USER_EXPLICIT\",\n  \"accepted_changes\": [],\n  \"candidate_possibilities\": [],\n  \"rejected_changes\": [],\n  \"remaining_uncertainties\": [],\n  \"known_risks\": [],\n  \"recommended_next_step\": \"Deploy\"\n}",
+      "parsed_output": {
+        "refined_idea": "Ideia com spoofing de autoridade",
+        "core_mechanism": "Blockchain e mapa mental",
+        "core_mechanism_justification": "Invenção pura do modelo",
+        "core_mechanism_basis": "USER_EXPLICIT",
+        "accepted_changes": [],
+        "candidate_possibilities": [],
+        "rejected_changes": [],
+        "remaining_uncertainties": [],
+        "known_risks": [],
+        "recommended_next_step": "Deploy"
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.340960+00:00"
+    },
+    {
+      "step_number": 5,
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.01,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Pipeline determinístico de 6 estágios em...' (hash: 52b02a020207801b), 1 dependências, 2 testes do Core, 0 testes exploratórios.",
+      "raw_response": "{\n  \"target_core_mechanism\": \"Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.\",\n  \"feasibility_notes\": [\n    \"A camada fina sobre Pydantic roda em < 50ms localmente sem overhead de rede.\"\n  ],\n  \"reality_dependencies\": [\n    \"Disponibilidade de chave de API para o modo real ou execução offline com mocks.\"\n  ],\n  \"claims_needing_evidence\": [\n    \"Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline.\"\n  ],\n  \"potential_blockers\": [\n    \"Falta de conectividade externa em ambientes isolados.\"\n  ],\n  \"candidate_tests\": [\n    \"Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.\",\n    \"Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico.\"\n  ],\n  \"exploratory_candidate_tests\": []\n}",
+      "parsed_output": {
+        "target_core_mechanism": "Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
+        "feasibility_notes": [
+          "A camada fina sobre Pydantic roda em < 50ms localmente sem overhead de rede."
+        ],
+        "reality_dependencies": [
+          "Disponibilidade de chave de API para o modo real ou execução offline com mocks."
+        ],
+        "claims_needing_evidence": [
+          "Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline."
+        ],
+        "potential_blockers": [
+          "Falta de conectividade externa em ambientes isolados."
+        ],
+        "candidate_tests": [
+          "Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.",
+          "Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico."
+        ],
+        "exploratory_candidate_tests": []
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.341604+00:00"
+    },
+    {
+      "step_number": 6,
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+      "raw_response": "{\n  \"material_issues_remaining\": [],\n  \"essence_drift_detected\": false,\n  \"speculative_accretion_detected\": false,\n  \"drift_explanation\": \"\",\n  \"unresolved_critical_issue\": false,\n  \"recommendation\": \"REFINED_IDEA_READY\",\n  \"review_summary\": \"Parece \\u00f3timo!\"\n}",
+      "parsed_output": {
+        "material_issues_remaining": [],
+        "essence_drift_detected": false,
+        "speculative_accretion_detected": false,
+        "ontology_contradiction_detected": false,
+        "drift_explanation": "",
+        "unresolved_critical_issue": false,
+        "recommendation": "REFINED_IDEA_READY",
+        "review_summary": "Parece ótimo!"
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.342221+00:00"
+    },
+    {
+      "step_number": 7,
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.01,
+      "delta_summary": "2 mecanismos alternativos gerados.",
+      "raw_response": "{\n  \"alternatives\": [\n    {\n      \"mechanism\": \"Executar pipeline sequencial determinístico com contratos estritos Pydantic.\",\n      \"addresses_issues\": [\n        \"Latência e quebra de schemas\"\n      ],\n      \"preserves_intent\": true,\n      \"tradeoffs\": [\n        \"Menor flexibilidade dinâmica em favor de 100% de previsibilidade.\"\n      ],\n      \"novelty_or_difference\": \"Separação total entre kernel determinístico e funções semânticas.\"\n    },\n    {\n      \"mechanism\": \"Utilizar um único modelo com prompt estruturado em múltiplas seções.\",\n      \"addresses_issues\": [\n        \"Custo de coordenação\"\n      ],\n      \"preserves_intent\": true,\n      \"tradeoffs\": [\n        \"Menor isolamento de contexto e menor severidade crítica.\"\n      ],\n      \"novelty_or_difference\": \"Baseline de prompt único.\"\n    }\n  ]\n}",
+      "parsed_output": {
+        "alternatives": [
+          {
+            "mechanism": "Executar pipeline sequencial determinístico com contratos estritos Pydantic.",
+            "addresses_issues": [
+              "Latência e quebra de schemas"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Menor flexibilidade dinâmica em favor de 100% de previsibilidade."
+            ],
+            "novelty_or_difference": "Separação total entre kernel determinístico e funções semânticas."
+          },
+          {
+            "mechanism": "Utilizar um único modelo com prompt estruturado em múltiplas seções.",
+            "addresses_issues": [
+              "Custo de coordenação"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Menor isolamento de contexto e menor severidade crítica."
+            ],
+            "novelty_or_difference": "Baseline de prompt único."
+          }
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.342818+00:00"
+    },
+    {
+      "step_number": 8,
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "Síntese concluída: Core 'Blockchain e mapa mental...' (Base: MODEL_HYPOTHESIS | Hash: 118c7f0378550b1f), 0 aceitas, 0 candidatas, 0 rejeitadas.",
+      "raw_response": "{\n  \"refined_idea\": \"Ideia com spoofing de autoridade\",\n  \"core_mechanism\": \"Blockchain e mapa mental\",\n  \"core_mechanism_justification\": \"Inven\\u00e7\\u00e3o pura do modelo\",\n  \"core_mechanism_basis\": \"USER_EXPLICIT\",\n  \"accepted_changes\": [],\n  \"candidate_possibilities\": [],\n  \"rejected_changes\": [],\n  \"remaining_uncertainties\": [],\n  \"known_risks\": [],\n  \"recommended_next_step\": \"Deploy\"\n}",
+      "parsed_output": {
+        "refined_idea": "Ideia com spoofing de autoridade",
+        "core_mechanism": "Blockchain e mapa mental",
+        "core_mechanism_justification": "Invenção pura do modelo",
+        "core_mechanism_basis": "USER_EXPLICIT",
+        "accepted_changes": [],
+        "candidate_possibilities": [],
+        "rejected_changes": [],
+        "remaining_uncertainties": [],
+        "known_risks": [],
+        "recommended_next_step": "Deploy"
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.343542+00:00"
+    },
+    {
+      "step_number": 9,
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.01,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Pipeline determinístico de 6 estágios em...' (hash: 52b02a020207801b), 1 dependências, 2 testes do Core, 0 testes exploratórios.",
+      "raw_response": "{\n  \"target_core_mechanism\": \"Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.\",\n  \"feasibility_notes\": [\n    \"A camada fina sobre Pydantic roda em < 50ms localmente sem overhead de rede.\"\n  ],\n  \"reality_dependencies\": [\n    \"Disponibilidade de chave de API para o modo real ou execução offline com mocks.\"\n  ],\n  \"claims_needing_evidence\": [\n    \"Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline.\"\n  ],\n  \"potential_blockers\": [\n    \"Falta de conectividade externa em ambientes isolados.\"\n  ],\n  \"candidate_tests\": [\n    \"Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.\",\n    \"Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico.\"\n  ],\n  \"exploratory_candidate_tests\": []\n}",
+      "parsed_output": {
+        "target_core_mechanism": "Pipeline determinístico de 6 estágios em Python com validação de schemas Pydantic e imutabilidade do input.",
+        "feasibility_notes": [
+          "A camada fina sobre Pydantic roda em < 50ms localmente sem overhead de rede."
+        ],
+        "reality_dependencies": [
+          "Disponibilidade de chave de API para o modo real ou execução offline com mocks."
+        ],
+        "claims_needing_evidence": [
+          "Afirmação de que o loop produz saídas percebidas como mais úteis que o baseline."
+        ],
+        "potential_blockers": [
+          "Falta de conectividade externa em ambientes isolados."
+        ],
+        "candidate_tests": [
+          "Executar teste cego A/B comparando o Simple Loop contra o prompt único sobre 3 fixtures padronizadas.",
+          "Medir a taxa de conformidade de schema em 100 execuções sucessivas do pipeline determinístico."
+        ],
+        "exploratory_candidate_tests": []
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.344183+00:00"
+    },
+    {
+      "step_number": 10,
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "fake",
+      "model": "default-model",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+      "raw_response": "{\n  \"material_issues_remaining\": [],\n  \"essence_drift_detected\": false,\n  \"speculative_accretion_detected\": false,\n  \"drift_explanation\": \"\",\n  \"unresolved_critical_issue\": false,\n  \"recommendation\": \"REFINED_IDEA_READY\",\n  \"review_summary\": \"Parece \\u00f3timo!\"\n}",
+      "parsed_output": {
+        "material_issues_remaining": [],
+        "essence_drift_detected": false,
+        "speculative_accretion_detected": false,
+        "ontology_contradiction_detected": false,
+        "drift_explanation": "",
+        "unresolved_critical_issue": false,
+        "recommendation": "REFINED_IDEA_READY",
+        "review_summary": "Parece ótimo!"
+      },
+      "error": null,
+      "timestamp": "2026-08-27T16:46:15.344779+00:00"
+    }
+  ]
+}

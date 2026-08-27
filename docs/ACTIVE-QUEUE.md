@@ -4,14 +4,14 @@
 
 ---
 
-## 🚦 Status Atual da Fila: REDESENHO LEAN IEE CONCLUÍDO | PRÓXIMO: PROTÓTIPO OFFLINE L1
+## 🚦 Status Atual da Fila: PROTÓTIPO LEAN IEE L1 OFFLINE CONCLUÍDO | PRÓXIMO: CALIBRAÇÃO M05.3
 
 ### 📌 Marco Recém-Concluído:
-- [x] **Redesenho Lean IEE (LEAN-IEE-01):** Colheita de doadores (`LEAN-IEE-DONOR-HARVEST.md`), especificação (`LEAN-IEE-DESIGN.md`), orçamento de complexidade (`LEAN-IEE-COMPLEXITY-BUDGET.md`), plano experimental (`LEAN-IEE-EXPERIMENT-PLAN.md`) e decisão `ADR-019` selecionando a Candidata L1.
+- [x] **Protótipo Offline Lean IEE L1 (LEAN-PROTOTYPE-01):** Implementação de `LeanLoopRunner`, `EarlyEpistemicGate`, `LeanFirstPassOutput`, `FocusedEscalationOutput`, `DecisionDeltaRecord`, `EpistemicRentRecord` e validação dos 12 cenários adversariais T1-T12 (126 testes verdes).
 
 ---
 
 ## 🎯 Próxima Missão Imediata:
-- **LEAN IEE MINIMAL OFFLINE PROTOTYPE:**
-  - *Objetivo:* Criar os contratos Pydantic e o executor offline desacoplado da Candidata L1 com testes unitários determinísticos (100% offline).
-  - *Regra:* Preservar intacto o `SimpleLoopRunner` de produção atual como grupo de controle; zero chamadas de inferência real nesta etapa.
+- **M05.3 LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION:**
+  - *Objetivo:* Calibrar limiares de falso positivo/falso negativo de escalação com dados de runs históricas e cenários adversariais adicionais (100% offline).
+  - *Regra:* Preservar o Simple Loop de produção como controle; zero chamadas de inferência paga/real.

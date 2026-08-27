@@ -288,4 +288,52 @@ class FakeModelRunner(ModelRunner):
                 next_steps=["Criar um protótipo e testar com usuários."],
             )
 
+        # Suporte aos schemas do Lean IEE L1
+        try:
+            from src.idea_evolution.domain.early_epistemic_gate import (
+                LeanFirstPassOutput,
+                FocusedEscalationOutput,
+                LeanCandidateMechanism,
+                LeanVulnerability,
+                EscalationReason,
+            )
+            from src.idea_evolution.domain.state import PromotionAuthorityBasis
+
+            if schema == LeanFirstPassOutput:
+                return LeanFirstPassOutput(
+                    interpreted_problem="Dificuldade em estruturar ideias dispersas de forma clara.",
+                    human_intent="Ajudar pessoas a transformar ideias vagas em projetos claros.",
+                    primary_mechanism=LeanCandidateMechanism(
+                        mechanism="Questionário guiado mínimo com exportação direta.",
+                        is_explicit_in_source=False,
+                        claimed_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+                        justification="Hipótese plausível para estruturação de projetos.",
+                        tradeoffs=["Pode limitar ideação livre."],
+                    ),
+                    competing_alternatives=[],
+                    key_assumptions=["Usuário deseja clareza rápida."],
+                    material_ambiguities=[],
+                    material_vulnerabilities=[],
+                    remaining_uncertainties=[],
+                    requires_human_normative_choice=False,
+                    human_choice_description="",
+                    proposed_next_action="Criar mock do questionário guiado.",
+                )
+
+            if schema == FocusedEscalationOutput:
+                return FocusedEscalationOutput(
+                    escalation_reason=EscalationReason.MATERIAL_VULNERABILITY,
+                    target_hypothesis="Questionário guiado mínimo com exportação direta.",
+                    focused_critique_or_analysis="Análise focada de vulnerabilidade completada com sucesso.",
+                    resolved_tradeoffs=["Definido limite de 5 perguntas para evitar fadiga."],
+                    discriminating_tests=["Teste A/B com 10 usuários medindo taxa de conclusão."],
+                    hypothesis_mutated=False,
+                    mutated_hypothesis_description="",
+                    decision_progress_made=True,
+                    updated_next_action="Construir protótipo com limite de 5 perguntas.",
+                )
+        except ImportError:
+            pass
+
         raise ValueError(f"Schema desconhecido para FakeModelRunner: {schema}")
+

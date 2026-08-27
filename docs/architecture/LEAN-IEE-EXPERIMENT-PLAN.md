@@ -17,10 +17,12 @@
 - **Critério de Rejeição da Hipótese:** Se o Simple Loop fixo superar L1 em fidelidade/autoridade com significância.
 
 ### [H-LEAN-002] Redução de Desperdício Epistêmico Pré-Gate
-- **Hipótese:** O Early Epistemic Gate reduz em $\ge 80\%$ o número de chamadas gastas elaborando hipóteses fracamente ancoradas antes da rejeição do gate final.
+- **Hipótese:** O Early Epistemic Gate reduz materialmente a elaboração de hipóteses não suportadas antes do veto final relativo ao Simple Loop fixo.
 - **Métrica:** Número de chamadas despendidas em runs que terminam com rejeição ou rebaixamento para `MODEL_HYPOTHESIS`.
 - **Baseline:** Condição B (gastou 10 chamadas no M05.2).
+- **Limiar de Aceitação:** `TO_BE_CALIBRATED_FROM_RECEIVER_DATA`
 - **Condição de Falha:** L1 gastar mais de 2 chamadas em runs rejeitadas.
+
 
 ### [H-LEAN-003] Maior Decision Delta por Chamada de Modelo
 - **Hipótese:** A escalação condicional do Lean IEE produz maior *Decision Delta por Chamada* ($\frac{\text{Score Humano}}{\text{Total de Chamadas}}$) do que o Simple Loop fixo e o Baseline de 1 chamada em ideias que possuem riscos reais.

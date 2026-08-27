@@ -5,21 +5,21 @@
 
 ---
 
-## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Redesenho Lean IEE Concluído
+## 1. Fase Ativa: Fase 1 — Simple Loop MVP & Protótipo Offline Lean IEE L1 Validado
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Redesenho:** `LEAN_DESIGN_COMPLETE` | `CANDIDATE_L1_SELECTED` ([`docs/architecture/LEAN-IEE-DESIGN.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/architecture/LEAN-IEE-DESIGN.md))
-- **Decisão Arquitetural:** `ADR-019` (Seleção de L1: Lean IEE + Early Epistemic Gate)
+- **Status do Protótipo Lean IEE (L1):** `OFFLINE_PROTOTYPE_VALIDATED` ([`src/idea_evolution/orchestration/lean_loop.py`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/src/idea_evolution/orchestration/lean_loop.py))
 - **Status do Simple Loop Atual:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e inalterado)
-- **Colheita de Doadores:** [`docs/architecture/LEAN-IEE-DONOR-HARVEST.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/architecture/LEAN-IEE-DONOR-HARVEST.md)
-- **Orçamento de Complexidade:** [`docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md)
-- **Plano de Replicação Experimental:** [`docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md)
+- **Invariante de Chamadas:** `LEAN_L1_MAX_MODEL_CALLS = 2` (12/12 testes adversariais aprovados)
+- **Total de Testes Automatizados:** **126 / 126 testes verdes** (100% offline)
 - **Branch Principal:** `main` | **Remote GitHub:** `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
 - **Varredura de Segredos:** `SECRET_SCAN: PASS`
-- **Último Checkpoint Imutável:** [`CP-20260827-019`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-019.md)
+- **Último Checkpoint Imutável:** [`CP-20260827-020`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-020.md)
 
 ---
 
 ## 2. O que Existe Fisicamente no Repositório
-- [x] Artefatos de design Lean IEE em `docs/architecture/`.
-- [x] Decisão arquitetural `ADR-019` registrada em `docs/DECISIONS-LEDGER.md`.
-- [x] Suíte de 114 testes automatizados e validadores de contexto 100% verdes.
+- [x] Implementação do `LeanLoopRunner` e `EarlyEpistemicGate` em `src/idea_evolution/`.
+- [x] Suíte adversarial T1-T12 em `tests/adversarial/test_adversarial_lean_iee.py`.
+- [x] Correções epistêmicas aplicadas em `docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md` e `docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md`.
+- [x] Achado `FINDING-021` registrado em `docs/intelligence/FINDINGS.md`.
+- [x] Suíte de 126 testes automatizados e validadores de contexto 100% verdes.

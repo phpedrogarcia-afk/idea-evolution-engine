@@ -1,0 +1,82 @@
+{
+  "checkpoint_id": "CP-20260827-020",
+  "created_at": "2026-08-27T13:45:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Mission LEAN IEE MINIMAL OFFLINE PROTOTYPE Complete: L1 Architecture Validated (LeanLoopRunner, EarlyEpistemicGate, Invariant LEAN_L1_MAX_MODEL_CALLS <= 2, 12 Adversarial Scenarios T1-T12 Passed, 126 Tests Passing)",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "completed_tasks": [
+    "TASK-001 a TASK-LEAN-DESIGN: Fundações, Hardening, MVP M04, Preflight M05, Roteamento M06, Catálogo M06.1, Autópsias Canárias M05.1-R2 a R5, Fronteira M06.2, Fundação Epistêmica CP-014, Harness A/B/C CP-015, Execução Real Online CP-016, Avaliação Humana CP-017, Fechamento Pós-Revelação CP-018, Redesenho Lean IEE CP-019",
+    "TASK-LEAN-CLAIMS-CORRECTION: Correção de alegações não comprovadas em LEAN-IEE-EXPERIMENT-PLAN.md e LEAN-IEE-COMPLEXITY-BUDGET.md",
+    "TASK-LEAN-GATE-CONTRACTS: Implementação de src/idea_evolution/domain/early_epistemic_gate.py (LeanFirstPassOutput, FocusedEscalationOutput, DecisionDeltaRecord, EpistemicRentRecord, EarlyEpistemicGate)",
+    "TASK-LEAN-ORCHESTRATOR: Implementação de src/idea_evolution/orchestration/lean_loop.py (LeanLoopRunner, LEAN_L1_MAX_MODEL_CALLS = 2)",
+    "TASK-LEAN-FAKE-RUNNER: Atualização de src/idea_evolution/providers/fake.py para suporte nativo aos contratos Lean",
+    "TASK-LEAN-ADVERSARIAL-SUITE: Criação e aprovação de 12 cenários adversariais em tests/adversarial/test_adversarial_lean_iee.py (T1 a T12)",
+    "TASK-LEAN-FINDINGS: Registro de FINDING-021 em docs/intelligence/FINDINGS.md"
+  ],
+  "changed_files": [
+    "docs/architecture/LEAN-IEE-EXPERIMENT-PLAN.md",
+    "docs/architecture/LEAN-IEE-COMPLEXITY-BUDGET.md",
+    "src/idea_evolution/domain/early_epistemic_gate.py",
+    "src/idea_evolution/orchestration/lean_loop.py",
+    "src/idea_evolution/providers/fake.py",
+    "tests/adversarial/test_adversarial_lean_iee.py",
+    "docs/intelligence/FINDINGS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20260827-020.md",
+    "docs/context/checkpoints/CP-20260827-020.json"
+  ],
+  "new_decisions": [
+    "LEAN_L1_MAX_MODEL_CALLS_INVARIANT: Fixado deterministicamente em 2 o teto máximo de chamadas de modelo para a Candidata L1",
+    "EARLY_EPISTEMIC_GATE_COST_ZERO: Gate avaliado deterministicamente após a primeira passada com zero chamadas de IA",
+    "UNSUPPORTED_HYPOTHESIS_NO_ESCALATION: Invenção de hipóteses por modelos permanece MODEL_HYPOTHESIS e não autoriza escalação automática",
+    "MISSING_HUMAN_AUTHORITY_EARLY_EXIT: Solicitação de autoridade humana (REQUEST_HUMAN_DECISION) encerra execução sem chamadas extras de IA"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% íntegro)",
+    "validate_intelligence.py (100% íntegro)",
+    "126/126 tests passing across 19 modules (100% offline)"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Métrica Determinística de Saturação Semântica",
+    "OQ-002: Extensão de Falsificação para Hipóteses Subjetivas",
+    "OQ-003: Limiares Práticos de Ativação do Modo Multiagente",
+    "OQ-004: Renderização Gráfica C-K sem Poluição Ontológica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oráculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenação Multiagente (Preservada)"
+  ],
+  "known_risks": [
+    "Gatilhos do Early Gate devem ser calibrados contra dados reais e históricos no M05.3 para minimizar falsos positivos/negativos de escalação"
+  ],
+  "blockers": [],
+  "readiness_verdict": {
+    "LEAN_L1_PROTOTYPE_VALIDATED": true,
+    "MAX_CALLS_LE_2_ENFORCED": true,
+    "SIMPLE_LOOP_UNCHANGED": true,
+    "READY_FOR_OFFLINE_CALIBRATION": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "Iniciar Missão M05.3 LEAN IEE OFFLINE REPLAY & ADVERSARIAL CALIBRATION usando dados de runs históricas",
+  "authorized_next_scope": [
+    "Calibração de limiares do Early Gate e replay offline de runs históricas (100% offline, zero chamadas reais)"
+  ],
+  "do_not_repeat": [
+    "Não alterar o SimpleLoopRunner de produção",
+    "Não autorizar chamadas reais de IA sem calibração prévia em M05.3"
+  ],
+  "recovery_notes": "Execute python -m unittest discover -s tests -p 'test_*.py' para verificar integridade dos 126 testes."
+}
