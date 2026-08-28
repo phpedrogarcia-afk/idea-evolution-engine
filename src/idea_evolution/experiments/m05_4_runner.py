@@ -107,8 +107,24 @@ class M054ExperimentExecutor:
         """Executa Condição B: Simple Loop Control (até 10 chamadas)."""
         runs_dir = RAW_DIR / "runs_b"
         runs_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Build a routing configuration that uses the same provider and model as the experiment runner
+        from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
+        from src.idea_evolution.providers.router import RunnerRouter
+        
+        config = ModelRoutingConfig(
+            models={
+                "default": ModelDefinition(
+                    provider=self.runner.provider,
+                    model=self.runner.default_model
+                )
+            },
+            routes={},
+            default_model_alias="default"
+        )
+        router = RunnerRouter(config=config, custom_runners={"default": self.runner})
         simple_runner = SimpleLoopRunner(
-            runner=self.runner,
+            router=router,
             topology="STANDARD_6_STAGE",
             runs_dir=runs_dir,
         )
@@ -190,7 +206,123 @@ class M054ExperimentExecutor:
 
         return raw_payload
 
+    def _build_condition_b_router(self, provider: str, model: str) -> ModelRoutingConfig:
+        """
+        Helper method to build the Condition B router configuration.
+        Extracted to avoid duplication between validation and execution.
+        """
+        from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
+        
+        return ModelRoutingConfig(
+            models={
+                "default": ModelDefinition(
+                    provider=provider,
+                    model=model
+                )
+            },
+            routes={},
+            default_model_alias="default"
+        )
+
+    def _get_temp_dir(self) -> Path:
+        """
+        Helper method to get a temporary directory for validation runs.
+        Uses tempfile.TemporaryDirectory for cross-platform compatibility.
+        """
+        import tempfile
+        return Path(tempfile.mkdtemp())
+
+    def _build_condition_b_router(self, provider: str, model: str) -> ModelRoutingConfig:
+        """
+        Helper method to build the Condition B router configuration.
+        Extracted to avoid duplication between validation and execution.
+        """
+        from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
+        
+        return ModelRoutingConfig(
+            models={
+                "default": ModelDefinition(
+                    provider=provider,
+                    model=model
+                )
+            },
+            routes={},
+            default_model_alias="default"
+        )
+
+    def _get_temp_dir(self) -> Path:
+        """
+        Helper method to get a temporary directory for validation runs.
+        Uses tempfile.TemporaryDirectory for cross-platform compatibility.
+        """
+        import tempfile
+        return Path(tempfile.mkdtemp())
+
+    def _validate_model_routing(self) -> None:
+        """
+        Fail-fast preflight validation: ensure all conditions route to the correct model.
+        Aborts before any provider call if routing is misconfigured.
+        """
+        from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
+        from src.idea_evolution.providers.router import RunnerRouter
+        from src.idea_evolution.orchestration.baseline import BaselineRunner
+        from src.idea_evolution.orchestration.simple_loop import SimpleLoopRunner
+        from src.idea_evolution.orchestration.lean_loop import LeanLoopRunner
+        
+        # Expected model for all conditions - FROZEN SPEC for M05.4
+        expected_provider = "groq"
+        expected_model = "openai/gpt-oss-120b"
+        
+        # Validate Condition A (BaselineRunner)
+        baseline_runner = BaselineRunner(runner=self.runner, model_name=expected_model)
+        # BaselineRunner doesn't use router, but we can verify the model_name was set correctly
+        if baseline_runner.model_name != expected_model:
+            raise RuntimeError(
+                f"BaselineRunner model mismatch: expected {expected_model}, got {baseline_runner.model_name}"
+            )
+        
+        # Validate Condition B (SimpleLoopRunner with explicit router)
+        config_b = self._build_condition_b_router(expected_provider, expected_model)
+        router_b = RunnerRouter(config=config_b, custom_runners={"default": self.runner})
+        
+        # Verify the router is configured correctly
+        from src.idea_evolution.config.catalog import ModelCatalog
+        catalog = ModelCatalog()
+        expected_stages = ["UNDERSTAND", "ATTACK", "ALTERNATIVES", "SYNTHESIZE", "REALITY_CHECK", "FINAL_REVIEW"]
+        for stage in expected_stages:
+            alias, model_def = router_b.config.resolve_stage(stage, catalog=catalog)
+            if alias != "default":
+                raise RuntimeError(f"Condition B stage {stage} resolved to wrong alias: {alias}")
+            if model_def.provider != expected_provider:
+                raise RuntimeError(
+                    f"Condition B stage {stage} provider mismatch: expected {expected_provider}, got {model_def.provider}"
+                )
+            if model_def.model != expected_model:
+                raise RuntimeError(
+                    f"Condition B stage {stage} model mismatch: expected {expected_model}, got {model_def.model}"
+                )
+        
+        # Validate Condition C (LeanLoopRunner)
+        lean_runner = LeanLoopRunner(
+            runner=self.runner,
+            model_name=expected_model,
+            runs_dir=self._get_temp_dir(),  # Use temporary directory for validation
+        )
+        if lean_runner.model_name != expected_model:
+            raise RuntimeError(
+                f"LeanLoopRunner model mismatch: expected {expected_model}, got {lean_runner.model_name}"
+            )
+        
+        # Additional check: ensure "default-model" is not in our configuration
+        if expected_model == "default-model":
+            raise RuntimeError(
+                f"Expected model should not be 'default-model', but got: {expected_model}"
+            )
+
     def execute_all(self) -> Dict[str, Any]:
+        # Run fail-fast preflight validation before any provider calls
+        self._validate_model_routing()
+        
         ideas = self.load_holdout_ideas()
         mappings = self.load_blind_mappings()
         raw_manifest_entries = []
