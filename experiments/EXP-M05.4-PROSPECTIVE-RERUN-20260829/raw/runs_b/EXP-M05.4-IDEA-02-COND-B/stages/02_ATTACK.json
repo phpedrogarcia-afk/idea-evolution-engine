@@ -1,0 +1,61 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 21.301451444625854,
+  "delta_summary": "3 vulnerabilidades críticas e 2 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Stored fragments become unretrievable over time\",\"why_it_matters\":\"If users cannot locate their saved thoughts, the service fails its core promise of preserving ideas for later review\",\"severity\":\"HIGH\",\"affected_part\":\"Retrieval/Search Functionality\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"why_it_matters\":\"Accumulated noise reduces perceived value and may cause users to abandon the tool\",\"severity\":\"MEDIUM\",\"affected_part\":\"User Engagement\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Privacy and security of unorganized personal thoughts are not addressed\",\"why_it_matters\":\"Sensitive ideas could be exposed, deterring adoption and raising legal risks\",\"severity\":\"HIGH\",\"affected_part\":\"Data Security\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Users desire to capture ideas quickly without any structure\",\"Users will remember to revisit unorganized fragments later\"],\"contradictions\":[\"The system claims no organization yet must provide enough indexing to make later retrieval possible\"],\"failure_modes\":[\"System performance degrades as the number of fragments grows\",\"Search returns irrelevant results due to lack of metadata\"],\"missing_information\":[\"How synchronization across multiple devices will be handled\",\"What privacy controls are provided for sensitive thoughts\"],\"overclaims\":[\"Providing a simple space will fully solve the problem of idea loss\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Stored fragments become unretrievable over time",
+        "why_it_matters": "If users cannot locate their saved thoughts, the service fails its core promise of preserving ideas for later review",
+        "severity": "HIGH",
+        "affected_part": "Retrieval/Search Functionality",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+        "why_it_matters": "Accumulated noise reduces perceived value and may cause users to abandon the tool",
+        "severity": "MEDIUM",
+        "affected_part": "User Engagement",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Privacy and security of unorganized personal thoughts are not addressed",
+        "why_it_matters": "Sensitive ideas could be exposed, deterring adoption and raising legal risks",
+        "severity": "HIGH",
+        "affected_part": "Data Security",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Users desire to capture ideas quickly without any structure",
+      "Users will remember to revisit unorganized fragments later"
+    ],
+    "contradictions": [
+      "The system claims no organization yet must provide enough indexing to make later retrieval possible"
+    ],
+    "failure_modes": [
+      "System performance degrades as the number of fragments grows",
+      "Search returns irrelevant results due to lack of metadata"
+    ],
+    "missing_information": [
+      "How synchronization across multiple devices will be handled",
+      "What privacy controls are provided for sensitive thoughts"
+    ],
+    "overclaims": [
+      "Providing a simple space will fully solve the problem of idea loss"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:47:05.593144+00:00"
+}

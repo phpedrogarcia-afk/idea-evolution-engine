@@ -1,0 +1,69 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 21.172452211380005,
+  "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Privacy leakage due to mandatory sharing of location and reading interests\",\"why_it_matters\":\"Exposes users to stalking, legal liability, and reduces willingness to join, threatening adoption\",\"severity\":\"HIGH\",\"affected_part\":\"User Data Handling\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Insufficient user density in niche rare‑book community\",\"why_it_matters\":\"Map may show no nearby peers and feed may lack relevant matches, rendering core functionality ineffective\",\"severity\":\"MEDIUM\",\"affected_part\":\"Matching & Map Feature\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Inaccurate categorization of obscure themes\",\"why_it_matters\":\"Poor recommendations lower perceived value and increase churn, undermining the feed's purpose\",\"severity\":\"MEDIUM\",\"affected_part\":\"Recommendation Engine\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"os usuários possuem dispositivos com acesso à internet\",\"os usuários desejam compartilhar informações sobre seus livros\",\"há disponibilidade de dados de localização\",\"os temas obscuros podem ser categorizados\",\"os usuários concordam em compartilhar sua localização ou interesses\"],\"contradictions\":[\"O sistema exige compartilhamento de localização para conectar vizinhos, mas assume que os usuários desejam privacidade total\",\"A proposta de um mapa local assume densidade suficiente de leitores raros, porém a comunidade é globalmente dispersa\"],\"failure_modes\":[\"Nenhum usuário próximo aparece no mapa, levando a percepção de inutilidade\",\"Algoritmo de recomendação recomenda usuários irrelevantes por classificação errônea de temas obscuros\",\"Vazamento de dados de localização resulta em abuso ou perseguição\"],\"missing_information\":[\"Como será verificada a raridade dos livros e direitos autorais associados\",\"Mecanismos de consentimento granular para compartilhamento de localização e interesses\",\"Incentivos para que usuários contribuam com dados de seus livros\",\"Estratégias de mitigação de risco legal e de privacidade\"],\"overclaims\":[\"Afirma que o mapa geográfico conectará leitores de forma eficaz apesar da baixa densidade da comunidade\",\"Afirma que o feed assíncrono recomendará usuários com interesses em temas obscuros sem necessidade de categorização avançada\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Privacy leakage due to mandatory sharing of location and reading interests",
+        "why_it_matters": "Exposes users to stalking, legal liability, and reduces willingness to join, threatening adoption",
+        "severity": "HIGH",
+        "affected_part": "User Data Handling",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Insufficient user density in niche rare‑book community",
+        "why_it_matters": "Map may show no nearby peers and feed may lack relevant matches, rendering core functionality ineffective",
+        "severity": "MEDIUM",
+        "affected_part": "Matching & Map Feature",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Inaccurate categorization of obscure themes",
+        "why_it_matters": "Poor recommendations lower perceived value and increase churn, undermining the feed's purpose",
+        "severity": "MEDIUM",
+        "affected_part": "Recommendation Engine",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "os usuários possuem dispositivos com acesso à internet",
+      "os usuários desejam compartilhar informações sobre seus livros",
+      "há disponibilidade de dados de localização",
+      "os temas obscuros podem ser categorizados",
+      "os usuários concordam em compartilhar sua localização ou interesses"
+    ],
+    "contradictions": [
+      "O sistema exige compartilhamento de localização para conectar vizinhos, mas assume que os usuários desejam privacidade total",
+      "A proposta de um mapa local assume densidade suficiente de leitores raros, porém a comunidade é globalmente dispersa"
+    ],
+    "failure_modes": [
+      "Nenhum usuário próximo aparece no mapa, levando a percepção de inutilidade",
+      "Algoritmo de recomendação recomenda usuários irrelevantes por classificação errônea de temas obscuros",
+      "Vazamento de dados de localização resulta em abuso ou perseguição"
+    ],
+    "missing_information": [
+      "Como será verificada a raridade dos livros e direitos autorais associados",
+      "Mecanismos de consentimento granular para compartilhamento de localização e interesses",
+      "Incentivos para que usuários contribuam com dados de seus livros",
+      "Estratégias de mitigação de risco legal e de privacidade"
+    ],
+    "overclaims": [
+      "Afirma que o mapa geográfico conectará leitores de forma eficaz apesar da baixa densidade da comunidade",
+      "Afirma que o feed assíncrono recomendará usuários com interesses em temas obscuros sem necessidade de categorização avançada"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:52:22.909338+00:00"
+}

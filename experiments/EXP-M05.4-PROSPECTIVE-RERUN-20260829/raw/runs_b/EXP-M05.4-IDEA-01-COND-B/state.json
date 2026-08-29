@@ -1,0 +1,364 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.4-IDEA-01-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-08-29T16:42:54.264026",
+  "updated_at": "2026-08-29T16:45:36.327611",
+  "original_idea": "Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos.",
+  "current_idea": "Aplicativo desktop minimalista que funciona como cronômetro pomodoro de 25 min e silencia notificações de outros apps durante o foco usando o modo nativo \"Não Perturbe\" com lista de exceções para alertas críticos.",
+  "human_intent": "Criar um aplicativo desktop minimalista que funcione como cronômetro pomodoro de 25 minutos e silencie as notificações de outros apps durante o período de foco.",
+  "problem_statement": "Usuários precisam de uma forma de manter foco durante sessões de trabalho de 25 minutos, evitando interrupções de notificações de outros aplicativos.",
+  "actors_or_users": [
+    "Usuários de desktop",
+    "Profissionais que utilizam a técnica Pomodoro",
+    "Estudantes que buscam foco"
+  ],
+  "assumptions": [
+    "O sistema operacional permite bloquear notificações de outros apps",
+    "Os usuários preferem uma interface minimalista",
+    "O foco de 25 minutos é adequado para a maioria dos usuários"
+  ],
+  "ambiguities": [
+    "Como o bloqueio de notificações será implementado em diferentes sistemas operacionais",
+    "Se o usuário pode escolher quais aplicativos são bloqueados",
+    "Se há opção de pausar ou interromper o timer"
+  ],
+  "strengths": [
+    "Simplicidade e minimalismo",
+    "Ajuda a manter foco ao eliminar distrações",
+    "Implementação direta do método Pomodoro"
+  ],
+  "critical_issues": [
+    {
+      "issue": "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+      "why_it_matters": "Se as notificações não forem silenciadas, o objetivo principal de melhorar o foco falha, tornando o aplicativo inútil para muitos usuários",
+      "severity": "HIGH",
+      "affected_part": "Módulo de bloqueio de notificações",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Bloquear notificações pode impedir alertas críticos (ex.: chamadas de emergência, alarmes do sistema)",
+      "why_it_matters": "Interferir em notificações essenciais pode causar riscos de segurança ou perda de informações importantes, gerando desconfiança no usuário",
+      "severity": "HIGH",
+      "affected_part": "Gerenciamento de permissões de notificação",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "O sistema operacional permite bloquear notificações de outros apps",
+    "Os usuários preferem uma interface minimalista",
+    "O foco de 25 minutos é adequado para a maioria dos usuários"
+  ],
+  "contradictions": [
+    "A proposta afirma ser minimalista, mas requer configurações avançadas de permissões que podem complicar a experiência do usuário",
+    "A afirmação de que 25 minutos é adequado para todos ignora necessidades de fluxos de trabalho que exigem blocos de tempo diferentes"
+  ],
+  "failure_modes": [
+    "O aplicativo falha ao silenciar notificações e deixa-as ativas",
+    "Crash ao solicitar permissões de administrador",
+    "Desvio de tempo do cronômetro devido a processos em segundo plano"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando uma lista de exceções para alertas críticos (chamadas de emergência, alarmes do sistema) e restaurando o estado ao final do pomodoro",
+      "addresses_issues": [
+        "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+        "Bloquear notificações pode impedir alertas críticos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Depende da disponibilidade e consistência da API Do Not Disturb em cada SO (Windows, macOS, Linux)",
+        "Requer permissão de usuário para alterar o estado do sistema",
+        "Alguns aplicativos podem ignorar o modo DND, deixando notificações passar"
+      ],
+      "novelty_or_difference": "Utiliza recurso nativo do SO em vez de implementar bloqueio próprio, garantindo que alertas críticos definidos pelo próprio sistema continuem visíveis"
+    },
+    {
+      "mechanism": "Sobrepor a tela com um \"focus overlay\" que silencia o áudio do sistema e intercepta janelas de notificação, descartando-as exceto as que correspondam a uma lista de aplicativos críticos configurada pelo usuário",
+      "addresses_issues": [
+        "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+        "Bloquear notificações pode impedir alertas críticos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requer automação de UI que pode ser frágil a atualizações de aplicativos ou do SO",
+        "Pode causar atraso visual ao fechar notificações",
+        "Não impede notificações que não geram janela (ex.: sons de sistema)"
+      ],
+      "novelty_or_difference": "Aborda o bloqueio de notificações a nível de interface gráfica, contornando limitações de APIs específicas"
+    },
+    {
+      "mechanism": "Daemon leve multiplataforma que, durante o intervalo de foco, usa as APIs de notificação de cada SO (Toast no Windows, Notification Center no macOS, D-Bus no Linux) para silenciar temporariamente todas as aplicações, exceto aquelas marcadas como críticas em uma whitelist configurável",
+      "addresses_issues": [
+        "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+        "Bloquear notificações pode impedir alertas críticos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Necessita implementação separada para cada plataforma, aumentando a complexidade de desenvolvimento",
+        "Exige permissões elevadas ou instalação de serviço em segundo plano",
+        "Manutenção contínua para acompanhar mudanças nas APIs de notificação"
+      ],
+      "novelty_or_difference": "Combina um serviço de fundo específico por SO com controle granular de whitelist, oferecendo cobertura mais ampla sem depender de recursos de UI"
+    }
+  ],
+  "core_mechanism": "Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando exceções para alertas críticos e restaurando o estado ao final do pomodoro.",
+  "core_mechanism_justification": "Esta abordagem atende diretamente à intenção do usuário de silenciar notificações de forma confiável, utiliza recursos já existentes nos sistemas operacionais e requer apenas permissão do usuário, reduzindo complexidade e necessidade de serviços em segundo plano.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "b100c318f89c7182",
+  "proposal_records": [
+    {
+      "proposal": "Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando exceções para alertas críticos e restaurando o estado ao final do pomodoro.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Esta abordagem atende diretamente à intenção do usuário de silenciar notificações de forma confiável, utiliza recursos já existentes nos sistemas operacionais e requer apenas permissão do usuário, reduzindo complexidade e necessidade de serviços em segundo plano.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Ativar o modo \"Não Perturbe\" nativo com exceções configuráveis",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Alinha‑se ao objetivo principal de silenciar notificações usando funcionalidade já presente no SO, garantindo maior robustez e menor necessidade de permissões elevadas",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Sobrepor a tela com um \"focus overlay\" que silencia áudio e descarta notificações exceto as críticas",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Daemon leve multiplataforma que usa APIs de notificação de cada SO para silenciar temporariamente todas as aplicações, exceto as whitelist",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Overlay de foco que intercepta janelas de notificação",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Pode ser frágil frente a atualizações de UI e não cobre notificações sem janela, aumentando risco de perda de alertas",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Ativar o modo \"Não Perturbe\" nativo com exceções configuráveis (Justificativa: Alinha‑se ao objetivo principal de silenciar notificações usando funcionalidade já presente no SO, garantindo maior robustez e menor necessidade de permissões elevadas | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Sobrepor a tela com um \"focus overlay\" que silencia áudio e descarta notificações exceto as críticas",
+    "Daemon leve multiplataforma que usa APIs de notificação de cada SO para silenciar temporariamente todas as aplicações, exceto as whitelist"
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Overlay de foco que intercepta janelas de notificação",
+      "reason_rejected": "Pode ser frágil frente a atualizações de UI e não cobre notificações sem janela, aumentando risco de perda de alertas",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [ativar, modo, nao, perturbe, sistema, operacional, via, chamadas, api, nativas, intervalo].",
+    "Compatibilidade das APIs Do Not Disturb em diferentes versões de Windows, macOS e Linux.",
+    "Necessidade de permissões elevadas ou consentimento do usuário para alterar o modo Não Perturbe.",
+    "Como garantir que notificações críticas (ex.: chamadas de emergência) não sejam suprimidas.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.' aparece nos testes exploratórios 'Implementar camada de sobreposição transparente que captura foco e silencia áudio do sistema, avaliando se reduz interrupções sem depender de API DND.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.' aparece nos testes exploratórios 'Experimentar uso de perfis de energia ou modos de foco (ex.: Windows Focus Assist profiles) como alternativa ao DND direto, medindo eficácia na supressão de notificações.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Desenvolver um protótipo que ative o modo 'Não Perturbe' via API nativa nos principais sistemas operacionais (Windows, macOS, Linux), testar a eficácia na supressão de notificações e validar que notificações críticas permanecem visíveis.' propõe mecanismo rejeitado 'Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Desenvolver um protótipo que ative o modo 'Não Perturbe' via API nativa nos principais sistemas operacionais (Windows, macOS, Linux), testar a eficácia na supressão de notificações e validar que notificações críticas permanecem visíveis.' propõe mecanismo rejeitado 'Instalar um serviço auxiliar que, ao iniciar o Pomodoro, reduz o nível de prioridade das notificações de aplicativos não críticos e permite whitelist de apps essenciais.'.; Teste do Core 'Teste unitário que invoca a API de DND no Windows 10 e verifica o estado via PowerShell antes e depois da chamada.' referencia mecanismo rejeitado 'Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.'.; Teste do Core 'Teste de integração no macOS 13 que usa o framework UserNotifications para ativar DND, aguarda 5 segundos e confirma a mudança via comando defaults read com `doNotDisturb` flag.' referencia mecanismo rejeitado 'Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.'.; Teste do Core 'Teste automatizado em uma distribuição Linux (ex.: Ubuntu 22.04) que envia uma notificação via `notify-send` antes e depois de chamar a interface D-Bus para habilitar DND, verificando se a notificação é suprimida.' referencia mecanismo rejeitado 'Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.'.; Teste do Core 'Teste de restauração: iniciar o aplicativo com DND já ativo, iniciar um Pomodoro, terminar o timer e confirmar que o estado original (ativo) foi mantido.' referencia mecanismo rejeitado 'Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.'.; Teste do Core 'Teste de permissão: instalar o aplicativo em um ambiente padrão e tentar ativar DND; validar que o fluxo de solicitação de permissão ao usuário ocorre corretamente.' referencia mecanismo rejeitado 'Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.'.; Dependência de realidade do Core 'Documentação oficial da API de 'Não Perturbe' para cada SO alvo (ex.: Windows Focus Assist API, macOS Do Not Disturb via UserNotifications framework, Linux org.freedesktop.Notifications D-Bus interface).' referencia mecanismo rejeitado 'Instalar um serviço auxiliar que, ao iniciar o Pomodoro, reduz o nível de prioridade das notificações de aplicativos não críticos e permite whitelist de apps essenciais.'.; Teste do Core 'Teste de restauração: iniciar o aplicativo com DND já ativo, iniciar um Pomodoro, terminar o timer e confirmar que o estado original (ativo) foi mantido.' referencia mecanismo rejeitado 'Instalar um serviço auxiliar que, ao iniciar o Pomodoro, reduz o nível de prioridade das notificações de aplicativos não críticos e permite whitelist de apps essenciais.'.; Teste do Core 'Teste de permissão: instalar o aplicativo em um ambiente padrão e tentar ativar DND; validar que o fluxo de solicitação de permissão ao usuário ocorre corretamente.' referencia mecanismo rejeitado 'Instalar um serviço auxiliar que, ao iniciar o Pomodoro, reduz o nível de prioridade das notificações de aplicativos não críticos e permite whitelist de apps essenciais.'.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [ativar, modo, nao, perturbe, not, disturb, nativo, sistema, operacional, configurando, excecoes, alertas, criticos, restaurando, estado, final].",
+    "Disponibilidade consistente da API Do Not Disturb em todas as versões dos sistemas operacionais",
+    "Necessidade de permissão do usuário para alterar o estado do sistema",
+    "Como garantir que aplicativos críticos sejam corretamente incluídos na lista de exceções",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando exceções para alertas críticos e restaurando o estado ao final do pomodoro.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando exceções para alertas críticos e restaurando o estado ao final do pomodoro.' aparece nos testes exploratórios 'Implementação de \"focus overlay\" que cobre a tela e silencia áudio do sistema; medir impacto na usabilidade'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando exceções para alertas críticos e restaurando o estado ao final do pomodoro.' aparece nos testes exploratórios 'Teste de integração com gerenciadores de energia para pausar o timer quando o laptop entra em modo de suspensão'.; Dependência de realidade do Core 'Permissões de usuário para modificar configurações de notificação em cada SO' referencia mecanismo rejeitado 'Overlay de foco que intercepta janelas de notificação'.; Dependência de realidade do Core 'Bibliotecas ou bindings que permitam interagir com as APIs de notificação de cada plataforma' referencia mecanismo rejeitado 'Overlay de foco que intercepta janelas de notificação'.; Teste do Core 'Teste unitário que chama a API de DND no Windows 10/11 e verifica se o estado muda para \"On\" e volta para \"Off\" após 5 s' referencia mecanismo rejeitado 'Overlay de foco que intercepta janelas de notificação'.; Teste do Core 'Teste de script AppleScript no macOS Big Sur que habilita o modo \"Não Perturbe\", envia uma notificação de teste e confirma que ela é suprimida' referencia mecanismo rejeitado 'Overlay de foco que intercepta janelas de notificação'.; Teste do Core 'Teste em Ubuntu GNOME que usa dconf para ativar \"Do Not Disturb\", envia uma notificação via notify‑send e verifica a ausência de exibição' referencia mecanismo rejeitado 'Overlay de foco que intercepta janelas de notificação'.; Teste do Core 'Teste de criação de whitelist no macOS (ex.: permitir notificações de \"Calendário\") e validar que notificações desse app ainda aparecem enquanto DND está ativo' referencia mecanismo rejeitado 'Overlay de foco que intercepta janelas de notificação'."
+  ],
+  "known_risks": [
+    "Alguns aplicativos podem ignorar o modo DND, permitindo que notificações passem",
+    "Usuário pode esquecer de restaurar o estado original se a aplicação falhar",
+    "Permissões elevadas podem ser recusadas em ambientes corporativos"
+  ],
+  "recommended_next_step": "Implementar um protótipo que ativa o modo Do Not Disturb nas principais plataformas (Windows, macOS, Linux), incluir configuração de exceções críticas e validar o comportamento em cenários de permissão e restauração automática.",
+  "tested_core_mechanism": "Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando exceções para alertas críticos e restaurando o estado ao final do pomodoro.",
+  "tested_core_hash": "b100c318f89c7182",
+  "reality_dependencies": [
+    "Acesso programático ao modo \"Não Perturbe\" em Windows (ex.: registro ou PowerShell), macOS (AppleScript/NSUserNotificationCenter) e Linux (dconf ou dbus para GNOME/KDE)",
+    "Permissões de usuário para modificar configurações de notificação em cada SO",
+    "Capacidade de definir listas de exceção/whitelist via API nativa ou contornar limitações com regras de prioridade",
+    "Mecanismo confiável para ler e restaurar o estado pré‑existente do modo Não Perturbe",
+    "Bibliotecas ou bindings que permitam interagir com as APIs de notificação de cada plataforma"
+  ],
+  "claims_needing_evidence": [
+    "É possível ativar/desativar programaticamente o modo \"Não Perturbe\" em todas as principais plataformas (Windows, macOS, Linux) sem intervenção manual",
+    "As APIs nativas permitem especificar exceções para alertas críticos durante o período de foco",
+    "A mudança de estado persiste apenas enquanto o aplicativo está em execução e pode ser revertida com segurança ao final do pomodoro",
+    "Nenhum efeito colateral inesperado (ex.: bloqueio de notificações de sistema essenciais) ocorre ao usar o modo DND com exceções"
+  ],
+  "candidate_tests": [
+    "Teste unitário que chama a API de DND no Windows 10/11 e verifica se o estado muda para \"On\" e volta para \"Off\" após 5 s",
+    "Teste de script AppleScript no macOS Big Sur que habilita o modo \"Não Perturbe\", envia uma notificação de teste e confirma que ela é suprimida",
+    "Teste em Ubuntu GNOME que usa dconf para ativar \"Do Not Disturb\", envia uma notificação via notify‑send e verifica a ausência de exibição",
+    "Teste de criação de whitelist no macOS (ex.: permitir notificações de \"Calendário\") e validar que notificações desse app ainda aparecem enquanto DND está ativo",
+    "Teste de restauração automática: salvar estado atual, ativar DND, aguardar 1 min, desativar e comparar estado final com o salvo"
+  ],
+  "exploratory_candidate_tests": [
+    "Implementação de \"focus overlay\" que cobre a tela e silencia áudio do sistema; medir impacto na usabilidade",
+    "Daemon multiplataforma que intercepta chamadas de notificação via APIs específicas (Toast, Notification Center, D‑Bus) e aplica filtro de whitelist",
+    "Uso de biblioteca de terceiros (ex.: electron-notification-state) para abstrair controle DND e comparar cobertura de plataformas",
+    "Teste de integração com gerenciadores de energia para pausar o timer quando o laptop entra em modo de suspensão"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:42:56.757349",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar um aplicativo desktop minimalista que funcione como cr...' | 3 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:42:58.906943",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 vulnerabilidades críticas e 3 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:43:01.866482",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:43:21.666730",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Ativar o modo 'Não Perturbe' do sistema ...' (Base: MODEL_HYPOTHESIS | Hash: b6bd2c48a665a0d7), 1 aceitas, 0 candidatas, 2 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:43:43.245838",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Ativar o modo 'Não Perturbe' do sistema ...' (hash: b6bd2c48a665a0d7), 4 dependências, 5 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:44:06.562769",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:44:15.519021",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:44:49.264871",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Ativar o modo \"Não Perturbe\" (Do Not Dis...' (Base: MODEL_HYPOTHESIS | Hash: b100c318f89c7182), 1 aceitas, 2 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:45:12.287989",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Ativar o modo \"Não Perturbe\" (Do Not Dis...' (hash: b100c318f89c7182), 5 dependências, 5 testes do Core, 4 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:45:36.327599",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

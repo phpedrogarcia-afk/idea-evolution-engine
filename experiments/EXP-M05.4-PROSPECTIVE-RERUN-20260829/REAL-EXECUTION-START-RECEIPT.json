@@ -1,0 +1,13 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "git_head": "8d0ac29e340a97fb7b3c883e70726f9e29b4617c",
+  "blind_commitment_sha256": "826c35740b335278e79634bf9eb041644c5fddf45d8672346d8a7aecac5c74d2",
+  "execution_manifest_sha256": "a4f120a403ab0cee8660c9ff6b1dc6efef15149655da317a8fa7fc1491db2600",
+  "freeze_manifest_sha256": "b1c88bcc542a225b1275edcd18194d2807f0c39c1583dfb44c6b775c54bc0cd1",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "start_timestamp": "2026-08-29T16:42:52.049554",
+  "total_cells_pending": 24,
+  "human_review_started": false,
+  "reveal_accessed": false
+}

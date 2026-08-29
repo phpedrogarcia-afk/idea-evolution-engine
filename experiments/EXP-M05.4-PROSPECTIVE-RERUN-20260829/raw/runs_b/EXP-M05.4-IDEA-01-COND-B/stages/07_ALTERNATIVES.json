@@ -1,0 +1,64 @@
+{
+  "step_number": 7,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 8.955348491668701,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Ativar o modo \\\"Não Perturbe\\\" (Do Not Disturb) nativo do sistema operacional, configurando uma lista de exceções para alertas críticos (chamadas de emergência, alarmes do sistema) e restaurando o estado ao final do pomodoro\",\"addresses_issues\":[\"O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas\",\"Bloquear notificações pode impedir alertas críticos\"],\"preserves_intent\":true,\"tradeoffs\":[\"Depende da disponibilidade e consistência da API Do Not Disturb em cada SO (Windows, macOS, Linux)\",\"Requer permissão de usuário para alterar o estado do sistema\",\"Alguns aplicativos podem ignorar o modo DND, deixando notificações passar\"],\"novelty_or_difference\":\"Utiliza recurso nativo do SO em vez de implementar bloqueio próprio, garantindo que alertas críticos definidos pelo próprio sistema continuem visíveis\"},{\"mechanism\":\"Sobrepor a tela com um \\\"focus overlay\\\" que silencia o áudio do sistema e intercepta janelas de notificação, descartando-as exceto as que correspondam a uma lista de aplicativos críticos configurada pelo usuário\",\"addresses_issues\":[\"O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas\",\"Bloquear notificações pode impedir alertas críticos\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requer automação de UI que pode ser frágil a atualizações de aplicativos ou do SO\",\"Pode causar atraso visual ao fechar notificações\",\"Não impede notificações que não geram janela (ex.: sons de sistema)\"],\"novelty_or_difference\":\"Aborda o bloqueio de notificações a nível de interface gráfica, contornando limitações de APIs específicas\"},{\"mechanism\":\"Daemon leve multiplataforma que, durante o intervalo de foco, usa as APIs de notificação de cada SO (Toast no Windows, Notification Center no macOS, D-Bus no Linux) para silenciar temporariamente todas as aplicações, exceto aquelas marcadas como críticas em uma whitelist configurável\",\"addresses_issues\":[\"O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas\",\"Bloquear notificações pode impedir alertas críticos\"],\"preserves_intent\":true,\"tradeoffs\":[\"Necessita implementação separada para cada plataforma, aumentando a complexidade de desenvolvimento\",\"Exige permissões elevadas ou instalação de serviço em segundo plano\",\"Manutenção contínua para acompanhar mudanças nas APIs de notificação\"],\"novelty_or_difference\":\"Combina um serviço de fundo específico por SO com controle granular de whitelist, oferecendo cobertura mais ampla sem depender de recursos de UI\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Ativar o modo \"Não Perturbe\" (Do Not Disturb) nativo do sistema operacional, configurando uma lista de exceções para alertas críticos (chamadas de emergência, alarmes do sistema) e restaurando o estado ao final do pomodoro",
+        "addresses_issues": [
+          "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+          "Bloquear notificações pode impedir alertas críticos"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Depende da disponibilidade e consistência da API Do Not Disturb em cada SO (Windows, macOS, Linux)",
+          "Requer permissão de usuário para alterar o estado do sistema",
+          "Alguns aplicativos podem ignorar o modo DND, deixando notificações passar"
+        ],
+        "novelty_or_difference": "Utiliza recurso nativo do SO em vez de implementar bloqueio próprio, garantindo que alertas críticos definidos pelo próprio sistema continuem visíveis"
+      },
+      {
+        "mechanism": "Sobrepor a tela com um \"focus overlay\" que silencia o áudio do sistema e intercepta janelas de notificação, descartando-as exceto as que correspondam a uma lista de aplicativos críticos configurada pelo usuário",
+        "addresses_issues": [
+          "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+          "Bloquear notificações pode impedir alertas críticos"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer automação de UI que pode ser frágil a atualizações de aplicativos ou do SO",
+          "Pode causar atraso visual ao fechar notificações",
+          "Não impede notificações que não geram janela (ex.: sons de sistema)"
+        ],
+        "novelty_or_difference": "Aborda o bloqueio de notificações a nível de interface gráfica, contornando limitações de APIs específicas"
+      },
+      {
+        "mechanism": "Daemon leve multiplataforma que, durante o intervalo de foco, usa as APIs de notificação de cada SO (Toast no Windows, Notification Center no macOS, D-Bus no Linux) para silenciar temporariamente todas as aplicações, exceto aquelas marcadas como críticas em uma whitelist configurável",
+        "addresses_issues": [
+          "O aplicativo pode não conseguir bloquear notificações em todos os sistemas operacionais ou versões devido a restrições de API ou permissões elevadas",
+          "Bloquear notificações pode impedir alertas críticos"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Necessita implementação separada para cada plataforma, aumentando a complexidade de desenvolvimento",
+          "Exige permissões elevadas ou instalação de serviço em segundo plano",
+          "Manutenção contínua para acompanhar mudanças nas APIs de notificação"
+        ],
+        "novelty_or_difference": "Combina um serviço de fundo específico por SO com controle granular de whitelist, oferecendo cobertura mais ampla sem depender de recursos de UI"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:44:15.519074+00:00"
+}

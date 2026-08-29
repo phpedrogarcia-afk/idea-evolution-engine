@@ -1,0 +1,538 @@
+{
+  "run_id": "EXP-M05.4-IDEA-02-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "total_duration_seconds": 240.7822163105011,
+  "total_stages_executed": 10,
+  "git_commit": "8d0ac29e340a97fb7b3c883e70726f9e29b4617c",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 15.940606117248535,
+      "delta_summary": "Intenção extraída: 'Criar um espaço digital que permita armazenar pensamentos in...' | 3 premissas mapeadas.",
+      "raw_response": "{\"interpreted_problem\":\"As pessoas não têm um local digital simples para guardar pensamentos ou ideias incompletas sem precisar organizá‑los imediatamente.\",\"human_intent\":\"Criar um espaço digital que permita armazenar pensamentos incompletos de forma rápida e sem obrigação de organização imediata.\",\"proposed_mechanism\":\"Um espaço digital onde o usuário pode guardar pensamentos incompletos sem necessidade de organização imediata.\",\"explicit_mechanism\":\"Um espaço digital onde o usuário pode guardar pensamentos incompletos sem necessidade de organização imediata.\",\"inferred_candidates\":[\"aplicativo web\",\"aplicativo móvel\",\"extensão de navegador\",\"software de desktop\"],\"actors_or_users\":[\"usuário que tem pensamentos incompletos\",\"qualquer pessoa que queira registrar ideias provisórias\"],\"assumptions\":[\"Os usuários desejam capturar ideias rapidamente\",\"Os usuários aceitarão armazenar ideias sem organização imediata\",\"O ambiente digital será acessível quando o usuário quiser revisitar as ideias\"],\"ambiguities\":[\"Como será definido o que é um pensamento 'incompleto'?\",\"Qual será o prazo ou política de retenção das ideias armazenadas?\",\"Como o usuário localizará ideias específicas posteriormente?\",\"Quais são as considerações de privacidade e segurança dos pensamentos armazenados?\"],\"strengths\":[\"Baixa fricção para captura de ideias\",\"Respeita o fluxo natural de pensamento\",\"Permite diferir a organização para um momento posterior\",\"Metáfora intuitiva de folhas secas que repousam\"],\"structured_idea\":\"Um espaço digital onde usuários podem armazenar pensamentos ou ideias incompletas sem a necessidade de organizá‑los imediatamente, permitindo que esses fragmentos fiquem guardados até que o usuário decida revisá‑los.\"}",
+      "parsed_output": {
+        "interpreted_problem": "As pessoas não têm um local digital simples para guardar pensamentos ou ideias incompletas sem precisar organizá‑los imediatamente.",
+        "human_intent": "Criar um espaço digital que permita armazenar pensamentos incompletos de forma rápida e sem obrigação de organização imediata.",
+        "proposed_mechanism": "Um espaço digital onde o usuário pode guardar pensamentos incompletos sem necessidade de organização imediata.",
+        "explicit_mechanism": "Um espaço digital onde o usuário pode guardar pensamentos incompletos sem necessidade de organização imediata.",
+        "inferred_candidates": [
+          "aplicativo web",
+          "aplicativo móvel",
+          "extensão de navegador",
+          "software de desktop"
+        ],
+        "actors_or_users": [
+          "usuário que tem pensamentos incompletos",
+          "qualquer pessoa que queira registrar ideias provisórias"
+        ],
+        "assumptions": [
+          "Os usuários desejam capturar ideias rapidamente",
+          "Os usuários aceitarão armazenar ideias sem organização imediata",
+          "O ambiente digital será acessível quando o usuário quiser revisitar as ideias"
+        ],
+        "ambiguities": [
+          "Como será definido o que é um pensamento 'incompleto'?",
+          "Qual será o prazo ou política de retenção das ideias armazenadas?",
+          "Como o usuário localizará ideias específicas posteriormente?",
+          "Quais são as considerações de privacidade e segurança dos pensamentos armazenados?"
+        ],
+        "strengths": [
+          "Baixa fricção para captura de ideias",
+          "Respeita o fluxo natural de pensamento",
+          "Permite diferir a organização para um momento posterior",
+          "Metáfora intuitiva de folhas secas que repousam"
+        ],
+        "structured_idea": "Um espaço digital onde usuários podem armazenar pensamentos ou ideias incompletas sem a necessidade de organizá‑los imediatamente, permitindo que esses fragmentos fiquem guardados até que o usuário decida revisá‑los."
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:46:44.290824+00:00"
+    },
+    {
+      "step_number": 2,
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 21.301451444625854,
+      "delta_summary": "3 vulnerabilidades críticas e 2 modos de falha identificados.",
+      "raw_response": "{\"critical_issues\":[{\"issue\":\"Stored fragments become unretrievable over time\",\"why_it_matters\":\"If users cannot locate their saved thoughts, the service fails its core promise of preserving ideas for later review\",\"severity\":\"HIGH\",\"affected_part\":\"Retrieval/Search Functionality\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"why_it_matters\":\"Accumulated noise reduces perceived value and may cause users to abandon the tool\",\"severity\":\"MEDIUM\",\"affected_part\":\"User Engagement\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Privacy and security of unorganized personal thoughts are not addressed\",\"why_it_matters\":\"Sensitive ideas could be exposed, deterring adoption and raising legal risks\",\"severity\":\"HIGH\",\"affected_part\":\"Data Security\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Users desire to capture ideas quickly without any structure\",\"Users will remember to revisit unorganized fragments later\"],\"contradictions\":[\"The system claims no organization yet must provide enough indexing to make later retrieval possible\"],\"failure_modes\":[\"System performance degrades as the number of fragments grows\",\"Search returns irrelevant results due to lack of metadata\"],\"missing_information\":[\"How synchronization across multiple devices will be handled\",\"What privacy controls are provided for sensitive thoughts\"],\"overclaims\":[\"Providing a simple space will fully solve the problem of idea loss\"]}",
+      "parsed_output": {
+        "critical_issues": [
+          {
+            "issue": "Stored fragments become unretrievable over time",
+            "why_it_matters": "If users cannot locate their saved thoughts, the service fails its core promise of preserving ideas for later review",
+            "severity": "HIGH",
+            "affected_part": "Retrieval/Search Functionality",
+            "origin": "MODEL_HYPOTHESIS"
+          },
+          {
+            "issue": "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+            "why_it_matters": "Accumulated noise reduces perceived value and may cause users to abandon the tool",
+            "severity": "MEDIUM",
+            "affected_part": "User Engagement",
+            "origin": "MODEL_HYPOTHESIS"
+          },
+          {
+            "issue": "Privacy and security of unorganized personal thoughts are not addressed",
+            "why_it_matters": "Sensitive ideas could be exposed, deterring adoption and raising legal risks",
+            "severity": "HIGH",
+            "affected_part": "Data Security",
+            "origin": "MODEL_HYPOTHESIS"
+          }
+        ],
+        "fragile_assumptions": [
+          "Users desire to capture ideas quickly without any structure",
+          "Users will remember to revisit unorganized fragments later"
+        ],
+        "contradictions": [
+          "The system claims no organization yet must provide enough indexing to make later retrieval possible"
+        ],
+        "failure_modes": [
+          "System performance degrades as the number of fragments grows",
+          "Search returns irrelevant results due to lack of metadata"
+        ],
+        "missing_information": [
+          "How synchronization across multiple devices will be handled",
+          "What privacy controls are provided for sensitive thoughts"
+        ],
+        "overclaims": [
+          "Providing a simple space will fully solve the problem of idea loss"
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:47:05.593144+00:00"
+    },
+    {
+      "step_number": 3,
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 14.3012375831604,
+      "delta_summary": "3 mecanismos alternativos gerados.",
+      "raw_response": "{\"alternatives\":[{\"mechanism\":\"Auto‑tagging + timed reminder: ao salvar um fragmento o sistema usa IA para gerar tags contextuais e agenda uma notificação após intervalo configurável para trazer o item à tona\",\"addresses_issues\":[\"Stored fragments become unretrievable over time\",\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"Privacy and security of unorganized personal thoughts are not addressed\"],\"preserves_intent\":true,\"tradeoffs\":[\"Dependência da precisão da IA nas tags geradas\",\"Possibilidade de sobrecarga de notificações se o intervalo for curto\",\"Armazenamento extra para metadados e agendamentos\"],\"novelty_or_difference\":\"Combina IA de classificação automática com lembretes proativos, criando um ciclo de captura‑revisita sem exigir organização manual\"},{\"mechanism\":\"Vault criptografado com indexação semântica: fragmentos são armazenados em um cofre cliente‑side criptografado e indexados por vetores semânticos para busca posterior; rótulo \\\"snooze\\\" agenda reaparecimento após período escolhido\",\"addresses_issues\":[\"Stored fragments become unretrievable over time\",\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"Privacy and security of unorganized personal thoughts are not addressed\"],\"preserves_intent\":true,\"tradeoffs\":[\"Custo computacional para geração e consulta de embeddings\",\"Necessidade de gerenciamento seguro de chaves de criptografia pelo usuário\",\"Latência potencial na busca semântica\"],\"novelty_or_difference\":\"Une criptografia de ponta‑a‑ponta com busca semântica local, permitindo recuperação segura sem exigir organização prévia\"},{\"mechanism\":\"Jardim de ideias gamificado: cada fragmento aparece como semente visual que só cresce quando o usuário o revisita; pontos e conquistas são concedidos por revisitar e organizar sementes, incentivando limpeza regular\",\"addresses_issues\":[\"Stored fragments become unretrievable over time\",\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"Privacy and security of unorganized personal thoughts are not addressed\"],\"preserves_intent\":true,\"tradeoffs\":[\"Curva de aprendizado para entender a metáfora visual\",\"Pode ser percebido como superficial ou distração para usuários focados em produtividade\",\"Complexidade adicional na UI/UX e necessidade de armazenar estado de progresso\"],\"novelty_or_difference\":\"Aplica gamificação e visualização botânica para transformar fragmentos desorganizados em elementos interativos que motivam a revisão e a organização\"}]}",
+      "parsed_output": {
+        "alternatives": [
+          {
+            "mechanism": "Auto‑tagging + timed reminder: ao salvar um fragmento o sistema usa IA para gerar tags contextuais e agenda uma notificação após intervalo configurável para trazer o item à tona",
+            "addresses_issues": [
+              "Stored fragments become unretrievable over time",
+              "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+              "Privacy and security of unorganized personal thoughts are not addressed"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Dependência da precisão da IA nas tags geradas",
+              "Possibilidade de sobrecarga de notificações se o intervalo for curto",
+              "Armazenamento extra para metadados e agendamentos"
+            ],
+            "novelty_or_difference": "Combina IA de classificação automática com lembretes proativos, criando um ciclo de captura‑revisita sem exigir organização manual"
+          },
+          {
+            "mechanism": "Vault criptografado com indexação semântica: fragmentos são armazenados em um cofre cliente‑side criptografado e indexados por vetores semânticos para busca posterior; rótulo \"snooze\" agenda reaparecimento após período escolhido",
+            "addresses_issues": [
+              "Stored fragments become unretrievable over time",
+              "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+              "Privacy and security of unorganized personal thoughts are not addressed"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Custo computacional para geração e consulta de embeddings",
+              "Necessidade de gerenciamento seguro de chaves de criptografia pelo usuário",
+              "Latência potencial na busca semântica"
+            ],
+            "novelty_or_difference": "Une criptografia de ponta‑a‑ponta com busca semântica local, permitindo recuperação segura sem exigir organização prévia"
+          },
+          {
+            "mechanism": "Jardim de ideias gamificado: cada fragmento aparece como semente visual que só cresce quando o usuário o revisita; pontos e conquistas são concedidos por revisitar e organizar sementes, incentivando limpeza regular",
+            "addresses_issues": [
+              "Stored fragments become unretrievable over time",
+              "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+              "Privacy and security of unorganized personal thoughts are not addressed"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Curva de aprendizado para entender a metáfora visual",
+              "Pode ser percebido como superficial ou distração para usuários focados em produtividade",
+              "Complexidade adicional na UI/UX e necessidade de armazenar estado de progresso"
+            ],
+            "novelty_or_difference": "Aplica gamificação e visualização botânica para transformar fragmentos desorganizados em elementos interativos que motivam a revisão e a organização"
+          }
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:47:19.895260+00:00"
+    },
+    {
+      "step_number": 4,
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 28.082605123519897,
+      "delta_summary": "Síntese concluída: Core 'Vault criptografado cliente‑side com ind...' (Base: VALID_USER_DERIVATION | Hash: 70383cdc2d64950b), 1 aceitas, 2 candidatas, 0 rejeitadas.",
+      "raw_response": "{\"refined_idea\":\"Um espaço digital onde usuários podem armazenar pensamentos ou ideias incompletas sem necessidade de organização imediata, garantindo privacidade e recuperação eficiente quando desejado.\",\"core_mechanism\":\"Vault criptografado cliente‑side com indexação semântica para busca de fragmentos\",\"core_mechanism_justification\":\"Protege a confidencialidade dos pensamentos não organizados e permite sua recuperação posterior através de busca semântica, atendendo diretamente à intenção humana de armazenar fragmentos de forma segura e acessível.\",\"core_mechanism_basis\":\"VALID_USER_DERIVATION\",\"accepted_changes\":[{\"proposal\":\"Vault criptografado cliente‑side com indexação semântica para busca de fragmentos\",\"promotion_reason\":\"Alinha‑se à intenção de armazenar pensamentos incompletos de forma segura e recuperável, abordando questões de privacidade e rastreabilidade\",\"promotion_basis\":\"VALID_USER_DERIVATION\",\"source_stage\":\"ALTERNATIVES\",\"evidence_or_decision_basis\":\"Intenção do usuário e problemas identificados de privacidade e recuperação\"}],\"candidate_possibilities\":[\"Auto‑tagging + lembrete temporizado: IA gera tags contextuais ao salvar e agenda notificações para revisitar o fragmento\",\"Jardim de ideias gamificado: fragmentos aparecem como sementes que crescem ao serem revisitadas, incentivando organização através de pontos e conquistas\"],\"rejected_changes\":[],\"remaining_uncertainties\":[\"Custo computacional e latência da geração e consulta de embeddings semânticos\",\"Gestão segura das chaves de criptografia pelo usuário final\",\"Escalabilidade do armazenamento de metadados semânticos\",\"Como incentivar a revisitação dos fragmentos sem gerar sobrecarga de notificações\"],\"known_risks\":[\"Dependência de recursos de processamento para embeddings pode elevar custos\",\"Perda de acesso se o usuário perder a chave de criptografia\",\"Complexidade de implementação de criptografia cliente‑side pode introduzir vulnerabilidades\",\"Sobrecarga de interface ao apresentar resultados de busca semântica\"],\"recommended_next_step\":\"Desenvolver um protótipo mínimo do cofre criptografado com indexação semântica e conduzir testes de usabilidade focados na recuperação de fragmentos e na experiência de gerenciamento de chaves\"}",
+      "parsed_output": {
+        "refined_idea": "Um espaço digital onde usuários podem armazenar pensamentos ou ideias incompletas sem necessidade de organização imediata, garantindo privacidade e recuperação eficiente quando desejado.",
+        "core_mechanism": "Vault criptografado cliente‑side com indexação semântica para busca de fragmentos",
+        "core_mechanism_justification": "Protege a confidencialidade dos pensamentos não organizados e permite sua recuperação posterior através de busca semântica, atendendo diretamente à intenção humana de armazenar fragmentos de forma segura e acessível.",
+        "core_mechanism_basis": "VALID_USER_DERIVATION",
+        "accepted_changes": [
+          {
+            "proposal": "Vault criptografado cliente‑side com indexação semântica para busca de fragmentos",
+            "promotion_reason": "Alinha‑se à intenção de armazenar pensamentos incompletos de forma segura e recuperável, abordando questões de privacidade e rastreabilidade",
+            "promotion_basis": "VALID_USER_DERIVATION",
+            "source_stage": "ALTERNATIVES",
+            "evidence_or_decision_basis": "Intenção do usuário e problemas identificados de privacidade e recuperação"
+          }
+        ],
+        "candidate_possibilities": [
+          "Auto‑tagging + lembrete temporizado: IA gera tags contextuais ao salvar e agenda notificações para revisitar o fragmento",
+          "Jardim de ideias gamificado: fragmentos aparecem como sementes que crescem ao serem revisitadas, incentivando organização através de pontos e conquistas"
+        ],
+        "rejected_changes": [],
+        "remaining_uncertainties": [
+          "Custo computacional e latência da geração e consulta de embeddings semânticos",
+          "Gestão segura das chaves de criptografia pelo usuário final",
+          "Escalabilidade do armazenamento de metadados semânticos",
+          "Como incentivar a revisitação dos fragmentos sem gerar sobrecarga de notificações"
+        ],
+        "known_risks": [
+          "Dependência de recursos de processamento para embeddings pode elevar custos",
+          "Perda de acesso se o usuário perder a chave de criptografia",
+          "Complexidade de implementação de criptografia cliente‑side pode introduzir vulnerabilidades",
+          "Sobrecarga de interface ao apresentar resultados de busca semântica"
+        ],
+        "recommended_next_step": "Desenvolver um protótipo mínimo do cofre criptografado com indexação semântica e conduzir testes de usabilidade focados na recuperação de fragmentos e na experiência de gerenciamento de chaves"
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:47:47.980021+00:00"
+    },
+    {
+      "step_number": 5,
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 19.157724857330322,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Vault criptografado cliente‑side com ind...' (hash: 70383cdc2d64950b), 4 dependências, 3 testes do Core, 3 testes exploratórios.",
+      "raw_response": "{\"target_core_mechanism\":\"Vault criptografado cliente‑side com indexação semântica para busca de fragmentos\",\"feasibility_notes\":[\"Criptografia cliente‑side pode ser implementada com a Web Crypto API em navegadores modernos\",\"Indexação semântica requer geração de embeddings; pode usar modelo on‑device leve ou serviço externo com transmissão de vetores criptografados\",\"Armazenamento local (IndexedDB/Filesystem API) suporta tamanhos típicos de fragmentos de texto\",\"Operações de criptografia e busca são computacionalmente leves o suficiente para dispositivos atuais\"],\"reality_dependencies\":[\"Biblioteca de criptografia compatível com todos os navegadores alvo (ex.: SubtleCrypto)\",\"Modelo de embeddings que rode localmente ou API de geração de vetores com transmissão segura\",\"Mecanismo de armazenamento persistente e criptografado no cliente (IndexedDB, Secure File System)\",\"Gerenciamento seguro de chaves de usuário (geração, backup, recuperação)\"],\"claims_needing_evidence\":[\"Os dados permanecem inacessíveis ao servidor quando armazenados criptografados cliente‑side\",\"A indexação semântica baseada em embeddings devolve resultados relevantes para consultas de texto livre\",\"Latência de criptografia, geração de embeddings e busca está dentro de limites aceitáveis (<200 ms) em dispositivos medianos\"],\"potential_blockers\":[\"Limitações de CPU/memória em dispositivos móveis para geração de embeddings on‑device\",\"Limites de quota de armazenamento local impostos pelos navegadores\",\"Complexidade de recuperação de chave em caso de perda de senha pelo usuário\",\"Conformidade com regulamentos de privacidade (ex.: GDPR) ao lidar com chaves gerenciadas pelo cliente\"],\"candidate_tests\":[\"Teste de impossibilidade de descriptografia por terceiros: armazenar fragmento criptografado, interceptar tráfego e tentar decifrar sem chave\",\"Teste de precisão da busca semântica: inserir conjunto de fragmentos rotulados, gerar consultas conhecidas e medir taxa de recuperação (precisão/recall)\",\"Benchmark de desempenho: medir tempo de criptografia, geração de embedding e busca em diferentes dispositivos e navegadores\"],\"exploratory_candidate_tests\":[\"Avaliar acurácia do auto‑tagging IA ao gerar tags contextuais para novos fragmentos\",\"Testar eficácia do lembrete temporizado: taxa de retorno do usuário após notificação programada\",\"Medir engajamento do jardim gamificado: frequência de interações, pontos acumulados e taxa de organização de sementes\"]}",
+      "parsed_output": {
+        "target_core_mechanism": "Vault criptografado cliente‑side com indexação semântica para busca de fragmentos",
+        "feasibility_notes": [
+          "Criptografia cliente‑side pode ser implementada com a Web Crypto API em navegadores modernos",
+          "Indexação semântica requer geração de embeddings; pode usar modelo on‑device leve ou serviço externo com transmissão de vetores criptografados",
+          "Armazenamento local (IndexedDB/Filesystem API) suporta tamanhos típicos de fragmentos de texto",
+          "Operações de criptografia e busca são computacionalmente leves o suficiente para dispositivos atuais"
+        ],
+        "reality_dependencies": [
+          "Biblioteca de criptografia compatível com todos os navegadores alvo (ex.: SubtleCrypto)",
+          "Modelo de embeddings que rode localmente ou API de geração de vetores com transmissão segura",
+          "Mecanismo de armazenamento persistente e criptografado no cliente (IndexedDB, Secure File System)",
+          "Gerenciamento seguro de chaves de usuário (geração, backup, recuperação)"
+        ],
+        "claims_needing_evidence": [
+          "Os dados permanecem inacessíveis ao servidor quando armazenados criptografados cliente‑side",
+          "A indexação semântica baseada em embeddings devolve resultados relevantes para consultas de texto livre",
+          "Latência de criptografia, geração de embeddings e busca está dentro de limites aceitáveis (<200 ms) em dispositivos medianos"
+        ],
+        "potential_blockers": [
+          "Limitações de CPU/memória em dispositivos móveis para geração de embeddings on‑device",
+          "Limites de quota de armazenamento local impostos pelos navegadores",
+          "Complexidade de recuperação de chave em caso de perda de senha pelo usuário",
+          "Conformidade com regulamentos de privacidade (ex.: GDPR) ao lidar com chaves gerenciadas pelo cliente"
+        ],
+        "candidate_tests": [
+          "Teste de impossibilidade de descriptografia por terceiros: armazenar fragmento criptografado, interceptar tráfego e tentar decifrar sem chave",
+          "Teste de precisão da busca semântica: inserir conjunto de fragmentos rotulados, gerar consultas conhecidas e medir taxa de recuperação (precisão/recall)",
+          "Benchmark de desempenho: medir tempo de criptografia, geração de embedding e busca em diferentes dispositivos e navegadores"
+        ],
+        "exploratory_candidate_tests": [
+          "Avaliar acurácia do auto‑tagging IA ao gerar tags contextuais para novos fragmentos",
+          "Testar eficácia do lembrete temporizado: taxa de retorno do usuário após notificação programada",
+          "Medir engajamento do jardim gamificado: frequência de interações, pontos acumulados e taxa de organização de sementes"
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:48:07.138645+00:00"
+    },
+    {
+      "step_number": 6,
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 19.07900857925415,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+      "raw_response": "{\"material_issues_remaining\":[\"Dependência de recursos de processamento para embeddings pode elevar custos\",\"Perda de acesso se o usuário perder a chave de criptografia\",\"Complexidade de implementação de criptografia cliente‑side pode introduzir vulnerabilidades\",\"Sobrecarga de interface ao apresentar resultados de busca semântica\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada preserva a essência original de armazenar pensamentos incompletos sem organização imediata, adicionando criptografia cliente‑side e indexação semântica que são coerentes com a intenção. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os riscos conhecidos são listados como questões materiais, mas não impedem a viabilidade. Recomenda‑se prosseguir com o protótipo.\"}",
+      "parsed_output": {
+        "material_issues_remaining": [
+          "Dependência de recursos de processamento para embeddings pode elevar custos",
+          "Perda de acesso se o usuário perder a chave de criptografia",
+          "Complexidade de implementação de criptografia cliente‑side pode introduzir vulnerabilidades",
+          "Sobrecarga de interface ao apresentar resultados de busca semântica"
+        ],
+        "essence_drift_detected": false,
+        "speculative_accretion_detected": false,
+        "ontology_contradiction_detected": false,
+        "drift_explanation": "",
+        "unresolved_critical_issue": false,
+        "recommendation": "REFINED_IDEA_READY",
+        "review_summary": "A ideia refinada preserva a essência original de armazenar pensamentos incompletos sem organização imediata, adicionando criptografia cliente‑side e indexação semântica que são coerentes com a intenção. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os riscos conhecidos são listados como questões materiais, mas não impedem a viabilidade. Recomenda‑se prosseguir com o protótipo."
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:48:26.218582+00:00"
+    },
+    {
+      "step_number": 7,
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 15.316285610198975,
+      "delta_summary": "3 mecanismos alternativos gerados.",
+      "raw_response": "{\"alternatives\":[{\"mechanism\":\"Integrar um motor de IA que analisa cada fragmento ao ser salvo, gera tags contextuais e cria um índice temporal criptografado; o usuário recebe lembretes inteligentes baseados nas tags para revisitar ideias antigas.\",\"addresses_issues\":[\"Stored fragments become unretrievable over time\",\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"Privacy and security of unorganized personal thoughts are not addressed\"],\"preserves_intent\":true,\"tradeoffs\":[\"Dependência de serviços de IA pode gerar custos e latência\",\"Possibilidade de tags imprecisas que atrapalhem a busca\",\"Necessidade de conexão à internet para processamento\"],\"novelty_or_difference\":\"Uso de IA para indexação automática e lembretes proativos, mantendo os fragmentos criptografados.\"},{\"mechanism\":\"Criar um \\\"jardim digital\\\" onde os fragmentos são visualizados como plantas que crescem; o sistema envia prompts de \\\"colheita\\\" a cada 30 dias e permite que o usuário archive ou delete fragmentos; todos os dados são armazenados localmente criptografados com opção de backup seguro.\",\"addresses_issues\":[\"Stored fragments become unretrievable over time\",\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"Privacy and security of unorganized personal thoughts are not addressed\"],\"preserves_intent\":true,\"tradeoffs\":[\"Promptes frequentes podem ser percebidos como incômodos\",\"Fragmentos podem ser excluídos se o usuário não responder ao prompt\",\"Requer armazenamento local suficiente\"],\"novelty_or_difference\":\"Metáfora visual de jardim que gamifica a revisão e permite gerenciamento orgânico dos pensamentos.\"},{\"mechanism\":\"Utilizar armazenamento descentralizado baseado em blockchain com blobs criptografados; cada fragmento gera um token de recompensa que pode ser resgatado ao revisitar o conteúdo, incentivando a revisão regular.\",\"addresses_issues\":[\"Stored fragments become unretrievable over time\",\"No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter\",\"Privacy and security of unorganized personal thoughts are not addressed\"],\"preserves_intent\":true,\"tradeoffs\":[\"Complexidade de integração com blockchain e custos de transação\",\"Dependência de um mercado de tokens para manter incentivos\",\"Curva de aprendizado para usuários menos técnicos\"],\"novelty_or_difference\":\"Combinação de segurança descentralizada com economia de tokens para motivar a revisão de ideias.\"}]}",
+      "parsed_output": {
+        "alternatives": [
+          {
+            "mechanism": "Integrar um motor de IA que analisa cada fragmento ao ser salvo, gera tags contextuais e cria um índice temporal criptografado; o usuário recebe lembretes inteligentes baseados nas tags para revisitar ideias antigas.",
+            "addresses_issues": [
+              "Stored fragments become unretrievable over time",
+              "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+              "Privacy and security of unorganized personal thoughts are not addressed"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Dependência de serviços de IA pode gerar custos e latência",
+              "Possibilidade de tags imprecisas que atrapalhem a busca",
+              "Necessidade de conexão à internet para processamento"
+            ],
+            "novelty_or_difference": "Uso de IA para indexação automática e lembretes proativos, mantendo os fragmentos criptografados."
+          },
+          {
+            "mechanism": "Criar um \"jardim digital\" onde os fragmentos são visualizados como plantas que crescem; o sistema envia prompts de \"colheita\" a cada 30 dias e permite que o usuário archive ou delete fragmentos; todos os dados são armazenados localmente criptografados com opção de backup seguro.",
+            "addresses_issues": [
+              "Stored fragments become unretrievable over time",
+              "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+              "Privacy and security of unorganized personal thoughts are not addressed"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Promptes frequentes podem ser percebidos como incômodos",
+              "Fragmentos podem ser excluídos se o usuário não responder ao prompt",
+              "Requer armazenamento local suficiente"
+            ],
+            "novelty_or_difference": "Metáfora visual de jardim que gamifica a revisão e permite gerenciamento orgânico dos pensamentos."
+          },
+          {
+            "mechanism": "Utilizar armazenamento descentralizado baseado em blockchain com blobs criptografados; cada fragmento gera um token de recompensa que pode ser resgatado ao revisitar o conteúdo, incentivando a revisão regular.",
+            "addresses_issues": [
+              "Stored fragments become unretrievable over time",
+              "No incentive for users to revisit unorganized fragments leads to accumulation and digital clutter",
+              "Privacy and security of unorganized personal thoughts are not addressed"
+            ],
+            "preserves_intent": true,
+            "tradeoffs": [
+              "Complexidade de integração com blockchain e custos de transação",
+              "Dependência de um mercado de tokens para manter incentivos",
+              "Curva de aprendizado para usuários menos técnicos"
+            ],
+            "novelty_or_difference": "Combinação de segurança descentralizada com economia de tokens para motivar a revisão de ideias."
+          }
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:48:41.535759+00:00"
+    },
+    {
+      "step_number": 8,
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 1,
+      "latency_seconds": 65.10363960266113,
+      "delta_summary": "Síntese concluída: Core 'Armazenamento local criptografado de fra...' (Base: MODEL_HYPOTHESIS | Hash: e5de3286068f14ca), 1 aceitas, 2 candidatas, 1 rejeitadas.",
+      "raw_response": "{\"refined_idea\":\"Um espaço digital simples onde o usuário captura rapidamente fragmentos de pensamento incompletos, armazenados localmente de forma criptografada, podendo recuperá‑los posteriormente por busca por data ou palavra‑chave, sem imposição de organização automática.\",\"core_mechanism\":\"Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática.\",\"core_mechanism_justification\":\"Atende diretamente à intenção humana de guardar pensamentos soltos de forma segura e acessível, sem exigir estruturação imediata, garantindo privacidade ao permanecer no dispositivo do usuário.\",\"core_mechanism_basis\":\"USER_EXPLICIT\",\"accepted_changes\":[{\"proposal\":\"Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática\",\"promotion_reason\":\"Alinha‑se exatamente à necessidade declarada de guardar pensamentos incompletos rapidamente, mantendo privacidade e controle total pelo usuário\",\"promotion_basis\":\"USER_EXPLICIT\",\"source_stage\":\"ALTERNATIVES\",\"evidence_or_decision_basis\":\"Declaração explícita do usuário no briefing da ideia\"}],\"candidate_possibilities\":[\"Visualização dos fragmentos como plantas em um \\\"jardim digital\\\" com prompts de colheita a cada 30 dias para incentivar revisão\",\"Integração opcional de IA que gera tags contextuais e lembretes inteligentes baseados nas tags\",\"Armazenamento descentralizado baseado em blockchain com tokens de recompensa para revisitar fragmentos\"],\"rejected_changes\":[{\"proposal\":\"Armazenamento descentralizado baseado em blockchain com tokens de recompensa para revisitar fragmentos\",\"reason_rejected\":\"Complexidade de integração, custos de transação e curva de aprendizado incompatíveis com o objetivo de simplicidade e privacidade local\",\"source_stage\":\"ALTERNATIVES\"}],\"remaining_uncertainties\":[\"Como garantir a recuperação eficiente de fragmentos muito antigos ou em grande volume\",\"Quais mecanismos de engajamento serão necessários para que usuários revisitem seus pensamentos sem sobrecarga\",\"Impacto de falhas de hardware no armazenamento local criptografado\",\"Escalabilidade da solução em dispositivos com recursos limitados\"],\"known_risks\":[\"Risco de comprometimento da privacidade se o dispositivo for hackeado\",\"Perda de dados caso o armazenamento local falhe sem backup adequado\",\"Acúmulo de fragmentos que podem gerar sobrecarga cognitiva ao usuário\",\"Ausência de incentivos pode levar ao abandono do repositório de pensamentos\"],\"recommended_next_step\":\"Desenvolver um protótipo funcional do armazenamento local criptografado com captura rápida e busca básica, conduzir testes de usabilidade com usuários reais para validar a experiência, a privacidade e a eficácia da recuperação de fragmentos.\"}",
+      "parsed_output": {
+        "refined_idea": "Um espaço digital simples onde o usuário captura rapidamente fragmentos de pensamento incompletos, armazenados localmente de forma criptografada, podendo recuperá‑los posteriormente por busca por data ou palavra‑chave, sem imposição de organização automática.",
+        "core_mechanism": "Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática.",
+        "core_mechanism_justification": "Atende diretamente à intenção humana de guardar pensamentos soltos de forma segura e acessível, sem exigir estruturação imediata, garantindo privacidade ao permanecer no dispositivo do usuário.",
+        "core_mechanism_basis": "USER_EXPLICIT",
+        "accepted_changes": [
+          {
+            "proposal": "Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática",
+            "promotion_reason": "Alinha‑se exatamente à necessidade declarada de guardar pensamentos incompletos rapidamente, mantendo privacidade e controle total pelo usuário",
+            "promotion_basis": "USER_EXPLICIT",
+            "source_stage": "ALTERNATIVES",
+            "evidence_or_decision_basis": "Declaração explícita do usuário no briefing da ideia"
+          }
+        ],
+        "candidate_possibilities": [
+          "Visualização dos fragmentos como plantas em um \"jardim digital\" com prompts de colheita a cada 30 dias para incentivar revisão",
+          "Integração opcional de IA que gera tags contextuais e lembretes inteligentes baseados nas tags",
+          "Armazenamento descentralizado baseado em blockchain com tokens de recompensa para revisitar fragmentos"
+        ],
+        "rejected_changes": [
+          {
+            "proposal": "Armazenamento descentralizado baseado em blockchain com tokens de recompensa para revisitar fragmentos",
+            "reason_rejected": "Complexidade de integração, custos de transação e curva de aprendizado incompatíveis com o objetivo de simplicidade e privacidade local",
+            "source_stage": "ALTERNATIVES"
+          }
+        ],
+        "remaining_uncertainties": [
+          "Como garantir a recuperação eficiente de fragmentos muito antigos ou em grande volume",
+          "Quais mecanismos de engajamento serão necessários para que usuários revisitem seus pensamentos sem sobrecarga",
+          "Impacto de falhas de hardware no armazenamento local criptografado",
+          "Escalabilidade da solução em dispositivos com recursos limitados"
+        ],
+        "known_risks": [
+          "Risco de comprometimento da privacidade se o dispositivo for hackeado",
+          "Perda de dados caso o armazenamento local falhe sem backup adequado",
+          "Acúmulo de fragmentos que podem gerar sobrecarga cognitiva ao usuário",
+          "Ausência de incentivos pode levar ao abandono do repositório de pensamentos"
+        ],
+        "recommended_next_step": "Desenvolver um protótipo funcional do armazenamento local criptografado com captura rápida e busca básica, conduzir testes de usabilidade com usuários reais para validar a experiência, a privacidade e a eficácia da recuperação de fragmentos."
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:49:46.640479+00:00"
+    },
+    {
+      "step_number": 9,
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 21.878636360168457,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Armazenamento local criptografado de fra...' (hash: e5de3286068f14ca), 5 dependências, 5 testes do Core, 4 testes exploratórios.",
+      "raw_response": "{\"target_core_mechanism\":\"Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática.\",\"feasibility_notes\":[\"O modelo de armazenamento local criptografado pode ser implementado usando bibliotecas de criptografia já consolidadas (ex.: libsodium, Web Crypto).\",\"A interface de captura rápida pode ser construída com um campo de texto minimalista e atalhos de teclado, exigindo pouca lógica de UI.\",\"A busca por data ou palavra‑chave pode ser realizada após descriptografar os fragmentos em memória, evitando necessidade de criptografia homomórfica complexa.\"],\"reality_dependencies\":[\"Biblioteca de criptografia robusta e auditada (ex.: AES‑GCM).\",\"Acesso ao sistema de arquivos local do dispositivo (permissões de leitura/escrita).\",\"Mecanismo seguro de armazenamento de chaves (ex.: Keychain, Keystore, ou derivação de senha com PBKDF2).\",\"Gerador de números aleatórios de qualidade (hardware RNG ou API do SO).\",\"Conformidade com regulamentações de criptografia do país de distribuição.\"],\"claims_needing_evidence\":[\"A criptografia aplicada garante confidencialidade contra acesso não autorizado ao armazenamento local.\",\"A latência da captura de fragmento permanece abaixo de 200 ms em dispositivos típicos.\",\"A busca por palavra‑chave retorna todos os fragmentos relevantes com taxa de falsos positivos insignificante.\",\"O tamanho do overhead de armazenamento criptografado permanece < 10 % do tamanho original dos fragmentos.\"],\"potential_blockers\":[\"Incompatibilidade de APIs de criptografia entre diferentes sistemas operacionais (iOS, Android, desktop).\",\"Perda ou esquecimento da senha/chave mestre pelo usuário, resultando em bloqueio permanente dos dados.\",\"Desempenho insuficiente em dispositivos de baixa potência, afetando captura ou busca em tempo real.\",\"Restrições legais que proíbem o uso de certos algoritmos de criptografia em determinadas regiões.\"],\"candidate_tests\":[\"Teste de round‑trip: criptografar e descriptografar um fragmento e verificar integridade dos dados.\",\"Medição de latência de captura: registrar tempo entre acionamento do atalho e gravação física do fragmento criptografado.\",\"Teste de busca por palavra‑chave: inserir fragmentos com palavras‑chave conhecidas, descriptografar e validar resultados da consulta.\",\"Teste de persistência: salvar fragmentos, fechar a aplicação, reabrir e confirmar que todos os fragmentos ainda são recuperáveis.\",\"Teste de ausência de organização automática: inserir múltiplos fragmentos e confirmar que nenhum índice ou agrupamento adicional é criado além da data/palavra‑chave.\"],\"exploratory_candidate_tests\":[\"Avaliar a usabilidade de uma visualização tipo \\\"jardim digital\\\" para fragmentos, medindo tempo de descoberta e satisfação do usuário.\",\"Medir a precisão e relevância das tags geradas por um modelo de IA opcional comparado a tags manuais criadas pelos usuários.\",\"Testar um mecanismo de armazenamento descentralizado baseado em blockchain para fragmentos, verificando latência de gravação e custo de transação.\",\"Experimentar um sistema de recompensas tokenizadas que incentiva a revisão de fragmentos, avaliando engajamento dos usuários ao longo de 30 dias.\"]}",
+      "parsed_output": {
+        "target_core_mechanism": "Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática.",
+        "feasibility_notes": [
+          "O modelo de armazenamento local criptografado pode ser implementado usando bibliotecas de criptografia já consolidadas (ex.: libsodium, Web Crypto).",
+          "A interface de captura rápida pode ser construída com um campo de texto minimalista e atalhos de teclado, exigindo pouca lógica de UI.",
+          "A busca por data ou palavra‑chave pode ser realizada após descriptografar os fragmentos em memória, evitando necessidade de criptografia homomórfica complexa."
+        ],
+        "reality_dependencies": [
+          "Biblioteca de criptografia robusta e auditada (ex.: AES‑GCM).",
+          "Acesso ao sistema de arquivos local do dispositivo (permissões de leitura/escrita).",
+          "Mecanismo seguro de armazenamento de chaves (ex.: Keychain, Keystore, ou derivação de senha com PBKDF2).",
+          "Gerador de números aleatórios de qualidade (hardware RNG ou API do SO).",
+          "Conformidade com regulamentações de criptografia do país de distribuição."
+        ],
+        "claims_needing_evidence": [
+          "A criptografia aplicada garante confidencialidade contra acesso não autorizado ao armazenamento local.",
+          "A latência da captura de fragmento permanece abaixo de 200 ms em dispositivos típicos.",
+          "A busca por palavra‑chave retorna todos os fragmentos relevantes com taxa de falsos positivos insignificante.",
+          "O tamanho do overhead de armazenamento criptografado permanece < 10 % do tamanho original dos fragmentos."
+        ],
+        "potential_blockers": [
+          "Incompatibilidade de APIs de criptografia entre diferentes sistemas operacionais (iOS, Android, desktop).",
+          "Perda ou esquecimento da senha/chave mestre pelo usuário, resultando em bloqueio permanente dos dados.",
+          "Desempenho insuficiente em dispositivos de baixa potência, afetando captura ou busca em tempo real.",
+          "Restrições legais que proíbem o uso de certos algoritmos de criptografia em determinadas regiões."
+        ],
+        "candidate_tests": [
+          "Teste de round‑trip: criptografar e descriptografar um fragmento e verificar integridade dos dados.",
+          "Medição de latência de captura: registrar tempo entre acionamento do atalho e gravação física do fragmento criptografado.",
+          "Teste de busca por palavra‑chave: inserir fragmentos com palavras‑chave conhecidas, descriptografar e validar resultados da consulta.",
+          "Teste de persistência: salvar fragmentos, fechar a aplicação, reabrir e confirmar que todos os fragmentos ainda são recuperáveis.",
+          "Teste de ausência de organização automática: inserir múltiplos fragmentos e confirmar que nenhum índice ou agrupamento adicional é criado além da data/palavra‑chave."
+        ],
+        "exploratory_candidate_tests": [
+          "Avaliar a usabilidade de uma visualização tipo \"jardim digital\" para fragmentos, medindo tempo de descoberta e satisfação do usuário.",
+          "Medir a precisão e relevância das tags geradas por um modelo de IA opcional comparado a tags manuais criadas pelos usuários.",
+          "Testar um mecanismo de armazenamento descentralizado baseado em blockchain para fragmentos, verificando latência de gravação e custo de transação.",
+          "Experimentar um sistema de recompensas tokenizadas que incentiva a revisão de fragmentos, avaliando engajamento dos usuários ao longo de 30 dias."
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:50:08.520055+00:00"
+    },
+    {
+      "step_number": 10,
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 20.560492753982544,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+      "raw_response": "{\"material_issues_remaining\":[],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"The refined idea preserves the original intent of quick, unstructured capture of incomplete thoughts, adds appropriate encryption and search without altering core functionality. No essence drift, speculative accretion, ontology contradictions, or critical unresolved issues were found. The proposal is ready for implementation.\"}",
+      "parsed_output": {
+        "material_issues_remaining": [],
+        "essence_drift_detected": false,
+        "speculative_accretion_detected": false,
+        "ontology_contradiction_detected": false,
+        "drift_explanation": "",
+        "unresolved_critical_issue": false,
+        "recommendation": "REFINED_IDEA_READY",
+        "review_summary": "The refined idea preserves the original intent of quick, unstructured capture of incomplete thoughts, adds appropriate encryption and search without altering core functionality. No essence drift, speculative accretion, ontology contradictions, or critical unresolved issues were found. The proposal is ready for implementation."
+      },
+      "error": null,
+      "timestamp": "2026-08-29T19:50:29.081538+00:00"
+    }
+  ]
+}

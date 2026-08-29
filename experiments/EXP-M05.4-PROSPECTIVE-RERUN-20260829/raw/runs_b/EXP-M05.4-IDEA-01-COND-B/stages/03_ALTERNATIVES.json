@@ -1,0 +1,64 @@
+{
+  "step_number": 3,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 2.958528757095337,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.\",\"addresses_issues\":[\"Pode falhar em sistemas onde a API de 'Não Perturbe' não está disponível ou requer permissões elevadas\",\"Bloquear notificações pode impedir alertas críticos como chamadas de emergência\"],\"preserves_intent\":true,\"tradeoffs\":[\"Dependência de suporte específico de cada SO\",\"Necessidade de solicitar permissões ao usuário\",\"Risco de silenciar notificações urgentes\"],\"novelty_or_difference\":\"Uso direto do recurso nativo de 'Não Perturbe', evitando implementação de bloqueio manual de notificações.\"},{\"mechanism\":\"Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.\",\"addresses_issues\":[\"Não depende de APIs de bloqueio de notificações, funcionando em mais versões de SO\",\"Permite que alertas críticos do sistema passem, mitigando risco de perda de emergências\"],\"preserves_intent\":true,\"tradeoffs\":[\"Não impede vibrações ou sons de aplicativos que não usam canal de áudio padrão\",\"Pode ser contornado por apps que enviam notificações fora do áudio\",\"Pode ser percebido como intrusivo ao usuário\"],\"novelty_or_difference\":\"Abordagem visual/áudio em vez de bloqueio de notificações, usando sobreposição de foco.\"},{\"mechanism\":\"Instalar um serviço auxiliar que, ao iniciar o Pomodoro, reduz o nível de prioridade das notificações de aplicativos não críticos e permite whitelist de apps essenciais.\",\"addresses_issues\":[\"Contorna restrições de API ao manipular prioridades ao invés de bloquear totalmente\",\"Usuário pode definir quais notificações são críticas, evitando silenciar emergências\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requer configuração inicial e manutenção da lista de whitelist\",\"Pode não ser suportado em todos os SOs\",\"Alteração de prioridades pode não impedir sons de alguns apps\"],\"novelty_or_difference\":\"Controle granular de prioridade de notificações via serviço de fundo, ao invés de bloqueio total.\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.",
+        "addresses_issues": [
+          "Pode falhar em sistemas onde a API de 'Não Perturbe' não está disponível ou requer permissões elevadas",
+          "Bloquear notificações pode impedir alertas críticos como chamadas de emergência"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Dependência de suporte específico de cada SO",
+          "Necessidade de solicitar permissões ao usuário",
+          "Risco de silenciar notificações urgentes"
+        ],
+        "novelty_or_difference": "Uso direto do recurso nativo de 'Não Perturbe', evitando implementação de bloqueio manual de notificações."
+      },
+      {
+        "mechanism": "Criar uma camada de sobreposição transparente que captura foco e silencia o áudio do sistema, permitindo que notificações críticas sejam exibidas em forma de pop-up do SO.",
+        "addresses_issues": [
+          "Não depende de APIs de bloqueio de notificações, funcionando em mais versões de SO",
+          "Permite que alertas críticos do sistema passem, mitigando risco de perda de emergências"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Não impede vibrações ou sons de aplicativos que não usam canal de áudio padrão",
+          "Pode ser contornado por apps que enviam notificações fora do áudio",
+          "Pode ser percebido como intrusivo ao usuário"
+        ],
+        "novelty_or_difference": "Abordagem visual/áudio em vez de bloqueio de notificações, usando sobreposição de foco."
+      },
+      {
+        "mechanism": "Instalar um serviço auxiliar que, ao iniciar o Pomodoro, reduz o nível de prioridade das notificações de aplicativos não críticos e permite whitelist de apps essenciais.",
+        "addresses_issues": [
+          "Contorna restrições de API ao manipular prioridades ao invés de bloquear totalmente",
+          "Usuário pode definir quais notificações são críticas, evitando silenciar emergências"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer configuração inicial e manutenção da lista de whitelist",
+          "Pode não ser suportado em todos os SOs",
+          "Alteração de prioridades pode não impedir sons de alguns apps"
+        ],
+        "novelty_or_difference": "Controle granular de prioridade de notificações via serviço de fundo, ao invés de bloqueio total."
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:43:01.866535+00:00"
+}

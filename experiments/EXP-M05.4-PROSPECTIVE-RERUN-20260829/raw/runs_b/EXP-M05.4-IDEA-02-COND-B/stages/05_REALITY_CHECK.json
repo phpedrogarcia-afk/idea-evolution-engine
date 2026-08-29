@@ -1,0 +1,54 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 19.157724857330322,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Vault criptografado cliente‑side com ind...' (hash: 70383cdc2d64950b), 4 dependências, 3 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Vault criptografado cliente‑side com indexação semântica para busca de fragmentos\",\"feasibility_notes\":[\"Criptografia cliente‑side pode ser implementada com a Web Crypto API em navegadores modernos\",\"Indexação semântica requer geração de embeddings; pode usar modelo on‑device leve ou serviço externo com transmissão de vetores criptografados\",\"Armazenamento local (IndexedDB/Filesystem API) suporta tamanhos típicos de fragmentos de texto\",\"Operações de criptografia e busca são computacionalmente leves o suficiente para dispositivos atuais\"],\"reality_dependencies\":[\"Biblioteca de criptografia compatível com todos os navegadores alvo (ex.: SubtleCrypto)\",\"Modelo de embeddings que rode localmente ou API de geração de vetores com transmissão segura\",\"Mecanismo de armazenamento persistente e criptografado no cliente (IndexedDB, Secure File System)\",\"Gerenciamento seguro de chaves de usuário (geração, backup, recuperação)\"],\"claims_needing_evidence\":[\"Os dados permanecem inacessíveis ao servidor quando armazenados criptografados cliente‑side\",\"A indexação semântica baseada em embeddings devolve resultados relevantes para consultas de texto livre\",\"Latência de criptografia, geração de embeddings e busca está dentro de limites aceitáveis (<200 ms) em dispositivos medianos\"],\"potential_blockers\":[\"Limitações de CPU/memória em dispositivos móveis para geração de embeddings on‑device\",\"Limites de quota de armazenamento local impostos pelos navegadores\",\"Complexidade de recuperação de chave em caso de perda de senha pelo usuário\",\"Conformidade com regulamentos de privacidade (ex.: GDPR) ao lidar com chaves gerenciadas pelo cliente\"],\"candidate_tests\":[\"Teste de impossibilidade de descriptografia por terceiros: armazenar fragmento criptografado, interceptar tráfego e tentar decifrar sem chave\",\"Teste de precisão da busca semântica: inserir conjunto de fragmentos rotulados, gerar consultas conhecidas e medir taxa de recuperação (precisão/recall)\",\"Benchmark de desempenho: medir tempo de criptografia, geração de embedding e busca em diferentes dispositivos e navegadores\"],\"exploratory_candidate_tests\":[\"Avaliar acurácia do auto‑tagging IA ao gerar tags contextuais para novos fragmentos\",\"Testar eficácia do lembrete temporizado: taxa de retorno do usuário após notificação programada\",\"Medir engajamento do jardim gamificado: frequência de interações, pontos acumulados e taxa de organização de sementes\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Vault criptografado cliente‑side com indexação semântica para busca de fragmentos",
+    "feasibility_notes": [
+      "Criptografia cliente‑side pode ser implementada com a Web Crypto API em navegadores modernos",
+      "Indexação semântica requer geração de embeddings; pode usar modelo on‑device leve ou serviço externo com transmissão de vetores criptografados",
+      "Armazenamento local (IndexedDB/Filesystem API) suporta tamanhos típicos de fragmentos de texto",
+      "Operações de criptografia e busca são computacionalmente leves o suficiente para dispositivos atuais"
+    ],
+    "reality_dependencies": [
+      "Biblioteca de criptografia compatível com todos os navegadores alvo (ex.: SubtleCrypto)",
+      "Modelo de embeddings que rode localmente ou API de geração de vetores com transmissão segura",
+      "Mecanismo de armazenamento persistente e criptografado no cliente (IndexedDB, Secure File System)",
+      "Gerenciamento seguro de chaves de usuário (geração, backup, recuperação)"
+    ],
+    "claims_needing_evidence": [
+      "Os dados permanecem inacessíveis ao servidor quando armazenados criptografados cliente‑side",
+      "A indexação semântica baseada em embeddings devolve resultados relevantes para consultas de texto livre",
+      "Latência de criptografia, geração de embeddings e busca está dentro de limites aceitáveis (<200 ms) em dispositivos medianos"
+    ],
+    "potential_blockers": [
+      "Limitações de CPU/memória em dispositivos móveis para geração de embeddings on‑device",
+      "Limites de quota de armazenamento local impostos pelos navegadores",
+      "Complexidade de recuperação de chave em caso de perda de senha pelo usuário",
+      "Conformidade com regulamentos de privacidade (ex.: GDPR) ao lidar com chaves gerenciadas pelo cliente"
+    ],
+    "candidate_tests": [
+      "Teste de impossibilidade de descriptografia por terceiros: armazenar fragmento criptografado, interceptar tráfego e tentar decifrar sem chave",
+      "Teste de precisão da busca semântica: inserir conjunto de fragmentos rotulados, gerar consultas conhecidas e medir taxa de recuperação (precisão/recall)",
+      "Benchmark de desempenho: medir tempo de criptografia, geração de embedding e busca em diferentes dispositivos e navegadores"
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar acurácia do auto‑tagging IA ao gerar tags contextuais para novos fragmentos",
+      "Testar eficácia do lembrete temporizado: taxa de retorno do usuário após notificação programada",
+      "Medir engajamento do jardim gamificado: frequência de interações, pontos acumulados e taxa de organização de sementes"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:48:07.138645+00:00"
+}

@@ -1,0 +1,58 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 21.878636360168457,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Armazenamento local criptografado de fra...' (hash: e5de3286068f14ca), 5 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática.\",\"feasibility_notes\":[\"O modelo de armazenamento local criptografado pode ser implementado usando bibliotecas de criptografia já consolidadas (ex.: libsodium, Web Crypto).\",\"A interface de captura rápida pode ser construída com um campo de texto minimalista e atalhos de teclado, exigindo pouca lógica de UI.\",\"A busca por data ou palavra‑chave pode ser realizada após descriptografar os fragmentos em memória, evitando necessidade de criptografia homomórfica complexa.\"],\"reality_dependencies\":[\"Biblioteca de criptografia robusta e auditada (ex.: AES‑GCM).\",\"Acesso ao sistema de arquivos local do dispositivo (permissões de leitura/escrita).\",\"Mecanismo seguro de armazenamento de chaves (ex.: Keychain, Keystore, ou derivação de senha com PBKDF2).\",\"Gerador de números aleatórios de qualidade (hardware RNG ou API do SO).\",\"Conformidade com regulamentações de criptografia do país de distribuição.\"],\"claims_needing_evidence\":[\"A criptografia aplicada garante confidencialidade contra acesso não autorizado ao armazenamento local.\",\"A latência da captura de fragmento permanece abaixo de 200 ms em dispositivos típicos.\",\"A busca por palavra‑chave retorna todos os fragmentos relevantes com taxa de falsos positivos insignificante.\",\"O tamanho do overhead de armazenamento criptografado permanece < 10 % do tamanho original dos fragmentos.\"],\"potential_blockers\":[\"Incompatibilidade de APIs de criptografia entre diferentes sistemas operacionais (iOS, Android, desktop).\",\"Perda ou esquecimento da senha/chave mestre pelo usuário, resultando em bloqueio permanente dos dados.\",\"Desempenho insuficiente em dispositivos de baixa potência, afetando captura ou busca em tempo real.\",\"Restrições legais que proíbem o uso de certos algoritmos de criptografia em determinadas regiões.\"],\"candidate_tests\":[\"Teste de round‑trip: criptografar e descriptografar um fragmento e verificar integridade dos dados.\",\"Medição de latência de captura: registrar tempo entre acionamento do atalho e gravação física do fragmento criptografado.\",\"Teste de busca por palavra‑chave: inserir fragmentos com palavras‑chave conhecidas, descriptografar e validar resultados da consulta.\",\"Teste de persistência: salvar fragmentos, fechar a aplicação, reabrir e confirmar que todos os fragmentos ainda são recuperáveis.\",\"Teste de ausência de organização automática: inserir múltiplos fragmentos e confirmar que nenhum índice ou agrupamento adicional é criado além da data/palavra‑chave.\"],\"exploratory_candidate_tests\":[\"Avaliar a usabilidade de uma visualização tipo \\\"jardim digital\\\" para fragmentos, medindo tempo de descoberta e satisfação do usuário.\",\"Medir a precisão e relevância das tags geradas por um modelo de IA opcional comparado a tags manuais criadas pelos usuários.\",\"Testar um mecanismo de armazenamento descentralizado baseado em blockchain para fragmentos, verificando latência de gravação e custo de transação.\",\"Experimentar um sistema de recompensas tokenizadas que incentiva a revisão de fragmentos, avaliando engajamento dos usuários ao longo de 30 dias.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Armazenamento local criptografado de fragmentos com interface de captura rápida e busca por data ou palavra‑chave, sem organização automática.",
+    "feasibility_notes": [
+      "O modelo de armazenamento local criptografado pode ser implementado usando bibliotecas de criptografia já consolidadas (ex.: libsodium, Web Crypto).",
+      "A interface de captura rápida pode ser construída com um campo de texto minimalista e atalhos de teclado, exigindo pouca lógica de UI.",
+      "A busca por data ou palavra‑chave pode ser realizada após descriptografar os fragmentos em memória, evitando necessidade de criptografia homomórfica complexa."
+    ],
+    "reality_dependencies": [
+      "Biblioteca de criptografia robusta e auditada (ex.: AES‑GCM).",
+      "Acesso ao sistema de arquivos local do dispositivo (permissões de leitura/escrita).",
+      "Mecanismo seguro de armazenamento de chaves (ex.: Keychain, Keystore, ou derivação de senha com PBKDF2).",
+      "Gerador de números aleatórios de qualidade (hardware RNG ou API do SO).",
+      "Conformidade com regulamentações de criptografia do país de distribuição."
+    ],
+    "claims_needing_evidence": [
+      "A criptografia aplicada garante confidencialidade contra acesso não autorizado ao armazenamento local.",
+      "A latência da captura de fragmento permanece abaixo de 200 ms em dispositivos típicos.",
+      "A busca por palavra‑chave retorna todos os fragmentos relevantes com taxa de falsos positivos insignificante.",
+      "O tamanho do overhead de armazenamento criptografado permanece < 10 % do tamanho original dos fragmentos."
+    ],
+    "potential_blockers": [
+      "Incompatibilidade de APIs de criptografia entre diferentes sistemas operacionais (iOS, Android, desktop).",
+      "Perda ou esquecimento da senha/chave mestre pelo usuário, resultando em bloqueio permanente dos dados.",
+      "Desempenho insuficiente em dispositivos de baixa potência, afetando captura ou busca em tempo real.",
+      "Restrições legais que proíbem o uso de certos algoritmos de criptografia em determinadas regiões."
+    ],
+    "candidate_tests": [
+      "Teste de round‑trip: criptografar e descriptografar um fragmento e verificar integridade dos dados.",
+      "Medição de latência de captura: registrar tempo entre acionamento do atalho e gravação física do fragmento criptografado.",
+      "Teste de busca por palavra‑chave: inserir fragmentos com palavras‑chave conhecidas, descriptografar e validar resultados da consulta.",
+      "Teste de persistência: salvar fragmentos, fechar a aplicação, reabrir e confirmar que todos os fragmentos ainda são recuperáveis.",
+      "Teste de ausência de organização automática: inserir múltiplos fragmentos e confirmar que nenhum índice ou agrupamento adicional é criado além da data/palavra‑chave."
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a usabilidade de uma visualização tipo \"jardim digital\" para fragmentos, medindo tempo de descoberta e satisfação do usuário.",
+      "Medir a precisão e relevância das tags geradas por um modelo de IA opcional comparado a tags manuais criadas pelos usuários.",
+      "Testar um mecanismo de armazenamento descentralizado baseado em blockchain para fragmentos, verificando latência de gravação e custo de transação.",
+      "Experimentar um sistema de recompensas tokenizadas que incentiva a revisão de fragmentos, avaliando engajamento dos usuários ao longo de 30 dias."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:50:08.520055+00:00"
+}

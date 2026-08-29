@@ -1,0 +1,56 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 21.578177213668823,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Ativar o modo 'Não Perturbe' do sistema ...' (hash: b6bd2c48a665a0d7), 4 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.\",\"feasibility_notes\":[\"A API nativa de 'Não Perturbe' está disponível na maioria dos sistemas modernos (Windows 10+, macOS 10.15+, Linux via D-Bus), mas varia em detalhes de implementação.\",\"Requer permissões de usuário ou elevação para modificar o estado do sistema; em alguns SO pode ser necessário que o usuário conceda explicitamente acesso ao aplicativo.\",\"A lógica de timer de 25 minutos é trivial de implementar e independente da API de DND, mas deve garantir a restauração do estado anterior ao término.\",\"A integração deve lidar com cenários onde o modo DND já está ativo por outra razão, preservando o estado original.\"],\"reality_dependencies\":[\"Documentação oficial da API de 'Não Perturbe' para cada SO alvo (ex.: Windows Focus Assist API, macOS Do Not Disturb via UserNotifications framework, Linux org.freedesktop.Notifications D-Bus interface).\",\"Permissões de usuário necessárias para alterar o estado do DND (ex.: manifesto de privacidade, solicitações de elevação).\",\"Ambiente de teste com versões suportadas dos sistemas operacionais para validar chamadas de API.\",\"Mecanismo confiável para armazenar e restaurar o estado pré‑existente do DND ao final do Pomodoro.\"],\"claims_needing_evidence\":[\"Chamadas de API nativas conseguem ativar e desativar o modo 'Não Perturbe' sem falhas nos SO suportados.\",\"O estado do DND é restaurado exatamente ao valor anterior ao término do timer, mesmo se o usuário mudar manualmente durante o intervalo.\",\"A ativação do DND silencia todas as notificações de aplicativos não críticos, conforme esperado pelo usuário.\"],\"potential_blockers\":[\"Ausência de API pública ou documentação insuficiente em versões legadas do SO.\",\"Políticas de segurança corporativas que bloqueiam alterações programáticas do DND.\",\"Necessidade de privilégios de administrador que o usuário pode recusar.\",\"Conflitos com outras aplicações que também gerenciam o modo DND, causando comportamento inesperado.\"],\"candidate_tests\":[\"Teste unitário que invoca a API de DND no Windows 10 e verifica o estado via PowerShell antes e depois da chamada.\",\"Teste de integração no macOS 13 que usa o framework UserNotifications para ativar DND, aguarda 5 segundos e confirma a mudança via comando defaults read com `doNotDisturb` flag.\",\"Teste automatizado em uma distribuição Linux (ex.: Ubuntu 22.04) que envia uma notificação via `notify-send` antes e depois de chamar a interface D-Bus para habilitar DND, verificando se a notificação é suprimida.\",\"Teste de restauração: iniciar o aplicativo com DND já ativo, iniciar um Pomodoro, terminar o timer e confirmar que o estado original (ativo) foi mantido.\",\"Teste de permissão: instalar o aplicativo em um ambiente padrão e tentar ativar DND; validar que o fluxo de solicitação de permissão ao usuário ocorre corretamente.\"],\"exploratory_candidate_tests\":[\"Implementar camada de sobreposição transparente que captura foco e silencia áudio do sistema, avaliando se reduz interrupções sem depender de API DND.\",\"Desenvolver serviço auxiliar que ajusta prioridades de notificação via regras de firewall ou gerenciamento de processos, permitindo whitelist de apps críticos.\",\"Experimentar uso de perfis de energia ou modos de foco (ex.: Windows Focus Assist profiles) como alternativa ao DND direto, medindo eficácia na supressão de notificações.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Ativar o modo 'Não Perturbe' do sistema operacional via chamadas de API nativas durante o intervalo Pomodoro.",
+    "feasibility_notes": [
+      "A API nativa de 'Não Perturbe' está disponível na maioria dos sistemas modernos (Windows 10+, macOS 10.15+, Linux via D-Bus), mas varia em detalhes de implementação.",
+      "Requer permissões de usuário ou elevação para modificar o estado do sistema; em alguns SO pode ser necessário que o usuário conceda explicitamente acesso ao aplicativo.",
+      "A lógica de timer de 25 minutos é trivial de implementar e independente da API de DND, mas deve garantir a restauração do estado anterior ao término.",
+      "A integração deve lidar com cenários onde o modo DND já está ativo por outra razão, preservando o estado original."
+    ],
+    "reality_dependencies": [
+      "Documentação oficial da API de 'Não Perturbe' para cada SO alvo (ex.: Windows Focus Assist API, macOS Do Not Disturb via UserNotifications framework, Linux org.freedesktop.Notifications D-Bus interface).",
+      "Permissões de usuário necessárias para alterar o estado do DND (ex.: manifesto de privacidade, solicitações de elevação).",
+      "Ambiente de teste com versões suportadas dos sistemas operacionais para validar chamadas de API.",
+      "Mecanismo confiável para armazenar e restaurar o estado pré‑existente do DND ao final do Pomodoro."
+    ],
+    "claims_needing_evidence": [
+      "Chamadas de API nativas conseguem ativar e desativar o modo 'Não Perturbe' sem falhas nos SO suportados.",
+      "O estado do DND é restaurado exatamente ao valor anterior ao término do timer, mesmo se o usuário mudar manualmente durante o intervalo.",
+      "A ativação do DND silencia todas as notificações de aplicativos não críticos, conforme esperado pelo usuário."
+    ],
+    "potential_blockers": [
+      "Ausência de API pública ou documentação insuficiente em versões legadas do SO.",
+      "Políticas de segurança corporativas que bloqueiam alterações programáticas do DND.",
+      "Necessidade de privilégios de administrador que o usuário pode recusar.",
+      "Conflitos com outras aplicações que também gerenciam o modo DND, causando comportamento inesperado."
+    ],
+    "candidate_tests": [
+      "Teste unitário que invoca a API de DND no Windows 10 e verifica o estado via PowerShell antes e depois da chamada.",
+      "Teste de integração no macOS 13 que usa o framework UserNotifications para ativar DND, aguarda 5 segundos e confirma a mudança via comando defaults read com `doNotDisturb` flag.",
+      "Teste automatizado em uma distribuição Linux (ex.: Ubuntu 22.04) que envia uma notificação via `notify-send` antes e depois de chamar a interface D-Bus para habilitar DND, verificando se a notificação é suprimida.",
+      "Teste de restauração: iniciar o aplicativo com DND já ativo, iniciar um Pomodoro, terminar o timer e confirmar que o estado original (ativo) foi mantido.",
+      "Teste de permissão: instalar o aplicativo em um ambiente padrão e tentar ativar DND; validar que o fluxo de solicitação de permissão ao usuário ocorre corretamente."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar camada de sobreposição transparente que captura foco e silencia áudio do sistema, avaliando se reduz interrupções sem depender de API DND.",
+      "Desenvolver serviço auxiliar que ajusta prioridades de notificação via regras de firewall ou gerenciamento de processos, permitindo whitelist de apps críticos.",
+      "Experimentar uso de perfis de energia ou modos de foco (ex.: Windows Focus Assist profiles) como alternativa ao DND direto, medindo eficácia na supressão de notificações."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T19:43:43.245895+00:00"
+}
