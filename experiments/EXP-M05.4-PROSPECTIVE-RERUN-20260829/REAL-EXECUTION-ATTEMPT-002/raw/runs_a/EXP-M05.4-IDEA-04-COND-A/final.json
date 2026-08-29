@@ -1,0 +1,33 @@
+{
+  "run_id": "EXP-M05.4-IDEA-04-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login.",
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "Um gerador de relatórios financeiros pessoais que opera totalmente offline em um único arquivo HTML, sem necessidade de banco de dados externo ou login, oferecendo privacidade e simplicidade ao usuário.",
+    "strengths": [
+      "Privacidade total – nenhum dado é enviado para servidores externos",
+      "Operação 100% offline – útil em ambientes sem conexão à internet",
+      "Instalação simples – basta abrir um arquivo HTML local",
+      "Baixo custo de desenvolvimento – não requer backend ou infraestrutura"
+    ],
+    "weaknesses": [
+      "Armazenamento limitado ao dispositivo do usuário, dificultando histórico longo",
+      "Segurança dos dados depende do próprio usuário – risco de perda ou acesso não autorizado ao arquivo",
+      "Funcionalidades avançadas (sincronização, backup) são difíceis de implementar sem backend",
+      "Desempenho pode ser impactado se o volume de dados crescer muito dentro do navegador"
+    ],
+    "refined_version": "Um gerador de relatórios financeiros pessoais baseado em um único arquivo HTML que utiliza tecnologias client‑side (JavaScript, Web Workers, IndexedDB ou LocalStorage) para armazenar dados de forma segura e criptografada no navegador. O usuário pode importar dados via CSV/JSON, visualizar gráficos interativos (Chart.js ou D3.js), personalizar categorias e filtros, e exportar o relatório final em PDF ou como um arquivo HTML estático. Opcionalmente, o aplicativo oferece um modo de backup/encriptação de arquivos para que o usuário possa salvar cópias seguras em mídia externa, mantendo a operação 100% offline e sem necessidade de login ou servidores externos.",
+    "next_steps": [
+      "Definir o formato de importação/exportação de dados (CSV, JSON)",
+      "Projetar a arquitetura client‑side usando IndexedDB para armazenamento criptografado",
+      "Selecionar bibliotecas de visualização (ex.: Chart.js) e geração de PDF (ex.: jsPDF)",
+      "Implementar interface de usuário responsiva e fluxo de importação de dados",
+      "Desenvolver funções de cálculo financeiro (receitas, despesas, saldo, projeções)",
+      "Criar mecanismo de exportação do relatório em PDF/HTML",
+      "Testar desempenho e segurança com grandes volumes de dados",
+      "Documentar o uso, backup e restauração dos arquivos locais"
+    ]
+  }
+}

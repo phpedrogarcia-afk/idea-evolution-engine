@@ -1,0 +1,15 @@
+{
+  "cell_id": "IDEA-03-CONDITION_C",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-002",
+  "idea_id": "IDEA-03",
+  "condition": "CONDITION_C",
+  "raw_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "latency_seconds": 25.3,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "human_decision_requested": true,
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.4-IDEA-03-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Create a platform that links readers of rare books either through a geographic proximity map of neighbors or an asynchronous thematic feed matching obscure topics.\n- **Problema Interpretado:** Rare book readers lack an easy way to discover and connect with other enthusiasts nearby or with similar obscure interests, limiting sharing, discussion, and community building.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Geographic proximity map that shows nearby users who own rare books, enabling local meet‑ups and exchanges.\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** Location data provides a concrete, low‑latency way for users to arrange in‑person interactions, which is valuable for physical book sharing.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Asynchronous thematic feed that recommends users based on similarity of obscure book topics, allowing remote discussion and digital exchange.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Relies on accurate metadata classification of obscure themes, Potentially higher latency in forming relationships, May require more moderation to prevent spam\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 2\n\n## 7. Próximo Passo Recomendado\n\nRun a survey and low‑fidelity prototypes for both the map and feed to gauge user preference and privacy comfort.\n"
+}

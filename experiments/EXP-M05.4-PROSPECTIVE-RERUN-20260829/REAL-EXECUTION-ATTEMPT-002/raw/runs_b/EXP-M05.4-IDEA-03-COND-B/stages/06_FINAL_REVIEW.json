@@ -1,0 +1,33 @@
+{
+  "step_number": 6,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 21.284398555755615,
+  "delta_summary": "Review Final: recomendação='RECONSTRUCT', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\n  \"material_issues_remaining\": [\n    \"Garantias de privacidade da localização ainda não validadas\",\n    \"Baixa densidade de leitores pode impedir formação de rede útil\",\n    \"Riscos legais associados ao empréstimo de livros raros\",\n    \"Carga computacional elevada nos dispositivos móveis devido ao protocolo criptográfico\"\n  ],\n  \"essence_drift_detected\": false,\n  \"speculative_accretion_detected\": false,\n  \"ontology_contradiction_detected\": true,\n  \"drift_explanation\": \"O hash do Core testado difere do hash do Core aceito, indicando inconsistência entre a implementação verificada e a especificação original. Essa divergência pode gerar comportamentos inesperados e viola a consistência ontológica esperada.\",\n  \"unresolved_critical_issue\": true,\n  \"recommendation\": \"RECONSTRUCT\",\n  \"review_summary\": \"A ideia refinada mantém o propósito central de conectar leitores de livros raros, mas apresenta contradições ontológicas (hash divergente) e questões críticas não resolvidas, como privacidade de localização, densidade de usuários e carga computacional. Recomenda-se reconstruir a proposta abordando essas inconsistências antes de avançar.\"\n}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Garantias de privacidade da localização ainda não validadas",
+      "Baixa densidade de leitores pode impedir formação de rede útil",
+      "Riscos legais associados ao empréstimo de livros raros",
+      "Carga computacional elevada nos dispositivos móveis devido ao protocolo criptográfico"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": true,
+    "drift_explanation": "O hash do Core testado difere do hash do Core aceito, indicando inconsistência entre a implementação verificada e a especificação original. Essa divergência pode gerar comportamentos inesperados e viola a consistência ontológica esperada.",
+    "unresolved_critical_issue": true,
+    "recommendation": "RECONSTRUCT",
+    "review_summary": "A ideia refinada mantém o propósito central de conectar leitores de livros raros, mas apresenta contradições ontológicas (hash divergente) e questões críticas não resolvidas, como privacidade de localização, densidade de usuários e carga computacional. Recomenda-se reconstruir a proposta abordando essas inconsistências antes de avançar."
+  },
+  "error": null,
+  "timestamp": "2026-08-29T20:20:13.145872+00:00"
+}

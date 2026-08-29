@@ -1,0 +1,60 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 17.880199193954468,
+  "delta_summary": "2 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Data stored in plain HTML file is unencrypted and easily accessible\",\"why_it_matters\":\"Financial data is sensitive; exposure can lead to identity theft or fraud\",\"severity\":\"HIGH\",\"affected_part\":\"Data storage\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Manual data entry is error‑prone and no validation is defined\",\"why_it_matters\":\"Incorrect entries produce inaccurate reports, undermining trust in the tool\",\"severity\":\"MEDIUM\",\"affected_part\":\"User input handling\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"User's browser can execute complex JavaScript without external resources\",\"User can accurately input or import complete financial data manually\",\"Local HTML file size remains manageable for large transaction histories\"],\"contradictions\":[\"Claim of zero external dependencies conflicts with potential need for third‑party JS libraries for calculations\",\"Single HTML file claim contradicts requirement to handle extensive historical data which may exceed practical file size limits\"],\"failure_modes\":[\"Corrupted HTML file renders unreadable report\",\"Calculations overflow with large numeric values\",\"Rounding errors produce misleading totals\",\"Loss of data if file is accidentally deleted\"],\"missing_information\":[\"Specification of supported import file formats\",\"Details on calculation algorithms and handling of edge cases (e.g., leap years, currency conversion)\",\"Mechanism for data backup or versioning\",\"Performance expectations for large datasets\"],\"overclaims\":[\"Stating the solution works 100% offline without any external libraries when complex financial formulas typically rely on libraries\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Data stored in plain HTML file is unencrypted and easily accessible",
+        "why_it_matters": "Financial data is sensitive; exposure can lead to identity theft or fraud",
+        "severity": "HIGH",
+        "affected_part": "Data storage",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Manual data entry is error‑prone and no validation is defined",
+        "why_it_matters": "Incorrect entries produce inaccurate reports, undermining trust in the tool",
+        "severity": "MEDIUM",
+        "affected_part": "User input handling",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "User's browser can execute complex JavaScript without external resources",
+      "User can accurately input or import complete financial data manually",
+      "Local HTML file size remains manageable for large transaction histories"
+    ],
+    "contradictions": [
+      "Claim of zero external dependencies conflicts with potential need for third‑party JS libraries for calculations",
+      "Single HTML file claim contradicts requirement to handle extensive historical data which may exceed practical file size limits"
+    ],
+    "failure_modes": [
+      "Corrupted HTML file renders unreadable report",
+      "Calculations overflow with large numeric values",
+      "Rounding errors produce misleading totals",
+      "Loss of data if file is accidentally deleted"
+    ],
+    "missing_information": [
+      "Specification of supported import file formats",
+      "Details on calculation algorithms and handling of edge cases (e.g., leap years, currency conversion)",
+      "Mechanism for data backup or versioning",
+      "Performance expectations for large datasets"
+    ],
+    "overclaims": [
+      "Stating the solution works 100% offline without any external libraries when complex financial formulas typically rely on libraries"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T20:23:28.971182+00:00"
+}

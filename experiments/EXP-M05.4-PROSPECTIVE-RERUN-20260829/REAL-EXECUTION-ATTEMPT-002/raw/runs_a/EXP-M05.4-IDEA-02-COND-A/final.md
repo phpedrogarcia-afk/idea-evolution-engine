@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.4-IDEA-02-COND-A
+
+## Ideia Original
+> Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.
+
+## Resumo do Modelo
+Um aplicativo web que funciona como um repositório temporário para pensamentos, notas e ideias ainda não estruturadas, permitindo que o usuário capture rapidamente fragmentos de pensamento sem a necessidade de organização imediata.
+
+## Versão Refinada
+Um aplicativo chamado "Folha Solta" que oferece um espaço de captura instantânea de notas curtas, com tags opcionais, lembretes de revisão e visualização em estilo de mural de cartões; inclui recursos de limpeza automática (por exemplo, mover notas não revisadas após 30 dias para um arquivo) e integração com ferramentas de produtividade como Google Keep, Notion e Trello.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Facilidade de captura rápida, Baixa fricção para registrar ideias espontâneas, Reduz a ansiedade de esquecer pensamentos importantes, Pode ser integrado a fluxos de trabalho existentes, Metáfora poética que atrai usuários criativos
+- **Fracos:** Risco de acúmulo de lixo digital sem organização, Possibilidade de perda de valor se as notas não forem revisadas, Desafio de engajamento a longo prazo sem incentivos de limpeza, Sobrecarga de informações sem filtros ou prioridades, Necessidade de garantir sincronização segura e privacidade dos dados
+
+## Próximos Passos
+Conduzir pesquisa de usuários para validar a necessidade de um espaço de captura de ideias incompletas, Definir requisitos mínimos do MVP (captura rápida, tags opcionais, lembretes de revisão), Projetar UI inspirada em folhas soltas que enfatize a leveza e a temporariedade, Desenvolver protótipo funcional e implementar sincronização básica com nuvem, Realizar testes com um grupo piloto e coletar feedback sobre usabilidade e utilidade, Iterar o design incorporando mecanismos de limpeza e organização automática, Planejar estratégia de retenção, como notificações de revisão periódica, e lançar a versão pública

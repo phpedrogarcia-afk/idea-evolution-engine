@@ -1,0 +1,11 @@
+{
+  "run_id": "EXP-M05.4-IDEA-01-COND-C",
+  "created_at": "2026-08-29T20:16:02.077643+00:00",
+  "original_idea": "Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos.",
+  "metadata": {
+    "topology": "LEAN_IEE_L1",
+    "max_allowed_calls": 2,
+    "git_commit": "e2d6f0725b59d0a4f094c78fb04067dd96cdef47",
+    "environment_pid": 5060
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 2.1660985946655273,
+  "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Dependência de controle de notificações que nem todos os sistemas operacionais suportam\",\"why_it_matters\":\"Se o SO não permite que apps de terceiros bloqueiem notificações, a funcionalidade central falha, tornando o produto inútil\",\"severity\":\"HIGH\",\"affected_part\":\"Mecanismo de bloqueio de notificações\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Bloqueio indiscriminado pode impedir alertas críticos (ex.: chamadas de emergência, alarmes)\",\"why_it_matters\":\"Perder notificações importantes pode colocar a segurança do usuário em risco e gerar rejeição ao app\",\"severity\":\"HIGH\",\"affected_part\":\"Política de bloqueio de notificações\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Suposição de que todos os usuários preferem sessões fixas de 25 minutos\",\"why_it_matters\":\"Usuários com necessidades diferentes (ex.: tarefas curtas ou longas) podem achar o app inflexível e abandoná‑lo\",\"severity\":\"MEDIUM\",\"affected_part\":\"Configuração de tempo padrão\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"O sistema operacional permite controle de notificações por aplicativos de terceiros\",\"O usuário prefere sessões de 25 minutos (padrão pomodoro)\",\"O usuário valoriza uma interface minimalista\",\"O aplicativo tem permissão para operar em segundo plano\"],\"contradictions\":[\"O app se propõe a ser minimalista, mas requer permissões avançadas e diálogos de configuração\",\"Afirma bloquear todas as notificações, mas ainda precisa permitir alertas críticos, o que cria ambiguidade\"],\"failure_modes\":[\"Falha ao interceptar notificações após atualizações do SO\",\"Crash ao rodar em segundo plano consumindo recursos excessivos\",\"Usuário desinstala o app por bloqueio excessivo de alertas importantes\"],\"missing_information\":[\"Lista de sistemas operacionais e versões suportadas\",\"Mecanismo para whitelist de notificações críticas\",\"Opções de personalização de duração do timer\",\"Impacto no consumo de bateria e desempenho\"],\"overclaims\":[\"\\\"Manterá o foco do usuário\\\" em todos os cenários\",\"\\\"Bloqueará todas as notificações\\\" sem exceções\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Dependência de controle de notificações que nem todos os sistemas operacionais suportam",
+        "why_it_matters": "Se o SO não permite que apps de terceiros bloqueiem notificações, a funcionalidade central falha, tornando o produto inútil",
+        "severity": "HIGH",
+        "affected_part": "Mecanismo de bloqueio de notificações",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Bloqueio indiscriminado pode impedir alertas críticos (ex.: chamadas de emergência, alarmes)",
+        "why_it_matters": "Perder notificações importantes pode colocar a segurança do usuário em risco e gerar rejeição ao app",
+        "severity": "HIGH",
+        "affected_part": "Política de bloqueio de notificações",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Suposição de que todos os usuários preferem sessões fixas de 25 minutos",
+        "why_it_matters": "Usuários com necessidades diferentes (ex.: tarefas curtas ou longas) podem achar o app inflexível e abandoná‑lo",
+        "severity": "MEDIUM",
+        "affected_part": "Configuração de tempo padrão",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "O sistema operacional permite controle de notificações por aplicativos de terceiros",
+      "O usuário prefere sessões de 25 minutos (padrão pomodoro)",
+      "O usuário valoriza uma interface minimalista",
+      "O aplicativo tem permissão para operar em segundo plano"
+    ],
+    "contradictions": [
+      "O app se propõe a ser minimalista, mas requer permissões avançadas e diálogos de configuração",
+      "Afirma bloquear todas as notificações, mas ainda precisa permitir alertas críticos, o que cria ambiguidade"
+    ],
+    "failure_modes": [
+      "Falha ao interceptar notificações após atualizações do SO",
+      "Crash ao rodar em segundo plano consumindo recursos excessivos",
+      "Usuário desinstala o app por bloqueio excessivo de alertas importantes"
+    ],
+    "missing_information": [
+      "Lista de sistemas operacionais e versões suportadas",
+      "Mecanismo para whitelist de notificações críticas",
+      "Opções de personalização de duração do timer",
+      "Impacto no consumo de bateria e desempenho"
+    ],
+    "overclaims": [
+      "\"Manterá o foco do usuário\" em todos os cenários",
+      "\"Bloqueará todas as notificações\" sem exceções"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T20:13:28.179400+00:00"
+}

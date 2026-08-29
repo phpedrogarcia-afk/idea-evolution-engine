@@ -1,0 +1,62 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 25.79023241996765,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Ativar o modo Não Perturbe do sistema ao...' (hash: a5c6ba8deb67e0cb), 5 dependências, 7 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Ativar o modo Não Perturbe do sistema ao iniciar o pomodoro e permitir ao usuário definir uma lista branca de notificações críticas.\",\"feasibility_notes\":[\"A maioria dos sistemas operacionais modernos (Windows 10+, macOS 10.15+, várias distribuições Linux com GNOME/KDE) expõem APIs para ativar/desativar o modo Não Perturbe programaticamente.\",\"É necessário solicitar permissão ao usuário ou executar com privilégios adequados para modificar as configurações de DND.\",\"Manter uma lista branca requer acesso à fila de notificações ou a um filtro que permita exceções, o que pode variar entre plataformas.\",\"A implementação pode ser feita em frameworks multiplataforma (Electron, Qt) que encapsulam chamadas nativas.\",\"O tempo de resposta da API de DND costuma ser imediato, permitindo sincronização com o início do timer.\"],\"reality_dependencies\":[\"API nativa de controle do modo Não Perturbe disponível e documentada para cada SO alvo (Windows, macOS, Linux).\",\"Permissão do usuário concedida para alterar o estado de DND (ex.: via prompt de segurança ou configuração de política).\",\"Acesso ao gerenciador de notificações para identificar e permitir exceções da lista branca.\",\"Persistência de configurações de whitelist entre sessões (arquivo de configuração ou armazenamento seguro).\",\"Capacidade de restaurar o estado original de DND ao término do pomodoro.\"],\"claims_needing_evidence\":[\"Que o modo Não Perturbe pode ser ativado e desativado sem necessidade de reiniciar o sistema ou o usuário.\",\"Que notificações incluídas na whitelist são entregues mesmo com DND ativo em todas as plataformas testadas.\",\"Que a mudança de estado de DND não interfere em outras funcionalidades críticas do sistema (ex.: alarmes do calendário).\",\"Que a latência entre o comando de ativação e o efeito real é insignificante para a experiência do usuário.\"],\"potential_blockers\":[\"Restrições de segurança em macOS que exigem que o aplicativo esteja assinado e autorizado nas Preferências de Segurança.\",\"Políticas corporativas ou de gerenciamento de dispositivos que bloqueiam alterações de DND.\",\"Inconsistências entre diferentes ambientes de desktop Linux, onde nem todos suportam controle programático de DND.\",\"Necessidade de solicitar permissões elevadas que podem desencorajar usuários.\",\"Possível conflito com outros aplicativos que também gerenciam DND, levando a comportamento inesperado.\"],\"candidate_tests\":[\"Teste de ativação do modo Não Perturbe ao iniciar o pomodoro em Windows 10/11 e verificação de estado via API.\",\"Teste de ativação do modo Não Perturbe em macOS 13+ e confirmação visual/por API.\",\"Teste de ativação do modo Não Perturbe em Ubuntu GNOME 22.04 e verificação de estado.\",\"Teste de entrega de notificações incluídas na whitelist enquanto DND está ativo em cada SO.\",\"Teste de bloqueio de notificações não listadas na whitelist enquanto DND está ativo.\",\"Teste de restauração automática do estado original de DND ao término do timer.\",\"Teste de persistência da lista branca entre reinicializações do aplicativo.\"],\"exploratory_candidate_tests\":[\"Implementar e testar um serviço cross‑platform de filtragem de notificações (ex.: Electron + node‑notifier) que silencia notificações fora da whitelist quando DND nativo não está disponível.\",\"Desenvolver um modo foco interno com overlay escuro, pausa de áudio e detecção de sons críticos para reativar notificações críticas, e validar a precisão da detecção de áudio.\",\"Criar uma versão web leve do timer que usa a API de Notificações do navegador e um helper nativo opcional para bloquear notificações de aplicativos específicos, testando a integração entre web e helper.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Ativar o modo Não Perturbe do sistema ao iniciar o pomodoro e permitir ao usuário definir uma lista branca de notificações críticas.",
+    "feasibility_notes": [
+      "A maioria dos sistemas operacionais modernos (Windows 10+, macOS 10.15+, várias distribuições Linux com GNOME/KDE) expõem APIs para ativar/desativar o modo Não Perturbe programaticamente.",
+      "É necessário solicitar permissão ao usuário ou executar com privilégios adequados para modificar as configurações de DND.",
+      "Manter uma lista branca requer acesso à fila de notificações ou a um filtro que permita exceções, o que pode variar entre plataformas.",
+      "A implementação pode ser feita em frameworks multiplataforma (Electron, Qt) que encapsulam chamadas nativas.",
+      "O tempo de resposta da API de DND costuma ser imediato, permitindo sincronização com o início do timer."
+    ],
+    "reality_dependencies": [
+      "API nativa de controle do modo Não Perturbe disponível e documentada para cada SO alvo (Windows, macOS, Linux).",
+      "Permissão do usuário concedida para alterar o estado de DND (ex.: via prompt de segurança ou configuração de política).",
+      "Acesso ao gerenciador de notificações para identificar e permitir exceções da lista branca.",
+      "Persistência de configurações de whitelist entre sessões (arquivo de configuração ou armazenamento seguro).",
+      "Capacidade de restaurar o estado original de DND ao término do pomodoro."
+    ],
+    "claims_needing_evidence": [
+      "Que o modo Não Perturbe pode ser ativado e desativado sem necessidade de reiniciar o sistema ou o usuário.",
+      "Que notificações incluídas na whitelist são entregues mesmo com DND ativo em todas as plataformas testadas.",
+      "Que a mudança de estado de DND não interfere em outras funcionalidades críticas do sistema (ex.: alarmes do calendário).",
+      "Que a latência entre o comando de ativação e o efeito real é insignificante para a experiência do usuário."
+    ],
+    "potential_blockers": [
+      "Restrições de segurança em macOS que exigem que o aplicativo esteja assinado e autorizado nas Preferências de Segurança.",
+      "Políticas corporativas ou de gerenciamento de dispositivos que bloqueiam alterações de DND.",
+      "Inconsistências entre diferentes ambientes de desktop Linux, onde nem todos suportam controle programático de DND.",
+      "Necessidade de solicitar permissões elevadas que podem desencorajar usuários.",
+      "Possível conflito com outros aplicativos que também gerenciam DND, levando a comportamento inesperado."
+    ],
+    "candidate_tests": [
+      "Teste de ativação do modo Não Perturbe ao iniciar o pomodoro em Windows 10/11 e verificação de estado via API.",
+      "Teste de ativação do modo Não Perturbe em macOS 13+ e confirmação visual/por API.",
+      "Teste de ativação do modo Não Perturbe em Ubuntu GNOME 22.04 e verificação de estado.",
+      "Teste de entrega de notificações incluídas na whitelist enquanto DND está ativo em cada SO.",
+      "Teste de bloqueio de notificações não listadas na whitelist enquanto DND está ativo.",
+      "Teste de restauração automática do estado original de DND ao término do timer.",
+      "Teste de persistência da lista branca entre reinicializações do aplicativo."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar e testar um serviço cross‑platform de filtragem de notificações (ex.: Electron + node‑notifier) que silencia notificações fora da whitelist quando DND nativo não está disponível.",
+      "Desenvolver um modo foco interno com overlay escuro, pausa de áudio e detecção de sons críticos para reativar notificações críticas, e validar a precisão da detecção de áudio.",
+      "Criar uma versão web leve do timer que usa a API de Notificações do navegador e um helper nativo opcional para bloquear notificações de aplicativos específicos, testando a integração entre web e helper."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T20:15:40.069209+00:00"
+}

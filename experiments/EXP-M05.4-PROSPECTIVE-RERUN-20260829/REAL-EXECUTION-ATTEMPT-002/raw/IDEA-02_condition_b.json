@@ -1,0 +1,17 @@
+{
+  "cell_id": "IDEA-02-CONDITION_B",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-002",
+  "idea_id": "IDEA-02",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.",
+  "latency_seconds": 42.179,
+  "model_calls": 1,
+  "status": "FAILED",
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUm espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.\n\n### Intenção Humana Preservada\n\n\n### Mecanismo Central\n\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

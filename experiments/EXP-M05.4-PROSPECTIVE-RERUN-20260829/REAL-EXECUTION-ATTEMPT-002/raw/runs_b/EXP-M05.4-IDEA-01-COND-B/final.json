@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.4-IDEA-01-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos.",
+  "human_intent": "Criar um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueie as notificações de outros apps durante os blocos de foco de 25 minutos.",
+  "refined_idea": "Aplicativo desktop minimalista de pomodoro de 25 minutos que, ao iniciar, ativa o modo Não Perturbe do sistema e permite ao usuário definir uma lista branca de alertas críticos, com opção de escolher a duração da sessão.",
+  "core_mechanism": "Ativar o modo Não Perturbe do sistema ao iniciar o pomodoro e permitir ao usuário definir uma lista branca de notificações críticas.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "a5c6ba8deb67e0cb",
+  "tested_core_hash": "a5c6ba8deb67e0cb",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 2,
+  "recommended_next_step": "Desenvolver um protótipo que alterna o modo Não Perturbe do sistema e gerencia a whitelist, testá‑lo nos principais sistemas operacionais (Windows, macOS, Linux) e coletar feedback de usuários sobre a personalização da duração da sessão."
+}

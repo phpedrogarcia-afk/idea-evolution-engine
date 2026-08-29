@@ -1,0 +1,60 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 9.934475421905518,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Integrar com o modo nativo \"Não Perturbe...' (hash: 18ba826b97f710cc), 4 dependências, 6 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Integrar com o modo nativo \\\"Não Perturbe\\\" de cada sistema operacional, ativando‑o ao iniciar o pomodoro e configurando lista branca para alertas críticos.\",\"feasibility_notes\":[\"A integração com APIs nativas de \\\"Não Perturbe\\\" é suportada em alguns SOs (Windows 10+, macOS 10.15+, várias distribuições Linux com suporte a dbus), mas varia em detalhes de implementação.\",\"É necessário solicitar permissões de administrador ou de controle de privacidade em alguns sistemas para alterar o estado do modo \\\"Não Perturbe\\\".\",\"A criação e manutenção de uma lista branca de alertas críticos depende de APIs específicas de cada SO; nem todos oferecem controle granular por aplicativo ou categoria.\",\"A UI para gerenciamento da lista branca deve ser simples e sincronizar o estado com o SO em tempo real.\",\"É preciso garantir que o estado original do \\\"Não Perturbe\\\" seja restaurado ao final da sessão para evitar efeitos colaterais.\"],\"reality_dependencies\":[\"Acesso programático ao modo \\\"Não Perturbe\\\" via APIs ou interfaces de sistema (por exemplo, PowerShell/Registry no Windows, AppleScript/NSUserNotificationCenter no macOS, dbus/gnome-settings-daemon no Linux).\",\"Permissões de usuário ou elevação de privilégio para modificar o estado do \\\"Não Perturbe\\\" e definir exceções de whitelist.\",\"Documentação oficial ou SDK que exponha controle de exceções de notificação crítica em cada plataforma suportada.\",\"Mecanismo confiável para ler e restaurar o estado pré‑existente do \\\"Não Perturbe\\\" antes de iniciar o pomodoro.\"],\"claims_needing_evidence\":[\"É possível ativar e desativar programaticamente o modo \\\"Não Perturbe\\\" em todas as plataformas alvo sem violar políticas de segurança.\",\"As APIs nativas permitem a definição de uma lista branca de notificações críticas por aplicativo ou categoria.\",\"A alteração do estado do \\\"Não Perturbe\\\" não interfere em processos críticos do sistema ou de terceiros.\",\"O usuário pode conceder as permissões necessárias de forma não intrusiva (ex.: prompt de consentimento).\"],\"potential_blockers\":[\"Restrições de segurança que impedem aplicativos de terceiros de modificar o modo \\\"Não Perturbe\\\" (ex.: macOS Gatekeeper, Windows UAC).\",\"Ausência de API pública para gerenciamento de whitelist em certas distribuições Linux ou versões antigas de SOs.\",\"Necessidade de múltiplas implementações específicas por plataforma, aumentando a complexidade de manutenção.\",\"Possível rejeição da loja de aplicativos (Microsoft Store, Mac App Store) devido ao uso de APIs privilegiadas.\",\"Conflitos com outras aplicações que também controlam o modo \\\"Não Perturbe\\\" simultaneamente.\"],\"candidate_tests\":[\"Teste de ativação/desativação do modo \\\"Não Perturbe\\\" no Windows 10+ usando PowerShell/Registry e verificação do estado via UI do sistema.\",\"Teste de ativação/desativação no macOS 10.15+ usando AppleScript ou framework UserNotifications e validação visual do estado.\",\"Teste de controle do modo \\\"Não Perturbe\\\" em uma distribuição Linux popular (ex.: Ubuntu GNOME) via dbus e verificação com gsettings.\",\"Teste de criação de whitelist de notificações críticas no Windows usando a API de foco de assistência (Focus Assist).\",\"Teste de criação de exceções de notificação crítica no macOS via UNUserNotificationCenter e verificação de entrega de alerta de teste.\",\"Teste de restauração automática do estado original do \\\"Não Perturbe\\\" após o término de um ciclo de 25 minutos em cada plataforma.\"],\"exploratory_candidate_tests\":[\"Implementar camada visual de foco que silencia sons e oculta pop‑ups, avaliando a experiência do usuário sem alterar o modo \\\"Não Perturbe\\\" do SO.\",\"Desenvolver um daemon de background que intercepta chamadas de API de notificação e filtra por categoria, como alternativa ao controle nativo do SO.\",\"Avaliar uso de ferramentas de terceiros (ex.: FocusWriter, Cold Turkey) para comparar eficácia de bloqueio de notificações versus integração nativa.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Integrar com o modo nativo \"Não Perturbe\" de cada sistema operacional, ativando‑o ao iniciar o pomodoro e configurando lista branca para alertas críticos.",
+    "feasibility_notes": [
+      "A integração com APIs nativas de \"Não Perturbe\" é suportada em alguns SOs (Windows 10+, macOS 10.15+, várias distribuições Linux com suporte a dbus), mas varia em detalhes de implementação.",
+      "É necessário solicitar permissões de administrador ou de controle de privacidade em alguns sistemas para alterar o estado do modo \"Não Perturbe\".",
+      "A criação e manutenção de uma lista branca de alertas críticos depende de APIs específicas de cada SO; nem todos oferecem controle granular por aplicativo ou categoria.",
+      "A UI para gerenciamento da lista branca deve ser simples e sincronizar o estado com o SO em tempo real.",
+      "É preciso garantir que o estado original do \"Não Perturbe\" seja restaurado ao final da sessão para evitar efeitos colaterais."
+    ],
+    "reality_dependencies": [
+      "Acesso programático ao modo \"Não Perturbe\" via APIs ou interfaces de sistema (por exemplo, PowerShell/Registry no Windows, AppleScript/NSUserNotificationCenter no macOS, dbus/gnome-settings-daemon no Linux).",
+      "Permissões de usuário ou elevação de privilégio para modificar o estado do \"Não Perturbe\" e definir exceções de whitelist.",
+      "Documentação oficial ou SDK que exponha controle de exceções de notificação crítica em cada plataforma suportada.",
+      "Mecanismo confiável para ler e restaurar o estado pré‑existente do \"Não Perturbe\" antes de iniciar o pomodoro."
+    ],
+    "claims_needing_evidence": [
+      "É possível ativar e desativar programaticamente o modo \"Não Perturbe\" em todas as plataformas alvo sem violar políticas de segurança.",
+      "As APIs nativas permitem a definição de uma lista branca de notificações críticas por aplicativo ou categoria.",
+      "A alteração do estado do \"Não Perturbe\" não interfere em processos críticos do sistema ou de terceiros.",
+      "O usuário pode conceder as permissões necessárias de forma não intrusiva (ex.: prompt de consentimento)."
+    ],
+    "potential_blockers": [
+      "Restrições de segurança que impedem aplicativos de terceiros de modificar o modo \"Não Perturbe\" (ex.: macOS Gatekeeper, Windows UAC).",
+      "Ausência de API pública para gerenciamento de whitelist em certas distribuições Linux ou versões antigas de SOs.",
+      "Necessidade de múltiplas implementações específicas por plataforma, aumentando a complexidade de manutenção.",
+      "Possível rejeição da loja de aplicativos (Microsoft Store, Mac App Store) devido ao uso de APIs privilegiadas.",
+      "Conflitos com outras aplicações que também controlam o modo \"Não Perturbe\" simultaneamente."
+    ],
+    "candidate_tests": [
+      "Teste de ativação/desativação do modo \"Não Perturbe\" no Windows 10+ usando PowerShell/Registry e verificação do estado via UI do sistema.",
+      "Teste de ativação/desativação no macOS 10.15+ usando AppleScript ou framework UserNotifications e validação visual do estado.",
+      "Teste de controle do modo \"Não Perturbe\" em uma distribuição Linux popular (ex.: Ubuntu GNOME) via dbus e verificação com gsettings.",
+      "Teste de criação de whitelist de notificações críticas no Windows usando a API de foco de assistência (Focus Assist).",
+      "Teste de criação de exceções de notificação crítica no macOS via UNUserNotificationCenter e verificação de entrega de alerta de teste.",
+      "Teste de restauração automática do estado original do \"Não Perturbe\" após o término de um ciclo de 25 minutos em cada plataforma."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar camada visual de foco que silencia sons e oculta pop‑ups, avaliando a experiência do usuário sem alterar o modo \"Não Perturbe\" do SO.",
+      "Desenvolver um daemon de background que intercepta chamadas de API de notificação e filtra por categoria, como alternativa ao controle nativo do SO.",
+      "Avaliar uso de ferramentas de terceiros (ex.: FocusWriter, Cold Turkey) para comparar eficácia de bloqueio de notificações versus integração nativa."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-29T20:14:09.167282+00:00"
+}
