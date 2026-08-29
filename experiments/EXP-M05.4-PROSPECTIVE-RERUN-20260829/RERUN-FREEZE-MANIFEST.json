@@ -1,7 +1,7 @@
 {
   "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
   "blinding_revision": 3,
-  "frozen_at": "2026-08-29T17:59:00-03:00",
+  "frozen_at": "2026-08-29T18:10:00-03:00",
   "target_attempt_id": "REAL-EXECUTION-ATTEMPT-002",
   "git_branch": "main",
   "frozen_provider": "groq",
@@ -10,8 +10,9 @@
   "blind_reveal_location_class": "OUTSIDE_REPOSITORY_LOCAL_SECRET",
   "execution_plane_isolated": true,
   "blind_rendering_plane_isolated": true,
+  "self_enforcing_freeze_gate": true,
   "execution_critical_hashes": {
-    "execute_m05_4_frozen.py": "a45a58ed51a3db05da9b22cc3586a5313dab87b2f624591cda06009bbfa36308",
+    "execute_m05_4_frozen.py": "fb8aaac94019904bbf506406efe53b78d114def414b28317ba36a243ab0af03d",
     "render_m05_4_blind_review.py": "4600f03dca9855a928a019c33fc45f10dacef7029e4078898b61a0fa9af26dda",
     "m05_4_runner.py": "0bb4181f24e7c040ebd24f8fdb8e3e2cbcfe4a36e51710eaf7e41bbb5c7b146e",
     "baseline.py": "2e13d038640a5ec7f36a8054a6fe4ce55c162b966bd56ba7aee891ce12fc729e",

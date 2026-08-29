@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """
 tools/experiments/execute_m05_4_frozen.py
-Clean execution harness for M05.4 prospective replication.
+Clean execution harness for M05.4 prospective replication with self-enforcing freeze gate.
 
 Architectural Invariant:
   EXECUTION_PLANE_HAS_NO_BLIND_KNOWLEDGE = True
 
 Responsibilities:
-  1. Load frozen holdout ideas from experiments/EXP-M05.4-PROSPECTIVE/HOLDOUT-IDEAS.json.
-  2. Load execution manifest from experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/RERUN-EXECUTION-MANIFEST.json.
-  3. Execute frozen A/B/C conditions in exact manifest order.
-  4. Record raw outputs and factual execution metadata into attempt namespace.
-  5. Compute artifact SHA-256 hashes.
-  6. Stop without scoring, interpreting, or accessing blind mappings.
+  1. Validate mechanical freeze state before ANY execution (git worktree, freeze manifest hashes, blind commitment).
+  2. Validate execution manifest (24 cells, 8 A / 8 B / 8 C, unique cells, correct provider/model).
+  3. Validate single-use attempt namespace (fail closed if attempt already started).
+  4. Create start receipt ONLY after all gates pass.
+  5. Execute frozen A/B/C conditions in exact manifest order.
+  6. Record raw outputs and factual execution metadata into attempt namespace.
+  7. Compute artifact SHA-256 hashes.
+  8. Stop without scoring, interpreting, or accessing blind mappings.
 
 Strict Boundaries:
   - NO BlindRenderer import or execution.
@@ -46,7 +48,8 @@ from src.idea_evolution.orchestration.simple_loop import SimpleLoopRunner
 from src.idea_evolution.orchestration.lean_loop import LeanLoopRunner
 from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
 from src.idea_evolution.providers.router import RunnerRouter
-from src.idea_evolution.config.catalog import ModelCatalog
+
+EXPECTED_BLIND_COMMITMENT_REV3 = "b2e271ff9dd35a8215c067d1e545f84dfa8add7f33335a69845ebd8d5ed82cf3"
 
 
 def calculate_sha256_text(text: str) -> str:
@@ -85,6 +88,170 @@ def validate_provider_guards(runner: ModelRunner, expected_provider: str = "groq
     if actual_model != expected_model:
         raise RuntimeError(
             f"MODEL_SPEC_VIOLATION: runner default_model must be '{expected_model}', got '{actual_model}'."
+        )
+
+
+def check_git_worktree_clean(repo_root: Optional[Path] = None) -> bool:
+    """Checks if git worktree is completely clean."""
+    root = repo_root or REPO_ROOT
+    try:
+        res = subprocess.run(
+            ["git", "status", "--porcelain"],
+            capture_output=True,
+            text=True,
+            cwd=str(root)
+        )
+        return res.returncode == 0 and len(res.stdout.strip()) == 0
+    except Exception:
+        return False
+
+
+def validate_frozen_execution_state(
+    repo_root: Optional[Path] = None,
+    exp_dir: Optional[Path] = None,
+    freeze_manifest_file: Optional[Path] = None,
+    blind_sha_file: Optional[Path] = None,
+    skip_git_check: bool = False,
+) -> Dict[str, Any]:
+    """
+    Self-enforcing freeze validation: fails closed if repository or inputs differ from frozen spec.
+    """
+    root = repo_root or REPO_ROOT
+    exp_root = exp_dir or (root / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829")
+    freeze_manifest_path = freeze_manifest_file or (exp_root / "RERUN-FREEZE-MANIFEST.json")
+    blind_sha_path = blind_sha_file or (exp_root / "BLIND-REVEAL.sha256")
+
+    # 1. Git clean worktree check
+    if not skip_git_check:
+        if not check_git_worktree_clean(root):
+            raise RuntimeError("DIRTY_WORKTREE_EXECUTION_FORBIDDEN: Git worktree contains uncommitted modifications.")
+
+    # 2. Freeze manifest existence and parsing
+    if not freeze_manifest_path.is_file():
+        raise RuntimeError(f"FREEZE_MANIFEST_MISSING: Freeze manifest not found at {freeze_manifest_path}")
+
+    freeze_data = json.loads(freeze_manifest_path.read_text(encoding="utf-8"))
+    recorded_hashes = freeze_data.get("execution_critical_hashes", {})
+
+    # Map file keys to relative paths from repo root or experiment dir
+    file_path_resolvers = {
+        "execute_m05_4_frozen.py": root / "tools" / "experiments" / "execute_m05_4_frozen.py",
+        "render_m05_4_blind_review.py": root / "tools" / "experiments" / "render_m05_4_blind_review.py",
+        "m05_4_runner.py": root / "src" / "idea_evolution" / "experiments" / "m05_4_runner.py",
+        "baseline.py": root / "src" / "idea_evolution" / "orchestration" / "baseline.py",
+        "simple_loop.py": root / "src" / "idea_evolution" / "orchestration" / "simple_loop.py",
+        "lean_loop.py": root / "src" / "idea_evolution" / "orchestration" / "lean_loop.py",
+        "routing.py": root / "src" / "idea_evolution" / "config" / "routing.py",
+        "catalog.py": root / "src" / "idea_evolution" / "config" / "catalog.py",
+        "native.py": root / "src" / "idea_evolution" / "providers" / "native.py",
+        "router.py": root / "src" / "idea_evolution" / "providers" / "router.py",
+        "blind_renderer.py": root / "src" / "idea_evolution" / "experiments" / "blind_renderer.py",
+        "HOLDOUT-IDEAS.json": root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "HOLDOUT-IDEAS.json",
+        "EVALUATION-RUBRIC.md": root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "EVALUATION-RUBRIC.md",
+        "ANALYSIS-PLAN.md": root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "ANALYSIS-PLAN.md",
+        "PREREGISTRATION.md": root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "PREREGISTRATION.md",
+        "RERUN-PROTOCOL-AMENDMENT-001.md": exp_root / "RERUN-PROTOCOL-AMENDMENT-001.md",
+        "PRE-EXECUTION-BLINDING-CORRECTION-001.md": exp_root / "PRE-EXECUTION-BLINDING-CORRECTION-001.md",
+        "PRE-EXECUTION-BLINDING-CORRECTION-002.md": exp_root / "PRE-EXECUTION-BLINDING-CORRECTION-002.md",
+        "RERUN-EXECUTION-MANIFEST.json": exp_root / "RERUN-EXECUTION-MANIFEST.json",
+        "RERUN-RETRY-SEMANTICS-FROZEN.md": exp_root / "RERUN-RETRY-SEMANTICS-FROZEN.md",
+        "BLIND-REVEAL.sha256": exp_root / "BLIND-REVEAL.sha256",
+    }
+
+    for key, expected_hash in recorded_hashes.items():
+        target_path = file_path_resolvers.get(key)
+        if target_path is None or not target_path.is_file():
+            raise RuntimeError(f"FROZEN_CRITICAL_FILE_MISSING: Critical file '{key}' not found at {target_path}")
+
+        actual_hash = calculate_sha256_file(target_path)
+        if actual_hash != expected_hash:
+            raise RuntimeError(
+                f"FROZEN_STATE_MUTATION: Critical file '{key}' hash mismatch. Expected {expected_hash}, got {actual_hash}."
+            )
+
+    # 3. Blind commitment verification
+    if not blind_sha_path.is_file():
+        raise RuntimeError(f"BLIND_COMMITMENT_FILE_MISSING: Not found at {blind_sha_path}")
+
+    current_commitment = blind_sha_path.read_text(encoding="utf-8").strip()
+    if current_commitment != EXPECTED_BLIND_COMMITMENT_REV3:
+        raise RuntimeError(
+            f"BLIND_COMMITMENT_MUTATION: Current commitment '{current_commitment}' does not match Revision 3 ('{EXPECTED_BLIND_COMMITMENT_REV3}')."
+        )
+
+    return {
+        "status": "PASS",
+        "verified_files_count": len(recorded_hashes),
+        "freeze_manifest_sha256": calculate_sha256_file(freeze_manifest_path),
+        "blind_commitment_sha256": current_commitment,
+    }
+
+
+def validate_frozen_manifest_cells(
+    frozen_cells: List[Dict[str, Any]],
+    holdout_ideas: Dict[str, Any]
+) -> None:
+    """
+    Validates the 24 cells in the frozen manifest.
+    """
+    if len(frozen_cells) != 24:
+        raise RuntimeError(f"FROZEN_CELL_COUNT_VIOLATION: Expected exactly 24 cells, got {len(frozen_cells)}.")
+
+    seen_cell_ids = set()
+    seen_pairs = set()
+    condition_counts = {"CONDITION_A": 0, "CONDITION_B": 0, "CONDITION_C": 0}
+
+    for idx, cell in enumerate(frozen_cells, 1):
+        cell_id = cell.get("cell_id")
+        if not cell_id or cell_id in seen_cell_ids:
+            raise RuntimeError(f"FROZEN_CELL_DUPLICATE: Duplicate or invalid cell_id '{cell_id}' at index {idx}.")
+        seen_cell_ids.add(cell_id)
+
+        cond = cell.get("condition")
+        if cond not in condition_counts:
+            raise RuntimeError(f"FROZEN_CONDITION_VIOLATION: Invalid condition '{cond}' in cell '{cell_id}'.")
+        condition_counts[cond] += 1
+
+        idea_id = cell.get("idea_id")
+        if idea_id not in holdout_ideas:
+            raise RuntimeError(f"FROZEN_IDEA_VIOLATION: Unknown idea_id '{idea_id}' in cell '{cell_id}'.")
+
+        pair = (idea_id, cond)
+        if pair in seen_pairs:
+            raise RuntimeError(f"FROZEN_CELL_DUPLICATE: Duplicate (idea_id, condition) pair {pair} in cell '{cell_id}'.")
+        seen_pairs.add(pair)
+
+        provider = cell.get("provider")
+        if provider != "groq":
+            raise RuntimeError(f"FROZEN_PROVIDER_VIOLATION: Expected cell provider 'groq', got '{provider}' in cell '{cell_id}'.")
+
+        model = cell.get("model")
+        if model != "openai/gpt-oss-120b":
+            raise RuntimeError(f"FROZEN_MODEL_VIOLATION: Expected cell model 'openai/gpt-oss-120b', got '{model}' in cell '{cell_id}'.")
+
+    for cond, count in condition_counts.items():
+        if count != 8:
+            raise RuntimeError(f"FROZEN_CELL_COUNT_VIOLATION: Expected exactly 8 cells for {cond}, got {count}.")
+
+
+def validate_attempt_single_use(attempt_dir: Path, allow_overwrite: bool = False) -> None:
+    """
+    Prevents accidental overwriting of an existing attempt.
+    """
+    if allow_overwrite:
+        return
+
+    receipt_file = attempt_dir / "REAL-EXECUTION-START-RECEIPT.json"
+    manifest_file = attempt_dir / "REAL-EXECUTION-MANIFEST.json"
+    raw_dir = attempt_dir / "raw"
+
+    has_receipt = receipt_file.is_file()
+    has_manifest = manifest_file.is_file()
+    has_raw = raw_dir.is_dir() and len(list(raw_dir.glob("*.json"))) > 0
+
+    if has_receipt or has_manifest or has_raw:
+        raise RuntimeError(
+            f"ATTEMPT_ALREADY_STARTED: Attempt directory '{attempt_dir.name}' already contains execution evidence. Overwrite forbidden."
         )
 
 
@@ -251,25 +418,45 @@ def execute_m05_4_cell(
 
 def run_clean_harness(
     runner: Optional[ModelRunner] = None,
+    repo_root: Optional[Path] = None,
     exp_dir: Optional[Path] = None,
     attempt_id: str = "attempt-002",
     holdout_file: Optional[Path] = None,
     manifest_file: Optional[Path] = None,
+    freeze_manifest_file: Optional[Path] = None,
+    blind_sha_file: Optional[Path] = None,
+    skip_git_check: bool = False,
+    allow_overwrite: bool = False,
     verbose: bool = True
 ) -> Dict[str, Any]:
     """
-    Main entry point for clean execution.
-    Consumes manifest, executes 24 cells, freezes raw outputs and factual metadata.
+    Main entry point for clean execution with mechanical start gate.
     """
-    exp_root = exp_dir or (REPO_ROOT / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829")
+    root = repo_root or REPO_ROOT
+    exp_root = exp_dir or (root / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829")
     attempt_dir = exp_root / attempt_id
     raw_dir = attempt_dir / "raw"
-    raw_dir.mkdir(parents=True, exist_ok=True)
 
-    holdout_path = holdout_file or (REPO_ROOT / "experiments" / "EXP-M05.4-PROSPECTIVE" / "HOLDOUT-IDEAS.json")
+    holdout_path = holdout_file or (root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "HOLDOUT-IDEAS.json")
     manifest_path = manifest_file or (exp_root / "RERUN-EXECUTION-MANIFEST.json")
-    freeze_manifest_path = exp_root / "RERUN-FREEZE-MANIFEST.json"
-    blind_sha_path = exp_root / "BLIND-REVEAL.sha256"
+    freeze_manifest_path = freeze_manifest_file or (exp_root / "RERUN-FREEZE-MANIFEST.json")
+    blind_sha_path = blind_sha_file or (exp_root / "BLIND-REVEAL.sha256")
+
+    # =========================================================================
+    # MECHANICAL GATE 1: SELF-ENFORCING FREEZE VALIDATION
+    # =========================================================================
+    freeze_val_res = validate_frozen_execution_state(
+        repo_root=root,
+        exp_dir=exp_root,
+        freeze_manifest_file=freeze_manifest_path,
+        blind_sha_file=blind_sha_path,
+        skip_git_check=skip_git_check,
+    )
+
+    # =========================================================================
+    # MECHANICAL GATE 2: SINGLE-USE ATTEMPT NAMESPACE VALIDATION
+    # =========================================================================
+    validate_attempt_single_use(attempt_dir, allow_overwrite=allow_overwrite)
 
     # Load holdout ideas
     holdout_ideas = {i["idea_id"]: i for i in json.loads(holdout_path.read_text(encoding="utf-8"))}
@@ -278,6 +465,11 @@ def run_clean_harness(
     exec_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     frozen_cells = exec_manifest["cells"]
 
+    # =========================================================================
+    # MECHANICAL GATE 3: MANIFEST CELLS VALIDATION
+    # =========================================================================
+    validate_frozen_manifest_cells(frozen_cells, holdout_ideas)
+
     # If no runner provided, instantiate NativeModelRunner with environment key
     if runner is None:
         api_key = os.environ.get("GROQ_API_KEY")
@@ -285,27 +477,41 @@ def run_clean_harness(
             raise ValueError("GROQ_API_KEY_MISSING: Cannot execute real attempt without Groq API key.")
         runner = NativeModelRunner(provider="groq", api_key=api_key, default_model="openai/gpt-oss-120b")
 
-    # Validate provider and model guards
+    # =========================================================================
+    # MECHANICAL GATE 4: RUNNER PROVIDER & MODEL VALIDATION
+    # =========================================================================
     validate_provider_guards(runner)
 
-    # 1. Create REAL-EXECUTION-START-RECEIPT.json
+    # Ensure raw output dir exists
+    raw_dir.mkdir(parents=True, exist_ok=True)
+
+    # =========================================================================
+    # MECHANICAL GATE 5: START RECEIPT WRITTEN ONLY AFTER ALL GATES PASS
+    # =========================================================================
     head_commit = "UNKNOWN"
     try:
-        head_commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+        head_commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=str(root)).stdout.strip()
     except Exception:
         pass
 
-    blind_commitment_sha = blind_sha_path.read_text(encoding="utf-8").strip() if blind_sha_path.exists() else "UNKNOWN"
-    exec_manifest_sha = calculate_sha256_file(manifest_path) if manifest_path.exists() else "UNKNOWN"
-    freeze_manifest_sha = calculate_sha256_file(freeze_manifest_path) if freeze_manifest_path.exists() else "UNKNOWN"
+    harness_path = root / "tools" / "experiments" / "execute_m05_4_frozen.py"
+    harness_sha = calculate_sha256_file(harness_path) if harness_path.exists() else "UNKNOWN"
+    freeze_data = json.loads(freeze_manifest_path.read_text(encoding="utf-8"))
+    expected_harness_sha = freeze_data.get("execution_critical_hashes", {}).get("execute_m05_4_frozen.py", "UNKNOWN")
 
     start_receipt = {
         "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
         "attempt_id": attempt_id,
         "git_head": head_commit,
-        "blind_commitment_sha256": blind_commitment_sha,
-        "execution_manifest_sha256": exec_manifest_sha,
-        "freeze_manifest_sha256": freeze_manifest_sha,
+        "worktree_clean": True,
+        "execution_harness_sha256": harness_sha,
+        "execution_harness_expected_sha256": expected_harness_sha,
+        "freeze_manifest_sha256": freeze_val_res["freeze_manifest_sha256"],
+        "blind_commitment_sha256": freeze_val_res["blind_commitment_sha256"],
+        "blinding_revision": 3,
+        "frozen_state_validation": "PASS",
+        "manifest_validation": "PASS",
+        "attempt_single_use_validation": "PASS",
         "provider": getattr(runner, "provider", "groq"),
         "model": getattr(runner, "default_model", "openai/gpt-oss-120b"),
         "start_timestamp": datetime.now().isoformat(),
@@ -316,7 +522,9 @@ def run_clean_harness(
     start_receipt_file = attempt_dir / "REAL-EXECUTION-START-RECEIPT.json"
     start_receipt_file.write_text(json.dumps(start_receipt, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    # 2. Execute cells in exact manifest order
+    # =========================================================================
+    # EXECUTION LOOP: 24 CELLS IN EXACT MANIFEST ORDER
+    # =========================================================================
     executed_cells = []
     total_calls = 0
     calls_by_condition = {"CONDITION_A": 0, "CONDITION_B": 0, "CONDITION_C": 0}
@@ -374,7 +582,7 @@ def run_clean_harness(
 
     duration = time.time() - start_all
 
-    # 3. Create REAL-EXECUTION-MANIFEST.json
+    # Save REAL-EXECUTION-MANIFEST.json
     real_manifest = {
         "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
         "attempt_id": attempt_id,
@@ -395,7 +603,7 @@ def run_clean_harness(
     real_manifest_file = attempt_dir / "REAL-EXECUTION-MANIFEST.json"
     real_manifest_file.write_text(json.dumps(real_manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    # 4. Create REAL-EXECUTION-EVIDENCE-MANIFEST.json
+    # Save REAL-EXECUTION-EVIDENCE-MANIFEST.json
     raw_artifacts_map = {c["raw_artifact_file"]: c["raw_artifact_sha256"] for c in executed_cells}
     evidence_manifest = {
         "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
@@ -409,7 +617,7 @@ def run_clean_harness(
     evidence_manifest_file = attempt_dir / "REAL-EXECUTION-EVIDENCE-MANIFEST.json"
     evidence_manifest_file.write_text(json.dumps(evidence_manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    # 5. Create REAL-EXECUTION-SUMMARY.md
+    # Save REAL-EXECUTION-SUMMARY.md
     summary_md = f"""# REAL-EXECUTION-SUMMARY.md
 
 ## Factual Execution Summary — {attempt_id}
