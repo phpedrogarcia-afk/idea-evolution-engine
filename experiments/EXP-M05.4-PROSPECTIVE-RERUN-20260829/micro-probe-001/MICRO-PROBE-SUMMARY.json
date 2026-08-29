@@ -1,0 +1,51 @@
+{
+  "probe_executed_at": "2026-08-29T18:40:00.943358",
+  "total_calls_spent": 3,
+  "schemas_tested": 3,
+  "schema_a_admission": true,
+  "schema_b_admission": true,
+  "schema_c_admission": true,
+  "all_schemas_passed": true,
+  "verdict": "PIPE_PROVEN_FOR_REPRESENTATIVE_SCHEMAS",
+  "receipts": [
+    {
+      "timestamp": "2026-08-29T18:15:11.586419",
+      "round": 1,
+      "schema_code": "A",
+      "schema_name": "BaselineRefineOutput",
+      "stage_name": "BASELINE_REFINE",
+      "success": true,
+      "latency_seconds": 1.655,
+      "raw_response_present": true,
+      "structured_admission": true,
+      "error": "",
+      "retry_count": 0
+    },
+    {
+      "timestamp": "2026-08-29T18:15:15.497023",
+      "round": 1,
+      "schema_code": "B",
+      "schema_name": "UnderstandOutput",
+      "stage_name": "UNDERSTAND",
+      "success": true,
+      "latency_seconds": 2.91,
+      "raw_response_present": true,
+      "structured_admission": true,
+      "error": "",
+      "retry_count": 0
+    },
+    {
+      "timestamp": "2026-08-29T18:39:59.942624",
+      "round": 1,
+      "schema_code": "C",
+      "schema_name": "LeanFirstPassOutput",
+      "stage_name": "LEAN_FIRST_PASS",
+      "success": true,
+      "latency_seconds": 1483.445,
+      "raw_response_present": true,
+      "structured_admission": true,
+      "error": "",
+      "retry_count": 0
+    }
+  ]
+}
