@@ -1,0 +1,77 @@
+diff --git a/src/idea_evolution/experiments/m05_4_runner.py b/src/idea_evolution/experiments/m05_4_runner.py
+index dade019..48ca427 100644
+--- a/src/idea_evolution/experiments/m05_4_runner.py
++++ b/src/idea_evolution/experiments/m05_4_runner.py
+@@ -24,8 +24,10 @@ from src.idea_evolution.domain.early_epistemic_gate import DecisionDeltaEventTyp
+ 
+ 
+ REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+-EXP_DIR = REPO_ROOT / "experiments" / "EXP-M05.4-PROSPECTIVE"
++EXP_DIR = REPO_ROOT / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829"
+ RAW_DIR = EXP_DIR / "raw"
++HOLDOUT_FILE = REPO_ROOT / "experiments" / "EXP-M05.4-PROSPECTIVE" / "HOLDOUT-IDEAS.json"
++SEALED_REVEAL_FILE = Path.home() / ".fioideias" / "sealed" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829" / "BLIND-REVEAL.json"
+ 
+ 
+ def calculate_sha256_text(text: str) -> str:
+@@ -49,12 +51,22 @@ class M054ExperimentExecutor:
+         RAW_DIR.mkdir(parents=True, exist_ok=True)
+ 
+     def load_holdout_ideas(self) -> List[Dict[str, str]]:
+-        holdout_file = EXP_DIR / "HOLDOUT-IDEAS.json"
++        if (EXP_DIR / "HOLDOUT-IDEAS.json").exists():
++            holdout_file = EXP_DIR / "HOLDOUT-IDEAS.json"
++        elif HOLDOUT_FILE.exists():
++            holdout_file = HOLDOUT_FILE
++        else:
++            raise FileNotFoundError(f"HOLDOUT-IDEAS.json not found at {EXP_DIR} or {HOLDOUT_FILE}")
+         with open(holdout_file, "r", encoding="utf-8") as f:
+             return json.load(f)
+ 
+     def load_blind_mappings(self) -> Dict[str, Dict[str, str]]:
+-        reveal_file = EXP_DIR / "BLIND-REVEAL.json"
++        if SEALED_REVEAL_FILE.exists():
++            reveal_file = SEALED_REVEAL_FILE
++        elif (EXP_DIR / "BLIND-REVEAL.json").exists():
++            reveal_file = EXP_DIR / "BLIND-REVEAL.json"
++        else:
++            raise FileNotFoundError(f"BLIND-REVEAL.json not found at {SEALED_REVEAL_FILE} or {EXP_DIR}")
+         with open(reveal_file, "r", encoding="utf-8") as f:
+             data = json.load(f)
+             return data["mappings"]
+@@ -87,7 +99,7 @@ class M054ExperimentExecutor:
+ 
+         raw_artifact_file = RAW_DIR / f"{idea_id}_condition_a.json"
+         raw_payload = {
+-            "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
++            "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+             "idea_id": idea_id,
+             "condition": "CONDITION_A",
+             "raw_idea": raw_idea,
+@@ -145,7 +157,7 @@ class M054ExperimentExecutor:
+         calls = len(state.stage_history)
+         raw_artifact_file = RAW_DIR / f"{idea_id}_condition_b.json"
+         raw_payload = {
+-            "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
++            "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+             "idea_id": idea_id,
+             "condition": "CONDITION_B",
+             "raw_idea": raw_idea,
+@@ -190,7 +202,7 @@ class M054ExperimentExecutor:
+ 
+         raw_artifact_file = RAW_DIR / f"{idea_id}_condition_c.json"
+         raw_payload = {
+-            "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
++            "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+             "idea_id": idea_id,
+             "condition": "CONDITION_C",
+             "raw_idea": raw_idea,
+@@ -410,7 +422,7 @@ class M054ExperimentExecutor:
+         raw_manifest_path = EXP_DIR / "RAW-EXECUTION-MANIFEST.json"
+         with open(raw_manifest_path, "w", encoding="utf-8") as f:
+             json.dump({
+-                "experiment_id": "EXP-M05.4-PROSPECTIVE-20260827",
++                "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+                 "executed_at": datetime.now().isoformat(),
+                 "total_cells": len(raw_manifest_entries),
+                 "total_real_model_calls": total_calls,

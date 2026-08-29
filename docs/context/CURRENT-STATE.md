@@ -11,20 +11,20 @@
 - **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (PREFLIGHT M05.4 RERUN CONGELADO)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
 - **Status do Experimento M05.4 Original (EXP-M05.4-PROSPECTIVE-20260827):** `CONDITION_B_EXECUTION_INVALID / INVALIDATED_BEFORE_HUMAN_REVIEW` — Preservado como evidência histórica. Imutável.
-- **Status do Rerun M05.4 (EXP-M05.4-PROSPECTIVE-RERUN-20260829):** `M05.4_CLEAN_RERUN_PREFLIGHT_FROZEN`
-  - Patch P1 integrado em main (67f4adb, fast-forward).
-  - Guard de provider e modelo em `_validate_model_routing()`: RuntimeError antes de qualquer execução.
-  - 178/178 testes verdes. Python -O guard PASS.
-  - Protocolo de rerun congelado: RERUN-PROTOCOL-AMENDMENT-001.md.
-    - Novo mapeamento cego gerado criptograficamente (secrets.SystemRandom, Blinding Revision 2).
-    - Mapeamento antigo (seed 20260829 / b50b51cb...): `REVOKED_BEFORE_EXECUTION`.
-    - Novo compromisso: `826c35740b335278e79634bf9eb041644c5fddf45d8672346d8a7aecac5c74d2`.
-    - Segredo de revelação armazenado FORA do repositório (`SEALED_OUTSIDE_REPOSITORY` em `C:\Users\phped\.fioideias\sealed\EXP-M05.4-PROSPECTIVE-RERUN-20260829\BLIND-REVEAL.json`), não rastreado no git.
-    - Retry semantics congeladas. Freeze manifest regenerado com 18 hashes críticos.
-    - Prova determinística: ROUTING A/B/C = groq/openai/gpt-oss-120b. default-model não alcançável. wrong-provider não alcançável.
-    - Dry run final: 24 células PASS. HISTORICAL_EXPERIMENT_MUTATION = 0.
-    - **Execução Real:** NÃO EXECUTADA (requer autorização humana + GROQ_API_KEY)
-    - **Human Review:** NOT_STARTED
+- **Status do Rerun M05.4 (EXP-M05.4-PROSPECTIVE-RERUN-20260829):** `ATTEMPT_002_PREFLIGHT_FROZEN`
+  - **Tentativa 001:** `REAL-EXECUTION-ATTEMPT-001` classificada como `INVALID_FOR_PRIMARY_ANALYSIS` (harness alterado pós-freeze, telemetria unmeasured, labels FioED sintéticas; 7 células concluídas, interrompido na 8ª; artefatos brutos e patch do harness em quarentena).
+  - **Harness Limpo Isolado:**
+    - Plano de Execução: `tools/experiments/execute_m05_4_frozen.py` (`EXECUTION_PLANE_HAS_NO_BLIND_KNOWLEDGE = True`).
+    - Plano de Renderização Cega: `tools/experiments/render_m05_4_blind_review.py` (`BLIND_RENDERING_PLANE_HAS_NO_MODEL_EXECUTION = True`).
+    - Status Fail-Closed: Validação estrita de status sem inferência permissiva.
+    - Telemetria: Classificação explícita de evidência (`OBSERVED`, `UNKNOWN_NOT_INSTRUMENTED`).
+    - Labels FioED sintéticas removidas do harness de execução.
+  - **Blinding Revision 3:** Mapeamento novo gerado criptograficamente (seed revogado na rev 2). Compromisso: `b2e271ff9dd35a8215c067d1e545f84dfa8add7f33335a69845ebd8d5ed82cf3` em `BLIND-REVEAL.sha256`. Segredo armazenado em `C:\Users\phped\.fioideias\sealed\EXP-M05.4-PROSPECTIVE-RERUN-20260829\BLIND-REVEAL-REV3.json`.
+  - **Freeze Manifest:** Regenerado com 21 hashes críticos (`RERUN-FREEZE-MANIFEST.json`).
+  - **Testes Offline do Harness:** 3/3 PASS em `tests/test_m05_4_clean_harness.py` (24 células, isolamento negativo de blind, isolamento de provedor do renderizador).
+  - **Mutação de Experimento Histórico:** 0 (`EXP-M05.4-PROSPECTIVE/` 100% intacto).
+  - **Status de Execução Real:** `FROZEN_NOT_EXECUTED` (0 chamadas reais no Attempt-002).
+  - **Human Review:** `NOT_STARTED`
 - **Status do Kernel FioED (Fio Epistemic Dynamics):** `PROSPECTIVE_VALIDATION_PENDING`
 - **Status do Protótipo Lean IEE (L1):** `PROSPECTIVE_VALIDATION_PENDING`
 - **Status do Simple Loop de Produção:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e 100% inalterado).
