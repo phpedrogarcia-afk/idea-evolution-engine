@@ -217,6 +217,9 @@ class EarlyEpistemicGate:
         negative_knowledge_pool: Optional[List[NegativeKnowledgeRecord]] = None,
         human_intervention_flag: bool = False,
     ) -> GateEvaluationResult:
+        if first_pass is None:
+            raise ValueError("EarlyEpistemicGate.evaluate: first_pass cannot be None.")
+
         original_text = source_anchor.original_content
         grounding_records: List[GroundingRecord] = []
         authority_spoofing = False

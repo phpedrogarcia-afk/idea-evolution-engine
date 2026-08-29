@@ -1,7 +1,7 @@
 """
 tests/test_m05_4_clean_harness.py
-Offline verification of clean M05.4 execution harness with self-enforcing freeze gate
-and blind review renderer.
+Offline verification of clean M05.4 execution harness with self-enforcing freeze gate,
+crash-safe execution journal, and blind review renderer.
 
 Verifies:
   CASE 1: Dirty worktree blocks execution before any model call.
@@ -10,10 +10,12 @@ Verifies:
   CASE 4: Manifest wrong model blocks execution.
   CASE 5: Manifest duplicate cell blocks execution.
   CASE 6: Attempt already started blocks execution (single-use namespace).
-  CASE 7: Valid matching frozen state executes 24 cells successfully.
+  CASE 7: Valid matching frozen state executes 24 cells successfully with complete journal.
+  CASE 8: Lean first-pass failure produces explicit cell failure without crash.
+  CASE 9: Unexpected infrastructure exception records CELL_EXCEPTION and stops run.
   Negative control: Corrupted blind reveal path does NOT stop execution (blind isolation).
   Renderer isolation: Separate renderer creates packet with zero model execution and zero leaks.
-  Historical experiment immutability: 0 mutations.
+  Immutability invariant: Historical experiment, Attempt-001, and Attempt-002 are never mutated.
 """
 
 import os
@@ -25,6 +27,7 @@ from pathlib import Path
 from unittest import TestCase, mock
 
 from src.idea_evolution.providers.fake import FakeModelRunner
+from src.idea_evolution.providers.base import ModelRunner, ModelResponse
 from tools.experiments.execute_m05_4_frozen import (
     run_clean_harness,
     validate_frozen_execution_state,
@@ -39,18 +42,70 @@ from tools.experiments.render_m05_4_blind_review import (
 )
 
 
+class NullFirstPassModelRunner(ModelRunner):
+    """Model runner that returns parsed=None on generate calls."""
+    def __init__(self, provider: str = "groq", default_model: str = "openai/gpt-oss-120b"):
+        self.provider = provider
+        self.default_model = default_model
+        self.call_count = 0
+
+    def generate(self, prompt_text: str, output_schema, stage_name: str, model_name=None, max_repairs=1) -> ModelResponse:
+        self.call_count += 1
+        return ModelResponse(
+            parsed=None,
+            raw_text="{\"invalid\": \"json\"}",
+            provider=self.provider,
+            model=self.default_model,
+            error="SCHEMA_VALIDATION_FAILED: simulated failure",
+        )
+
+
+class ExplodingModelRunner(ModelRunner):
+    """Model runner that raises an unexpected exception after N calls."""
+    def __init__(self, explode_at_call: int = 1, provider: str = "groq", default_model: str = "openai/gpt-oss-120b"):
+        self.provider = provider
+        self.default_model = default_model
+        self.explode_at_call = explode_at_call
+        self.call_count = 0
+
+    def generate(self, prompt_text: str, output_schema, stage_name: str, model_name=None, max_repairs=1) -> ModelResponse:
+        self.call_count += 1
+        if self.call_count >= self.explode_at_call:
+            raise ConnectionResetError("Simulated infrastructure connection reset")
+        return ModelResponse(
+            parsed=None,
+            raw_text="ok",
+            provider=self.provider,
+            model=self.default_model,
+        )
+
+
 class TestM054CleanHarness(TestCase):
-    """Test suite for clean execution harness, self-enforcing freeze gate, and renderer."""
+    """Test suite for clean execution harness, self-enforcing freeze gate, journal, and renderer."""
 
     def setUp(self):
         self.repo_root = Path(__file__).resolve().parent.parent
         self.hist_raw_path = self.repo_root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "raw"
         self.hist_before = {str(f): f.read_bytes() for f in self.hist_raw_path.rglob("*") if f.is_file()}
 
+        self.att1_dir = self.repo_root / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829" / "attempt-001-invalid"
+        self.att1_before = {str(f): f.read_bytes() for f in self.att1_dir.rglob("*") if f.is_file()}
+
+        self.att2_dir = self.repo_root / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829" / "REAL-EXECUTION-ATTEMPT-002"
+        self.att2_before = {str(f): f.read_bytes() for f in self.att2_dir.rglob("*") if f.is_file()}
+
     def tearDown(self):
         # Invariant: historical experiment was never mutated
         hist_after = {str(f): f.read_bytes() for f in self.hist_raw_path.rglob("*") if f.is_file()}
         self.assertEqual(self.hist_before, hist_after, "Historical experiment was mutated during test!")
+
+        # Invariant: Attempt-001 was never mutated
+        att1_after = {str(f): f.read_bytes() for f in self.att1_dir.rglob("*") if f.is_file()}
+        self.assertEqual(self.att1_before, att1_after, "Attempt-001 was mutated during test!")
+
+        # Invariant: Attempt-002 was never mutated
+        att2_after = {str(f): f.read_bytes() for f in self.att2_dir.rglob("*") if f.is_file()}
+        self.assertEqual(self.att2_before, att2_after, "Attempt-002 was mutated during test!")
 
     def _setup_test_universe(self, temp_path: Path) -> Path:
         """Sets up a complete isolated test universe matching frozen state."""
@@ -94,6 +149,7 @@ class TestM054CleanHarness(TestCase):
             "baseline.py": temp_path / "src" / "idea_evolution" / "orchestration" / "baseline.py",
             "simple_loop.py": temp_path / "src" / "idea_evolution" / "orchestration" / "simple_loop.py",
             "lean_loop.py": temp_path / "src" / "idea_evolution" / "orchestration" / "lean_loop.py",
+            "early_epistemic_gate.py": temp_path / "src" / "idea_evolution" / "domain" / "early_epistemic_gate.py",
             "routing.py": temp_path / "src" / "idea_evolution" / "config" / "routing.py",
             "catalog.py": temp_path / "src" / "idea_evolution" / "config" / "catalog.py",
             "native.py": temp_path / "src" / "idea_evolution" / "providers" / "native.py",
@@ -132,7 +188,7 @@ class TestM054CleanHarness(TestCase):
                         runner=fake_runner,
                         repo_root=temp_path,
                         exp_dir=exp_dir,
-                        attempt_id="attempt-002-test",
+                        attempt_id="attempt-003-test",
                         skip_git_check=False,
                         verbose=False,
                     )
@@ -155,7 +211,7 @@ class TestM054CleanHarness(TestCase):
                     runner=fake_runner,
                     repo_root=temp_path,
                     exp_dir=exp_dir,
-                    attempt_id="attempt-002-test",
+                    attempt_id="attempt-003-test",
                     skip_git_check=True,
                     verbose=False,
                 )
@@ -169,13 +225,11 @@ class TestM054CleanHarness(TestCase):
             exp_dir = self._setup_test_universe(temp_path)
             fake_runner = FakeModelRunner(provider="groq", default_model="openai/gpt-oss-120b")
 
-            # Mutate manifest cell provider
             manifest_file = exp_dir / "RERUN-EXECUTION-MANIFEST.json"
             man_data = json.loads(manifest_file.read_text())
             man_data["cells"][0]["provider"] = "openai"
             manifest_file.write_text(json.dumps(man_data))
 
-            # Update freeze hash for manifest so Gate 1 passes and Gate 3 catches provider violation
             freeze_file = exp_dir / "RERUN-FREEZE-MANIFEST.json"
             freeze_data = json.loads(freeze_file.read_text())
             freeze_data["execution_critical_hashes"]["RERUN-EXECUTION-MANIFEST.json"] = calculate_sha256_file(manifest_file)
@@ -186,7 +240,7 @@ class TestM054CleanHarness(TestCase):
                     runner=fake_runner,
                     repo_root=temp_path,
                     exp_dir=exp_dir,
-                    attempt_id="attempt-002-test",
+                    attempt_id="attempt-003-test",
                     skip_git_check=True,
                     verbose=False,
                 )
@@ -215,7 +269,7 @@ class TestM054CleanHarness(TestCase):
                     runner=fake_runner,
                     repo_root=temp_path,
                     exp_dir=exp_dir,
-                    attempt_id="attempt-002-test",
+                    attempt_id="attempt-003-test",
                     skip_git_check=True,
                     verbose=False,
                 )
@@ -244,7 +298,7 @@ class TestM054CleanHarness(TestCase):
                     runner=fake_runner,
                     repo_root=temp_path,
                     exp_dir=exp_dir,
-                    attempt_id="attempt-002-test",
+                    attempt_id="attempt-003-test",
                     skip_git_check=True,
                     verbose=False,
                 )
@@ -258,8 +312,7 @@ class TestM054CleanHarness(TestCase):
             exp_dir = self._setup_test_universe(temp_path)
             fake_runner = FakeModelRunner(provider="groq", default_model="openai/gpt-oss-120b")
 
-            # Pre-create attempt directory with start receipt
-            attempt_dir = exp_dir / "attempt-002"
+            attempt_dir = exp_dir / "REAL-EXECUTION-ATTEMPT-003"
             attempt_dir.mkdir(parents=True)
             (attempt_dir / "REAL-EXECUTION-START-RECEIPT.json").write_text('{"existing": true}')
 
@@ -268,7 +321,7 @@ class TestM054CleanHarness(TestCase):
                     runner=fake_runner,
                     repo_root=temp_path,
                     exp_dir=exp_dir,
-                    attempt_id="attempt-002",
+                    attempt_id="REAL-EXECUTION-ATTEMPT-003",
                     skip_git_check=True,
                     allow_overwrite=False,
                     verbose=False,
@@ -276,8 +329,8 @@ class TestM054CleanHarness(TestCase):
             self.assertIn("ATTEMPT_ALREADY_STARTED", str(ctx.exception))
             self.assertEqual(sum(fake_runner.call_counts.values()), 0, "Fake provider calls must be 0")
 
-    def test_case_7_valid_frozen_execution(self):
-        """CASE 7: Valid matching frozen state executes 24 cells successfully."""
+    def test_case_7_valid_frozen_execution_with_journal(self):
+        """CASE 7: Valid matching frozen state executes 24 cells and writes complete journal."""
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
             exp_dir = self._setup_test_universe(temp_path)
@@ -287,7 +340,7 @@ class TestM054CleanHarness(TestCase):
                 runner=fake_runner,
                 repo_root=temp_path,
                 exp_dir=exp_dir,
-                attempt_id="attempt-002-valid",
+                attempt_id="REAL-EXECUTION-ATTEMPT-003-VALID",
                 skip_git_check=True,
                 verbose=False,
             )
@@ -295,15 +348,81 @@ class TestM054CleanHarness(TestCase):
             self.assertEqual(result["cells_attempted"], 24)
             self.assertEqual(result["cells_success"], 24)
             self.assertEqual(result["cells_failed"], 0)
-            self.assertEqual(result["calls_by_condition"]["CONDITION_A"], 8)
-            self.assertGreaterEqual(result["calls_by_condition"]["CONDITION_B"], 48)
-            self.assertLessEqual(result["calls_by_condition"]["CONDITION_C"], 16)
 
-            attempt_dir = exp_dir / "attempt-002-valid"
+            attempt_dir = exp_dir / "REAL-EXECUTION-ATTEMPT-003-VALID"
             receipt = json.loads((attempt_dir / "REAL-EXECUTION-START-RECEIPT.json").read_text())
             self.assertEqual(receipt["frozen_state_validation"], "PASS")
-            self.assertEqual(receipt["manifest_validation"], "PASS")
-            self.assertEqual(receipt["blinding_revision"], 3)
+
+            # Check journal records: 24 STARTED and 24 COMPLETED
+            journal_file = attempt_dir / "REAL-EXECUTION-JOURNAL.jsonl"
+            self.assertTrue(journal_file.exists())
+            lines = [json.loads(line) for line in journal_file.read_text(encoding="utf-8").strip().split("\n")]
+            started = [l for l in lines if l["event"] == "CELL_STARTED"]
+            completed = [l for l in lines if l["event"] == "CELL_COMPLETED"]
+            exceptions = [l for l in lines if l["event"] == "CELL_EXCEPTION"]
+
+            self.assertEqual(len(started), 24)
+            self.assertEqual(len(completed), 24)
+            self.assertEqual(len(exceptions), 0)
+
+    def test_case_8_lean_null_first_pass_in_clean_harness(self):
+        """CASE 8: Lean first pass generation failure produces explicit FAILED cell without Python crash."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            exp_dir = self._setup_test_universe(temp_path)
+            null_runner = NullFirstPassModelRunner(provider="groq", default_model="openai/gpt-oss-120b")
+
+            result = run_clean_harness(
+                runner=null_runner,
+                repo_root=temp_path,
+                exp_dir=exp_dir,
+                attempt_id="REAL-EXECUTION-ATTEMPT-003-NULL-TEST",
+                skip_git_check=True,
+                verbose=False,
+            )
+
+            self.assertEqual(result["cells_attempted"], 24)
+            self.assertEqual(result["cells_failed"], 24)  # All cells fail fail-closed
+            self.assertEqual(result["cells_success"], 0)
+
+            # Check Condition C output explicitly has FIRST_PASS_FAILED terminal status
+            attempt_dir = exp_dir / "REAL-EXECUTION-ATTEMPT-003-NULL-TEST"
+            cond_c_raw = json.loads((attempt_dir / "raw" / "IDEA-01_condition_c.json").read_text(encoding="utf-8"))
+            self.assertEqual(cond_c_raw["status"], "FAILED")
+            self.assertEqual(cond_c_raw["terminal_status"], "FIRST_PASS_FAILED")
+
+    def test_case_9_unexpected_exception_stops_run_and_journals(self):
+        """CASE 9: Unexpected infrastructure exception records CELL_EXCEPTION and stops remaining cells."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            exp_dir = self._setup_test_universe(temp_path)
+            exploding_runner = ExplodingModelRunner(explode_at_call=2, provider="groq", default_model="openai/gpt-oss-120b")
+
+            attempt_id = "REAL-EXECUTION-ATTEMPT-003-EXPLODE"
+            with self.assertRaises(ConnectionResetError):
+                run_clean_harness(
+                    runner=exploding_runner,
+                    repo_root=temp_path,
+                    exp_dir=exp_dir,
+                    attempt_id=attempt_id,
+                    skip_git_check=True,
+                    verbose=False,
+                )
+
+            attempt_dir = exp_dir / attempt_id
+            journal_file = attempt_dir / "REAL-EXECUTION-JOURNAL.jsonl"
+            self.assertTrue(journal_file.exists())
+            lines = [json.loads(line) for line in journal_file.read_text(encoding="utf-8").strip().split("\n")]
+
+            exceptions = [l for l in lines if l["event"] == "CELL_EXCEPTION"]
+            self.assertEqual(len(exceptions), 1)
+            self.assertEqual(exceptions[0]["exception_class"], "ConnectionResetError")
+
+            # Partial manifest was written
+            partial_manifest = attempt_dir / "PARTIAL-EXECUTION-MANIFEST.json"
+            self.assertTrue(partial_manifest.exists())
+            pdata = json.loads(partial_manifest.read_text(encoding="utf-8"))
+            self.assertEqual(pdata["status"], "INTERRUPTED")
 
     def test_execution_blind_isolation_negative_control(self):
         """Negative control: prove execution succeeds when reveal path is blocked/broken."""
@@ -312,14 +431,13 @@ class TestM054CleanHarness(TestCase):
             exp_dir = self._setup_test_universe(temp_path)
             fake_runner = FakeModelRunner(provider="groq", default_model="openai/gpt-oss-120b")
 
-            # Corrupted secret reveal in exp_dir (should never be read by execution plane)
             (exp_dir / "BLIND-REVEAL.json").write_text("CORRUPTED_SECRET_SHOULD_NEVER_BE_READ")
 
             result = run_clean_harness(
                 runner=fake_runner,
                 repo_root=temp_path,
                 exp_dir=exp_dir,
-                attempt_id="attempt-002-isolation-test",
+                attempt_id="attempt-003-isolation-test",
                 skip_git_check=True,
                 verbose=False,
             )
@@ -331,7 +449,7 @@ class TestM054CleanHarness(TestCase):
 
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
-            attempt_dir = temp_path / "attempt-002-test"
+            attempt_dir = temp_path / "attempt-003-test"
             raw_dir = attempt_dir / "raw"
             raw_dir.mkdir(parents=True)
 

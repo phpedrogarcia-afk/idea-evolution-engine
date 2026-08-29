@@ -93,7 +93,40 @@ class LeanLoopRunner:
             model_name=self.model_name,
         )
 
-        first_pass_output: LeanFirstPassOutput = res_1.parsed  # type: ignore
+        first_pass_output: Optional[LeanFirstPassOutput] = res_1.parsed  # type: ignore
+
+        # Prevenção de falha por first_pass nulo (fail-closed sem dereferência indevida)
+        if first_pass_output is None:
+            failed_md = f"# Pacote Lean de Maturação — Run {tracer.run_id}\n\n**Status:** `FIRST_PASS_FAILED` | **Chamadas de Modelo Utilizadas:** {calls_used} (Max: {LEAN_L1_MAX_MODEL_CALLS})\n\n---\n\n### Falha na Execução\nNão foi possível gerar a análise inicial da ideia: {res_1.error or 'Erro de validação ou geração estruturada.'}"
+            final_data = {
+                "run_id": tracer.run_id,
+                "topology": "LEAN_IEE_L1",
+                "original_idea": original_idea,
+                "total_model_calls": calls_used,
+                "gate_outcome": "UNKNOWN",
+                "escalation_reason": "UNKNOWN",
+                "authority_spoofing_detected": False,
+                "unsupported_candidate_count": 0,
+                "terminal_status": "FIRST_PASS_FAILED",
+                "decision_progress_detected": False,
+                "error": res_1.error,
+            }
+            (tracer.run_dir / "final.json").write_text(json.dumps(final_data, indent=2, ensure_ascii=False), encoding="utf-8")
+            (tracer.run_dir / "final.md").write_text(failed_md, encoding="utf-8")
+            return LeanRunResult(
+                run_id=tracer.run_id,
+                source_anchor=source_anchor,
+                first_pass=None,
+                gate_result=None,
+                escalation_result=None,
+                decision_delta=None,
+                epistemic_rent=None,
+                total_model_calls=calls_used,
+                terminal_status="FIRST_PASS_FAILED",
+                human_decision_requested=False,
+                decision_progress_detected=False,
+                final_markdown=failed_md,
+            )
 
         # 3. Avaliação determinística do Early Epistemic Gate (Custo = 0 chamadas)
         gate_result = EarlyEpistemicGate.evaluate(

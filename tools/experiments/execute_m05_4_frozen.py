@@ -141,6 +141,7 @@ def validate_frozen_execution_state(
         "baseline.py": root / "src" / "idea_evolution" / "orchestration" / "baseline.py",
         "simple_loop.py": root / "src" / "idea_evolution" / "orchestration" / "simple_loop.py",
         "lean_loop.py": root / "src" / "idea_evolution" / "orchestration" / "lean_loop.py",
+        "early_epistemic_gate.py": root / "src" / "idea_evolution" / "domain" / "early_epistemic_gate.py",
         "routing.py": root / "src" / "idea_evolution" / "config" / "routing.py",
         "catalog.py": root / "src" / "idea_evolution" / "config" / "catalog.py",
         "native.py": root / "src" / "idea_evolution" / "providers" / "native.py",
@@ -260,7 +261,8 @@ def execute_m05_4_cell(
     idea_data: Dict[str, Any],
     runner: ModelRunner,
     raw_dir: Path,
-    expected_model: str = "openai/gpt-oss-120b"
+    expected_model: str = "openai/gpt-oss-120b",
+    attempt_id: str = "REAL-EXECUTION-ATTEMPT-003",
 ) -> Dict[str, Any]:
     """
     Executes a single cell according to frozen condition semantics.
@@ -304,7 +306,7 @@ def execute_m05_4_cell(
         raw_payload = {
             "cell_id": cell_id,
             "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
-            "attempt_id": "REAL-EXECUTION-ATTEMPT-002",
+            "attempt_id": attempt_id,
             "idea_id": idea_id,
             "condition": "CONDITION_A",
             "raw_idea": raw_idea,
@@ -342,7 +344,7 @@ def execute_m05_4_cell(
         raw_payload = {
             "cell_id": cell_id,
             "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
-            "attempt_id": "REAL-EXECUTION-ATTEMPT-002",
+            "attempt_id": attempt_id,
             "idea_id": idea_id,
             "condition": "CONDITION_B",
             "raw_idea": raw_idea,
@@ -393,7 +395,7 @@ def execute_m05_4_cell(
         raw_payload = {
             "cell_id": cell_id,
             "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
-            "attempt_id": "REAL-EXECUTION-ATTEMPT-002",
+            "attempt_id": attempt_id,
             "idea_id": idea_id,
             "condition": "CONDITION_C",
             "raw_idea": raw_idea,
@@ -416,11 +418,48 @@ def execute_m05_4_cell(
     return raw_payload
 
 
+def _append_journal(journal_path: Path, entry: Dict[str, Any]) -> None:
+    """Atomic append of a single JSON line to the execution journal."""
+    with open(journal_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
+def _save_partial_manifest(
+    attempt_dir: Path,
+    attempt_id: str,
+    executed_cells: List[Dict[str, Any]],
+    total_calls: int,
+    calls_by_condition: Dict[str, int],
+    cell_status_counts: Dict[str, int],
+    b_reconstructions: int,
+    runner: ModelRunner,
+    exp_root: Path
+) -> None:
+    """Saves a partial execution manifest if an unhandled exception interrupts execution."""
+    partial_manifest = {
+        "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+        "attempt_id": attempt_id,
+        "interrupted_at": datetime.now().isoformat(),
+        "status": "INTERRUPTED",
+        "total_cells_completed": len(executed_cells),
+        "cells_success": cell_status_counts["SUCCESS"],
+        "cells_failed": cell_status_counts["FAILED"],
+        "total_semantic_model_calls": total_calls,
+        "calls_by_condition": calls_by_condition,
+        "b_reconstructions": b_reconstructions,
+        "provider": getattr(runner, "provider", "groq"),
+        "model": getattr(runner, "default_model", "openai/gpt-oss-120b"),
+        "completed_cells": executed_cells,
+    }
+    partial_manifest_file = attempt_dir / "PARTIAL-EXECUTION-MANIFEST.json"
+    partial_manifest_file.write_text(json.dumps(partial_manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
 def run_clean_harness(
     runner: Optional[ModelRunner] = None,
     repo_root: Optional[Path] = None,
     exp_dir: Optional[Path] = None,
-    attempt_id: str = "attempt-002",
+    attempt_id: str = "REAL-EXECUTION-ATTEMPT-003",
     holdout_file: Optional[Path] = None,
     manifest_file: Optional[Path] = None,
     freeze_manifest_file: Optional[Path] = None,
@@ -430,12 +469,13 @@ def run_clean_harness(
     verbose: bool = True
 ) -> Dict[str, Any]:
     """
-    Main entry point for clean execution with mechanical start gate.
+    Main entry point for clean execution with mechanical start gate and crash-safe journal.
     """
     root = repo_root or REPO_ROOT
     exp_root = exp_dir or (root / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829")
     attempt_dir = exp_root / attempt_id
     raw_dir = attempt_dir / "raw"
+    journal_file = attempt_dir / "REAL-EXECUTION-JOURNAL.jsonl"
 
     holdout_path = holdout_file or (root / "experiments" / "EXP-M05.4-PROSPECTIVE" / "HOLDOUT-IDEAS.json")
     manifest_path = manifest_file or (exp_root / "RERUN-EXECUTION-MANIFEST.json")
@@ -523,7 +563,7 @@ def run_clean_harness(
     start_receipt_file.write_text(json.dumps(start_receipt, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # =========================================================================
-    # EXECUTION LOOP: 24 CELLS IN EXACT MANIFEST ORDER
+    # EXECUTION LOOP: 24 CELLS IN EXACT MANIFEST ORDER (CRASH-SAFE JOURNALED)
     # =========================================================================
     executed_cells = []
     total_calls = 0
@@ -545,7 +585,35 @@ def run_clean_harness(
         if verbose:
             print(f"[{idx}/{len(frozen_cells)}] Executing {cell_id}...", end="", flush=True)
 
-        res = execute_m05_4_cell(cell, idea_data, runner, raw_dir)
+        # Record CELL_STARTED in journal
+        _append_journal(journal_file, {
+            "event": "CELL_STARTED",
+            "execution_order": idx,
+            "cell_id": cell_id,
+            "idea_id": idea_id,
+            "condition": cond,
+            "timestamp": datetime.now().isoformat(),
+        })
+
+        try:
+            res = execute_m05_4_cell(cell, idea_data, runner, raw_dir, attempt_id=attempt_id)
+        except Exception as exc:
+            # Record CELL_EXCEPTION in journal and persist partial manifest
+            _append_journal(journal_file, {
+                "event": "CELL_EXCEPTION",
+                "execution_order": idx,
+                "cell_id": cell_id,
+                "idea_id": idea_id,
+                "condition": cond,
+                "exception_class": type(exc).__name__,
+                "error_message": str(exc),
+                "timestamp": datetime.now().isoformat(),
+            })
+            _save_partial_manifest(
+                attempt_dir, attempt_id, executed_cells, total_calls,
+                calls_by_condition, cell_status_counts, b_reconstructions, runner, exp_root
+            )
+            raise
 
         c_calls = res.get("model_calls", 0)
         c_status = res.get("status", "FAILED")
@@ -575,6 +643,20 @@ def run_clean_harness(
                 "transport_retries": "UNKNOWN_NOT_INSTRUMENTED",
                 "structured_output_repairs": "UNKNOWN_NOT_INSTRUMENTED",
             }
+        })
+
+        # Record CELL_COMPLETED in journal
+        _append_journal(journal_file, {
+            "event": "CELL_COMPLETED",
+            "execution_order": idx,
+            "cell_id": cell_id,
+            "idea_id": idea_id,
+            "condition": cond,
+            "status": c_status,
+            "model_calls": c_calls,
+            "raw_artifact_file": str(raw_fpath.relative_to(exp_root)),
+            "raw_artifact_sha256": raw_hash,
+            "timestamp": datetime.now().isoformat(),
         })
 
         if verbose:
