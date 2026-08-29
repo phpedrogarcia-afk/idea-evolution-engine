@@ -1,0 +1,48 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "generated_at": "2026-08-29T17:07:00-03:00",
+  "seed": 20260829,
+  "mappings": {
+    "IDEA-01": {
+      "RESULT_1": "CONDITION_A",
+      "RESULT_2": "CONDITION_B",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-02": {
+      "RESULT_1": "CONDITION_C",
+      "RESULT_2": "CONDITION_A",
+      "RESULT_3": "CONDITION_B"
+    },
+    "IDEA-03": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_C",
+      "RESULT_3": "CONDITION_A"
+    },
+    "IDEA-04": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_C",
+      "RESULT_3": "CONDITION_A"
+    },
+    "IDEA-05": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_C",
+      "RESULT_3": "CONDITION_A"
+    },
+    "IDEA-06": {
+      "RESULT_1": "CONDITION_B",
+      "RESULT_2": "CONDITION_A",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-07": {
+      "RESULT_1": "CONDITION_A",
+      "RESULT_2": "CONDITION_B",
+      "RESULT_3": "CONDITION_C"
+    },
+    "IDEA-08": {
+      "RESULT_1": "CONDITION_C",
+      "RESULT_2": "CONDITION_B",
+      "RESULT_3": "CONDITION_A"
+    }
+  },
+  "note": "DO NOT OPEN BEFORE HUMAN REVIEW IS COMPLETE AND SCORES ARE FROZEN."
+}

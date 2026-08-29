@@ -1,0 +1,255 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "original_invalid_id": "EXP-M05.4-PROSPECTIVE-20260827",
+  "amendment": "RERUN-PROTOCOL-AMENDMENT-001.md",
+  "frozen_at": "2026-08-29T17:07:00-03:00",
+  "total_cells": 24,
+  "cells_by_condition": {
+    "CONDITION_A": 8,
+    "CONDITION_B": 8,
+    "CONDITION_C": 8
+  },
+  "scheduling_policy": "NO_POST_OUTPUT_CHANGES",
+  "cells": [
+    {
+      "cell_id": "IDEA-01-CONDITION_A",
+      "idea_id": "IDEA-01",
+      "suite_class": "SIMPLE_CLEAR_PRODUCT",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 1,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-01-CONDITION_B",
+      "idea_id": "IDEA-01",
+      "suite_class": "SIMPLE_CLEAR_PRODUCT",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 2,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-01-CONDITION_C",
+      "idea_id": "IDEA-01",
+      "suite_class": "SIMPLE_CLEAR_PRODUCT",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 3,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-02-CONDITION_A",
+      "idea_id": "IDEA-02",
+      "suite_class": "FERTILE_POETIC_IDEA",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 4,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-02-CONDITION_B",
+      "idea_id": "IDEA-02",
+      "suite_class": "FERTILE_POETIC_IDEA",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 5,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-02-CONDITION_C",
+      "idea_id": "IDEA-02",
+      "suite_class": "FERTILE_POETIC_IDEA",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 6,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-03-CONDITION_A",
+      "idea_id": "IDEA-03",
+      "suite_class": "TWO_PLAUSIBLE_MECHANISMS",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 7,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-03-CONDITION_B",
+      "idea_id": "IDEA-03",
+      "suite_class": "TWO_PLAUSIBLE_MECHANISMS",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 8,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-03-CONDITION_C",
+      "idea_id": "IDEA-03",
+      "suite_class": "TWO_PLAUSIBLE_MECHANISMS",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 9,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-04-CONDITION_A",
+      "idea_id": "IDEA-04",
+      "suite_class": "EXPLICIT_HUMAN_CONSTRAINTS",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 10,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-04-CONDITION_B",
+      "idea_id": "IDEA-04",
+      "suite_class": "EXPLICIT_HUMAN_CONSTRAINTS",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 11,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-04-CONDITION_C",
+      "idea_id": "IDEA-04",
+      "suite_class": "EXPLICIT_HUMAN_CONSTRAINTS",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 12,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-05-CONDITION_A",
+      "idea_id": "IDEA-05",
+      "suite_class": "FACTUAL_REALITY_UNKNOWN",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 13,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-05-CONDITION_B",
+      "idea_id": "IDEA-05",
+      "suite_class": "FACTUAL_REALITY_UNKNOWN",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 14,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-05-CONDITION_C",
+      "idea_id": "IDEA-05",
+      "suite_class": "FACTUAL_REALITY_UNKNOWN",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 15,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-06-CONDITION_A",
+      "idea_id": "IDEA-06",
+      "suite_class": "NORMATIVE_HUMAN_PREFERENCE",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 16,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-06-CONDITION_B",
+      "idea_id": "IDEA-06",
+      "suite_class": "NORMATIVE_HUMAN_PREFERENCE",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 17,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-06-CONDITION_C",
+      "idea_id": "IDEA-06",
+      "suite_class": "NORMATIVE_HUMAN_PREFERENCE",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 18,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-07-CONDITION_A",
+      "idea_id": "IDEA-07",
+      "suite_class": "ATTRACTIVE_UNSUPPORTED_FEATURE_TRAP",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 19,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-07-CONDITION_B",
+      "idea_id": "IDEA-07",
+      "suite_class": "ATTRACTIVE_UNSUPPORTED_FEATURE_TRAP",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 20,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-07-CONDITION_C",
+      "idea_id": "IDEA-07",
+      "suite_class": "ATTRACTIVE_UNSUPPORTED_FEATURE_TRAP",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 21,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-08-CONDITION_A",
+      "idea_id": "IDEA-08",
+      "suite_class": "MIXED_UF_UG",
+      "condition": "CONDITION_A",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 22,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-08-CONDITION_B",
+      "idea_id": "IDEA-08",
+      "suite_class": "MIXED_UF_UG",
+      "condition": "CONDITION_B",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 23,
+      "status": "PENDING"
+    },
+    {
+      "cell_id": "IDEA-08-CONDITION_C",
+      "idea_id": "IDEA-08",
+      "suite_class": "MIXED_UF_UG",
+      "condition": "CONDITION_C",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "execution_order": 24,
+      "status": "PENDING"
+    }
+  ]
+}

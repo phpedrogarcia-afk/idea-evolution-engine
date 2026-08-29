@@ -1,0 +1,115 @@
+{
+  "checkpoint_id": "CP-20260829-028",
+  "created_at": "2026-08-29T17:10:00-03:00",
+  "author": "Antigravity (Google DeepMind)",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "M05.4 accepted patch integrated (67f4adb ff-merged to main). Provider guard P1 dead. EXP-M05.4-PROSPECTIVE-RERUN-20260829 preflight frozen: protocol amendment, new blind commitment, 24-cell execution manifest, retry semantics, freeze manifest. Dry run pass. Historical experiment unchanged. Ready for M05.4 real 24-cell execution.",
+  "repository": {
+    "default_branch": "main",
+    "remote_origin": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
+    "head_commit": "67f4adb09ea058944839f9d2bdabb006e458d476",
+    "secret_scan_status": "PASS",
+    "worktree_state": "CLEAN"
+  },
+  "experiment_state": {
+    "original_invalid_id": "EXP-M05.4-PROSPECTIVE-20260827",
+    "original_status": "INVALIDATED_BEFORE_HUMAN_REVIEW",
+    "rerun_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+    "rerun_status": "M05.4_CLEAN_RERUN_PREFLIGHT_FROZEN",
+    "execution_status": "NOT_EXECUTED",
+    "human_review_status": "NOT_STARTED",
+    "blind_commitment_sha256": "b50b51cb9dcbb71fb5e5ac99af3d0d5deaf6fd4a3b3257f68e1e45e61d926d46",
+    "blind_reveal_status": "SEALED",
+    "cells_frozen": 24
+  },
+  "patch_integration": {
+    "accepted_patch_head": "67f4adb",
+    "merge_method": "fast-forward",
+    "p1_status": "CLOSED",
+    "p0_status": "NONE",
+    "regression_tests": 5,
+    "total_tests": 178
+  },
+  "completed_tasks": [
+    "INTEGRATE: fast-forward merge 67f4adb into main",
+    "POST_INTEGRATION_GATE: 178/178 tests, validators, git diff --check PASS",
+    "NEW_EXP_ID: EXP-M05.4-PROSPECTIVE-RERUN-20260829 created",
+    "PROTOCOL_AMENDMENT: RERUN-PROTOCOL-AMENDMENT-001.md frozen",
+    "BLIND_MAPPING: new BLIND-REVEAL.json generated (seed=20260829), sealed",
+    "EXECUTION_MANIFEST: 24 cells frozen pre-execution",
+    "RETRY_SEMANTICS: RERUN-RETRY-SEMANTICS-FROZEN.md frozen",
+    "FREEZE_MANIFEST: RERUN-FREEZE-MANIFEST.json with 17 critical hashes",
+    "DETERMINISTIC_PROOF: routing A/B/C proven, default-model unreachable, wrong-provider unreachable",
+    "FINAL_DRY_RUN: 24 cells PASS, HISTORICAL_EXPERIMENT_MUTATION=0",
+    "SCAR_RECORDED: HISTORICAL_EXPERIMENT_PREVIOUSLY_MUTATED_BY_TEST_PATH",
+    "KNOWLEDGE_DEBT: FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md preserved, not activated"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/RERUN-PROTOCOL-AMENDMENT-001.md",
+    "experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/BLIND-REVEAL.json",
+    "experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/BLIND-REVEAL.sha256",
+    "experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/RERUN-EXECUTION-MANIFEST.json",
+    "experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/RERUN-RETRY-SEMANTICS-FROZEN.md",
+    "experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/RERUN-FREEZE-MANIFEST.json",
+    "docs/intelligence/FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md",
+    "docs/context/checkpoints/CP-20260829-028.md",
+    "docs/context/checkpoints/CP-20260829-028.json"
+  ],
+  "known_risks": [
+    "Historical artifact mutation scar: RESTORED, monitor in next dry run"
+  ],
+  "readiness_verdict": {
+    "PATCH_INTEGRATED": true,
+    "P1_CLOSED": true,
+    "PREFLIGHT_FROZEN": true,
+    "DRY_RUN_PASS": true,
+    "HISTORICAL_EXPERIMENT_INTACT": true,
+    "READY_FOR_REAL_EXECUTION": true,
+    "FOUNDATION_READY": true
+  },
+  "next_exact_action": "M05.4 REAL 24-CELL EXECUTION with EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "authorized_next_scope": [
+    "Execute 24 real provider calls against Groq openai/gpt-oss-120b",
+    "Generate raw artifacts under experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/raw/",
+    "Generate new blind review packet",
+    "NO theory changes, NO rubric changes, NO holdout changes"
+  ],
+  "do_not_repeat": [
+    "Do not reopen routing audit",
+    "Do not activate FIOOS-TO-FIOIDEIAS knowledge transfer before M05.4 closes",
+    "Do not touch original invalid experiment EXP-M05.4-PROSPECTIVE-20260827",
+    "Do not open BLIND-REVEAL.json for either experiment before review is complete"
+  ],
+  "recovery_notes": "python -m unittest discover -s tests -p test_*.py (178 tests expected)",
+  "new_decisions": [
+    "P1_PROVIDER_SPEC_BYPASS_CLOSED: Guard implementado em _validate_model_routing() com RuntimeError antes de qualquer execucao de condicao",
+    "EXP_RERUN_IDENTITY: EXP-M05.4-PROSPECTIVE-RERUN-20260829 e identidade separada e independente do experimento original invalidado",
+    "EXECUTION_MANIFEST_FROZEN: 24 celulas congeladas pre-execucao em RERUN-EXECUTION-MANIFEST.json",
+    "RETRY_SEMANTICS_FROZEN: Taxonomia TRANSPORT/REPAIR/SEMANTIC/RECONSTRUCTION explicitamente definida",
+    "KNOWLEDGE_TRANSFER_DEFERRED: FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md preservado mas nao ativado durante M05.4"
+  ],
+  "tests_executed": [
+    "validate_context.py (100% integro)",
+    "validate_intelligence.py (100% integro)",
+    "178/178 tests passing (5 novos testes de regressao P1 em tests/test_m05_4_provider_guard.py)",
+    "python -O provider guard: PASS",
+    "negative control: PASS (old guard silently passed wrong-provider)",
+    "24-cell isolated dry run: PASS, HISTORICAL_EXPERIMENT_MUTATION=0"
+  ],
+  "unresolved_questions": [
+    "RU-LEAN-IEE-001: Menor arquitetura condicional que produz mais Decision Delta por chamada que o baseline",
+    "OQ-001: Metrica Deterministica de Saturacao Semantica",
+    "OQ-002: Extensao de Falsificacao para Hipoteses Subjetivas",
+    "OQ-003: Limiares Praticos de Ativacao do Modo Multiagente",
+    "OQ-004: Renderizacao Grafica C-K sem Poluicao Ontologica"
+  ],
+  "known_contradictions": [
+    "CON-001: Escopo do MVP reconciliado como Simple Idea Evolution Loop (Resolvido)",
+    "CON-002: E-values vs Oraculos Qualitativos (Preservada)",
+    "CON-003: Custo de Coordenacao Multiagente (Preservada)"
+  ],
+  "blockers": [
+    "Execucao real M05.4 requer GROQ_API_KEY valida fornecida pelo operador humano",
+    "Avaliacao humana bloqueada ate execucao real ser concluida"
+  ]
+}

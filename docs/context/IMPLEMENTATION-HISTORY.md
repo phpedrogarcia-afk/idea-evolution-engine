@@ -5,6 +5,22 @@
 
 ---
 
+### [MS-M05.4-P1-INTEGRATE-CP028] Integracao do Patch P1 + Freeze do Rerun M05.4 (CP-028)
+- **Data:** 2026-08-29
+- **Autor / Agente:** Antigravity (Google DeepMind)
+- **Checkpoint:** CP-20260829-028
+- **Objetivo:** Integrar o patch aceito (67f4adb, P1 provider-spec bypass fix) em main e congelar o protocolo completo de rerun limpo para EXP-M05.4-PROSPECTIVE-RERUN-20260829.
+- **O que Mudou:**
+  - Fast-forward merge de `deepseek/m05.4-preflight-hardening-20260827` (67f4adb) em `main`.
+  - `_validate_model_routing()`: GUARD 1 (provider) + GUARD 2 (model), RuntimeError, python -O proof.
+  - 5 testes de regressao adicionados (`tests/test_m05_4_provider_guard.py`). 178/178 PASS.
+  - `EXP-M05.4-PROSPECTIVE-RERUN-20260829/`: RERUN-PROTOCOL-AMENDMENT-001.md, BLIND-REVEAL.json selado (compromisso `b50b51cb...`), RERUN-EXECUTION-MANIFEST.json (24 celulas), RERUN-RETRY-SEMANTICS-FROZEN.md, RERUN-FREEZE-MANIFEST.json (17 hashes).
+  - `docs/intelligence/FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md` preservado, nao ativado.
+  - Dry run final: 24 celulas PASS, HISTORICAL_EXPERIMENT_MUTATION = 0.
+- **Resultado:** `COMPLETE` — M05.4 clean rerun preflight congelado. Pronto para execucao real.
+
+---
+
 ### [MS-001] Fundação Conceitual e Constitucional v0.1 (Fase 0)
 - **Data:** 2026-08-26
 - **Autor / Agente:** Antigravity (Google DeepMind)
