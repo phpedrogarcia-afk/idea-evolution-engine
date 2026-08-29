@@ -1,0 +1,14 @@
+{
+  "cell_id": "IDEA-05-CONDITION_A",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "idea_id": "IDEA-05",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã.",
+  "latency_seconds": 0.203,
+  "model_calls": 1,
+  "status": "FAILED",
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {},
+  "rendered_semantic_text": "### Resumo\n\n\n### Versão Refinada\n\n\n### Pontos Fortes e Fracos\n- **Fortes:** \n- **Fracos:** \n\n### Próximos Passos\n"
+}

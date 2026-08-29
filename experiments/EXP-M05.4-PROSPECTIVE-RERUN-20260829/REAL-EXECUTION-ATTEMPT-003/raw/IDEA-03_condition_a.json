@@ -1,0 +1,14 @@
+{
+  "cell_id": "IDEA-03-CONDITION_A",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "idea_id": "IDEA-03",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "latency_seconds": 0.223,
+  "model_calls": 1,
+  "status": "FAILED",
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {},
+  "rendered_semantic_text": "### Resumo\n\n\n### Versão Refinada\n\n\n### Pontos Fortes e Fracos\n- **Fortes:** \n- **Fracos:** \n\n### Próximos Passos\n"
+}

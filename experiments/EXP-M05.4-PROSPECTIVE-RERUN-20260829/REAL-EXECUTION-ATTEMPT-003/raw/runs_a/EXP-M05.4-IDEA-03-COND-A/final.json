@@ -1,0 +1,8 @@
+{
+  "run_id": "EXP-M05.4-IDEA-03-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "success": false,
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {}
+}

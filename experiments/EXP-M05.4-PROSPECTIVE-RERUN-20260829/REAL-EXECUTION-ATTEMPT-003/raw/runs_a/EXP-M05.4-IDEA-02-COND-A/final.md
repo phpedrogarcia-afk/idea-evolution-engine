@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.4-IDEA-02-COND-A
+
+## Ideia Original
+> Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.
+
+## Resumo do Modelo
+Um aplicativo/web que oferece um espaço digital temporário onde usuários podem capturar e armazenar pensamentos, ideias ou notas incompletas sem a necessidade de organização imediata, permitindo que retornem a eles quando estiverem prontos.
+
+## Versão Refinada
+Um aplicativo chamado "Folha Solta" que funciona como um "inbox" de ideias, permitindo captura rápida via texto, voz ou imagem, com tags opcionais, lembretes de revisão e um algoritmo de sugestão que periodicamente destaca itens não revisados, incentivando a limpeza e a migração para sistemas de organização quando o usuário estiver pronto.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Baixa fricção para captura rápida, Ajuda a reduzir a ansiedade de esquecer ideias, Flexibilidade de formatos (texto, áudio, imagem), Inspira criatividade ao permitir incubação de ideias, Pode integrar com ferramentas de organização posteriores
+- **Fracos:** Risco de acúmulo de lixo digital se não houver limpeza, Falta de estrutura pode dificultar recuperação futura, Possível sobrecarga de informações sem priorização, Desafio de garantir segurança e privacidade dos pensamentos sensíveis, Pode competir com apps de notas já existentes
+
+## Próximos Passos
+Definir personas e casos de uso, Desenhar fluxo de captura e revisão, Escolher plataforma (mobile/web) e tecnologias, Desenvolver MVP com funcionalidades básicas de captura e lembrete, Testar com usuários piloto e coletar feedback sobre organização vs. acúmulo, Iterar com recursos de tags, busca e integração com apps de produtividade, Planejar estratégia de privacidade e criptografia de dados

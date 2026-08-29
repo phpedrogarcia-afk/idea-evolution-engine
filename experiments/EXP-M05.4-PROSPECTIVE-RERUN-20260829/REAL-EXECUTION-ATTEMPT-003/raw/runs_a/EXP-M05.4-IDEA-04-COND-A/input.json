@@ -1,0 +1,10 @@
+{
+  "run_id": "EXP-M05.4-IDEA-04-COND-A",
+  "created_at": "2026-08-29T21:01:59.907238+00:00",
+  "original_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "8ad728806b014041c45c9c281475dd096d362307",
+    "environment_pid": 3472
+  }
+}

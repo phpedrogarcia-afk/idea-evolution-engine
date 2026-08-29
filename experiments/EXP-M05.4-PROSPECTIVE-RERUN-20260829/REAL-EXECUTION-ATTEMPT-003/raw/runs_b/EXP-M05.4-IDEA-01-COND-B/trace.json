@@ -1,0 +1,85 @@
+{
+  "run_id": "EXP-M05.4-IDEA-01-COND-B",
+  "status": "FAILED",
+  "total_duration_seconds": 5.305478572845459,
+  "total_stages_executed": 2,
+  "git_commit": "8ad728806b014041c45c9c281475dd096d362307",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 1,
+      "latency_seconds": 5.107951402664185,
+      "delta_summary": "Intenção extraída: 'Criar um aplicativo desktop minimalista que funcione como cr...' | 4 premissas mapeadas.",
+      "raw_response": "{\"interpreted_problem\":\"Usuários têm dificuldade de manter foco porque notificações de outros aplicativos interrompem sessões de trabalho de 25 minutos.\",\"human_intent\":\"Criar um aplicativo desktop minimalista que funcione como cronômetro pomodoro e bloqueie notificações de outros apps durante os blocos de foco.\",\"proposed_mechanism\":\"Cronômetro pomodoro de 25 minutos que, ao iniciar, impede a exibição de notificações de outros aplicativos até o término do bloco.\",\"explicit_mechanism\":\"Cronômetro pomodoro de 25 minutos que, ao iniciar, impede a exibição de notificações de outros aplicativos até o término do bloco.\",\"inferred_candidates\":[\"Opção para pausar ou interromper o timer\",\"Configuração de duração dos blocos\",\"Indicador visual de bloqueio de notificações\",\"Registro de sessões concluídas\",\"Integração com diferentes sistemas operacionais\"],\"actors_or_users\":[\"Profissionais que trabalham no computador\",\"Estudantes\",\"Qualquer pessoa que use a técnica pomodoro\"],\"assumptions\":[\"O usuário utiliza um computador desktop\",\"O sistema operacional permite bloquear notificações programaticamente\",\"O usuário prefere uma interface minimalista sem recursos avançados\",\"Os blocos de foco são de 25 minutos por padrão\"],\"ambiguities\":[\"Como o aplicativo bloqueará notificações (nível do sistema ou apenas da própria aplicação?)\",\"Em quais sistemas operacionais o bloqueio de notificações será suportado\",\"Se o usuário pode ajustar a duração dos blocos\",\"Se há necessidade de permissões especiais para bloquear notificações\",\"Como o aplicativo lida com notificações críticas (ex.: chamadas de emergência)\"],\"strengths\":[\"Design minimalista\",\"Foco na redução de interrupções\",\"Implementação direta da técnica pomodoro\",\"Facilidade de uso\",\"Bloqueio automático de notificações durante o foco\"],\"structured_idea\":\"Um aplicativo desktop minimalista que funciona como cronômetro pomodoro de 25 minutos e bloqueia notificações de outros aplicativos durante os períodos de foco.\"}",
+      "parsed_output": {
+        "interpreted_problem": "Usuários têm dificuldade de manter foco porque notificações de outros aplicativos interrompem sessões de trabalho de 25 minutos.",
+        "human_intent": "Criar um aplicativo desktop minimalista que funcione como cronômetro pomodoro e bloqueie notificações de outros apps durante os blocos de foco.",
+        "proposed_mechanism": "Cronômetro pomodoro de 25 minutos que, ao iniciar, impede a exibição de notificações de outros aplicativos até o término do bloco.",
+        "explicit_mechanism": "Cronômetro pomodoro de 25 minutos que, ao iniciar, impede a exibição de notificações de outros aplicativos até o término do bloco.",
+        "inferred_candidates": [
+          "Opção para pausar ou interromper o timer",
+          "Configuração de duração dos blocos",
+          "Indicador visual de bloqueio de notificações",
+          "Registro de sessões concluídas",
+          "Integração com diferentes sistemas operacionais"
+        ],
+        "actors_or_users": [
+          "Profissionais que trabalham no computador",
+          "Estudantes",
+          "Qualquer pessoa que use a técnica pomodoro"
+        ],
+        "assumptions": [
+          "O usuário utiliza um computador desktop",
+          "O sistema operacional permite bloquear notificações programaticamente",
+          "O usuário prefere uma interface minimalista sem recursos avançados",
+          "Os blocos de foco são de 25 minutos por padrão"
+        ],
+        "ambiguities": [
+          "Como o aplicativo bloqueará notificações (nível do sistema ou apenas da própria aplicação?)",
+          "Em quais sistemas operacionais o bloqueio de notificações será suportado",
+          "Se o usuário pode ajustar a duração dos blocos",
+          "Se há necessidade de permissões especiais para bloquear notificações",
+          "Como o aplicativo lida com notificações críticas (ex.: chamadas de emergência)"
+        ],
+        "strengths": [
+          "Design minimalista",
+          "Foco na redução de interrupções",
+          "Implementação direta da técnica pomodoro",
+          "Facilidade de uso",
+          "Bloqueio automático de notificações durante o foco"
+        ],
+        "structured_idea": "Um aplicativo desktop minimalista que funciona como cronômetro pomodoro de 25 minutos e bloqueia notificações de outros aplicativos durante os períodos de foco."
+      },
+      "error": null,
+      "timestamp": "2026-08-29T21:01:56.124302+00:00"
+    },
+    {
+      "step_number": 2,
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 1,
+      "latency_seconds": 0.15411090850830078,
+      "delta_summary": "",
+      "raw_response": "",
+      "parsed_output": null,
+      "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+      "timestamp": "2026-08-29T21:01:56.280359+00:00"
+    }
+  ]
+}

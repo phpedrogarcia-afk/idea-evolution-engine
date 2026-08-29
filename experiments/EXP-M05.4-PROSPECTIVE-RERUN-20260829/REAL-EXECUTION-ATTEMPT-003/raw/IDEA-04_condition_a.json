@@ -1,0 +1,14 @@
+{
+  "cell_id": "IDEA-04-CONDITION_A",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "idea_id": "IDEA-04",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login.",
+  "latency_seconds": 0.209,
+  "model_calls": 1,
+  "status": "FAILED",
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {},
+  "rendered_semantic_text": "### Resumo\n\n\n### Versão Refinada\n\n\n### Pontos Fortes e Fracos\n- **Fortes:** \n- **Fracos:** \n\n### Próximos Passos\n"
+}

@@ -1,0 +1,14 @@
+{
+  "cell_id": "IDEA-08-CONDITION_A",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "idea_id": "IDEA-08",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.",
+  "latency_seconds": 0.19,
+  "model_calls": 1,
+  "status": "FAILED",
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {},
+  "rendered_semantic_text": "### Resumo\n\n\n### Versão Refinada\n\n\n### Pontos Fortes e Fracos\n- **Fortes:** \n- **Fracos:** \n\n### Próximos Passos\n"
+}

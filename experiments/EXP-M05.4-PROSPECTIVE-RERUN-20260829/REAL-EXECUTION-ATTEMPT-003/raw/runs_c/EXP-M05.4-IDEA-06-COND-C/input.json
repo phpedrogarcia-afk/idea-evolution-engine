@@ -1,0 +1,11 @@
+{
+  "run_id": "EXP-M05.4-IDEA-06-COND-C",
+  "created_at": "2026-08-29T21:02:01.662898+00:00",
+  "original_idea": "Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.",
+  "metadata": {
+    "topology": "LEAN_IEE_L1",
+    "max_allowed_calls": 2,
+    "git_commit": "8ad728806b014041c45c9c281475dd096d362307",
+    "environment_pid": 3472
+  }
+}

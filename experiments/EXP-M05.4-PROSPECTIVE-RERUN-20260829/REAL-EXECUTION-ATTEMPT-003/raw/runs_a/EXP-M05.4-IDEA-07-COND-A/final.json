@@ -1,0 +1,8 @@
+{
+  "run_id": "EXP-M05.4-IDEA-07-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Um bloco de notas em linha de comando simples para salvar trechos rápidos de texto em arquivos markdown na pasta pessoal.",
+  "success": false,
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {}
+}

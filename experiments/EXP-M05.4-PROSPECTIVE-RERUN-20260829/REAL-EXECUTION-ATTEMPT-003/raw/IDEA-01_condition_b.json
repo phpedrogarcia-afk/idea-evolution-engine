@@ -1,0 +1,18 @@
+{
+  "cell_id": "IDEA-01-CONDITION_B",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "idea_id": "IDEA-01",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos.",
+  "latency_seconds": 5.307,
+  "model_calls": 2,
+  "status": "FAILED",
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUm aplicativo desktop minimalista que funciona como cronômetro pomodoro de 25 minutos e bloqueia notificações de outros aplicativos durante os períodos de foco.\n\n### Intenção Humana Preservada\nCriar um aplicativo desktop minimalista que funcione como cronômetro pomodoro e bloqueie notificações de outros apps durante os blocos de foco.\n\n### Mecanismo Central\nCronômetro pomodoro de 25 minutos que, ao iniciar, impede a exibição de notificações de outros aplicativos até o término do bloco.\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.4-IDEA-01-COND-B",
+  "status": "FAILED",
+  "created_at": "2026-08-29T18:01:51.015927",
+  "updated_at": "2026-08-29T18:01:56.280309",
+  "original_idea": "Um aplicativo de cronômetro pomodoro minimalista para desktop que bloqueia notificações de outros apps durante os blocos de foco de 25 minutos.",
+  "current_idea": "Um aplicativo desktop minimalista que funciona como cronômetro pomodoro de 25 minutos e bloqueia notificações de outros aplicativos durante os períodos de foco.",
+  "human_intent": "Criar um aplicativo desktop minimalista que funcione como cronômetro pomodoro e bloqueie notificações de outros apps durante os blocos de foco.",
+  "problem_statement": "Usuários têm dificuldade de manter foco porque notificações de outros aplicativos interrompem sessões de trabalho de 25 minutos.",
+  "actors_or_users": [
+    "Profissionais que trabalham no computador",
+    "Estudantes",
+    "Qualquer pessoa que use a técnica pomodoro"
+  ],
+  "assumptions": [
+    "O usuário utiliza um computador desktop",
+    "O sistema operacional permite bloquear notificações programaticamente",
+    "O usuário prefere uma interface minimalista sem recursos avançados",
+    "Os blocos de foco são de 25 minutos por padrão"
+  ],
+  "ambiguities": [
+    "Como o aplicativo bloqueará notificações (nível do sistema ou apenas da própria aplicação?)",
+    "Em quais sistemas operacionais o bloqueio de notificações será suportado",
+    "Se o usuário pode ajustar a duração dos blocos",
+    "Se há necessidade de permissões especiais para bloquear notificações",
+    "Como o aplicativo lida com notificações críticas (ex.: chamadas de emergência)"
+  ],
+  "strengths": [
+    "Design minimalista",
+    "Foco na redução de interrupções",
+    "Implementação direta da técnica pomodoro",
+    "Facilidade de uso",
+    "Bloqueio automático de notificações durante o foco"
+  ],
+  "critical_issues": [],
+  "fragile_assumptions": [],
+  "contradictions": [],
+  "failure_modes": [],
+  "alternatives": [],
+  "core_mechanism": "Cronômetro pomodoro de 25 minutos que, ao iniciar, impede a exibição de notificações de outros aplicativos até o término do bloco.",
+  "core_mechanism_justification": "",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "",
+  "proposal_records": [],
+  "accepted_changes": [],
+  "candidate_extensions": [
+    "Opção para pausar ou interromper o timer",
+    "Configuração de duração dos blocos",
+    "Indicador visual de bloqueio de notificações",
+    "Registro de sessões concluídas",
+    "Integração com diferentes sistemas operacionais"
+  ],
+  "rejected_changes": [],
+  "remaining_uncertainties": [],
+  "known_risks": [],
+  "recommended_next_step": "",
+  "tested_core_mechanism": "",
+  "tested_core_hash": "",
+  "reality_dependencies": [],
+  "claims_needing_evidence": [],
+  "candidate_tests": [],
+  "exploratory_candidate_tests": [],
+  "reconstruction_count": 0,
+  "max_reconstructions": 1,
+  "essence_drift_detected": false,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": false,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T18:01:56.124201",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 1,
+      "delta_summary": "Intenção extraída: 'Criar um aplicativo desktop minimalista que funcione como cr...' | 4 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-29T18:01:56.280287",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 1,
+      "delta_summary": "FALHA: PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED"
+    }
+  ]
+}

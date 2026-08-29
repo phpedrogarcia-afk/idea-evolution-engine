@@ -1,0 +1,13 @@
+{
+  "run_id": "EXP-M05.4-IDEA-02-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.",
+  "total_model_calls": 1,
+  "gate_outcome": "UNKNOWN",
+  "escalation_reason": "UNKNOWN",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 0,
+  "terminal_status": "FIRST_PASS_FAILED",
+  "decision_progress_detected": false,
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED"
+}

@@ -1,0 +1,8 @@
+{
+  "run_id": "EXP-M05.4-IDEA-06-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.",
+  "success": false,
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED",
+  "parsed_output": {}
+}

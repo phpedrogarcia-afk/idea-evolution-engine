@@ -1,0 +1,13 @@
+{
+  "run_id": "EXP-M05.4-IDEA-06-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.",
+  "total_model_calls": 1,
+  "gate_outcome": "UNKNOWN",
+  "escalation_reason": "UNKNOWN",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 0,
+  "terminal_status": "FIRST_PASS_FAILED",
+  "decision_progress_detected": false,
+  "error": "PROVIDER_STRUCTURED_OUTPUT_REPAIR_FAILED"
+}
