@@ -1,0 +1,10 @@
+[
+  {
+    "raw_idea": "Um aplicativo de lista de compras compartilhada que aprende quais itens uma família costuma comprar e sugere automaticamente o que pode estar faltando, sem adicionar itens sem confirmação.",
+    "idea_id": "CAL-01"
+  },
+  {
+    "raw_idea": "Uma ferramenta para equipes remotas registrar decisões importantes, mostrar por que cada decisão foi tomada e avisar quando uma condição que justificava a decisão mudou.",
+    "idea_id": "CAL-02"
+  }
+]
