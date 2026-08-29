@@ -232,36 +232,18 @@ class M054ExperimentExecutor:
         import tempfile
         return Path(tempfile.mkdtemp())
 
-    def _build_condition_b_router(self, provider: str, model: str) -> ModelRoutingConfig:
-        """
-        Helper method to build the Condition B router configuration.
-        Extracted to avoid duplication between validation and execution.
-        """
-        from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
-
-        return ModelRoutingConfig(
-            models={
-                "default": ModelDefinition(
-                    provider=provider,
-                    model=model
-                )
-            },
-            routes={},
-            default_model_alias="default"
-        )
-
-    def _get_temp_dir(self) -> Path:
-        """
-        Helper method to get a temporary directory for validation runs.
-        Uses tempfile.TemporaryDirectory for cross-platform compatibility.
-        """
-        import tempfile
-        return Path(tempfile.mkdtemp())
-
     def _validate_model_routing(self) -> None:
         """
-        Fail-fast preflight validation: ensure all conditions route to the correct model.
-        Aborts before any provider call if routing is misconfigured.
+        Fail-fast preflight validation: ensure all conditions execute with the frozen
+        provider and model specification before any provider boundary is reached.
+
+        Guards (in order):
+          1. PROVIDER_SPEC: self.runner.provider must equal 'groq'.
+             Conditions A and C execute self.runner directly.
+             Condition B passes self.runner as custom_runner in the router.
+             A misconfigured runner would silently bypass any config-only check.
+          2. MODEL_SPEC: self.runner.default_model must equal 'openai/gpt-oss-120b'.
+          3. Structural routing verification for Condition B stages.
         """
         from src.idea_evolution.config.routing import ModelRoutingConfig, ModelDefinition
         from src.idea_evolution.providers.router import RunnerRouter
@@ -272,6 +254,27 @@ class M054ExperimentExecutor:
         # Expected model for all conditions - FROZEN SPEC for M05.4
         expected_provider = "groq"
         expected_model = "openai/gpt-oss-120b"
+
+        # --- GUARD 1: Verify the actual executed runner provider ---
+        # Conditions A and C directly execute self.runner.
+        # Condition B passes self.runner as a custom_runner.
+        # A misconfigured self.runner can bypass any config-only check.
+        actual_provider = getattr(self.runner, "provider", None)
+        if actual_provider != expected_provider:
+            raise RuntimeError(
+                f"PROVIDER_SPEC_VIOLATION: executor runner provider must be '{expected_provider}' "
+                f"before any M05.4 execution, but got '{actual_provider}'. "
+                f"Conditions A, B, and C would have executed with the wrong provider. "
+                f"Aborting before any provider boundary is reached."
+            )
+
+        # --- GUARD 2: Verify the executed model identifier ---
+        actual_model = getattr(self.runner, "default_model", None)
+        if actual_model != expected_model:
+            raise RuntimeError(
+                f"MODEL_SPEC_VIOLATION: executor runner default_model must be '{expected_model}' "
+                f"before any M05.4 execution, but got '{actual_model}'."
+            )
 
         # Validate Condition A (BaselineRunner)
         baseline_runner = BaselineRunner(runner=self.runner, model_name=expected_model)
