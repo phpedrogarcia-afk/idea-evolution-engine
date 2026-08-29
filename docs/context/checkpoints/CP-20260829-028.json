@@ -18,9 +18,13 @@
     "rerun_status": "M05.4_CLEAN_RERUN_PREFLIGHT_FROZEN",
     "execution_status": "NOT_EXECUTED",
     "human_review_status": "NOT_STARTED",
-    "blind_commitment_sha256": "b50b51cb9dcbb71fb5e5ac99af3d0d5deaf6fd4a3b3257f68e1e45e61d926d46",
-    "blind_reveal_status": "SEALED",
-    "cells_frozen": 24
+    "blind_commitment_sha256": "826c35740b335278e79634bf9eb041644c5fddf45d8672346d8a7aecac5c74d2",
+    "blind_reveal_status": "SEALED_OUTSIDE_REPOSITORY",
+    "cells_frozen": 24,
+    "blinding_revision": 2,
+    "old_blind_commitment": "b50b51cb9dcbb71fb5e5ac99af3d0d5deaf6fd4a3b3257f68e1e45e61d926d46",
+    "old_blind_commitment_status": "REVOKED_BEFORE_EXECUTION",
+    "blind_reveal_location_class": "OUTSIDE_REPOSITORY_LOCAL_SECRET"
   },
   "patch_integration": {
     "accepted_patch_head": "67f4adb",
@@ -86,7 +90,8 @@
     "EXP_RERUN_IDENTITY: EXP-M05.4-PROSPECTIVE-RERUN-20260829 e identidade separada e independente do experimento original invalidado",
     "EXECUTION_MANIFEST_FROZEN: 24 celulas congeladas pre-execucao em RERUN-EXECUTION-MANIFEST.json",
     "RETRY_SEMANTICS_FROZEN: Taxonomia TRANSPORT/REPAIR/SEMANTIC/RECONSTRUCTION explicitamente definida",
-    "KNOWLEDGE_TRANSFER_DEFERRED: FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md preservado mas nao ativado durante M05.4"
+    "KNOWLEDGE_TRANSFER_DEFERRED: FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md preservado mas nao ativado durante M05.4",
+    "BLINDING_REVISION_2: Mapeamento antigo revogado por exposicao de seed; novo segredo gerado criptograficamente e armazenado fora do repositorio"
   ],
   "tests_executed": [
     "validate_context.py (100% integro)",

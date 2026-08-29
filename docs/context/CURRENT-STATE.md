@@ -16,13 +16,15 @@
   - Guard de provider e modelo em `_validate_model_routing()`: RuntimeError antes de qualquer execução.
   - 178/178 testes verdes. Python -O guard PASS.
   - Protocolo de rerun congelado: RERUN-PROTOCOL-AMENDMENT-001.md.
-  - 24 células congeladas pré-execução: RERUN-EXECUTION-MANIFEST.json.
-  - Novo mapeamento cego gerado e selado (seed=20260829). Compromisso: `b50b51cb9dcbb71fb5e5ac99af3d0d5deaf6fd4a3b3257f68e1e45e61d926d46`.
-  - Retry semantics congeladas. Freeze manifest com 17 hashes críticos.
-  - Prova determinística: ROUTING A/B/C = groq/openai/gpt-oss-120b. default-model não alcançável. wrong-provider não alcançável.
-  - Dry run final: 24 células PASS. HISTORICAL_EXPERIMENT_MUTATION = 0.
-  - **Execução Real:** NÃO EXECUTADA (requer autorização humana + GROQ_API_KEY)
-  - **Human Review:** NOT_STARTED
+    - Novo mapeamento cego gerado criptograficamente (secrets.SystemRandom, Blinding Revision 2).
+    - Mapeamento antigo (seed 20260829 / b50b51cb...): `REVOKED_BEFORE_EXECUTION`.
+    - Novo compromisso: `826c35740b335278e79634bf9eb041644c5fddf45d8672346d8a7aecac5c74d2`.
+    - Segredo de revelação armazenado FORA do repositório (`SEALED_OUTSIDE_REPOSITORY` em `C:\Users\phped\.fioideias\sealed\EXP-M05.4-PROSPECTIVE-RERUN-20260829\BLIND-REVEAL.json`), não rastreado no git.
+    - Retry semantics congeladas. Freeze manifest regenerado com 18 hashes críticos.
+    - Prova determinística: ROUTING A/B/C = groq/openai/gpt-oss-120b. default-model não alcançável. wrong-provider não alcançável.
+    - Dry run final: 24 células PASS. HISTORICAL_EXPERIMENT_MUTATION = 0.
+    - **Execução Real:** NÃO EXECUTADA (requer autorização humana + GROQ_API_KEY)
+    - **Human Review:** NOT_STARTED
 - **Status do Kernel FioED (Fio Epistemic Dynamics):** `PROSPECTIVE_VALIDATION_PENDING`
 - **Status do Protótipo Lean IEE (L1):** `PROSPECTIVE_VALIDATION_PENDING`
 - **Status do Simple Loop de Produção:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e 100% inalterado).

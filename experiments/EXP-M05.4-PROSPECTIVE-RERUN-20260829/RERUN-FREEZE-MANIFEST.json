@@ -1,10 +1,13 @@
 {
   "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
-  "frozen_at": "2026-08-29T17:09:00-03:00",
-  "git_commit": "67f4adb09ea058944839f9d2bdabb006e458d476",
-  "git_branch": "main (integrated from deepseek/m05.4-preflight-hardening-20260827)",
+  "blinding_revision": 2,
+  "frozen_at": "2026-08-29T17:23:00-03:00",
+  "git_commit": "9039941445c5bb59918122e017198fdd1694d39b",
+  "git_branch": "main",
   "frozen_provider": "groq",
   "frozen_model": "openai/gpt-oss-120b",
+  "blind_status": "SEALED_OUTSIDE_REPOSITORY",
+  "blind_reveal_location_class": "OUTSIDE_REPOSITORY_LOCAL_SECRET",
   "execution_critical_hashes": {
     "m05_4_runner.py": "0bb4181f24e7c040ebd24f8fdb8e3e2cbcfe4a36e51710eaf7e41bbb5c7b146e",
     "baseline.py": "2e13d038640a5ec7f36a8054a6fe4ce55c162b966bd56ba7aee891ce12fc729e",
@@ -20,8 +23,9 @@
     "ANALYSIS-PLAN.md": "34127e5278a6ff7f099c11044d90f49afe9cd8da2c63b9e264af1b1a16b31540",
     "PREREGISTRATION.md": "6b39c3325862f531ac199870bc7f46127474e6bcd62db49a30c18c96cf64f2c1",
     "RERUN-PROTOCOL-AMENDMENT-001.md": "1872236f105911a153af768747bcc053e436255195f235822442c1e6efeac2eb",
+    "PRE-EXECUTION-BLINDING-CORRECTION-001.md": "637a1ee5c7146812f02d2d634b21ac700695a052bdcd2f1e8e07ef5fd05d0304",
     "RERUN-EXECUTION-MANIFEST.json": "a4f120a403ab0cee8660c9ff6b1dc6efef15149655da317a8fa7fc1491db2600",
     "RERUN-RETRY-SEMANTICS-FROZEN.md": "3a33ed617fc5ef8e3062262a0237d415b28ab3c2d4a5da7499c0407ba920aa91",
-    "BLIND-REVEAL.sha256": "6bbdf54473e7dafa8eb5697129ae8e56c47931dac256dba2d91f4cda3eb885df"
+    "BLIND-REVEAL.sha256": "4760b8b6b5d3c64ce50413d383150370e76e54027ffa39392897440c1b26aa36"
   }
 }

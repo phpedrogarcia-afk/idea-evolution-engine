@@ -38,3 +38,6 @@ htmlcov/
 
 # Local run outputs
 runs_test_*/
+
+# Active secret reveal artifacts (must not be committed)
+experiments/EXP-M05.4-PROSPECTIVE-RERUN-*/BLIND-REVEAL.json
