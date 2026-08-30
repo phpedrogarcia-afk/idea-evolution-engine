@@ -262,7 +262,7 @@ def execute_m05_4_cell(
     runner: ModelRunner,
     raw_dir: Path,
     expected_model: str = "openai/gpt-oss-120b",
-    attempt_id: str = "REAL-EXECUTION-ATTEMPT-003",
+    attempt_id: str = "REAL-EXECUTION-ATTEMPT-004",
 ) -> Dict[str, Any]:
     """
     Executes a single cell according to frozen condition semantics.
@@ -459,7 +459,7 @@ def run_clean_harness(
     runner: Optional[ModelRunner] = None,
     repo_root: Optional[Path] = None,
     exp_dir: Optional[Path] = None,
-    attempt_id: str = "REAL-EXECUTION-ATTEMPT-003",
+    attempt_id: str = "REAL-EXECUTION-ATTEMPT-004",
     holdout_file: Optional[Path] = None,
     manifest_file: Optional[Path] = None,
     freeze_manifest_file: Optional[Path] = None,

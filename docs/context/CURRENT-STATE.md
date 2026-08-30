@@ -1,37 +1,26 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-08-29 | Checkpoint: CP-20260829-028
+> Atualizado em: 2026-08-30 | Checkpoint: CP-20260829-028
 
 ---
 
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (PREFLIGHT M05.4 RERUN CONGELADO)
+- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (PREFLIGHT M05.4 RERUN CONGELADO — ATTEMPT-004)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Experimento M05.4 Original (EXP-M05.4-PROSPECTIVE-20260827):** `CONDITION_B_EXECUTION_INVALID / INVALIDATED_BEFORE_HUMAN_REVIEW` — Preservado como evidência histórica. Imutável.
-- **Status do Rerun M05.4 (EXP-M05.4-PROSPECTIVE-RERUN-20260829):** `ATTEMPT_002_PREFLIGHT_FROZEN`
-  - **Tentativa 001:** `REAL-EXECUTION-ATTEMPT-001` classificada como `INVALID_FOR_PRIMARY_ANALYSIS` (harness alterado pós-freeze, telemetria unmeasured, labels FioED sintéticas; 7 células concluídas, interrompido na 8ª; artefatos brutos e patch do harness em quarentena).
-  - **Harness Limpo Isolado:**
-    - Plano de Execução: `tools/experiments/execute_m05_4_frozen.py` (`EXECUTION_PLANE_HAS_NO_BLIND_KNOWLEDGE = True`).
-    - Plano de Renderização Cega: `tools/experiments/render_m05_4_blind_review.py` (`BLIND_RENDERING_PLANE_HAS_NO_MODEL_EXECUTION = True`).
-    - Status Fail-Closed: Validação estrita de status sem inferência permissiva.
-    - Telemetria: Classificação explícita de evidência (`OBSERVED`, `UNKNOWN_NOT_INSTRUMENTED`).
-    - Labels FioED sintéticas removidas do harness de execução.
-  - **Blinding Revision 3:** Mapeamento novo gerado criptograficamente (seed revogado na rev 2). Compromisso: `b2e271ff9dd35a8215c067d1e545f84dfa8add7f33335a69845ebd8d5ed82cf3` em `BLIND-REVEAL.sha256`. Segredo armazenado em `C:\Users\phped\.fioideias\sealed\EXP-M05.4-PROSPECTIVE-RERUN-20260829\BLIND-REVEAL-REV3.json`.
-  - **Freeze Manifest:** Regenerado com 21 hashes críticos (`RERUN-FREEZE-MANIFEST.json`).
-  - **Testes Offline do Harness:** 3/3 PASS em `tests/test_m05_4_clean_harness.py` (24 células, isolamento negativo de blind, isolamento de provedor do renderizador).
-  - **Mutação de Experimento Histórico:** 0 (`EXP-M05.4-PROSPECTIVE/` 100% intacto).
-  - **Status de Execução Real:** `FROZEN_NOT_EXECUTED` (0 chamadas reais no Attempt-002).
+- **Status do Rerun M05.4 (EXP-M05.4-PROSPECTIVE-RERUN-20260829):** `ATTEMPT_004_PREFLIGHT_FROZEN`
+  - **Tentativa 001:** `INVALID_FOR_PRIMARY_ANALYSIS` (harness alterado pós-freeze).
+  - **Tentativa 002:** `INVALID_FOR_PRIMARY_ANALYSIS` (exceção não capturada na célula 01).
+  - **Tentativa 003:** `EXECUTION_INTEGRITY = PASS`, `HUMAN_REVIEW_ADMISSIBILITY = NOT_ADMISSIBLE_AS_PREREGISTERED` (22/24 células com falha de adapter mascarada).
+  - **Autópsia & Hardening de Adapter:** `NativeModelRunner` corrigido com extração tipada de erros (`ProviderErrorDetails`), sanitização de segredos e retentativas de transporte delimitadas.
+  - **Micro-Probe 001:** 3/3 esquemas representativos aprovados (A: 1.65s, B: 2.91s, C: PASS).
+  - **Treatment Delivery Pilot 01:** 6/6 células concluídas (A: 2/2 DELIVERED, B: 2/2 PARTIALLY_DELIVERED com candidato substantivo, C: 2/2 DELIVERED).
+  - **Decisão do Supervisor:** `CONDITION_B_REFINEMENT_INCOMPLETE_WITH_SUBSTANTIVE_CANDIDATE = ADMISSIBLE_TREATMENT_OUTPUT`.
+  - **Tentativa 004:** `REAL-EXECUTION-ATTEMPT-004` (FROZEN_NOT_EXECUTED).
+  - **Blinding Revision 3:** Compromisso `b2e271ff9dd35a8215c067d1e545f84dfa8add7f33335a69845ebd8d5ed82cf3` em `BLIND-REVEAL.sha256`. Segredo selado fora do repositório.
   - **Human Review:** `NOT_STARTED`
-- **Status do Kernel FioED (Fio Epistemic Dynamics):** `PROSPECTIVE_VALIDATION_PENDING`
-- **Status do Protótipo Lean IEE (L1):** `PROSPECTIVE_VALIDATION_PENDING`
-- **Status do Simple Loop de Produção:** `REFERENCE_IMPLEMENTATION / CONTROL` (Preservado e 100% inalterado).
-- **Reconciliação do Repositório Remoto:**
-  - `DEFAULT_BRANCH`: `main`
-  - `REMOTE_REPOSITORY`: `https://github.com/phpedrogarcia-afk/idea-evolution-engine.git`
-  - `SECRET_SCAN`: `PASS` (0 credenciais ou segredos rastreados no Git)
 - **Último Checkpoint Imutável:** [`CP-20260829-028`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260829-028.md)
 - **Último Estado Seguro (Last Known Good):** `CP-20260829-028`
 - **Git Branch:** `main`
@@ -42,21 +31,17 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Conclusão da Missão M05.4-P1A (Auditoria de Integridade de Execução):
-    - Causa-raiz da anomalia de 1 chamada da Condição B comprovada e documentada.
-    - Preservação integral de todos os artefatos brutos e hashes pré-registrados.
-    - Zero vazamento ou exposição semântica ao avaliador humano (`HUMAN_SEMANTIC_EXPOSURE = NO`).
-    - Classificação formal como `CONDITION_B_EXECUTION_INVALID`.
-    - Registro de `FINDING-028` em `docs/intelligence/FINDINGS.md`.
+  - Freeze do Attempt-004 (`REAL-EXECUTION-ATTEMPT-004-PREFLIGHT.md` e `RERUN-FREEZE-MANIFEST.json` atualizado com 22 hashes).
+  - Conclusão do Piloto de Entrega de Tratamento 01 com veredicto `END_TO_END_TREATMENT_DELIVERY_PROVEN_ON_CALIBRATION`.
 - **Tarefa Ativa Atual:**
-  - `TASK-000`: Transição de Fila — Autorização e preparação para M05.4-P1R (Correção do Harness e Rerun Limpo sob novo ID experimental).
+  - Execução Real do Attempt-004 (`REAL-EXECUTION-ATTEMPT-004`).
 - **Próximo Passo Exato:**
-  - Iniciar a Missão **M05.4-P1R PROSPECTIVE MULTI-IDEA CLEAN RERUN** (Ajuste da injeção de modelo no runner da Condição B, execução limpa das 24 células com novo ID experimental e novo pacote cego desidentificado).
+  - Executar as 24 células prospectivas com `execute_m05_4_frozen.py`.
 
 ---
 
 ## 3. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
-1. ❌ **NÃO** realizar avaliação humana sobre o pacote invalidado `EXP-M05.4-PROSPECTIVE-20260827`.
-2. ❌ **NÃO** abrir ou inspecionar `BLIND-REVEAL.json`.
-3. ❌ **NÃO** misturar saídas da execução anterior com a nova execução limpa.
-4. ❌ **NÃO** alterar as 8 ideias da suíte holdout ou a teoria FioED.
+1. ❌ **NÃO** reutilizar saídas do Attempt-001, 002, 003 ou Pilot.
+2. ❌ **NÃO** abrir ou inspecionar `BLIND-REVEAL-REV3.json` durante a execução.
+3. ❌ **NÃO** expor ou persistir chaves de API (`GROQ_API_KEY`).
+4. ❌ **NÃO** modificar o código de produção durante a execução real.

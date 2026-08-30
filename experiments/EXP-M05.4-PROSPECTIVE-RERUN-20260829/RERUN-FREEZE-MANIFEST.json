@@ -1,8 +1,8 @@
 {
   "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
   "blinding_revision": 3,
-  "frozen_at": "2026-08-29T18:31:00-03:00",
-  "target_attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "frozen_at": "2026-08-30T18:00:00-03:00",
+  "target_attempt_id": "REAL-EXECUTION-ATTEMPT-004",
   "git_branch": "main",
   "frozen_provider": "groq",
   "frozen_model": "openai/gpt-oss-120b",
@@ -13,7 +13,7 @@
   "self_enforcing_freeze_gate": true,
   "crash_safe_journal": true,
   "execution_critical_hashes": {
-    "execute_m05_4_frozen.py": "eb2a4d617bdac9bf7b1e39bb3892359e069d3be5e4d303609db8b101745f5b3c",
+    "execute_m05_4_frozen.py": "b44093a93d8418572ab2b101e416cfedf5cdf15067ee19b249fb5c7cf4798fab",
     "render_m05_4_blind_review.py": "4600f03dca9855a928a019c33fc45f10dacef7029e4078898b61a0fa9af26dda",
     "m05_4_runner.py": "0bb4181f24e7c040ebd24f8fdb8e3e2cbcfe4a36e51710eaf7e41bbb5c7b146e",
     "baseline.py": "2e13d038640a5ec7f36a8054a6fe4ce55c162b966bd56ba7aee891ce12fc729e",
@@ -22,7 +22,7 @@
     "early_epistemic_gate.py": "2bc13fdff123964f7b1e103ab52d41d61d7ca130eed07bdc1b7a0583063ebb62",
     "routing.py": "e735b7f80c0940753ab7904bc5ccd86273d328c500e4fa08d711ef9090bed7f8",
     "catalog.py": "5278a00c89da5edce78d2e41b4d6f05acd48d83dae61d9ffa89f10c2f8cb15f6",
-    "native.py": "d75cbc36ef8db02101dd4088fa3ad21a275f14f85cc8b3a3cc92444d5edbf88a",
+    "native.py": "39a5d735e6043dafe592b3a861a7bff03b96714c72b18bab326f79f956430f06",
     "router.py": "bb1f7b57bc8e42cd4e50b2e241d7ba847791d7e4c6d6a11deecf1f7703aa36a9",
     "blind_renderer.py": "304ec4396ac4de34825117975168b57a38a39a5f4155dd9af45f9e75e4e49a9d",
     "HOLDOUT-IDEAS.json": "8c098995a374a756ee71f7d69a4ffe5eb64e9624a79043e36e3e1791672fcbfd",
