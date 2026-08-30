@@ -1,0 +1,235 @@
+{
+  "pilot_id": "M05.4-TREATMENT-DELIVERY-PILOT-01",
+  "generated_at": "2026-08-30T17:39:50.541636",
+  "total_files": 57,
+  "files": {
+    "CALIBRATION-IDEAS.json": {
+      "sha256": "0d88ea63834fcb09aaf7ea7cac48c95bb008c26d85d54c3fc4aa1d83c4bbfbf0",
+      "size_bytes": 484
+    },
+    "PILOT-JOURNAL.jsonl": {
+      "sha256": "c52f77513d7ab9e1ffddf2756b7092cc17cb258bc8ee93bca5eea3b34291abb5",
+      "size_bytes": 2775
+    },
+    "PILOT-MANIFEST.json": {
+      "sha256": "4a18aca5cbe52b0e1318be0a3fe581cf39c558562be91f88b3b404e79e84bab5",
+      "size_bytes": 8912
+    },
+    "PILOT-PROTOCOL.md": {
+      "sha256": "f6f9b71b01b82eb3fc8d60aff3660a10bd72d1f37fc06dfcc6cbfbfd6afde013",
+      "size_bytes": 1752
+    },
+    "raw/CAL-01_condition_a.json": {
+      "sha256": "0881c582622dd4828caafe99af3f739b276165aecc7b4da2804bceb863c86129",
+      "size_bytes": 2833
+    },
+    "raw/CAL-02_condition_a.json": {
+      "sha256": "b13219c69dc433c528bfe8bf9b7a59f2d21cd1d5b73bda478e5f38319ccd6fb4",
+      "size_bytes": 2719
+    },
+    "raw/cal_01_condition_b_v2.json": {
+      "sha256": "cebeab3c849fa177b11eda238f2df7e9a1ec964123e23f3f2fee924f5ea3b71f",
+      "size_bytes": 595
+    },
+    "raw/cal_01_condition_c.json": {
+      "sha256": "1b2d072ac220101676d3559d04a13d29c8b785eb85b84d4ed8271c9f45f55ed4",
+      "size_bytes": 405
+    },
+    "raw/cal_02_condition_b.json": {
+      "sha256": "2d65254f5eee0cda9f4e7e9886c7b040af90cbc34c1d822d389a5265b9d54abb",
+      "size_bytes": 592
+    },
+    "raw/cal_02_condition_c.json": {
+      "sha256": "a008135b7d22487e0bf521d10f50d6bf2af0acd2900f7e457a4a7e656454aebd",
+      "size_bytes": 405
+    },
+    "raw/runs_a/PILOT-CAL-01-COND-A/final.json": {
+      "sha256": "0aaa682b36c346c83cd5546a00dddf28dba1a489d949d679c13ca7931b3baf65",
+      "size_bytes": 2882
+    },
+    "raw/runs_a/PILOT-CAL-01-COND-A/final.md": {
+      "sha256": "fb7ea6e81b3999d5cf990ad3bc907cf97cc65f339918871cfa75c14759c2d051",
+      "size_bytes": 2620
+    },
+    "raw/runs_a/PILOT-CAL-01-COND-A/input.json": {
+      "sha256": "a804ffa7094388b4a4c8687a25db70c819d68bfd7fc516f49f4cbc2de33141ac",
+      "size_bytes": 465
+    },
+    "raw/runs_a/PILOT-CAL-02-COND-A/final.json": {
+      "sha256": "16063fcbc62812bb1d166543c80324840a95c624501598f09660610af4f0b3b5",
+      "size_bytes": 2751
+    },
+    "raw/runs_a/PILOT-CAL-02-COND-A/final.md": {
+      "sha256": "35910dbaa5c1598a7a5448f88829a0a86eec613468e916f5561f136c7751d0ca",
+      "size_bytes": 2509
+    },
+    "raw/runs_a/PILOT-CAL-02-COND-A/input.json": {
+      "sha256": "aeb3e77e71fd9ffcbe1eb9bf121168614bef05e0b677971139794a834c2e45d1",
+      "size_bytes": 449
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B/input.json": {
+      "sha256": "049e0d139b9cc0e781a544d9535294684b2994aecabfed13bc3cf1f5891277a0",
+      "size_bytes": 595
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B/stages/01_UNDERSTAND.json": {
+      "sha256": "c71f1312b394534c7f15fc57517257e27ce35297b2b8d7ff0867c175b9e46068",
+      "size_bytes": 4905
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B/stages/02_ATTACK.json": {
+      "sha256": "5b023a2a2c52c89e0b02d7328f37dba9fca67c13b7485f1c0e773dd2d53f2d6d",
+      "size_bytes": 5653
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B/stages/03_ALTERNATIVES.json": {
+      "sha256": "3d0220ffdf1e05cee2abbd8fbc67965a0677a995a52dbed1bdbed525db477c62",
+      "size_bytes": 5451
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B/stages/04_SYNTHESIZE.json": {
+      "sha256": "1fbf0c1e035019c787e7dbc80fcb96dd50043f032f4bbcb98cbb66771aefa812",
+      "size_bytes": 5608
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/final.json": {
+      "sha256": "9e81cfba07c3b0fdcc7328d6bb2776dfbcefb377f2ceafc39649767b88277698",
+      "size_bytes": 1708
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/final.md": {
+      "sha256": "d00ae5d56795ba5899af208b43fa632ea5a1c7561a23f767998d037818b25c23",
+      "size_bytes": 7754
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/input.json": {
+      "sha256": "b0e3f5311975a530455ee8a51374986d26265b5341507380b21294c9d977778b",
+      "size_bytes": 599
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/01_UNDERSTAND.json": {
+      "sha256": "358e88c583e307d7c615017a9ffbf01e617c67d253b37efa3e17e007b9c20e1d",
+      "size_bytes": 5590
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/02_ATTACK.json": {
+      "sha256": "b39d6d5a6a6f6bd72427345cd214999139b8d16a612e06ac9745d3ad6ffdbf4a",
+      "size_bytes": 5928
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/03_ALTERNATIVES.json": {
+      "sha256": "29b2e003191bfcff077743b9e3340215ef00c925a9f2b02e71c8a5a110c58db8",
+      "size_bytes": 5944
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/04_SYNTHESIZE.json": {
+      "sha256": "8da1307ed1c9c51602947b87a4749c1b2c19d54b9857ca652bcf02d7ce769059",
+      "size_bytes": 7766
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/05_REALITY_CHECK.json": {
+      "sha256": "17ce634fc01af1d32d0e1d0d3cc8a9bbc23773fe6390eff8d540f8d3c2f88d29",
+      "size_bytes": 6337
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/06_FINAL_REVIEW.json": {
+      "sha256": "25fdcb8dd10bea3ceb2b1f9b4fd8cb756eb71ae55ec11c107ca3e63a415c559c",
+      "size_bytes": 1585
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/07_ALTERNATIVES.json": {
+      "sha256": "1bb3e9f98f5cb41c3ca06653fad7d8c5a7acd81018e7e641b98414729e096195",
+      "size_bytes": 6620
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/08_SYNTHESIZE.json": {
+      "sha256": "f2323422fc9bc754a065eb6f46b752e6eacd2aedd4f3625bab6ec061eda6b39f",
+      "size_bytes": 8124
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/09_REALITY_CHECK.json": {
+      "sha256": "b1bb8b20876a102d55e8b3a6107f242e7032a4d974da699c2ac67a3e95dcb4a9",
+      "size_bytes": 8766
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/stages/10_FINAL_REVIEW.json": {
+      "sha256": "60e888cfbed392000a93bc20de3bf3feea8ef9c76fe3e764e7cad514e914ceaf",
+      "size_bytes": 1820
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/state.json": {
+      "sha256": "c23397ea8971ac25bf4298ca65f7e2b006d61d2cff4f00315ad67f12123e1c2a",
+      "size_bytes": 31511
+    },
+    "raw/runs_b/PILOT-CAL-01-COND-B_v2/trace.json": {
+      "sha256": "ae5642e88a54f1d00f127047e9fdd7a73b3d19a80a93a38b93bfd550c11b8aa0",
+      "size_bytes": 60960
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/final.json": {
+      "sha256": "4dea79a560ec1516e701d14ed8f6b9f17aeddc617344b06fd3ed7fa2d53b04a5",
+      "size_bytes": 1630
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/final.md": {
+      "sha256": "1f00d4fe450fe8cd635c09368af50febcd264d49cf53a7f10e73e1175aab142f",
+      "size_bytes": 7691
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/input.json": {
+      "sha256": "06acff7ffd9738d5d40c27c844166e5bdc1ac3c3dfbdbff8393d40900595d6c9",
+      "size_bytes": 579
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/01_UNDERSTAND.json": {
+      "sha256": "adab95454cb80e57b359c00e6f436c507cf45a0056fd81f3337cad24c97ed3dd",
+      "size_bytes": 5493
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/02_ATTACK.json": {
+      "sha256": "3f97dc79a634893e14aea086eeb5bf4e47bb99071ef60125e0d9334c97a02170",
+      "size_bytes": 6992
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/03_ALTERNATIVES.json": {
+      "sha256": "a3b9263b2ce4d46672481ff7eb703061e047eedd653258c2bda4259d218ef23c",
+      "size_bytes": 5828
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/04_SYNTHESIZE.json": {
+      "sha256": "2f6ef216aacb2f65bb49c9db7171fc1d7fedf694d05174962da9c2bae066416c",
+      "size_bytes": 6120
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/05_REALITY_CHECK.json": {
+      "sha256": "7f39b792dfdb72180f79c38505bf014314746964e03f52823a7f69e7f29a2c92",
+      "size_bytes": 5573
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/06_FINAL_REVIEW.json": {
+      "sha256": "7d2e0a61118caec67d56efe6cf5adcd636f15c700ffe92c7e9dc4be09bf5eb88",
+      "size_bytes": 1776
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/07_ALTERNATIVES.json": {
+      "sha256": "eeac40699ba0a5727d2bc27269518579b06f5bdc225b2dfa4f461725558aa934",
+      "size_bytes": 7303
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/08_SYNTHESIZE.json": {
+      "sha256": "20118a203334a71127603bcd5f5356e19b3340353ebcdbdb39e756bc5660c11d",
+      "size_bytes": 7813
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/09_REALITY_CHECK.json": {
+      "sha256": "9f3c9fe3f3d2910b499c74bba795180fb4278608e8ebd0d65762a84c6b117cf7",
+      "size_bytes": 7942
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/stages/10_FINAL_REVIEW.json": {
+      "sha256": "cf7fe64c1915756ba24f97ea8a711d1e908bd35a0e0c1229301e372ecebb175f",
+      "size_bytes": 2853
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/state.json": {
+      "sha256": "cd5ba32bb3a16d633d567452c89e5faeedc69267392cb4307ae897698e804a0b",
+      "size_bytes": 26791
+    },
+    "raw/runs_b/PILOT-CAL-02-COND-B/trace.json": {
+      "sha256": "1a885115da77ff106c3eb1f594e1860dcb654c43dfe2535e8e112bb6bb7295f7",
+      "size_bytes": 60154
+    },
+    "raw/runs_c/PILOT-CAL-01-COND-C/final.json": {
+      "sha256": "de9d7e51fe661418e8f18984f5d2b3dce58580cacedaba78f313da0fdcc406cc",
+      "size_bytes": 553
+    },
+    "raw/runs_c/PILOT-CAL-01-COND-C/final.md": {
+      "sha256": "8fce25857f4bb5cdb961f35ea44d221eaf9d637df6cddab656fa6902d5e577c9",
+      "size_bytes": 2303
+    },
+    "raw/runs_c/PILOT-CAL-01-COND-C/input.json": {
+      "sha256": "67eae8732fc46d6a24d27dcb8521ebdab48f998d5088c196c2977862eff2ddb1",
+      "size_bytes": 484
+    },
+    "raw/runs_c/PILOT-CAL-02-COND-C/final.json": {
+      "sha256": "8b5e3a0f8b8ff921068b5c9e638f8d16640a58ddeb0ea3ba116e2f8447b109b4",
+      "size_bytes": 537
+    },
+    "raw/runs_c/PILOT-CAL-02-COND-C/final.md": {
+      "sha256": "3eb64c6c904043ffec3ee726c7db52842c3e54b3cc4534482e4eb1765e836933",
+      "size_bytes": 2591
+    },
+    "raw/runs_c/PILOT-CAL-02-COND-C/input.json": {
+      "sha256": "049b5acb0bb2fd5bc5da2b1d922c378644e01d9fc34fa79b15e7e47289410d33",
+      "size_bytes": 467
+    }
+  }
+}

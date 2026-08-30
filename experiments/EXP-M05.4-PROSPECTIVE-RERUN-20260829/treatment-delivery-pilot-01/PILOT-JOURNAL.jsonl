@@ -1,0 +1,14 @@
+{"event": "CELL_STARTED", "cell_id": "CAL-01-CONDITION_A", "idea_id": "CAL-01", "condition": "CONDITION_A", "timestamp": "2026-08-29T18:44:31.880319"}
+{"event": "CELL_COMPLETED", "cell_id": "CAL-01-CONDITION_A", "delivery_class": "DELIVERED", "terminal_status": "SUCCESS", "model_calls": 1, "latency_seconds": 45.141, "timestamp": "2026-08-29T18:45:17.022019"}
+{"event": "CELL_STARTED", "cell_id": "CAL-01-CONDITION_B", "idea_id": "CAL-01", "condition": "CONDITION_B", "timestamp": "2026-08-29T18:45:18.522756"}
+{"event": "SERVER_RESTART_RECOVERY", "note": "CAL-01-CONDITION_B interrupted after stage 4 SYNTHESIZE. Re-running with run_id_v2. Partial stages in runs_b/PILOT-CAL-01-COND-B/stages preserved as evidence.", "timestamp": "2026-08-30T17:31:48.287568"}
+{"event": "CELL_STARTED", "cell_id": "CAL-01-CONDITION_B", "idea_id": "CAL-01", "condition": "CONDITION_B", "run_note": "v2_restart", "timestamp": "2026-08-30T17:31:48.288444"}
+{"event": "CELL_COMPLETED", "cell_id": "CAL-01-CONDITION_B", "delivery_class": "PARTIALLY_DELIVERED", "terminal_status": "REFINEMENT_INCOMPLETE", "model_calls": 10, "latency_seconds": 192.017, "timestamp": "2026-08-30T17:35:00.305942"}
+{"event": "CELL_STARTED", "cell_id": "CAL-01-CONDITION_C", "idea_id": "CAL-01", "condition": "CONDITION_C", "run_note": "fresh", "timestamp": "2026-08-30T17:35:01.806317"}
+{"event": "CELL_COMPLETED", "cell_id": "CAL-01-CONDITION_C", "delivery_class": "DELIVERED", "terminal_status": "HUMAN_DECISION_REQUIRED", "model_calls": 1, "latency_seconds": 19.535, "timestamp": "2026-08-30T17:35:21.342458"}
+{"event": "CELL_STARTED", "cell_id": "CAL-02-CONDITION_A", "idea_id": "CAL-02", "condition": "CONDITION_A", "run_note": "fresh", "timestamp": "2026-08-30T17:35:22.843374"}
+{"event": "CELL_COMPLETED", "cell_id": "CAL-02-CONDITION_A", "delivery_class": "DELIVERED", "terminal_status": "SUCCESS", "model_calls": 1, "latency_seconds": 12.839, "timestamp": "2026-08-30T17:35:35.683285"}
+{"event": "CELL_STARTED", "cell_id": "CAL-02-CONDITION_B", "idea_id": "CAL-02", "condition": "CONDITION_B", "run_note": "fresh", "timestamp": "2026-08-30T17:35:37.183653"}
+{"event": "CELL_COMPLETED", "cell_id": "CAL-02-CONDITION_B", "delivery_class": "PARTIALLY_DELIVERED", "terminal_status": "REFINEMENT_INCOMPLETE", "model_calls": 10, "latency_seconds": 227.468, "timestamp": "2026-08-30T17:39:24.652309"}
+{"event": "CELL_STARTED", "cell_id": "CAL-02-CONDITION_C", "idea_id": "CAL-02", "condition": "CONDITION_C", "run_note": "fresh", "timestamp": "2026-08-30T17:39:26.152896"}
+{"event": "CELL_COMPLETED", "cell_id": "CAL-02-CONDITION_C", "delivery_class": "DELIVERED", "terminal_status": "HUMAN_DECISION_REQUIRED", "model_calls": 1, "latency_seconds": 22.871, "timestamp": "2026-08-30T17:39:49.024580"}

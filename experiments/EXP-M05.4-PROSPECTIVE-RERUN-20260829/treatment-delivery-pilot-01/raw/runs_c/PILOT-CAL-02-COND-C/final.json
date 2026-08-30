@@ -1,0 +1,12 @@
+{
+  "run_id": "PILOT-CAL-02-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma ferramenta para equipes remotas registrar decisões importantes, mostrar por que cada decisão foi tomada e avisar quando uma condição que justificava a decisão mudou.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

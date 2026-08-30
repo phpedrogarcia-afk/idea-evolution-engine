@@ -1,0 +1,10 @@
+{
+  "run_id": "PILOT-CAL-02-COND-A",
+  "created_at": "2026-08-30T20:35:22.868123+00:00",
+  "original_idea": "Uma ferramenta para equipes remotas registrar decisões importantes, mostrar por que cada decisão foi tomada e avisar quando uma condição que justificava a decisão mudou.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "e7f0d5be48a32b970735d198a23f05a6a4732ef3",
+    "environment_pid": 20176
+  }
+}

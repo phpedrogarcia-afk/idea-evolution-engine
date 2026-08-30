@@ -1,0 +1,19 @@
+{
+  "run_id": "PILOT-CAL-02-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Uma ferramenta para equipes remotas registrar decisões importantes, mostrar por que cada decisão foi tomada e avisar quando uma condição que justificava a decisão mudou.",
+  "human_intent": "Criar uma ferramenta que permita a equipes remotas registrar decisões críticas, exibir o motivo de cada decisão e alertar a equipe quando as condições que sustentavam a decisão forem alteradas.",
+  "refined_idea": "Ferramenta para equipes remotas registrar decisões importantes, documentar o motivo de cada decisão e enviar alertas automáticos quando as condições que justificaram a decisão mudam.",
+  "core_mechanism": "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "b8259cba1af0149e",
+  "tested_core_hash": "b8259cba1af0149e",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 4,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Conduzir entrevistas com usuários e executar um piloto da solução manual de etiquetagem de condições em uma equipe remota pequena para validar usabilidade, adesão e eficácia antes de expandir o desenvolvimento."
+}

@@ -1,0 +1,54 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 24.083726167678833,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Verificação humana no loop das condições...' (hash: 9b52ef1e6c8b7398), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Verificação humana no loop das condições com interface leve e sugestões de mudança assistidas por IA\",\"feasibility_notes\":[\"A interface leve pode ser desenvolvida com frameworks web modernos e exige baixa latência.\",\"Integração de modelo de IA para sugestões de mudança requer acesso a APIs de linguagem natural.\",\"Manter o loop humano depende de engajamento consistente dos membros da equipe.\"],\"reality_dependencies\":[\"Conectividade de rede estável para sincronização de condições.\",\"Modelo de IA treinado ou serviço externo para gerar sugestões de mudança.\",\"Banco de dados centralizado ou distribuído para armazenar o estado das condições.\",\"Mecanismo de autenticação e autorização para garantir que apenas usuários autorizados atualizem condições.\"],\"claims_needing_evidence\":[\"Human-in-the-loop verificação de condições reduz decisões errôneas.\",\"Sugestões de mudança assistidas por IA aumentam a velocidade de atualização das condições.\",\"Alertas automáticos baseados em mudanças de condição são percebidos como úteis pelos usuários.\"],\"potential_blockers\":[\"Baixa adesão dos usuários ao processo de confirmação manual.\",\"Latência ou falhas no serviço de IA que impedem geração de sugestões em tempo real.\",\"Restrições de privacidade que limitam coleta de dados de condição.\",\"Integração com ferramentas de comunicação existentes pode ser complexa.\"],\"candidate_tests\":[\"Realizar estudo controlado comparando decisões tomadas com e sem verificação humana no loop, medindo taxa de erro.\",\"Medir tempo médio de atualização de condição quando sugestões de IA são apresentadas versus quando não são.\",\"Avaliar taxa de resposta dos usuários à interface leve de confirmação de condição em diferentes contextos de trabalho remoto.\",\"Testar a precisão das sugestões de mudança da IA comparando com decisões históricas de especialistas.\"],\"exploratory_candidate_tests\":[\"Testar eficácia de alertas configuráveis em camadas, comparando taxa de resposta entre modos digest e imediato.\",\"Avaliar desempenho e usabilidade de armazenamento criptografado no cliente com busca por metadados.\",\"Medir impacto da prova de conhecimento zero na experiência de acesso a decisões confidenciais.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Verificação humana no loop das condições com interface leve e sugestões de mudança assistidas por IA",
+    "feasibility_notes": [
+      "A interface leve pode ser desenvolvida com frameworks web modernos e exige baixa latência.",
+      "Integração de modelo de IA para sugestões de mudança requer acesso a APIs de linguagem natural.",
+      "Manter o loop humano depende de engajamento consistente dos membros da equipe."
+    ],
+    "reality_dependencies": [
+      "Conectividade de rede estável para sincronização de condições.",
+      "Modelo de IA treinado ou serviço externo para gerar sugestões de mudança.",
+      "Banco de dados centralizado ou distribuído para armazenar o estado das condições.",
+      "Mecanismo de autenticação e autorização para garantir que apenas usuários autorizados atualizem condições."
+    ],
+    "claims_needing_evidence": [
+      "Human-in-the-loop verificação de condições reduz decisões errôneas.",
+      "Sugestões de mudança assistidas por IA aumentam a velocidade de atualização das condições.",
+      "Alertas automáticos baseados em mudanças de condição são percebidos como úteis pelos usuários."
+    ],
+    "potential_blockers": [
+      "Baixa adesão dos usuários ao processo de confirmação manual.",
+      "Latência ou falhas no serviço de IA que impedem geração de sugestões em tempo real.",
+      "Restrições de privacidade que limitam coleta de dados de condição.",
+      "Integração com ferramentas de comunicação existentes pode ser complexa."
+    ],
+    "candidate_tests": [
+      "Realizar estudo controlado comparando decisões tomadas com e sem verificação humana no loop, medindo taxa de erro.",
+      "Medir tempo médio de atualização de condição quando sugestões de IA são apresentadas versus quando não são.",
+      "Avaliar taxa de resposta dos usuários à interface leve de confirmação de condição em diferentes contextos de trabalho remoto.",
+      "Testar a precisão das sugestões de mudança da IA comparando com decisões históricas de especialistas."
+    ],
+    "exploratory_candidate_tests": [
+      "Testar eficácia de alertas configuráveis em camadas, comparando taxa de resposta entre modos digest e imediato.",
+      "Avaliar desempenho e usabilidade de armazenamento criptografado no cliente com busca por metadados.",
+      "Medir impacto da prova de conhecimento zero na experiência de acesso a decisões confidenciais."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T20:37:33.717754+00:00"
+}

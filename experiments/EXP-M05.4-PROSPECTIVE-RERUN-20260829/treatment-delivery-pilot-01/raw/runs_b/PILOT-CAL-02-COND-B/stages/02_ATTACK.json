@@ -1,0 +1,78 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 28.020889282226562,
+  "delta_summary": "4 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Programmatic detection of condition changes is often infeasible due to ambiguous or qualitative criteria.\",\"why_it_matters\":\"If the system cannot reliably detect changes, alerts will be inaccurate, undermining trust and usefulness of the tool.\",\"severity\":\"HIGH\",\"affected_part\":\"Condition monitoring engine\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Alert fatigue may cause users to ignore or disable notifications.\",\"why_it_matters\":\"Excessive or irrelevant alerts reduce the perceived value of the system and can lead to missed critical updates.\",\"severity\":\"MEDIUM\",\"affected_part\":\"Notification subsystem\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Storing decision rationales may expose sensitive business information.\",\"why_it_matters\":\"Data breaches or insufficient access controls could leak confidential strategies, leading to legal and competitive risks.\",\"severity\":\"HIGH\",\"affected_part\":\"Data storage and security layer\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"User adoption is uncertain; teams may not consistently log decisions.\",\"why_it_matters\":\"Incomplete records diminish the tool's value and make alerts unreliable due to missing baseline conditions.\",\"severity\":\"MEDIUM\",\"affected_part\":\"User interface / workflow\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Decisions have conditions that can be defined and monitored.\",\"It is possible to determine programmatically when a condition has changed.\",\"All team members have reliable access to the tool.\",\"Teams desire notifications about condition changes.\",\"Decisions are sufficiently important to justify systematic recording.\"],\"contradictions\":[\"The claim that remote teams lack any centralized decision‑recording tool overlooks existing solutions such as Confluence, Notion, or shared document repositories.\",\"Assuming condition changes can be detected automatically contradicts the earlier assumption that conditions are well‑defined and monitorable.\"],\"failure_modes\":[\"False positive alerts triggered by noisy or poorly defined condition metrics.\",\"Missed alerts when condition changes are not captured due to ambiguous definitions.\",\"Data loss or corruption of decision records due to inadequate backup mechanisms.\",\"System downtime preventing timely notifications.\"],\"missing_information\":[\"Specification of the language or schema used to define decision conditions.\",\"Integration requirements with existing collaboration platforms (e.g., Slack, Teams, Jira).\",\"Security and access control policies for stored decision data.\",\"Scalability expectations for the volume of decisions and alerts.\",\"User onboarding and training processes to ensure consistent usage.\"],\"overclaims\":[\"Stating that remote teams have no existing means to record decisions ignores widely adopted tools.\",\"Claiming that condition changes can always be detected programmatically overstates current technical capabilities.\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Programmatic detection of condition changes is often infeasible due to ambiguous or qualitative criteria.",
+        "why_it_matters": "If the system cannot reliably detect changes, alerts will be inaccurate, undermining trust and usefulness of the tool.",
+        "severity": "HIGH",
+        "affected_part": "Condition monitoring engine",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Alert fatigue may cause users to ignore or disable notifications.",
+        "why_it_matters": "Excessive or irrelevant alerts reduce the perceived value of the system and can lead to missed critical updates.",
+        "severity": "MEDIUM",
+        "affected_part": "Notification subsystem",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Storing decision rationales may expose sensitive business information.",
+        "why_it_matters": "Data breaches or insufficient access controls could leak confidential strategies, leading to legal and competitive risks.",
+        "severity": "HIGH",
+        "affected_part": "Data storage and security layer",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "User adoption is uncertain; teams may not consistently log decisions.",
+        "why_it_matters": "Incomplete records diminish the tool's value and make alerts unreliable due to missing baseline conditions.",
+        "severity": "MEDIUM",
+        "affected_part": "User interface / workflow",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Decisions have conditions that can be defined and monitored.",
+      "It is possible to determine programmatically when a condition has changed.",
+      "All team members have reliable access to the tool.",
+      "Teams desire notifications about condition changes.",
+      "Decisions are sufficiently important to justify systematic recording."
+    ],
+    "contradictions": [
+      "The claim that remote teams lack any centralized decision‑recording tool overlooks existing solutions such as Confluence, Notion, or shared document repositories.",
+      "Assuming condition changes can be detected automatically contradicts the earlier assumption that conditions are well‑defined and monitorable."
+    ],
+    "failure_modes": [
+      "False positive alerts triggered by noisy or poorly defined condition metrics.",
+      "Missed alerts when condition changes are not captured due to ambiguous definitions.",
+      "Data loss or corruption of decision records due to inadequate backup mechanisms.",
+      "System downtime preventing timely notifications."
+    ],
+    "missing_information": [
+      "Specification of the language or schema used to define decision conditions.",
+      "Integration requirements with existing collaboration platforms (e.g., Slack, Teams, Jira).",
+      "Security and access control policies for stored decision data.",
+      "Scalability expectations for the volume of decisions and alerts.",
+      "User onboarding and training processes to ensure consistent usage."
+    ],
+    "overclaims": [
+      "Stating that remote teams have no existing means to record decisions ignores widely adopted tools.",
+      "Claiming that condition changes can always be detected programmatically overstates current technical capabilities."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T20:36:20.818453+00:00"
+}

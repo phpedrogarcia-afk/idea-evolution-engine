@@ -1,0 +1,383 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "PILOT-CAL-02-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-08-30T17:35:37.204530",
+  "updated_at": "2026-08-30T17:39:24.648671",
+  "original_idea": "Uma ferramenta para equipes remotas registrar decisões importantes, mostrar por que cada decisão foi tomada e avisar quando uma condição que justificava a decisão mudou.",
+  "current_idea": "Ferramenta para equipes remotas registrar decisões importantes, documentar o motivo de cada decisão e enviar alertas automáticos quando as condições que justificaram a decisão mudam.",
+  "human_intent": "Criar uma ferramenta que permita a equipes remotas registrar decisões críticas, exibir o motivo de cada decisão e alertar a equipe quando as condições que sustentavam a decisão forem alteradas.",
+  "problem_statement": "Equipes remotas não possuem um meio centralizado para registrar decisões importantes, acompanhar o raciocínio por trás delas e ser notificadas quando as condições que justificaram essas decisões mudam.",
+  "actors_or_users": [
+    "Membros de equipes remotas",
+    "Líderes ou gerentes de projeto",
+    "Stakeholders"
+  ],
+  "assumptions": [
+    "As decisões têm condições que podem ser definidas e monitoradas",
+    "Os membros da equipe têm acesso ao instrumento",
+    "É possível determinar programaticamente quando uma condição mudou",
+    "A equipe deseja ser notificada sobre mudanças de condição",
+    "As decisões são suficientemente importantes para justificar registro"
+  ],
+  "ambiguities": [
+    "Como as condições que justificam uma decisão serão especificadas",
+    "Qual o canal de notificação preferido",
+    "Integração com ferramentas existentes (ex.: Slack, email)",
+    "Escopo de decisões que devem ser registradas",
+    "Privacidade e controle de acesso aos registros"
+  ],
+  "strengths": [
+    "Aumenta transparência e responsabilidade",
+    "Facilita a revisão de decisões passadas",
+    "Previne a continuidade de decisões baseadas em premissas obsoletas",
+    "Melhora a comunicação em equipes distribuídas",
+    "Cria histórico auditável"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Programmatic detection of condition changes is often infeasible due to ambiguous or qualitative criteria.",
+      "why_it_matters": "If the system cannot reliably detect changes, alerts will be inaccurate, undermining trust and usefulness of the tool.",
+      "severity": "HIGH",
+      "affected_part": "Condition monitoring engine",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Alert fatigue may cause users to ignore or disable notifications.",
+      "why_it_matters": "Excessive or irrelevant alerts reduce the perceived value of the system and can lead to missed critical updates.",
+      "severity": "MEDIUM",
+      "affected_part": "Notification subsystem",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Storing decision rationales may expose sensitive business information.",
+      "why_it_matters": "Data breaches or insufficient access controls could leak confidential strategies, leading to legal and competitive risks.",
+      "severity": "HIGH",
+      "affected_part": "Data storage and security layer",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "User adoption is uncertain; teams may not consistently log decisions.",
+      "why_it_matters": "Incomplete records diminish the tool's value and make alerts unreliable due to missing baseline conditions.",
+      "severity": "MEDIUM",
+      "affected_part": "User interface / workflow",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Decisions have conditions that can be defined and monitored.",
+    "It is possible to determine programmatically when a condition has changed.",
+    "All team members have reliable access to the tool.",
+    "Teams desire notifications about condition changes.",
+    "Decisions are sufficiently important to justify systematic recording."
+  ],
+  "contradictions": [
+    "The claim that remote teams lack any centralized decision‑recording tool overlooks existing solutions such as Confluence, Notion, or shared document repositories.",
+    "Assuming condition changes can be detected automatically contradicts the earlier assumption that conditions are well‑defined and monitorable."
+  ],
+  "failure_modes": [
+    "False positive alerts triggered by noisy or poorly defined condition metrics.",
+    "Missed alerts when condition changes are not captured due to ambiguous definitions.",
+    "Data loss or corruption of decision records due to inadequate backup mechanisms.",
+    "System downtime preventing timely notifications."
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Implement a manual, template‑driven condition tagging system where decision makers select predefined condition categories and set review dates; the platform sends reminder alerts when reviews are due rather than trying to detect changes automatically.",
+      "addresses_issues": [
+        "Programmatic detection of condition changes is often infeasible due to ambiguous or qualitative criteria.",
+        "Alert fatigue may cause users to ignore or disable notifications.",
+        "User adoption is uncertain; teams may not consistently log decisions."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requires additional manual effort from users to tag and schedule reviews.",
+        "May delay notification of real‑time condition changes.",
+        "Relies on users remembering to complete reviews."
+      ],
+      "novelty_or_difference": "Shifts from fully automated detection to a human‑in‑the‑loop review cadence, reducing reliance on ambiguous programmatic checks."
+    },
+    {
+      "mechanism": "Use an AI‑assisted fuzzy‑matching engine that parses decision rationales to infer condition shifts; alerts are aggregated into configurable daily digests with severity levels to limit interruption.",
+      "addresses_issues": [
+        "Programmatic detection of condition changes is often infeasible due to ambiguous or qualitative criteria.",
+        "Alert fatigue may cause users to ignore or disable notifications.",
+        "Storing decision rationales may expose sensitive business information."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "AI may generate false positives or miss subtle changes, requiring user verification.",
+        "Higher computational cost and need for model tuning.",
+        "Potential privacy concerns if AI processing occurs in the cloud."
+      ],
+      "novelty_or_difference": "Applies natural‑language understanding to interpret qualitative criteria and bundles notifications to combat fatigue."
+    },
+    {
+      "mechanism": "Integrate with existing project‑management tools via webhooks and provide a rule‑based trigger builder; users define explicit conditions (e.g., status changes, metric thresholds) that fire alerts, combined with role‑based access control and gamified prompts to encourage logging.",
+      "addresses_issues": [
+        "Programmatic detection of condition changes is often infeasible due to ambiguous or qualitative criteria.",
+        "Alert fatigue may cause users to ignore or disable notifications.",
+        "Storing decision rationales may expose sensitive business information.",
+        "User adoption is uncertain; teams may not consistently log decisions."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Only measurable, rule‑friendly changes can be captured; qualitative shifts remain manual.",
+        "Initial setup requires users to create and maintain rule definitions.",
+        "Gamification may feel forced for some teams."
+      ],
+      "novelty_or_difference": "Combines explicit rule engineering with gamified adoption incentives, offering precise alerts while protecting sensitive data through RBAC."
+    }
+  ],
+  "core_mechanism": "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.",
+  "core_mechanism_justification": "Atende ao desejo explícito dos usuários por um método confiável, privativo e que evita fadiga de alertas, eliminando a dependência de inferência automática incerta.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "b8259cba1af0149e",
+  "proposal_records": [
+    {
+      "proposal": "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Atende ao desejo explícito dos usuários por um método confiável, privativo e que evita fadiga de alertas, eliminando a dependência de inferência automática incerta.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Garante detecção confiável de mudanças de condição sem depender de inferência automática, protege informações sensíveis e reduz fadiga de alertas.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Alinhado à intenção humana de privacidade, confiabilidade e controle manual."
+    },
+    {
+      "proposal": "Integrar com ferramentas de gerenciamento de projetos existentes via webhooks e oferecer um construtor de gatilhos baseado em regras, permitindo que os usuários definam condições explícitas (por exemplo, mudanças de status, limites de métricas) que disparem alertas, combinado com controle de acesso baseado em papéis e prompts gamificados para incentivar o registro.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Usar um motor de correspondência difusa assistido por IA que analisa as justificativas das decisões para inferir mudanças de condição, com alertas agregados em resumos diários configuráveis e níveis de severidade para limitar interrupções.",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Levanta preocupações de privacidade ao processar dados sensíveis na nuvem e pode gerar falsos positivos ou negativos, comprometendo a confiabilidade desejada pelos usuários.",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente. (Justificativa: Garante detecção confiável de mudanças de condição sem depender de inferência automática, protege informações sensíveis e reduz fadiga de alertas. | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Integrar com ferramentas de gerenciamento de projetos existentes via webhooks e oferecer um construtor de gatilhos baseado em regras, permitindo que os usuários definam condições explícitas (por exemplo, mudanças de status, limites de métricas) que disparem alertas, combinado com controle de acesso baseado em papéis e prompts gamificados para incentivar o registro."
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Usar um motor de correspondência difusa assistido por IA que analisa as justificativas das decisões para inferir mudanças de condição, com alertas agregados em resumos diários configuráveis e níveis de severidade para limitar interrupções.",
+      "reason_rejected": "Levanta preocupações de privacidade ao processar dados sensíveis na nuvem e pode gerar falsos positivos ou negativos, comprometendo a confiabilidade desejada pelos usuários.",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [verificacao, humana, loop, condicoes, interface, leve, sugestoes, mudanca, assistidas].",
+    "Detecção programática de mudanças de condição pode ser inviável devido a critérios ambíguos ou qualitativos",
+    "Fadiga de alertas pode levar usuários a ignorar ou desativar notificações",
+    "Armazenar racionalizações de decisão pode expor informações sensíveis de negócios",
+    "Adoção pelos usuários é incerta; equipes podem não registrar decisões de forma consistente",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Verificação humana no loop das condições com interface leve e sugestões de mudança assistidas por IA' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [implementar, sistema, manual, baseado, modelos, onde, responsaveis, pela, selecionam, categorias, predefinidas, definem, datas, revisao, plataforma, envia, lembretes, revisoes, sao, devidas, vez, tentar, detectar, mudancas, automaticamente].",
+    "Detecção programática de mudanças de condição pode ser inviável devido a critérios ambíguos ou qualitativos.",
+    "Fadiga de alertas pode levar os usuários a ignorar ou desativar notificações.",
+    "Armazenamento de justificativas de decisão pode expor informações empresariais sensíveis.",
+    "Adoção pelos usuários é incerta; as equipes podem não registrar decisões de forma consistente.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.' aparece nos testes exploratórios 'Implementar webhook para sincronizar mudanças de status de tarefas em ferramentas como Jira ou Asana e disparar alertas baseados em regras definidas externamente.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.' aparece nos testes exploratórios 'Desenvolver construtor de gatilhos baseado em regras onde usuários definem condições como limites de métricas ou mudanças de status e verificam disparo correto dos alertas.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.' aparece nos testes exploratórios 'Adicionar camada gamificada (badges, pontos) para incentivar registro de decisões e revisões; medir impacto na adoção.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.' aparece nos testes exploratórios 'Experimentar motor de correspondência fuzzy assistido por IA para sugerir categorias de condição a partir da descrição da decisão (não parte do core).'.; Teste do Core 'Teste de edição de categoria e data de revisão: alterações são persistidas e próximos lembretes refletem as mudanças.' referencia mecanismo rejeitado 'Usar um motor de correspondência difusa assistido por IA que analisa as justificativas das decisões para inferir mudanças de condição, com alertas agregados em resumos diários configuráveis e níveis de severidade para limitar interrupções.'."
+  ],
+  "known_risks": [
+    "Esforço manual adicional pode resultar em registros incompletos ou atrasados.",
+    "Lembretes excessivos podem gerar fadiga de alertas se não forem bem configurados.",
+    "Dependência da disciplina dos usuários para atualizar revisões pode levar a condições desatualizadas.",
+    "Mudanças em tempo real podem não ser capturadas imediatamente devido ao processo manual."
+  ],
+  "recommended_next_step": "Conduzir entrevistas com usuários e executar um piloto da solução manual de etiquetagem de condições em uma equipe remota pequena para validar usabilidade, adesão e eficácia antes de expandir o desenvolvimento.",
+  "tested_core_mechanism": "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.",
+  "tested_core_hash": "b8259cba1af0149e",
+  "reality_dependencies": [
+    "Serviço confiável de entrega de notificações (SMTP, serviço de push, webhook para Slack/Teams).",
+    "Infraestrutura de banco de dados com backup e disponibilidade garantida.",
+    "Mecanismo de gerenciamento de identidade e controle de acesso (OAuth, SSO).",
+    "Sincronização correta de fusos horários para cálculo de datas de revisão."
+  ],
+  "claims_needing_evidence": [
+    "Usuários conseguem categorizar condições de forma suficientemente abrangente usando categorias predefinidas.",
+    "Definir datas de revisão manualmente resulta em alertas oportunos que evitam decisões desatualizadas.",
+    "Lembretes automáticos aumentam a taxa de revisão de decisões críticas comparado a processos manuais sem suporte.",
+    "Um sistema manual é suficiente para a maioria das equipes remotas, sem necessidade de detecção automática de mudanças."
+  ],
+  "candidate_tests": [
+    "Teste de criação de decisão: usuário preenche formulário, seleciona categoria e define data de revisão; verificação de armazenamento correto.",
+    "Teste de agendamento de lembrete: sistema gera evento de notificação na data/hora especificada e entrega ao canal escolhido.",
+    "Teste de entrega de notificação: usuário recebe e visualiza lembrete via email/push/Slack conforme configuração.",
+    "Teste de edição de categoria e data de revisão: alterações são persistidas e próximos lembretes refletem as mudanças.",
+    "Teste de controle de acesso: apenas usuários com permissão de “responsável” podem definir/alterar revisões; outros usuários têm acesso somente leitura."
+  ],
+  "exploratory_candidate_tests": [
+    "Implementar webhook para sincronizar mudanças de status de tarefas em ferramentas como Jira ou Asana e disparar alertas baseados em regras definidas externamente.",
+    "Desenvolver construtor de gatilhos baseado em regras onde usuários definem condições como limites de métricas ou mudanças de status e verificam disparo correto dos alertas.",
+    "Adicionar camada gamificada (badges, pontos) para incentivar registro de decisões e revisões; medir impacto na adoção.",
+    "Experimentar motor de correspondência fuzzy assistido por IA para sugerir categorias de condição a partir da descrição da decisão (não parte do core)."
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:35:52.796533",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar uma ferramenta que permita a equipes remotas registrar...' | 5 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:36:20.818394",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "4 vulnerabilidades críticas e 4 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:36:39.981310",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:37:09.632777",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Verificação humana no loop das condições...' (Base: MODEL_HYPOTHESIS | Hash: 9b52ef1e6c8b7398), 1 aceitas, 2 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:37:33.717685",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Verificação humana no loop das condições...' (hash: 9b52ef1e6c8b7398), 4 dependências, 4 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:37:53.544079",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:38:09.400500",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:38:38.049452",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Implementar um sistema manual, baseado e...' (Base: MODEL_HYPOTHESIS | Hash: b8259cba1af0149e), 1 aceitas, 1 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:39:01.039115",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Implementar um sistema manual, baseado e...' (hash: b8259cba1af0149e), 4 dependências, 5 testes do Core, 4 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-30T17:39:24.648658",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "cell_id": "CAL-02-CONDITION_C",
+  "idea_id": "CAL-02",
+  "condition": "CONDITION_C",
+  "run_id_used": "PILOT-CAL-02-COND-C",
+  "latency_seconds": 22.871,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "delivery_class": "DELIVERED",
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "human_decision_requested": true,
+  "candidate_present": true
+}

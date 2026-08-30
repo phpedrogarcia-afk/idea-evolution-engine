@@ -1,0 +1,19 @@
+{
+  "run_id": "PILOT-CAL-01-COND-B_v2",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um aplicativo de lista de compras compartilhada que aprende quais itens uma família costuma comprar e sugere automaticamente o que pode estar faltando, sem adicionar itens sem confirmação.",
+  "human_intent": "Criar um aplicativo de lista de compras compartilhada que aprenda os itens habituais da família e sugira automaticamente o que está faltando, adicionando apenas após confirmação do usuário.",
+  "refined_idea": "Aplicativo de lista de compras compartilhada que aprende localmente os itens habituais da família, sincroniza de forma ponto‑a‑ponto entre dispositivos usando criptografia de grupo e apresenta sugestões resumidas diárias que exigem confirmação manual antes de serem adicionadas.",
+  "core_mechanism": "Sincronização ponto‑a‑ponto (peer‑to‑peer) entre dispositivos familiares com chaves de grupo criptografadas; cada dispositivo mantém histórico local e executa modelo de aprendizado local, compartilhando apenas atualizações resumidas criptografadas.",
+  "core_mechanism_basis": "VALID_USER_DERIVATION",
+  "core_mechanism_hash": "2dd661e75f92252e",
+  "tested_core_hash": "2dd661e75f92252e",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 2,
+  "rejected_changes_count": 2,
+  "recommended_next_step": "Prototipar a sincronização ponto‑a‑ponto com criptografia de grupo, integrar o modelo de aprendizado local e conduzir testes de usabilidade focados na confirmação manual das sugestões."
+}

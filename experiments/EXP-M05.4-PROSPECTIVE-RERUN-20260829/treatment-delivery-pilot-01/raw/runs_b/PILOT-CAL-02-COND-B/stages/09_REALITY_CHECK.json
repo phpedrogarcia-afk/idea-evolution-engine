@@ -1,0 +1,58 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 22.98859453201294,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Implementar um sistema manual, baseado e...' (hash: b8259cba1af0149e), 4 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.\",\"feasibility_notes\":[\"A criação de formulários/template para registro de decisões é tecnicamente simples e pode ser implementada com frameworks web existentes.\",\"Agendamento de revisões e envio de lembretes pode ser suportado por serviços de agenda/cron e APIs de notificação (email, push, Slack).\",\"Gerenciamento de papéis e permissões requer um módulo de autenticação/autorizações já comum em SaaS.\",\"Armazenamento persistente de decisões e metadados pode ser atendido por bancos de dados relacionais ou NoSQL já disponíveis.\"],\"reality_dependencies\":[\"Serviço confiável de entrega de notificações (SMTP, serviço de push, webhook para Slack/Teams).\",\"Infraestrutura de banco de dados com backup e disponibilidade garantida.\",\"Mecanismo de gerenciamento de identidade e controle de acesso (OAuth, SSO).\",\"Sincronização correta de fusos horários para cálculo de datas de revisão.\"],\"claims_needing_evidence\":[\"Usuários conseguem categorizar condições de forma suficientemente abrangente usando categorias predefinidas.\",\"Definir datas de revisão manualmente resulta em alertas oportunos que evitam decisões desatualizadas.\",\"Lembretes automáticos aumentam a taxa de revisão de decisões críticas comparado a processos manuais sem suporte.\",\"Um sistema manual é suficiente para a maioria das equipes remotas, sem necessidade de detecção automática de mudanças.\"],\"potential_blockers\":[\"Resistência dos usuários em adotar o registro manual e definir revisões periódicas.\",\"Fadiga de notificações se lembretes forem excessivos ou irrelevantes.\",\"Definição inadequada das categorias predefinidas pode levar a uso inconsistente.\",\"Limitações de integração com ferramentas de calendário ou comunicação já existentes na empresa.\"],\"candidate_tests\":[\"Teste de criação de decisão: usuário preenche formulário, seleciona categoria e define data de revisão; verificação de armazenamento correto.\",\"Teste de agendamento de lembrete: sistema gera evento de notificação na data/hora especificada e entrega ao canal escolhido.\",\"Teste de entrega de notificação: usuário recebe e visualiza lembrete via email/push/Slack conforme configuração.\",\"Teste de edição de categoria e data de revisão: alterações são persistidas e próximos lembretes refletem as mudanças.\",\"Teste de controle de acesso: apenas usuários com permissão de “responsável” podem definir/alterar revisões; outros usuários têm acesso somente leitura.\"],\"exploratory_candidate_tests\":[\"Implementar webhook para sincronizar mudanças de status de tarefas em ferramentas como Jira ou Asana e disparar alertas baseados em regras definidas externamente.\",\"Desenvolver construtor de gatilhos baseado em regras onde usuários definem condições como limites de métricas ou mudanças de status e verificam disparo correto dos alertas.\",\"Adicionar camada gamificada (badges, pontos) para incentivar registro de decisões e revisões; medir impacto na adoção.\",\"Experimentar motor de correspondência fuzzy assistido por IA para sugerir categorias de condição a partir da descrição da decisão (não parte do core).\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Implementar um sistema manual, baseado em modelos, onde os responsáveis pela decisão selecionam categorias de condição predefinidas e definem datas de revisão; a plataforma envia lembretes quando as revisões são devidas, em vez de tentar detectar mudanças automaticamente.",
+    "feasibility_notes": [
+      "A criação de formulários/template para registro de decisões é tecnicamente simples e pode ser implementada com frameworks web existentes.",
+      "Agendamento de revisões e envio de lembretes pode ser suportado por serviços de agenda/cron e APIs de notificação (email, push, Slack).",
+      "Gerenciamento de papéis e permissões requer um módulo de autenticação/autorizações já comum em SaaS.",
+      "Armazenamento persistente de decisões e metadados pode ser atendido por bancos de dados relacionais ou NoSQL já disponíveis."
+    ],
+    "reality_dependencies": [
+      "Serviço confiável de entrega de notificações (SMTP, serviço de push, webhook para Slack/Teams).",
+      "Infraestrutura de banco de dados com backup e disponibilidade garantida.",
+      "Mecanismo de gerenciamento de identidade e controle de acesso (OAuth, SSO).",
+      "Sincronização correta de fusos horários para cálculo de datas de revisão."
+    ],
+    "claims_needing_evidence": [
+      "Usuários conseguem categorizar condições de forma suficientemente abrangente usando categorias predefinidas.",
+      "Definir datas de revisão manualmente resulta em alertas oportunos que evitam decisões desatualizadas.",
+      "Lembretes automáticos aumentam a taxa de revisão de decisões críticas comparado a processos manuais sem suporte.",
+      "Um sistema manual é suficiente para a maioria das equipes remotas, sem necessidade de detecção automática de mudanças."
+    ],
+    "potential_blockers": [
+      "Resistência dos usuários em adotar o registro manual e definir revisões periódicas.",
+      "Fadiga de notificações se lembretes forem excessivos ou irrelevantes.",
+      "Definição inadequada das categorias predefinidas pode levar a uso inconsistente.",
+      "Limitações de integração com ferramentas de calendário ou comunicação já existentes na empresa."
+    ],
+    "candidate_tests": [
+      "Teste de criação de decisão: usuário preenche formulário, seleciona categoria e define data de revisão; verificação de armazenamento correto.",
+      "Teste de agendamento de lembrete: sistema gera evento de notificação na data/hora especificada e entrega ao canal escolhido.",
+      "Teste de entrega de notificação: usuário recebe e visualiza lembrete via email/push/Slack conforme configuração.",
+      "Teste de edição de categoria e data de revisão: alterações são persistidas e próximos lembretes refletem as mudanças.",
+      "Teste de controle de acesso: apenas usuários com permissão de “responsável” podem definir/alterar revisões; outros usuários têm acesso somente leitura."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar webhook para sincronizar mudanças de status de tarefas em ferramentas como Jira ou Asana e disparar alertas baseados em regras definidas externamente.",
+      "Desenvolver construtor de gatilhos baseado em regras onde usuários definem condições como limites de métricas ou mudanças de status e verificam disparo correto dos alertas.",
+      "Adicionar camada gamificada (badges, pontos) para incentivar registro de decisões e revisões; medir impacto na adoção.",
+      "Experimentar motor de correspondência fuzzy assistido por IA para sugerir categorias de condição a partir da descrição da decisão (não parte do core)."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T20:39:01.039180+00:00"
+}

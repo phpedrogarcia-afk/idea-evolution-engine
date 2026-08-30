@@ -1,0 +1,10 @@
+{
+  "run_id": "PILOT-CAL-01-COND-A",
+  "created_at": "2026-08-29T21:44:31.923148+00:00",
+  "original_idea": "Um aplicativo de lista de compras compartilhada que aprende quais itens uma família costuma comprar e sugere automaticamente o que pode estar faltando, sem adicionar itens sem confirmação.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "e7f0d5be48a32b970735d198a23f05a6a4732ef3",
+    "environment_pid": 9064
+  }
+}

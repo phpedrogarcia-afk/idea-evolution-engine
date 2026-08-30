@@ -1,0 +1,182 @@
+{
+  "pilot_id": "M05.4-TREATMENT-DELIVERY-PILOT-01",
+  "timestamp": "2026-08-30T17:39:50.525124",
+  "resume_note": "Resumed after server restart; CAL-01-CONDITION_B partial evidence preserved, restarted as v2.",
+  "total_duration_seconds": 482.24,
+  "total_cells_planned": 6,
+  "total_cells_completed": 6,
+  "total_semantic_model_calls": 24,
+  "calls_by_condition": {
+    "CONDITION_A": 2,
+    "CONDITION_B": 20,
+    "CONDITION_C": 2
+  },
+  "delivery_counts": {
+    "DELIVERED": 4,
+    "PARTIALLY_DELIVERED": 2
+  },
+  "a_delivered_count": 2,
+  "b_delivered_or_partial_count": 2,
+  "c_delivered_count": 2,
+  "verdict": "END_TO_END_TREATMENT_DELIVERY_PROVEN_ON_CALIBRATION",
+  "cells": [
+    {
+      "cell_id": "CAL-01-CONDITION_A",
+      "idea_id": "CAL-01",
+      "condition": "CONDITION_A",
+      "latency_seconds": 45.141,
+      "model_calls": 1,
+      "status": "SUCCESS",
+      "terminal_status": "SUCCESS",
+      "delivery_class": "DELIVERED",
+      "error": null,
+      "candidate_present": true,
+      "parsed_output": {
+        "summary": "Um aplicativo de lista de compras colaborativa que aprende os padrões de consumo da família, sugere itens que provavelmente estão em falta e permite confirmação antes de adicionar, oferecendo também integração com lojas e recursos de privacidade.",
+        "strengths": [
+          "Facilita a colaboração familiar",
+          "Reduz o esquecimento de itens essenciais",
+          "Sugestões automáticas baseadas em histórico de compras",
+          "Economia de tempo ao evitar inserções manuais repetitivas",
+          "Possibilidade de integração com APIs de supermercados para preços e disponibilidade"
+        ],
+        "weaknesses": [
+          "Dependência de dados históricos pode gerar sugestões imprecisas",
+          "Preocupações com privacidade dos hábitos de consumo",
+          "Necessidade de confirmação pode gerar atrito se a UI for confusa",
+          "Desenvolvimento de modelo preditivo requer coleta e rotulagem de dados",
+          "Integração com múltiplas lojas pode ser complexa"
+        ],
+        "refined_version": "Um app móvel e web onde cada membro da família tem seu perfil; o sistema registra compras passadas (via entrada manual ou integração com recibos digitais) e treina um modelo leve de aprendizado de máquina para prever itens recorrentes. Quando a lista está quase completa, o app propõe automaticamente os itens que provavelmente faltam, exibindo uma pré‑visualização com opções de \"Adicionar\", \"Ignorar\" ou \"Editar quantidade\". O usuário pode revisar as sugestões antes da confirmação final. O app inclui controles de privacidade (opt‑in para coleta de dados, anonimização), sincronização em tempo real, notificações de lembrete e integração opcional com APIs de supermercados para preços, disponibilidade e entrega.",
+        "next_steps": [
+          "Conduzir pesquisa de mercado com famílias para validar necessidade e preferências",
+          "Definir requisitos de privacidade e obter consentimento de usuários",
+          "Desenvolver protótipo de UI/UX focado em confirmação simples das sugestões",
+          "Implementar pipeline de coleta de dados de compras (manual e via recibos)",
+          "Treinar modelo preditivo inicial usando dados sintéticos",
+          "Testar protótipo com grupo piloto e coletar feedback",
+          "Iterar no algoritmo de sugestão para melhorar precisão",
+          "Planejar integração com APIs de supermercados locais",
+          "Lançar versão beta fechada e monitorar métricas de adoção e precisão"
+        ]
+      }
+    },
+    {
+      "cell_id": "CAL-01-CONDITION_B",
+      "idea_id": "CAL-01",
+      "condition": "CONDITION_B",
+      "run_id_used": "PILOT-CAL-01-COND-B_v2",
+      "latency_seconds": 192.017,
+      "model_calls": 10,
+      "status": "SUCCESS",
+      "terminal_status": "REFINEMENT_INCOMPLETE",
+      "delivery_class": "PARTIALLY_DELIVERED",
+      "reconstruction_count": 1,
+      "stages_executed": [
+        "UNDERSTAND",
+        "ATTACK",
+        "ALTERNATIVES",
+        "SYNTHESIZE",
+        "REALITY_CHECK",
+        "FINAL_REVIEW",
+        "ALTERNATIVES",
+        "SYNTHESIZE",
+        "REALITY_CHECK",
+        "FINAL_REVIEW"
+      ],
+      "candidate_present": true
+    },
+    {
+      "cell_id": "CAL-01-CONDITION_C",
+      "idea_id": "CAL-01",
+      "condition": "CONDITION_C",
+      "run_id_used": "PILOT-CAL-01-COND-C",
+      "latency_seconds": 19.535,
+      "model_calls": 1,
+      "status": "SUCCESS",
+      "terminal_status": "HUMAN_DECISION_REQUIRED",
+      "delivery_class": "DELIVERED",
+      "gate_outcome": "REQUEST_HUMAN_DECISION",
+      "human_decision_requested": true,
+      "candidate_present": true
+    },
+    {
+      "cell_id": "CAL-02-CONDITION_A",
+      "idea_id": "CAL-02",
+      "condition": "CONDITION_A",
+      "latency_seconds": 12.839,
+      "model_calls": 1,
+      "status": "SUCCESS",
+      "terminal_status": "SUCCESS",
+      "delivery_class": "DELIVERED",
+      "error": null,
+      "candidate_present": true,
+      "parsed_output": {
+        "summary": "Uma plataforma colaborativa de registro de decisões para equipes remotas, que captura a decisão, seu contexto e justificativa, versiona alterações e envia alertas automáticos quando condições monitoradas que sustentavam a decisão mudam, integrando-se a ferramentas de gestão e comunicação já usadas pela equipe.",
+        "strengths": [
+          "Aumenta transparência e responsabilidade nas decisões",
+          "Cria um repositório centralizado de conhecimento institucional",
+          "Facilita a revisão e atualização de decisões quando o contexto evolui",
+          "Integração com ferramentas existentes (Slack, Teams, Jira, Confluence) reduz fricção",
+          "Notificações proativas evitam a continuidade de decisões desatualizadas"
+        ],
+        "weaknesses": [
+          "Risco de sobrecarga de registro se não houver processos claros",
+          "Desafio de definir e monitorar as \"condições\" que justificam cada decisão",
+          "Necessidade de integração técnica com múltiplas ferramentas pode ser complexa",
+          "Possível resistência cultural à disciplina de registro constante",
+          "Questões de privacidade e controle de acesso a decisões sensíveis"
+        ],
+        "refined_version": "DecisionLog Pro: um SaaS que permite que equipes remotas criem \"Decision Records\" estruturados contendo título, descrição, critérios, responsáveis e métricas de condição. Cada registro inclui gatilhos configuráveis (ex.: mudança de KPI, data, evento externo) que, ao serem detectados via APIs ou integrações, disparam alertas no canal de comunicação escolhido. O sistema oferece versionamento, busca semântica, visualização de histórico e recomendações de IA para resumir alterações e sugerir revisões.",
+        "next_steps": [
+          "Realizar entrevistas com equipes remotas para mapear fluxos de decisão atuais",
+          "Definir o modelo de dados dos Decision Records e os tipos de gatilhos monitoráveis",
+          "Desenvolver um protótipo de UI/UX focado em criação rápida de registros",
+          "Construir integrações piloto com Slack e Jira para captura de métricas",
+          "Implementar mecanismo de monitoramento de condições (webhooks, APIs)",
+          "Testar o protótipo com um grupo piloto e coletar feedback de usabilidade",
+          "Iterar no design, priorizando automação de alertas e controle de permissões"
+        ]
+      }
+    },
+    {
+      "cell_id": "CAL-02-CONDITION_B",
+      "idea_id": "CAL-02",
+      "condition": "CONDITION_B",
+      "run_id_used": "PILOT-CAL-02-COND-B",
+      "latency_seconds": 227.468,
+      "model_calls": 10,
+      "status": "SUCCESS",
+      "terminal_status": "REFINEMENT_INCOMPLETE",
+      "delivery_class": "PARTIALLY_DELIVERED",
+      "reconstruction_count": 1,
+      "stages_executed": [
+        "UNDERSTAND",
+        "ATTACK",
+        "ALTERNATIVES",
+        "SYNTHESIZE",
+        "REALITY_CHECK",
+        "FINAL_REVIEW",
+        "ALTERNATIVES",
+        "SYNTHESIZE",
+        "REALITY_CHECK",
+        "FINAL_REVIEW"
+      ],
+      "candidate_present": true
+    },
+    {
+      "cell_id": "CAL-02-CONDITION_C",
+      "idea_id": "CAL-02",
+      "condition": "CONDITION_C",
+      "run_id_used": "PILOT-CAL-02-COND-C",
+      "latency_seconds": 22.871,
+      "model_calls": 1,
+      "status": "SUCCESS",
+      "terminal_status": "HUMAN_DECISION_REQUIRED",
+      "delivery_class": "DELIVERED",
+      "gate_outcome": "REQUEST_HUMAN_DECISION",
+      "human_decision_requested": true,
+      "candidate_present": true
+    }
+  ]
+}

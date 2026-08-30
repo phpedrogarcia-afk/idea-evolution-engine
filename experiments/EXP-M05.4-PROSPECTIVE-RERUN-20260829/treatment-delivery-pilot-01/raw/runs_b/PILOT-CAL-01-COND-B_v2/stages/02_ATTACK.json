@@ -1,0 +1,70 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 4.066408634185791,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Dependência de uma única conta compartilhada pode falhar quando membros usam contas distintas.\",\"why_it_matters\":\"Fragmenta os dados de compra, impede a aprendizagem correta e gera sugestões incompletas ou errôneas.\",\"severity\":\"HIGH\",\"affected_part\":\"Autenticação e modelo de compartilhamento\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Armazenamento de padrões de compra pode violar privacidade ou regulamentos de dados.\",\"why_it_matters\":\"Risco legal e perda de confiança do usuário, podendo levar à remoção do app das lojas.\",\"severity\":\"HIGH\",\"affected_part\":\"Camada de armazenamento de dados\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Confirmação manual de cada sugestão pode gerar fadiga do usuário.\",\"why_it_matters\":\"Reduz a taxa de adoção e pode levar os usuários a desativar a funcionalidade.\",\"severity\":\"MEDIUM\",\"affected_part\":\"Interface do usuário\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"todos os membros da família utilizam a mesma conta ou compartilham a lista\",\"os dados de compras anteriores estão disponíveis para o app\",\"os usuários revisarão e confirmarão sugestões antes de adicioná-las\",\"as preferências de privacidade permitem o armazenamento dos padrões de compra\",\"as famílias mantêm hábitos de compra estáveis ao longo do tempo\"],\"contradictions\":[\"O app promete \\\"sugerir automaticamente\\\" mas também \\\"não adicionar itens sem confirmação\\\", o que pode tornar a sugestão inútil se o usuário nunca confirmar.\",\"Afirma que evita itens esquecidos, mas depende de dados históricos que podem estar incompletos.\"],\"failure_modes\":[\"Sugestões irrelevantes devido a dados históricos insuficientes.\",\"Perda de sincronização entre dispositivos, resultando em listas divergentes.\",\"Violação de privacidade por exposição de padrões de consumo.\",\"Sobrecarga da UI por excesso de confirmações, levando ao abandono.\"],\"missing_information\":[\"Como o app integrará fontes de dados de compras (receipts, cartões, supermercados).\",\"Mecanismo de gerenciamento de múltiplas contas ou permissões granulares.\",\"Estratégias de anonimização ou consentimento para dados de compra.\",\"Planos de operação offline e reconciliação de dados.\"],\"overclaims\":[\"Afirma que eliminará completamente itens esquecidos sem considerar variações de necessidade.\",\"Promete aprendizagem precisa sem necessidade de feedback adicional.\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Dependência de uma única conta compartilhada pode falhar quando membros usam contas distintas.",
+        "why_it_matters": "Fragmenta os dados de compra, impede a aprendizagem correta e gera sugestões incompletas ou errôneas.",
+        "severity": "HIGH",
+        "affected_part": "Autenticação e modelo de compartilhamento",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Armazenamento de padrões de compra pode violar privacidade ou regulamentos de dados.",
+        "why_it_matters": "Risco legal e perda de confiança do usuário, podendo levar à remoção do app das lojas.",
+        "severity": "HIGH",
+        "affected_part": "Camada de armazenamento de dados",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Confirmação manual de cada sugestão pode gerar fadiga do usuário.",
+        "why_it_matters": "Reduz a taxa de adoção e pode levar os usuários a desativar a funcionalidade.",
+        "severity": "MEDIUM",
+        "affected_part": "Interface do usuário",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "todos os membros da família utilizam a mesma conta ou compartilham a lista",
+      "os dados de compras anteriores estão disponíveis para o app",
+      "os usuários revisarão e confirmarão sugestões antes de adicioná-las",
+      "as preferências de privacidade permitem o armazenamento dos padrões de compra",
+      "as famílias mantêm hábitos de compra estáveis ao longo do tempo"
+    ],
+    "contradictions": [
+      "O app promete \"sugerir automaticamente\" mas também \"não adicionar itens sem confirmação\", o que pode tornar a sugestão inútil se o usuário nunca confirmar.",
+      "Afirma que evita itens esquecidos, mas depende de dados históricos que podem estar incompletos."
+    ],
+    "failure_modes": [
+      "Sugestões irrelevantes devido a dados históricos insuficientes.",
+      "Perda de sincronização entre dispositivos, resultando em listas divergentes.",
+      "Violação de privacidade por exposição de padrões de consumo.",
+      "Sobrecarga da UI por excesso de confirmações, levando ao abandono."
+    ],
+    "missing_information": [
+      "Como o app integrará fontes de dados de compras (receipts, cartões, supermercados).",
+      "Mecanismo de gerenciamento de múltiplas contas ou permissões granulares.",
+      "Estratégias de anonimização ou consentimento para dados de compra.",
+      "Planos de operação offline e reconciliação de dados."
+    ],
+    "overclaims": [
+      "Afirma que eliminará completamente itens esquecidos sem considerar variações de necessidade.",
+      "Promete aprendizagem precisa sem necessidade de feedback adicional."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T20:31:58.164067+00:00"
+}

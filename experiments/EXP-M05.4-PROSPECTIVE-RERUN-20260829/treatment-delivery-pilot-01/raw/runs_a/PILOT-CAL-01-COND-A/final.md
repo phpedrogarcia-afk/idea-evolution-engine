@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — PILOT-CAL-01-COND-A
+
+## Ideia Original
+> Um aplicativo de lista de compras compartilhada que aprende quais itens uma família costuma comprar e sugere automaticamente o que pode estar faltando, sem adicionar itens sem confirmação.
+
+## Resumo do Modelo
+Um aplicativo de lista de compras colaborativa que aprende os padrões de consumo da família, sugere itens que provavelmente estão em falta e permite confirmação antes de adicionar, oferecendo também integração com lojas e recursos de privacidade.
+
+## Versão Refinada
+Um app móvel e web onde cada membro da família tem seu perfil; o sistema registra compras passadas (via entrada manual ou integração com recibos digitais) e treina um modelo leve de aprendizado de máquina para prever itens recorrentes. Quando a lista está quase completa, o app propõe automaticamente os itens que provavelmente faltam, exibindo uma pré‑visualização com opções de "Adicionar", "Ignorar" ou "Editar quantidade". O usuário pode revisar as sugestões antes da confirmação final. O app inclui controles de privacidade (opt‑in para coleta de dados, anonimização), sincronização em tempo real, notificações de lembrete e integração opcional com APIs de supermercados para preços, disponibilidade e entrega.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Facilita a colaboração familiar, Reduz o esquecimento de itens essenciais, Sugestões automáticas baseadas em histórico de compras, Economia de tempo ao evitar inserções manuais repetitivas, Possibilidade de integração com APIs de supermercados para preços e disponibilidade
+- **Fracos:** Dependência de dados históricos pode gerar sugestões imprecisas, Preocupações com privacidade dos hábitos de consumo, Necessidade de confirmação pode gerar atrito se a UI for confusa, Desenvolvimento de modelo preditivo requer coleta e rotulagem de dados, Integração com múltiplas lojas pode ser complexa
+
+## Próximos Passos
+Conduzir pesquisa de mercado com famílias para validar necessidade e preferências, Definir requisitos de privacidade e obter consentimento de usuários, Desenvolver protótipo de UI/UX focado em confirmação simples das sugestões, Implementar pipeline de coleta de dados de compras (manual e via recibos), Treinar modelo preditivo inicial usando dados sintéticos, Testar protótipo com grupo piloto e coletar feedback, Iterar no algoritmo de sugestão para melhorar precisão, Planejar integração com APIs de supermercados locais, Lançar versão beta fechada e monitorar métricas de adoção e precisão

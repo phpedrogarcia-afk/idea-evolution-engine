@@ -1,0 +1,32 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 23.608585357666016,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"Esforço manual adicional pode resultar em registros incompletos ou atrasados.\",\"Lembretes excessivos podem gerar fadiga de alertas se não forem bem configurados.\",\"Dependência da disciplina dos usuários para atualizar revisões pode levar a condições desatualizadas.\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada preserva o propósito original de registrar decisões, documentar motivos e alertar sobre mudanças de condição, sem introduzir desvios de essência ou complexidades especulativas. O Core manual foi testado e corresponde ao modelo, sem contradições ontológicas. Riscos conhecidos relacionados ao esforço manual e fadiga de alertas permanecem, mas são reconhecidos e podem ser mitigados nas próximas etapas de validação com usuários. Recomenda-se avançar com o protótipo manual e conduzir entrevistas/piloto.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Esforço manual adicional pode resultar em registros incompletos ou atrasados.",
+      "Lembretes excessivos podem gerar fadiga de alertas se não forem bem configurados.",
+      "Dependência da disciplina dos usuários para atualizar revisões pode levar a condições desatualizadas."
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A ideia refinada preserva o propósito original de registrar decisões, documentar motivos e alertar sobre mudanças de condição, sem introduzir desvios de essência ou complexidades especulativas. O Core manual foi testado e corresponde ao modelo, sem contradições ontológicas. Riscos conhecidos relacionados ao esforço manual e fadiga de alertas permanecem, mas são reconhecidos e podem ser mitigados nas próximas etapas de validação com usuários. Recomenda-se avançar com o protótipo manual e conduzir entrevistas/piloto."
+  },
+  "error": null,
+  "timestamp": "2026-08-30T20:39:24.648708+00:00"
+}

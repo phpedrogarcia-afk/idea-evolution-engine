@@ -1,0 +1,25 @@
+{
+  "cell_id": "CAL-02-CONDITION_B",
+  "idea_id": "CAL-02",
+  "condition": "CONDITION_B",
+  "run_id_used": "PILOT-CAL-02-COND-B",
+  "latency_seconds": 227.468,
+  "model_calls": 10,
+  "status": "SUCCESS",
+  "terminal_status": "REFINEMENT_INCOMPLETE",
+  "delivery_class": "PARTIALLY_DELIVERED",
+  "reconstruction_count": 1,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE",
+    "REALITY_CHECK",
+    "FINAL_REVIEW",
+    "ALTERNATIVES",
+    "SYNTHESIZE",
+    "REALITY_CHECK",
+    "FINAL_REVIEW"
+  ],
+  "candidate_present": true
+}
