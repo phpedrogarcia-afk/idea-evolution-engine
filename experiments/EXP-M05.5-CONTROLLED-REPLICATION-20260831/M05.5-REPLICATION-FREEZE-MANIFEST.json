@@ -12,8 +12,16 @@
   "holdout_count": 8,
   "cell_count": 24,
   "global_call_maximum": 104,
-  "frozen_at": "2026-08-31T14:24:00-03:00",
+  "frozen_at": "2026-08-31T15:38:00-03:00",
   "critical_file_hashes": {
+    "execute_m05_5_frozen": {
+      "path": "tools/experiments/execute_m05_5_frozen.py",
+      "sha256": "8ec52db347b711526fd7e0ed3b58ed44ff4f667854de28369560a9070d9a67f3"
+    },
+    "render_m05_5_blind_review": {
+      "path": "tools/experiments/render_m05_5_blind_review.py",
+      "sha256": "966b41f0f8feeadf84ff68d6a617bee3e98732a5a126757ef19eeb6e77ed95d2"
+    },
     "m05_5_runner": {
       "path": "src/idea_evolution/experiments/m05_5_runner.py",
       "sha256": "e2e8ac8622e3b7715c1ea4bcb54853ad8d80bb4a120f4375f844cf62e4e80233"
