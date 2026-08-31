@@ -67,7 +67,7 @@
     },
     "holdout_ideas": {
       "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/HOLDOUT-IDEAS.json",
-      "sha256": "7b843dc99eec149729359a91cbc787068ced5c64ec8ba4dd34431b0c0138b0df"
+      "sha256": "318c43cfb9f885decb0de794bbbfee0ead7ff34d5e941f5ef21bf52b1cfedab9"
     },
     "preregistration": {
       "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-PREREGISTRATION.md",
@@ -100,6 +100,10 @@
     "final_review_stage": {
       "path": "src/idea_evolution/stages/final_review.py",
       "sha256": "79d8d5ab919b6c518f8ab656515843e84d3fc19a451df776f6589225859699cd"
+    },
+    "m05_5_runner": {
+      "path": "src/idea_evolution/experiments/m05_5_runner.py",
+      "sha256": "e2e8ac8622e3b7715c1ea4bcb54853ad8d80bb4a120f4375f844cf62e4e80233"
     }
   }
 }

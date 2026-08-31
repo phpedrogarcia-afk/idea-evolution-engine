@@ -5,44 +5,44 @@
   "governance": "Literal human source text. Not rewritten, improved, clarified, expanded, or semantically normalized.",
   "ideas": [
     {
-      "id": "REP-01",
-      "type": "SIMPLE_CONSTRAINED_UTILITY",
-      "text": "Uma pequena ferramenta desktop que cola um texto e remove toda a formatação, salvando o resultado somente se o usuário clicar em confirmar; sem conta, sem nuvem e sem histórico automático."
+      "idea_id": "REP-01",
+      "suite_class": "SIMPLE_CONSTRAINED_UTILITY",
+      "raw_idea": "Uma pequena ferramenta desktop que cola um texto e remove toda a formatação, salvando o resultado somente se o usuário clicar em confirmar; sem conta, sem nuvem e sem histórico automático."
     },
     {
-      "id": "REP-02",
-      "type": "FERTILE_INCUBATIVE",
-      "text": "Um lugar digital para guardar perguntas que ainda não têm resposta, deixando-as reaparecer ocasionalmente sem categorias, metas ou obrigação de concluí-las."
+      "idea_id": "REP-02",
+      "suite_class": "FERTILE_INCUBATIVE",
+      "raw_idea": "Um lugar digital para guardar perguntas que ainda não têm resposta, deixando-as reaparecer ocasionalmente sem categorias, metas ou obrigação de concluí-las."
     },
     {
-      "id": "REP-03",
-      "type": "TWO_PLAUSIBLE_MECHANISMS",
-      "text": "Uma comunidade para músicos amadores encontrarem parceiros: ou por proximidade geográfica para ensaiar presencialmente, ou por afinidade de repertório e estilo; o criador ainda não sabe qual eixo deve ser central."
+      "idea_id": "REP-03",
+      "suite_class": "TWO_PLAUSIBLE_MECHANISMS",
+      "raw_idea": "Uma comunidade para músicos amadores encontrarem parceiros: ou por proximidade geográfica para ensaiar presencialmente, ou por afinidade de repertório e estilo; o criador ainda não sabe qual eixo deve ser central."
     },
     {
-      "id": "REP-04",
-      "type": "HARD_LOCAL_PRIVACY_CONSTRAINT",
-      "text": "Um organizador de documentos pessoais que funcione 100% local no computador, sem login, sem servidor e sem enviar conteúdo para a internet, permitindo exportar um único arquivo de backup."
+      "idea_id": "REP-04",
+      "suite_class": "HARD_LOCAL_PRIVACY_CONSTRAINT",
+      "raw_idea": "Um organizador de documentos pessoais que funcione 100% local no computador, sem login, sem servidor e sem enviar conteúdo para a internet, permitindo exportar um único arquivo de backup."
     },
     {
-      "id": "REP-05",
-      "type": "PHYSICAL_OPERATIONAL_IDEA",
-      "text": "Um serviço de pequenos reparos de roupas por bairro: coleta na portaria, conserto e devolução em até 48 horas, sem exigir que o cliente esteja em casa."
+      "idea_id": "REP-05",
+      "suite_class": "PHYSICAL_OPERATIONAL_IDEA",
+      "raw_idea": "Um serviço de pequenos reparos de roupas por bairro: coleta na portaria, conserto e devolução em até 48 horas, sem exigir que o cliente esteja em casa."
     },
     {
-      "id": "REP-06",
-      "type": "NORMATIVE_HUMAN_DECISION",
-      "text": "Uma comunidade online de ajuda entre vizinhos em que o criador ainda não decidiu se avaliações e reputação devem ser públicas, privadas para cada usuário ou nem existir, para evitar competição social."
+      "idea_id": "REP-06",
+      "suite_class": "NORMATIVE_HUMAN_DECISION",
+      "raw_idea": "Uma comunidade online de ajuda entre vizinhos em que o criador ainda não decidiu se avaliações e reputação devem ser públicas, privadas para cada usuário ou nem existir, para evitar competição social."
     },
     {
-      "id": "REP-07",
-      "type": "SIMPLE_DEVELOPER_TOOL",
-      "text": "Uma ferramenta de linha de comando simples que recebe um nome de arquivo e cria uma cópia com timestamp antes de alterações manuais, sem banco de dados, interface gráfica ou sincronização."
+      "idea_id": "REP-07",
+      "suite_class": "SIMPLE_DEVELOPER_TOOL",
+      "raw_idea": "Uma ferramenta de linha de comando simples que recebe um nome de arquivo e cria uma cópia com timestamp antes de alterações manuais, sem banco de dados, interface gráfica ou sincronização."
     },
     {
-      "id": "REP-08",
-      "type": "TESTABLE_PRODUCT_HYPOTHESIS",
-      "text": "Um leitor digital que quer testar se reduzir animações de interface durante a leitura melhora a concentração; a hipótese deve ser avaliada antes de transformar isso em um produto cheio de recursos."
+      "idea_id": "REP-08",
+      "suite_class": "TESTABLE_PRODUCT_HYPOTHESIS",
+      "raw_idea": "Um leitor digital que quer testar se reduzir animações de interface durante a leitura melhora a concentração; a hipótese deve ser avaliada antes de transformar isso em um produto cheio de recursos."
     }
   ]
 }
