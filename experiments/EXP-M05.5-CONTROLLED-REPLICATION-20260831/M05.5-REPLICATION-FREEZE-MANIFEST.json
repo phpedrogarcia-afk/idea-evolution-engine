@@ -1,0 +1,105 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "blinding_revision": 1,
+  "blind_commitment": "c4c82dde29da6914dc4a26252e8666619c752ddea36dfb00d728239c0761cd97",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "condition_a_call_ceiling": 1,
+  "condition_b_call_ceiling": 10,
+  "condition_c_call_ceiling": 2,
+  "holdout_count": 8,
+  "cell_count": 24,
+  "global_call_maximum": 104,
+  "frozen_at": "2026-08-31T13:55:00-03:00",
+  "critical_file_hashes": {
+    "execution_harness": {
+      "path": "src/idea_evolution/experiments/m05_4_runner.py",
+      "sha256": "0bb4181f24e7c040ebd24f8fdb8e3e2cbcfe4a36e51710eaf7e41bbb5c7b146e"
+    },
+    "abc_experiment": {
+      "path": "src/idea_evolution/experiments/abc_experiment.py",
+      "sha256": "1463de2b7d01215441213cf9244f94e9db2e788803eacf419e2f02cb5309b741"
+    },
+    "native_model_runner": {
+      "path": "src/idea_evolution/providers/native.py",
+      "sha256": "39a5d735e6043dafe592b3a861a7bff03b96714c72b18bab326f79f956430f06"
+    },
+    "provider_router": {
+      "path": "src/idea_evolution/providers/router.py",
+      "sha256": "bb1f7b57bc8e42cd4e50b2e241d7ba847791d7e4c6d6a11deecf1f7703aa36a9"
+    },
+    "baseline_runner": {
+      "path": "src/idea_evolution/orchestration/baseline.py",
+      "sha256": "2e13d038640a5ec7f36a8054a6fe4ce55c162b966bd56ba7aee891ce12fc729e"
+    },
+    "simple_loop_runner": {
+      "path": "src/idea_evolution/orchestration/simple_loop.py",
+      "sha256": "043fc79f16c0b049d1e116146c9f9930cb5ca54918e0d2b3c05a761dac6f27e5"
+    },
+    "lean_loop_runner": {
+      "path": "src/idea_evolution/orchestration/lean_loop.py",
+      "sha256": "8e3551f87dc9c1b9a6bf225f96d6b50fe6bb48441eaa94e569438918fa6056d0"
+    },
+    "early_epistemic_gate": {
+      "path": "src/idea_evolution/domain/early_epistemic_gate.py",
+      "sha256": "2bc13fdff123964f7b1e103ab52d41d61d7ca130eed07bdc1b7a0583063ebb62"
+    },
+    "idea_catalog": {
+      "path": "src/idea_evolution/config/catalog.py",
+      "sha256": "5278a00c89da5edce78d2e41b4d6f05acd48d83dae61d9ffa89f10c2f8cb15f6"
+    },
+    "routing_config": {
+      "path": "src/idea_evolution/config/routing.py",
+      "sha256": "e735b7f80c0940753ab7904bc5ccd86273d328c500e4fa08d711ef9090bed7f8"
+    },
+    "state_domain": {
+      "path": "src/idea_evolution/domain/state.py",
+      "sha256": "9692daf65e3a4697b6847a1afb83a0231954cae564d726eae30c37b5dcfd0a83"
+    },
+    "epistemic_contracts": {
+      "path": "src/idea_evolution/domain/epistemic_contracts.py",
+      "sha256": "639866dd801d8e60e93ce9ccb9d673c9df204a66a98c407c559a86adefc8e43b"
+    },
+    "blind_renderer": {
+      "path": "src/idea_evolution/experiments/blind_renderer.py",
+      "sha256": "80cf0e2500b4f307598e1e289035f946551212583d118635fd4d5c4c992c28b2"
+    },
+    "holdout_ideas": {
+      "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/HOLDOUT-IDEAS.json",
+      "sha256": "7b843dc99eec149729359a91cbc787068ced5c64ec8ba4dd34431b0c0138b0df"
+    },
+    "preregistration": {
+      "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-PREREGISTRATION.md",
+      "sha256": "bc8603bf01967beb6faeddbb0dc3f370c6ba79ddab99fa7ac70608024fa46356"
+    },
+    "blind_commitment": {
+      "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/BLIND-REVEAL.sha256",
+      "sha256": "25c5b671613f58ff4dc89e9f3cb003df3ac7c378166b61174928ab50457cf19b"
+    },
+    "understand_stage": {
+      "path": "src/idea_evolution/stages/understand.py",
+      "sha256": "bbfc4d747cb54817a37dfb8c93974bad0887e785ac66df7cdfe9aa7a592d6125"
+    },
+    "critique_stage": {
+      "path": "src/idea_evolution/stages/critique.py",
+      "sha256": "a32d290de0d65ee502e04fb904350542761303f5fa4f86ec1028215a086197ad"
+    },
+    "revision_stage": {
+      "path": "src/idea_evolution/stages/revision.py",
+      "sha256": "5f35c95f321fb0e87679e09493c009d32236d20393db1d516ab0e0a06771e7e2"
+    },
+    "reality_check_stage": {
+      "path": "src/idea_evolution/stages/reality_check.py",
+      "sha256": "f1b3bfbed362ef5e7738a5fef41c3e1a1a8833faf206d3a4a4c18cf06c3273b1"
+    },
+    "synthesize_stage": {
+      "path": "src/idea_evolution/stages/synthesize.py",
+      "sha256": "8bf5903ff99265d9b2453e1488a4e7f133ab2b44347de19fb2947f20ff7a1bd3"
+    },
+    "final_review_stage": {
+      "path": "src/idea_evolution/stages/final_review.py",
+      "sha256": "79d8d5ab919b6c518f8ab656515843e84d3fc19a451df776f6589225859699cd"
+    }
+  }
+}
