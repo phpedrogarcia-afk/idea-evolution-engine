@@ -1,0 +1,53 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "blind_packet_sha256": "ac9bf8e1422b6d23e63ccfa105ffaf21c3e56bc4120230c820aa80bcb4f80c26",
+  "human_review_frozen_file": "M05.4-HUMAN-REVIEW-FROZEN.md",
+  "human_review_frozen_sha256": "50353702c3decbf62bd9b151f6789cb121bfeab1b0529e3bc411f6b7826d2fc7",
+  "review_timestamp": "2026-08-31T13:33:00-03:00",
+  "human_review_idea_count": 8,
+  "human_review_dimension_score_count": 240,
+  "ordinal_totals": {
+    "R1": {
+      "first_count": 2,
+      "second_count": 5,
+      "third_count": 1,
+      "ordinal_points": 17
+    },
+    "R2": {
+      "first_count": 4,
+      "second_count": 1,
+      "third_count": 3,
+      "ordinal_points": 17
+    },
+    "R3": {
+      "first_count": 2,
+      "second_count": 2,
+      "third_count": 4,
+      "ordinal_points": 14
+    },
+    "primary_result": "R1_R2_TIE"
+  },
+  "secondary_totals": {
+    "R1": {
+      "total": 267,
+      "max_points": 400,
+      "mean": 3.3375
+    },
+    "R2": {
+      "total": 301,
+      "max_points": 400,
+      "mean": 3.7625
+    },
+    "R3": {
+      "total": 239,
+      "max_points": 400,
+      "mean": 2.9875
+    }
+  },
+  "human_review_frozen": true,
+  "human_unblinded": false,
+  "reveal_exposed_to_human": false,
+  "condition_mapping_present": false,
+  "a_b_c_interpretation_present": false
+}
