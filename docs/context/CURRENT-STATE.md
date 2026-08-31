@@ -15,13 +15,15 @@
   - **Avaliação Humana Cega:** Congelada criptograficamente em `M05.4-HUMAN-REVIEW-FROZEN.md` (`50353702c3decbf62bd9b151f6789cb121bfeab1b0529e3bc411f6b7826d2fc7`).
   - **Proveniência Registrada:** `M05.4-HUMAN-REVIEW-PROVENANCE-ADDENDUM.md` (`0812ad78aa3bc229aa0de1751c7871f4cffdbd1b`).
   - **Descegamento Formal:** Mapeamento da Revisão 3 aberto e registrado em `M05.4-UNBLINDING-RECORD.md`.
-  - **Resultado Primário Pré-Registrado:**
+  - **Resultado Primário Observado no M05.4:**
     - **Condição C (Lean L1 / FioED):** 5x 1º lugar, 3x 2º lugar, 0x 3º lugar $\to$ **21 pontos**
-    - **Condição B (Simple Loop):** 3x 1º lugar, 4x 2º lugar, 1x 3º lugar $\to$ **18 pontos**
-    - **Condição A (Baseline):** 0x 1º lugar, 1x 2º lugar, 7x 3º lugar $\to$ **9 pontos**
+    - **Condição B (Simple Loop Control):** 3x 1º lugar, 4x 2º lugar, 1x 3º lugar $\to$ **18 pontos**
+    - **Condição A (Baseline Single Refine):** 0x 1º lugar, 1x 2º lugar, 7x 3º lugar $\to$ **9 pontos**
   - **Desfecho de Continuidade:** Condição C escolhida em 5/8 ideias; Condição B em 3/8; Condição A em 0/8.
-  - **Desfechos Secundários:** Condição C = 309/400 (média 3.86/5.0); Condição B = 277/400 (média 3.46/5.0); Condição A = 221/400 (média 2.76/5.0).
-  - **Predições Pré-Registradas:** 10/10 predições (`PRED-01` a `PRED-10`) **SUPPORTED**.
+  - **Desfechos Secundários:** Condição C = 309/400 (média 3.8625/5.0); Condição B = 277/400 (média 3.4625/5.0); Condição A = 221/400 (média 2.7625/5.0).
+  - **Predições Pré-Registradas:** 6 SUPPORTED (`PRED-01`, `PRED-02`, `PRED-05`, `PRED-06`, `PRED-07`, `PRED-08`), 1 NOT_SUPPORTED (`PRED-04` — empate de intenção entre C e B em `IDEA-02`), 3 NOT_TESTABLE_FROM_THIS_RUN (`PRED-03`, `PRED-09`, `PRED-10` — variáveis teóricas não instrumentadas).
+  - **Efeito do Tratamento vs Mecanismo:** `OBSERVED_TREATMENT_EFFECT = C_BEST_IN_M05_4`, `CAUSAL_MECHANISM = UNRESOLVED`.
+  - **Status do Lean L1:** `LEAN_L1_STATUS = LEADING_CANDIDATE_PROVISIONAL_DEFAULT`.
   - **Relatório de Análise Primária:** [`M05.4-PRIMARY-ANALYSIS-AFTER-UNBLINDING.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/M05.4-PRIMARY-ANALYSIS-AFTER-UNBLINDING.md).
 - **Último Checkpoint Imutável:** [`CP-20260829-028`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260829-028.md)
 - **Último Estado Seguro (Last Known Good):** `CP-20260829-028`
@@ -33,12 +35,12 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Descegamento formal do experimento M05.4 e análise primária completa pós-reveal.
-  - Comprovação experimental conclusiva da hipótese Lean L1 / FioED.
+  - Descegamento formal do experimento M05.4 e análise primária completa pós-reveal com interpretação científica rigorosa.
+  - Correção de sobreafirmações e adjudicação exata das 10 predições pré-registradas.
 - **Tarefa Ativa Atual:**
-  - Encerramento do ciclo experimental M05.4 e transição para arquitetura canônica de produto.
+  - Encerramento do ciclo experimental M05.4 e consolidação da arquitetura de produto MVP.
 - **Próximo Passo Exato:**
-  - Consolidar a arquitetura canônica do MVP com inferência padrão baseada no `LeanLoop` e `EarlyEpistemicGate`.
+  - Adotar o `LeanLoop` e `EarlyEpistemicGate` como padrão provisório de inferência do MVP.
 
 ---
 
