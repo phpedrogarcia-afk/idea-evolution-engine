@@ -21,11 +21,30 @@ FORBIDDEN_METADATA_PATTERNS = [
     r"\bLEAN[-_]?L1\b",
     r"\bFIOED\b",
     r"\bRUN[-_]\d{8}[-_]\w+\b",
+    r"\bEXP[-_]M05[\w\.\-_]*\b",
     r"\b0\d[-_][A-Z_]+\.json\b",
     r"\bprovider\b\s*:\s*[\"']?\w+[\"']?",
     r"\bmodel\b\s*:\s*[\"']?[\w/-]+[\"']?",
     r"\bcall_count\b\s*:\s*\d+",
     r"\btotal_tokens\b\s*:\s*\d+",
+    r"\bBaselineRunner\b",
+    r"\bSimpleLoopRunner\b",
+    r"\bLeanLoopRunner\b",
+    r"\bNativeModelRunner\b",
+    r"\bEarlyEpistemicGate\b",
+    r"\bREFINEMENT_INCOMPLETE\b",
+    r"\bHUMAN_DECISION_REQUIRED\b",
+    r"\bCOMPLETED_WITH_FOCUSED_ESCALATION\b",
+    r"\bEARLY_EXIT\b",
+    r"\bFIRST_PASS_FAILED\b",
+    r"\bREQUEST_HUMAN_DECISION\b",
+    r"\bmodel_calls\b",
+    r"\breconstruction_count\b",
+    r"\bterminal_status\b",
+    r"\bstage_history\b",
+    r"\bgate_outcome\b",
+    r"\bopenai/gpt-oss-120b\b",
+    r"\bgroq\b",
 ]
 
 
@@ -48,7 +67,30 @@ class BlindRenderer:
 
     @classmethod
     def sanitize_text(cls, text: str) -> str:
-        sanitized = text
+        lines = text.splitlines()
+        cleaned_lines = []
+        skip_gate_section = False
+
+        for line in lines:
+            # Remover cabeçalhos e metadados de orquestração do Lean L1
+            if line.startswith("# Pacote Lean") or line.startswith("**Status:**") or "Chamadas de Modelo" in line:
+                continue
+            if line.startswith("## 1. Fonte Humana Imutável"):
+                continue
+            if line.strip().startswith("> ") and not cleaned_lines:
+                continue
+            # Remover seção técnica do Gate
+            if line.startswith("## 5. Avaliação do Early Epistemic Gate") or line.startswith("## 5. Avaliação do Gate"):
+                skip_gate_section = True
+                continue
+            if skip_gate_section and line.startswith("## "):
+                skip_gate_section = False
+
+            if not skip_gate_section:
+                cleaned_lines.append(line)
+
+        sanitized = "\n".join(cleaned_lines).strip()
+
         # Remove eventuais metadados brutos que possam ter sido injetados
         for pattern in FORBIDDEN_METADATA_PATTERNS:
             sanitized = re.sub(pattern, "[REDACTED_METADATA]", sanitized, flags=re.IGNORECASE)

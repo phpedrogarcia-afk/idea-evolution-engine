@@ -1,0 +1,16 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "blinding_revision": 3,
+  "blind_commitment_sha256": "b2e271ff9dd35a8215c067d1e545f84dfa8add7f33335a69845ebd8d5ed82cf3",
+  "blind_review_packet_file": "BLIND-REVIEW-PACKET.md",
+  "blind_review_packet_sha256": "ac9bf8e1422b6d23e63ccfa105ffaf21c3e56bc4120230c820aa80bcb4f80c26",
+  "human_review_form_file": "M05.4-HUMAN-REVIEW-FORM.md",
+  "human_review_form_sha256": "dfedd3e11755c648c1c298cf838721bf73ed07c4ad96cb1b8b0df1ca7d2ea48e",
+  "idea_count": 8,
+  "result_count": 24,
+  "leak_audit_result": "PASS",
+  "leak_count": 0,
+  "render_timestamp": "2026-08-31T08:10:39.013699",
+  "human_review_started": false
+}
