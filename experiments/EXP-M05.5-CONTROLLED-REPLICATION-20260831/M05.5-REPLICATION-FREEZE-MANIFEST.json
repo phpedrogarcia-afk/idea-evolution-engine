@@ -1,8 +1,9 @@
 {
   "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
   "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
-  "blinding_revision": 1,
-  "blind_commitment": "c4c82dde29da6914dc4a26252e8666619c752ddea36dfb00d728239c0761cd97",
+  "blinding_revision": 2,
+  "blind_commitment": "791197eab62e714e5284bbc616ed34a6e83cd3b86551664ed99a62f0c8b340f3",
+  "prior_invalidated_rev1_commitment": "c4c82dde29da6914dc4a26252e8666619c752ddea36dfb00d728239c0761cd97",
   "provider": "groq",
   "model": "openai/gpt-oss-120b",
   "condition_a_call_ceiling": 1,
@@ -11,9 +12,13 @@
   "holdout_count": 8,
   "cell_count": 24,
   "global_call_maximum": 104,
-  "frozen_at": "2026-08-31T13:55:00-03:00",
+  "frozen_at": "2026-08-31T14:24:00-03:00",
   "critical_file_hashes": {
-    "execution_harness": {
+    "m05_5_runner": {
+      "path": "src/idea_evolution/experiments/m05_5_runner.py",
+      "sha256": "e2e8ac8622e3b7715c1ea4bcb54853ad8d80bb4a120f4375f844cf62e4e80233"
+    },
+    "m05_4_runner": {
       "path": "src/idea_evolution/experiments/m05_4_runner.py",
       "sha256": "0bb4181f24e7c040ebd24f8fdb8e3e2cbcfe4a36e51710eaf7e41bbb5c7b146e"
     },
@@ -73,9 +78,13 @@
       "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-PREREGISTRATION.md",
       "sha256": "bc8603bf01967beb6faeddbb0dc3f370c6ba79ddab99fa7ac70608024fa46356"
     },
+    "preexecution_amendment": {
+      "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-PREEXECUTION-AMENDMENT-001.md",
+      "sha256": "c55a0b456864f522267f7cbe7e0685857e6b38769afd5d5241fb89782061eacb"
+    },
     "blind_commitment": {
       "path": "experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/BLIND-REVEAL.sha256",
-      "sha256": "25c5b671613f58ff4dc89e9f3cb003df3ac7c378166b61174928ab50457cf19b"
+      "sha256": "4ab41de11bfb762838a50191f249a20bc8cfce28b17b6fe4aba6540c1e791cb5"
     },
     "understand_stage": {
       "path": "src/idea_evolution/stages/understand.py",
@@ -100,10 +109,6 @@
     "final_review_stage": {
       "path": "src/idea_evolution/stages/final_review.py",
       "sha256": "79d8d5ab919b6c518f8ab656515843e84d3fc19a451df776f6589225859699cd"
-    },
-    "m05_5_runner": {
-      "path": "src/idea_evolution/experiments/m05_5_runner.py",
-      "sha256": "e2e8ac8622e3b7715c1ea4bcb54853ad8d80bb4a120f4375f844cf62e4e80233"
     }
   }
 }

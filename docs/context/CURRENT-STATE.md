@@ -8,23 +8,18 @@
 ## 1. Identificação Operacional
 
 - **Projeto:** Idea Evolution Engine (IEE)
-- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (EXPERIMENTO M05.4 PROSPECTIVO CONCLUÍDO E DESCEGADO)
+- **Fase Ativa:** FASE 1 — SIMPLE IDEA EVOLUTION LOOP MVP (REPLICAÇÃO CONTROLADA M05.5 CONGELADA — PRÉ-EXECUÇÃO)
 - **Status da Fundação:** `COMPLETE_AND_LOCKED` (`FOUNDATION_READY = TRUE`)
-- **Status do Rerun M05.4 (EXP-M05.4-PROSPECTIVE-RERUN-20260829):** `UNBLINDED_ANALYSIS_COMPLETED`
-  - **Tentativa 004:** `REAL-EXECUTION-ATTEMPT-004` (24/24 células concluídas com 98 chamadas semânticas).
-  - **Avaliação Humana Cega:** Congelada criptograficamente em `M05.4-HUMAN-REVIEW-FROZEN.md` (`50353702c3decbf62bd9b151f6789cb121bfeab1b0529e3bc411f6b7826d2fc7`).
-  - **Proveniência Registrada:** `M05.4-HUMAN-REVIEW-PROVENANCE-ADDENDUM.md` (`0812ad78aa3bc229aa0de1751c7871f4cffdbd1b`).
-  - **Descegamento Formal:** Mapeamento da Revisão 3 aberto e registrado em `M05.4-UNBLINDING-RECORD.md`.
-  - **Resultado Primário Observado no M05.4:**
-    - **Condição C (Lean L1 / FioED):** 5x 1º lugar, 3x 2º lugar, 0x 3º lugar $\to$ **21 pontos**
-    - **Condição B (Simple Loop Control):** 3x 1º lugar, 4x 2º lugar, 1x 3º lugar $\to$ **18 pontos**
-    - **Condição A (Baseline Single Refine):** 0x 1º lugar, 1x 2º lugar, 7x 3º lugar $\to$ **9 pontos**
-  - **Desfecho de Continuidade:** Condição C escolhida em 5/8 ideias; Condição B em 3/8; Condição A em 0/8.
-  - **Desfechos Secundários:** Condição C = 309/400 (média 3.8625/5.0); Condição B = 277/400 (média 3.4625/5.0); Condição A = 221/400 (média 2.7625/5.0).
-  - **Predições Pré-Registradas:** 6 SUPPORTED (`PRED-01`, `PRED-02`, `PRED-05`, `PRED-06`, `PRED-07`, `PRED-08`), 1 NOT_SUPPORTED (`PRED-04` — empate de intenção entre C e B em `IDEA-02`), 3 NOT_TESTABLE_FROM_THIS_RUN (`PRED-03`, `PRED-09`, `PRED-10` — variáveis teóricas não instrumentadas).
-  - **Efeito do Tratamento vs Mecanismo:** `OBSERVED_TREATMENT_EFFECT = C_BEST_IN_M05_4`, `CAUSAL_MECHANISM = UNRESOLVED`.
-  - **Status do Lean L1:** `LEAN_L1_STATUS = LEADING_CANDIDATE_PROVISIONAL_DEFAULT`.
-  - **Relatório de Análise Primária:** [`M05.4-PRIMARY-ANALYSIS-AFTER-UNBLINDING.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/experiments/EXP-M05.4-PROSPECTIVE-RERUN-20260829/M05.4-PRIMARY-ANALYSIS-AFTER-UNBLINDING.md).
+- **Status do Experimento M05.4 (EXP-M05.4-PROSPECTIVE-RERUN-20260829):** `CLOSED_PROSPECTIVE_EXPERIMENT`
+  - Efeito de Tratamento Observado: `C_BEST_IN_M05_4`
+  - Status do Lean L1: `LEADING_CANDIDATE_PROVISIONAL_DEFAULT`
+  - Mecanismo Causal: `UNRESOLVED`
+- **Novo Experimento de Replicação M05.5 (EXP-M05.5-CONTROLLED-REPLICATION-20260831):**
+  - **Objetivo:** Replicação direta de confiabilidade do efeito de tratamento principal M05.4 em 8 novas ideias holdout independentes (`REP-01` a `REP-08`).
+  - **Execução:** `REAL-EXECUTION-ATTEMPT-001`
+  - **Status de Cegamento:** Revisão 2 ativa (Rev1 invalidada antes de qualquer chamada semântica conforme `M05.5-PREEXECUTION-AMENDMENT-001.md`).
+  - **Compromisso de Cegamento (Rev2):** `791197eab62e714e5284bbc616ed34a6e83cd3b86551664ed99a62f0c8b340f3` em `BLIND-REVEAL.sha256`. Segredo Rev2 selado fora do repositório.
+  - **Variáveis Fixas:** Provedor `groq`, modelo `openai/gpt-oss-120b`, condições A/B/C idênticas, rubrica e regras de reviewability idênticas.
 - **Último Checkpoint Imutável:** [`CP-20260829-028`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260829-028.md)
 - **Último Estado Seguro (Last Known Good):** `CP-20260829-028`
 - **Git Branch:** `main`
@@ -35,16 +30,16 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Descegamento formal do experimento M05.4 e análise primária completa pós-reveal com interpretação científica rigorosa.
-  - Correção de sobreafirmações e adjudicação exata das 10 predições pré-registradas.
+  - Rotação de cegamento para Revisão 2 com CSPRNG seguro e registro da Emenda 001.
+  - Pré-registro, holdout ideas e manifestos de congelamento M05.5 devidamente assinados e verificados.
 - **Tarefa Ativa Atual:**
-  - Encerramento do ciclo experimental M05.4 e consolidação da arquitetura de produto MVP.
+  - `M05.5`: Execução Real de Replicação Controlada (`REAL-EXECUTION-ATTEMPT-001`).
 - **Próximo Passo Exato:**
-  - Adotar o `LeanLoop` e `EarlyEpistemicGate` como padrão provisório de inferência do MVP.
+  - Recuperar chave da API Groq do GCP Secret Manager de forma segura, executar as 24 células e limpar a chave de ambiente.
 
 ---
 
 ## 3. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
-1. ❌ **NÃO** alterar as notas da avaliação humana cega após o congelamento.
-2. ❌ **NÃO** expor chaves de API (`GROQ_API_KEY`).
-3. ❌ **NÃO** modificar os artefatos brutos de execuções anteriores.
+1. ❌ **NÃO** expor chaves de API (`GROQ_API_KEY`) no console, git ou logs.
+2. ❌ **NÃO** expor o mapeamento cego Rev2.
+3. ❌ **NÃO** modificar o conjunto de ideias holdout ou código dos runners durante a execução.
