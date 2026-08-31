@@ -1,0 +1,20 @@
+{
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "git_head": "e92c7ec582e003c684fb0d48e7ee456f6f5cd893",
+  "worktree_clean": true,
+  "execution_harness_sha256": "b44093a93d8418572ab2b101e416cfedf5cdf15067ee19b249fb5c7cf4798fab",
+  "execution_harness_expected_sha256": "b44093a93d8418572ab2b101e416cfedf5cdf15067ee19b249fb5c7cf4798fab",
+  "freeze_manifest_sha256": "48bfaa54f13576914cec22c1c9cc209432c9236f65c146152f875948d8565a0e",
+  "blind_commitment_sha256": "b2e271ff9dd35a8215c067d1e545f84dfa8add7f33335a69845ebd8d5ed82cf3",
+  "blinding_revision": 3,
+  "frozen_state_validation": "PASS",
+  "manifest_validation": "PASS",
+  "attempt_single_use_validation": "PASS",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "start_timestamp": "2026-08-30T18:02:06.549636",
+  "total_cells_frozen": 24,
+  "execution_plane_has_no_blind_knowledge": true,
+  "human_review_started": false
+}

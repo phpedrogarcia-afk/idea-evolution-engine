@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.4-IDEA-08-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.",
+  "human_intent": "Criar um diário reflexivo que registre sensações cotidianas e avalie se um editor de texto com latência inferior a 16 ms reduz a distração durante a escrita.",
+  "refined_idea": "Um diário digital reflexivo que registra sensações cotidianas e mede a latência do editor de texto usado, correlacionando latências <16 ms com níveis de distração durante a digitação.",
+  "core_mechanism": "Medição precisa da latência do editor de texto usando timestamps de alta resolução (performance.now) com calibração automática por hardware/SO antes da sessão de escrita.",
+  "core_mechanism_basis": "VALID_USER_DERIVATION",
+  "core_mechanism_hash": "10b01ded59ecad4a",
+  "tested_core_hash": "10b01ded59ecad4a",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 2,
+  "recommended_next_step": "Desenvolver um protótipo da medição de latência com performance.now, calibrar em diferentes dispositivos e conduzir um estudo piloto para correlacionar latência medida com autorrelatos de distração."
+}

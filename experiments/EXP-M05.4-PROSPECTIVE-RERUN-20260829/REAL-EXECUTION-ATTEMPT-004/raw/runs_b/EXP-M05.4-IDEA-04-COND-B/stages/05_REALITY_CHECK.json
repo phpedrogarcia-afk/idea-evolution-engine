@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 485.39293336868286,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Gerar relatório financeiro em um único a...' (hash: 5ec747eeda49c1a3), 4 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Gerar relatório financeiro em um único arquivo HTML local, operando 100% offline, sem login nem banco de dados externo.\",\"feasibility_notes\":[\"A geração de HTML pode ser feita inteiramente com JavaScript puro no navegador, usando templates string ou bibliotecas leves sem necessidade de conexão externa.\",\"A exportação para arquivo local pode ser realizada via Blob e o método download do elemento <a>, suportado pela maioria dos navegadores modernos.\",\"Nenhum backend ou serviço de nuvem é requerido; todos os dados permanecem na memória do cliente até a criação do arquivo.\",\"O tamanho máximo praticável do HTML depende da memória disponível no dispositivo; relatórios muito extensos podem causar lentidão ou falhas de memória.\"],\"reality_dependencies\":[\"Suporte do navegador ao API Blob e ao atributo download para salvar arquivos localmente.\",\"Capacidade do dispositivo do usuário de alocar memória suficiente para montar o HTML completo antes da exportação.\",\"Ausência de políticas de segurança que bloqueiem a criação de links de download gerados dinamicamente (ex.: CSP restritivo).\",\"Disponibilidade de um mecanismo de renderização de HTML que suporte todos os estilos e scripts incorporados sem necessidade de recursos externos.\"],\"claims_needing_evidence\":[\"O HTML gerado renderiza corretamente todos os elementos de relatório (tabelas, gráficos, formatação) em modo offline.\",\"O processo de geração e download completa-se em tempo aceitável para usuários finais (ex.: <5 s para relatórios até 200 KB).\",\"Nenhum dado sensível é transmitido ou armazenado fora do dispositivo durante a geração do relatório.\",\"O arquivo HTML resultante pode ser aberto em diferentes navegadores sem requerer recursos externos.\"],\"potential_blockers\":[\"Limitações de memória em dispositivos móveis que impedem a montagem de relatórios grandes em memória única.\",\"Políticas de segurança corporativas que desabilitam a criação de downloads via JavaScript.\",\"Falhas de compatibilidade em navegadores antigos que não suportam o atributo download ou Blob.\",\"Restrição de tamanho de arquivo imposta pelo sistema de arquivos ao salvar o HTML (ex.: limites de 2 GB).\"],\"candidate_tests\":[\"Criar um relatório de teste com 100 linhas de dados e gerar o arquivo HTML; verificar integridade visual ao abrir offline.\",\"Medir o tempo total de geração e download para relatórios de diferentes tamanhos (50 KB, 200 KB, 1 MB).\",\"Inspecionar o tráfego de rede durante a geração para garantir que nenhuma requisição externa seja feita.\",\"Abrir o arquivo HTML gerado em Chrome, Firefox e Edge sem conexão de rede e validar renderização completa.\",\"Testar a funcionalidade em modo incognito e com CSP restritivo para confirmar que o download ainda funciona.\"],\"exploratory_candidate_tests\":[\"Implementar criptografia client‑side do HTML usando Web Crypto API e avaliar impacto de desempenho.\",\"Gerar o relatório como PDF usando PDF‑JS ou jsPDF e comparar tamanho e qualidade com o HTML puro.\",\"Armazenar dados brutos em IndexedDB, gerar fragmentos HTML paginados sob demanda e medir latência de carregamento.\",\"Avaliar a viabilidade de compressão gzip do HTML antes do download para reduzir tamanho de arquivo.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Gerar relatório financeiro em um único arquivo HTML local, operando 100% offline, sem login nem banco de dados externo.",
+    "feasibility_notes": [
+      "A geração de HTML pode ser feita inteiramente com JavaScript puro no navegador, usando templates string ou bibliotecas leves sem necessidade de conexão externa.",
+      "A exportação para arquivo local pode ser realizada via Blob e o método download do elemento <a>, suportado pela maioria dos navegadores modernos.",
+      "Nenhum backend ou serviço de nuvem é requerido; todos os dados permanecem na memória do cliente até a criação do arquivo.",
+      "O tamanho máximo praticável do HTML depende da memória disponível no dispositivo; relatórios muito extensos podem causar lentidão ou falhas de memória."
+    ],
+    "reality_dependencies": [
+      "Suporte do navegador ao API Blob e ao atributo download para salvar arquivos localmente.",
+      "Capacidade do dispositivo do usuário de alocar memória suficiente para montar o HTML completo antes da exportação.",
+      "Ausência de políticas de segurança que bloqueiem a criação de links de download gerados dinamicamente (ex.: CSP restritivo).",
+      "Disponibilidade de um mecanismo de renderização de HTML que suporte todos os estilos e scripts incorporados sem necessidade de recursos externos."
+    ],
+    "claims_needing_evidence": [
+      "O HTML gerado renderiza corretamente todos os elementos de relatório (tabelas, gráficos, formatação) em modo offline.",
+      "O processo de geração e download completa-se em tempo aceitável para usuários finais (ex.: <5 s para relatórios até 200 KB).",
+      "Nenhum dado sensível é transmitido ou armazenado fora do dispositivo durante a geração do relatório.",
+      "O arquivo HTML resultante pode ser aberto em diferentes navegadores sem requerer recursos externos."
+    ],
+    "potential_blockers": [
+      "Limitações de memória em dispositivos móveis que impedem a montagem de relatórios grandes em memória única.",
+      "Políticas de segurança corporativas que desabilitam a criação de downloads via JavaScript.",
+      "Falhas de compatibilidade em navegadores antigos que não suportam o atributo download ou Blob.",
+      "Restrição de tamanho de arquivo imposta pelo sistema de arquivos ao salvar o HTML (ex.: limites de 2 GB)."
+    ],
+    "candidate_tests": [
+      "Criar um relatório de teste com 100 linhas de dados e gerar o arquivo HTML; verificar integridade visual ao abrir offline.",
+      "Medir o tempo total de geração e download para relatórios de diferentes tamanhos (50 KB, 200 KB, 1 MB).",
+      "Inspecionar o tráfego de rede durante a geração para garantir que nenhuma requisição externa seja feita.",
+      "Abrir o arquivo HTML gerado em Chrome, Firefox e Edge sem conexão de rede e validar renderização completa.",
+      "Testar a funcionalidade em modo incognito e com CSP restritivo para confirmar que o download ainda funciona."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar criptografia client‑side do HTML usando Web Crypto API e avaliar impacto de desempenho.",
+      "Gerar o relatório como PDF usando PDF‑JS ou jsPDF e comparar tamanho e qualidade com o HTML puro.",
+      "Armazenar dados brutos em IndexedDB, gerar fragmentos HTML paginados sob demanda e medir latência de carregamento.",
+      "Avaliar a viabilidade de compressão gzip do HTML antes do download para reduzir tamanho de arquivo."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:37:36.752684+00:00"
+}

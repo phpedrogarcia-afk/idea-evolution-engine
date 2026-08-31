@@ -1,0 +1,66 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 18.668141841888428,
+  "delta_summary": "2 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Sensitive financial data stored in plain text within the HTML file\",\"why_it_matters\":\"If the file is accessed by unauthorized parties, personal financial information is exposed, violating privacy priorities\",\"severity\":\"HIGH\",\"affected_part\":\"Data storage / privacy\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Performance degradation with large datasets\",\"why_it_matters\":\"Browsers may become unresponsive or crash when processing extensive financial records in a single HTML file, rendering the tool unusable\",\"severity\":\"MEDIUM\",\"affected_part\":\"Rendering engine / JavaScript execution\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"User's browser can execute complex JavaScript without performance issues\",\"All required scripts and styles can fit within a single HTML file\",\"User will correctly format and import local data files\",\"User will keep the HTML file safe from accidental deletion or corruption\",\"No need for real‑time calculations; a static report is sufficient\"],\"contradictions\":[\"Claim of 100% offline conflicts with potential need for external libraries or fonts unless they are bundled\",\"Stating privacy is a priority while storing data in an unencrypted, readable HTML file\",\"Saying no login is required contradicts the need for protecting sensitive financial data\"],\"failure_modes\":[\"Browser incompatibility or crashes causing loss of functionality\",\"Corrupted HTML file making the report unreadable\",\"JavaScript runtime errors triggered by unexpected data formats\",\"Accidental sharing of the HTML file exposing private data\"],\"missing_information\":[\"Maximum dataset size the tool can handle\",\"Encryption or other protection mechanisms for data within the HTML file\",\"Supported browsers and minimum version requirements\",\"Specific validation rules for imported data formats\",\"Mechanism for delivering offline updates or bug fixes\"],\"overclaims\":[\"\\\"100% offline\\\" may be overstated if any external resources are required\",\"\\\"Single file HTML\\\" may be insufficient for complex financial calculations\",\"\\\"No login\\\" may underestimate the need for access control to protect sensitive data\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Sensitive financial data stored in plain text within the HTML file",
+        "why_it_matters": "If the file is accessed by unauthorized parties, personal financial information is exposed, violating privacy priorities",
+        "severity": "HIGH",
+        "affected_part": "Data storage / privacy",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Performance degradation with large datasets",
+        "why_it_matters": "Browsers may become unresponsive or crash when processing extensive financial records in a single HTML file, rendering the tool unusable",
+        "severity": "MEDIUM",
+        "affected_part": "Rendering engine / JavaScript execution",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "User's browser can execute complex JavaScript without performance issues",
+      "All required scripts and styles can fit within a single HTML file",
+      "User will correctly format and import local data files",
+      "User will keep the HTML file safe from accidental deletion or corruption",
+      "No need for real‑time calculations; a static report is sufficient"
+    ],
+    "contradictions": [
+      "Claim of 100% offline conflicts with potential need for external libraries or fonts unless they are bundled",
+      "Stating privacy is a priority while storing data in an unencrypted, readable HTML file",
+      "Saying no login is required contradicts the need for protecting sensitive financial data"
+    ],
+    "failure_modes": [
+      "Browser incompatibility or crashes causing loss of functionality",
+      "Corrupted HTML file making the report unreadable",
+      "JavaScript runtime errors triggered by unexpected data formats",
+      "Accidental sharing of the HTML file exposing private data"
+    ],
+    "missing_information": [
+      "Maximum dataset size the tool can handle",
+      "Encryption or other protection mechanisms for data within the HTML file",
+      "Supported browsers and minimum version requirements",
+      "Specific validation rules for imported data formats",
+      "Mechanism for delivering offline updates or bug fixes"
+    ],
+    "overclaims": [
+      "\"100% offline\" may be overstated if any external resources are required",
+      "\"Single file HTML\" may be insufficient for complex financial calculations",
+      "\"No login\" may underestimate the need for access control to protect sensitive data"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:15:02.381364+00:00"
+}

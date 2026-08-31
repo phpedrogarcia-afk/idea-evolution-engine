@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.4-IDEA-06-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma plataforma de mentoria comunitária onde o criador ainda não decidiu se o acesso deve ser totalmente gratuito e aberto a todos ou se deve cobrar uma mensalidade simbólica para garantir compromisso e selecionar membros dedicados.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

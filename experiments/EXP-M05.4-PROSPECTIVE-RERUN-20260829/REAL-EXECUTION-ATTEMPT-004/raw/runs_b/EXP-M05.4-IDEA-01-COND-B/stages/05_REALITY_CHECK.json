@@ -1,0 +1,56 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 1,
+  "latency_seconds": 36.239617109298706,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Integrar o aplicativo com os modos de fo...' (hash: 41503a1fad8f83fd), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Integrar o aplicativo com os modos de foco nativos do sistema (Do Not Disturb, Focus Assist) e ativá‑los ao iniciar o timer.\",\"feasibility_notes\":[\"A maioria dos sistemas operacionais modernos expõe APIs públicas ou interfaces de script para ativar/desativar o modo \\\"Do Not Disturb\\\" ou \\\"Focus Assist\\\".\",\"É necessário preservar o estado anterior do modo de foco e restaurá‑lo ao término do timer para evitar efeitos colaterais ao usuário.\",\"A implementação deve lidar com diferenças de permissões entre Windows, macOS e distribuições Linux que suportam D‑Bus ou XDG‑Desktop‑Portal.\",\"O aplicativo pode ser mantido minimalista se limitar‑se apenas ao controle do modo de foco, sem necessidade de camada de sobreposição ou manipulação de áudio.\"],\"reality_dependencies\":[\"Acesso às APIs nativas de controle de foco do Windows (Focus Assist) e macOS (Do Not Disturb) ou equivalentes via AppleScript/Swift.\",\"Permissões de usuário para modificar configurações de foco em cada plataforma (ex.: consentimento de acessibilidade no macOS).\",\"Um mecanismo confiável para ler e restaurar o estado pré‑existente do modo de foco.\",\"Bibliotecas ou bindings compatíveis com a linguagem de desenvolvimento escolhida (ex.: winrt para Windows, pyobjc para macOS).\"],\"claims_needing_evidence\":[\"Que a chamada programática ao modo \\\"Do Not Disturb\\\"/\\\"Focus Assist\\\" realmente silencia todas as notificações de terceiros durante o intervalo de 25 minutos.\",\"Que notificações críticas do sistema (ex.: alarmes de emergência) permanecem ativas mesmo com o modo de foco habilitado.\",\"Que o estado original do modo de foco é restaurado exatamente como estava ao final do timer, sem perda de configuração do usuário.\",\"Que a latência entre o início do timer e a ativação do modo de foco é insignificante para a experiência do usuário.\"],\"potential_blockers\":[\"Restrições de segurança que impedem aplicativos de terceiros de alterar o modo de foco sem interação explícita do usuário (ex.: macOS Catalina+).\",\"Diferenças de implementação entre versões do Windows (10 vs 11) que podem tornar a API inconsistente ou obsoleta.\",\"Ausência de API pública em algumas distribuições Linux, exigindo soluções dependentes do ambiente de desktop.\",\"Possível rejeição da loja de aplicativos (Microsoft Store, Mac App Store) se o app modificar configurações do sistema sem declaração adequada.\"],\"candidate_tests\":[\"Teste unitário que invoca a API de Focus Assist no Windows 10/11, verifica se a bandeira \\\"Quiet Hours\\\" está ativa e se novas notificações são suprimidas.\",\"Teste de integração no macOS Big Sur e posteriores usando AppleScript/Swift para ativar Do Not Disturb, enviar uma notificação de teste e confirmar que não aparece na Central de Notificações.\",\"Teste cross‑platform que grava o estado atual do modo de foco, ativa‑o, inicia um timer de 5 segundos, gera notificações de aplicativos de terceiros e verifica a ausência de exibição, depois restaura o estado e confirma a retomada das notificações.\",\"Teste de regressão que simula a interrupção do timer (ex.: usuário pausa ou cancela) e garante que o modo de foco seja restaurado ao estado original imediatamente.\"],\"exploratory_candidate_tests\":[\"Implementar camada de sobreposição que captura notificações via APIs de acessibilidade e permite regras de exceção; testar filtragem de notificações específicas (ex.: mensagens de emergência).\",\"Desenvolver serviço de fundo que silencia temporariamente canais de áudio usando APIs de controle de volume e verifica que alertas críticos de áudio (ex.: chamadas 911) ainda são audíveis.\",\"Avaliar a viabilidade de pausar processos não essenciais via gerenciamento de tarefas do sistema e medir impacto na performance e estabilidade do usuário.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Integrar o aplicativo com os modos de foco nativos do sistema (Do Not Disturb, Focus Assist) e ativá‑los ao iniciar o timer.",
+    "feasibility_notes": [
+      "A maioria dos sistemas operacionais modernos expõe APIs públicas ou interfaces de script para ativar/desativar o modo \"Do Not Disturb\" ou \"Focus Assist\".",
+      "É necessário preservar o estado anterior do modo de foco e restaurá‑lo ao término do timer para evitar efeitos colaterais ao usuário.",
+      "A implementação deve lidar com diferenças de permissões entre Windows, macOS e distribuições Linux que suportam D‑Bus ou XDG‑Desktop‑Portal.",
+      "O aplicativo pode ser mantido minimalista se limitar‑se apenas ao controle do modo de foco, sem necessidade de camada de sobreposição ou manipulação de áudio."
+    ],
+    "reality_dependencies": [
+      "Acesso às APIs nativas de controle de foco do Windows (Focus Assist) e macOS (Do Not Disturb) ou equivalentes via AppleScript/Swift.",
+      "Permissões de usuário para modificar configurações de foco em cada plataforma (ex.: consentimento de acessibilidade no macOS).",
+      "Um mecanismo confiável para ler e restaurar o estado pré‑existente do modo de foco.",
+      "Bibliotecas ou bindings compatíveis com a linguagem de desenvolvimento escolhida (ex.: winrt para Windows, pyobjc para macOS)."
+    ],
+    "claims_needing_evidence": [
+      "Que a chamada programática ao modo \"Do Not Disturb\"/\"Focus Assist\" realmente silencia todas as notificações de terceiros durante o intervalo de 25 minutos.",
+      "Que notificações críticas do sistema (ex.: alarmes de emergência) permanecem ativas mesmo com o modo de foco habilitado.",
+      "Que o estado original do modo de foco é restaurado exatamente como estava ao final do timer, sem perda de configuração do usuário.",
+      "Que a latência entre o início do timer e a ativação do modo de foco é insignificante para a experiência do usuário."
+    ],
+    "potential_blockers": [
+      "Restrições de segurança que impedem aplicativos de terceiros de alterar o modo de foco sem interação explícita do usuário (ex.: macOS Catalina+).",
+      "Diferenças de implementação entre versões do Windows (10 vs 11) que podem tornar a API inconsistente ou obsoleta.",
+      "Ausência de API pública em algumas distribuições Linux, exigindo soluções dependentes do ambiente de desktop.",
+      "Possível rejeição da loja de aplicativos (Microsoft Store, Mac App Store) se o app modificar configurações do sistema sem declaração adequada."
+    ],
+    "candidate_tests": [
+      "Teste unitário que invoca a API de Focus Assist no Windows 10/11, verifica se a bandeira \"Quiet Hours\" está ativa e se novas notificações são suprimidas.",
+      "Teste de integração no macOS Big Sur e posteriores usando AppleScript/Swift para ativar Do Not Disturb, enviar uma notificação de teste e confirmar que não aparece na Central de Notificações.",
+      "Teste cross‑platform que grava o estado atual do modo de foco, ativa‑o, inicia um timer de 5 segundos, gera notificações de aplicativos de terceiros e verifica a ausência de exibição, depois restaura o estado e confirma a retomada das notificações.",
+      "Teste de regressão que simula a interrupção do timer (ex.: usuário pausa ou cancela) e garante que o modo de foco seja restaurado ao estado original imediatamente."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar camada de sobreposição que captura notificações via APIs de acessibilidade e permite regras de exceção; testar filtragem de notificações específicas (ex.: mensagens de emergência).",
+      "Desenvolver serviço de fundo que silencia temporariamente canais de áudio usando APIs de controle de volume e verifica que alertas críticos de áudio (ex.: chamadas 911) ainda são audíveis.",
+      "Avaliar a viabilidade de pausar processos não essenciais via gerenciamento de tarefas do sistema e medir impacto na performance e estabilidade do usuário."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:03:25.542476+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.4-IDEA-04-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login.",
+  "human_intent": "Permitir que o usuário gere seus próprios relatórios financeiros de forma totalmente offline, mantendo a privacidade e simplicidade.",
+  "refined_idea": "Gerador de relatórios financeiros pessoais totalmente offline que produz um único arquivo HTML contendo os dados financeiros criptografados com senha fornecida pelo usuário, garantindo privacidade e simplicidade.",
+  "core_mechanism": "Gerar um arquivo HTML único que incorpora os dados financeiros criptografados com uma senha fornecida pelo usuário; o navegador descriptografa o conteúdo em tempo real para renderizar o relatório.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "172231d2501f5990",
+  "tested_core_hash": "172231d2501f5990",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 2,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 0,
+  "recommended_next_step": "Develop a prototype implementing the encrypted‑HTML generator, then test password handling, decryption performance, and compatibility across major browsers with realistic dataset sizes."
+}

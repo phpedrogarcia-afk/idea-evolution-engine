@@ -1,0 +1,61 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 654.4815440177917,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Rede de micro-boulangeries locais com en...' (hash: 958bf61385bfb294), 6 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Rede de micro-boulangeries locais com entregas em bicicletas elétricas e rotas escalonadas\",\"feasibility_notes\":[\"Capacidade de produção diária das micro‑boulangeries deve suprir a demanda de assinantes\",\"Bicicletas elétricas precisam ter autonomia suficiente para percorrer rotas otimizadas antes das 6h30\",\"Rotas escalonadas exigem algoritmo que considere tráfego noturno e restrições de circulação\",\"Necessidade de infraestrutura de carregamento de bicicletas nas proximidades das boulangeries\",\"Recrutamento de padeiros para turnos noturnos pode ser um desafio\"],\"reality_dependencies\":[\"Disponibilidade de padeiros qualificados para produção noturna\",\"Fornecimento contínuo de farinha, fermento e outros insumos frescos\",\"Aquisição e manutenção de frota de bicicletas elétricas com baterias adequadas\",\"Permissão municipal para entregas residenciais antes das 6h30\",\"Acesso a vias e ciclovias que permitam circulação segura nas primeiras horas da manhã\",\"Infraestrutura de carregamento de bicicletas nas micro‑boulangeries\"],\"claims_needing_evidence\":[\"Bicicletas elétricas conseguem completar a rota média (X km) em menos de 45 minutos com carga plena\",\"Micro‑boulangeries podem produzir quantidade Y de pães frescos por noite sem perda de qualidade\",\"Clientes em Pinheiros aceitam receber entregas residenciais antes das 6h30\",\"Custo total da operação (produção + entrega) é competitivo frente a modelos de ponto de retirada\"],\"potential_blockers\":[\"Restrição de horário de entrega imposta por regulamentos locais\",\"Limitações de autonomia da bateria em dias de clima frio ou chuvoso\",\"Escassez de profissionais dispostos a trabalhar em turnos noturnos\",\"Congestionamento inesperado nas rotas matinais que atrase entregas\",\"Problemas de segurança para entregadores nas primeiras horas da manhã\"],\"candidate_tests\":[\"Realizar um piloto de 2 semanas com uma micro‑boulangerie e 10 assinantes para medir capacidade de produção e qualidade do pão\",\"Executar testes de tempo de entrega com bicicletas elétricas em rotas reais para validar cumprimento do prazo de 6h30\",\"Implementar algoritmo de rotas escalonadas e comparar tempo total versus rotas estáticas\",\"Conduzir pesquisa de aceitação com moradores de Pinheiros sobre entregas antes das 6h30\",\"Monitorar consumo de bateria das bicicletas ao longo de um turno completo e avaliar necessidade de recarga intermediária\"],\"exploratory_candidate_tests\":[\"Testar modelo de pontos de retirada em mercearias locais com horário de abertura antes das 6h30\",\"Executar piloto de fábrica central noturna com micro‑vans para comparar custos e tempos de entrega\",\"Avaliar combinação híbrida: produção em micro‑boulangeries + entregas de vans para áreas fora do alcance das bicicletas\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Rede de micro-boulangeries locais com entregas em bicicletas elétricas e rotas escalonadas",
+    "feasibility_notes": [
+      "Capacidade de produção diária das micro‑boulangeries deve suprir a demanda de assinantes",
+      "Bicicletas elétricas precisam ter autonomia suficiente para percorrer rotas otimizadas antes das 6h30",
+      "Rotas escalonadas exigem algoritmo que considere tráfego noturno e restrições de circulação",
+      "Necessidade de infraestrutura de carregamento de bicicletas nas proximidades das boulangeries",
+      "Recrutamento de padeiros para turnos noturnos pode ser um desafio"
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de padeiros qualificados para produção noturna",
+      "Fornecimento contínuo de farinha, fermento e outros insumos frescos",
+      "Aquisição e manutenção de frota de bicicletas elétricas com baterias adequadas",
+      "Permissão municipal para entregas residenciais antes das 6h30",
+      "Acesso a vias e ciclovias que permitam circulação segura nas primeiras horas da manhã",
+      "Infraestrutura de carregamento de bicicletas nas micro‑boulangeries"
+    ],
+    "claims_needing_evidence": [
+      "Bicicletas elétricas conseguem completar a rota média (X km) em menos de 45 minutos com carga plena",
+      "Micro‑boulangeries podem produzir quantidade Y de pães frescos por noite sem perda de qualidade",
+      "Clientes em Pinheiros aceitam receber entregas residenciais antes das 6h30",
+      "Custo total da operação (produção + entrega) é competitivo frente a modelos de ponto de retirada"
+    ],
+    "potential_blockers": [
+      "Restrição de horário de entrega imposta por regulamentos locais",
+      "Limitações de autonomia da bateria em dias de clima frio ou chuvoso",
+      "Escassez de profissionais dispostos a trabalhar em turnos noturnos",
+      "Congestionamento inesperado nas rotas matinais que atrase entregas",
+      "Problemas de segurança para entregadores nas primeiras horas da manhã"
+    ],
+    "candidate_tests": [
+      "Realizar um piloto de 2 semanas com uma micro‑boulangerie e 10 assinantes para medir capacidade de produção e qualidade do pão",
+      "Executar testes de tempo de entrega com bicicletas elétricas em rotas reais para validar cumprimento do prazo de 6h30",
+      "Implementar algoritmo de rotas escalonadas e comparar tempo total versus rotas estáticas",
+      "Conduzir pesquisa de aceitação com moradores de Pinheiros sobre entregas antes das 6h30",
+      "Monitorar consumo de bateria das bicicletas ao longo de um turno completo e avaliar necessidade de recarga intermediária"
+    ],
+    "exploratory_candidate_tests": [
+      "Testar modelo de pontos de retirada em mercearias locais com horário de abertura antes das 6h30",
+      "Executar piloto de fábrica central noturna com micro‑vans para comparar custos e tempos de entrega",
+      "Avaliar combinação híbrida: produção em micro‑boulangeries + entregas de vans para áreas fora do alcance das bicicletas"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T00:14:47.900802+00:00"
+}

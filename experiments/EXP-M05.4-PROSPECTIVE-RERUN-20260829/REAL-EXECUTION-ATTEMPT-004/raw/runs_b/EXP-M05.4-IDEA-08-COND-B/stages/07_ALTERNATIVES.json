@@ -1,0 +1,57 @@
+{
+  "step_number": 7,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 525.6841924190521,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Implementar medição de latência baseada em timestamps de alta resolução (Performance.now) combinada com calibração automática por hardware/OS usando benchmarks de microsegundos antes da sessão de escrita\",\"addresses_issues\":[\"Imprecisão na medição do tempo de resposta do editor com precisão de milissegundos em diferentes sistemas operacionais e hardware\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requer permissões de baixo nível ou extensões do navegador; aumento da complexidade de implementação; possível overhead de desempenho durante a calibração\"],\"novelty_or_difference\":\"Calibração per‑dispositivo que adapta o critério de latência ao ambiente real do usuário\"},{\"mechanism\":\"Substituir o limiar fixo de 16 ms por um limiar perceptual individual determinado por testes psicofísicos adaptativos e complementar a avaliação de distração com métricas fisiológicas (p. ex., variação de frequência cardíaca ou rastreamento ocular)\",\"addresses_issues\":[\"Suposição de que latências abaixo de 16 ms são percebidas como instantâneas pelos usuários não é suportada por evidência psicológica\",\"Dependência de autorrelato de distração como métrica principal, que é altamente subjetiva e suscetível a viés\"],\"preserves_intent\":true,\"tradeoffs\":[\"Necessita equipamento adicional (sensor de frequência cardíaca, eye‑tracker) e sessões de calibração mais longas; aumento da carga cognitiva para o usuário durante os testes\"],\"novelty_or_difference\":\"Introduz um limiar de latência personalizado baseado em percepção real e métricas objetivas de distração\"},{\"mechanism\":\"Criar um modelo híbrido que combina autorrelato de distração com indicadores passivos de comportamento (variação de velocidade de digitação, frequência de pausas, erros de tecla) treinado por aprendizado de máquina para inferir níveis de distração\",\"addresses_issues\":[\"Imprecisão na medição do tempo de resposta do editor com precisão de milissegundos em diferentes sistemas operacionais e hardware\",\"Dependência de autorrelato de distração como métrica principal, que é altamente subjetiva e suscetível a viés\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requer coleta de dados extensiva para treinar o modelo; risco de viés algorítmico; necessidade de validação contínua\"],\"novelty_or_difference\":\"Uso de IA para transformar sinais comportamentais em métricas de distração, reduzindo a dependência de relatos subjetivos\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Implementar medição de latência baseada em timestamps de alta resolução (Performance.now) combinada com calibração automática por hardware/OS usando benchmarks de microsegundos antes da sessão de escrita",
+        "addresses_issues": [
+          "Imprecisão na medição do tempo de resposta do editor com precisão de milissegundos em diferentes sistemas operacionais e hardware"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer permissões de baixo nível ou extensões do navegador; aumento da complexidade de implementação; possível overhead de desempenho durante a calibração"
+        ],
+        "novelty_or_difference": "Calibração per‑dispositivo que adapta o critério de latência ao ambiente real do usuário"
+      },
+      {
+        "mechanism": "Substituir o limiar fixo de 16 ms por um limiar perceptual individual determinado por testes psicofísicos adaptativos e complementar a avaliação de distração com métricas fisiológicas (p. ex., variação de frequência cardíaca ou rastreamento ocular)",
+        "addresses_issues": [
+          "Suposição de que latências abaixo de 16 ms são percebidas como instantâneas pelos usuários não é suportada por evidência psicológica",
+          "Dependência de autorrelato de distração como métrica principal, que é altamente subjetiva e suscetível a viés"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Necessita equipamento adicional (sensor de frequência cardíaca, eye‑tracker) e sessões de calibração mais longas; aumento da carga cognitiva para o usuário durante os testes"
+        ],
+        "novelty_or_difference": "Introduz um limiar de latência personalizado baseado em percepção real e métricas objetivas de distração"
+      },
+      {
+        "mechanism": "Criar um modelo híbrido que combina autorrelato de distração com indicadores passivos de comportamento (variação de velocidade de digitação, frequência de pausas, erros de tecla) treinado por aprendizado de máquina para inferir níveis de distração",
+        "addresses_issues": [
+          "Imprecisão na medição do tempo de resposta do editor com precisão de milissegundos em diferentes sistemas operacionais e hardware",
+          "Dependência de autorrelato de distração como métrica principal, que é altamente subjetiva e suscetível a viés"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer coleta de dados extensiva para treinar o modelo; risco de viés algorítmico; necessidade de validação contínua"
+        ],
+        "novelty_or_difference": "Uso de IA para transformar sinais comportamentais em métricas de distração, reduzindo a dependência de relatos subjetivos"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T08:20:02.477461+00:00"
+}

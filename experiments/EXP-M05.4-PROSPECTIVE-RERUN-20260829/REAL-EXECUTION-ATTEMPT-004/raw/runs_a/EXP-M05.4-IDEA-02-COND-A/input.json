@@ -1,0 +1,10 @@
+{
+  "run_id": "EXP-M05.4-IDEA-02-COND-A",
+  "created_at": "2026-08-30T21:05:27.696792+00:00",
+  "original_idea": "Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "e92c7ec582e003c684fb0d48e7ee456f6f5cd893",
+    "environment_pid": 6320
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 707.8726804256439,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Entrega porta a porta de pães artesanais...' (hash: fa26749cf3f65014), 5 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Entrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.\",\"feasibility_notes\":[\"Modelo de assinatura pode ser gerenciado digitalmente com pagamentos recorrentes.\",\"Bicicletas elétricas são adequadas para curtas distâncias urbanas e podem ser carregadas durante a noite.\",\"Rotas otimizadas podem reduzir tempo de deslocamento em áreas densas como Pinheiros.\",\"Produção local garante frescor, mas requer coordenação estreita entre padarias e entregadores.\"],\"reality_dependencies\":[\"Presença de micro‑boulangeries operando diariamente em Pinheiros.\",\"Frota suficiente de bicicletas elétricas com autonomia para a rota matinal.\",\"Permissões municipais para entregas de bicicleta em áreas residenciais antes das 7h.\",\"Infraestrutura de carregamento de baterias disponível durante a noite.\",\"Sistema de pagamento recorrente confiável e integração com app de assinantes.\"],\"claims_needing_evidence\":[\"Bicicletas conseguem completar todas as entregas dentro do intervalo 5:30‑6:30 em condições de tráfego real.\",\"Micro‑boulangeries podem produzir volume diário suficiente para atender à demanda de assinantes sem comprometer qualidade.\",\"Algoritmo de roteamento reduz o tempo total de entrega em pelo menos 15% comparado a rotas manuais.\",\"Assinantes estão dispostos a pagar preço premium por pão artesanal entregue cedo.\",\"Custo operacional (bikes, manutenção, salários) permite margem de lucro sustentável.\"],\"potential_blockers\":[\"Congestionamento inesperado ou obras nas ruas que atrasem entregas.\",\"Falhas de bateria ou necessidade de recarga extra durante a manhã.\",\"Condições climáticas adversas (chuva forte, frio intenso) que inviabilizem entregas de bicicleta.\",\"Limitações de produção das padarias que causem falta de estoque.\",\"Regulamentações que restrinjam uso de bicicletas comerciais em áreas residenciais.\"],\"candidate_tests\":[\"Executar um piloto de 2 semanas com 20 assinantes para medir tempos reais de entrega entre 5:30 e 6:30.\",\"Testar o algoritmo de roteamento em simulação com dados de tráfego real da manhã de Pinheiros.\",\"Avaliar a capacidade de produção diária de uma micro‑boulangerie selecionada ao produzir para 30 assinantes.\",\"Medir autonomia e tempo de recarga das bicicletas elétricas em uso contínuo durante a madrugada.\",\"Realizar pesquisa de mercado para validar disposição a pagar e taxa de churn esperada.\"],\"exploratory_candidate_tests\":[\"Pilotar hub centralizado de produção noturna com vans elétricas para entregas entre 5:30 e 6:30.\",\"Instalar ponto de retirada automatizado em loja 24h e medir taxa de uso pelos assinantes.\",\"Testar modelo de cesta semanal de pães com entregas flexíveis e comparar custo logístico.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Entrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.",
+    "feasibility_notes": [
+      "Modelo de assinatura pode ser gerenciado digitalmente com pagamentos recorrentes.",
+      "Bicicletas elétricas são adequadas para curtas distâncias urbanas e podem ser carregadas durante a noite.",
+      "Rotas otimizadas podem reduzir tempo de deslocamento em áreas densas como Pinheiros.",
+      "Produção local garante frescor, mas requer coordenação estreita entre padarias e entregadores."
+    ],
+    "reality_dependencies": [
+      "Presença de micro‑boulangeries operando diariamente em Pinheiros.",
+      "Frota suficiente de bicicletas elétricas com autonomia para a rota matinal.",
+      "Permissões municipais para entregas de bicicleta em áreas residenciais antes das 7h.",
+      "Infraestrutura de carregamento de baterias disponível durante a noite.",
+      "Sistema de pagamento recorrente confiável e integração com app de assinantes."
+    ],
+    "claims_needing_evidence": [
+      "Bicicletas conseguem completar todas as entregas dentro do intervalo 5:30‑6:30 em condições de tráfego real.",
+      "Micro‑boulangeries podem produzir volume diário suficiente para atender à demanda de assinantes sem comprometer qualidade.",
+      "Algoritmo de roteamento reduz o tempo total de entrega em pelo menos 15% comparado a rotas manuais.",
+      "Assinantes estão dispostos a pagar preço premium por pão artesanal entregue cedo.",
+      "Custo operacional (bikes, manutenção, salários) permite margem de lucro sustentável."
+    ],
+    "potential_blockers": [
+      "Congestionamento inesperado ou obras nas ruas que atrasem entregas.",
+      "Falhas de bateria ou necessidade de recarga extra durante a manhã.",
+      "Condições climáticas adversas (chuva forte, frio intenso) que inviabilizem entregas de bicicleta.",
+      "Limitações de produção das padarias que causem falta de estoque.",
+      "Regulamentações que restrinjam uso de bicicletas comerciais em áreas residenciais."
+    ],
+    "candidate_tests": [
+      "Executar um piloto de 2 semanas com 20 assinantes para medir tempos reais de entrega entre 5:30 e 6:30.",
+      "Testar o algoritmo de roteamento em simulação com dados de tráfego real da manhã de Pinheiros.",
+      "Avaliar a capacidade de produção diária de uma micro‑boulangerie selecionada ao produzir para 30 assinantes.",
+      "Medir autonomia e tempo de recarga das bicicletas elétricas em uso contínuo durante a madrugada.",
+      "Realizar pesquisa de mercado para validar disposição a pagar e taxa de churn esperada."
+    ],
+    "exploratory_candidate_tests": [
+      "Pilotar hub centralizado de produção noturna com vans elétricas para entregas entre 5:30 e 6:30.",
+      "Instalar ponto de retirada automatizado em loja 24h e medir taxa de uso pelos assinantes.",
+      "Testar modelo de cesta semanal de pães com entregas flexíveis e comparar custo logístico."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T01:09:43.590809+00:00"
+}

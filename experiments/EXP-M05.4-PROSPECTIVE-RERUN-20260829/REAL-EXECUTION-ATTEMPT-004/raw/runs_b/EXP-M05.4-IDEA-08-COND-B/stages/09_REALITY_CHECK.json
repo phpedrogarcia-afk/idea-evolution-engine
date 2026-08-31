@@ -1,0 +1,60 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 719.7369859218597,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Medição precisa da latência do editor de...' (hash: 10b01ded59ecad4a), 5 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Medição precisa da latência do editor de texto usando timestamps de alta resolução (performance.now) com calibração automática por hardware/SO antes da sessão de escrita.\",\"feasibility_notes\":[\"performance.now está disponível na maioria dos navegadores modernos e oferece sub‑milissegundo de resolução\",\"A calibração automática pode ser implementada rodando um benchmark de microsegundos antes da escrita\",\"É necessário garantir que o relógio do sistema não seja ajustado durante a sessão\",\"A precisão prática depende da consistência do hardware e do agendamento do SO\",\"Implementar a coleta de timestamps sem introduzir overhead perceptível ao usuário\"],\"reality_dependencies\":[\"Acesso ao API performance.now no ambiente de execução (navegador ou app desktop)\",\"Permissão para executar código de benchmark de alta frequência antes da sessão\",\"Consistência do relógio de alta resolução do SO/hardware durante a medição\",\"Capacidade de registrar timestamps imediatamente antes da captura de entrada e imediatamente após a renderização do texto\",\"Mecanismo de sincronização entre thread de entrada e thread de renderização para evitar atrasos de software\"],\"claims_needing_evidence\":[\"Latências de editor <16 ms reduzem efetivamente a distração percebida durante a digitação\",\"performance.now fornece precisão suficiente para detectar diferenças de poucos milissegundos na latência do editor\",\"A calibração automática elimina variações de hardware/OS suficientemente para confiar nas medições\"],\"potential_blockers\":[\"Alguns navegadores limitam a resolução de performance.now por questões de segurança (ex.: 1 ms ou maior)\",\"Variações de carga do CPU ou do thread de renderização podem introduzir jitter imprevisível\",\"Políticas de privacidade podem impedir a execução de benchmarks antes da sessão\",\"Diferenças de hardware (ex.: laptops vs desktops) podem exigir calibrações distintas\",\"Sincronização de eventos de entrada e renderização pode não ser acessível via API padrão\"],\"candidate_tests\":[\"Comparar latência medida por performance.now com um equipamento externo de captura de vídeo de alta velocidade para validar a precisão\",\"Executar o benchmark de calibração em diferentes máquinas/OS e medir a variabilidade do offset estimado\",\"Realizar um estudo controlado onde participantes escrevem com latências medidas <16 ms e >16 ms e reportam níveis de distração\",\"Testar se a calibração automática reduz o erro médio da medição em pelo menos 50 % comparado a medições não calibradas\",\"Verificar a consistência das medições de latência ao longo de sessões prolongadas (ex.: 30 min)\"],\"exploratory_candidate_tests\":[\"Desenvolver testes psicofísicos adaptativos para determinar o limiar perceptual individual de latência de teclado\",\"Construir modelo híbrido que combina autorrelato de distração com métricas passivas (velocidade de digitação, pausas, taxa de erros) e validar sua capacidade preditiva\",\"Incorporar sensores fisiológicos (ex.: frequência cardíaca, rastreamento ocular) para investigar correlações adicionais com distração\",\"Explorar algoritmos de aprendizado de máquina que inferem níveis de distração a partir de padrões de digitação e latência medida\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Medição precisa da latência do editor de texto usando timestamps de alta resolução (performance.now) com calibração automática por hardware/SO antes da sessão de escrita.",
+    "feasibility_notes": [
+      "performance.now está disponível na maioria dos navegadores modernos e oferece sub‑milissegundo de resolução",
+      "A calibração automática pode ser implementada rodando um benchmark de microsegundos antes da escrita",
+      "É necessário garantir que o relógio do sistema não seja ajustado durante a sessão",
+      "A precisão prática depende da consistência do hardware e do agendamento do SO",
+      "Implementar a coleta de timestamps sem introduzir overhead perceptível ao usuário"
+    ],
+    "reality_dependencies": [
+      "Acesso ao API performance.now no ambiente de execução (navegador ou app desktop)",
+      "Permissão para executar código de benchmark de alta frequência antes da sessão",
+      "Consistência do relógio de alta resolução do SO/hardware durante a medição",
+      "Capacidade de registrar timestamps imediatamente antes da captura de entrada e imediatamente após a renderização do texto",
+      "Mecanismo de sincronização entre thread de entrada e thread de renderização para evitar atrasos de software"
+    ],
+    "claims_needing_evidence": [
+      "Latências de editor <16 ms reduzem efetivamente a distração percebida durante a digitação",
+      "performance.now fornece precisão suficiente para detectar diferenças de poucos milissegundos na latência do editor",
+      "A calibração automática elimina variações de hardware/OS suficientemente para confiar nas medições"
+    ],
+    "potential_blockers": [
+      "Alguns navegadores limitam a resolução de performance.now por questões de segurança (ex.: 1 ms ou maior)",
+      "Variações de carga do CPU ou do thread de renderização podem introduzir jitter imprevisível",
+      "Políticas de privacidade podem impedir a execução de benchmarks antes da sessão",
+      "Diferenças de hardware (ex.: laptops vs desktops) podem exigir calibrações distintas",
+      "Sincronização de eventos de entrada e renderização pode não ser acessível via API padrão"
+    ],
+    "candidate_tests": [
+      "Comparar latência medida por performance.now com um equipamento externo de captura de vídeo de alta velocidade para validar a precisão",
+      "Executar o benchmark de calibração em diferentes máquinas/OS e medir a variabilidade do offset estimado",
+      "Realizar um estudo controlado onde participantes escrevem com latências medidas <16 ms e >16 ms e reportam níveis de distração",
+      "Testar se a calibração automática reduz o erro médio da medição em pelo menos 50 % comparado a medições não calibradas",
+      "Verificar a consistência das medições de latência ao longo de sessões prolongadas (ex.: 30 min)"
+    ],
+    "exploratory_candidate_tests": [
+      "Desenvolver testes psicofísicos adaptativos para determinar o limiar perceptual individual de latência de teclado",
+      "Construir modelo híbrido que combina autorrelato de distração com métricas passivas (velocidade de digitação, pausas, taxa de erros) e validar sua capacidade preditiva",
+      "Incorporar sensores fisiológicos (ex.: frequência cardíaca, rastreamento ocular) para investigar correlações adicionais com distração",
+      "Explorar algoritmos de aprendizado de máquina que inferem níveis de distração a partir de padrões de digitação e latência medida"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T08:53:58.880260+00:00"
+}

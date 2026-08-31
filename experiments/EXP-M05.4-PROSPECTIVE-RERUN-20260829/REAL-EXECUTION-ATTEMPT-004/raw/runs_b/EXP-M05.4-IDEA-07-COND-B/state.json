@@ -1,0 +1,401 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.4-IDEA-07-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-08-31T01:15:30.321381",
+  "updated_at": "2026-08-31T03:21:52.027274",
+  "original_idea": "Um bloco de notas em linha de comando simples para salvar trechos rápidos de texto em arquivos markdown na pasta pessoal.",
+  "current_idea": "Utilitário de linha de comando que captura trechos de texto, salva cada um como arquivo markdown individual com nome único e mantém um índice estruturado para busca rápida.",
+  "human_intent": "Criar um bloco de notas operado via linha de comando que permita salvar de forma rápida e direta trechos de texto em arquivos markdown dentro de um diretório pessoal.",
+  "problem_statement": "O usuário carece de uma ferramenta simples de linha de comando para capturar rapidamente trechos de texto e armazená‑los como arquivos markdown em sua pasta pessoal, evitando a necessidade de abrir editores ou gerenciar manualmente arquivos individuais.",
+  "actors_or_users": [
+    "usuário final que precisa capturar notas rápidas",
+    "desenvolvedor que utiliza o terminal para organizar snippets"
+  ],
+  "assumptions": [
+    "o usuário possui um diretório pessoal onde armazenar os arquivos",
+    "o sistema operacional oferece suporte a linha de comando e ao filesystem padrão",
+    "os arquivos markdown serão visualizados ou editados posteriormente com um editor compatível",
+    "o usuário deseja apenas salvar, não necessariamente buscar ou editar imediatamente"
+  ],
+  "ambiguities": [
+    "como será definido o nome do arquivo markdown (padrão, timestamp, título fornecido?)",
+    "há necessidade de organização em subpastas ou tags?",
+    "o utilitário deve suportar edição ou apenas criação?",
+    "como lidar com duplicatas ou sobrescrita de arquivos existentes",
+    "há requisitos de formatação ou metadados adicionais no markdown"
+  ],
+  "strengths": [
+    "alta simplicidade e baixo overhead",
+    "integração direta ao fluxo de trabalho de terminal",
+    "uso de formato markdown amplamente suportado",
+    "armazenamento automático em pasta pessoal facilita backup e acesso",
+    "não requer interface gráfica nem dependências complexas"
+  ],
+  "critical_issues": [
+    {
+      "issue": "File name collisions can overwrite existing notes, causing irreversible data loss",
+      "why_it_matters": "Without a robust naming or deduplication strategy, two different snippets may generate the same filename, erasing the first entry",
+      "severity": "HIGH",
+      "affected_part": "filename generation / storage logic",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Absence of search or indexing makes saved notes hard to retrieve",
+      "why_it_matters": "Capturing notes is only valuable if the user can later locate them; lacking retrieval mechanisms renders the tool ineffective",
+      "severity": "MEDIUM",
+      "affected_part": "overall utility / user workflow",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Improper handling of special characters and Unicode can cause filesystem errors",
+      "why_it_matters": "Users may paste text containing symbols, emojis, or non‑ASCII characters; if these are used directly in filenames the command may fail on many OSes",
+      "severity": "MEDIUM",
+      "affected_part": "input sanitization / filename creation",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "The user has a dedicated personal directory with write permissions",
+    "The operating system provides consistent filesystem semantics for all characters used in filenames",
+    "The user will manually organize notes without built‑in tagging or indexing",
+    "The user will never need to retrieve or edit notes programmatically"
+  ],
+  "contradictions": [
+    "The tool claims \"simple capture and organization\" yet provides no mechanism for organizing or locating saved notes later",
+    "It assumes the user only wants to save notes, but later editing or searching is typically required"
+  ],
+  "failure_modes": [
+    "Overwrite of existing files due to duplicate names",
+    "Disk‑full or permission‑denied errors causing note loss",
+    "Invalid filenames from special characters or spaces leading to command failure",
+    "Race conditions when multiple instances run concurrently"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Gerar nomes de arquivos baseados em UUIDs (versão 4) e armazenar notas em subdiretórios por data, mantendo um índice SQLite que registra caminho, timestamp, tags e conteúdo para busca rápida",
+      "addresses_issues": [
+        "File name collisions can overwrite existing notes, causing irreversible data loss",
+        "Absence of search or indexing makes saved notes hard to retrieve",
+        "Improper handling of special characters and Unicode can cause filesystem errors"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Dependência de SQLite aumenta o tamanho do binário e requer migrações de esquema",
+        "Estrutura de diretórios mais profunda pode complicar backups manuais"
+      ],
+      "novelty_or_difference": "Uso de UUID elimina colisões totalmente e o SQLite oferece busca estruturada sem necessidade de arquivos de índice JSON separados"
+    },
+    {
+      "mechanism": "Salvar todas as anotações de um dia em um único arquivo markdown diário com cabeçalhos delimitados por front‑matter, usando codificação URL‑safe para nomes de seções e permitindo busca via grep ou ferramenta integrada de regex",
+      "addresses_issues": [
+        "File name collisions can overwrite existing notes, causing irreversible data loss",
+        "Absence of search or indexing makes saved notes hard to retrieve",
+        "Improper handling of special characters and Unicode can cause filesystem errors"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "O arquivo diário pode crescer muito grande, tornando a edição manual lenta",
+        "Requer parsing adicional para extrair notas individuais"
+      ],
+      "novelty_or_difference": "Consolida notas diárias em um único documento, simplificando gerenciamento de arquivos e usando codificação segura para caracteres especiais"
+    },
+    {
+      "mechanism": "Integrar o diretório de notas a um repositório Git local; cada captura cria um commit com mensagem contendo metadados e o conteúdo salvo em um arquivo markdown cujo nome é sanitizado (slug) e, se necessário, numerado para evitar colisões; busca feita via git grep e histórico de versões protege contra perdas",
+      "addresses_issues": [
+        "File name collisions can overwrite existing notes, causing irreversible data loss",
+        "Absence of search or indexing makes saved notes hard to retrieve",
+        "Improper handling of special characters and Unicode can cause filesystem errors"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requer que o usuário tenha Git instalado e compreenda seu fluxo básico",
+        "Operações de commit podem introduzir latência em ambientes de baixa performance"
+      ],
+      "novelty_or_difference": "Aproveita o controle de versão nativo do Git para prevenção de perdas e busca poderosa, transformando notas em histórico versionado"
+    }
+  ],
+  "core_mechanism": "Salvar cada trecho como arquivo markdown com nome único baseado em UUID v4, armazenar metadados (timestamp, hash, tags) em um banco SQLite que serve como índice de busca.",
+  "core_mechanism_justification": "UUID elimina colisões de nomes; SQLite oferece consultas eficientes e evita limitações do índice JSON plano.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "875d73f80d35be0b",
+  "proposal_records": [
+    {
+      "proposal": "Salvar cada trecho como arquivo markdown com nome único baseado em UUID v4, armazenar metadados (timestamp, hash, tags) em um banco SQLite que serve como índice de busca.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "UUID elimina colisões de nomes; SQLite oferece consultas eficientes e evita limitações do índice JSON plano.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Uso de UUID v4 para nomes de arquivos e SQLite como backend de índice em vez de JSON plano.",
+      "ontology_state": "DERIVED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Resolve colisões de nomes e fornece busca rápida e escalável.",
+      "promotion_basis": "VALID_USER_DERIVATION",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Usuário apontou risco de colisões de nomes e ausência de busca; SQLite atende a esses requisitos."
+    },
+    {
+      "proposal": "Permitir escolha entre backend JSON ou SQLite via flag",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Adicionar suporte opcional para criptografia de notas",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Implementar modo de operação offline sem dependência de SQLite",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Salvar todas as anotações de um dia em um único arquivo markdown diário com front‑matter.",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Aumenta o tamanho do arquivo diário, dificultando edição e busca; contraria objetivo de acesso rápido a notas individuais.",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Integrar diretório de notas a um repositório Git local, criando commit por captura.",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Exige que usuário tenha Git instalado e compreenda fluxo, adicionando complexidade desnecessária ao utilitário simples.",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Uso de UUID v4 para nomes de arquivos e SQLite como backend de índice em vez de JSON plano. (Justificativa: Resolve colisões de nomes e fornece busca rápida e escalável. | Base: VALID_USER_DERIVATION)"
+  ],
+  "candidate_extensions": [
+    "Permitir escolha entre backend JSON ou SQLite via flag",
+    "Adicionar suporte opcional para criptografia de notas",
+    "Implementar modo de operação offline sem dependência de SQLite"
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Salvar todas as anotações de um dia em um único arquivo markdown diário com front‑matter.",
+      "reason_rejected": "Aumenta o tamanho do arquivo diário, dificultando edição e busca; contraria objetivo de acesso rápido a notas individuais.",
+      "source_stage": "ALTERNATIVES"
+    },
+    {
+      "proposal": "Integrar diretório de notas a um repositório Git local, criando commit por captura.",
+      "reason_rejected": "Exige que usuário tenha Git instalado e compreenda fluxo, adicionando complexidade desnecessária ao utilitário simples.",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "Como lidar com caracteres especiais e Unicode nos nomes de arquivos de forma segura",
+    "Escalabilidade do arquivo de índice JSON com milhares de notas",
+    "Estratégia de backup e recuperação do índice JSON em caso de corrupção",
+    "Integração de tags e filtros de busca avançada no índice",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_IN_EXPLORATORY: Mecanismo do Core 'Salvar trechos como arquivos markdown individuais usando nomes de arquivos compostos por timestamp ISO8601, slug opcional e hash curto, e manter um índice JSON com metadados (título, data, tags, caminho) para busca rápida.' aparece nos testes exploratórios 'Implementar variante que armazena notas em um banco SQLite local e comparar tempo de inserção e busca com a solução baseada em arquivos.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Salvar trechos como arquivos markdown individuais usando nomes de arquivos compostos por timestamp ISO8601, slug opcional e hash curto, e manter um índice JSON com metadados (título, data, tags, caminho) para busca rápida.' aparece nos testes exploratórios 'Substituir o hash curto por UUID v4 como parte do nome de arquivo e medir taxa de colisão percebida.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Salvar trechos como arquivos markdown individuais usando nomes de arquivos compostos por timestamp ISO8601, slug opcional e hash curto, e manter um índice JSON com metadados (título, data, tags, caminho) para busca rápida.' aparece nos testes exploratórios 'Utilizar um índice armazenado em SQLite ao invés de JSON para suportar consultas mais complexas e concorrência.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Salvar trechos como arquivos markdown individuais usando nomes de arquivos compostos por timestamp ISO8601, slug opcional e hash curto, e manter um índice JSON com metadados (título, data, tags, caminho) para busca rápida.' aparece nos testes exploratórios 'Avaliar uso de ferramentas de busca de texto (ex.: ripgrep) sobre arquivos markdown como alternativa ao índice JSON.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Desenvolver um protótipo funcional que implemente o mecanismo de nomes de arquivos baseado em timestamp ISO8601 + slug opcional + hash curto e o índice JSON, validar a unicidade dos nomes e a eficiência das buscas, e criar testes de integridade do índice.' propõe mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Desenvolver um protótipo funcional que implemente o mecanismo de nomes de arquivos baseado em timestamp ISO8601 + slug opcional + hash curto e o índice JSON, validar a unicidade dos nomes e a eficiência das buscas, e criar testes de integridade do índice.' propõe mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Dependência de realidade do Core 'Permissão de escrita no diretório de notas do usuário.' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Dependência de realidade do Core 'Suporte do sistema de arquivos a criação atômica de arquivos (rename).' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Teste do Core 'Criar uma nota e validar que o arquivo markdown foi salvo com nome no formato 'YYYY-MM-DDTHH:MM:SSZ-<slug>-<hash>.md'.' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Teste do Core 'Executar 10 000 criações de notas em paralelo e verificar ausência de colisões de nomes de arquivo.' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Teste do Core 'Inserir 1 000 notas sequencialmente e confirmar que o índice JSON contém 1 000 entradas corretas e bem‑formadas.' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Teste do Core 'Simular duas instâncias concorrentes escrevendo notas ao mesmo tempo e checar integridade do índice após a operação.' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Teste do Core 'Testar criação de notas com slugs contendo caracteres Unicode e garantir que o nome de arquivo resultante seja válido no sistema de arquivos.' referencia mecanismo rejeitado 'Armazenar todas as notas em um banco SQLite local com colunas para conteúdo markdown, título, tags e data, exportando notas individuais para arquivos markdown sob demanda'.; Dependência de realidade do Core 'Permissão de escrita no diretório de notas do usuário.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Dependência de realidade do Core 'Suporte do sistema de arquivos a criação atômica de arquivos (rename).' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Dependência de realidade do Core 'Limite de comprimento de nome de arquivo do OS (ex.: 255 caracteres no ext4).' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Teste do Core 'Criar uma nota e validar que o arquivo markdown foi salvo com nome no formato 'YYYY-MM-DDTHH:MM:SSZ-<slug>-<hash>.md'.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Teste do Core 'Executar 10 000 criações de notas em paralelo e verificar ausência de colisões de nomes de arquivo.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Teste do Core 'Inserir 1 000 notas sequencialmente e confirmar que o índice JSON contém 1 000 entradas corretas e bem‑formadas.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Teste do Core 'Simular duas instâncias concorrentes escrevendo notas ao mesmo tempo e checar integridade do índice após a operação.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Teste do Core 'Medir tempo de busca de uma nota pelo título usando o índice JSON versus varredura de diretório.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.; Teste do Core 'Testar criação de notas com slugs contendo caracteres Unicode e garantir que o nome de arquivo resultante seja válido no sistema de arquivos.' referencia mecanismo rejeitado 'Organizar notas em subpastas hierárquicas por ano/mês/dia e prefixar cada arquivo com um UUID v4, incluindo script de busca baseado em grep'.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [cada, trecho, como, arquivo, nome, unico, baseado, uuid, armazenar, metadados, timestamp, hash, tags, banco, sqlite, serve, como, indice, busca].",
+    "Como sanitizar nomes de arquivos para suportar todos os caracteres Unicode",
+    "Impacto de desempenho do SQLite com milhões de notas",
+    "Preferência do usuário entre JSON simples e SQLite para índice",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Salvar cada trecho como arquivo markdown com nome único baseado em UUID v4, armazenar metadados (timestamp, hash, tags) em um banco SQLite que serve como índice de busca.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Salvar cada trecho como arquivo markdown com nome único baseado em UUID v4, armazenar metadados (timestamp, hash, tags) em um banco SQLite que serve como índice de busca.' aparece nos testes exploratórios 'Testar a flag de escolha entre backend JSON vs SQLite e validar que ambos mantêm a mesma consistência de metadados'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Salvar cada trecho como arquivo markdown com nome único baseado em UUID v4, armazenar metadados (timestamp, hash, tags) em um banco SQLite que serve como índice de busca.' aparece nos testes exploratórios 'Avaliar modo offline que usa apenas arquivos markdown sem SQLite, verificando se buscas por metadados ainda são possíveis via parsing de cabeçalhos'.; Dependência de realidade do Core 'Acesso de leitura/escrita ao sistema de arquivos do usuário' referencia mecanismo rejeitado 'Salvar todas as anotações de um dia em um único arquivo markdown diário com front‑matter.'.; Dependência de realidade do Core 'Permissões de execução para criar arquivos e abrir o banco SQLite' referencia mecanismo rejeitado 'Salvar todas as anotações de um dia em um único arquivo markdown diário com front‑matter.'.; Teste do Core 'Criar 10.000 notas de teste e verificar que cada arquivo possui nome UUID v4 válido e único' referencia mecanismo rejeitado 'Salvar todas as anotações de um dia em um único arquivo markdown diário com front‑matter.'.; Teste do Core 'Alterar o conteúdo de um arquivo e validar que o hash armazenado no SQLite não corresponde, detectando a corrupção' referencia mecanismo rejeitado 'Salvar todas as anotações de um dia em um único arquivo markdown diário com front‑matter.'.; Teste do Core 'Criar 10.000 notas de teste e verificar que cada arquivo possui nome UUID v4 válido e único' referencia mecanismo rejeitado 'Integrar diretório de notas a um repositório Git local, criando commit por captura.'.",
+    "ALERTA DE ESSENCE DRIFT / ACCRETION: A ideia refinada introduz um mecanismo de índice SQLite e metadados (timestamp, hash, tags) que não estavam presentes na intenção original de um bloco de notas simples, configurando uma acumulação especulativa de funcionalidades."
+  ],
+  "known_risks": [
+    "Corruptela do arquivo de banco SQLite pode causar perda de índice",
+    "Dependência de biblioteca SQLite aumenta tamanho do binário",
+    "Falha ao gerar UUID pode gerar duplicatas (extremamente improvável)"
+  ],
+  "recommended_next_step": "Implementar o core mechanism com geração de UUID v4 e backend SQLite, escrever testes de colisão de nomes e consultas de busca, e validar com usuários que relataram problemas de colisão.",
+  "tested_core_mechanism": "Salvar cada trecho como arquivo markdown com nome único baseado em UUID v4, armazenar metadados (timestamp, hash, tags) em um banco SQLite que serve como índice de busca.",
+  "tested_core_hash": "875d73f80d35be0b",
+  "reality_dependencies": [
+    "Acesso de leitura/escrita ao sistema de arquivos do usuário",
+    "Biblioteca para geração de UUID v4 (ex.: uuid em Python, uuid npm)",
+    "Biblioteca SQLite compatível com a linguagem escolhida",
+    "Função de hash criptográfico (ex.: SHA‑256) para gerar o hash do conteúdo",
+    "Permissões de execução para criar arquivos e abrir o banco SQLite"
+  ],
+  "claims_needing_evidence": [
+    "UUID v4 fornece unicidade suficiente para evitar colisões de nomes de arquivos mesmo em escala de milhões de notas",
+    "O índice SQLite mantém desempenho de busca aceitável à medida que o número de notas cresce (ex.: <100 ms para 100 k entradas)",
+    "Armazenar o hash do conteúdo permite detectar corrupção de arquivos de forma confiável",
+    "A combinação de arquivos individuais + índice SQLite não introduz inconsistências de sincronização entre metadados e conteúdo"
+  ],
+  "candidate_tests": [
+    "Criar 10.000 notas de teste e verificar que cada arquivo possui nome UUID v4 válido e único",
+    "Confirmar que para cada nota existe um registro correspondente no banco SQLite com timestamp, hash e tags corretos",
+    "Executar consultas de busca por tag e por intervalo de timestamps e medir tempo de resposta (<100 ms)",
+    "Alterar o conteúdo de um arquivo e validar que o hash armazenado no SQLite não corresponde, detectando a corrupção",
+    "Simular falha de energia durante gravação e garantir que o banco SQLite permanece consistente ao reiniciar"
+  ],
+  "exploratory_candidate_tests": [
+    "Testar a flag de escolha entre backend JSON vs SQLite e validar que ambos mantêm a mesma consistência de metadados",
+    "Implementar criptografia opcional das notas e medir impacto de desempenho na gravação e leitura",
+    "Avaliar modo offline que usa apenas arquivos markdown sem SQLite, verificando se buscas por metadados ainda são possíveis via parsing de cabeçalhos"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": true,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T01:25:34.861491",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar um bloco de notas operado via linha de comando que per...' | 4 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T01:37:42.045893",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T01:45:25.088085",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T02:05:17.187838",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Salvar trechos como arquivos markdown in...' (Base: VALID_USER_DERIVATION | Hash: 96adfc8184becc21), 1 aceitas, 0 candidatas, 2 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T02:15:59.210660",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Salvar trechos como arquivos markdown in...' (hash: 96adfc8184becc21), 5 dependências, 6 testes do Core, 5 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T02:29:23.102955",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T02:37:13.284356",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T02:57:40.058012",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Salvar cada trecho como arquivo markdown...' (Base: MODEL_HYPOTHESIS | Hash: 875d73f80d35be0b), 1 aceitas, 3 candidatas, 2 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T03:09:07.625050",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Salvar cada trecho como arquivo markdown...' (hash: 875d73f80d35be0b), 5 dependências, 5 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T03:21:52.027260",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='RECONSTRUCT', essence_drift=True, accretion=True, ontology_contradiction=True."
+    }
+  ]
+}

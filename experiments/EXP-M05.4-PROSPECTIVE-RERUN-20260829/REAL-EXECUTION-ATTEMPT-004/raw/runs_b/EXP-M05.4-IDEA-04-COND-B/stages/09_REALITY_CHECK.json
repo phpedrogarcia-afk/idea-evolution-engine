@@ -1,0 +1,58 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 630.598806142807,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Gerar um arquivo HTML único que incorpor...' (hash: 172231d2501f5990), 5 dependências, 4 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Gerar um arquivo HTML único que incorpora os dados financeiros criptografados com uma senha fornecida pelo usuário; o navegador descriptografa o conteúdo em tempo real para renderizar o relatório.\",\"feasibility_notes\":[\"Web Crypto API permite criptografia e descriptografia client‑side totalmente offline\",\"JavaScript pode embutir ciphertext em base64 dentro do HTML\",\"Descriptografia em tempo real é viável para volumes de dados típicos de relatórios pessoais\",\"Nenhum servidor externo é necessário, garantindo privacidade\"],\"reality_dependencies\":[\"Disponibilidade e compatibilidade do Web Crypto API nos navegadores alvo (Chrome, Firefox, Safari, Edge)\",\"Suporte ao File API/Blob para leitura do HTML local\",\"Capacidade de executar JavaScript de forma segura em arquivos HTML abertos localmente\",\"Gerador de salt e KDF (ex.: PBKDF2, scrypt) implementado em JavaScript\",\"Mecanismo de derivação de chave a partir da senha do usuário\"],\"claims_needing_evidence\":[\"A força criptográfica da senha‑derivada atende a requisitos de segurança prática\",\"Tempo de descriptografia é aceitável (<2 s) para um dataset de até 10 MB\",\"O navegador renderiza corretamente o relatório após a descriptografia sem erros de layout\",\"O arquivo HTML funciona totalmente offline em todos os navegadores suportados\"],\"potential_blockers\":[\"Navegadores antigos ou ambientes sem suporte ao Web Crypto API\",\"Limitações de memória ao carregar datasets grandes inteiramente em RAM\",\"Políticas de segurança que bloqueiam a execução de scripts em arquivos HTML locais (CSP, sandbox)\",\"Falhas na derivação de chave que permitam ataques de força‑bruta\"],\"candidate_tests\":[\"Teste de round‑trip: criptografar um dataset de exemplo, embutir no HTML, abrir offline e verificar se a saída renderizada corresponde ao original\",\"Medição de tempo de descriptografia para diferentes tamanhos de dataset (1 MB, 5 MB, 10 MB) em Chrome, Firefox e Safari\",\"Teste de senha incorreta: garantir que o relatório não seja renderizado e que mensagens de erro não vazem dados\",\"Verificação de funcionamento offline: abrir o HTML em modo avião e confirmar que todas as funcionalidades permanecem operacionais\"],\"exploratory_candidate_tests\":[\"Implementar armazenamento de blob gzip‑compressado ao lado do HTML e medir tempo de streaming e descriptografia parcial\",\"Usar IndexedDB para armazenar o dataset criptografado e gerar relatórios dinamicamente, avaliando latência de consultas\",\"Testar fallback para browsers sem Web Crypto usando bibliotecas JavaScript puras (ex.: CryptoJS)\",\"Avaliar impacto de diferentes KDFs (PBKDF2 vs scrypt) sobre tempo de derivação de chave e segurança\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Gerar um arquivo HTML único que incorpora os dados financeiros criptografados com uma senha fornecida pelo usuário; o navegador descriptografa o conteúdo em tempo real para renderizar o relatório.",
+    "feasibility_notes": [
+      "Web Crypto API permite criptografia e descriptografia client‑side totalmente offline",
+      "JavaScript pode embutir ciphertext em base64 dentro do HTML",
+      "Descriptografia em tempo real é viável para volumes de dados típicos de relatórios pessoais",
+      "Nenhum servidor externo é necessário, garantindo privacidade"
+    ],
+    "reality_dependencies": [
+      "Disponibilidade e compatibilidade do Web Crypto API nos navegadores alvo (Chrome, Firefox, Safari, Edge)",
+      "Suporte ao File API/Blob para leitura do HTML local",
+      "Capacidade de executar JavaScript de forma segura em arquivos HTML abertos localmente",
+      "Gerador de salt e KDF (ex.: PBKDF2, scrypt) implementado em JavaScript",
+      "Mecanismo de derivação de chave a partir da senha do usuário"
+    ],
+    "claims_needing_evidence": [
+      "A força criptográfica da senha‑derivada atende a requisitos de segurança prática",
+      "Tempo de descriptografia é aceitável (<2 s) para um dataset de até 10 MB",
+      "O navegador renderiza corretamente o relatório após a descriptografia sem erros de layout",
+      "O arquivo HTML funciona totalmente offline em todos os navegadores suportados"
+    ],
+    "potential_blockers": [
+      "Navegadores antigos ou ambientes sem suporte ao Web Crypto API",
+      "Limitações de memória ao carregar datasets grandes inteiramente em RAM",
+      "Políticas de segurança que bloqueiam a execução de scripts em arquivos HTML locais (CSP, sandbox)",
+      "Falhas na derivação de chave que permitam ataques de força‑bruta"
+    ],
+    "candidate_tests": [
+      "Teste de round‑trip: criptografar um dataset de exemplo, embutir no HTML, abrir offline e verificar se a saída renderizada corresponde ao original",
+      "Medição de tempo de descriptografia para diferentes tamanhos de dataset (1 MB, 5 MB, 10 MB) em Chrome, Firefox e Safari",
+      "Teste de senha incorreta: garantir que o relatório não seja renderizado e que mensagens de erro não vazem dados",
+      "Verificação de funcionamento offline: abrir o HTML em modo avião e confirmar que todas as funcionalidades permanecem operacionais"
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar armazenamento de blob gzip‑compressado ao lado do HTML e medir tempo de streaming e descriptografia parcial",
+      "Usar IndexedDB para armazenar o dataset criptografado e gerar relatórios dinamicamente, avaliando latência de consultas",
+      "Testar fallback para browsers sem Web Crypto usando bibliotecas JavaScript puras (ex.: CryptoJS)",
+      "Avaliar impacto de diferentes KDFs (PBKDF2 vs scrypt) sobre tempo de derivação de chave e segurança"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T22:30:05.025705+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "cell_id": "IDEA-02-CONDITION_C",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "idea_id": "IDEA-02",
+  "condition": "CONDITION_C",
+  "raw_idea": "Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.",
+  "latency_seconds": 21.19,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "human_decision_requested": true,
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.4-IDEA-02-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Um espaço digital para pensamentos incompletos que você não quer organizar ainda, como folhas secas que repousam antes do vento.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Permitir que o usuário capture rapidamente pensamentos soltos, como folhas secas ao vento, para revisitar e organizar posteriormente.\n- **Problema Interpretado:** Necessidade de um espaço digital onde o usuário possa armazenar pensamentos incompletos ou ideias ainda não organizadas, sem exigir estrutura imediata.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Caixa de entrada digital de notas rápidas (digital scratchpad)\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** Facilita a captura de ideias incompletas sem impor organização imediata, reduzindo a fricção e preservando o fluxo criativo.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Aplicativo 'Drafts' para captura instantânea de texto** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Integração limitada com outros sistemas, Curva de aprendizado\n2. **Uso de tags em Notion ou Evernote como 'Inbox'** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Dependência de plataforma externa, Possível sobrecarga de organização\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 3\n\n## 7. Próximo Passo Recomendado\n\nDesenvolver um protótipo de interface simples de captura de notas rápidas com armazenamento criptografado em nuvem e funcionalidade de busca básica.\n"
+}

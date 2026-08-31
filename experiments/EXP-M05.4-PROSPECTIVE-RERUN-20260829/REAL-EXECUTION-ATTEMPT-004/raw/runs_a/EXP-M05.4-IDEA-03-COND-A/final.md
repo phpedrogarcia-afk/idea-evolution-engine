@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.4-IDEA-03-COND-A
+
+## Ideia Original
+> Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.
+
+## Resumo do Modelo
+Um plataforma híbrida que conecta leitores e colecionadores de livros raros, combinando encontros presenciais baseados em proximidade geográfica com um feed assíncrono que recomenda trocas e discussões por afinidade temática, oferecendo catálogos verificados, controle de privacidade e ferramentas de curadoria colaborativa.
+
+## Versão Refinada
+A plataforma "RareBook Connect" oferece duas camadas integradas: 1) "Local Book Circles" – mapa seguro que mostra usuários próximos dispostos a encontros presenciais ou empréstimos curtos, com opções de anonimato e controle de visibilidade; 2) "Rare Book Hub" – feed assíncrono alimentado por um algoritmo de recomendação que cruza temas obscuros, palavras‑chave e avaliações da comunidade, permitindo mensagens, propostas de troca e discussões. O catálogo central utiliza metadados padronizados (ISBN, OCLC) e um sistema de validação por pares, com badges de autenticidade. A plataforma inclui recursos de privacidade avançada, contratos digitais de empréstimo, e integração opcional com serviços de envio seguro. Parcerias estratégicas com bibliotecas especializadas e casas de leilão ampliam o acervo e garantem credibilidade.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Atende a um nicho apaixonado e pouco explorado, Facilita trocas físicas e digitais, ampliando oportunidades de acesso, Uso de geolocalização para encontros locais cria comunidade e reduz custos de envio, Feed temático alimentado por IA aumenta descoberta de obras obscuras, Mecanismos de verificação e rating melhoram confiança nas transações, Possibilidade de parcerias com bibliotecas, livrarias e colecionadores
+- **Fracos:** Base de usuários inicialmente limitada, dificultando o efeito de rede, Preocupações de privacidade ao compartilhar localização, Desafios logísticos e legais na troca de obras valiosas ou protegidas por direitos autorais, Dependência de contribuição voluntária para catalogar e validar raridades, Risco de fraude ou falsificação de livros, Escalabilidade do sistema de verificação manual
+
+## Próximos Passos
+Conduzir pesquisa de mercado para mapear perfis de colecionadores e leitores de livros raros, Definir personas de usuário e jornadas de troca (presencial vs. digital), Desenvolver protótipo de UI/UX para o mapa de proximidade e o feed temático, Construir backend com banco de dados de metadados bibliográficos e algoritmo de matching, Estabelecer parcerias piloto com bibliotecas universitárias e livrarias de segunda mão, Criar política de privacidade e termos de uso focados em localização e propriedade intelectual, Lançar MVP fechado para teste com usuários early‑adopters e coletar feedback iterativo

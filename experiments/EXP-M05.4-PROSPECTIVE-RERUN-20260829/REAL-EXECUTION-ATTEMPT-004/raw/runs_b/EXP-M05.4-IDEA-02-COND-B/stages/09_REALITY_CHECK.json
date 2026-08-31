@@ -1,0 +1,57 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 20.327720403671265,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Captura rápida de pensamentos incompleto...' (hash: fa7cf440c3f85441), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Captura rápida de pensamentos incompletos com armazenamento privado e recuperação futura por palavra‑chave, sem exigir organização imediata.\",\"feasibility_notes\":[\"A captura de texto curto pode ser implementada com APIs nativas de entrada em dispositivos móveis e web.\",\"Armazenamento privado requer criptografia de ponta a ponta e gerenciamento seguro de chaves.\",\"A indexação por palavra‑chave sem estrutura pré‑definida é viável usando motores de busca invertida leves.\",\"A ausência de organização imediata não impede a criação de índices, pois cada entrada pode ser tokenizada na hora da gravação.\"],\"reality_dependencies\":[\"Serviço de armazenamento criptografado (ex.: cloud storage com suporte a SSE ou armazenamento local com criptografia AES‑256).\",\"Mecanismo de autenticação de usuário (OAuth, biometria ou senha forte).\",\"Motor de busca invertida para indexação de palavras‑chave (ex.: SQLite FTS, ElasticSearch Lite).\",\"Gerenciamento de chaves de criptografia (KMS ou geração local de chaves derivadas da senha).\",\"Infraestrutura de backup e recuperação de dados para garantir durabilidade.\"],\"claims_needing_evidence\":[\"Os usuários conseguem capturar um pensamento em menos de 2 segundos em dispositivos comuns.\",\"A recuperação por palavra‑chave funciona com alta precisão (>90 %) mesmo sem tags ou categorias pré‑definidas.\",\"Os dados permanecem confidenciais contra acesso não autorizado tanto em repouso quanto em trânsito.\",\"O sistema mantém desempenho de busca aceitável (<200 ms) com até 10 mil notas por usuário.\"],\"potential_blockers\":[\"Conformidade com regulamentos de privacidade (GDPR, LGPD) ao armazenar dados sensíveis.\",\"Gestão segura de chaves de criptografia em ambientes multi‑dispositivo.\",\"Escalabilidade da indexação de texto livre em grandes volumes de notas.\",\"Dependência de conectividade para sincronização de backups criptografados.\"],\"candidate_tests\":[\"Teste de usabilidade: medir o tempo médio de captura de uma nota em diferentes dispositivos.\",\"Teste de recuperação: inserir notas com palavras‑chave específicas e validar taxa de acerto na busca sem organização prévia.\",\"Teste de segurança: auditoria de criptografia em repouso e em trânsito, incluindo tentativa de acesso não autorizado.\",\"Teste de desempenho: benchmark de tempo de busca em bases de 1 k, 5 k e 10 k notas.\"],\"exploratory_candidate_tests\":[\"Avaliar IA de sugestão automática de tags dinâmicas e seu impacto na organização posterior.\",\"Validar o funcionamento do vault temporal que arquiva notas inativas em snapshots criptografados e permite recuperação por intervalo de datas.\",\"Testar a criação automática de grafos de conhecimento a partir de notas conectadas por relações inferidas por IA, incluindo buscas difusas e controle de privacidade por nó.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Captura rápida de pensamentos incompletos com armazenamento privado e recuperação futura por palavra‑chave, sem exigir organização imediata.",
+    "feasibility_notes": [
+      "A captura de texto curto pode ser implementada com APIs nativas de entrada em dispositivos móveis e web.",
+      "Armazenamento privado requer criptografia de ponta a ponta e gerenciamento seguro de chaves.",
+      "A indexação por palavra‑chave sem estrutura pré‑definida é viável usando motores de busca invertida leves.",
+      "A ausência de organização imediata não impede a criação de índices, pois cada entrada pode ser tokenizada na hora da gravação."
+    ],
+    "reality_dependencies": [
+      "Serviço de armazenamento criptografado (ex.: cloud storage com suporte a SSE ou armazenamento local com criptografia AES‑256).",
+      "Mecanismo de autenticação de usuário (OAuth, biometria ou senha forte).",
+      "Motor de busca invertida para indexação de palavras‑chave (ex.: SQLite FTS, ElasticSearch Lite).",
+      "Gerenciamento de chaves de criptografia (KMS ou geração local de chaves derivadas da senha).",
+      "Infraestrutura de backup e recuperação de dados para garantir durabilidade."
+    ],
+    "claims_needing_evidence": [
+      "Os usuários conseguem capturar um pensamento em menos de 2 segundos em dispositivos comuns.",
+      "A recuperação por palavra‑chave funciona com alta precisão (>90 %) mesmo sem tags ou categorias pré‑definidas.",
+      "Os dados permanecem confidenciais contra acesso não autorizado tanto em repouso quanto em trânsito.",
+      "O sistema mantém desempenho de busca aceitável (<200 ms) com até 10 mil notas por usuário."
+    ],
+    "potential_blockers": [
+      "Conformidade com regulamentos de privacidade (GDPR, LGPD) ao armazenar dados sensíveis.",
+      "Gestão segura de chaves de criptografia em ambientes multi‑dispositivo.",
+      "Escalabilidade da indexação de texto livre em grandes volumes de notas.",
+      "Dependência de conectividade para sincronização de backups criptografados."
+    ],
+    "candidate_tests": [
+      "Teste de usabilidade: medir o tempo médio de captura de uma nota em diferentes dispositivos.",
+      "Teste de recuperação: inserir notas com palavras‑chave específicas e validar taxa de acerto na busca sem organização prévia.",
+      "Teste de segurança: auditoria de criptografia em repouso e em trânsito, incluindo tentativa de acesso não autorizado.",
+      "Teste de desempenho: benchmark de tempo de busca em bases de 1 k, 5 k e 10 k notas."
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar IA de sugestão automática de tags dinâmicas e seu impacto na organização posterior.",
+      "Validar o funcionamento do vault temporal que arquiva notas inativas em snapshots criptografados e permite recuperação por intervalo de datas.",
+      "Testar a criação automática de grafos de conhecimento a partir de notas conectadas por relações inferidas por IA, incluindo buscas difusas e controle de privacidade por nó."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:08:52.838123+00:00"
+}

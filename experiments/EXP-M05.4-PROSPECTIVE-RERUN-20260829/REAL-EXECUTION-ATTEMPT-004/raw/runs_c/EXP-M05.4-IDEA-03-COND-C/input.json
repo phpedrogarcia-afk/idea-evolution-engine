@@ -1,0 +1,11 @@
+{
+  "run_id": "EXP-M05.4-IDEA-03-COND-C",
+  "created_at": "2026-08-30T21:13:18.908961+00:00",
+  "original_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "metadata": {
+    "topology": "LEAN_IEE_L1",
+    "max_allowed_calls": 2,
+    "git_commit": "e92c7ec582e003c684fb0d48e7ee456f6f5cd893",
+    "environment_pid": 6320
+  }
+}

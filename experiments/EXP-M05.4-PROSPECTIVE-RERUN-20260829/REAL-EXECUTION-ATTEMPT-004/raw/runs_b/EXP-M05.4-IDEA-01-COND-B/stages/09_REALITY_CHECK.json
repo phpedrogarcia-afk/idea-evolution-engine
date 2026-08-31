@@ -1,0 +1,59 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 7.433172941207886,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Usar a API nativa do sistema para ativar...' (hash: 7a61ace882249886), 4 dependências, 5 testes do Core, 5 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Usar a API nativa do sistema para ativar o modo \\\"Do Not Disturb\\\" (DND) durante o intervalo Pomodoro, permitindo ao usuário definir exceções para notificações críticas e ajustar a duração do timer via UI mínima.\",\"feasibility_notes\":[\"A ativação programática do DND é suportada nas principais plataformas desktop (Windows, macOS, Linux) via APIs públicas ou chamadas ao sistema.\",\"Implementar uma UI mínima para ajuste de tempo e gerenciamento de exceções é trivial com frameworks GUI.\",\"Gerenciar exceções requer acesso à lista de notificações permitidas, o que pode ser limitado por políticas do SO.\"],\"reality_dependencies\":[\"Acesso à API nativa de DND do sistema operacional (ex.: Windows Focus Assist, macOS Notification Center, Linux Dunst ou equivalente).\",\"Permissões de usuário para modificar configurações de DND.\",\"Biblioteca/framework GUI compatível com o SO alvo (ex.: Electron, Qt, Tkinter).\",\"Capacidade de persistir configurações de exceção entre sessões.\"],\"claims_needing_evidence\":[\"Que a API nativa permite ativar e desativar DND programaticamente sem necessidade de privilégios de administrador.\",\"Que é possível definir exceções de notificação específicas via API.\",\"Que a mudança de estado DND não interfere em outras funcionalidades críticas do sistema.\",\"Que a latência entre comando e efeito DND é suficientemente baixa para o ciclo Pomodoro.\"],\"potential_blockers\":[\"Restrições de segurança que impedem aplicativos de terceiros de alterar o modo DND.\",\"Diferenças de implementação entre sistemas operacionais que exigem código específico por plataforma.\",\"Políticas de sandbox em macOS que requerem entitlements especiais.\",\"Usuários que desativam permissões de automação ou que utilizam gerenciadores de notificação de terceiros.\",\"Possibilidade de conflitos com outros aplicativos que também controlam DND.\"],\"candidate_tests\":[\"Teste de ativação do DND via API ao iniciar o timer e verificação visual de que o modo está ativo.\",\"Teste de desativação automática do DND ao término do intervalo Pomodoro.\",\"Teste de adição e remoção de exceções de notificação e confirmação de que notificações críticas ainda são entregues.\",\"Teste de persistência das configurações de exceção após reinício da aplicação.\",\"Teste de UI: ajuste de duração do timer reflete corretamente no comportamento do DND.\"],\"exploratory_candidate_tests\":[\"Implementar sobreposição transparente em tela cheia que captura eventos de notificação via hooking e medir eficácia de silenciamento.\",\"Desenvolver serviço de fundo que silencia áudio do sistema durante o Pomodoro e avaliar impacto na experiência do usuário.\",\"Desativar temporariamente a conectividade de rede para aplicativos não essenciais e medir se isso reduz interrupções.\",\"Avaliar uso de APIs de controle de energia para colocar o monitor em modo de baixa energia durante o foco.\",\"Testar integração com ferramentas de gerenciamento de tarefas para iniciar automaticamente o timer Pomodoro.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Usar a API nativa do sistema para ativar o modo \"Do Not Disturb\" (DND) durante o intervalo Pomodoro, permitindo ao usuário definir exceções para notificações críticas e ajustar a duração do timer via UI mínima.",
+    "feasibility_notes": [
+      "A ativação programática do DND é suportada nas principais plataformas desktop (Windows, macOS, Linux) via APIs públicas ou chamadas ao sistema.",
+      "Implementar uma UI mínima para ajuste de tempo e gerenciamento de exceções é trivial com frameworks GUI.",
+      "Gerenciar exceções requer acesso à lista de notificações permitidas, o que pode ser limitado por políticas do SO."
+    ],
+    "reality_dependencies": [
+      "Acesso à API nativa de DND do sistema operacional (ex.: Windows Focus Assist, macOS Notification Center, Linux Dunst ou equivalente).",
+      "Permissões de usuário para modificar configurações de DND.",
+      "Biblioteca/framework GUI compatível com o SO alvo (ex.: Electron, Qt, Tkinter).",
+      "Capacidade de persistir configurações de exceção entre sessões."
+    ],
+    "claims_needing_evidence": [
+      "Que a API nativa permite ativar e desativar DND programaticamente sem necessidade de privilégios de administrador.",
+      "Que é possível definir exceções de notificação específicas via API.",
+      "Que a mudança de estado DND não interfere em outras funcionalidades críticas do sistema.",
+      "Que a latência entre comando e efeito DND é suficientemente baixa para o ciclo Pomodoro."
+    ],
+    "potential_blockers": [
+      "Restrições de segurança que impedem aplicativos de terceiros de alterar o modo DND.",
+      "Diferenças de implementação entre sistemas operacionais que exigem código específico por plataforma.",
+      "Políticas de sandbox em macOS que requerem entitlements especiais.",
+      "Usuários que desativam permissões de automação ou que utilizam gerenciadores de notificação de terceiros.",
+      "Possibilidade de conflitos com outros aplicativos que também controlam DND."
+    ],
+    "candidate_tests": [
+      "Teste de ativação do DND via API ao iniciar o timer e verificação visual de que o modo está ativo.",
+      "Teste de desativação automática do DND ao término do intervalo Pomodoro.",
+      "Teste de adição e remoção de exceções de notificação e confirmação de que notificações críticas ainda são entregues.",
+      "Teste de persistência das configurações de exceção após reinício da aplicação.",
+      "Teste de UI: ajuste de duração do timer reflete corretamente no comportamento do DND."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar sobreposição transparente em tela cheia que captura eventos de notificação via hooking e medir eficácia de silenciamento.",
+      "Desenvolver serviço de fundo que silencia áudio do sistema durante o Pomodoro e avaliar impacto na experiência do usuário.",
+      "Desativar temporariamente a conectividade de rede para aplicativos não essenciais e medir se isso reduz interrupções.",
+      "Avaliar uso de APIs de controle de energia para colocar o monitor em modo de baixa energia durante o foco.",
+      "Testar integração com ferramentas de gerenciamento de tarefas para iniciar automaticamente o timer Pomodoro."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:04:43.095625+00:00"
+}

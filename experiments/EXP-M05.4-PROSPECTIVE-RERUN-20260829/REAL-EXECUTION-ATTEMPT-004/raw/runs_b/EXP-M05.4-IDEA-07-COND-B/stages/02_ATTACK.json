@@ -1,0 +1,70 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 727.1833417415619,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"File name collisions can overwrite existing notes, causing irreversible data loss\",\"why_it_matters\":\"Without a robust naming or deduplication strategy, two different snippets may generate the same filename, erasing the first entry\",\"severity\":\"HIGH\",\"affected_part\":\"filename generation / storage logic\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Absence of search or indexing makes saved notes hard to retrieve\",\"why_it_matters\":\"Capturing notes is only valuable if the user can later locate them; lacking retrieval mechanisms renders the tool ineffective\",\"severity\":\"MEDIUM\",\"affected_part\":\"overall utility / user workflow\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Improper handling of special characters and Unicode can cause filesystem errors\",\"why_it_matters\":\"Users may paste text containing symbols, emojis, or non‑ASCII characters; if these are used directly in filenames the command may fail on many OSes\",\"severity\":\"MEDIUM\",\"affected_part\":\"input sanitization / filename creation\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"The user has a dedicated personal directory with write permissions\",\"The operating system provides consistent filesystem semantics for all characters used in filenames\",\"The user will manually organize notes without built‑in tagging or indexing\",\"The user will never need to retrieve or edit notes programmatically\"],\"contradictions\":[\"The tool claims \\\"simple capture and organization\\\" yet provides no mechanism for organizing or locating saved notes later\",\"It assumes the user only wants to save notes, but later editing or searching is typically required\"],\"failure_modes\":[\"Overwrite of existing files due to duplicate names\",\"Disk‑full or permission‑denied errors causing note loss\",\"Invalid filenames from special characters or spaces leading to command failure\",\"Race conditions when multiple instances run concurrently\"],\"missing_information\":[\"How are filenames derived from the note content or user input?\",\"Can the user configure the target storage directory?\",\"Is there a limit on the size of a note that can be saved?\",\"What strategy is used to handle duplicate notes?\",\"Are any backup, versioning, or recovery mechanisms provided?\"],\"overclaims\":[\"\\\"Provides instant capture and simple organization\\\" overstates the organizational capabilities of a plain file‑save utility\",\"\\\"Avoids the need to open editors\\\" ignores the inevitable need to edit or view notes after they are saved\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "File name collisions can overwrite existing notes, causing irreversible data loss",
+        "why_it_matters": "Without a robust naming or deduplication strategy, two different snippets may generate the same filename, erasing the first entry",
+        "severity": "HIGH",
+        "affected_part": "filename generation / storage logic",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Absence of search or indexing makes saved notes hard to retrieve",
+        "why_it_matters": "Capturing notes is only valuable if the user can later locate them; lacking retrieval mechanisms renders the tool ineffective",
+        "severity": "MEDIUM",
+        "affected_part": "overall utility / user workflow",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Improper handling of special characters and Unicode can cause filesystem errors",
+        "why_it_matters": "Users may paste text containing symbols, emojis, or non‑ASCII characters; if these are used directly in filenames the command may fail on many OSes",
+        "severity": "MEDIUM",
+        "affected_part": "input sanitization / filename creation",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "The user has a dedicated personal directory with write permissions",
+      "The operating system provides consistent filesystem semantics for all characters used in filenames",
+      "The user will manually organize notes without built‑in tagging or indexing",
+      "The user will never need to retrieve or edit notes programmatically"
+    ],
+    "contradictions": [
+      "The tool claims \"simple capture and organization\" yet provides no mechanism for organizing or locating saved notes later",
+      "It assumes the user only wants to save notes, but later editing or searching is typically required"
+    ],
+    "failure_modes": [
+      "Overwrite of existing files due to duplicate names",
+      "Disk‑full or permission‑denied errors causing note loss",
+      "Invalid filenames from special characters or spaces leading to command failure",
+      "Race conditions when multiple instances run concurrently"
+    ],
+    "missing_information": [
+      "How are filenames derived from the note content or user input?",
+      "Can the user configure the target storage directory?",
+      "Is there a limit on the size of a note that can be saved?",
+      "What strategy is used to handle duplicate notes?",
+      "Are any backup, versioning, or recovery mechanisms provided?"
+    ],
+    "overclaims": [
+      "\"Provides instant capture and simple organization\" overstates the organizational capabilities of a plain file‑save utility",
+      "\"Avoids the need to open editors\" ignores the inevitable need to edit or view notes after they are saved"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T04:37:42.045965+00:00"
+}

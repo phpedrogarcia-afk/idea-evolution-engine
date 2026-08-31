@@ -1,0 +1,15 @@
+{
+  "cell_id": "IDEA-03-CONDITION_C",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "idea_id": "IDEA-03",
+  "condition": "CONDITION_C",
+  "raw_idea": "Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.",
+  "latency_seconds": 25.18,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "human_decision_requested": true,
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.4-IDEA-03-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Um sistema para conectar leitores de livros raros: ou através de um mapa geográfico de proximidade física entre vizinhos, ou através de um feed assíncrono baseado em afinidade de temas obscuros.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Facilitar o empréstimo e a troca de livros raros entre leitores, usando proximidade física ou afinidade temática.\n- **Problema Interpretado:** Conectar leitores de livros raros que desejam compartilhar exemplares, superando barreiras de localização e de descoberta de temas obscuros.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Mapa interativo que mostra vizinhos com livros raros disponíveis para empréstimo, permitindo agendamentos presenciais de troca.\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** A proximidade física reduz custos de envio e aumenta confiança entre usuários locais.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Feed assíncrono que recomenda livros raros baseados em afinidade de temas obscuros, permitindo solicitações de empréstimo independentes da localização.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Maior custo de envio, Risco de atrasos, Necessita logística de entrega\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 2\n\n## 7. Próximo Passo Recomendado\n\nRealizar entrevistas com potenciais usuários para validar interesse e coletar requisitos legais, seguido de protótipo de mapa de proximidade.\n"
+}

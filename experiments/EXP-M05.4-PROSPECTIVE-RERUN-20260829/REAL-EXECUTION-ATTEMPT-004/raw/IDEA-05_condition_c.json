@@ -1,0 +1,15 @@
+{
+  "cell_id": "IDEA-05-CONDITION_C",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "idea_id": "IDEA-05",
+  "condition": "CONDITION_C",
+  "raw_idea": "Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã.",
+  "latency_seconds": 965.896,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "human_decision_requested": true,
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.4-IDEA-05-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Criar um serviço de assinatura que forneça pães artesanais diariamente, garantindo entrega matinal.\n- **Problema Interpretado:** Entregar pães artesanais frescos aos moradores de Pinheiros até 6h30 da manhã via assinatura.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Assinatura semanal com produção noturna e rotas de entrega matinais usando entregadores locais\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** Baseado na demanda por produtos artesanais frescos e conveniência de entrega matinal\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Parceria com padarias existentes para usar suas entregas já estabelecidas** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Divisão de receita com padarias, Menor controle de qualidade\n2. **Uso de aplicativos de delivery padrão (iFood, Rappi) para entrega matinal** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Taxas de serviço altas, Possível indisponibilidade de entregas tão cedo\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 3\n\n## 7. Próximo Passo Recomendado\n\nConduzir pesquisa de mercado em Pinheiros para validar demanda e disposição a pagar\n"
+}

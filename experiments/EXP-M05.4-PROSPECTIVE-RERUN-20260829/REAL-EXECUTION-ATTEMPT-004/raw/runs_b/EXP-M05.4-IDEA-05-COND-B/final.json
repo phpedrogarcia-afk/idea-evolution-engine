@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.4-IDEA-05-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã.",
+  "human_intent": "Criar um serviço de assinatura que forneça pães artesanais frescos diretamente nas residências dos moradores de Pinheiros, garantindo que a entrega ocorra até as 6h30 da manhã.",
+  "refined_idea": "Serviço de assinatura que entrega pães artesanais frescos diretamente nas casas dos moradores de Pinheiros até as 6h30 da manhã, usando micro‑boulangeries locais e bicicletas elétricas com rotas otimizadas.",
+  "core_mechanism": "Entrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "fa26749cf3f65014",
+  "tested_core_hash": "fa26749cf3f65014",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Realizar um piloto de entrega em um sub‑conjunto de ruas de Pinheiros nas primeiras 30 minutos da manhã, medindo tempos de percurso, capacidade de produção e aceitação dos clientes, para validar o core_mechanism antes de escalar."
+}

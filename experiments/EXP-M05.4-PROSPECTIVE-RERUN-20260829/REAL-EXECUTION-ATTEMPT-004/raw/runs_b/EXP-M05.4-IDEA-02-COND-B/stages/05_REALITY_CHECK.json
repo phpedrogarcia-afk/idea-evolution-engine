@@ -1,0 +1,62 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 23.650882244110107,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Caixa de entrada temporal com arquivamen...' (hash: d4a83a07b831b406), 6 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Caixa de entrada temporal com arquivamento automático e cofre criptografado; notas permanecem na caixa de entrada até um prazo configurável e então são movidas para um vault pesquisável e criptografado.\",\"feasibility_notes\":[\"Implementar gatilhos temporais confiáveis em dispositivos móveis e web é viável usando serviços de background ou cron jobs.\",\"Bibliotecas de criptografia maduras (ex.: AES‑256, libsodium) permitem criar um cofre criptografado sem reinventar algoritmos.\",\"Arquivamento automático pode ser modelado como mudança de estado em um banco de dados com timestamp.\",\"Busca em vault criptografado requer técnicas de searchable encryption ou descriptografia temporária controlada, ambas já demonstradas em protótipos.\",\"Escalabilidade de armazenamento pode ser atendida por serviços de nuvem com criptografia em repouso.\"],\"reality_dependencies\":[\"Biblioteca de criptografia robusta e auditada (ex.: OpenSSL, libsodium).\",\"Serviço de agendamento de tarefas confiável (ex.: cron, WorkManager, Cloud Functions).\",\"Infraestrutura de armazenamento persistente com suporte a criptografia em repouso (ex.: S3, Firebase).\",\"Mecanismo de autenticação de usuário forte (ex.: OAuth2, WebAuthn).\",\"Conformidade com regulamentações de privacidade (ex.: GDPR, LGPD).\",\"Capacidade de executar buscas sobre dados criptografados ou descriptografá‑los temporariamente de forma segura.\"],\"claims_needing_evidence\":[\"A criptografia adotada impede acesso não autorizado mesmo em caso de comprometimento do servidor.\",\"O mecanismo de arquivamento automático move notas exatamente após o prazo configurado, sem perdas ou duplicações.\",\"A busca no vault criptografado retorna resultados corretos dentro de limites de latência aceitáveis.\",\"Os usuários percebem o cofre como seguro e confiam na privacidade das notas armazenadas.\",\"O sistema mantém integridade dos dados durante a transição da caixa de entrada para o vault.\"],\"potential_blockers\":[\"Limitações de execução em background em navegadores ou sistemas operacionais móveis que impedem gatilhos precisos.\",\"Restrições de políticas de armazenamento de dados em nuvem que proíbem chaves de criptografia gerenciadas pelo cliente.\",\"Desempenho insuficiente de searchable encryption para buscas em tempo real.\",\"Custo de auditoria de segurança externa para validar a implementação criptográfica.\",\"Resistência dos usuários em adotar um sistema que requer gerenciamento de chaves ou senhas adicionais.\"],\"candidate_tests\":[\"Teste unitário que verifica se uma nota com timestamp X é movida para o vault exatamente após o intervalo configurado.\",\"Teste de integração que cria, criptografa, armazena e depois descriptografa uma nota, confirmando integridade dos dados.\",\"Teste de carga que simula 10.000 notas arquivadas e mede tempo de busca no vault criptografado.\",\"Auditoria de segurança que tenta acessar o cofre sem credenciais válidas e verifica que o acesso é negado.\",\"Teste de usabilidade onde usuários reais avaliam a percepção de privacidade ao usar a caixa de entrada temporal.\"],\"exploratory_candidate_tests\":[\"Avaliar a performance de um caderno relacional baseado em grafo ao conectar 100.000 nós de pensamento.\",\"Testar a eficácia de camadas de privacidade por grupos de acesso em um grafo de notas compartilhadas.\",\"Medir a precisão e relevância das sugestões de tags geradas por IA em um fluxo de captura rápida.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Caixa de entrada temporal com arquivamento automático e cofre criptografado; notas permanecem na caixa de entrada até um prazo configurável e então são movidas para um vault pesquisável e criptografado.",
+    "feasibility_notes": [
+      "Implementar gatilhos temporais confiáveis em dispositivos móveis e web é viável usando serviços de background ou cron jobs.",
+      "Bibliotecas de criptografia maduras (ex.: AES‑256, libsodium) permitem criar um cofre criptografado sem reinventar algoritmos.",
+      "Arquivamento automático pode ser modelado como mudança de estado em um banco de dados com timestamp.",
+      "Busca em vault criptografado requer técnicas de searchable encryption ou descriptografia temporária controlada, ambas já demonstradas em protótipos.",
+      "Escalabilidade de armazenamento pode ser atendida por serviços de nuvem com criptografia em repouso."
+    ],
+    "reality_dependencies": [
+      "Biblioteca de criptografia robusta e auditada (ex.: OpenSSL, libsodium).",
+      "Serviço de agendamento de tarefas confiável (ex.: cron, WorkManager, Cloud Functions).",
+      "Infraestrutura de armazenamento persistente com suporte a criptografia em repouso (ex.: S3, Firebase).",
+      "Mecanismo de autenticação de usuário forte (ex.: OAuth2, WebAuthn).",
+      "Conformidade com regulamentações de privacidade (ex.: GDPR, LGPD).",
+      "Capacidade de executar buscas sobre dados criptografados ou descriptografá‑los temporariamente de forma segura."
+    ],
+    "claims_needing_evidence": [
+      "A criptografia adotada impede acesso não autorizado mesmo em caso de comprometimento do servidor.",
+      "O mecanismo de arquivamento automático move notas exatamente após o prazo configurado, sem perdas ou duplicações.",
+      "A busca no vault criptografado retorna resultados corretos dentro de limites de latência aceitáveis.",
+      "Os usuários percebem o cofre como seguro e confiam na privacidade das notas armazenadas.",
+      "O sistema mantém integridade dos dados durante a transição da caixa de entrada para o vault."
+    ],
+    "potential_blockers": [
+      "Limitações de execução em background em navegadores ou sistemas operacionais móveis que impedem gatilhos precisos.",
+      "Restrições de políticas de armazenamento de dados em nuvem que proíbem chaves de criptografia gerenciadas pelo cliente.",
+      "Desempenho insuficiente de searchable encryption para buscas em tempo real.",
+      "Custo de auditoria de segurança externa para validar a implementação criptográfica.",
+      "Resistência dos usuários em adotar um sistema que requer gerenciamento de chaves ou senhas adicionais."
+    ],
+    "candidate_tests": [
+      "Teste unitário que verifica se uma nota com timestamp X é movida para o vault exatamente após o intervalo configurado.",
+      "Teste de integração que cria, criptografa, armazena e depois descriptografa uma nota, confirmando integridade dos dados.",
+      "Teste de carga que simula 10.000 notas arquivadas e mede tempo de busca no vault criptografado.",
+      "Auditoria de segurança que tenta acessar o cofre sem credenciais válidas e verifica que o acesso é negado.",
+      "Teste de usabilidade onde usuários reais avaliam a percepção de privacidade ao usar a caixa de entrada temporal."
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a performance de um caderno relacional baseado em grafo ao conectar 100.000 nós de pensamento.",
+      "Testar a eficácia de camadas de privacidade por grupos de acesso em um grafo de notas compartilhadas.",
+      "Medir a precisão e relevância das sugestões de tags geradas por IA em um fluxo de captura rápida."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:07:33.657856+00:00"
+}

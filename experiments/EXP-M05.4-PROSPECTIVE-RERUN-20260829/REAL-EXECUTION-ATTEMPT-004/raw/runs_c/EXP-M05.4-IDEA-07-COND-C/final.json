@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.4-IDEA-07-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um bloco de notas em linha de comando simples para salvar trechos rápidos de texto em arquivos markdown na pasta pessoal.",
+  "total_model_calls": 2,
+  "gate_outcome": "ESCALATE_FOCUSED",
+  "escalation_reason": "COMPETING_MECHANISMS",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "decision_progress_detected": true
+}

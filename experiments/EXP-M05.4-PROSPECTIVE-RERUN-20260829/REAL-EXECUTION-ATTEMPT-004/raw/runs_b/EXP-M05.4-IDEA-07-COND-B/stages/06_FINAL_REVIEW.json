@@ -1,0 +1,28 @@
+{
+  "step_number": 6,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 803.8910808563232,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada mantém o propósito original de captura rápida de trechos em arquivos markdown, adicionando nomes baseados em timestamp+hash e um índice JSON para busca. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Nenhum problema crítico não resolvido permanece; os riscos conhecidos são reconhecidos mas mitigáveis. Recomenda-se avançar para protótipo funcional.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A ideia refinada mantém o propósito original de captura rápida de trechos em arquivos markdown, adicionando nomes baseados em timestamp+hash e um índice JSON para busca. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Nenhum problema crítico não resolvido permanece; os riscos conhecidos são reconhecidos mas mitigáveis. Recomenda-se avançar para protótipo funcional."
+  },
+  "error": null,
+  "timestamp": "2026-08-31T05:29:23.103006+00:00"
+}

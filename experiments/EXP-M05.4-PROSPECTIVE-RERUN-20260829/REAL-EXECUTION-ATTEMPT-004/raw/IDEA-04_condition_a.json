@@ -1,0 +1,41 @@
+{
+  "cell_id": "IDEA-04-CONDITION_A",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "idea_id": "IDEA-04",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um gerador de relatórios financeiros pessoais que precisa funcionar 100% offline, em um único arquivo HTML local, sem banco de dados externo e sem login.",
+  "latency_seconds": 17.083,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "error": null,
+  "parsed_output": {
+    "summary": "Um gerador de relatórios financeiros pessoais totalmente offline, implementado como um único arquivo HTML que utiliza recursos nativos do navegador (JavaScript, IndexedDB/localStorage, Service Workers) para armazenar dados, processar cálculos e gerar relatórios visualmente ricos, exportáveis em PDF ou CSV, sem necessidade de login ou servidores externos.",
+    "strengths": [
+      "Privacidade total – nenhum dado sai do dispositivo do usuário",
+      "Operação 100% offline – útil em ambientes sem conexão",
+      "Instalação simples – basta abrir o arquivo HTML",
+      "Baixo custo de desenvolvimento e manutenção",
+      "Portabilidade – pode ser copiado e usado em qualquer computador"
+    ],
+    "weaknesses": [
+      "Capacidade de armazenamento limitada ao espaço disponível no navegador",
+      "Gerenciamento de dados complexo pode ser difícil sem um DB tradicional",
+      "Risco de perda de dados se o usuário limpar o cache do navegador",
+      "Funcionalidades avançadas (ex.: integração bancária) são inviáveis offline",
+      "Segurança dos dados depende de criptografia client‑side, que pode ser frágil"
+    ],
+    "refined_version": "Um aplicativo web single‑page (SPA) em um único arquivo HTML que usa JavaScript puro ou frameworks leves para: \n1. Importar dados financeiros via arquivos CSV/Excel arrastando‑e‑soltando; \n2. Armazenar temporariamente os registros em IndexedDB com opção de criptografia opcional; \n3. Processar cálculos (receitas, despesas, categorias, projeções) totalmente no cliente; \n4. Gerar relatórios interativos com gráficos (Chart.js) e tabelas estilizadas; \n5. Exportar relatórios como PDF (via jsPDF) ou CSV; \n6. Utilizar Service Worker para garantir funcionamento offline completo; \n7. Oferecer um modo \"sandbox\" que salva tudo em memória apenas enquanto a página está aberta, para usuários que não desejam persistência. Tudo isso sem necessidade de login, servidores ou bancos de dados externos.",
+    "next_steps": [
+      "Definir requisitos detalhados (tipos de relatórios, filtros, exportação)",
+      "Escolher bibliotecas JavaScript (Chart.js, jsPDF, IndexedDB wrapper)",
+      "Desenhar wireframes da interface de usuário e fluxo de importação/exportação",
+      "Implementar protótipo básico: importação CSV, armazenamento em IndexedDB, cálculo simples e visualização de gráfico",
+      "Adicionar funcionalidade de exportação PDF/CSV e opções de criptografia opcional",
+      "Testar o aplicativo em diferentes navegadores e cenários offline",
+      "Documentar instruções de uso e procedimentos de backup/restauração de dados",
+      "Coletar feedback de usuários piloto e iterar melhorias"
+    ]
+  },
+  "rendered_semantic_text": "### Resumo\nUm gerador de relatórios financeiros pessoais totalmente offline, implementado como um único arquivo HTML que utiliza recursos nativos do navegador (JavaScript, IndexedDB/localStorage, Service Workers) para armazenar dados, processar cálculos e gerar relatórios visualmente ricos, exportáveis em PDF ou CSV, sem necessidade de login ou servidores externos.\n\n### Versão Refinada\nUm aplicativo web single‑page (SPA) em um único arquivo HTML que usa JavaScript puro ou frameworks leves para: \n1. Importar dados financeiros via arquivos CSV/Excel arrastando‑e‑soltando; \n2. Armazenar temporariamente os registros em IndexedDB com opção de criptografia opcional; \n3. Processar cálculos (receitas, despesas, categorias, projeções) totalmente no cliente; \n4. Gerar relatórios interativos com gráficos (Chart.js) e tabelas estilizadas; \n5. Exportar relatórios como PDF (via jsPDF) ou CSV; \n6. Utilizar Service Worker para garantir funcionamento offline completo; \n7. Oferecer um modo \"sandbox\" que salva tudo em memória apenas enquanto a página está aberta, para usuários que não desejam persistência. Tudo isso sem necessidade de login, servidores ou bancos de dados externos.\n\n### Pontos Fortes e Fracos\n- **Fortes:** Privacidade total – nenhum dado sai do dispositivo do usuário, Operação 100% offline – útil em ambientes sem conexão, Instalação simples – basta abrir o arquivo HTML, Baixo custo de desenvolvimento e manutenção, Portabilidade – pode ser copiado e usado em qualquer computador\n- **Fracos:** Capacidade de armazenamento limitada ao espaço disponível no navegador, Gerenciamento de dados complexo pode ser difícil sem um DB tradicional, Risco de perda de dados se o usuário limpar o cache do navegador, Funcionalidades avançadas (ex.: integração bancária) são inviáveis offline, Segurança dos dados depende de criptografia client‑side, que pode ser frágil\n\n### Próximos Passos\nDefinir requisitos detalhados (tipos de relatórios, filtros, exportação), Escolher bibliotecas JavaScript (Chart.js, jsPDF, IndexedDB wrapper), Desenhar wireframes da interface de usuário e fluxo de importação/exportação, Implementar protótipo básico: importação CSV, armazenamento em IndexedDB, cálculo simples e visualização de gráfico, Adicionar funcionalidade de exportação PDF/CSV e opções de criptografia opcional, Testar o aplicativo em diferentes navegadores e cenários offline, Documentar instruções de uso e procedimentos de backup/restauração de dados, Coletar feedback de usuários piloto e iterar melhorias"
+}

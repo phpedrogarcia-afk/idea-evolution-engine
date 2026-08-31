@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 633.1405699253082,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Modelo em camadas: correspondência básic...' (hash: 9e17be896bac5992), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Modelo em camadas: correspondência básica de mentoria gratuita, com recursos avançados (busca avançada, analytics, agendamento prioritário) disponíveis via assinatura mensal modesta para mentores ou usuários avançados.\",\"feasibility_notes\":[\"A arquitetura de correspondência básica pode ser implementada com algoritmos de matching existentes e não requer infraestrutura complexa.\",\"Recursos premium são extensões de funcionalidades já disponíveis em plataformas SaaS, facilitando desenvolvimento incremental.\",\"O modelo de assinatura modesta reduz a barreira de entrada, mas requer validação de disposição a pagar.\",\"A camada gratuita pode gerar tráfego suficiente para sustentar custos operacionais iniciais.\"],\"reality_dependencies\":[\"Integração com provedores de pagamento (ex.: Stripe, PayPal) para cobrança recorrente.\",\"Conformidade legal e regulatória (proteção de dados, termos de serviço, LGPD).\",\"Infraestrutura de hospedagem escalável (cloud, CDN).\",\"Adoção de mentores qualificados dispostos a participar da camada gratuita e premium.\",\"Estratégia de aquisição de usuários (marketing, parcerias comunitárias).\"],\"claims_needing_evidence\":[\"% de usuários dispostos a migrar da camada gratuita para a assinatura mensal modesta.\",\"Impacto dos recursos premium na retenção e engajamento dos mentores.\",\"Viabilidade econômica da plataforma com a proporção esperada de assinantes pagos versus usuários gratuitos.\",\"Aceitação do preço de assinatura entre mentores e usuários avançados.\"],\"potential_blockers\":[\"Falhas na integração de pagamento que impeçam cobranças recorrentes.\",\"Alta taxa de churn entre assinantes devido a percepção de valor insuficiente.\",\"Escassez de mentores qualificados para atender à demanda da camada gratuita.\",\"Concorrência de plataformas já estabelecidas com modelos similares.\",\"Restrições legais que limitem coleta e compartilhamento de dados de mentoria.\"],\"candidate_tests\":[\"Lançar um MVP com camada gratuita e recurso premium limitado; medir taxa de conversão para assinatura nos primeiros 30 dias.\",\"Realizar teste A/B de diferentes faixas de preço da assinatura para identificar ponto ótimo de preço.\",\"Executar pesquisa de intenção de pagamento com usuários potenciais antes do lançamento.\",\"Monitorar engajamento e retenção de mentores na camada gratuita versus premium durante um piloto de 8 semanas.\"],\"exploratory_candidate_tests\":[\"Pilotar um programa de patrocínio com empresas locais para financiar mentores e avaliar interesse de patrocinadores.\",\"Implementar um sistema gamificado de pontos em um grupo de teste restrito e medir efeito na frequência de sessões de mentoria.\",\"Testar micro‑transações para compra de pontos adicionais e observar receita incremental versus modelo de assinatura.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Modelo em camadas: correspondência básica de mentoria gratuita, com recursos avançados (busca avançada, analytics, agendamento prioritário) disponíveis via assinatura mensal modesta para mentores ou usuários avançados.",
+    "feasibility_notes": [
+      "A arquitetura de correspondência básica pode ser implementada com algoritmos de matching existentes e não requer infraestrutura complexa.",
+      "Recursos premium são extensões de funcionalidades já disponíveis em plataformas SaaS, facilitando desenvolvimento incremental.",
+      "O modelo de assinatura modesta reduz a barreira de entrada, mas requer validação de disposição a pagar.",
+      "A camada gratuita pode gerar tráfego suficiente para sustentar custos operacionais iniciais."
+    ],
+    "reality_dependencies": [
+      "Integração com provedores de pagamento (ex.: Stripe, PayPal) para cobrança recorrente.",
+      "Conformidade legal e regulatória (proteção de dados, termos de serviço, LGPD).",
+      "Infraestrutura de hospedagem escalável (cloud, CDN).",
+      "Adoção de mentores qualificados dispostos a participar da camada gratuita e premium.",
+      "Estratégia de aquisição de usuários (marketing, parcerias comunitárias)."
+    ],
+    "claims_needing_evidence": [
+      "% de usuários dispostos a migrar da camada gratuita para a assinatura mensal modesta.",
+      "Impacto dos recursos premium na retenção e engajamento dos mentores.",
+      "Viabilidade econômica da plataforma com a proporção esperada de assinantes pagos versus usuários gratuitos.",
+      "Aceitação do preço de assinatura entre mentores e usuários avançados."
+    ],
+    "potential_blockers": [
+      "Falhas na integração de pagamento que impeçam cobranças recorrentes.",
+      "Alta taxa de churn entre assinantes devido a percepção de valor insuficiente.",
+      "Escassez de mentores qualificados para atender à demanda da camada gratuita.",
+      "Concorrência de plataformas já estabelecidas com modelos similares.",
+      "Restrições legais que limitem coleta e compartilhamento de dados de mentoria."
+    ],
+    "candidate_tests": [
+      "Lançar um MVP com camada gratuita e recurso premium limitado; medir taxa de conversão para assinatura nos primeiros 30 dias.",
+      "Realizar teste A/B de diferentes faixas de preço da assinatura para identificar ponto ótimo de preço.",
+      "Executar pesquisa de intenção de pagamento com usuários potenciais antes do lançamento.",
+      "Monitorar engajamento e retenção de mentores na camada gratuita versus premium durante um piloto de 8 semanas."
+    ],
+    "exploratory_candidate_tests": [
+      "Pilotar um programa de patrocínio com empresas locais para financiar mentores e avaliar interesse de patrocinadores.",
+      "Implementar um sistema gamificado de pontos em um grupo de teste restrito e medir efeito na frequência de sessões de mentoria.",
+      "Testar micro‑transações para compra de pontos adicionais e observar receita incremental versus modelo de assinatura."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T02:48:44.204058+00:00"
+}

@@ -1,0 +1,71 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 734.8122589588165,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Logística de entrega antes das 6h30 em toda a área de Pinheiros pode ser inviável devido a restrições de tráfego e disponibilidade limitada de motoristas\",\"why_it_matters\":\"Atrasos quebram a promessa central do serviço, geram insatisfação e alta taxa de churn\",\"severity\":\"HIGH\",\"affected_part\":\"Operações de entrega\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Capacidade de produção das padarias artesanais pode não atender à demanda diária necessária para um modelo de assinatura em escala\",\"why_it_matters\":\"Incapacidade de cumprir pedidos resulta em cancelamentos, reputação danificada e perda de receita\",\"severity\":\"HIGH\",\"affected_part\":\"Produção\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Dependência de pagamentos recorrentes pode gerar alta taxa de churn se os clientes não consumirem pão diariamente\",\"why_it_matters\":\"Instabilidade de fluxo de caixa e necessidade de constante aquisição de novos assinantes\",\"severity\":\"MEDIUM\",\"affected_part\":\"Financeiro\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Existe demanda suficiente por pães artesanais na região\",\"As padarias conseguem produzir a quantidade necessária diariamente\",\"É viável logisticamente entregar antes das 6h30 em toda a área de Pinheiros\",\"Os clientes aceitam pagamentos recorrentes\"],\"contradictions\":[\"Prometer entrega artesanal fresca até 6h30 conflita com a natureza de produção em pequena escala das padarias\",\"Modelo de assinatura pressupõe consumo diário, mas o consumo de pão pode ser esporádico\"],\"failure_modes\":[\"Atrasos nas entregas devido ao trânsito matinal\",\"Escassez de produção resultando em pedidos não atendidos\",\"Desperdício de pão por deterioração antes do consumo\",\"Cancelamento massivo de assinaturas por insatisfação\"],\"missing_information\":[\"Tamanho e perfil da base de clientes potenciais em Pinheiros\",\"Custo detalhado de produção, entrega e margem de lucro\",\"Número e capacidade das padarias parceiras\",\"Regulamentações locais para entrega de alimentos antes das 6h30\",\"Estrutura de remuneração dos entregadores e disponibilidade de turnos noturnos\"],\"overclaims\":[\"Garantia de entrega até 6h30 em toda a área de Pinheiros sem evidência logística\",\"Afirmação de demanda suficiente sem pesquisa de mercado\",\"Capacidade de produção ilimitada das padarias artesanais\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Logística de entrega antes das 6h30 em toda a área de Pinheiros pode ser inviável devido a restrições de tráfego e disponibilidade limitada de motoristas",
+        "why_it_matters": "Atrasos quebram a promessa central do serviço, geram insatisfação e alta taxa de churn",
+        "severity": "HIGH",
+        "affected_part": "Operações de entrega",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Capacidade de produção das padarias artesanais pode não atender à demanda diária necessária para um modelo de assinatura em escala",
+        "why_it_matters": "Incapacidade de cumprir pedidos resulta em cancelamentos, reputação danificada e perda de receita",
+        "severity": "HIGH",
+        "affected_part": "Produção",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Dependência de pagamentos recorrentes pode gerar alta taxa de churn se os clientes não consumirem pão diariamente",
+        "why_it_matters": "Instabilidade de fluxo de caixa e necessidade de constante aquisição de novos assinantes",
+        "severity": "MEDIUM",
+        "affected_part": "Financeiro",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Existe demanda suficiente por pães artesanais na região",
+      "As padarias conseguem produzir a quantidade necessária diariamente",
+      "É viável logisticamente entregar antes das 6h30 em toda a área de Pinheiros",
+      "Os clientes aceitam pagamentos recorrentes"
+    ],
+    "contradictions": [
+      "Prometer entrega artesanal fresca até 6h30 conflita com a natureza de produção em pequena escala das padarias",
+      "Modelo de assinatura pressupõe consumo diário, mas o consumo de pão pode ser esporádico"
+    ],
+    "failure_modes": [
+      "Atrasos nas entregas devido ao trânsito matinal",
+      "Escassez de produção resultando em pedidos não atendidos",
+      "Desperdício de pão por deterioração antes do consumo",
+      "Cancelamento massivo de assinaturas por insatisfação"
+    ],
+    "missing_information": [
+      "Tamanho e perfil da base de clientes potenciais em Pinheiros",
+      "Custo detalhado de produção, entrega e margem de lucro",
+      "Número e capacidade das padarias parceiras",
+      "Regulamentações locais para entrega de alimentos antes das 6h30",
+      "Estrutura de remuneração dos entregadores e disponibilidade de turnos noturnos"
+    ],
+    "overclaims": [
+      "Garantia de entrega até 6h30 em toda a área de Pinheiros sem evidência logística",
+      "Afirmação de demanda suficiente sem pesquisa de mercado",
+      "Capacidade de produção ilimitada das padarias artesanais"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T23:34:55.434030+00:00"
+}

@@ -1,0 +1,54 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 709.4750201702118,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Registro reflexivo de sensações combinad...' (hash: 3620c8298bbffa09), 5 dependências, 3 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Registro reflexivo de sensações combinado com medição precisa da latência do editor de texto (<16 ms) para analisar a relação entre latência e distração.\",\"feasibility_notes\":[\"A medição de latência abaixo de 16 ms é tecnicamente viável em desktops modernos usando APIs de alta resolução (performance.now) e eventos de input/render.\",\"O registro reflexivo pode ser implementado com prompts de autorrelato simples integrados ao fluxo de escrita.\",\"A correlação entre latência e distração requer amostras suficientes e controle de variáveis externas (ambiente, tarefa).\"],\"reality_dependencies\":[\"Acesso a APIs de timestamp de alta resolução suportadas pelo navegador/OS.\",\"Hardware capaz de renderizar e responder a entradas em <16 ms (teclado, monitor, GPU).\",\"Biblioteca ou método confiável para sincronizar timestamps de entrada e renderização.\",\"Participantes dispostos a usar o editor em condições controladas.\",\"Infraestrutura para armazenar logs de latência e respostas reflexivas de forma segura.\"],\"claims_needing_evidence\":[\"Latência do editor <16 ms reduz a percepção de distração durante a digitação.\",\"Autorrelatos de distração correlacionam-se positivamente com métricas objetivas de latência.\",\"A medição de latência via performance.now reflete com precisão a latência percebida pelo usuário.\"],\"potential_blockers\":[\"Variação de latência entre diferentes sistemas operacionais e dispositivos pode obscurecer efeitos.\",\"Limitações de precisão das APIs de timestamp em alguns navegadores/OS.\",\"Viés de autorrelato dos usuários ao avaliar distração.\",\"Dificuldade em isolar a latência como única variável influente em ambientes não‑laboratoriais.\"],\"candidate_tests\":[\"Conduzir experimento controlado com dois grupos: um usando editor configurado para latência <16 ms e outro com latência >30 ms; coletar autorrelatos de distração após sessões de escrita.\",\"Medir latência real de cada tecla usando timestamps de input e renderização e validar contra benchmarks internos do editor.\",\"Analisar correlação entre latência medida e pontuações de distração autorrelatada usando análise estatística (regressão).\"],\"exploratory_candidate_tests\":[\"Implementar rastreamento ocular para capturar desvios de foco e comparar com autorrelatos de distração.\",\"Desenvolver aplicativo companion com editor otimizado e teste psicofísico de percepção de instantaneidade; comparar resultados com a versão web.\",\"Avaliar métricas objetivas de distração (pausas, ritmo de digitação) como indicadores complementares ao autorrelato.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Registro reflexivo de sensações combinado com medição precisa da latência do editor de texto (<16 ms) para analisar a relação entre latência e distração.",
+    "feasibility_notes": [
+      "A medição de latência abaixo de 16 ms é tecnicamente viável em desktops modernos usando APIs de alta resolução (performance.now) e eventos de input/render.",
+      "O registro reflexivo pode ser implementado com prompts de autorrelato simples integrados ao fluxo de escrita.",
+      "A correlação entre latência e distração requer amostras suficientes e controle de variáveis externas (ambiente, tarefa)."
+    ],
+    "reality_dependencies": [
+      "Acesso a APIs de timestamp de alta resolução suportadas pelo navegador/OS.",
+      "Hardware capaz de renderizar e responder a entradas em <16 ms (teclado, monitor, GPU).",
+      "Biblioteca ou método confiável para sincronizar timestamps de entrada e renderização.",
+      "Participantes dispostos a usar o editor em condições controladas.",
+      "Infraestrutura para armazenar logs de latência e respostas reflexivas de forma segura."
+    ],
+    "claims_needing_evidence": [
+      "Latência do editor <16 ms reduz a percepção de distração durante a digitação.",
+      "Autorrelatos de distração correlacionam-se positivamente com métricas objetivas de latência.",
+      "A medição de latência via performance.now reflete com precisão a latência percebida pelo usuário."
+    ],
+    "potential_blockers": [
+      "Variação de latência entre diferentes sistemas operacionais e dispositivos pode obscurecer efeitos.",
+      "Limitações de precisão das APIs de timestamp em alguns navegadores/OS.",
+      "Viés de autorrelato dos usuários ao avaliar distração.",
+      "Dificuldade em isolar a latência como única variável influente em ambientes não‑laboratoriais."
+    ],
+    "candidate_tests": [
+      "Conduzir experimento controlado com dois grupos: um usando editor configurado para latência <16 ms e outro com latência >30 ms; coletar autorrelatos de distração após sessões de escrita.",
+      "Medir latência real de cada tecla usando timestamps de input e renderização e validar contra benchmarks internos do editor.",
+      "Analisar correlação entre latência medida e pontuações de distração autorrelatada usando análise estatística (regressão)."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar rastreamento ocular para capturar desvios de foco e comparar com autorrelatos de distração.",
+      "Desenvolver aplicativo companion com editor otimizado e teste psicofísico de percepção de instantaneidade; comparar resultados com a versão web.",
+      "Avaliar métricas objetivas de distração (pausas, ritmo de digitação) como indicadores complementares ao autorrelato."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-31T07:57:34.838965+00:00"
+}

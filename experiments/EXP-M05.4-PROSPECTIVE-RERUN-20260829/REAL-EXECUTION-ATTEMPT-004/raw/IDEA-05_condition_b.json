@@ -1,0 +1,26 @@
+{
+  "cell_id": "IDEA-05-CONDITION_B",
+  "experiment_id": "EXP-M05.4-PROSPECTIVE-RERUN-20260829",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "idea_id": "IDEA-05",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um serviço de entrega de pães artesanais por assinatura para moradores do bairro de Pinheiros em São Paulo com entrega garantida até as 6h30 da manhã.",
+  "latency_seconds": 7847.264,
+  "model_calls": 10,
+  "status": "FAILED",
+  "terminal_status": "REFINEMENT_INCOMPLETE",
+  "reconstruction_count": 1,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE",
+    "REALITY_CHECK",
+    "FINAL_REVIEW",
+    "ALTERNATIVES",
+    "SYNTHESIZE",
+    "REALITY_CHECK",
+    "FINAL_REVIEW"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nServiço de assinatura que entrega pães artesanais frescos diretamente nas casas dos moradores de Pinheiros até as 6h30 da manhã, usando micro‑boulangeries locais e bicicletas elétricas com rotas otimizadas.\n\n### Intenção Humana Preservada\nCriar um serviço de assinatura que forneça pães artesanais frescos diretamente nas residências dos moradores de Pinheiros, garantindo que a entrega ocorra até as 6h30 da manhã.\n\n### Mecanismo Central\nEntrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.\n\n### Incertezas Críticas Remanescentes\n- Viabilidade de entregas antes das 6h30 em toda a área usando bicicletas elétricas\n- Capacidade de produção diária das micro‑boulangeries para atender demanda\n- Taxa de churn devido ao consumo irregular de pão\n- Impacto das condições climáticas nas entregas de bicicleta\n- Regulamentação de uso de bicicletas comerciais em áreas residenciais\n- ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede de micro-boulangeries locais com entregas em bicicletas elétricas e rotas escalonadas' aparece nos testes exploratórios 'Testar modelo de pontos de retirada em mercearias locais com horário de abertura antes das 6h30'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede de micro-boulangeries locais com entregas em bicicletas elétricas e rotas escalonadas' aparece nos testes exploratórios 'Executar piloto de fábrica central noturna com micro‑vans para comparar custos e tempos de entrega'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Rede de micro-boulangeries locais com entregas em bicicletas elétricas e rotas escalonadas' aparece nos testes exploratórios 'Avaliar combinação híbrida: produção em micro‑boulangeries + entregas de vans para áreas fora do alcance das bicicletas'.\n- AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [porta, porta, producao, nas, micro, boulangeries, locais, distribuicao, bicicletas, eletricas, garantindo, chegada].\n- Viabilidade logística de entregas antes das 6h30 em toda a área de Pinheiros\n- Capacidade de produção diária das micro‑boulangeries para atender demanda de assinatura\n- Taxa de churn associada ao modelo de assinatura diária\n- Impacto de condições climáticas adversas nas entregas de bicicleta elétrica\n- Regulamentação municipal sobre circulação de bicicletas comerciais nas primeiras horas da manhã\n- ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Entrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Entrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.' aparece nos testes exploratórios 'Pilotar hub centralizado de produção noturna com vans elétricas para entregas entre 5:30 e 6:30.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Entrega porta a porta de pães artesanais por assinatura, com produção nas micro‑boulangeries locais e distribuição em bicicletas elétricas, garantindo chegada até 6h30.' aparece nos testes exploratórios 'Testar modelo de cesta semanal de pães com entregas flexíveis e comparar custo logístico.'.; Dependência de realidade do Core 'Permissões municipais para entregas de bicicleta em áreas residenciais antes das 7h.' referencia mecanismo rejeitado 'Assinaturas flexíveis com entregas semanais de cestas e pedidos avulsos diários sob demanda'.\n\n### Próxima Ação Recomendada\nRealizar um piloto de entrega em um sub‑conjunto de ruas de Pinheiros nas primeiras 30 minutos da manhã, medindo tempos de percurso, capacidade de produção e aceitação dos clientes, para validar o core_mechanism antes de escalar."
+}

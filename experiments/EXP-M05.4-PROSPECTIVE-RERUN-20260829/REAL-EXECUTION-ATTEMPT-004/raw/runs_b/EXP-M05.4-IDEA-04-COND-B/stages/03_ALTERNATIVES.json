@@ -1,0 +1,64 @@
+{
+  "step_number": 3,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 16.01549005508423,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Criptografia client‑side do arquivo HTML com senha fornecida pelo usuário, usando a API Web Crypto\",\"addresses_issues\":[\"Sensitive financial data stored in plain text within the HTML file\",\"Performance degradation with large datasets\"],\"preserves_intent\":true,\"tradeoffs\":[\"Necessita que o usuário lembre a senha para abrir o relatório\",\"Processamento extra de criptografia pode aumentar o tempo de geração\",\"Impossibilidade de visualização direta em navegadores sem descriptografia\"],\"novelty_or_difference\":\"Primeira camada de proteção que mantém o arquivo totalmente offline e ainda legível após descriptografia local\"},{\"mechanism\":\"Exportar o relatório como um arquivo PDF compactado, contendo os dados em formato binário criptografado e renderizado via biblioteca PDF‑JS\",\"addresses_issues\":[\"Sensitive financial data stored in plain text within the HTML file\",\"Performance degradation with large datasets\"],\"preserves_intent\":true,\"tradeoffs\":[\"PDF pode gerar arquivos maiores quando não comprimido\",\"Requer biblioteca de geração de PDF, aumentando a complexidade do código\",\"Edição manual dos dados torna‑se impraticável\"],\"novelty_or_difference\":\"Uso de PDF como contêiner offline permite visualização universal sem necessidade de servidor\"},{\"mechanism\":\"Dividir o relatório em múltiplos fragmentos HTML paginados gerados sob demanda e armazenar os dados brutos em IndexedDB local, criptografados, carregando apenas a página solicitada\",\"addresses_issues\":[\"Sensitive financial data stored in plain text within the HTML file\",\"Performance degradation with large datasets\"],\"preserves_intent\":true,\"tradeoffs\":[\"Dependência de suporte ao IndexedDB no navegador\",\"Processo de exportação/importação mais complexo\",\"Usuário precisa de um pequeno script para abrir o relatório completo\"],\"novelty_or_difference\":\"Arquitetura de relatório paginado com armazenamento local criptografado, mantendo a experiência offline\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Criptografia client‑side do arquivo HTML com senha fornecida pelo usuário, usando a API Web Crypto",
+        "addresses_issues": [
+          "Sensitive financial data stored in plain text within the HTML file",
+          "Performance degradation with large datasets"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Necessita que o usuário lembre a senha para abrir o relatório",
+          "Processamento extra de criptografia pode aumentar o tempo de geração",
+          "Impossibilidade de visualização direta em navegadores sem descriptografia"
+        ],
+        "novelty_or_difference": "Primeira camada de proteção que mantém o arquivo totalmente offline e ainda legível após descriptografia local"
+      },
+      {
+        "mechanism": "Exportar o relatório como um arquivo PDF compactado, contendo os dados em formato binário criptografado e renderizado via biblioteca PDF‑JS",
+        "addresses_issues": [
+          "Sensitive financial data stored in plain text within the HTML file",
+          "Performance degradation with large datasets"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "PDF pode gerar arquivos maiores quando não comprimido",
+          "Requer biblioteca de geração de PDF, aumentando a complexidade do código",
+          "Edição manual dos dados torna‑se impraticável"
+        ],
+        "novelty_or_difference": "Uso de PDF como contêiner offline permite visualização universal sem necessidade de servidor"
+      },
+      {
+        "mechanism": "Dividir o relatório em múltiplos fragmentos HTML paginados gerados sob demanda e armazenar os dados brutos em IndexedDB local, criptografados, carregando apenas a página solicitada",
+        "addresses_issues": [
+          "Sensitive financial data stored in plain text within the HTML file",
+          "Performance degradation with large datasets"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Dependência de suporte ao IndexedDB no navegador",
+          "Processo de exportação/importação mais complexo",
+          "Usuário precisa de um pequeno script para abrir o relatório completo"
+        ],
+        "novelty_or_difference": "Arquitetura de relatório paginado com armazenamento local criptografado, mantendo a experiência offline"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:15:18.397824+00:00"
+}

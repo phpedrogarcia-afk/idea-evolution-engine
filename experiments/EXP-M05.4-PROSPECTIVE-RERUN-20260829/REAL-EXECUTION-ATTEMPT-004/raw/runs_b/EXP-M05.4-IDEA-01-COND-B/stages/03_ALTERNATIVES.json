@@ -1,0 +1,67 @@
+{
+  "step_number": 3,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 3.5847151279449463,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Integrar o aplicativo com os modos de foco nativos do sistema (Do Not Disturb, Focus Assist) e ativá‑los ao iniciar o timer.\",\"addresses_issues\":[\"OS-level notification blocking may be unsupported or restricted on major platforms (e.g., macOS, iOS)\",\"Indiscriminate blocking can suppress critical or emergency notifications\",\"Fixed 25‑minute interval with no customization limits usability for users with different work rhythms\"],\"preserves_intent\":true,\"tradeoffs\":[\"Depende da disponibilidade e consistência das APIs de foco em cada SO\",\"O usuário ainda precisa configurar perfis de foco para permitir notificações críticas\",\"Alguns sistemas podem exigir permissões adicionais ou não oferecer controle granular\"],\"novelty_or_difference\":\"Uso das funcionalidades nativas de foco do SO em vez de bloqueio direto de notificações.\"},{\"mechanism\":\"Criar uma camada de sobreposição que captura notificações via APIs de acessibilidade e as filtra segundo regras definidas pelo usuário, permitindo exceções para alertas críticos.\",\"addresses_issues\":[\"OS-level notification blocking may be unsupported or restricted on major platforms (e.g., macOS, iOS)\",\"Indiscriminate blocking can suppress critical or emergency notifications\",\"Fixed 25‑minute interval with no customization limits usability for users with different work rhythms\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requer permissões de acessibilidade que podem assustar usuários\",\"Filtragem baseada em palavras‑chave pode gerar falsos positivos/negativos\",\"Implementação pode variar em estabilidade entre plataformas\"],\"novelty_or_difference\":\"Filtro de notificações customizado em tempo real, independente das APIs de foco do SO.\"},{\"mechanism\":\"Adicionar um serviço de fundo que silencia temporariamente os canais de áudio e pausa processos não essenciais, enquanto mantém ativos os canais de alerta de emergência do sistema.\",\"addresses_issues\":[\"OS-level notification blocking may be unsupported or restricted on major platforms (e.g., macOS, iOS)\",\"Indiscriminate blocking can suppress critical or emergency notifications\",\"Fixed 25‑minute interval with no customization limits usability for users with different work rhythms\"],\"preserves_intent\":true,\"tradeoffs\":[\"Pode interferir em outras aplicações que dependem de áudio\",\"Necessita de privilégios de administrador ou elevação\",\"Não bloqueia notificações visuais, apenas sonoras\"],\"novelty_or_difference\":\"Abordagem de muting de áudio e suspensão de processos ao invés de bloqueio direto de notificações.\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Integrar o aplicativo com os modos de foco nativos do sistema (Do Not Disturb, Focus Assist) e ativá‑los ao iniciar o timer.",
+        "addresses_issues": [
+          "OS-level notification blocking may be unsupported or restricted on major platforms (e.g., macOS, iOS)",
+          "Indiscriminate blocking can suppress critical or emergency notifications",
+          "Fixed 25‑minute interval with no customization limits usability for users with different work rhythms"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Depende da disponibilidade e consistência das APIs de foco em cada SO",
+          "O usuário ainda precisa configurar perfis de foco para permitir notificações críticas",
+          "Alguns sistemas podem exigir permissões adicionais ou não oferecer controle granular"
+        ],
+        "novelty_or_difference": "Uso das funcionalidades nativas de foco do SO em vez de bloqueio direto de notificações."
+      },
+      {
+        "mechanism": "Criar uma camada de sobreposição que captura notificações via APIs de acessibilidade e as filtra segundo regras definidas pelo usuário, permitindo exceções para alertas críticos.",
+        "addresses_issues": [
+          "OS-level notification blocking may be unsupported or restricted on major platforms (e.g., macOS, iOS)",
+          "Indiscriminate blocking can suppress critical or emergency notifications",
+          "Fixed 25‑minute interval with no customization limits usability for users with different work rhythms"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer permissões de acessibilidade que podem assustar usuários",
+          "Filtragem baseada em palavras‑chave pode gerar falsos positivos/negativos",
+          "Implementação pode variar em estabilidade entre plataformas"
+        ],
+        "novelty_or_difference": "Filtro de notificações customizado em tempo real, independente das APIs de foco do SO."
+      },
+      {
+        "mechanism": "Adicionar um serviço de fundo que silencia temporariamente os canais de áudio e pausa processos não essenciais, enquanto mantém ativos os canais de alerta de emergência do sistema.",
+        "addresses_issues": [
+          "OS-level notification blocking may be unsupported or restricted on major platforms (e.g., macOS, iOS)",
+          "Indiscriminate blocking can suppress critical or emergency notifications",
+          "Fixed 25‑minute interval with no customization limits usability for users with different work rhythms"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Pode interferir em outras aplicações que dependem de áudio",
+          "Necessita de privilégios de administrador ou elevação",
+          "Não bloqueia notificações visuais, apenas sonoras"
+        ],
+        "novelty_or_difference": "Abordagem de muting de áudio e suspensão de processos ao invés de bloqueio direto de notificações."
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-08-30T21:02:19.229196+00:00"
+}
