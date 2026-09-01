@@ -5,6 +5,14 @@
 
 ---
 
+### [PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001] Freeze Offline de Capacidade e Ordem
+- **Data:** 2026-09-01
+- **Objetivo:** remover o conflito de desenho de capacidade sem tocar em holdouts/reveal, chamar o provedor ou executar A/B/C.
+- **Entrega:** `M05.5R1-CAPACITY-DESIGN-FREEZE.json` congela cap `max_completion_tokens=8192`, envelope conservador, reparos explícitos, retry de transporte proibido, schedule CSPRNG balanceado e pacing de concorrência 1.
+- **Evidência:** outputs M05.4 válidos (maior resposta bruta B: 3882 bytes UTF-8) e 18 testes sintéticos, incluindo controles negativos de ordem legada, TPD UNKNOWN, cap hit, retry e perda de estado.
+- **Resultado:** `READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; ainda não há prova de saldo/limite da conta real, preflight ou execução.
+- **Scar / aprendizado:** `PRIMARY_CALL_CEILING != TOTAL_GENERATION_REQUESTS` quando existe repair; `SCHEDULED_CELL_ORDER != QUOTA_NEUTRALITY` sem balanço e invalidação fail-closed.
+
 ### [PFI-M05_5R1-REAL-CAPACITY-READINESS-001] Capacity Evidence Sem Execução
 - **Data:** 2026-09-01
 - **Objetivo:** verificar se uma tentativa M05.5R1 completa cabe na capacidade real sem expor holdouts/reveal, chamar o modelo ou executar tratamentos.
@@ -554,7 +562,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 

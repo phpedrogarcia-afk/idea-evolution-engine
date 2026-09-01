@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "mission_id": "PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001",
+  "execution_authority": "OFFLINE_ONLY",
+  "experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901",
+  "source_head": "a2887d150aa7a2b63e49fefcd30c37932215976a",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "holdout_set_sha256": "9b2a3b004a3b5533072bf7b6974ed17ee0180b61788621eefa03e1da12092cb9",
+  "blinding_revision": 1,
+  "reveal_accessed": false,
+  "holdout_content_accessed": false,
+  "tokenizer": {
+    "method": "CONSERVATIVE_CONTEXT_WINDOW_BOUND_NO_EXACT_OFFLINE_TOKENIZER",
+    "status": "CONSERVATIVE_BOUND",
+    "exact_tokenizer_available": false,
+    "model_context_window_tokens": 131072,
+    "reason": "No compatible offline tokenizer was installed. The documented context window bounds input plus generated tokens per request without claiming exact prompt token counts."
+  },
+  "m05_4_observed_output_size_range_utf8_bytes": {
+    "condition_a_rendered": {"min": 1629, "max": 2737},
+    "condition_b_raw_response": {"min": 422, "max": 3882, "count": 80},
+    "condition_b_rendered": {"min": 3528, "max": 12132},
+    "condition_c_rendered": {"min": 1913, "max": 4111}
+  },
+  "output_cap": {
+    "max_completion_tokens": 8192,
+    "provider_option": "max_completion_tokens",
+    "rationale": "8192 is below the documented model maximum of 65536 and exceeds every M05.4 raw provider response observed (max 3882 UTF-8 bytes). It is a conservative non-binding historical cap, not an exact token count.",
+    "expected_to_be_nonbinding": true,
+    "headroom_vs_max_observed_raw_response": "2.10x by conservative byte comparison",
+    "cap_hit_outcome": "INVALID_EXECUTION",
+    "missing_usage_outcome": "INVALID_EXECUTION",
+    "future_executor_requirement": "Pass max_completion_tokens=8192 and persist completion usage; this offline design does not authorize provider integration."
+  },
+  "call_envelope": {
+    "a_primary_calls_per_holdout": {"min": 1, "max": 1},
+    "b_primary_calls_per_holdout": {"min": 6, "max": 10},
+    "c_primary_calls_per_holdout": {"min": 1, "max": 2},
+    "minimum_complete_primary_generations": 64,
+    "maximum_primary_generations": 104,
+    "maximum_semantic_repairs": 104,
+    "maximum_generation_requests_including_explicit_repair": 208,
+    "maximum_transport_retries_per_request": 0,
+    "maximum_transport_attempts": 208,
+    "semantic_repair_policy": "At most one schema repair per primary generation; it is a separate, logged, scheduled request and is never a product result.",
+    "expected_calls": "UNKNOWN_INPUT_AND_VALIDATION_DEPENDENT"
+  },
+  "conservative_token_envelope": {
+    "max_input_tokens_independent": 27262976,
+    "max_output_tokens_independent": 1703936,
+    "max_total_tokens": 27262976,
+    "per_request_token_reservation": 131072,
+    "required_rpm": 1,
+    "required_tpm": 131072,
+    "required_rpd": 208,
+    "required_tpd": 27262976,
+    "envelope_sha256": "11351a77efd17ba3f25930a4ff323983789c932bbface10dd802841e7a7e9530",
+    "interpretation": "Independent input and output maxima are not additive. The total is bounded by 131072 per request. This is safe but intentionally conservative until exact tokenizer-bound serialized prompts are available."
+  },
+  "order_policy": {
+    "legacy_order": "CONDITION_A -> CONDITION_B -> CONDITION_C for each holdout",
+    "algorithm": "CSPRNG_BASE_PERMUTATION_PLUS_BALANCED_ROTATIONS_V1",
+    "randomization_method": "python.secrets.SystemRandom.sample",
+    "holdout_order": ["H08", "H02", "H03", "H01", "H07", "H04", "H05", "H06"],
+    "base_permutation": ["CONDITION_C", "CONDITION_B", "CONDITION_A"],
+    "schedule": [{"block":1,"position":1,"holdout_id":"H08","condition":"CONDITION_C"},{"block":1,"position":2,"holdout_id":"H08","condition":"CONDITION_B"},{"block":1,"position":3,"holdout_id":"H08","condition":"CONDITION_A"},{"block":2,"position":1,"holdout_id":"H02","condition":"CONDITION_B"},{"block":2,"position":2,"holdout_id":"H02","condition":"CONDITION_A"},{"block":2,"position":3,"holdout_id":"H02","condition":"CONDITION_C"},{"block":3,"position":1,"holdout_id":"H03","condition":"CONDITION_A"},{"block":3,"position":2,"holdout_id":"H03","condition":"CONDITION_C"},{"block":3,"position":3,"holdout_id":"H03","condition":"CONDITION_B"},{"block":4,"position":1,"holdout_id":"H01","condition":"CONDITION_C"},{"block":4,"position":2,"holdout_id":"H01","condition":"CONDITION_B"},{"block":4,"position":3,"holdout_id":"H01","condition":"CONDITION_A"},{"block":5,"position":1,"holdout_id":"H07","condition":"CONDITION_B"},{"block":5,"position":2,"holdout_id":"H07","condition":"CONDITION_A"},{"block":5,"position":3,"holdout_id":"H07","condition":"CONDITION_C"},{"block":6,"position":1,"holdout_id":"H04","condition":"CONDITION_A"},{"block":6,"position":2,"holdout_id":"H04","condition":"CONDITION_C"},{"block":6,"position":3,"holdout_id":"H04","condition":"CONDITION_B"},{"block":7,"position":1,"holdout_id":"H05","condition":"CONDITION_C"},{"block":7,"position":2,"holdout_id":"H05","condition":"CONDITION_B"},{"block":7,"position":3,"holdout_id":"H05","condition":"CONDITION_A"},{"block":8,"position":1,"holdout_id":"H06","condition":"CONDITION_A"},{"block":8,"position":2,"holdout_id":"H06","condition":"CONDITION_B"},{"block":8,"position":3,"holdout_id":"H06","condition":"CONDITION_C"}],
+    "schedule_commitment_sha256": "05f948a49bdf11e7233dce98771359e216339989818cf46782d014ee94af7983",
+    "neutrality_property": "Each block contains exactly one A/B/C. Across all eight blocks, every condition has mean position 2.0; quota failure before completing a block invalidates the attempt rather than yielding a partial product result."
+  },
+  "pacing_policy": {
+    "bounded_concurrency": 1,
+    "dispatch_only_when": ["authenticated remaining TPD covers the full conservative envelope", "remaining TPM covers one 131072-token reservation", "remaining RPM is at least one", "schedule commitment and scheduler state are intact"],
+    "tpm_insufficient": "WAIT_FOR_TPM_RESET without changing the next scheduled cell",
+    "rpm_insufficient": "WAIT_FOR_RPM_RESET without changing the next scheduled cell",
+    "daily_capacity_insufficient": "ABORTED_CAPACITY before start",
+    "daily_capacity_unknown": "BLOCK_START",
+    "http_429": "ABORTED_CAPACITY",
+    "provider_unavailable": "INVALID_EXECUTION",
+    "transport_retry": "DISALLOWED_UNTIL_SEPARATELY_IMPLEMENTED_WITH_PER_ATTEMPT_JOURNALING"
+  },
+  "invalidation_rules": {"OUTPUT_CAP_HIT":"INVALID_EXECUTION","OUTPUT_USAGE_MISSING":"INVALID_EXECUTION","CAPACITY_RECEIPT_INVALID":"ABORTED_CAPACITY","TPD_BECOMES_INSUFFICIENT":"ABORTED_CAPACITY","ORDER_POLICY_VIOLATED":"INVALID_EXECUTION","UNPLANNED_TRANSPORT_RETRY":"INVALID_EXECUTION","SCHEDULER_STATE_LOST":"INVALID_EXECUTION","HTTP_429":"ABORTED_CAPACITY","PROVIDER_UNAVAILABLE":"INVALID_EXECUTION"},
+  "test_evidence": {"test_target":"tests/test_m05_5r1_capacity_design.py","result":"18 passed","provider_calls":0,"network_calls_for_experiment":0},
+  "capacity_design_pass": true,
+  "verdict": "READY_FOR_AUTHENTICATED_CAPACITY_CHECK",
+  "next_allowed_step": "A separately authorized authenticated capacity check for the exact Groq organization/project. This artifact does not authorize preflight or real replication."
+}

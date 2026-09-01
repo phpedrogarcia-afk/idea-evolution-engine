@@ -16,6 +16,14 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 
 ## 2. Catálogo de Achados Estruturados
 
+### [FINDING-029] Quota Deve Ser Parte do Contrato Experimental, Não um Efeito Colateral do Transporte
+- **Claim:** Um experimento comparativo não pode tratar limites de quota como detalhe operacional: output sem cap, reparos implícitos e ordem fixa de tratamentos impedem estimar capacidade e podem confundir o efeito do tratamento com posição na janela do provedor.
+- **Evidence:** M05.5R1 Capacity Design Freeze: 104 gerações primárias, até 104 reparos estruturados adicionais, outputs M05.4 válidos e 18 testes sintéticos incluindo controles negativos de ordem, TPD desconhecido e retry não planejado.
+- **Status:** `CONFIRMED_BY_OFFLINE_TESTS_AND_SOURCE_INSPECTION`
+- **Implications:** A tentativa futura exige schedule comprometido, cap observável, pacing neutro e estado autenticado de TPD; falha de capacidade é `ABORTED_CAPACITY`/`INVALID_EXECUTION`, nunca resultado científico do produto.
+
+---
+
 ### [FINDING-001] Deliberação Multiagente sem Filtro Apresenta Alto Custo e Baixo Retorno Marginal
 - **Claim:** A introdução irrestrita de múltiplos agentes em tarefas de ideação aumenta o consumo de tokens exponencialmente sem garantir melhoria na diversidade de falhas críticas detectadas.
 - **Evidence:** Autópsia do framework DCI e experimentos de Stanford (Level B).
@@ -269,7 +277,6 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Status:** `DIAGNOSED_ROOT_CAUSE_PROVEN`
 - **Implications:** Proibido realizar avaliação humana sobre o pacote atual. O harness deve ser corrigido em missão dedicada (M05.4-P1R) com novo ID experimental, mantendo o protocolo pré-registrado e as 8 ideias holdout intactas.
 - **Related Decisions:** [M05.4-P1A AUDIT](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-027.md)
-
 
 
 

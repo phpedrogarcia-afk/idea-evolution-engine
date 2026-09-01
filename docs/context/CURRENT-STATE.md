@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-006
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-007
 
 ---
 
@@ -26,10 +26,10 @@
   - Controles offline: namespace/receipt imutável, boundary sintético de holdout e gate de capacidade fail-closed; 12 testes sintéticos passaram.
   - Holdouts: `M05.5R1-HOLDOUT-SET-REV1` foi selado literalmente fora do repositório; receipt hashado está em `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/`.
   - Blinding: REV1 foi congelada em cofre externo; o repositório tem somente seu commitment, sem reveal.
-  - Capacity readiness: `STOP_CAPACITY_DESIGN_CONFLICT`; o remaining TPD da conta real não foi comprovado, não há limites de token configurados nem schedule neutro para evitar viés A→B→C sob quota.
-  - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), desenho de ordem/pacing neutro, evidência autenticada de capacidade, preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-006`](checkpoints/CP-20260901-006.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-006`
+  - Capacity design: `FROZEN_READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; cap de saída 8192, envelope conservador de 208 requests, schedule CSPRNG comprometido e pacing de concorrência 1 foram congelados offline.
+  - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), evidência autenticada de capacidade, preflight e autorização humana separada.
+- **Último Checkpoint Imutável:** [`CP-20260901-007`](checkpoints/CP-20260901-007.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-007`
 - **Git Branch:** `main`
 - **Worktree no planejamento R2:** `DIRTY_PLANNING_PENDING_COMMIT`
 
@@ -46,10 +46,11 @@
   - `PFI-M05_5R1-HOLDOUT-SEALING-001`, que congelou REV1 literalmente em cofre externo e publicou somente seu receipt permitido.
   - `PFI-M05_5R1-BLINDING-REV1-001`, que congelou o reveal A/B/C ↔ R1/R2/R3 em cofre externo e publicou somente commitment.
   - `PFI-M05_5R1-REAL-CAPACITY-READINESS-001`, que encontrou TPD restante não comprovado, envelope total de tokens não limitado e ausência de schedule neutro; nenhuma chamada ou tratamento foi feito.
+  - `PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001`, que congelou o cap, bound conservador, schedule neutro, pacing e invalidações sem tocar em holdouts/reveal ou provedor.
 - **Tarefa Ativa Atual:**
   - M05.5R1 possui harness offline validado; execução real não está autorizada.
 - **Próximo Passo Exato:**
-  - Decidir separadamente se deve ser especificado/congelado um desenho de ordem/pacing neutro com limites de token; depois obter estado autenticado da conta Groq exata. Preflight e execução continuam decisões posteriores e separadas.
+  - Autorizar uma missão autenticada de capacity check para a conta Groq exata; preflight e execução continuam decisões posteriores e separadas.
 
 ---
 

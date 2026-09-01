@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "CP-20260901-007",
+  "created_at": "2026-09-01T17:48:59-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Congelar offline o envelope conservador de tokens, cap observável, schedule neutro e pacing M05.5R1 sem executar tratamentos.",
+  "repository": {"branch": "main", "commit": "a2887d150aa7a2b63e49fefcd30c37932215976a", "worktree_state": "DIRTY_UNTIL_CAPACITY_DESIGN_COMMIT"},
+  "completed_tasks": ["PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001", "Fast-forward canônico de a2887d1 para origin/main"],
+  "changed_files": ["tools/experiments/m05_5r1_capacity_design.py", "tests/test_m05_5r1_capacity_design.py", "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-CAPACITY-DESIGN-FREEZE.json", "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md", "docs/intelligence/FINDINGS.md", "docs/context/CURRENT-STATE.md", "docs/context/ACTIVE-QUEUE.md", "docs/context/IMPLEMENTATION-HISTORY.md"],
+  "new_decisions": ["8192 é o cap de saída obrigatório e observável para futura execução M05.5R1.", "O limite de 104 gerações primárias não oculta até 104 reparos estruturados; a capacidade deve reservar 208 requests.", "A ordem fixa A→B→C é rejeitada; o schedule balanceado comprometido é o único admissível."],
+  "tests_executed": ["tests/test_m05_5r1_capacity_design.py — 18 passed (offline).", "Controle negativo de A→B→C detectado.", "Mutação de commitment, TPD UNKNOWN, cap hit, retry e perda de estado falharam fechados."],
+  "unresolved_questions": ["Quais limites e saldos atuais da organização/projeto Groq exatos cobrem o envelope conservador?"],
+  "known_contradictions": ["O envelope é um bound seguro de contexto, não uma contagem tokenizer-exata de prompts; a conta pode não ter capacidade para ele."],
+  "known_risks": ["Uma integração futura que não passe max_completion_tokens, não registre repairs ou permita retry de transporte viola este freeze.", "O saldo TPD real continua desconhecido."],
+  "blockers": ["Authenticated remaining TPD/TPM/RPD/RPM da conta exata.", "Preflight e autorização humana separada para execução."],
+  "next_exact_action": "Decisão humana sobre uma missão autenticada de capacity check para a organização/projeto Groq exatos, sem A/B/C.",
+  "authorized_next_scope": ["Somente obtenção/verificação autenticada de capacidade do provedor para o envelope congelado.", "Nenhum tratamento, reveal, holdout bruto, execução, bridge FioOS ou alteração de autoridade."],
+  "do_not_repeat": ["Não regenerar schedule ou mudar commitment.", "Não usar documented plan limit ou HTTP 200 como prova de remaining TPD.", "Não reexecutar R2/R3."],
+  "recovery_notes": "A fonte canônica é M05.5R1-CAPACITY-DESIGN-FREEZE.json. O executor real permanece bloqueado; ele deve respeitar request_options, schedule commitment e pacing_decision antes de qualquer request."
+}
