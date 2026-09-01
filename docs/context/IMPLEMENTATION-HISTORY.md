@@ -25,6 +25,12 @@
 - **Limite:** não houve blind mapping, provider call, quota probe, execução ou saída de tratamento.
 - **Scar observado:** `REAL-EXECUTION-ATTEMPT-001/raw/` preexistia vazio, sem registry e sem bruto; foi preservado e torna esse ID inelegível para início futuro pelo gate de namespace novo.
 
+### [PFI-M05_5R1-BLINDING-REV1-001] Blinding REV1 por CSPRNG
+- **Data:** 2026-09-01
+- **Entrega:** oito permutações independentes A/B/C ↔ R1/R2/R3 geradas por CSPRNG, seladas externamente e comprometidas criptograficamente antes de qualquer execução/review.
+- **Evidência:** receipt sem reveal, commitment verificável e controle negativo de mutação em cópia sintética aprovado.
+- **Limite:** o mapeamento não foi mostrado ao reviewer, nenhum holdout literal foi lido, e não houve provider call, quota probe ou célula A/B/C.
+
 ---
 
 ### [PFI-R2-M05_5R1-REPLICATION-PLANNING-001] Desenho e Preflight M05.5R1
@@ -540,7 +546,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 

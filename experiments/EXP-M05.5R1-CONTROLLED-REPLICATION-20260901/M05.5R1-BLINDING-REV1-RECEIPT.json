@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901",
+  "holdout_set_id": "M05.5R1-HOLDOUT-SET-REV1",
+  "holdout_set_sha256": "9b2a3b004a3b5533072bf7b6974ed17ee0180b61788621eefa03e1da12092cb9",
+  "blinding_revision": 1,
+  "holdout_ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08"],
+  "visible_label_set": ["R1", "R2", "R3"],
+  "randomization_method": "python.secrets.SystemRandom.sample (OS/CSPRNG-backed)",
+  "created_at": "2026-09-01T14:57:28-03:00",
+  "source_head": "c7b49fc79be21a4ec3e5d7c4fc77454af5ec83d7",
+  "reveal_commitment_sha256": "d2de9ac1bbcd76c7aaef639b0b61d63dd355f1bea96f9d1c0f41ef7d434eed02",
+  "status": "FROZEN",
+  "reveal_storage": "EXTERNAL_LOCAL_SEALED_STORE",
+  "reveal_present_in_repository": false,
+  "human_reviewer_access": false,
+  "commitment_verification": "PASS",
+  "commitment_negative_control": "PASS",
+  "provider_calls": 0,
+  "experiment_execution_performed": false
+}

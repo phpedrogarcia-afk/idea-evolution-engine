@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-004
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-005
 
 ---
 
@@ -25,9 +25,10 @@
   - Contrato: `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md`.
   - Controles offline: namespace/receipt imutável, boundary sintético de holdout e gate de capacidade fail-closed; 12 testes sintéticos passaram.
   - Holdouts: `M05.5R1-HOLDOUT-SET-REV1` foi selado literalmente fora do repositório; receipt hashado está em `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/`.
-  - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), além de receipt de capacidade real, blind mapping, preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-004`](checkpoints/CP-20260901-004.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-004`
+  - Blinding: REV1 foi congelada em cofre externo; o repositório tem somente seu commitment, sem reveal.
+  - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), além de receipt de capacidade real, preflight e autorização humana separada.
+- **Último Checkpoint Imutável:** [`CP-20260901-005`](checkpoints/CP-20260901-005.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-005`
 - **Git Branch:** `main`
 - **Worktree no planejamento R2:** `DIRTY_PLANNING_PENDING_COMMIT`
 
@@ -42,10 +43,11 @@
   - `PFI-R2-M05_5R1-REPLICATION-PLANNING-001`, que congelou o desenho mínimo e identificou os controles determinísticos ainda ausentes.
   - `PFI-R3-M05_5R1-OFFLINE-HARNESS-HARDENING-001`, que corrigiu os controles offline sem chamadas, holdouts reais ou alteração de autoridade.
   - `PFI-M05_5R1-HOLDOUT-SEALING-001`, que congelou REV1 literalmente em cofre externo e publicou somente seu receipt permitido.
+  - `PFI-M05_5R1-BLINDING-REV1-001`, que congelou o reveal A/B/C ↔ R1/R2/R3 em cofre externo e publicou somente commitment.
 - **Tarefa Ativa Atual:**
   - M05.5R1 possui harness offline validado; execução real não está autorizada.
 - **Próximo Passo Exato:**
-  - Autorizar uma missão separada para criar o blind treatment mapping REV1; depois, obter receipt real de capacidade e autorizar preflight e execução em decisões separadas.
+  - Autorizar uma missão separada de readiness de capacidade real; depois, autorizar preflight e execução em decisões separadas.
 
 ---
 

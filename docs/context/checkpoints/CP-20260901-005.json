@@ -1,0 +1,26 @@
+{
+  "checkpoint_id": "CP-20260901-005",
+  "created_at": "2026-09-01T14:57:28-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Criar BLINDING REV1 independente e congelar o reveal fora do repositório antes de qualquer execução ou review.",
+  "repository": {"branch": "main", "commit": "c7b49fc79be21a4ec3e5d7c4fc77454af5ec83d7", "worktree_state": "DIRTY_UNTIL_BLINDING_COMMIT"},
+  "completed_tasks": ["PFI-M05_5R1-BLINDING-REV1-001", "Fast-forward canônico da selagem REV1 para origin/main"],
+  "changed_files": [
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-BLINDING-REV1-RECEIPT.json",
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": ["O reveal REV1 não aparece em metadata/review packet; somente commitment é público.", "Mudança ou regeneração do reveal exige nova revisão explicitamente autorizada."],
+  "tests_executed": ["Bijeção em oito mapeamentos CSPRNG.", "Commitment do reveal externo verificado.", "Controle negativo: mutação em cópia sintética divergiu do commitment.", "Varredura do receipt confirmou ausência de reveal."],
+  "unresolved_questions": ["Qual receipt real de capacidade cobrirá o envelope de 24 células/até 104 pedidos?"],
+  "known_contradictions": [],
+  "known_risks": ["O reveal externo permanece inacessível ao reviewer até unblinding autorizado.", "REAL-EXECUTION-ATTEMPT-001 permanece inelegível por namespace não novo."],
+  "blockers": ["Missão de capacity readiness real.", "Preflight e autorização humana posterior para execução."],
+  "next_exact_action": "Autorizar M05.5R1 real capacity readiness sem tratamento.",
+  "authorized_next_scope": ["Receipt de capacidade e preflight estrito sem chamadas semânticas.", "Nenhum provider call, tratamento, reveal, bridge FioOS ou mudança de autoridade."],
+  "do_not_repeat": ["Não regenerar ou revelar BLINDING REV1.", "Não ler holdouts brutos para capacity readiness."],
+  "recovery_notes": "O receipt REV1 contém somente o commitment. O reveal está selado externamente e deve permanecer fechado até review congelado e missão de unblinding." 
+}
