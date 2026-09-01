@@ -1,0 +1,61 @@
+{
+  "checkpoint_id": "CP-20260901-002",
+  "created_at": "2026-09-01T13:37:47-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Congelar o desenho/preflight M05.5R1 e verificar se os controles existentes bastam para execução sem repetir a invalidação de Attempt 001.",
+  "repository": {
+    "default_branch": "main",
+    "head_commit": "c60700cc6e706563a41ecbc11181f07ce60e71a8",
+    "worktree_state": "DIRTY_PLANNING_PENDING_COMMIT"
+  },
+  "completed_tasks": [
+    "PFI-R2-M05_5R1-REPLICATION-PLANNING-001",
+    "Commit da reconciliação R1: c7a131e",
+    "Contrato de pré-registro e preflight M05.5R1 criado"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/context-manifest.json",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/checkpoints/CP-20260901-002.json",
+    "docs/context/checkpoints/CP-20260901-002.md"
+  ],
+  "new_decisions": [
+    "M05.5R1 será uma única replicação direta de 8 holdouts e 24 células, sem alegação de poder estatístico geral.",
+    "Capacidade deve ser provada por envelope tokenizado e receipt de quota, não por contagem de chamadas ou margem inventada.",
+    "A fronteira de holdout deve ficar selada fora do repositório até a execução autorizada."
+  ],
+  "tests_executed": [
+    "Inspeção determinística de scars M05.5, executor M05.5 e clean harness M05.4",
+    "Validação de contexto e hashes pendente após registrar CP-002"
+  ],
+  "unresolved_questions": [
+    "O humano autorizará uma missão offline para implementar e testar o harness M05.5R1?",
+    "Qual receipt verificável de capacidade o provedor poderá fornecer no período de execução?"
+  ],
+  "known_contradictions": [
+    "CONTINUITY-CAPSULE.md contém estado histórico de Fase 0 e não foi alterado por esta missão; não referencia M05.5 e requer reconciliação própria se virar bloqueador."
+  ],
+  "known_risks": [
+    "O harness R1 existente não é elegível: a sonda não prova capacidade e o teste manipula o namespace real de Attempt 001.",
+    "Se o receipt de capacidade falhar, a saída correta é ABORTED_CAPACITY sem chamada semântica."
+  ],
+  "blockers": [
+    "Faltam harness isolado e controles negativos para holdout/attempt/capacidade.",
+    "Execução real M05.5R1 requer autorização humana posterior e separada."
+  ],
+  "next_exact_action": "Decisão humana sobre autorizar uma missão offline de implementação/teste do harness M05.5R1.",
+  "authorized_next_scope": [
+    "Harness isolado, checks determinísticos e testes negativos offline.",
+    "Nenhuma chamada semântica, holdout novo, mapeamento cego, execução, bridge ou alteração de autoridade."
+  ],
+  "do_not_repeat": [
+    "Não reexecutar Attempt 001, não reutilizar seus holdouts e não tratá-lo como falha do Lean L1.",
+    "Não iniciar M05.5R1 somente porque existe um plano.",
+    "Não pesquisar donors externos sem nova incerteza material de desenho."
+  ],
+  "recovery_notes": "O contrato R2 está na seção R2 Planning / Preflight Reality Check de experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md; ele declara explicitamente EXECUTION_READY=NO."
+}

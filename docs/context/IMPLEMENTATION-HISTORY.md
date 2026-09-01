@@ -5,6 +5,18 @@
 
 ---
 
+### [PFI-R2-M05_5R1-REPLICATION-PLANNING-001] Desenho e Preflight M05.5R1
+- **Data:** 2026-09-01
+- **Autor / Agente:** Codex
+- **Checkpoint:** CP-20260901-002
+- **Objetivo:** projetar a menor replicação M05.5R1 capaz de testar o padrão M05.4 sem repetir a reutilização de tentativa, contaminação de holdout ou interferência de quota de Attempt 001.
+- **Artefato:** `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md` (seção R2 Planning / Preflight Reality Check).
+- **Mecanismos reutilizados:** conceito do clean harness M05.4 — worktree limpo, freeze por hash, receipt imutável, journal, bloqueio de overwrite e renderização cega separada.
+- **Lacunas encontradas:** o executor M05.5 é hard-coded para Attempt 001. O harness R1 externo não calcula/prova a capacidade TPD/TPM, não impõe boundary de holdout e seu teste manipula o namespace de evidência real. Portanto, a replicação não está pronta.
+- **Resultado:** `PLANNED_NOT_EXECUTION_READY` / `BLOCKED_BY_EXPERIMENT_DESIGN`; nenhuma chamada semântica, holdout novo, bridge FioOS ou mudança de autoridade foi realizada.
+
+---
+
 ### [PFI-R1-STATE-QUEUE-RECONCILIATION-001] Reconciliação de Estado M05.5 por Evidência
 - **Data:** 2026-09-01
 - **Autor / Agente:** Codex
@@ -506,8 +518,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
-
 
 
 

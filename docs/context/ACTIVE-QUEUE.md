@@ -7,19 +7,19 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
 
-- [ ] **HUMAN-DECISION-M05.5R1:** decidir se uma nova replicação controlada deve ser planejada após a invalidação de `REAL-EXECUTION-ATTEMPT-001`.
-  - **Fato de partida:** `M05.5_ATTEMPT_001 = QUARANTINED_EXECUTION_STRESS_EVIDENCE / INVALID_PRIMARY_REPLICATION`.
-  - **Escopo desta decisão:** autorizar ou negar apenas o planejamento/preflight de M05.5R1.
-  - **Não autorizado agora:** chamadas semânticas, uso de novos holdouts, geração de novo mapeamento cego, execução real, alteração de produto ou integração FioOS.
+- [ ] **HUMAN-DECISION-M05.5R1-HARNESS:** autorizar ou negar uma missão offline para implementar e testar os controles que o contrato R2 exige.
+  - **Fato de partida:** o desenho M05.5R1 está congelado como `PLANNED_NOT_EXECUTION_READY`; o executor M05.5 antigo é hard-coded para Attempt 001 e não possui preflight de capacidade ou boundary de holdout selado.
+  - **Escopo possível:** somente harness isolado, checks determinísticos e testes negativos, sem holdouts novos, chave, chamadas semânticas, execução real, alteração de produto ou integração FioOS.
 
 ---
 
 ## 🟡 NEXT (Condicionado à Decisão Humana)
 
-1. [ ] **M05.5R1-PREFLIGHT-FREEZE:** se autorizado, congelar uma nova replicação com 8 holdouts inéditos, novo mapeamento cego, novo namespace de tentativa e prova de quota adequada — sem executar chamadas semânticas.
-2. [ ] **M05.5R1-REAL-EXECUTION:** somente após o preflight congelado e uma autorização de execução específica; nunca reutilizar `REAL-EXECUTION-ATTEMPT-001`.
-3. [ ] **M05.5R1-HUMAN-REVIEW-AND-REVEAL:** somente se uma tentativa futura for admissível e tiver pacote cego válido.
-4. [ ] **KNOWLEDGE-TRANSFER-PRESERVATION:** manter E10 como evidência de não elevação de autoridade. O documento não habilita implementação, parser externo, invocação FioOS ou escrita entre projetos.
+1. [ ] **M05.5R1-PREFLIGHT-FREEZE:** após harness aprovado, o humano sela 8 holdouts inéditos, novo mapeamento cego e receipt de capacidade; o freeze é feito sem chamadas semânticas.
+2. [ ] **M05.5R1-EXECUTION-AUTHORIZATION:** decisão humana separada, somente após o preflight retornar pronto e todos os checks determinísticos passarem.
+3. [ ] **M05.5R1-REAL-EXECUTION:** somente sob a autorização específica acima; nunca reutilizar `REAL-EXECUTION-ATTEMPT-001`.
+4. [ ] **M05.5R1-HUMAN-REVIEW-AND-REVEAL:** somente se uma tentativa futura for admissível e tiver pacote cego válido.
+5. [ ] **KNOWLEDGE-TRANSFER-PRESERVATION:** manter E10 como evidência de não elevação de autoridade. O documento não habilita implementação, parser externo, invocação FioOS ou escrita entre projetos.
 
 ---
 
