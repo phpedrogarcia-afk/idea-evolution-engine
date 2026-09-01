@@ -1,7 +1,7 @@
 {
   "run_id": "EXP-M05.5-REP-08-COND-B",
   "status": "FAILED",
-  "total_duration_seconds": 4489.5922248363495,
+  "total_duration_seconds": 3930.3841032981873,
   "total_stages_executed": 4,
   "git_commit": "126fc5ae066fe9a70bd7eb9a7479507127522400",
   "stages": [
@@ -17,46 +17,51 @@
       "attempt": 1,
       "success": true,
       "retry_count": 0,
-      "latency_seconds": 610.7877600193024,
-      "delta_summary": "Intenção extraída: 'Testar a hipótese de que menos animações aumentam a concentr...' | 4 premissas mapeadas.",
-      "raw_response": "{\"interpreted_problem\":\"Avaliar se a redução de animações na interface de um leitor digital melhora a concentração durante a leitura.\",\"human_intent\":\"Testar a hipótese de que menos animações aumentam a concentração antes de desenvolver um produto completo.\",\"proposed_mechanism\":\"\",\"explicit_mechanism\":\"reduzir animações de interface durante a leitura\",\"inferred_candidates\":[\"modo de leitura sem animações\",\"configuração para desativar animações\",\"estudo de usabilidade com medição de concentração\"],\"actors_or_users\":[\"leitores digitais\",\"usuários que leem em dispositivos digitais\"],\"assumptions\":[\"animações podem distrair a concentração\",\"reduzir animações é tecnicamente viável nos leitores digitais\",\"há métricas adequadas para medir concentração\",\"os usuários perceberão diferença na experiência\"],\"ambiguities\":[\"quais animações específicas devem ser reduzidas\",\"como será medida a concentração\",\"qual nível de redução é suficiente\",\"qual público-alvo será testado\",\"em quais dispositivos o teste será realizado\"],\"strengths\":[\"foco em validar hipótese antes de desenvolvimento\",\"abordagem baseada em evidência\",\"potencial de melhorar foco do leitor\",\"simplicidade do experimento\"],\"structured_idea\":\"Um leitor digital que pretende avaliar, por meio de teste, se a diminuição das animações da interface durante a leitura aumenta a concentração do usuário, antes de desenvolver um produto completo.\"}",
+      "latency_seconds": 611.0869183540344,
+      "delta_summary": "Intenção extraída: 'Testar a hipótese de que menos animações aumentam a concentr...' | 5 premissas mapeadas.",
+      "raw_response": "{\"interpreted_problem\":\"Necessidade de verificar se a diminuição das animações da interface de um leitor digital melhora a concentração do usuário durante a leitura.\",\"human_intent\":\"Testar a hipótese de que menos animações aumentam a concentração antes de desenvolver um produto completo.\",\"proposed_mechanism\":\"\",\"explicit_mechanism\":\"Reduzir as animações da interface durante a leitura.\",\"inferred_candidates\":[\"Teste A/B\",\"Estudo de usabilidade\",\"Experimento controlado\",\"Protótipo com opção de ativar/desativar animações\",\"Coleta de métricas de atenção/concentração\"],\"actors_or_users\":[\"Leitores digitais\",\"Usuários de aplicativos de leitura\",\"Pesquisadores de experiência do usuário\"],\"assumptions\":[\"Animações podem distrair os leitores\",\"A concentração pode ser medida de forma confiável\",\"A redução das animações é tecnicamente viável\",\"Os usuários perceberão a diferença nas animações\",\"A hipótese é testável em curto prazo\"],\"ambiguities\":[\"Como definir e medir concentração\",\"Quais animações específicas devem ser reduzidas\",\"Qual nível de redução é suficiente\",\"Qual duração da leitura para o teste\",\"Critérios de sucesso da hipótese\"],\"strengths\":[\"Foco em hipótese clara\",\"Abordagem mínima antes de investir em recursos\",\"Possibilidade de validar impacto na experiência do usuário\",\"Evita desenvolvimento prematuro\",\"Facilita iteração baseada em dados\"],\"structured_idea\":\"Realizar um teste controlado para determinar se a redução das animações de interface em um leitor digital aumenta a concentração do usuário, avaliando a hipótese antes de avançar para um produto completo.\"}",
       "parsed_output": {
-        "interpreted_problem": "Avaliar se a redução de animações na interface de um leitor digital melhora a concentração durante a leitura.",
+        "interpreted_problem": "Necessidade de verificar se a diminuição das animações da interface de um leitor digital melhora a concentração do usuário durante a leitura.",
         "human_intent": "Testar a hipótese de que menos animações aumentam a concentração antes de desenvolver um produto completo.",
         "proposed_mechanism": "",
-        "explicit_mechanism": "reduzir animações de interface durante a leitura",
+        "explicit_mechanism": "Reduzir as animações da interface durante a leitura.",
         "inferred_candidates": [
-          "modo de leitura sem animações",
-          "configuração para desativar animações",
-          "estudo de usabilidade com medição de concentração"
+          "Teste A/B",
+          "Estudo de usabilidade",
+          "Experimento controlado",
+          "Protótipo com opção de ativar/desativar animações",
+          "Coleta de métricas de atenção/concentração"
         ],
         "actors_or_users": [
-          "leitores digitais",
-          "usuários que leem em dispositivos digitais"
+          "Leitores digitais",
+          "Usuários de aplicativos de leitura",
+          "Pesquisadores de experiência do usuário"
         ],
         "assumptions": [
-          "animações podem distrair a concentração",
-          "reduzir animações é tecnicamente viável nos leitores digitais",
-          "há métricas adequadas para medir concentração",
-          "os usuários perceberão diferença na experiência"
+          "Animações podem distrair os leitores",
+          "A concentração pode ser medida de forma confiável",
+          "A redução das animações é tecnicamente viável",
+          "Os usuários perceberão a diferença nas animações",
+          "A hipótese é testável em curto prazo"
         ],
         "ambiguities": [
-          "quais animações específicas devem ser reduzidas",
-          "como será medida a concentração",
-          "qual nível de redução é suficiente",
-          "qual público-alvo será testado",
-          "em quais dispositivos o teste será realizado"
+          "Como definir e medir concentração",
+          "Quais animações específicas devem ser reduzidas",
+          "Qual nível de redução é suficiente",
+          "Qual duração da leitura para o teste",
+          "Critérios de sucesso da hipótese"
         ],
         "strengths": [
-          "foco em validar hipótese antes de desenvolvimento",
-          "abordagem baseada em evidência",
-          "potencial de melhorar foco do leitor",
-          "simplicidade do experimento"
+          "Foco em hipótese clara",
+          "Abordagem mínima antes de investir em recursos",
+          "Possibilidade de validar impacto na experiência do usuário",
+          "Evita desenvolvimento prematuro",
+          "Facilita iteração baseada em dados"
         ],
-        "structured_idea": "Um leitor digital que pretende avaliar, por meio de teste, se a diminuição das animações da interface durante a leitura aumenta a concentração do usuário, antes de desenvolver um produto completo."
+        "structured_idea": "Realizar um teste controlado para determinar se a redução das animações de interface em um leitor digital aumenta a concentração do usuário, avaliando a hipótese antes de avançar para um produto completo."
       },
       "error": null,
-      "timestamp": "2026-09-01T07:04:11.664144+00:00"
+      "timestamp": "2026-09-01T07:48:44.608254+00:00"
     },
     {
       "step_number": 2,
@@ -70,63 +75,59 @@
       "attempt": 1,
       "success": true,
       "retry_count": 0,
-      "latency_seconds": 729.0852613449097,
+      "latency_seconds": 741.9310629367828,
       "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
-      "raw_response": "{\n  \"critical_issues\": [\n    {\n      \"issue\": \"Concentration is difficult to measure objectively, leading to unreliable results.\",\n      \"why_it_matters\": \"If the metric does not accurately reflect true concentration, the test cannot validate the hypothesis, rendering the entire study inconclusive.\",\n      \"severity\": \"HIGH\",\n      \"affected_part\": \"Measurement methodology\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    },\n    {\n      \"issue\": \"Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.\",\n      \"why_it_matters\": \"These factors can influence concentration independently of animation changes, biasing the outcome.\",\n      \"severity\": \"MEDIUM\",\n      \"affected_part\": \"Experimental design\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    },\n    {\n      \"issue\": \"Reducing animations may decrease user engagement or perceived responsiveness.\",\n      \"why_it_matters\": \"A less engaging interface could offset any concentration gains, leading to negative user experience.\",\n      \"severity\": \"MEDIUM\",\n      \"affected_part\": \"User experience\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    }\n  ],\n  \"fragile_assumptions\": [\n    \"animações podem distrair a concentração\",\n    \"reduzir animações é tecnicamente viável nos leitores digitais\",\n    \"há métricas adequadas para medir concentração\",\n    \"os usuários perceberão diferença na experiência\"\n  ],\n  \"contradictions\": [\n    \"Assume que toda animação distrai, embora pesquisas mostrem que animações sutis podem melhorar foco e orientação visual\",\n    \"A hipótese de que menos animação aumenta concentração conflita com a ideia de que feedback visual pode sustentar atenção\"\n  ],\n  \"failure_modes\": [\n    \"Medição de concentração baseada apenas em auto‑relato, gerando viés de resposta\",\n    \"Amostra de usuários não representativa, limitando a generalização dos resultados\",\n    \"Implementação de redução de animações introduz latência ou artefatos visuais que atrapalham a leitura\",\n    \"Análise estatística inadequada que interpreta ruído como efeito significativo\"\n  ],\n  \"missing_information\": [\n    \"Descrição detalhada das métricas específicas que serão usadas para quantificar concentração\",\n    \"Tamanho de amostra planejado e critérios de recrutamento dos participantes\",\n    \"Procedimentos de controle de variáveis externas (ambiente, tipo de texto, horário do dia)\",\n    \"Plano de análise de dados, incluindo testes estatísticos e níveis de significância\"\n  ],\n  \"overclaims\": [\n    \"Afirmar que reduzir animações necessariamente melhora a concentração sem evidência empírica\",\n    \"Generalizar resultados de um teste piloto para todos os leitores digitais e contextos de leitura\",\n    \"Presumir que aumento de concentração se traduz automaticamente em melhor compreensão ou retenção de conteúdo\"\n  ]\n}",
+      "raw_response": "{\"critical_issues\":[{\"issue\":\"Concentration measurement may be unreliable or biased\",\"why_it_matters\":\"If the metric does not accurately reflect true concentration, results will be invalid, undermining the test's purpose\",\"severity\":\"HIGH\",\"affected_part\":\"Measurement methodology\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Reduction of animations may have negligible impact on user concentration\",\"why_it_matters\":\"If the effect size is too small, the test may not justify further development, wasting resources\",\"severity\":\"MEDIUM\",\"affected_part\":\"Hypothesis relevance\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"User perception of animation changes may be inconsistent\",\"why_it_matters\":\"If users do not notice the difference, the experimental manipulation fails, leading to false negatives\",\"severity\":\"MEDIUM\",\"affected_part\":\"User interface design\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Animações podem distrair os leitores\",\"A concentração pode ser medida de forma confiável\",\"Os usuários perceberão a diferença nas animações\",\"A redução das animações é tecnicamente viável\"],\"contradictions\":[],\"failure_modes\":[\"Inadequate sample size leading to inconclusive statistical results\",\"Physiological measurement equipment malfunction\",\"Participants' prior familiarity with animation settings biases results\",\"Implementation bugs causing animations not to be fully disabled\"],\"missing_information\":[\"Specific metrics and tools to quantify concentration\",\"Baseline data on typical animation usage and user preferences\",\"Details on how animation reduction will be implemented across platforms\",\"Estimated effect size to power the study\"],\"overclaims\":[\"Assuming that any reduction in animations will automatically improve concentration\",\"Claiming that results will generalize to all reading contexts without validation\"]}",
       "parsed_output": {
         "critical_issues": [
           {
-            "issue": "Concentration is difficult to measure objectively, leading to unreliable results.",
-            "why_it_matters": "If the metric does not accurately reflect true concentration, the test cannot validate the hypothesis, rendering the entire study inconclusive.",
+            "issue": "Concentration measurement may be unreliable or biased",
+            "why_it_matters": "If the metric does not accurately reflect true concentration, results will be invalid, undermining the test's purpose",
             "severity": "HIGH",
             "affected_part": "Measurement methodology",
             "origin": "MODEL_HYPOTHESIS"
           },
           {
-            "issue": "Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.",
-            "why_it_matters": "These factors can influence concentration independently of animation changes, biasing the outcome.",
+            "issue": "Reduction of animations may have negligible impact on user concentration",
+            "why_it_matters": "If the effect size is too small, the test may not justify further development, wasting resources",
             "severity": "MEDIUM",
-            "affected_part": "Experimental design",
+            "affected_part": "Hypothesis relevance",
             "origin": "MODEL_HYPOTHESIS"
           },
           {
-            "issue": "Reducing animations may decrease user engagement or perceived responsiveness.",
-            "why_it_matters": "A less engaging interface could offset any concentration gains, leading to negative user experience.",
+            "issue": "User perception of animation changes may be inconsistent",
+            "why_it_matters": "If users do not notice the difference, the experimental manipulation fails, leading to false negatives",
             "severity": "MEDIUM",
-            "affected_part": "User experience",
+            "affected_part": "User interface design",
             "origin": "MODEL_HYPOTHESIS"
           }
         ],
         "fragile_assumptions": [
-          "animações podem distrair a concentração",
-          "reduzir animações é tecnicamente viável nos leitores digitais",
-          "há métricas adequadas para medir concentração",
-          "os usuários perceberão diferença na experiência"
+          "Animações podem distrair os leitores",
+          "A concentração pode ser medida de forma confiável",
+          "Os usuários perceberão a diferença nas animações",
+          "A redução das animações é tecnicamente viável"
         ],
-        "contradictions": [
-          "Assume que toda animação distrai, embora pesquisas mostrem que animações sutis podem melhorar foco e orientação visual",
-          "A hipótese de que menos animação aumenta concentração conflita com a ideia de que feedback visual pode sustentar atenção"
-        ],
+        "contradictions": [],
         "failure_modes": [
-          "Medição de concentração baseada apenas em auto‑relato, gerando viés de resposta",
-          "Amostra de usuários não representativa, limitando a generalização dos resultados",
-          "Implementação de redução de animações introduz latência ou artefatos visuais que atrapalham a leitura",
-          "Análise estatística inadequada que interpreta ruído como efeito significativo"
+          "Inadequate sample size leading to inconclusive statistical results",
+          "Physiological measurement equipment malfunction",
+          "Participants' prior familiarity with animation settings biases results",
+          "Implementation bugs causing animations not to be fully disabled"
         ],
         "missing_information": [
-          "Descrição detalhada das métricas específicas que serão usadas para quantificar concentração",
-          "Tamanho de amostra planejado e critérios de recrutamento dos participantes",
-          "Procedimentos de controle de variáveis externas (ambiente, tipo de texto, horário do dia)",
-          "Plano de análise de dados, incluindo testes estatísticos e níveis de significância"
+          "Specific metrics and tools to quantify concentration",
+          "Baseline data on typical animation usage and user preferences",
+          "Details on how animation reduction will be implemented across platforms",
+          "Estimated effect size to power the study"
         ],
         "overclaims": [
-          "Afirmar que reduzir animações necessariamente melhora a concentração sem evidência empírica",
-          "Generalizar resultados de um teste piloto para todos os leitores digitais e contextos de leitura",
-          "Presumir que aumento de concentração se traduz automaticamente em melhor compreensão ou retenção de conteúdo"
+          "Assuming that any reduction in animations will automatically improve concentration",
+          "Claiming that results will generalize to all reading contexts without validation"
         ]
       },
       "error": null,
-      "timestamp": "2026-09-01T07:16:20.750535+00:00"
+      "timestamp": "2026-09-01T08:01:06.540334+00:00"
     },
     {
       "step_number": 3,
@@ -140,58 +141,54 @@
       "attempt": 1,
       "success": true,
       "retry_count": 0,
-      "latency_seconds": 774.4556257724762,
+      "latency_seconds": 453.0378851890564,
       "delta_summary": "3 mecanismos alternativos gerados.",
-      "raw_response": "{\"alternatives\":[{\"mechanism\":\"Integrar sensores de rastreamento ocular e EEG para medir concentração de forma objetiva enquanto o usuário lê com diferentes níveis de animação\",\"addresses_issues\":[\"Concentration is difficult to measure objectively, leading to unreliable results.\",\"Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.\"],\"preserves_intent\":true,\"tradeoffs\":[\"Equipamento caro e necessidade de ambiente controlado\",\"Baixa escalabilidade para testes em grande escala\",\"Curva de aprendizado para análise dos dados fisiológicos\"],\"novelty_or_difference\":\"Uso de métricas fisiológicas avançadas como proxy direto de concentração\"},{\"mechanism\":\"Realizar testes A/B controlados combinando escalas de autorrelato validadas com randomização de iluminação, dificuldade do texto e intervalos de descanso para mitigar variáveis de confusão\",\"addresses_issues\":[\"Concentration is difficult to measure objectively, leading to unreliable results.\",\"Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.\"],\"preserves_intent\":true,\"tradeoffs\":[\"Dependência de medidas subjetivas que podem ser enviesadas\",\"Necessidade de maior número de participantes para obter significância estatística\",\"Tempo prolongado para coleta e análise dos dados\"],\"novelty_or_difference\":\"Mescla de métodos qualitativos e controle experimental rigoroso dentro de um ambiente de leitura digital\"},{\"mechanism\":\"Substituir a leitura por micro‑tarefas de foco (ex.: encontrar palavras‑chave ou responder perguntas de compreensão) e usar desempenho (acurácia e tempo de resposta) como proxy de concentração, alternando a presença de animações\",\"addresses_issues\":[\"Concentration is difficult to measure objectively, leading to unreliable results.\",\"Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.\",\"Reducing animations may decrease user engagement or perceived responsiveness.\"],\"preserves_intent\":true,\"tradeoffs\":[\"O desempenho nas tarefas pode não refletir a concentração real durante leitura prolongada\",\"Possível aumento da carga cognitiva que interfere no objetivo original\",\"Necessidade de projetar tarefas que sejam suficientemente representativas\"],\"novelty_or_difference\":\"Transforma a medição de concentração em métricas de performance de tarefas focais, permitindo avaliação quantitativa sem equipamentos invasivos\"}]}",
+      "raw_response": "{\"alternatives\":[{\"mechanism\":\"Integrar medidas fisiológicas (EEG, rastreamento ocular) e autorrelatos para avaliar a concentração, cruzando os dados para validar a confiabilidade da métrica\",\"addresses_issues\":[\"Concentration measurement may be unreliable or biased\"],\"preserves_intent\":true,\"tradeoffs\":[\"Custo e complexidade aumentados\",\"Equipamento pode ser intrusivo e afetar o comportamento natural\"],\"novelty_or_difference\":\"Uso de biometria para validar a concentração, reduzindo viés de autoavaliação\"},{\"mechanism\":\"Implementar níveis adaptativos de animação com grupos A/B que variam a intensidade das animações e coletar feedback de percepção em tempo real\",\"addresses_issues\":[\"Reduction of animations may have negligible impact on user concentration\",\"User perception of animation changes may be inconsistent\"],\"preserves_intent\":true,\"tradeoffs\":[\"Necessita maior tamanho de amostra e tempo de coleta\",\"Possível sobrecarga cognitiva ao ajustar dinamicamente\"],\"novelty_or_difference\":\"Ajuste dinâmico de animações baseado em preferências individuais, permitindo detectar efeitos sutis\"},{\"mechanism\":\"Desenhar um experimento cruzado (crossover) dentro dos mesmos participantes, alternando condições com e sem animações e usando uma tarefa padronizada de atenção sustentada para medir a concentração\",\"addresses_issues\":[\"Concentration measurement may be unreliable or biased\",\"Reduction of animations may have negligible impact on user concentration\",\"User perception of animation changes may be inconsistent\"],\"preserves_intent\":true,\"tradeoffs\":[\"Sessões mais longas podem causar fadiga\",\"Risco de efeitos de ordem que exigem contrabalançamento cuidadoso\"],\"novelty_or_difference\":\"Design experimental dentro‑sujeito que controla variações individuais e percepção, aumentando a robustez dos resultados\"}]}",
       "parsed_output": {
         "alternatives": [
           {
-            "mechanism": "Integrar sensores de rastreamento ocular e EEG para medir concentração de forma objetiva enquanto o usuário lê com diferentes níveis de animação",
+            "mechanism": "Integrar medidas fisiológicas (EEG, rastreamento ocular) e autorrelatos para avaliar a concentração, cruzando os dados para validar a confiabilidade da métrica",
             "addresses_issues": [
-              "Concentration is difficult to measure objectively, leading to unreliable results.",
-              "Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled."
+              "Concentration measurement may be unreliable or biased"
             ],
             "preserves_intent": true,
             "tradeoffs": [
-              "Equipamento caro e necessidade de ambiente controlado",
-              "Baixa escalabilidade para testes em grande escala",
-              "Curva de aprendizado para análise dos dados fisiológicos"
+              "Custo e complexidade aumentados",
+              "Equipamento pode ser intrusivo e afetar o comportamento natural"
             ],
-            "novelty_or_difference": "Uso de métricas fisiológicas avançadas como proxy direto de concentração"
+            "novelty_or_difference": "Uso de biometria para validar a concentração, reduzindo viés de autoavaliação"
           },
           {
-            "mechanism": "Realizar testes A/B controlados combinando escalas de autorrelato validadas com randomização de iluminação, dificuldade do texto e intervalos de descanso para mitigar variáveis de confusão",
+            "mechanism": "Implementar níveis adaptativos de animação com grupos A/B que variam a intensidade das animações e coletar feedback de percepção em tempo real",
             "addresses_issues": [
-              "Concentration is difficult to measure objectively, leading to unreliable results.",
-              "Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled."
+              "Reduction of animations may have negligible impact on user concentration",
+              "User perception of animation changes may be inconsistent"
             ],
             "preserves_intent": true,
             "tradeoffs": [
-              "Dependência de medidas subjetivas que podem ser enviesadas",
-              "Necessidade de maior número de participantes para obter significância estatística",
-              "Tempo prolongado para coleta e análise dos dados"
+              "Necessita maior tamanho de amostra e tempo de coleta",
+              "Possível sobrecarga cognitiva ao ajustar dinamicamente"
             ],
-            "novelty_or_difference": "Mescla de métodos qualitativos e controle experimental rigoroso dentro de um ambiente de leitura digital"
+            "novelty_or_difference": "Ajuste dinâmico de animações baseado em preferências individuais, permitindo detectar efeitos sutis"
           },
           {
-            "mechanism": "Substituir a leitura por micro‑tarefas de foco (ex.: encontrar palavras‑chave ou responder perguntas de compreensão) e usar desempenho (acurácia e tempo de resposta) como proxy de concentração, alternando a presença de animações",
+            "mechanism": "Desenhar um experimento cruzado (crossover) dentro dos mesmos participantes, alternando condições com e sem animações e usando uma tarefa padronizada de atenção sustentada para medir a concentração",
             "addresses_issues": [
-              "Concentration is difficult to measure objectively, leading to unreliable results.",
-              "Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.",
-              "Reducing animations may decrease user engagement or perceived responsiveness."
+              "Concentration measurement may be unreliable or biased",
+              "Reduction of animations may have negligible impact on user concentration",
+              "User perception of animation changes may be inconsistent"
             ],
             "preserves_intent": true,
             "tradeoffs": [
-              "O desempenho nas tarefas pode não refletir a concentração real durante leitura prolongada",
-              "Possível aumento da carga cognitiva que interfere no objetivo original",
-              "Necessidade de projetar tarefas que sejam suficientemente representativas"
+              "Sessões mais longas podem causar fadiga",
+              "Risco de efeitos de ordem que exigem contrabalançamento cuidadoso"
             ],
-            "novelty_or_difference": "Transforma a medição de concentração em métricas de performance de tarefas focais, permitindo avaliação quantitativa sem equipamentos invasivos"
+            "novelty_or_difference": "Design experimental dentro‑sujeito que controla variações individuais e percepção, aumentando a robustez dos resultados"
           }
         ]
       },
       "error": null,
-      "timestamp": "2026-09-01T07:29:15.207359+00:00"
+      "timestamp": "2026-09-01T08:08:39.579180+00:00"
     },
     {
       "step_number": 4,
@@ -205,12 +202,12 @@
       "attempt": 1,
       "success": false,
       "retry_count": 0,
-      "latency_seconds": 2375.22789478302,
+      "latency_seconds": 2124.299272298813,
       "delta_summary": "",
       "raw_response": "",
       "parsed_output": null,
-      "error": "PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199975, Requested 2790. Please try again in 19m54.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
-      "timestamp": "2026-09-01T08:08:50.442071+00:00"
+      "error": "PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198549, Requested 2676. Please try again in 8m49.2s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "timestamp": "2026-09-01T08:44:03.879441+00:00"
     }
   ]
 }

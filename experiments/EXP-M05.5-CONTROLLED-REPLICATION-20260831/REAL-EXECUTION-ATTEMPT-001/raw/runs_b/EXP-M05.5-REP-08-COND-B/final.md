@@ -12,43 +12,45 @@
 ## 2. Intenção Humana & Problema Definido
 
 - **Intenção Preservada:** Testar a hipótese de que menos animações aumentam a concentração antes de desenvolver um produto completo.
-- **Problema Central:** Avaliar se a redução de animações na interface de um leitor digital melhora a concentração durante a leitura.
-- **Atores / Usuários:** leitores digitais, usuários que leem em dispositivos digitais
+- **Problema Central:** Necessidade de verificar se a diminuição das animações da interface de um leitor digital melhora a concentração do usuário durante a leitura.
+- **Atores / Usuários:** Leitores digitais, Usuários de aplicativos de leitura, Pesquisadores de experiência do usuário
 
 
 ## 3. Versão Refinada e Mecanismo Proposto
 
-Um leitor digital que pretende avaliar, por meio de teste, se a diminuição das animações da interface durante a leitura aumenta a concentração do usuário, antes de desenvolver um produto completo.
+Realizar um teste controlado para determinar se a redução das animações de interface em um leitor digital aumenta a concentração do usuário, avaliando a hipótese antes de avançar para um produto completo.
 
 
 ## 4. Vulnerabilidades e Críticas Severas Encontradas
 
-1. **[HIGH]** Concentration is difficult to measure objectively, leading to unreliable results.
-   - *Impacto:* If the metric does not accurately reflect true concentration, the test cannot validate the hypothesis, rendering the entire study inconclusive.
+1. **[HIGH]** Concentration measurement may be unreliable or biased
+   - *Impacto:* If the metric does not accurately reflect true concentration, results will be invalid, undermining the test's purpose
    - *Parte Afetada:* Measurement methodology
-2. **[MEDIUM]** Potential confounding variables (e.g., lighting, text difficulty, user fatigue) are not controlled.
-   - *Impacto:* These factors can influence concentration independently of animation changes, biasing the outcome.
-   - *Parte Afetada:* Experimental design
-3. **[MEDIUM]** Reducing animations may decrease user engagement or perceived responsiveness.
-   - *Impacto:* A less engaging interface could offset any concentration gains, leading to negative user experience.
-   - *Parte Afetada:* User experience
+2. **[MEDIUM]** Reduction of animations may have negligible impact on user concentration
+   - *Impacto:* If the effect size is too small, the test may not justify further development, wasting resources
+   - *Parte Afetada:* Hypothesis relevance
+3. **[MEDIUM]** User perception of animation changes may be inconsistent
+   - *Impacto:* If users do not notice the difference, the experimental manipulation fails, leading to false negatives
+   - *Parte Afetada:* User interface design
 
 
 ## 5. Mecanismos Alternativos Considerados
 
-1. **Mecanismo:** Integrar sensores de rastreamento ocular e EEG para medir concentração de forma objetiva enquanto o usuário lê com diferentes níveis de animação
-   - *Tradeoffs:* Equipamento caro e necessidade de ambiente controlado, Baixa escalabilidade para testes em grande escala, Curva de aprendizado para análise dos dados fisiológicos
-2. **Mecanismo:** Realizar testes A/B controlados combinando escalas de autorrelato validadas com randomização de iluminação, dificuldade do texto e intervalos de descanso para mitigar variáveis de confusão
-   - *Tradeoffs:* Dependência de medidas subjetivas que podem ser enviesadas, Necessidade de maior número de participantes para obter significância estatística, Tempo prolongado para coleta e análise dos dados
-3. **Mecanismo:** Substituir a leitura por micro‑tarefas de foco (ex.: encontrar palavras‑chave ou responder perguntas de compreensão) e usar desempenho (acurácia e tempo de resposta) como proxy de concentração, alternando a presença de animações
-   - *Tradeoffs:* O desempenho nas tarefas pode não refletir a concentração real durante leitura prolongada, Possível aumento da carga cognitiva que interfere no objetivo original, Necessidade de projetar tarefas que sejam suficientemente representativas
+1. **Mecanismo:** Integrar medidas fisiológicas (EEG, rastreamento ocular) e autorrelatos para avaliar a concentração, cruzando os dados para validar a confiabilidade da métrica
+   - *Tradeoffs:* Custo e complexidade aumentados, Equipamento pode ser intrusivo e afetar o comportamento natural
+2. **Mecanismo:** Implementar níveis adaptativos de animação com grupos A/B que variam a intensidade das animações e coletar feedback de percepção em tempo real
+   - *Tradeoffs:* Necessita maior tamanho de amostra e tempo de coleta, Possível sobrecarga cognitiva ao ajustar dinamicamente
+3. **Mecanismo:** Desenhar um experimento cruzado (crossover) dentro dos mesmos participantes, alternando condições com e sem animações e usando uma tarefa padronizada de atenção sustentada para medir a concentração
+   - *Tradeoffs:* Sessões mais longas podem causar fadiga, Risco de efeitos de ordem que exigem contrabalançamento cuidadoso
 
 
 ## 6. Possibilidades Candidatas (Não Incorporadas ao Core)
 
-1. *[CANDIDATE]* modo de leitura sem animações
-2. *[CANDIDATE]* configuração para desativar animações
-3. *[CANDIDATE]* estudo de usabilidade com medição de concentração
+1. *[CANDIDATE]* Teste A/B
+2. *[CANDIDATE]* Estudo de usabilidade
+3. *[CANDIDATE]* Experimento controlado
+4. *[CANDIDATE]* Protótipo com opção de ativar/desativar animações
+5. *[CANDIDATE]* Coleta de métricas de atenção/concentração
 
 
 ## 10. Próximo Passo Recomendado

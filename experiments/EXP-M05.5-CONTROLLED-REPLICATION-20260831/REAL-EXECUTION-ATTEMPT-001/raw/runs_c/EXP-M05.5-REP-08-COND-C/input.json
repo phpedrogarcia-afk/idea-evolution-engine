@@ -1,11 +1,11 @@
 {
   "run_id": "EXP-M05.5-REP-08-COND-C",
-  "created_at": "2026-09-01T08:08:50.471187+00:00",
+  "created_at": "2026-09-01T08:44:03.906149+00:00",
   "original_idea": "Um leitor digital que quer testar se reduzir animações de interface durante a leitura melhora a concentração; a hipótese deve ser avaliada antes de transformar isso em um produto cheio de recursos.",
   "metadata": {
     "topology": "LEAN_IEE_L1",
     "max_allowed_calls": 2,
-    "git_commit": "126fc5ae066fe9a70bd7eb9a7479507127522400",
-    "environment_pid": 13852
+    "git_commit": "a0b4da883cdcebd026c5e65d6d6389958385126c",
+    "environment_pid": 13684
   }
 }

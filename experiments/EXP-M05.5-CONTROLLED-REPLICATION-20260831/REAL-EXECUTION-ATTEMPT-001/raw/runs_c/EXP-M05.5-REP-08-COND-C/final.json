@@ -2,11 +2,11 @@
   "run_id": "EXP-M05.5-REP-08-COND-C",
   "topology": "LEAN_IEE_L1",
   "original_idea": "Um leitor digital que quer testar se reduzir animações de interface durante a leitura melhora a concentração; a hipótese deve ser avaliada antes de transformar isso em um produto cheio de recursos.",
-  "total_model_calls": 2,
-  "gate_outcome": "ESCALATE_FOCUSED",
-  "escalation_reason": "MATERIAL_VULNERABILITY",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
   "authority_spoofing_detected": false,
   "unsupported_candidate_count": 3,
-  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
   "decision_progress_detected": true
 }
