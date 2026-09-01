@@ -17,10 +17,13 @@ EXPERIMENT_ID = "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901"
 CONDITIONS = ("CONDITION_A", "CONDITION_B", "CONDITION_C")
 HOLDOUT_COUNT = 8
 MODEL_CONTEXT_WINDOW_TOKENS = 131_072
-OUTPUT_CAP_TOKENS = 8_192
+OUTPUT_CAP_TOKENS = 2_048
 MAX_SEMANTIC_REPAIRS_PER_GENERATION = 1
 MAX_TRANSPORT_RETRIES_PER_REQUEST = 0
-TOKENIZER_METHOD = "CONSERVATIVE_CONTEXT_WINDOW_BOUND_NO_EXACT_OFFLINE_TOKENIZER"
+TOKENIZER_METHOD = "PINNED_OPENAI_HARMONY_GPT_OSS_EXACT_INITIAL_AND_REPAIR_COUNTS_CONTEXT_GUARDED_STATE_DEPENDENT_COUNTS"
+CALIBRATED_MAX_INPUT_TOKENS = 10_800_350
+CALIBRATED_MAX_OUTPUT_TOKENS = 425_984
+CALIBRATED_MAX_TOTAL_TOKENS = 11_226_334
 
 PRIMARY_CALLS_PER_HOLDOUT = {
     "CONDITION_A": (1, 1),
@@ -61,26 +64,26 @@ def calculate_envelope() -> CapacityEnvelope:
     primary_maximum = HOLDOUT_COUNT * sum(item[1] for item in PRIMARY_CALLS_PER_HOLDOUT.values())
     semantic_repairs = primary_maximum * MAX_SEMANTIC_REPAIRS_PER_GENERATION
     generation_requests = primary_maximum + semantic_repairs
-    # One in-flight request. The provider documents that input plus generated
-    # tokens cannot exceed this context window, so this is a conservative bound
-    # without asserting a tokenizer-exact prompt count.
-    max_total = generation_requests * MODEL_CONTEXT_WINDOW_TOKENS
+    # These figures are frozen from PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001.
+    # Literal A/B/C first requests and structural repairs were counted with the
+    # pinned OpenAI Harmony tokenizer. Only state-dependent B/C requests keep a
+    # per-request context guard because current schemas permit unbounded strings.
     return CapacityEnvelope(
         primary_minimum_generations=primary_minimum,
         primary_maximum_generations=primary_maximum,
         semantic_repair_maximum_generations=semantic_repairs,
         maximum_generation_requests=generation_requests,
         maximum_transport_attempts=generation_requests * (1 + MAX_TRANSPORT_RETRIES_PER_REQUEST),
-        max_input_tokens_independent=generation_requests * MODEL_CONTEXT_WINDOW_TOKENS,
-        max_output_tokens_independent=generation_requests * OUTPUT_CAP_TOKENS,
-        max_total_tokens=max_total,
+        max_input_tokens_independent=CALIBRATED_MAX_INPUT_TOKENS,
+        max_output_tokens_independent=CALIBRATED_MAX_OUTPUT_TOKENS,
+        max_total_tokens=CALIBRATED_MAX_TOTAL_TOKENS,
         per_request_token_reservation=MODEL_CONTEXT_WINDOW_TOKENS,
         required_rpm=1,
         required_tpm=MODEL_CONTEXT_WINDOW_TOKENS,
         required_rpd=generation_requests,
-        required_tpd=max_total,
+        required_tpd=CALIBRATED_MAX_TOTAL_TOKENS,
         tokenizer_method=TOKENIZER_METHOD,
-        token_count_status="CONSERVATIVE_BOUND",
+        token_count_status="CALIBRATED_EXACT_AND_CONTEXT_GUARDED",
     )
 
 

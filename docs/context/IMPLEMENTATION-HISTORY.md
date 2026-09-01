@@ -5,6 +5,16 @@
 
 ---
 
+### [PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001] Calibração Offline do Envelope de Tokens
+- **Data:** 2026-09-01
+- **Objetivo:** substituir a reserva absoluta de 27.262.976 tokens por um limite específico da replicação sem redesenhar tratamentos, holdouts, cegamento, ordem ou pacing.
+- **Entrega:** `M05.5R1-TOKEN-ENVELOPE-CALIBRATION.json`, tokenizer oficial `openai-harmony==0.0.8` / `HarmonyGptOss` pinado por hash, cap `max_completion_tokens=2048` e envelope máximo de `11.226.334` tokens.
+- **Evidência:** 88 outputs M05.4 tokenizados (máximo 811, P95 697); requests iniciais e repairs serializados localmente; 23 testes offline aprovados incluindo fixture, identidade, mutação do cap, contribuição de saída prévia e falha fechada de identidade.
+- **Resultado:** `READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; nenhuma chamada de provedor, reveal ou célula A/B/C ocorreu.
+- **Scar / aprendizado:** `CONTEXT_WINDOW_BOUND != EXPERIMENT_ENVELOPE`; schemas com strings Unicode sem limite impedem apertar as 80 requests state-dependent abaixo do guard `input + cap <= context` sem mudar a semântica do tratamento.
+
+---
+
 ### [PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001] Freeze Offline de Capacidade e Ordem
 - **Data:** 2026-09-01
 - **Objetivo:** remover o conflito de desenho de capacidade sem tocar em holdouts/reveal, chamar o provedor ou executar A/B/C.
@@ -562,7 +572,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 

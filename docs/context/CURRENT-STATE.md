@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-007
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-008
 
 ---
 
@@ -26,12 +26,12 @@
   - Controles offline: namespace/receipt imutável, boundary sintético de holdout e gate de capacidade fail-closed; 12 testes sintéticos passaram.
   - Holdouts: `M05.5R1-HOLDOUT-SET-REV1` foi selado literalmente fora do repositório; receipt hashado está em `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/`.
   - Blinding: REV1 foi congelada em cofre externo; o repositório tem somente seu commitment, sem reveal.
-  - Capacity design: `FROZEN_READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; cap de saída 8192, envelope conservador de 208 requests, schedule CSPRNG comprometido e pacing de concorrência 1 foram congelados offline.
+  - Capacity design: `CALIBRATED_READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; o cap é `2048`, o envelope máximo específico é `11,226,334` tokens (redução de 58,82% sobre 27,262,976), 208 requests máximos incluindo repairs explícitos, schedule CSPRNG comprometido e pacing de concorrência 1 permanecem congelados offline.
   - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), evidência autenticada de capacidade, preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-007`](checkpoints/CP-20260901-007.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-007`
+- **Último Checkpoint Imutável:** [`CP-20260901-008`](checkpoints/CP-20260901-008.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-008`
 - **Git Branch:** `main`
-- **Worktree no planejamento R2:** `DIRTY_PLANNING_PENDING_COMMIT`
+- **Worktree após a calibração:** `PENDING_CHECKPOINT_COMMIT`
 
 ---
 
@@ -47,10 +47,11 @@
   - `PFI-M05_5R1-BLINDING-REV1-001`, que congelou o reveal A/B/C ↔ R1/R2/R3 em cofre externo e publicou somente commitment.
   - `PFI-M05_5R1-REAL-CAPACITY-READINESS-001`, que encontrou TPD restante não comprovado, envelope total de tokens não limitado e ausência de schedule neutro; nenhuma chamada ou tratamento foi feito.
   - `PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001`, que congelou o cap, bound conservador, schedule neutro, pacing e invalidações sem tocar em holdouts/reveal ou provedor.
+  - `PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001`, que substituiu o bound de contexto inteiro por um envelope tokenizado com `openai-harmony` oficial, sem inferência, reveal ou execução A/B/C.
 - **Tarefa Ativa Atual:**
   - M05.5R1 possui harness offline validado; execução real não está autorizada.
 - **Próximo Passo Exato:**
-  - Autorizar uma missão autenticada de capacity check para a conta Groq exata; preflight e execução continuam decisões posteriores e separadas.
+- Autorizar uma missão autenticada de capacity check para a conta Groq exata contra o envelope calibrado; preflight e execução continuam decisões posteriores e separadas.
 
 ---
 

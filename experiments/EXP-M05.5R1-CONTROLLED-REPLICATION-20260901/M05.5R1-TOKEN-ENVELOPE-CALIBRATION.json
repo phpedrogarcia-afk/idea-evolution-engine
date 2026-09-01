@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "mission_id": "PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001",
+  "execution_authority": "OFFLINE_ONLY",
+  "input_head": "0845a23ddba644cdc1056200a13438ecbbc26e34",
+  "experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901",
+  "model": "openai/gpt-oss-120b",
+  "tokenizer": {
+    "package": "openai-harmony",
+    "package_version": "0.0.8",
+    "wheel_sha256": "39d44f0d8f466bd56698e7ead708bead3141e27b9b87e3ab7d5a6d0e4a869ee5",
+    "encoding_name": "HarmonyGptOss",
+    "identity_sha256": "45c75e9070327773c24c9c7a345f18cf11afb17eba36108667bffc35f84f7e39",
+    "artifact_download": "OFFICIAL_TOKENIZER_ARTIFACT_ONLY_NOT_INFERENCE"
+  },
+  "m05_4_output_tokens": {
+    "count": 88,
+    "min": 93,
+    "max": 811,
+    "p50": 474,
+    "p95": 697,
+    "distribution": {
+      "per_kind": {
+        "CANONICAL_VALIDATED_FALLBACK": {"count": 8, "min": 300, "max": 575},
+        "DIRECT_RAW": {"count": 80, "min": 93, "max": 811}
+      },
+      "histogram": {"0-255": 16, "256-511": 33, "512-767": 37, "768-1023": 2}
+    }
+  },
+  "output_cap": {
+    "old": 8192,
+    "new": 2048,
+    "decision": "LOWER_TO_DEFENSIBLE_NONBINDING_CAP",
+    "headroom_vs_max_observed": 2.525277435265105,
+    "headroom_vs_p95_observed": 2.938307030129125,
+    "treatment_semantics_changed": false,
+    "reason": "All schemas remain unchanged; cap hits remain observable and invalidating."
+  },
+  "request_maxima": {
+    "A": {"input_tokens": 494, "output_tokens": 2048, "total_tokens": 2542, "fixed_prompt_tokens": 428, "holdout_tokens": 56, "schema_tokens": 225, "protocol_overhead_tokens": 10, "previous_output_tokens": 0, "source": "A_FROZEN_BASELINE"},
+    "B": {"input_tokens": 129024, "output_tokens": 2048, "total_tokens": 131072, "fixed_prompt_tokens": 0, "holdout_tokens": 0, "schema_tokens": 0, "protocol_overhead_tokens": 0, "previous_output_tokens": 2048, "source": "STATE_DEPENDENT_CONTEXT_GUARD_INPUT_PLUS_CAP_LE_CONTEXT_WINDOW"},
+    "C": {"input_tokens": 129024, "output_tokens": 2048, "total_tokens": 131072, "fixed_prompt_tokens": 0, "holdout_tokens": 0, "schema_tokens": 0, "protocol_overhead_tokens": 0, "previous_output_tokens": 2048, "source": "STATE_DEPENDENT_CONTEXT_GUARD_INPUT_PLUS_CAP_LE_CONTEXT_WINDOW"}
+  },
+  "initial_request_maxima": {
+    "A_BASELINE": {"input_tokens": 494, "output_tokens": 2048, "total_tokens": 2542, "fixed_prompt_tokens": 428, "holdout_tokens": 56, "schema_tokens": 225, "protocol_overhead_tokens": 10, "previous_output_tokens": 0, "source": "A_FROZEN_BASELINE"},
+    "B_UNDERSTAND": {"input_tokens": 1048, "output_tokens": 2048, "total_tokens": 3096, "fixed_prompt_tokens": 982, "holdout_tokens": 56, "schema_tokens": 429, "protocol_overhead_tokens": 10, "previous_output_tokens": 0, "source": "B_UNDERSTAND_FROZEN"},
+    "C_LEAN_FIRST_PASS": {"input_tokens": 1278, "output_tokens": 2048, "total_tokens": 3326, "fixed_prompt_tokens": 1212, "holdout_tokens": 56, "schema_tokens": 1117, "protocol_overhead_tokens": 10, "previous_output_tokens": 0, "source": "C_LEAN_FIRST_PASS_FROZEN"}
+  },
+  "state_dependent_positions": {
+    "B": {"count": 72, "positions_per_holdout": 9, "guard": "serialized_input + 2048 <= 131072"},
+    "C": {"count": 8, "positions_per_holdout": 1, "guard": "serialized_input + 2048 <= 131072"}
+  },
+  "repair_maximum": {"input_tokens": 4385, "output_tokens": 2048, "total_tokens": 6433, "fixed_prompt_tokens": 2337, "holdout_tokens": 0, "schema_tokens": 1117, "protocol_overhead_tokens": 0, "previous_output_tokens": 2048, "source": "STRUCTURAL_REPAIR_LEAN_FIRST_PASS_NO_HOLDOUT"},
+  "request_counts": {"max_primary_requests": 104, "max_repair_requests": 104, "max_transport_requests": 208, "transport_retries": 0},
+  "experiment_max_input_tokens": 10800350,
+  "experiment_max_output_tokens": 425984,
+  "experiment_max_total_tokens": 11226334,
+  "old_full_context_bound": 27262976,
+  "bound_reduction_percent": 58.8221,
+  "max_single_request_token_load": 131072,
+  "required_tpm_for_no_wait": 131072,
+  "safe_pacing_policy": "CONCURRENCY_1; before every request count the frozen serialized message; dispatch only if serialized_input + cap <= 131072 and remaining TPM covers that load; otherwise wait without changing the committed schedule.",
+  "hard_bound_scope": "A/B/C initial requests and all structural repairs are tokenizer-counted exactly. State-dependent B/C requests are guarded at the actual model context limit; this is required because current output schemas permit unconstrained Unicode strings whose reserialization cannot be bounded more narrowly without changing treatment semantics.",
+  "observed_expected_envelope": "NOT_EMITTED_M05_4_OUTPUT_HISTORY_DOES_NOT_PROVE_M05_5R1_STATE_DEPENDENT_INPUT_MAXIMUM",
+  "holdout_content_exposed_to_coordinator": false,
+  "reveal_accessed": false,
+  "provider_calls": 0,
+  "network_inference_calls": 0,
+  "a_b_c_cells_executed": 0,
+  "real_replication_started": false
+}

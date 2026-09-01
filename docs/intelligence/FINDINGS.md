@@ -16,6 +16,14 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 
 ## 2. Catálogo de Achados Estruturados
 
+### [FINDING-030] Envelope de Capacidade Deve Distinguir Serialização Conhecida de Estado Dependente
+- **Claim:** O teto da plataforma é seguro, mas não serve como decisão de capacidade quando existem requests iniciais e repairs cuja serialização pode ser medida. A contagem exata com `HarmonyGptOss` reduziu o teto M05.5R1 de 27.262.976 para 11.226.334 tokens sem alterar A/B/C; as 80 posições dependentes de estado permanecem protegidas pelo guard de contexto porque os schemas permitem strings Unicode sem limite.
+- **Evidence:** `M05.5R1-TOKEN-ENVELOPE-CALIBRATION.json`, `tools/experiments/m05_5r1_token_envelope.py` e 23 testes offline de envelope/ordem.
+- **Status:** `CONFIRMED_BY_OFFLINE_TOKENIZATION_AND_CONTROLS`
+- **Implications:** Capacity check autenticado pode usar o envelope calibrado; ele continua distinto de prova de saldo da conta, preflight ou autorização de execução.
+
+---
+
 ### [FINDING-029] Quota Deve Ser Parte do Contrato Experimental, Não um Efeito Colateral do Transporte
 - **Claim:** Um experimento comparativo não pode tratar limites de quota como detalhe operacional: output sem cap, reparos implícitos e ordem fixa de tratamentos impedem estimar capacidade e podem confundir o efeito do tratamento com posição na janela do provedor.
 - **Evidence:** M05.5R1 Capacity Design Freeze: 104 gerações primárias, até 104 reparos estruturados adicionais, outputs M05.4 válidos e 18 testes sintéticos incluindo controles negativos de ordem, TPD desconhecido e retry não planejado.
@@ -277,7 +285,6 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Status:** `DIAGNOSED_ROOT_CAUSE_PROVEN`
 - **Implications:** Proibido realizar avaliação humana sobre o pacote atual. O harness deve ser corrigido em missão dedicada (M05.4-P1R) com novo ID experimental, mantendo o protocolo pré-registrado e as 8 ideias holdout intactas.
 - **Related Decisions:** [M05.4-P1A AUDIT](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-027.md)
-
 
 
 

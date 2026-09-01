@@ -33,9 +33,9 @@ def test_envelope_is_source_bound_and_repair_inclusive():
     assert item.semantic_repair_maximum_generations == 104
     assert item.maximum_generation_requests == 208
     assert item.maximum_transport_attempts == 208
-    assert item.max_total_tokens == 208 * MODEL_CONTEXT_WINDOW_TOKENS
+    assert item.max_total_tokens == 11_226_334
     assert item.max_output_tokens_independent == 208 * OUTPUT_CAP_TOKENS
-    assert item.token_count_status == "CONSERVATIVE_BOUND"
+    assert item.token_count_status == "CALIBRATED_EXACT_AND_CONTEXT_GUARDED"
 
 
 def test_condition_call_ceilings_are_preserved_in_primary_and_repair_bounds():
