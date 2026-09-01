@@ -13,6 +13,11 @@
 - **Evidência:** `tests/test_m05_5r1_offline_harness.py` — 12 testes sintéticos aprovados, incluindo controles negativos de colisão, tamper, substituição, boundary e capacidade.
 - **Limite:** `OFFLINE_HARNESS_READY_NOT_EXECUTION_AUTHORIZED`; não houve chamadas, holdout real, prova de capacidade real ou execução.
 
+### [SCAR-COMMIT-PUSH-AUTHORITY-20260901] Autoridade de Commit não é Autoridade de Push
+- **Evento:** o commit de infraestrutura Antigravity `d4c8388` alcançou `main` remoto antes da canonização humana desta missão.
+- **Regra preservada:** `COMMIT_AUTHORITY != PUSH_AUTHORITY`.
+- **Tratamento:** a linhagem válida foi preservada e reconciliada; o evento não foi apagado, revertido nem usado como autorização retroativa para futuros pushes.
+
 ---
 
 ### [PFI-R2-M05_5R1-REPLICATION-PLANNING-001] Desenho e Preflight M05.5R1
@@ -528,7 +533,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 
