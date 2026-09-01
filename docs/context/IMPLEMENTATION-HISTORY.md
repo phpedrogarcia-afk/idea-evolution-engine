@@ -5,6 +5,14 @@
 
 ---
 
+### [PFI-M05_5R1-REAL-CAPACITY-READINESS-001] Capacity Evidence Sem Execução
+- **Data:** 2026-09-01
+- **Objetivo:** verificar se uma tentativa M05.5R1 completa cabe na capacidade real sem expor holdouts/reveal, chamar o modelo ou executar tratamentos.
+- **Evidência:** o envelope lógico congelado é 64..104 gerações; há até 312 tentativas de transporte contingentes. O cliente Groq não congela limite de saída e não existe schedule de pacing/interleaving neutro. A página oficial de limites sem sessão não revelou conta, limites, remaining TPD ou reset.
+- **Resultado:** `STOP_CAPACITY_DESIGN_CONFLICT`; `PROVIDER_QUOTA_READY = UNKNOWN`; `EXECUTION_READY_CAPACITY = NO`; `A_B_C_CELLS_EXECUTED = 0`.
+- **Scar / aprendizado:** `DOCUMENTED_LIMIT != ACCOUNT_REMAINING_CAPACITY`; `104_LOGICAL_GENERATIONS != BOUNDED_TOKEN_ENVELOPE`; a ordem A→B→C é um confound potencial quando quota pode se esgotar.
+- **Próximo passo:** decisão humana separada sobre desenho de ordem/pacing neutro e limites de token; só então coletar estado autenticado da conta/projeto Groq exatos.
+
 ### [PFI-R3-M05_5R1-OFFLINE-HARNESS-HARDENING-001] Harness Offline M05.5R1
 - **Data:** 2026-09-01
 - **Autor / Agente:** Codex
@@ -546,7 +554,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 

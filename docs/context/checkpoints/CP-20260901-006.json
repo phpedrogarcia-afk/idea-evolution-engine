@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "CP-20260901-006",
+  "created_at": "2026-09-01T15:08:33-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Determinar a prontidão de capacidade real M05.5R1 sem acessar holdouts/reveal, chamar provedor ou executar tratamento.",
+  "repository": {"branch": "main", "commit": "d71d8927d3f35d2172ea8e424a1a4913c8712796", "worktree_state": "DIRTY_UNTIL_CAPACITY_RECEIPT_COMMIT"},
+  "completed_tasks": ["PFI-M05_5R1-REAL-CAPACITY-READINESS-001"],
+  "changed_files": ["experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-REAL-CAPACITY-READINESS-RECEIPT.json", "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md", "docs/context/CURRENT-STATE.md", "docs/context/ACTIVE-QUEUE.md", "docs/context/IMPLEMENTATION-HISTORY.md"],
+  "new_decisions": ["M05.5R1 não está pronta para autorização de execução: remaining TPD não foi comprovado para a conta real.", "O sequenciamento A→B→C por holdout não previne viés de quota; uma política neutra exige decisão de desenho separada."],
+  "tests_executed": ["Inspeção estática das topologias A/B/C e do cliente Groq congelado.", "Consulta a documentação oficial Groq e à página oficial de limites sem sessão autenticada.", "Validação de ausência de acesso a holdout/reveal e de chamadas ao provedor."],
+  "unresolved_questions": ["Qual política de ordem/pacing, aprovada separadamente, preservará comparabilidade sob quota?", "Quais são limites e remaining TPD atuais da organização/projeto Groq exatos?"],
+  "known_contradictions": ["O helper offline admite envelope sintético de 104 pedidos, mas o executor não congela limites de saída, tokenizer ou schedule de pacing reais."],
+  "known_risks": ["Uma execução sob TPD desconhecido ou ordem A→B→C pode confundir o tratamento com exaustão de quota.", "Até duas retransmissões de transporte por geração elevam o teto de tentativas a 312 em falhas transientes."],
+  "blockers": ["TPD restante não provider-reported/current.", "Envelope total de tokens não limitado no código congelado.", "Desenho de ordem/pacing neutro ausente."],
+  "next_exact_action": "Decisão humana sobre autorizar uma missão de resolução de desenho para ordem/pacing neutros e limites de token configurados; sem execução.",
+  "authorized_next_scope": ["Somente resolução pré-execução explicitamente autorizada.", "Nenhum tratamento, reveal, holdout bruto, execução, bridge FioOS ou elevação de autoridade."],
+  "do_not_repeat": ["Não usar uma página de documentação ou HTTP 200 como prova de remaining TPD.", "Não reexecutar R2/R3.", "Não acessar reveal ou holdouts para suprir limites de provedor."],
+  "recovery_notes": "O receipt de capacity readiness registra CAPACITY_UNKNOWN/STOP_CAPACITY_DESIGN_CONFLICT sem segredo, literal de holdout ou mapeamento cego. Este checkpoint não autoriza preflight ou execução."
+}
