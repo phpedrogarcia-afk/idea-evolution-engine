@@ -5,6 +5,15 @@
 
 ---
 
+### [PFI-M05_5R1-AUTHENTICATED-CAPACITY-CHECK-001] Evidência Autenticada de Capacidade
+- **Data:** 2026-09-01
+- **Objetivo:** obter limites/saldos da conta Groq exata para comparar com o envelope calibrado, sem executar tratamentos.
+- **Resultado:** `AUTHENTICATED_CAPACITY_UNAVAILABLE`; não havia configuração autenticada local e a sessão do console não estava logada. Nenhuma chamada ao provedor foi feita.
+- **Evidência:** `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-001.json`, sem segredos, holdouts ou reveal.
+- **Próximo passo mínimo:** login humano na conta/projeto Groq pretendidos; não colar API key no chat.
+
+---
+
 ### [PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001] Calibração Offline do Envelope de Tokens
 - **Data:** 2026-09-01
 - **Objetivo:** substituir a reserva absoluta de 27.262.976 tokens por um limite específico da replicação sem redesenhar tratamentos, holdouts, cegamento, ordem ou pacing.
@@ -572,6 +581,5 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 

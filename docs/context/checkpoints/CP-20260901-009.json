@@ -1,0 +1,49 @@
+{
+  "checkpoint_id": "CP-20260901-009",
+  "created_at": "2026-09-01T20:09:14.294240",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "M05.5R1 authenticated Groq capacity check",
+  "repository": {
+    "branch": "main",
+    "commit": "5d5d048",
+    "worktree_state": "DIRTY"
+  },
+  "completed_tasks": [
+    "Canonicalized and fast-forward pushed calibration 5d5d048 to origin/main",
+    "Checked local non-secret configuration and existing Groq console session without reading credentials",
+    "Recorded authenticated capacity as unavailable with zero provider calls"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-AUTHENTICATED-CAPACITY-CHECK-001.json",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [
+    "No generic documentation is substituted for authenticated account capacity",
+    "TPD, TPM, RPD and RPM remain UNKNOWN without authenticated account evidence"
+  ],
+  "tests_executed": [
+    "Credential-presence check only; no provider call",
+    "Console session check found login required"
+  ],
+  "unresolved_questions": [
+    "Exact Groq account tier, limits, usage, TPD remaining and reset window"
+  ],
+  "known_contradictions": [],
+  "known_risks": [],
+  "blockers": [
+    "Human sign-in to intended Groq account/project is required"
+  ],
+  "next_exact_action": "Human signs in to the intended Groq account/project, then resume authenticated capacity evidence collection",
+  "authorized_next_scope": [
+    "Capacity evidence only after authentication"
+  ],
+  "do_not_repeat": [
+    "Do not paste API keys into chat",
+    "Do not access holdouts or reveal",
+    "Do not execute A/B/C"
+  ],
+  "recovery_notes": "Consulte CONTINUITY-CAPSULE.md e execute project_status.py."
+}

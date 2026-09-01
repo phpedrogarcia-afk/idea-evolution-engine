@@ -9,6 +9,7 @@
 
 - [ ] **HUMAN-DECISION-M05.5R1-AUTHENTICATED-CAPACITY-CHECK:** autorizar obtenção/verificação dos limites e saldos reais da organização/projeto Groq para o envelope M05.5R1 calibrado.
   - **Fato de partida:** `max_completion_tokens=2048`, envelope máximo `11,226,334`, schedule e pacing estão congelados; remaining TPD da conta real continua não comprovado.
+  - **Bloqueio observado:** não havia `GROQ_API_KEY` configurada localmente nem sessão autenticada no console Groq; receipt `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-001.json` registra somente campos não secretos como `UNKNOWN`.
   - **Escopo possível:** somente evidência autenticada de capacidade, sem chamada semântica, A/B/C, execução real, reveal, alteração de produto ou integração FioOS.
 
 ---
