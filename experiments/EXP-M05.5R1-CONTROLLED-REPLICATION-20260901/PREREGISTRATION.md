@@ -1,6 +1,6 @@
 # PREREGISTRATION: EXP-M05.5R1-CONTROLLED-REPLICATION
 
-**Status:** FROZEN (Awaiting Supervisor Approval, DO NOT EXECUTE)
+**Status:** DRAFT_PENDING_SUPERVISOR_FREEZE
 **Type:** Controlled Replication (Clean Rerun of M05.5)
 
 ## 1. Goal
@@ -14,19 +14,21 @@ Repeat the intended M05.5 reliability experiment without carrying forward contam
 - **Model:** openai/gpt-oss-120b
 
 ## 3. New Holdouts (N=8)
-To guarantee uncontaminated provenance, 8 completely new holdouts are defined, maintaining the original conceptual classes:
+To guarantee uncontaminated provenance, 8 completely new holdouts MUST be defined, maintaining the original conceptual classes. Current draft is rejected because the designer knew treatment results. New independent holdouts are awaited for:
 
-- **REP-01 (Simple constrained utility):** Um aplicativo de menu de barra (menu bar) que exibe apenas a velocidade atual de download/upload da rede e permite definir um alarme se a conexão cair por mais de 10 segundos, sem histórico.
-- **REP-02 (Fertile/incubative):** Como usar o modelo mental de "jardinagem" em vez de "arquitetura" para o desenvolvimento de software colaborativo, aceitando o crescimento orgânico e a poda.
-- **REP-03 (Two plausible mechanisms):** Um sistema de votação para pequenas equipes que pode funcionar através de alocação de pontos distribuídos (token voting) ou através de veto único (consensus minus one) para aprovar designs.
-- **REP-04 (Hard local/privacy constraint):** Um diário pessoal em áudio no celular onde a transcrição é feita por um modelo rodando 100% no dispositivo (on-device) e o áudio original é destruído imediatamente após a transcrição.
-- **REP-05 (Physical operational idea):** Um sensor de umidade de solo feito com sucata eletrônica que acende um LED vermelho quando a planta precisa de água, sem nenhum tipo de conectividade Wi-Fi ou Bluetooth.
-- **REP-06 (Normative human decision):** Um comitê de moderação deve priorizar a exclusão de conteúdos que causam dano emocional comprovado aos membros da comunidade, mesmo que isso restrinja o humor ácido e a sátira?
-- **REP-07 (Simple developer tool):** Um script de linha de comando que lê um arquivo .env e verifica se todas as variáveis obrigatórias estão presentes no sistema antes de iniciar um serviço de backend.
-- **REP-08 (Testable product hypothesis):** Se exibirmos o tempo estimado de leitura no topo de cada artigo, a taxa de rejeição (bounce rate) diminuirá em pelo menos 15%, pois os usuários terão expectativas mais claras.
+1. SIMPLE_CONSTRAINED_UTILITY
+2. FERTILE_INCUBATIVE
+3. TWO_PLAUSIBLE_MECHANISMS
+4. HARD_LOCAL_PRIVACY_CONSTRAINT
+5. PHYSICAL_OPERATIONAL_IDEA
+6. NORMATIVE_HUMAN_DECISION
+7. SIMPLE_DEVELOPER_TOOL
+8. TESTABLE_PRODUCT_HYPOTHESIS
 
-## 4. New Blinding (Rev3)
-An entirely fresh mapping will be created using an OS-backed CSPRNG. 
+*Note: Holdouts must NOT be REP-01..08. New literal text is required.*
+
+## 4. New Blinding (Revision 1)
+An entirely fresh mapping (BLINDING_REVISION = 1) will be created using an OS-backed CSPRNG once new holdouts are frozen. 
 - Mapping must NEVER be printed or logged.
 - Reveal is stored only in a canonical external sealed directory.
 - Only the commitment hash is committed to this repository.
@@ -43,13 +45,14 @@ Once an attempt performs its first semantic provider call, its `ATTEMPT_ID` beco
 ### Provider Quota Readiness Gate
 Before the first real holdout call, a deterministic `PROVIDER_QUOTA_READINESS_GATE` will verify adequate same-model quota exists for the complete experiment.
 - No holdout text may be sent through this gate. Use a neutral non-holdout synthetic string (recorded as `INFRASTRUCTURE_QUOTA_PROBE`).
-- Estimate Required Quota: Based on M05.4, if token counts are unavailable, the gate requires a freshly reset provider quota window (e.g., full 200,000 TPD for Groq) and NO competing Groq work during the experiment.
+- Estimate Required Quota: Since historical exact usage is unproven, the gate requires a freshly reset provider quota window and NO competing workloads.
 
 ### Exclusive Provider Window
 During primary execution:
 - NO diagnostic model calls.
 - NO Groq pings.
-- NO unrelated Groq workloads.
+- NO parallel Groq experiments.
+- NO unrelated workloads under the same known quota.
 - The primary runner owns the experimental provider window.
 
 ## 6. Execution Readiness Contract
