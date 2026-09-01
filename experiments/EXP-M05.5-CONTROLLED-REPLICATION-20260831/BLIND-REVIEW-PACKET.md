@@ -530,37 +530,27 @@ Define the exact command‑line syntax and help output, Implement core copy‑wi
 
 ## 2. Intenção & Problema Estruturado (Lean First Pass)
 
-- **Intenção do Usuário:** Avaliar empiricamente a hipótese de que menos animações aumentam a concentração antes de desenvolver um produto completo.
-- **Problema Interpretado:** Leitores digitais podem ter sua concentração prejudicada por animações de interface, e deseja‑se testar se a redução dessas animações melhora o foco durante a leitura.
+- **Intenção do Usuário:** Testar a hipótese de que menos animações aumentam foco, validando-a com experimentos antes de investir em recursos adicionais.
+- **Problema Interpretado:** Avaliar se a redução de animações na interface de um leitor digital melhora a concentração do usuário antes de desenvolver um produto completo.
 
 ## 3. Mecanismo Primário Proposto
 
-**Mecanismo:** Desativar ou reduzir animações de interface durante a sessão de leitura para minimizar distrações visuais
+**Mecanismo:** Reduzir animações da interface durante a leitura
 - **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`
-- **Justificativa:** Animações podem desviar a atenção do texto; ao removê‑las espera‑se que o leitor mantenha maior foco e retenção
+- **Justificativa:** Animações podem gerar carga cognitiva extra, distraindo o leitor; ao removê‑las espera‑se melhorar foco e retenção.
 
 
 ## 4. Alternativas Concorrentes Identificadas
 
-1. **Manter animações, mas oferecer um modo "sem distrações" que o usuário pode ativar manualmente** (Base: `MODEL_HYPOTHESIS`)
-   - *Tradeoffs:* Complexidade adicional de UI, Risco de que usuários esqueçam de ativar o modo
-2. **Ajustar a velocidade ou intensidade das animações em vez de removê‑las completamente** (Base: `MODEL_HYPOTHESIS`)
-   - *Tradeoffs:* Pode ainda ser suficiente para distrair alguns usuários, Implementação mais complexa
+1. **Ocultar elementos não essenciais (menus, barras laterais) durante a leitura** (Base: `MODEL_HYPOTHESIS`)
+   - *Tradeoffs:* Reduz a acessibilidade rápida a funções, Pode confundir usuários acostumados ao layout completo
+2. **Aplicar tema escuro e reduzir brilho da tela** (Base: `MODEL_HYPOTHESIS`)
+   - *Tradeoffs:* Nem todos preferem tema escuro, Pode não impactar distrações de animação
 
-
-## 6. Resultado da Escalação Focada (Chamada 2)
-
-**Incerteza Alvo:** Desativar ou reduzir animações de interface durante a sessão de leitura para minimizar distrações visuais
-- **Análise / Crítica:** A vulnerabilidade de viés de seleção pode inflar os efeitos percebidos das animações; participantes mais propensos a se distrair podem ser sub-representados, comprometendo a validade externa dos resultados.
-- **Trade-offs Resolvidos:** Equilíbrio entre usabilidade fluida e redução de distrações, Impacto de desempenho ao desativar animações, Possível diminuição de engajamento visual
-- **Testes Discriminativos Sugeridos:**
-  - [ ] Teste A/B comparando grupos com animações ativadas vs desativadas medindo taxa de compreensão e tempo de leitura
-  - [ ] Análise de retenção de informação em participantes com diferentes perfis de sensibilidade visual
-- **Progresso Decisório:** `True`
 
 ## 7. Próximo Passo Recomendado
 
-Implementar o teste A/B descrito e analisar diferenças estatísticas nas métricas de compreensão
+Desenvolver duas versões do leitor (padrão e com animações reduzidas), conduzir teste A/B com leitores reais, coletar métricas de concentração (ex.: auto‑relato, eye‑tracking) e satisfação, analisar resultados para validar ou refutar a hipótese.
 
 ---
 
@@ -584,13 +574,13 @@ Definir métricas específicas (tempo de leitura, pontuação de compreensão, e
 ## RESULTADO 3
 
 ### Ideia Refinada Final
-Um leitor digital que pretende avaliar, por meio de teste, se a diminuição das animações da interface durante a leitura aumenta a concentração do usuário, antes de desenvolver um produto completo.
+Realizar um teste controlado para determinar se a redução das animações de interface em um leitor digital aumenta a concentração do usuário, avaliando a hipótese antes de avançar para um produto completo.
 
 ### Intenção Humana Preservada
 Testar a hipótese de que menos animações aumentam a concentração antes de desenvolver um produto completo.
 
 ### Mecanismo Central
-reduzir animações de interface durante a leitura
+Reduzir as animações da interface durante a leitura.
 
 ### Incertezas Críticas Remanescentes
 
