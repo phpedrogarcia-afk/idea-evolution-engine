@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "holdout_set_id": "M05.5R1-HOLDOUT-SET-REV1",
+  "revision": "REV1",
+  "holdout_set_status": "FROZEN",
+  "holdout_count": 8,
+  "holdout_ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08"],
+  "frozen_at": "2026-09-01T14:48:43-03:00",
+  "source_generation_mission": "PFI-M05_5R1-INDEPENDENT-BLINDED-HOLDOUT-GENERATION-001",
+  "supervisor_acceptance_state": "ACCEPT_AS_GENERATED",
+  "items": [
+    {"id": "H01", "class": "SIMPLE_CONSTRAINED_UTILITY", "raw_idea_sha256": "972d540972f900411d115213e545695939aefc6d11a4d9c7492feaa39f4b2a7b"},
+    {"id": "H02", "class": "FERTILE_INCUBATIVE", "raw_idea_sha256": "6597817ddb08bf1a44d1cf247380103b5d71a33af54f0e96ffb46f576abd99eb"},
+    {"id": "H03", "class": "TWO_PLAUSIBLE_MECHANISMS", "raw_idea_sha256": "a1dfbc9d21080d549a0ae6f6af2cd13b8aba82a50da651f75794f5c17a09b22d"},
+    {"id": "H04", "class": "HARD_LOCAL_PRIVACY_CONSTRAINT", "raw_idea_sha256": "dd826e7d9061a6a442d2b41cfe57e5a07b33c681dd1c39b8f41dfdffdf6943c5"},
+    {"id": "H05", "class": "PHYSICAL_OPERATIONAL_IDEA", "raw_idea_sha256": "0ec48ac0a03240d9a5c7cab516702c374b566932c2f62c9095c49456dbd8530d"},
+    {"id": "H06", "class": "NORMATIVE_HUMAN_DECISION", "raw_idea_sha256": "4aab00aee9dd972540daaf7baa57c999450b2169e77ffabf5ada971e49c674fa"},
+    {"id": "H07", "class": "SIMPLE_DEVELOPER_TOOL", "raw_idea_sha256": "67553304847a466aadf171320b97dd954e141c4d119b4a3f19b69fd2841df772"},
+    {"id": "H08", "class": "TESTABLE_PRODUCT_HYPOTHESIS", "raw_idea_sha256": "7f30569705dc16f95aaab53fb77d18849995a63d7aa97da195e19e4bc964ba67"}
+  ],
+  "holdout_set_sha256": "9b2a3b004a3b5533072bf7b6974ed17ee0180b61788621eefa03e1da12092cb9",
+  "r3_boundary_receipt": {
+    "content_sha256": "e0bf1727635fc2eda80c1fb6fb75605762ec7ef1e99b641be4d5f44d08231af5",
+    "count": 8,
+    "guardian_id": "HUMAN_SUPERVISOR_ACCEPT_AS_GENERATED",
+    "sealed_at": "2026-09-01T14:48:43-03:00",
+    "integrity_sha256": "e33e65bb6bb4e82de1e6c5e3f56b3c7eae99014aecfbe14824dd43ec28460755"
+  },
+  "sealed_storage": "EXTERNAL_LOCAL_SEALED_STORE",
+  "repository_contains_raw_content": false,
+  "pre_evaluation_access_denied": true,
+  "access_audit_external": true,
+  "provider_calls": 0,
+  "experiment_execution_performed": false
+}

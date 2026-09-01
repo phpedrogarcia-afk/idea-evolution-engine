@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-003
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-004
 
 ---
 
@@ -24,9 +24,10 @@
 - **M05.5R1 (EXP-M05.5R1-CONTROLLED-REPLICATION-20260901):** `OFFLINE_HARNESS_READY_NOT_EXECUTION_AUTHORIZED`
   - Contrato: `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md`.
   - Controles offline: namespace/receipt imutável, boundary sintético de holdout e gate de capacidade fail-closed; 12 testes sintéticos passaram.
-  - Bloqueios reais: holdouts selados, receipt de capacidade real, blind mapping, preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-003`](checkpoints/CP-20260901-003.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-003`
+  - Holdouts: `M05.5R1-HOLDOUT-SET-REV1` foi selado literalmente fora do repositório; receipt hashado está em `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/`.
+  - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), além de receipt de capacidade real, blind mapping, preflight e autorização humana separada.
+- **Último Checkpoint Imutável:** [`CP-20260901-004`](checkpoints/CP-20260901-004.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-004`
 - **Git Branch:** `main`
 - **Worktree no planejamento R2:** `DIRTY_PLANNING_PENDING_COMMIT`
 
@@ -40,10 +41,11 @@
   - `PFI-R1-STATE-QUEUE-RECONCILIATION-001`, que substituiu o estado pré-execução obsoleto pela classificação acima.
   - `PFI-R2-M05_5R1-REPLICATION-PLANNING-001`, que congelou o desenho mínimo e identificou os controles determinísticos ainda ausentes.
   - `PFI-R3-M05_5R1-OFFLINE-HARNESS-HARDENING-001`, que corrigiu os controles offline sem chamadas, holdouts reais ou alteração de autoridade.
+  - `PFI-M05_5R1-HOLDOUT-SEALING-001`, que congelou REV1 literalmente em cofre externo e publicou somente seu receipt permitido.
 - **Tarefa Ativa Atual:**
   - M05.5R1 possui harness offline validado; execução real não está autorizada.
 - **Próximo Passo Exato:**
-  - Selar novos holdouts e blind mapping fora do repositório e obter receipt real de capacidade; depois, autorizar preflight e execução em decisões separadas.
+  - Autorizar uma missão separada para criar o blind treatment mapping REV1; depois, obter receipt real de capacidade e autorizar preflight e execução em decisões separadas.
 
 ---
 

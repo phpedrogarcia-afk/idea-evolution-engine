@@ -1,0 +1,36 @@
+{
+  "checkpoint_id": "CP-20260901-004",
+  "created_at": "2026-09-01T14:48:43-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Congelar literalmente o conjunto independente M05.5R1 REV1 fora do repositório e publicar somente recibos permitidos.",
+  "repository": {
+    "branch": "main",
+    "commit": "2d2479d8790b638c897b26c17d5d33f00f6ac5e2",
+    "worktree_state": "DIRTY_UNTIL_SEAL_COMMIT"
+  },
+  "completed_tasks": ["PFI-M05_5R1-HOLDOUT-SEALING-001"],
+  "changed_files": [
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-HOLDOUT-SET-REV1-RECEIPT.json",
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [
+    "REV1 é imutável; mudança literal exige nova revisão explicitamente autorizada.",
+    "O conteúdo bruto permanece no cofre local externo; o repositório guarda apenas receipt hashado."
+  ],
+  "tests_executed": [
+    "Verificação determinística de oito hashes individuais e hash agregado contra o cofre externo.",
+    "Tentativa pré-avaliação pela fronteira R3 negada antes de invocar loader e registrada em audit externo."
+  ],
+  "unresolved_questions": ["Quando autorizar a criação separada do blind treatment mapping REV1?", "Qual receipt real de capacidade cobrirá o envelope no preflight?"],
+  "known_contradictions": [],
+  "known_risks": ["O receipt não torna o conteúdo bruto público nem autoriza execução.", "Blind mapping e capacidade real permanecem ausentes.", "REAL-EXECUTION-ATTEMPT-001/raw/ já existia vazio e sem registry; o ID não é namespace novo."],
+  "blockers": ["Missão de blind mapping REV1 separada.", "Receipt real de capacidade e autorização posterior de preflight/execução.", "Uma execução futura precisa de novo attempt ID; este ID não deve ser apagado nem reutilizado."],
+  "next_exact_action": "Criar M05.5R1 blind treatment mapping REV1 em missão explicitamente autorizada.",
+  "authorized_next_scope": ["Blind mapping e provenance somente.", "Nenhuma chamada de provedor, execução, alteração FioOS ou mudança de autoridade."],
+  "do_not_repeat": ["Não editar ou regenerar REV1.", "Não expor literals no repositório, logs de tratamento ou metadata normal."],
+  "recovery_notes": "Use o receipt REV1 para validar identidade/hash sem abrir o cofre externo. A próxima etapa permitida é somente BLINDING REV1."
+}

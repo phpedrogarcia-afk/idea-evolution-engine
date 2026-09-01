@@ -18,6 +18,13 @@
 - **Regra preservada:** `COMMIT_AUTHORITY != PUSH_AUTHORITY`.
 - **Tratamento:** a linhagem válida foi preservada e reconciliada; o evento não foi apagado, revertido nem usado como autorização retroativa para futuros pushes.
 
+### [PFI-M05_5R1-HOLDOUT-SEALING-001] Selagem Literal Independente REV1
+- **Data:** 2026-09-01
+- **Entrega:** `M05.5R1-HOLDOUT-SET-REV1` congelado sem edição semântica; conteúdo bruto exclusivamente fora do repositório e receipt permitido em `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-HOLDOUT-SET-REV1-RECEIPT.json`.
+- **Evidência:** oito hashes individuais, hash agregado, provenance da missão independente, aceitação humana e tentativa pré-avaliação negada/auditada.
+- **Limite:** não houve blind mapping, provider call, quota probe, execução ou saída de tratamento.
+- **Scar observado:** `REAL-EXECUTION-ATTEMPT-001/raw/` preexistia vazio, sem registry e sem bruto; foi preservado e torna esse ID inelegível para início futuro pelo gate de namespace novo.
+
 ---
 
 ### [PFI-R2-M05_5R1-REPLICATION-PLANNING-001] Desenho e Preflight M05.5R1
@@ -533,8 +540,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
-
 
 
 
