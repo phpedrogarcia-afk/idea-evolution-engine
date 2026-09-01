@@ -1,0 +1,18 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-03",
+  "condition": "CONDITION_B",
+  "raw_idea": "Uma comunidade para músicos amadores encontrarem parceiros: ou por proximidade geográfica para ensaiar presencialmente, ou por afinidade de repertório e estilo; o criador ainda não sabe qual eixo deve ser central.",
+  "latency_seconds": 4245.8933362960815,
+  "model_calls": 4,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUma comunidade para músicos amadores encontrarem parceiros, oferecendo duas formas de conexão – proximidade geográfica para ensaios presenciais ou afinidade de repertório e estilo – com a decisão ainda pendente sobre qual eixo será o foco principal.\n\n### Intenção Humana Preservada\nCriar uma comunidade que conecte músicos amadores, permitindo que encontrem parceiros com base em localização ou em estilos musicais, ainda sem definir qual critério será central.\n\n### Mecanismo Central\nA comunidade permite que músicos busquem parceiros por proximidade geográfica para ensaios presenciais ou por afinidade de repertório e estilo, conectando-os dentro da plataforma.\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

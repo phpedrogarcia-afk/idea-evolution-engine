@@ -1,0 +1,151 @@
+{
+  "run_id": "EXP-M05.5-REP-06-COND-B",
+  "status": "FAILED",
+  "total_duration_seconds": 2457.632978439331,
+  "total_stages_executed": 3,
+  "git_commit": "126fc5ae066fe9a70bd7eb9a7479507127522400",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 611.7762966156006,
+      "delta_summary": "Intenção extraída: 'Construir uma plataforma que permita vizinhos ajudarem uns a...' | 5 premissas mapeadas.",
+      "raw_response": "{\"interpreted_problem\":\"A necessidade de criar uma comunidade online de ajuda entre vizinhos, porém há incerteza sobre como (ou se) implementar avaliações e reputação para evitar competição social.\",\"human_intent\":\"Construir uma plataforma que permita vizinhos ajudarem uns aos outros, decidindo posteriormente a forma de tratamento das avaliações/reputação para minimizar rivalidade social.\",\"proposed_mechanism\":\"\",\"explicit_mechanism\":\"Plataforma online de ajuda mútua entre vizinhos, com possibilidade de incluir avaliações ou reputação que ainda não foi definida (públicas, privadas por usuário ou inexistentes).\",\"inferred_candidates\":[\"sistema de avaliações públicas\",\"sistema de avaliações privadas por usuário\",\"ausência total de avaliações/reputação\"],\"actors_or_users\":[\"vizinhos\",\"criador da comunidade\",\"usuários da plataforma\"],\"assumptions\":[\"vizinhos têm acesso à internet\",\"os usuários desejam trocar ajuda mútua\",\"a competição social é indesejada\",\"as avaliações podem influenciar o comportamento dos usuários\",\"a comunidade será baseada em localização geográfica\"],\"ambiguities\":[\"decisão sobre tornar avaliações públicas, privadas ou inexistentes\",\"como será garantida a privacidade dos usuários\",\"quem moderará ou definirá regras da comunidade\",\"quais critérios de ajuda serão aceitos\"],\"strengths\":[\"promove cooperação local\",\"fortalece laços de vizinhança\",\"baixo custo de implementação inicial\",\"potencial para aumentar segurança e bem‑estar da comunidade\",\"evita competição social ao considerar diferentes modelos de reputação\"],\"structured_idea\":\"Criar uma plataforma online onde vizinhos podem solicitar e oferecer ajuda uns aos outros, com o criador ainda indeciso sobre como (ou se) implementar um sistema de avaliações ou reputação — público, privado ou inexistente — para prevenir competição social.\"}",
+      "parsed_output": {
+        "interpreted_problem": "A necessidade de criar uma comunidade online de ajuda entre vizinhos, porém há incerteza sobre como (ou se) implementar avaliações e reputação para evitar competição social.",
+        "human_intent": "Construir uma plataforma que permita vizinhos ajudarem uns aos outros, decidindo posteriormente a forma de tratamento das avaliações/reputação para minimizar rivalidade social.",
+        "proposed_mechanism": "",
+        "explicit_mechanism": "Plataforma online de ajuda mútua entre vizinhos, com possibilidade de incluir avaliações ou reputação que ainda não foi definida (públicas, privadas por usuário ou inexistentes).",
+        "inferred_candidates": [
+          "sistema de avaliações públicas",
+          "sistema de avaliações privadas por usuário",
+          "ausência total de avaliações/reputação"
+        ],
+        "actors_or_users": [
+          "vizinhos",
+          "criador da comunidade",
+          "usuários da plataforma"
+        ],
+        "assumptions": [
+          "vizinhos têm acesso à internet",
+          "os usuários desejam trocar ajuda mútua",
+          "a competição social é indesejada",
+          "as avaliações podem influenciar o comportamento dos usuários",
+          "a comunidade será baseada em localização geográfica"
+        ],
+        "ambiguities": [
+          "decisão sobre tornar avaliações públicas, privadas ou inexistentes",
+          "como será garantida a privacidade dos usuários",
+          "quem moderará ou definirá regras da comunidade",
+          "quais critérios de ajuda serão aceitos"
+        ],
+        "strengths": [
+          "promove cooperação local",
+          "fortalece laços de vizinhança",
+          "baixo custo de implementação inicial",
+          "potencial para aumentar segurança e bem‑estar da comunidade",
+          "evita competição social ao considerar diferentes modelos de reputação"
+        ],
+        "structured_idea": "Criar uma plataforma online onde vizinhos podem solicitar e oferecer ajuda uns aos outros, com o criador ainda indeciso sobre como (ou se) implementar um sistema de avaliações ou reputação — público, privado ou inexistente — para prevenir competição social."
+      },
+      "error": null,
+      "timestamp": "2026-09-01T04:26:58.841120+00:00"
+    },
+    {
+      "step_number": 2,
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 742.5491919517517,
+      "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+      "raw_response": "{\"critical_issues\":[{\"issue\":\"Ausência de sistema de avaliação ou reputação impede a construção de confiança entre vizinhos, permitindo comportamentos abusivos ou não confiáveis\",\"why_it_matters\":\"Sem mecanismos de confiança, usuários podem ser enganados, resultando em baixa adoção e risco de fraudes\",\"severity\":\"HIGH\",\"affected_part\":\"Trust & Safety\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Indecisão sobre a política de avaliações cria incerteza de produto e atrasos de implementação\",\"why_it_matters\":\"A falta de decisão impede definição de fluxos, UI e políticas, comprometendo o cronograma e a clareza para investidores\",\"severity\":\"MEDIUM\",\"affected_part\":\"Product Planning\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Suposição de que todos os vizinhos têm acesso à internet exclui segmentos da população, limitando alcance e inclusão\",\"why_it_matters\":\"Sem acesso digital, grande parte da comunidade alvo não pode participar, reduzindo valor da rede e potencial de escala\",\"severity\":\"MEDIUM\",\"affected_part\":\"User Base\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"vizinhos têm acesso à internet\",\"os usuários desejam trocar ajuda mútua\",\"a competição social é indesejada\",\"as avaliações podem influenciar o comportamento dos usuários\",\"a comunidade será baseada em localização geográfica\"],\"contradictions\":[\"Quer evitar competição social, mas a ausência de avaliações pode reduzir incentivos para ajudar\",\"Indecisão sobre avaliações conflita com necessidade de estabelecer confiança\"],\"failure_modes\":[\"Abuso e fraude devido à falta de verificação de identidade\",\"Baixa participação por falta de incentivos claros\",\"Violação de privacidade ao expor localização dos usuários\"],\"missing_information\":[\"Como será feita a verificação de identidade e localização dos usuários\",\"Políticas de moderação e resolução de conflitos\",\"Estratégias de incentivo para participação sem avaliações públicas\",\"Conformidade legal com proteção de dados pessoais\"],\"overclaims\":[\"A plataforma garantirá ajuda mútua eficaz sem nenhum sistema de reputação ou avaliação\"]}",
+      "parsed_output": {
+        "critical_issues": [
+          {
+            "issue": "Ausência de sistema de avaliação ou reputação impede a construção de confiança entre vizinhos, permitindo comportamentos abusivos ou não confiáveis",
+            "why_it_matters": "Sem mecanismos de confiança, usuários podem ser enganados, resultando em baixa adoção e risco de fraudes",
+            "severity": "HIGH",
+            "affected_part": "Trust & Safety",
+            "origin": "MODEL_HYPOTHESIS"
+          },
+          {
+            "issue": "Indecisão sobre a política de avaliações cria incerteza de produto e atrasos de implementação",
+            "why_it_matters": "A falta de decisão impede definição de fluxos, UI e políticas, comprometendo o cronograma e a clareza para investidores",
+            "severity": "MEDIUM",
+            "affected_part": "Product Planning",
+            "origin": "MODEL_HYPOTHESIS"
+          },
+          {
+            "issue": "Suposição de que todos os vizinhos têm acesso à internet exclui segmentos da população, limitando alcance e inclusão",
+            "why_it_matters": "Sem acesso digital, grande parte da comunidade alvo não pode participar, reduzindo valor da rede e potencial de escala",
+            "severity": "MEDIUM",
+            "affected_part": "User Base",
+            "origin": "MODEL_HYPOTHESIS"
+          }
+        ],
+        "fragile_assumptions": [
+          "vizinhos têm acesso à internet",
+          "os usuários desejam trocar ajuda mútua",
+          "a competição social é indesejada",
+          "as avaliações podem influenciar o comportamento dos usuários",
+          "a comunidade será baseada em localização geográfica"
+        ],
+        "contradictions": [
+          "Quer evitar competição social, mas a ausência de avaliações pode reduzir incentivos para ajudar",
+          "Indecisão sobre avaliações conflita com necessidade de estabelecer confiança"
+        ],
+        "failure_modes": [
+          "Abuso e fraude devido à falta de verificação de identidade",
+          "Baixa participação por falta de incentivos claros",
+          "Violação de privacidade ao expor localização dos usuários"
+        ],
+        "missing_information": [
+          "Como será feita a verificação de identidade e localização dos usuários",
+          "Políticas de moderação e resolução de conflitos",
+          "Estratégias de incentivo para participação sem avaliações públicas",
+          "Conformidade legal com proteção de dados pessoais"
+        ],
+        "overclaims": [
+          "A plataforma garantirá ajuda mútua eficaz sem nenhum sistema de reputação ou avaliação"
+        ]
+      },
+      "error": null,
+      "timestamp": "2026-09-01T04:39:21.391407+00:00"
+    },
+    {
+      "step_number": 3,
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 0,
+      "latency_seconds": 1103.2803966999054,
+      "delta_summary": "",
+      "raw_response": "",
+      "parsed_output": null,
+      "error": "PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199596, Requested 1216. Please try again in 5m50.784s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "timestamp": "2026-09-01T04:57:44.672923+00:00"
+    }
+  ]
+}

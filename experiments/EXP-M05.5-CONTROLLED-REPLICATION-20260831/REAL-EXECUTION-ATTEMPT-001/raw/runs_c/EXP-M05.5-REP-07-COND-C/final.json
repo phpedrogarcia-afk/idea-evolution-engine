@@ -1,0 +1,13 @@
+{
+  "run_id": "EXP-M05.5-REP-07-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma ferramenta de linha de comando simples que recebe um nome de arquivo e cria uma cópia com timestamp antes de alterações manuais, sem banco de dados, interface gráfica ou sincronização.",
+  "total_model_calls": 1,
+  "gate_outcome": "UNKNOWN",
+  "escalation_reason": "UNKNOWN",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 0,
+  "terminal_status": "FIRST_PASS_FAILED",
+  "decision_progress_detected": false,
+  "error": "PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199454, Requested 2232. Please try again in 12m8.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+}

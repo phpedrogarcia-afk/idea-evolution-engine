@@ -1,0 +1,18 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-05",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um serviço de pequenos reparos de roupas por bairro: coleta na portaria, conserto e devolução em até 48 horas, sem exigir que o cliente esteja em casa.",
+  "latency_seconds": 4073.3456902503967,
+  "model_calls": 4,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUm serviço local que coleta roupas na portaria do condomínio, realiza pequenos reparos e devolve ao cliente em até 48 horas, sem necessidade de o cliente estar presente.\n\n### Intenção Humana Preservada\nOferecer um serviço de reparos de roupas de pequeno porte por bairro que coleta na portaria, conserta e devolve em até 48h, eliminando a necessidade de presença do cliente.\n\n### Mecanismo Central\nColeta das peças na portaria do condomínio, realização dos pequenos reparos e devolução ao cliente dentro de 48 horas, sem exigir que o cliente esteja em casa.\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

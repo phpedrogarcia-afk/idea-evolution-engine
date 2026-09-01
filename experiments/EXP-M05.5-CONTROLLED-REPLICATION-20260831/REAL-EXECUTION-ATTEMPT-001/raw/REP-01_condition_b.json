@@ -1,0 +1,18 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-01",
+  "condition": "CONDITION_B",
+  "raw_idea": "Uma pequena ferramenta desktop que cola um texto e remove toda a formatação, salvando o resultado somente se o usuário clicar em confirmar; sem conta, sem nuvem e sem histórico automático.",
+  "latency_seconds": 4231.130290031433,
+  "model_calls": 4,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUma ferramenta desktop simples que permite ao usuário colar texto, remover toda a formatação e, após confirmação explícita, salvar o texto limpo; não requer conta, não usa nuvem e não mantém histórico automático.\n\n### Intenção Humana Preservada\nCriar uma ferramenta desktop leve que permita colar texto, limpar sua formatação e salvar o texto limpo somente após confirmação explícita, mantendo a privacidade e evitando histórico automático.\n\n### Mecanismo Central\nO usuário cola um texto na ferramenta, que remove toda a formatação e exibe o texto limpo; ao clicar em confirmar, o texto é salvo; caso contrário, nada é salvo.\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

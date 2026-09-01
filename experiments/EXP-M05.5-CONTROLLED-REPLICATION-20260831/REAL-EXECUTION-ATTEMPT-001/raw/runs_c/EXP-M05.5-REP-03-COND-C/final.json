@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5-REP-03-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma comunidade para músicos amadores encontrarem parceiros: ou por proximidade geográfica para ensaiar presencialmente, ou por afinidade de repertório e estilo; o criador ainda não sabe qual eixo deve ser central.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

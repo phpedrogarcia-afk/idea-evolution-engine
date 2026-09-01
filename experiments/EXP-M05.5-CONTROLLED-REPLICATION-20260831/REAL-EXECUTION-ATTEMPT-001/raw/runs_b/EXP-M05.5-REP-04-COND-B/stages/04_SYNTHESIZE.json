@@ -1,0 +1,19 @@
+{
+  "step_number": 4,
+  "stage_id": "SYNTHESIZE",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "synthesize_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": false,
+  "retry_count": 0,
+  "latency_seconds": 2356.3466324806213,
+  "delta_summary": "",
+  "raw_response": "",
+  "parsed_output": null,
+  "error": "PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199944, Requested 2863. Please try again in 20m12.624s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+  "timestamp": "2026-09-01T02:08:12.341162+00:00"
+}

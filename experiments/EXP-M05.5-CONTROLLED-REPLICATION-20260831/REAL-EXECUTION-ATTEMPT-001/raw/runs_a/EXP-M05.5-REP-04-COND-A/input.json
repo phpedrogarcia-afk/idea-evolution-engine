@@ -1,0 +1,10 @@
+{
+  "run_id": "EXP-M05.5-REP-04-COND-A",
+  "created_at": "2026-09-01T00:53:27.805555+00:00",
+  "original_idea": "Um organizador de documentos pessoais que funcione 100% local no computador, sem login, sem servidor e sem enviar conteúdo para a internet, permitindo exportar um único arquivo de backup.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "126fc5ae066fe9a70bd7eb9a7479507127522400",
+    "environment_pid": 13684
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 720.7205770015717,
+  "delta_summary": "2 vulnerabilidades críticas e 5 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Risco de perda, dano ou furto das roupas durante coleta, transporte ou reparo\",\"why_it_matters\":\"Os clientes confiam itens pessoais ao serviço; incidentes geram reclamações, responsabilidade civil e perda de confiança, comprometendo a viabilidade do negócio\",\"severity\":\"HIGH\",\"affected_part\":\"Logística de coleta/entrega\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Incapacidade de cumprir o prazo de 48 horas para todos os tipos de reparos pequenos\",\"why_it_matters\":\"A promessa de devolução em até 48h é central para a proposta de valor; atrasos frequentes reduzem a satisfação do cliente e podem gerar penalidades contratuais\",\"severity\":\"MEDIUM\",\"affected_part\":\"Operações de reparo\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Os clientes têm acesso à portaria do prédio\",\"Os reparos são de pequeno porte e podem ser concluídos em 48h\",\"Existe demanda suficiente por serviço local\",\"Os custos de logística são viáveis\",\"Os clientes confiam no manuseio das roupas\"],\"contradictions\":[\"Coleta na portaria pressupõe que o cliente esteja presente ou que haja acesso ao prédio, o que contradiz a afirmação de que o cliente não precisa estar em casa\",\"A promessa de \\\"pequenos reparos\\\" pode incluir itens que exigem tempo ou técnicas que ultrapassam o limite de 48h\"],\"failure_modes\":[\"Perda ou dano das roupas durante o transporte\",\"Atrasos na devolução que excedem 48h\",\"Contaminação ou manuseio inadequado das peças\",\"Falha na comunicação com porteiros ou síndicos, impedindo a coleta\",\"Escassez de técnicos qualificados para atender a demanda\"],\"missing_information\":[\"Modelo de precificação e margem de lucro esperada\",\"Cobertura de seguro ou responsabilidade civil para itens perdidos/danificados\",\"Capacidade operacional (número de técnicos, volume máximo de peças por dia)\",\"Estratégia de aquisição de clientes e validação de demanda\",\"Procedimentos de higiene e tratamento de tecidos delicados\"],\"overclaims\":[\"A garantia de devolução em até 48h sem necessidade de presença do cliente pode ser inviável para certos tipos de reparos ou em períodos de alta demanda\",\"A afirmação de que \\\"os custos de logística são viáveis\\\" não está sustentada por dados de custo de transporte e armazenamento\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Risco de perda, dano ou furto das roupas durante coleta, transporte ou reparo",
+        "why_it_matters": "Os clientes confiam itens pessoais ao serviço; incidentes geram reclamações, responsabilidade civil e perda de confiança, comprometendo a viabilidade do negócio",
+        "severity": "HIGH",
+        "affected_part": "Logística de coleta/entrega",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Incapacidade de cumprir o prazo de 48 horas para todos os tipos de reparos pequenos",
+        "why_it_matters": "A promessa de devolução em até 48h é central para a proposta de valor; atrasos frequentes reduzem a satisfação do cliente e podem gerar penalidades contratuais",
+        "severity": "MEDIUM",
+        "affected_part": "Operações de reparo",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Os clientes têm acesso à portaria do prédio",
+      "Os reparos são de pequeno porte e podem ser concluídos em 48h",
+      "Existe demanda suficiente por serviço local",
+      "Os custos de logística são viáveis",
+      "Os clientes confiam no manuseio das roupas"
+    ],
+    "contradictions": [
+      "Coleta na portaria pressupõe que o cliente esteja presente ou que haja acesso ao prédio, o que contradiz a afirmação de que o cliente não precisa estar em casa",
+      "A promessa de \"pequenos reparos\" pode incluir itens que exigem tempo ou técnicas que ultrapassam o limite de 48h"
+    ],
+    "failure_modes": [
+      "Perda ou dano das roupas durante o transporte",
+      "Atrasos na devolução que excedem 48h",
+      "Contaminação ou manuseio inadequado das peças",
+      "Falha na comunicação com porteiros ou síndicos, impedindo a coleta",
+      "Escassez de técnicos qualificados para atender a demanda"
+    ],
+    "missing_information": [
+      "Modelo de precificação e margem de lucro esperada",
+      "Cobertura de seguro ou responsabilidade civil para itens perdidos/danificados",
+      "Capacidade operacional (número de técnicos, volume máximo de peças por dia)",
+      "Estratégia de aquisição de clientes e validação de demanda",
+      "Procedimentos de higiene e tratamento de tecidos delicados"
+    ],
+    "overclaims": [
+      "A garantia de devolução em até 48h sem necessidade de presença do cliente pode ser inviável para certos tipos de reparos ou em períodos de alta demanda",
+      "A afirmação de que \"os custos de logística são viáveis\" não está sustentada por dados de custo de transporte e armazenamento"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-01T03:00:19.759012+00:00"
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "EXP-M05.5-REP-08-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Um leitor digital que quer testar se reduzir animações de interface durante a leitura melhora a concentração; a hipótese deve ser avaliada antes de transformar isso em um produto cheio de recursos.",
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "A proposta é criar um modo de concentração no leitor digital que desativa animações de interface, testando via experimento A/B se isso aumenta a concentração dos usuários durante a leitura, antes de desenvolver um produto completo.",
+    "strengths": [
+      "Hipótese clara e mensurável",
+      "Baixo custo de implementação inicial",
+      "Foco em problema concreto de usabilidade",
+      "Facilita coleta de dados quantitativos (tempo de leitura, taxa de retenção, autoavaliação de foco)",
+      "Alinha-se ao conceito de MVP, permitindo validação rápida"
+    ],
+    "weaknesses": [
+      "Escopo restrito pode não capturar outros fatores que afetam a concentração (luminosidade, fonte, distrações externas)",
+      "Necessidade de um grupo de controle bem definido para evitar viés",
+      "Resultados podem ser específicos a um público ou dispositivo e não generalizáveis",
+      "Requer definição cuidadosa de métricas e instrumentos de medição",
+      "Dependência de usuários dispostos a participar de experimentos"
+    ],
+    "refined_version": "Desenvolver um recurso opcional chamado \"Modo Concentração\" no leitor digital, que desativa todas as animações de transição e feedback visual. Implementar um experimento A/B onde um grupo usa o modo padrão com animações e outro usa o modo concentração. Medir indicadores como tempo médio de leitura por página, taxa de retenção (quiz rápido pós‑leitura) e auto‑relato de foco em escala Likert. Analisar os dados para determinar impacto estatístico e decidir sobre a incorporação permanente ou expansão do recurso.",
+    "next_steps": [
+      "Definir métricas específicas (tempo de leitura, pontuação de compreensão, escala de foco)",
+      "Especificar o design do experimento A/B e tamanho de amostra necessário",
+      "Implementar o toggle de animações no aplicativo existente",
+      "Recrutar participantes representativos (leitores frequentes, diferentes faixas etárias)",
+      "Coletar e analisar os dados estatisticamente",
+      "Documentar conclusões e decidir sobre a viabilidade de evoluir o recurso para um produto completo"
+    ]
+  }
+}

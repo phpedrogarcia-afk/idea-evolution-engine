@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5-REP-04-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um organizador de documentos pessoais que funcione 100% local no computador, sem login, sem servidor e sem enviar conteúdo para a internet, permitindo exportar um único arquivo de backup.",
+  "total_model_calls": 2,
+  "gate_outcome": "ESCALATE_FOCUSED",
+  "escalation_reason": "MATERIAL_VULNERABILITY",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "decision_progress_detected": true
+}

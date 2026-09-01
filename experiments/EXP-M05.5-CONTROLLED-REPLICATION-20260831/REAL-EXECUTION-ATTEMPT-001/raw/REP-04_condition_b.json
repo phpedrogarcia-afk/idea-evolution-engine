@@ -1,0 +1,18 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-04",
+  "condition": "CONDITION_B",
+  "raw_idea": "Um organizador de documentos pessoais que funcione 100% local no computador, sem login, sem servidor e sem enviar conteúdo para a internet, permitindo exportar um único arquivo de backup.",
+  "latency_seconds": 4165.640990972519,
+  "model_calls": 4,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nUm aplicativo de organização de documentos pessoais que opera totalmente offline no computador do usuário, sem necessidade de login ou conexão a servidores, e que permite exportar todos os documentos organizados em um único arquivo de backup.\n\n### Intenção Humana Preservada\nCriar um organizador de documentos pessoais que funcione totalmente localmente, sem login nem conexão à internet, e que permita exportar tudo em um único arquivo de backup.\n\n### Mecanismo Central\nO organizador funciona 100% local no computador, não requer login, não utiliza servidores nem envia conteúdo para a internet, e permite exportar um único arquivo contendo todos os documentos como backup.\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

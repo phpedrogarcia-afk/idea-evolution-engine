@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-04",
+  "condition": "CONDITION_A",
+  "raw_idea": "Um organizador de documentos pessoais que funcione 100% local no computador, sem login, sem servidor e sem enviar conteúdo para a internet, permitindo exportar um único arquivo de backup.",
+  "latency_seconds": 318.9184193611145,
+  "model_calls": 1,
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "Um aplicativo desktop de organização de documentos pessoais que opera totalmente offline, sem necessidade de login ou servidores externos, armazenando os arquivos em um banco de dados local criptografado e permitindo exportar/importar um único arquivo de backup seguro.",
+    "strengths": [
+      "Privacidade total – nenhum dado sai do computador",
+      "Operação 100% offline, sem dependência de internet",
+      "Simplicidade de uso – sem contas ou logins",
+      "Facilidade de backup com um único arquivo exportável",
+      "Código aberto pode aumentar confiança e auditabilidade"
+    ],
+    "weaknesses": [
+      "Sem sincronização automática entre múltiplos dispositivos",
+      "Risco de perda de dados se o disco local falhar e o backup não for mantido",
+      "Funcionalidades avançadas de colaboração e compartilhamento ausentes",
+      "Possível curva de aprendizado para configurar criptografia correta",
+      "Manutenção de atualizações de segurança depende do usuário"
+    ],
+    "refined_version": "Desenvolver um aplicativo multiplataforma (Windows, macOS, Linux) usando uma stack como Tauri + Rust ou Electron + SQLite, onde os documentos são armazenados em um banco de dados local criptografado com chave derivada de uma senha mestre. O programa oferece interface de arrastar‑e‑soltar, tags, busca full‑text, versionamento interno e um recurso de \"Exportar Backup\" que gera um único arquivo ZIP criptografado contendo o banco de dados e metadados. Opcionalmente, pode‑se habilitar sincronização local via rede LAN usando troca ponto‑a‑ponto, ainda sem envolver servidores externos. O código será licenciado sob MIT ou GPL e hospedado em repositório público para auditoria.",
+    "next_steps": [
+      "Definir requisitos funcionais detalhados (criptografia, versionamento, UI)",
+      "Escolher a stack tecnológica (ex.: Tauri+Rust ou Electron+SQLite)",
+      "Projetar o esquema de banco de dados e fluxo de backup/exportação",
+      "Implementar protótipo de interface básica com importação/exportação de arquivos",
+      "Adicionar camada de criptografia de ponta a ponta com senha mestre",
+      "Testar recuperação de backup em diferentes cenários de falha",
+      "Criar documentação de uso e guia de segurança",
+      "Lançar versão beta para usuários early adopters e coletar feedback"
+    ]
+  },
+  "rendered_semantic_text": "### Resumo\nUm aplicativo desktop de organização de documentos pessoais que opera totalmente offline, sem necessidade de login ou servidores externos, armazenando os arquivos em um banco de dados local criptografado e permitindo exportar/importar um único arquivo de backup seguro.\n\n### Versão Refinada\nDesenvolver um aplicativo multiplataforma (Windows, macOS, Linux) usando uma stack como Tauri + Rust ou Electron + SQLite, onde os documentos são armazenados em um banco de dados local criptografado com chave derivada de uma senha mestre. O programa oferece interface de arrastar‑e‑soltar, tags, busca full‑text, versionamento interno e um recurso de \"Exportar Backup\" que gera um único arquivo ZIP criptografado contendo o banco de dados e metadados. Opcionalmente, pode‑se habilitar sincronização local via rede LAN usando troca ponto‑a‑ponto, ainda sem envolver servidores externos. O código será licenciado sob MIT ou GPL e hospedado em repositório público para auditoria.\n\n### Pontos Fortes e Fracos\n- **Fortes:** Privacidade total – nenhum dado sai do computador, Operação 100% offline, sem dependência de internet, Simplicidade de uso – sem contas ou logins, Facilidade de backup com um único arquivo exportável, Código aberto pode aumentar confiança e auditabilidade\n- **Fracos:** Sem sincronização automática entre múltiplos dispositivos, Risco de perda de dados se o disco local falhar e o backup não for mantido, Funcionalidades avançadas de colaboração e compartilhamento ausentes, Possível curva de aprendizado para configurar criptografia correta, Manutenção de atualizações de segurança depende do usuário\n\n### Próximos Passos\nDefinir requisitos funcionais detalhados (criptografia, versionamento, UI), Escolher a stack tecnológica (ex.: Tauri+Rust ou Electron+SQLite), Projetar o esquema de banco de dados e fluxo de backup/exportação, Implementar protótipo de interface básica com importação/exportação de arquivos, Adicionar camada de criptografia de ponta a ponta com senha mestre, Testar recuperação de backup em diferentes cenários de falha, Criar documentação de uso e guia de segurança, Lançar versão beta para usuários early adopters e coletar feedback"
+}

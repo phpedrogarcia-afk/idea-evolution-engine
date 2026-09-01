@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5-REP-06-COND-B",
+  "status": "FAILED",
+  "original_idea": "Uma comunidade online de ajuda entre vizinhos em que o criador ainda não decidiu se avaliações e reputação devem ser públicas, privadas para cada usuário ou nem existir, para evitar competição social.",
+  "human_intent": "Construir uma plataforma que permita vizinhos ajudarem uns aos outros, decidindo posteriormente a forma de tratamento das avaliações/reputação para minimizar rivalidade social.",
+  "refined_idea": "Criar uma plataforma online onde vizinhos podem solicitar e oferecer ajuda uns aos outros, com o criador ainda indeciso sobre como (ou se) implementar um sistema de avaliações ou reputação — público, privado ou inexistente — para prevenir competição social.",
+  "core_mechanism": "Plataforma online de ajuda mútua entre vizinhos, com possibilidade de incluir avaliações ou reputação que ainda não foi definida (públicas, privadas por usuário ou inexistentes).",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "",
+  "tested_core_hash": "",
+  "reconstruction_count": 0,
+  "essence_drift_detected": false,
+  "ontology_contradiction_detected": false,
+  "critical_issues_count": 3,
+  "alternatives_count": 0,
+  "accepted_changes_count": 0,
+  "rejected_changes_count": 0,
+  "recommended_next_step": ""
+}

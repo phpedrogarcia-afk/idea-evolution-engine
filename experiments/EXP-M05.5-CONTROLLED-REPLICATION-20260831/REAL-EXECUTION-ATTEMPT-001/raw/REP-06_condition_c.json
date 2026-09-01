@@ -1,0 +1,13 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-06",
+  "condition": "CONDITION_C",
+  "raw_idea": "Uma comunidade online de ajuda entre vizinhos em que o criador ainda não decidiu se avaliações e reputação devem ser públicas, privadas para cada usuário ou nem existir, para evitar competição social.",
+  "latency_seconds": 2372.2907540798187,
+  "model_calls": 1,
+  "terminal_status": "FIRST_PASS_FAILED",
+  "gate_outcome": "UNKNOWN",
+  "human_decision_requested": false,
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.5-REP-06-COND-C\n\n**Status:** `FIRST_PASS_FAILED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n### Falha na Execução\nNão foi possível gerar a análise inicial da ideia: PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199757, Requested 2233. Please try again in 14m19.68s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+}

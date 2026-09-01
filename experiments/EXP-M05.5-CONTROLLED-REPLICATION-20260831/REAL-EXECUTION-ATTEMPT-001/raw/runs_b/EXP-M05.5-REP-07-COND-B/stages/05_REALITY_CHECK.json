@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 679.4041638374329,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Gerar um timestamp (resolução de segundo...' (hash: 1e9cd48a389e2139), 5 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Gerar um timestamp (resolução de segundos) e copiar o arquivo para um arquivo temporário; ao concluir com sucesso, renomear atômicamente para o nome final contendo o timestamp.\",\"feasibility_notes\":[\"A geração de timestamp em segundos é suportada por todas as bibliotecas padrão de tempo.\",\"Copiar para um arquivo temporário e usar rename() é uma prática comum e bem documentada.\",\"A lógica pode ser implementada em poucas linhas em linguagens como Python, Bash ou Go sem dependências externas complexas.\"],\"reality_dependencies\":[\"Sistema operacional que ofereça rename() atômico (ex.: POSIX compliant)\",\"Permissões de leitura do arquivo original e escrita no diretório de destino\",\"Precisão e sincronização do relógio do sistema para garantir timestamps únicos\",\"Espaço em disco suficiente para armazenar temporariamente uma cópia completa do arquivo\",\"Biblioteca padrão de manipulação de arquivos do idioma escolhido\"],\"claims_needing_evidence\":[\"O rename() é realmente atômico no sistema de arquivos alvo (ex.: ext4, NTFS)\",\"Um timestamp de resolução de segundos é suficiente para evitar colisões de nomes em usos típicos\",\"A cópia completa preserva a integridade dos dados (byte‑for‑byte)\",\"Em caso de falha durante a cópia, nenhum arquivo parcial permanece e o arquivo original não é corrompido\"],\"potential_blockers\":[\"Sistemas de arquivos que não garantem atomicidade de rename, como alguns mounts NFS\",\"Permissões insuficientes para criar arquivos temporários ou renomeá‑los\",\"Relógio do sistema desatualizado ou com baixa resolução, gerando timestamps duplicados\",\"Arquivos muito grandes que excedem o espaço livre temporário\",\"Execuções concorrentes que iniciam dentro do mesmo segundo, potencialmente gerando nomes idênticos\"],\"candidate_tests\":[\"Criar backup de um arquivo pequeno e verificar que o nome contém o timestamp correto e que o conteúdo é idêntico ao original\",\"Interromper o processo de cópia (e.g., kill) e confirmar que nenhum arquivo temporário residual permanece e que o arquivo original permanece intacto\",\"Executar múltiplas instâncias simultâneas e assegurar que cada backup recebe um timestamp distinto sem sobrescrita\",\"Testar a operação em diferentes sistemas de arquivos (ext4, NTFS, XFS) para validar a atomicidade do rename\",\"Medir o consumo de espaço em disco antes e depois da operação para garantir que o arquivo temporário só ocupa espaço permanente após rename bem‑sucedido\"],\"exploratory_candidate_tests\":[\"Implementar timestamp com resolução de nanossegundos e validar que o nome inclui a fração de segundo\",\"Manter um arquivo oculto de contador incremental ao lado do original e testar se o contador incrementa corretamente entre execuções\",\"Adicionar o hash SHA‑256 do conteúdo ao nome do backup e verificar que o hash corresponde ao conteúdo armazenado\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Gerar um timestamp (resolução de segundos) e copiar o arquivo para um arquivo temporário; ao concluir com sucesso, renomear atômicamente para o nome final contendo o timestamp.",
+    "feasibility_notes": [
+      "A geração de timestamp em segundos é suportada por todas as bibliotecas padrão de tempo.",
+      "Copiar para um arquivo temporário e usar rename() é uma prática comum e bem documentada.",
+      "A lógica pode ser implementada em poucas linhas em linguagens como Python, Bash ou Go sem dependências externas complexas."
+    ],
+    "reality_dependencies": [
+      "Sistema operacional que ofereça rename() atômico (ex.: POSIX compliant)",
+      "Permissões de leitura do arquivo original e escrita no diretório de destino",
+      "Precisão e sincronização do relógio do sistema para garantir timestamps únicos",
+      "Espaço em disco suficiente para armazenar temporariamente uma cópia completa do arquivo",
+      "Biblioteca padrão de manipulação de arquivos do idioma escolhido"
+    ],
+    "claims_needing_evidence": [
+      "O rename() é realmente atômico no sistema de arquivos alvo (ex.: ext4, NTFS)",
+      "Um timestamp de resolução de segundos é suficiente para evitar colisões de nomes em usos típicos",
+      "A cópia completa preserva a integridade dos dados (byte‑for‑byte)",
+      "Em caso de falha durante a cópia, nenhum arquivo parcial permanece e o arquivo original não é corrompido"
+    ],
+    "potential_blockers": [
+      "Sistemas de arquivos que não garantem atomicidade de rename, como alguns mounts NFS",
+      "Permissões insuficientes para criar arquivos temporários ou renomeá‑los",
+      "Relógio do sistema desatualizado ou com baixa resolução, gerando timestamps duplicados",
+      "Arquivos muito grandes que excedem o espaço livre temporário",
+      "Execuções concorrentes que iniciam dentro do mesmo segundo, potencialmente gerando nomes idênticos"
+    ],
+    "candidate_tests": [
+      "Criar backup de um arquivo pequeno e verificar que o nome contém o timestamp correto e que o conteúdo é idêntico ao original",
+      "Interromper o processo de cópia (e.g., kill) e confirmar que nenhum arquivo temporário residual permanece e que o arquivo original permanece intacto",
+      "Executar múltiplas instâncias simultâneas e assegurar que cada backup recebe um timestamp distinto sem sobrescrita",
+      "Testar a operação em diferentes sistemas de arquivos (ext4, NTFS, XFS) para validar a atomicidade do rename",
+      "Medir o consumo de espaço em disco antes e depois da operação para garantir que o arquivo temporário só ocupa espaço permanente após rename bem‑sucedido"
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar timestamp com resolução de nanossegundos e validar que o nome inclui a fração de segundo",
+      "Manter um arquivo oculto de contador incremental ao lado do original e testar se o contador incrementa corretamente entre execuções",
+      "Adicionar o hash SHA‑256 do conteúdo ao nome do backup e verificar que o hash corresponde ao conteúdo armazenado"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-01T05:46:51.022867+00:00"
+}

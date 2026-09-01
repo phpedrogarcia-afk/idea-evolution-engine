@@ -1,0 +1,17 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-06",
+  "condition": "CONDITION_B",
+  "raw_idea": "Uma comunidade online de ajuda entre vizinhos em que o criador ainda não decidiu se avaliações e reputação devem ser públicas, privadas para cada usuário ou nem existir, para evitar competição social.",
+  "latency_seconds": 2457.633851289749,
+  "model_calls": 3,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nCriar uma plataforma online onde vizinhos podem solicitar e oferecer ajuda uns aos outros, com o criador ainda indeciso sobre como (ou se) implementar um sistema de avaliações ou reputação — público, privado ou inexistente — para prevenir competição social.\n\n### Intenção Humana Preservada\nConstruir uma plataforma que permita vizinhos ajudarem uns aos outros, decidindo posteriormente a forma de tratamento das avaliações/reputação para minimizar rivalidade social.\n\n### Mecanismo Central\nPlataforma online de ajuda mútua entre vizinhos, com possibilidade de incluir avaliações ou reputação que ainda não foi definida (públicas, privadas por usuário ou inexistentes).\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

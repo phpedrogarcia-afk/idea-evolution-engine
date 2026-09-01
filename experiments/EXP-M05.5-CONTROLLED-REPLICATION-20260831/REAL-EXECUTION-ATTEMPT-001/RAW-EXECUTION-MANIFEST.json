@@ -1,0 +1,208 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "executed_at": "2026-09-01T05:33:36.746574",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "total_cells": 24,
+  "total_real_model_calls": 50,
+  "calls_by_condition": {
+    "CONDITION_A": 8,
+    "CONDITION_B": 31,
+    "CONDITION_C": 11
+  },
+  "entries": [
+    {
+      "idea_id": "REP-01",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-01_condition_a.json",
+      "sha256": "92644a1f8fb229eff4bb728a3a3b5399c831583bada5a97d21bc47ff8dcb7ee7",
+      "model_calls": 1,
+      "latency_seconds": 784.5073158740997
+    },
+    {
+      "idea_id": "REP-01",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-01_condition_b.json",
+      "sha256": "bfdb495c0a5d28f019854f776699d0da7206d0fe3b499c9b5cd451babfd7418a",
+      "model_calls": 1,
+      "latency_seconds": 680.3993923664093
+    },
+    {
+      "idea_id": "REP-01",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-01_condition_c.json",
+      "sha256": "b37b285091c53f72aae3bac2ca818db65d34d8d45ee33b60b563c1594549d28f",
+      "model_calls": 1,
+      "latency_seconds": 1730.3198065757751
+    },
+    {
+      "idea_id": "REP-02",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-02_condition_a.json",
+      "sha256": "aeb1d02d9d756dcf70f7b259d1d11efadff00eecc2a04b31a82b377627dd8bc1",
+      "model_calls": 1,
+      "latency_seconds": 1.8875515460968018
+    },
+    {
+      "idea_id": "REP-02",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-02_condition_b.json",
+      "sha256": "425b45f9dfe2be59c027cbce609ac8e0056cff8667afcfa4b31018f59a2266e9",
+      "model_calls": 4,
+      "latency_seconds": 4928.327543020248
+    },
+    {
+      "idea_id": "REP-02",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-02_condition_c.json",
+      "sha256": "ff009f600a6f9a9156dd7855cac93628e9e62faf4d587ff040b89423243e486b",
+      "model_calls": 2,
+      "latency_seconds": 2183.9379930496216
+    },
+    {
+      "idea_id": "REP-03",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-03_condition_a.json",
+      "sha256": "53baff2c06da9904715530c6eb76e1696aa8818fbbd7f33cc18010fc3e415002",
+      "model_calls": 1,
+      "latency_seconds": 321.71619844436646
+    },
+    {
+      "idea_id": "REP-03",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-03_condition_b.json",
+      "sha256": "af2b67a171d54f06a9a167508cfdb501c63282d21773839ee84647306c5c614a",
+      "model_calls": 4,
+      "latency_seconds": 4084.79137468338
+    },
+    {
+      "idea_id": "REP-03",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-03_condition_c.json",
+      "sha256": "1e664112b18b62ca922d14a66abcaebcd2a0076747341437ed8974d3eaed955b",
+      "model_calls": 1,
+      "latency_seconds": 1175.5697770118713
+    },
+    {
+      "idea_id": "REP-04",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-04_condition_a.json",
+      "sha256": "d004fe5d5ccaf9b5cc2372f7b27235bfbd979cbb45d9bfec14ce250b9fe4e89b",
+      "model_calls": 1,
+      "latency_seconds": 94.01400876045227
+    },
+    {
+      "idea_id": "REP-04",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-04_condition_b.json",
+      "sha256": "b15d88b6f01bfcb0816c7f340bc229b14666f509fdab490c6afeb4129c0c6e96",
+      "model_calls": 4,
+      "latency_seconds": 4647.337308883667
+    },
+    {
+      "idea_id": "REP-04",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-04_condition_c.json",
+      "sha256": "63fa5ef4bf157727175812d25754c3968cd6d4e5aa8d7b2cab5521bcc168ca5f",
+      "model_calls": 1,
+      "latency_seconds": 1515.3302190303802
+    },
+    {
+      "idea_id": "REP-05",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-05_condition_a.json",
+      "sha256": "18a4a8a408c399e756f206b609b6a98e7fef6c8d86704598991fd62e053da1bc",
+      "model_calls": 1,
+      "latency_seconds": 1.5992693901062012
+    },
+    {
+      "idea_id": "REP-05",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-05_condition_b.json",
+      "sha256": "a6fdd4c8bf1e9c2ce4238677342e481f8d87983ff601e89b2e0bbf227983815d",
+      "model_calls": 4,
+      "latency_seconds": 4705.559071302414
+    },
+    {
+      "idea_id": "REP-05",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-05_condition_c.json",
+      "sha256": "3cc5cca79e13723f162f60ea0690234a056b2ad1d4a2c234268aba8292d00289",
+      "model_calls": 1,
+      "latency_seconds": 1236.2987775802612
+    },
+    {
+      "idea_id": "REP-06",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-06_condition_a.json",
+      "sha256": "255ddac7eb80424d7bd488915239ab8d1ae6b06ae840501b1eda2ebaf084d8f9",
+      "model_calls": 1,
+      "latency_seconds": 1.7613146305084229
+    },
+    {
+      "idea_id": "REP-06",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-06_condition_b.json",
+      "sha256": "bcf15ea00ef34c4beadb6ba0bcb0ed909cf9081a0706c1098542f19fe04b7fa1",
+      "model_calls": 4,
+      "latency_seconds": 4015.7334554195404
+    },
+    {
+      "idea_id": "REP-06",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-06_condition_c.json",
+      "sha256": "30090f51b9b4c33ebee83fd98f42a568c7e90aa8a80f3cfef3ae345829425e72",
+      "model_calls": 1,
+      "latency_seconds": 1182.2947294712067
+    },
+    {
+      "idea_id": "REP-07",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-07_condition_a.json",
+      "sha256": "86d10370e0768022e72dfd25af3ba4909b6e83ead574d37c18ab0eeb6d1a7785",
+      "model_calls": 1,
+      "latency_seconds": 94.90062546730042
+    },
+    {
+      "idea_id": "REP-07",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-07_condition_b.json",
+      "sha256": "f37a2031a8a4172fe12016975af74c12873787accb912373ed097ee017fdb9c4",
+      "model_calls": 6,
+      "latency_seconds": 4909.807967662811
+    },
+    {
+      "idea_id": "REP-07",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-07_condition_c.json",
+      "sha256": "93b3fae8df340c0d87163cd40b4de79f8b216965b64ed4bf8a34ec33431f67e6",
+      "model_calls": 2,
+      "latency_seconds": 2533.722864151001
+    },
+    {
+      "idea_id": "REP-08",
+      "condition": "CONDITION_A",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-08_condition_a.json",
+      "sha256": "b3cc22e0f731f1cb026e7daceb3f1896fdc39d5b454eaa61e08c13ca6a3462d7",
+      "model_calls": 1,
+      "latency_seconds": 317.86103653907776
+    },
+    {
+      "idea_id": "REP-08",
+      "condition": "CONDITION_B",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-08_condition_b.json",
+      "sha256": "b1fa87e44efa1d28177023c65ce4b14af97b73819d1b9ef19c7522545641b360",
+      "model_calls": 4,
+      "latency_seconds": 4489.593685626984
+    },
+    {
+      "idea_id": "REP-08",
+      "condition": "CONDITION_C",
+      "raw_artifact_file": "REAL-EXECUTION-ATTEMPT-001\\raw\\REP-08_condition_c.json",
+      "sha256": "77d79da5b29f1a810f34869f1f0564b3633f7d0e75e7fc09d4291ac12d7e0b72",
+      "model_calls": 2,
+      "latency_seconds": 1486.298823595047
+    }
+  ]
+}

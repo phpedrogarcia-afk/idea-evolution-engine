@@ -1,0 +1,201 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.5-REP-05-COND-B",
+  "status": "FAILED",
+  "created_at": "2026-08-31T23:38:07.833678",
+  "updated_at": "2026-09-01T00:46:01.152414",
+  "original_idea": "Um serviço de pequenos reparos de roupas por bairro: coleta na portaria, conserto e devolução em até 48 horas, sem exigir que o cliente esteja em casa.",
+  "current_idea": "Um serviço local que coleta roupas na portaria do condomínio, realiza pequenos reparos e devolve ao cliente em até 48 horas, sem necessidade de o cliente estar presente.",
+  "human_intent": "Oferecer um serviço de reparos de roupas de pequeno porte por bairro que coleta na portaria, conserta e devolve em até 48h, eliminando a necessidade de presença do cliente.",
+  "problem_statement": "Clientes precisam de reparos rápidos em roupas sem precisar estar em casa para entrega ou coleta.",
+  "actors_or_users": [
+    "Clientes residentes",
+    "Costureiros/técnicos de reparo",
+    "Funcionários de coleta/entrega",
+    "Equipe da portaria"
+  ],
+  "assumptions": [
+    "Os clientes têm acesso à portaria do prédio",
+    "Os reparos são de pequeno porte e podem ser concluídos em 48h",
+    "Existe demanda suficiente por serviço local",
+    "Os custos de logística são viáveis",
+    "Os clientes confiam no manuseio das roupas"
+  ],
+  "ambiguities": [
+    "Tipos específicos de reparos cobertos",
+    "Modelo de pagamento e precificação",
+    "Responsabilidade por perdas ou danos",
+    "Como são agendados os horários de coleta",
+    "Cobertura geográfica exata"
+  ],
+  "strengths": [
+    "Conveniência ao cliente",
+    "Não requer presença do cliente em casa",
+    "Tempo de devolução rápido (48h)",
+    "Serviço local reduz deslocamento",
+    "Possível redução de custos por logística de bairro"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Risco de perda, dano ou furto das roupas durante coleta, transporte ou reparo",
+      "why_it_matters": "Os clientes confiam itens pessoais ao serviço; incidentes geram reclamações, responsabilidade civil e perda de confiança, comprometendo a viabilidade do negócio",
+      "severity": "HIGH",
+      "affected_part": "Logística de coleta/entrega",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Incapacidade de cumprir o prazo de 48 horas para todos os tipos de reparos pequenos",
+      "why_it_matters": "A promessa de devolução em até 48h é central para a proposta de valor; atrasos frequentes reduzem a satisfação do cliente e podem gerar penalidades contratuais",
+      "severity": "MEDIUM",
+      "affected_part": "Operações de reparo",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Os clientes têm acesso à portaria do prédio",
+    "Os reparos são de pequeno porte e podem ser concluídos em 48h",
+    "Existe demanda suficiente por serviço local",
+    "Os custos de logística são viáveis",
+    "Os clientes confiam no manuseio das roupas"
+  ],
+  "contradictions": [
+    "Coleta na portaria pressupõe que o cliente esteja presente ou que haja acesso ao prédio, o que contradiz a afirmação de que o cliente não precisa estar em casa",
+    "A promessa de \"pequenos reparos\" pode incluir itens que exigem tempo ou técnicas que ultrapassam o limite de 48h"
+  ],
+  "failure_modes": [
+    "Perda ou dano das roupas durante o transporte",
+    "Atrasos na devolução que excedem 48h",
+    "Contaminação ou manuseio inadequado das peças",
+    "Falha na comunicação com porteiros ou síndicos, impedindo a coleta",
+    "Escassez de técnicos qualificados para atender a demanda"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Utilizar sacolas seladas com RFID e seguro integrado para coleta, transporte e reparo, permitindo rastreamento em tempo real e cobertura contra perdas ou danos",
+      "addresses_issues": [
+        "Risco de perda, dano ou furto das roupas durante coleta, transporte ou reparo",
+        "Incapacidade de cumprir o prazo de 48 horas para todos os tipos de reparos pequenos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Custo adicional para sacolas inteligentes e seguro",
+        "Necessidade de infraestrutura de leitura RFID",
+        "Possível preocupação dos clientes com privacidade dos dados"
+      ],
+      "novelty_or_difference": "Uso de tecnologia IoT e seguro automático para garantir segurança e rastreabilidade dos itens"
+    },
+    {
+      "mechanism": "Criar uma rede de costureiros locais parceiros com contrato de garantia de 48h e um sistema digital de fila que prioriza reparos por complexidade e tempo estimado",
+      "addresses_issues": [
+        "Incapacidade de cumprir o prazo de 48 horas para todos os tipos de reparos pequenos",
+        "Risco de perda, dano ou furto das roupas durante coleta, transporte ou reparo"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Dependência de qualidade e disponibilidade dos parceiros",
+        "Necessidade de gerenciamento de contratos e monitoramento de desempenho",
+        "Possível variação na qualidade do serviço"
+      ],
+      "novelty_or_difference": "Alocação dinâmica de reparos baseada em complexidade, reduzindo gargalos e melhorando cumprimento de prazos"
+    },
+    {
+      "mechanism": "Instalar lockers seguros nas portarias dos condomínios onde os clientes depositam as roupas; a equipe recolhe, repara e devolve os itens ao mesmo locker",
+      "addresses_issues": [
+        "Risco de perda, dano ou furto das roupas durante coleta, transporte ou reparo",
+        "Incapacidade de cumprir o prazo de 48 horas para todos os tipos de reparos pequenos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Investimento em hardware de lockers e manutenção",
+        "Limitações de espaço nas áreas comuns",
+        "Necessidade de treinamento da equipe para operar os lockers"
+      ],
+      "novelty_or_difference": "Descentralização do ponto de coleta e entrega via lockers individuais, eliminando manuseio desnecessário e aumentando a segurança"
+    }
+  ],
+  "core_mechanism": "Coleta das peças na portaria do condomínio, realização dos pequenos reparos e devolução ao cliente dentro de 48 horas, sem exigir que o cliente esteja em casa.",
+  "core_mechanism_justification": "",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "",
+  "proposal_records": [],
+  "accepted_changes": [],
+  "candidate_extensions": [
+    "Aplicativo móvel para agendamento",
+    "Parcerias com costureiros locais",
+    "Rede logística de coleta e entrega por bairro"
+  ],
+  "rejected_changes": [],
+  "remaining_uncertainties": [],
+  "known_risks": [],
+  "recommended_next_step": "",
+  "tested_core_mechanism": "",
+  "tested_core_hash": "",
+  "reality_dependencies": [],
+  "claims_needing_evidence": [],
+  "candidate_tests": [],
+  "exploratory_candidate_tests": [],
+  "reconstruction_count": 0,
+  "max_reconstructions": 1,
+  "essence_drift_detected": false,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": false,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-08-31T23:48:19.037322",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Oferecer um serviço de reparos de roupas de pequeno porte po...' | 5 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-01T00:00:19.758960",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 vulnerabilidades críticas e 5 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-01T00:08:04.886651",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-01T00:46:01.152401",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 0,
+      "delta_summary": "FALHA: PROVIDER_TRANSPORT_ERROR: RATE_LIMIT (HTTP 429): Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kzy3eqtke92bksx1fgegbppf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198984, Requested 2689. Please try again in 12m2.735999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ]
+}

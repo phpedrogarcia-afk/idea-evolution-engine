@@ -1,0 +1,10 @@
+{
+  "run_id": "EXP-M05.5-REP-06-COND-A",
+  "created_at": "2026-09-01T04:11:28.093771+00:00",
+  "original_idea": "Uma comunidade online de ajuda entre vizinhos em que o criador ainda não decidiu se avaliações e reputação devem ser públicas, privadas para cada usuário ou nem existir, para evitar competição social.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "126fc5ae066fe9a70bd7eb9a7479507127522400",
+    "environment_pid": 13684
+  }
+}

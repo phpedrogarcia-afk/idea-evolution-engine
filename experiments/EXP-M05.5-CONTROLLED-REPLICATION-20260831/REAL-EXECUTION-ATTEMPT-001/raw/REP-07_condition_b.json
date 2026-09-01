@@ -1,0 +1,18 @@
+{
+  "experiment_id": "EXP-M05.5-CONTROLLED-REPLICATION-20260831",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "REP-07",
+  "condition": "CONDITION_B",
+  "raw_idea": "Uma ferramenta de linha de comando simples que recebe um nome de arquivo e cria uma cópia com timestamp antes de alterações manuais, sem banco de dados, interface gráfica ou sincronização.",
+  "latency_seconds": 3907.8266484737396,
+  "model_calls": 4,
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND",
+    "ATTACK",
+    "ALTERNATIVES",
+    "SYNTHESIZE"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nA command-line utility that takes a file path as input and creates a duplicate of the file with a timestamp appended to its name, intended to be run manually before editing the original file, and operates without any database, graphical interface, or synchronization components.\n\n### Intenção Humana Preservada\nCreate a simple command-line utility that automatically generates a timestamped backup copy of a specified file prior to manual modification.\n\n### Mecanismo Central\nThe tool receives a file name as an argument and creates a copy of that file with a timestamp added to the filename.\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}

@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5-REP-02-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um lugar digital para guardar perguntas que ainda não têm resposta, deixando-as reaparecer ocasionalmente sem categorias, metas ou obrigação de concluí-las.",
+  "total_model_calls": 2,
+  "gate_outcome": "ESCALATE_FOCUSED",
+  "escalation_reason": "MATERIAL_VULNERABILITY",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "decision_progress_detected": true
+}
