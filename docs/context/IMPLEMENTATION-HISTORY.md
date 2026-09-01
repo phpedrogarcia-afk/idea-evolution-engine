@@ -5,6 +5,19 @@
 
 ---
 
+### [PFI-R1-STATE-QUEUE-RECONCILIATION-001] Reconciliação de Estado M05.5 por Evidência
+- **Data:** 2026-09-01
+- **Autor / Agente:** Codex
+- **Checkpoint:** CP-20260901-001
+- **Antes:** `CURRENT-STATE.md`, `ACTIVE-QUEUE.md` e `context-manifest.json` ainda descreviam M05.5 como pré-execução e M05.4 como próxima execução real, embora o commit `26a2a67` já tivesse registrado a auditoria de integridade de M05.5.
+- **Por que estava obsoleto:** o estado operacional não foi reconciliado após a evidência `M05.5-ATTEMPT-001-INTEGRITY-AUDIT.md` entrar em `main`.
+- **Evidência:** `REAL-EXECUTION-ATTEMPT-001` é `QUARANTINED_EXECUTION_STRESS_EVIDENCE` e `INVALID_PRIMARY_REPLICATION` por reutilização de identidade, contaminação de holdouts e interferência de quota/TPD. Não há evidência posterior que a substitua; `git log` após `26a2a67` não contém novo artefato M05.5.
+- **Depois:** a fila exige decisão humana antes de qualquer M05.5R1; uma eventual tentativa requer holdouts inéditos, novo cegamento, namespace novo e quota adequada. A quarentena não foi convertida em falha do Lean L1, rejeição, prontidão ou prova.
+- **Higiene de worktree:** os cinco diretórios `runs/RUN-20260901_1555*` criados pela suíte R0 foram classificados como `TEST_EPHEMERA` (cenários Fake/Lean de teste, no commit `26a2a67`, sem relação com M05.5) e removidos. O cache rastreado `src/idea_evolution/providers/__pycache__/native.cpython-314.pyc` foi classificado como `TRACKED_SOURCE_DRIFT` e restaurado para `HEAD`. Seis diretórios `pytest-cache-files-*` datados de 2026-08-27 permanecem `UNKNOWN` e intocados por falta de acesso.
+- **Resultado:** `COMPLETE` — correção mínima de metadados; nenhum código de integração, bridge ou semântica de autoridade foi alterado.
+
+---
+
 ### [MS-M05.4-P1-INTEGRATE-CP028] Integracao do Patch P1 + Freeze do Rerun M05.4 (CP-028)
 - **Data:** 2026-08-29
 - **Autor / Agente:** Antigravity (Google DeepMind)
@@ -493,7 +506,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 

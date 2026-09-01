@@ -1,27 +1,29 @@
 # docs/context/ACTIVE-QUEUE.md — Fila Ativa de Tarefas
 
 > **FILA DE TRABALHO ESTRUTURADA EM REGIME DE DISCIPLINA OPERACIONAL.**
-> Nenhuma IA deve assumir tarefas fora da ordem prescrita sem registro no [`docs/DECISIONS-LEDGER.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/DECISIONS-LEDGER.md).
+> Nenhuma IA deve assumir tarefas fora da ordem prescrita sem registro no [`docs/DECISIONS-LEDGER.md`](../DECISIONS-LEDGER.md).
 
 ---
 
-## 🟢 NOW (Próxima Missão Imediata)
-- [ ] **MISSION-M05.4-REAL-EXECUTION:** **M05.4 REAL 24-CELL EXECUTION**
-  - **Objetivo:** Executar as 24 células (8 ideias x 3 condições) contra Groq `openai/gpt-oss-120b` sob `EXP-M05.4-PROSPECTIVE-RERUN-20260829`. Salvar artefatos brutos, computar instrumentação FioED, gerar novo pacote cego desidentificado e congelar para avaliação humana.
-  - **Pré-condição:** GROQ_API_KEY válida fornecida pelo operador humano.
-  - **Protocolo:** Seguir `RERUN-EXECUTION-MANIFEST.json` e `RERUN-RETRY-SEMANTICS-FROZEN.md`.
+## 🟢 NOW (Próxima Decisão Imediata)
+
+- [ ] **HUMAN-DECISION-M05.5R1:** decidir se uma nova replicação controlada deve ser planejada após a invalidação de `REAL-EXECUTION-ATTEMPT-001`.
+  - **Fato de partida:** `M05.5_ATTEMPT_001 = QUARANTINED_EXECUTION_STRESS_EVIDENCE / INVALID_PRIMARY_REPLICATION`.
+  - **Escopo desta decisão:** autorizar ou negar apenas o planejamento/preflight de M05.5R1.
+  - **Não autorizado agora:** chamadas semânticas, uso de novos holdouts, geração de novo mapeamento cego, execução real, alteração de produto ou integração FioOS.
 
 ---
 
-## 🟡 NEXT (Próximos Passos na Fila)
-1. [ ] **HUMAN-REVIEW-M05.4:** Avaliação humana cega sobre o pacote gerado na execução real.
-2. [ ] **MISSION-M05.4-REVEAL-ANALYSIS:** Congelamento do review humano, abertura de `BLIND-REVEAL.json`, cálculo de eficiência e predições FioED.
-3. [ ] **KNOWLEDGE-TRANSFER-ACTIVATION:** Ativar `FIOOS-TO-FIOIDEIAS-KNOWLEDGE-TRANSFER.md` após M05.4 fechar.
-4. [ ] **EXP-HTR-LITE-REPLAY:** Replay de linhagem de ideias sob `IdeaLineageNode`.
-5. [ ] **DONOR-DEEP-AUTOPSIES:** Continuidade das autópsias de doadores no arsenal.
+## 🟡 NEXT (Condicionado à Decisão Humana)
+
+1. [ ] **M05.5R1-PREFLIGHT-FREEZE:** se autorizado, congelar uma nova replicação com 8 holdouts inéditos, novo mapeamento cego, novo namespace de tentativa e prova de quota adequada — sem executar chamadas semânticas.
+2. [ ] **M05.5R1-REAL-EXECUTION:** somente após o preflight congelado e uma autorização de execução específica; nunca reutilizar `REAL-EXECUTION-ATTEMPT-001`.
+3. [ ] **M05.5R1-HUMAN-REVIEW-AND-REVEAL:** somente se uma tentativa futura for admissível e tiver pacote cego válido.
+4. [ ] **KNOWLEDGE-TRANSFER-PRESERVATION:** manter E10 como evidência de não elevação de autoridade. O documento não habilita implementação, parser externo, invocação FioOS ou escrita entre projetos.
 
 ---
 
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
-- *Avaliação humana bloqueada até execução real concluída.*
-- *Ativação de knowledge transfer bloqueada até M05.4 fechar.*
+
+- **M05.5 Attempt 001:** bloqueado como caminho confirmatório; seus artefatos brutos são preservados, mas não são base para revisão humana, reveal ou conclusão de replicação.
+- **Bridge IEE ↔ FioOS:** bloqueado até uma missão e autoridade específicas. `READY_TO_TEST != EXECUTION_AUTHORITY`.

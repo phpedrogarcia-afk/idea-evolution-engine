@@ -10,12 +10,12 @@
   "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260829-028",
-  "last_known_good_checkpoint": "CP-20260829-028",
-  "current_objective": "M05.4 accepted patch integrated (67f4adb). Provider guard P1 closed. EXP-M05.4-PROSPECTIVE-RERUN-20260829 preflight frozen. 24-cell execution manifest frozen. Ready for M05.4 REAL 24-CELL EXECUTION.",
-  "current_active_task": "TASK-M05.4-RERUN-EXECUTION",
-  "next_authorized_work": "M05.4 REAL 24-CELL EXECUTION com Groq openai/gpt-oss-120b sob EXP-M05.4-PROSPECTIVE-RERUN-20260829",
-  "updated_at": "2026-08-29T17:10:00-03:00",
+  "latest_checkpoint": "CP-20260901-001",
+  "last_known_good_checkpoint": "CP-20260901-001",
+  "current_objective": "M05.5 REAL-EXECUTION-ATTEMPT-001 is quarantined as INVALID_PRIMARY_REPLICATION: attempt identity reuse, holdout contamination, and provider TPD interference invalidate it as confirmatory evidence. M05.4 remains C_BEST_IN_M05_4 and Lean L1 remains provisional. E10 remains a non-authorizing boundary result only.",
+  "current_active_task": "NO_AUTONOMOUS_EXECUTION__HUMAN_DECISION_REQUIRED_FOR_M05_5R1",
+  "next_authorized_work": "Human decision gate on whether to authorize M05.5R1 planning/preflight only; no semantic calls, holdouts, bridge implementation, external parser, or FioOS invocation.",
+  "updated_at": "2026-09-01T13:26:14-03:00",
   "required_read_order": [
     "AI-START-HERE.md",
     "docs/context/CURRENT-STATE.md",
@@ -125,11 +125,11 @@
     "docs/GOVERNANCE-INVARIANTS.md": "9cce61ce9303dd4a5f2914a2912700b5f4751cfc3607f0b0b22e490f03d47bda",
     "docs/DECISIONS-LEDGER.md": "92a9877a58964f4909dc2f5b56322ab4b73f698c544324d37dcee38ca7232ca0",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "678e7c753237c6d75d0cb292a578f82367e79635fde4aa54629381a5aa8c1c95",
-    "docs/context/ACTIVE-QUEUE.md": "406a4a1aa63258fa8865d8432afe43ec09b090398a56ede07c8d3838ce9e8fb2",
+    "docs/context/CURRENT-STATE.md": "14c533224235db912dc3bccc9c7f0c869cc23be879e14a1a4cf8c793b2f5e3d1",
+    "docs/context/ACTIVE-QUEUE.md": "e1e08686985bd7e274f77121216872e031c11bf1e8fc6103813988be27ce0317",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"
   },
-  "last_updated": "2026-08-31T15:38:00-03:00"
+  "last_updated": "2026-09-01T13:26:14-03:00"
 }

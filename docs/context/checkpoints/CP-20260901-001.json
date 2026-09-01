@@ -1,0 +1,60 @@
+{
+  "checkpoint_id": "CP-20260901-001",
+  "created_at": "2026-09-01T13:26:14-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Reconciliar a declaração operacional do IEE com a auditoria M05.5 Attempt 001 já comprometida em main, sem mudar evidência, produto, bridge FioOS ou autoridade.",
+  "repository": {
+    "default_branch": "main",
+    "head_commit": "26a2a67f812bedacf0f1b43cf2700b7ae3accf63",
+    "worktree_state": "DIRTY_METADATA_RECONCILIATION_PENDING_COMMIT"
+  },
+  "completed_tasks": [
+    "PFI-R1-STATE-QUEUE-RECONCILIATION-001",
+    "Classificacao e remocao de cinco runs de teste gerados por PFI-R0",
+    "Restauracao para HEAD de um cache Python rastreado modificado pela execucao de testes"
+  ],
+  "changed_files": [
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/context-manifest.json",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/checkpoints/CP-20260901-001.json",
+    "docs/context/checkpoints/CP-20260901-001.md"
+  ],
+  "new_decisions": [
+    "M05.5 Attempt 001 permanece QUARANTINED_EXECUTION_STRESS_EVIDENCE e INVALID_PRIMARY_REPLICATION; a correção é de metadados, não de evidência.",
+    "M05.5R1 requer decisão humana antes de planejamento ou execução.",
+    "E10 continua limitado à não elevação de autoridade; READY_TO_TEST nao concede EXECUTION_AUTHORITY."
+  ],
+  "tests_executed": [
+    "python tools/context/validate_context.py: PASS",
+    "Validação de referências M05.5 e de JSON do manifesto: PASS"
+  ],
+  "unresolved_questions": [
+    "O humano autorizará planejamento de M05.5R1?",
+    "Há quota de provedor suficiente para uma execução futura admissível?"
+  ],
+  "known_contradictions": [
+    "CONTINUITY-CAPSULE.md contém estado histórico de Fase 0 e não foi alterado por esta missão, pois não referencia M05.5; requer reconciliação separada se virar bloqueador."
+  ],
+  "known_risks": [
+    "Os diretórios pytest-cache-files-* permanecem inacessíveis e intocados; não são evidência M05.5.",
+    "Nenhuma tentativa futura pode reutilizar holdouts, identidade ou cegamento de Attempt 001."
+  ],
+  "blockers": [
+    "M05.5R1 não está autorizada até decisão humana explícita.",
+    "Bridge IEE-FioOS, parser externo, invocação automática e transferência de autoridade não estão autorizados."
+  ],
+  "next_exact_action": "Decisão humana explícita: autorizar ou negar apenas o planejamento/preflight de M05.5R1.",
+  "authorized_next_scope": [
+    "Se autorizado, planejar e congelar M05.5R1 sem chamadas semânticas.",
+    "Usar 8 holdouts inéditos, novo mapeamento cego, namespace novo e prova de quota antes de qualquer execução."
+  ],
+  "do_not_repeat": [
+    "Não reexecutar M05.5 Attempt 001 nem reclassificar a mesma evidência como falha do Lean L1.",
+    "Não reexecutar a suíte completa de 198 testes para uma alteração exclusivamente documental.",
+    "Não implementar bridge FioOS ou modificar semântica de autoridade."
+  ],
+  "recovery_notes": "Leia docs/context/CURRENT-STATE.md e ACTIVE-QUEUE.md; a evidência primária é experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-ATTEMPT-001-INTEGRITY-AUDIT.md."
+}
