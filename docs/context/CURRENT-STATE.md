@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-009
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-010
 
 ---
 
@@ -28,8 +28,8 @@
   - Blinding: REV1 foi congelada em cofre externo; o repositório tem somente seu commitment, sem reveal.
   - Capacity design: `CALIBRATED_READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; o cap é `2048`, o envelope máximo específico é `11,226,334` tokens (redução de 58,82% sobre 27,262,976), 208 requests máximos incluindo repairs explícitos, schedule CSPRNG comprometido e pacing de concorrência 1 permanecem congelados offline.
   - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), evidência autenticada de capacidade, preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-009`](checkpoints/CP-20260901-009.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-009`
+- **Último Checkpoint Imutável:** [`CP-20260901-010`](checkpoints/CP-20260901-010.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-010`
 - **Git Branch:** `main`
 - **Worktree após a calibração:** `PENDING_CHECKPOINT_COMMIT`
 
@@ -49,9 +49,9 @@
   - `PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001`, que congelou o cap, bound conservador, schedule neutro, pacing e invalidações sem tocar em holdouts/reveal ou provedor.
   - `PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001`, que substituiu o bound de contexto inteiro por um envelope tokenizado com `openai-harmony` oficial, sem inferência, reveal ou execução A/B/C.
 - **Tarefa Ativa Atual:**
-  - A missão autenticada de capacidade confirmou que não há configuração local autenticada nem sessão Groq ativa; capacidade da conta permanece `UNKNOWN` e execução real não está autorizada.
+  - A descoberta de autenticação confirmou `AUTH_SOURCE=NONE`; o login oficial Groq foi aberto e aguarda somente a ação humana legítima. Capacidade da conta permanece `UNKNOWN` e execução real não está autorizada.
 - **Próximo Passo Exato:**
-- Fazer login na conta/projeto Groq pretendidos e autorizar a retomada do capacity check contra o envelope calibrado; preflight e execução continuam decisões posteriores e separadas.
+- Concluir login na conta/projeto Groq pretendidos e, se a checagem futura precisar de headers API, configurar `GROQ_API_KEY` diretamente no ambiente local que a executará — nunca no repositório ou no chat.
 
 ---
 

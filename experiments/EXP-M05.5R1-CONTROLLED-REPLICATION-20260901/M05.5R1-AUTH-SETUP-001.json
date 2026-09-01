@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "mission_id": "PFI-GROQ-AUTH-SETUP-001",
+  "execution_authority": "AUTH_SETUP_ONLY",
+  "source_head": "04a6ec531c7171cc249320b6c9f3accd77cf2d7e",
+  "provider": "groq",
+  "auth_source": "NONE",
+  "existing_auth_found": false,
+  "secret_present": false,
+  "secret_value_exposed": false,
+  "authentication_verified": false,
+  "auth_verification_requests": 0,
+  "auth_verification_tokens": 0,
+  "discovery": {
+    "environment_credential_present": false,
+    "project_env_file_present": false,
+    "official_cli_present": false,
+    "known_provider_config_directory_present": false,
+    "authenticated_console_session_present": false,
+    "official_login_flow_available": true,
+    "official_login_url": "https://console.groq.com/login"
+  },
+  "repository_secret_safety": {
+    "secret_stored_in_repository": false,
+    "secret_committed": false,
+    "secret_printed": false,
+    "dot_env_tracked": false,
+    "dot_env_ignored": true,
+    "tracked_pattern_matches_are_test_fixtures_only": true
+  },
+  "interactive_human_action_required": true,
+  "human_action_required": "Complete sign-in in the official Groq console. If the subsequent authenticated capacity check needs API headers, create/select a Groq API key and set GROQ_API_KEY directly in the local environment that will run the check; do not put it in the repository or paste it into chat.",
+  "holdouts_accessed": false,
+  "reveal_accessed": false,
+  "a_b_c_cells_executed": 0,
+  "real_replication_started": false,
+  "capacity_check_executed": false,
+  "verdict": "HUMAN_INTERACTIVE_LOGIN_REQUIRED",
+  "next_allowed_step": "COMPLETE_MINIMAL_HUMAN_AUTH_ACTION"
+}

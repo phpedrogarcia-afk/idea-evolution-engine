@@ -5,6 +5,14 @@
 
 ---
 
+### [PFI-GROQ-AUTH-SETUP-001] Descoberta e Setup Legítimo de Autenticação Groq
+- **Data:** 2026-09-01
+- **Resultado:** `HUMAN_INTERACTIVE_LOGIN_REQUIRED`; nenhum mecanismo existente foi encontrado e o login oficial foi aberto sem inserir credenciais.
+- **Evidência:** `M05.5R1-AUTH-SETUP-001.json`; zero requests de autenticação/provedor, zero tokens e nenhum segredo exposto.
+- **Ação humana mínima:** concluir o login oficial e, se a futura coleta de headers API exigir, criar/selecionar uma chave e definir `GROQ_API_KEY` somente no ambiente local da execução, fora do repositório e do chat.
+
+---
+
 ### [PFI-M05_5R1-AUTHENTICATED-CAPACITY-CHECK-001] Evidência Autenticada de Capacidade
 - **Data:** 2026-09-01
 - **Objetivo:** obter limites/saldos da conta Groq exata para comparar com o envelope calibrado, sem executar tratamentos.
@@ -581,5 +589,4 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 

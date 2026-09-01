@@ -1,0 +1,49 @@
+{
+  "checkpoint_id": "CP-20260901-010",
+  "created_at": "2026-09-01T20:17:55.072260",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Groq authentication discovery and setup",
+  "repository": {
+    "branch": "main",
+    "commit": "04a6ec5",
+    "worktree_state": "DIRTY"
+  },
+  "completed_tasks": [
+    "Checked only named legitimate local authentication mechanisms without reading credential values",
+    "Verified the official Groq login flow is available and left it open for human completion",
+    "Verified no repository dotenv or secret-bearing credential file was tracked"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-AUTH-SETUP-001.json",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [
+    "Authentication setup ends at human credential or MFA entry",
+    "Credentials must remain outside the repository and chat"
+  ],
+  "tests_executed": [
+    "Non-secret auth-source discovery",
+    "Tracked dotenv and secret-pattern safety check"
+  ],
+  "unresolved_questions": [
+    "Which intended Groq account/project and authenticated capacity limits will apply"
+  ],
+  "known_contradictions": [],
+  "known_risks": [],
+  "blockers": [
+    "Human completion of official Groq login"
+  ],
+  "next_exact_action": "Human completes official Groq sign-in; next mission can verify the resulting context without disclosing a secret",
+  "authorized_next_scope": [
+    "Authentication setup only"
+  ],
+  "do_not_repeat": [
+    "Do not ask for or print secrets",
+    "Do not execute capacity check or A/B/C",
+    "Do not access holdouts or reveal"
+  ],
+  "recovery_notes": "Consulte CONTINUITY-CAPSULE.md e execute project_status.py."
+}
