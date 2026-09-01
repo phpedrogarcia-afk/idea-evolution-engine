@@ -1,0 +1,58 @@
+{
+  "checkpoint_id": "CP-20260901-003",
+  "created_at": "2026-09-01T14:30:00-03:00",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Endurecer offline o harness M05.5R1 sem iniciar experimento, chamar provedor ou revelar holdout.",
+  "repository": {
+    "branch": "main",
+    "commit": "d4c8388ea18b762a86d8aea28977ff6dcea1cdf6",
+    "worktree_state": "DIRTY_UNTIL_R3_COMMIT"
+  },
+  "completed_tasks": [
+    "PFI-R3-M05_5R1-OFFLINE-HARNESS-HARDENING-001",
+    "Reconciliação do commit externo d4c8388 como ADOPT_WITH_HARDENING"
+  ],
+  "changed_files": [
+    "tools/experiments/execute_m05_5r1.py",
+    "tools/experiments/test_execute_m05_5r1.py",
+    "tests/test_m05_5r1_offline_harness.py",
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [
+    "O harness R3 é offline-only e execute_replication falha fechada sem autoridade posterior.",
+    "Recibos sintéticos demonstram somente a propriedade do gate, nunca capacidade real do provedor."
+  ],
+  "tests_executed": [
+    "python -m pytest tests/test_m05_5r1_offline_harness.py -q -p no:cacheprovider --basetemp=.m05r3-pytest-final: 12 passed",
+    "Verificação estrutural: ausência de requests, endpoint Groq e import de runner no fluxo R3"
+  ],
+  "unresolved_questions": [
+    "Qual receipt verificável de capacidade real cobrirá o envelope tokenizado na janela de execução?",
+    "Quando o humano selará 8 holdouts e o blind mapping fora do repositório?"
+  ],
+  "known_contradictions": [
+    "O commit d4c8388 endureceu o executor mas ainda preservava rota de execução futura; R3 a substituiu por falha fechada dentro deste escopo."
+  ],
+  "known_risks": [
+    "O teste sintético não é capacidade real, resultado científico ou autorização de execução.",
+    "O namespace REAL-EXECUTION-ATTEMPT-001 continua reservado para uma autorização futura e não foi tocado."
+  ],
+  "blockers": [
+    "Holdouts novos selados, blind mapping e receipt de capacidade real ainda não existem.",
+    "Execução real requer decisão humana específica e posterior."
+  ],
+  "next_exact_action": "Autorizar e realizar somente o preflight-freeze humano com receipts reais, sem chamadas semânticas.",
+  "authorized_next_scope": [
+    "Preparar/verificar receipts reais de holdout, cegamento e capacidade.",
+    "Nenhuma execução, chamada de modelo, bridge FioOS ou mudança de autoridade sem missão nova."
+  ],
+  "do_not_repeat": [
+    "Não reexecutar Attempt 001 nem usar seus holdouts.",
+    "Não tratar a aprovação dos testes sintéticos como autorização ou capacidade real."
+  ],
+  "recovery_notes": "R3 está descrita na seção 11 de M05.5R1-PRE-FREEZE-READINESS.md. O próximo passo continua humano e pré-execução."
+}

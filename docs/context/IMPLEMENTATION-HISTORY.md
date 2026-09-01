@@ -5,6 +5,16 @@
 
 ---
 
+### [PFI-R3-M05_5R1-OFFLINE-HARNESS-HARDENING-001] Harness Offline M05.5R1
+- **Data:** 2026-09-01
+- **Autor / Agente:** Codex
+- **Checkpoint:** CP-20260901-003
+- **Entrega:** receipt de início e namespace imutáveis, receipt de holdout selado/auditado, envelope 24 células/até 104 pedidos e gate TPD/TPM/RPD/RPM fail-closed.
+- **Evidência:** `tests/test_m05_5r1_offline_harness.py` — 12 testes sintéticos aprovados, incluindo controles negativos de colisão, tamper, substituição, boundary e capacidade.
+- **Limite:** `OFFLINE_HARNESS_READY_NOT_EXECUTION_AUTHORIZED`; não houve chamadas, holdout real, prova de capacidade real ou execução.
+
+---
+
 ### [PFI-R2-M05_5R1-REPLICATION-PLANNING-001] Desenho e Preflight M05.5R1
 - **Data:** 2026-09-01
 - **Autor / Agente:** Codex
@@ -518,7 +528,6 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
 
 
 

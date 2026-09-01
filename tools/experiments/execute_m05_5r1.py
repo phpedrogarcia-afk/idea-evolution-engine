@@ -25,6 +25,7 @@ Invariants:
 
 from __future__ import annotations
 
+from dataclasses import asdict, dataclass
 import hashlib
 import json
 import os
@@ -32,7 +33,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Sequence
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(line_buffering=True)
@@ -47,6 +48,12 @@ EXPERIMENT_ID     = "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901"
 ATTEMPT_ID        = "REAL-EXECUTION-ATTEMPT-001"
 EXPECTED_PROVIDER = "groq"
 EXPECTED_MODEL    = "openai/gpt-oss-120b"
+CELL_COUNT = 24
+MAX_REQUEST_COUNT = 104
+VALID_OUTCOMES = {
+    "SUPPORTED", "NOT_SUPPORTED", "INCONCLUSIVE", "INVALID_EXECUTION",
+    "ABORTED_CAPACITY", "NO_USEFUL_WORK_FOUND",
+}
 
 EXP_DIR         = REPO_ROOT / "experiments" / EXPERIMENT_ID
 ATTEMPT_DIR     = EXP_DIR / ATTEMPT_ID
@@ -122,7 +129,175 @@ def preflight_treatment_hashes() -> None:
 
 
 def quota_gate() -> str:
+    """Offline R3 must never infer provider capacity from a network probe."""
     return "UNKNOWN"
+
+
+def _canonical_hash(value: object) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+@dataclass(frozen=True)
+class HoldoutReceipt:
+    content_sha256: str
+    count: int
+    guardian_id: str
+    sealed_at: str
+    integrity_sha256: str
+
+
+def make_holdout_receipt(items: Sequence[str], guardian_id: str, sealed_at: datetime) -> HoldoutReceipt:
+    payload = {"content_sha256": _canonical_hash(list(items)), "count": len(items),
+               "guardian_id": guardian_id, "sealed_at": sealed_at.isoformat()}
+    return HoldoutReceipt(**payload, integrity_sha256=_canonical_hash(payload))
+
+
+def _valid_holdout_receipt(receipt: HoldoutReceipt) -> bool:
+    payload = asdict(receipt)
+    integrity = payload.pop("integrity_sha256")
+    return bool(receipt.content_sha256 and receipt.guardian_id and receipt.count == 8 and integrity == _canonical_hash(payload))
+
+
+class SealedHoldoutBoundary:
+    """Contents cross the boundary only in the explicit evaluation phase."""
+
+    def __init__(self, receipt: HoldoutReceipt, loader: Callable[[], Sequence[str]]):
+        self.receipt = receipt
+        self._loader = loader
+
+    def access_for_evaluation(self, phase: str, audit_path: Path) -> list[str]:
+        if phase != "EVALUATION":
+            raise PermissionError("HOLDOUT_ACCESS_DENIED")
+        if not _valid_holdout_receipt(self.receipt):
+            raise ValueError("HOLDOUT_RECEIPT_INVALID")
+        items = list(self._loader())
+        if _canonical_hash(items) != self.receipt.content_sha256 or len(items) != self.receipt.count:
+            raise ValueError("HOLDOUT_RECEIPT_MISMATCH")
+        audit_path.parent.mkdir(parents=True, exist_ok=True)
+        event = {"event": "holdout_access", "phase": phase, "content_sha256": self.receipt.content_sha256,
+                 "count": self.receipt.count, "guardian_id": self.receipt.guardian_id}
+        with audit_path.open("a", encoding="utf-8") as output:
+            output.write(json.dumps(event, sort_keys=True) + "\n")
+        return items
+
+
+@dataclass(frozen=True)
+class CapacityEnvelope:
+    request_count: int
+    input_tokens: int
+    output_tokens: int
+    tpd_required: int
+    tpm_required: int
+    rpd_required: int
+    rpm_required: int
+    tokenizer_id: str
+
+    @property
+    def sha256(self) -> str:
+        return _canonical_hash(asdict(self))
+
+
+def build_capacity_envelope(inputs: Sequence[int], outputs: Sequence[int], tokenizer_id: str) -> CapacityEnvelope:
+    if len(inputs) != MAX_REQUEST_COUNT or len(outputs) != MAX_REQUEST_COUNT:
+        raise ValueError("CAPACITY_ENVELOPE_REQUEST_COUNT_MISMATCH")
+    if not tokenizer_id or any(value < 0 for value in [*inputs, *outputs]):
+        raise ValueError("CAPACITY_ENVELOPE_INVALID")
+    input_total, output_total = sum(inputs), sum(outputs)
+    return CapacityEnvelope(MAX_REQUEST_COUNT, input_total, output_total, input_total + output_total,
+                            max(a + b for a, b in zip(inputs, outputs)), MAX_REQUEST_COUNT, 1, tokenizer_id)
+
+
+@dataclass(frozen=True)
+class CapacityReceipt:
+    envelope_sha256: str
+    available_tpd: int
+    available_tpm: int
+    available_rpd: int
+    available_rpm: int
+    observed_at: str
+    expires_at: str
+    source: str
+    verified: bool
+    integrity_sha256: str
+
+
+def make_capacity_receipt(envelope: CapacityEnvelope, *, available_tpd: int, available_tpm: int,
+                          available_rpd: int, available_rpm: int, observed_at: datetime,
+                          expires_at: datetime, source: str) -> CapacityReceipt:
+    payload = {"envelope_sha256": envelope.sha256, "available_tpd": available_tpd, "available_tpm": available_tpm,
+               "available_rpd": available_rpd, "available_rpm": available_rpm, "observed_at": observed_at.isoformat(),
+               "expires_at": expires_at.isoformat(), "source": source, "verified": True}
+    return CapacityReceipt(**payload, integrity_sha256=_canonical_hash(payload))
+
+
+def evaluate_capacity(envelope: CapacityEnvelope, receipt: CapacityReceipt | None, now: datetime) -> str:
+    if receipt is None or not receipt.verified or receipt.envelope_sha256 != envelope.sha256 or not receipt.source:
+        return "NOT_READY_CAPACITY"
+    try:
+        payload = asdict(receipt)
+        integrity = payload.pop("integrity_sha256")
+        expired = datetime.fromisoformat(receipt.expires_at.replace("Z", "+00:00")) <= now
+    except (TypeError, ValueError):
+        return "NOT_READY_CAPACITY"
+    if integrity != _canonical_hash(payload) or expired:
+        return "NOT_READY_CAPACITY"
+    for available, required, status in ((receipt.available_tpd, envelope.tpd_required, "NOT_READY_TPD"),
+                                       (receipt.available_tpm, envelope.tpm_required, "NOT_READY_TPM"),
+                                       (receipt.available_rpd, envelope.rpd_required, "NOT_READY_RPD"),
+                                       (receipt.available_rpm, envelope.rpm_required, "NOT_READY_RPM")):
+        if available < required:
+            return status
+    return "READY"
+
+
+def _start_payload(attempt_id: str, provenance: Dict[str, str]) -> Dict[str, object]:
+    if not all(provenance.get(key) for key in ("source_commit", "freeze_manifest_sha256", "config_sha256")):
+        raise ValueError("START_RECEIPT_PROVENANCE_MISSING")
+    body: Dict[str, object] = {"experiment_id": EXPERIMENT_ID, "attempt_id": attempt_id, **provenance}
+    return {"body": body, "integrity_sha256": _canonical_hash(body)}
+
+
+def create_start_receipt(namespace: Path, attempt_id: str, provenance: Dict[str, str]) -> Path:
+    if not attempt_id:
+        raise ValueError("ATTEMPT_ID_INVALID")
+    attempt = namespace / attempt_id
+    try:
+        attempt.mkdir(parents=False)
+    except FileExistsError as error:
+        raise FileExistsError("ATTEMPT_NAMESPACE_COLLISION") from error
+    receipt = attempt / "start-receipt.json"
+    receipt.write_text(json.dumps(_start_payload(attempt_id, provenance), sort_keys=True), encoding="utf-8")
+    return receipt
+
+
+def verify_start_receipt(receipt: Path, expected_provenance: Dict[str, str]) -> Dict[str, object]:
+    data = json.loads(receipt.read_text(encoding="utf-8"))
+    body = data.get("body")
+    if not isinstance(body, dict) or data.get("integrity_sha256") != _canonical_hash(body):
+        raise ValueError("START_RECEIPT_TAMPERED")
+    expected = _start_payload(str(body.get("attempt_id", "")), expected_provenance)["body"]
+    if body != expected:
+        raise ValueError("START_RECEIPT_IDENTITY_OR_CONFIG_MISMATCH")
+    return body
+
+
+def authorize_start(namespace: Path, attempt_id: str, provenance: Dict[str, str], holdout: HoldoutReceipt,
+                    envelope: CapacityEnvelope, capacity: CapacityReceipt | None, now: datetime) -> tuple[str, Path | None, List[str]]:
+    reasons: List[str] = []
+    if not attempt_id:
+        reasons.append("ATTEMPT_ID_INVALID")
+    elif (namespace / attempt_id).exists():
+        reasons.append("ATTEMPT_NAMESPACE_NOT_FRESH")
+    if not all(provenance.get(key) for key in ("source_commit", "freeze_manifest_sha256", "config_sha256")):
+        reasons.append("PROVENANCE_MISSING")
+    if not _valid_holdout_receipt(holdout):
+        reasons.append("HOLDOUT_RECEIPT_INVALID")
+    capacity_status = evaluate_capacity(envelope, capacity, now)
+    if capacity_status != "READY":
+        reasons.append(capacity_status)
+    if reasons:
+        return "START_DENIED", None, reasons
+    return "START_ALLOWED", create_start_receipt(namespace, attempt_id, provenance), []
 
 
 def _registry_entries() -> List[Dict[str, Any]]:
@@ -221,30 +396,8 @@ def write_cell(path: Path, data: Dict[str, Any]) -> None:
 # ---------------------------------------------------------------------------
 
 def execute_replication(api_key: Optional[str] = None) -> None:
-    key = api_key or os.environ.get("GROQ_API_KEY")
-    if not key:
-        raise ValueError("GROQ_API_KEY_MISSING")
-
-    preflight_treatment_hashes()
-
-    quota_status = quota_gate()
-    if quota_status != "YES":
-        raise RuntimeError(
-            f"QUOTA_GATE_BLOCKED: PROVIDER_QUOTA_READY={quota_status}. "
-            "Blocked until provider capacity is independently verified."
-        )
-
-    reserve_attempt()
-    create_lock()
-
-    from src.idea_evolution.providers.native import NativeModelRunner  # noqa
-    from src.idea_evolution.orchestration.baseline import BaselineRunner  # noqa
-    from src.idea_evolution.orchestration.simple_loop import SimpleLoopRunner  # noqa
-    from src.idea_evolution.orchestration.lean_loop import LeanLoopRunner  # noqa
-
-    print("TREATMENT_EXECUTION_PLANE: Stub. Pending holdout freeze + quota evidence.")
-    update_attempt_status("COMPLETED")
+    raise RuntimeError("OFFLINE_HARNESS_ONLY: separate execution authority is required")
 
 
 if __name__ == "__main__":
-    print("M05.5R1 harness loaded. Do not execute until holdouts frozen + quota proven.")
+    print("OFFLINE_HARNESS_ONLY: no provider, model, or holdout execution is available.")

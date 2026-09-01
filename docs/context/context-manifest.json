@@ -10,12 +10,12 @@
   "fioos_integration_status": "PROTOCOL_SPECIFIED_NOT_IMPLEMENTED",
   "default_branch": "main",
   "remote_repository": "https://github.com/phpedrogarcia-afk/idea-evolution-engine.git",
-  "latest_checkpoint": "CP-20260901-002",
-  "last_known_good_checkpoint": "CP-20260901-002",
-  "current_objective": "M05.5R1 is planned but not execution-ready. The contract adopts M05.4 clean-harness controls and requires a fresh attempt namespace, sealed new holdouts, frozen hashes, and a deterministic capacity receipt. M05.5 Attempt 001 remains invalid; M05.4 remains C_BEST_IN_M05_4 and Lean L1 remains provisional.",
-  "current_active_task": "HUMAN_DECISION_REQUIRED_FOR_M05_5R1_OFFLINE_HARNESS_IMPLEMENTATION",
-  "next_authorized_work": "Human decision on an offline-only M05.5R1 harness/checks mission. No semantic calls, new holdouts, blind mapping, execution, bridge implementation, external parser, or FioOS invocation.",
-  "updated_at": "2026-09-01T13:37:47-03:00",
+  "latest_checkpoint": "CP-20260901-003",
+  "last_known_good_checkpoint": "CP-20260901-003",
+  "current_objective": "M05.5R1 has an offline-only harness validated by synthetic controls, but is not execution-authorized. A fresh namespace, sealed new holdouts, blind mapping and a real deterministic capacity receipt remain required. M05.5 Attempt 001 remains invalid; M05.4 remains C_BEST_IN_M05_4 and Lean L1 remains provisional.",
+  "current_active_task": "HUMAN_DECISION_REQUIRED_FOR_M05_5R1_PREFLIGHT_FREEZE",
+  "next_authorized_work": "Human preflight-freeze decision for real sealed holdout, blind mapping and capacity receipts. No semantic calls, execution, bridge implementation, external parser, or FioOS invocation without a new mission.",
+  "updated_at": "2026-09-01T14:30:00-03:00",
   "required_read_order": [
     "AI-START-HERE.md",
     "docs/context/CURRENT-STATE.md",
@@ -125,11 +125,11 @@
     "docs/GOVERNANCE-INVARIANTS.md": "9cce61ce9303dd4a5f2914a2912700b5f4751cfc3607f0b0b22e490f03d47bda",
     "docs/DECISIONS-LEDGER.md": "92a9877a58964f4909dc2f5b56322ab4b73f698c544324d37dcee38ca7232ca0",
     "docs/TERMINOLOGY.md": "8972dd35f5c417d6813871397e152f812c894100252b7973f5c211d467f5ec00",
-    "docs/context/CURRENT-STATE.md": "cd2ebf8b50adf23ac9d8f6f1e779d2cec09ac2e29f0cdbbda6d309cbf73b2c1c",
-    "docs/context/ACTIVE-QUEUE.md": "13fd858067b0384626d753d368f2f7fb973127d6a14fe2b673de646bdd86bca0",
+    "docs/context/CURRENT-STATE.md": "9729bace4ab0e654bcf65428187f0e7cd2a4bfd3cd08afe75009533af30e5656",
+    "docs/context/ACTIVE-QUEUE.md": "202efdccad9eef4def57a0ac2f3daf338e12f5b331987a3a725f7d21b6827ce1",
     "docs/context/CONTINUITY-CAPSULE.md": "fed4a2e86d0984fed6b63974b2b0cfd950c8a8b2ecc66031d90e715af160fafb",
     "docs/doctrine/OPERATING-DOCTRINE.md": "374cadaa221f320f609f0f741927d0e5b29e037a6342f0654553659c45be14cb",
     "docs/doctrine/source/CONSTRUCTION-CONSTITUTION-v1.0.md": "5337f466a6f6e450ab4c517a8d43b642fcf6b713d75095c878b71a0417e77468"
   },
-  "last_updated": "2026-09-01T13:37:47-03:00"
+  "last_updated": "2026-09-01T14:30:00-03:00"
 }

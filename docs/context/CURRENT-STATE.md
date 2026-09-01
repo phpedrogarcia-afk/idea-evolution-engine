@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-002
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-003
 
 ---
 
@@ -21,11 +21,12 @@
   - Razão: reutilização de identidade de tentativa, contaminação dos holdouts e interferência de quota/TPD do provedor.
   - Semântica preservada: isto é `EXPERIMENT_EXECUTION_FAILURE`, não `LEAN_L1_REPLICATION_FAILURE`; não é `FAILED`, `REJECTED`, `READY`, `PROVEN` ou `SUPERSEDED`.
   - Evidência: `experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-ATTEMPT-001-INTEGRITY-AUDIT.md` (commit `26a2a67`).
-- **M05.5R1 (EXP-M05.5R1-CONTROLLED-REPLICATION-20260901):** `PLANNED_NOT_EXECUTION_READY`
+- **M05.5R1 (EXP-M05.5R1-CONTROLLED-REPLICATION-20260901):** `OFFLINE_HARNESS_READY_NOT_EXECUTION_AUTHORIZED`
   - Contrato: `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md`.
-  - Bloqueios: o harness existente não prova imutabilidade, boundary de holdout ou capacidade determinística; execução permanece bloqueada.
-- **Último Checkpoint Imutável:** [`CP-20260901-002`](checkpoints/CP-20260901-002.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-002`
+  - Controles offline: namespace/receipt imutável, boundary sintético de holdout e gate de capacidade fail-closed; 12 testes sintéticos passaram.
+  - Bloqueios reais: holdouts selados, receipt de capacidade real, blind mapping, preflight e autorização humana separada.
+- **Último Checkpoint Imutável:** [`CP-20260901-003`](checkpoints/CP-20260901-003.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-003`
 - **Git Branch:** `main`
 - **Worktree no planejamento R2:** `DIRTY_PLANNING_PENDING_COMMIT`
 
@@ -38,10 +39,11 @@
   - `PFI-R0-IDEA-EVOLUTION-ENGINE-READINESS-AUDIT-001`, que confirmou que E10 só prova a fronteira epistêmica/de autoridade, não um bridge de runtime.
   - `PFI-R1-STATE-QUEUE-RECONCILIATION-001`, que substituiu o estado pré-execução obsoleto pela classificação acima.
   - `PFI-R2-M05_5R1-REPLICATION-PLANNING-001`, que congelou o desenho mínimo e identificou os controles determinísticos ainda ausentes.
+  - `PFI-R3-M05_5R1-OFFLINE-HARNESS-HARDENING-001`, que corrigiu os controles offline sem chamadas, holdouts reais ou alteração de autoridade.
 - **Tarefa Ativa Atual:**
-  - M05.5R1 permanece em planejamento; execução autônoma não está autorizada.
+  - M05.5R1 possui harness offline validado; execução real não está autorizada.
 - **Próximo Passo Exato:**
-  - Decisão humana explícita sobre autorizar ou não uma missão offline para implementar e testar o harness/preflight M05.5R1. Nenhuma chamada semântica, novo holdout, novo cegamento ou bridge pode começar antes dessa decisão.
+  - Selar novos holdouts e blind mapping fora do repositório e obter receipt real de capacidade; depois, autorizar preflight e execução em decisões separadas.
 
 ---
 

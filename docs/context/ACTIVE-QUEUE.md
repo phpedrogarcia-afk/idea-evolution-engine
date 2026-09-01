@@ -7,15 +7,15 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
 
-- [ ] **HUMAN-DECISION-M05.5R1-HARNESS:** autorizar ou negar uma missão offline para implementar e testar os controles que o contrato R2 exige.
-  - **Fato de partida:** o desenho M05.5R1 está congelado como `PLANNED_NOT_EXECUTION_READY`; o executor M05.5 antigo é hard-coded para Attempt 001 e não possui preflight de capacidade ou boundary de holdout selado.
-  - **Escopo possível:** somente harness isolado, checks determinísticos e testes negativos, sem holdouts novos, chave, chamadas semânticas, execução real, alteração de produto ou integração FioOS.
+- [ ] **HUMAN-DECISION-M05.5R1-PREFLIGHT-FREEZE:** autorizar receipts reais de holdout selado, cegamento e capacidade, seguidos de preflight sem chamadas semânticas.
+  - **Fato de partida:** o harness offline R3 está validado por 12 testes sintéticos; ele não consulta provedor nem autoriza execução.
+  - **Escopo possível:** receipts e verificações pré-execução; sem chamada semântica, execução real, alteração de produto ou integração FioOS.
 
 ---
 
 ## 🟡 NEXT (Condicionado à Decisão Humana)
 
-1. [ ] **M05.5R1-PREFLIGHT-FREEZE:** após harness aprovado, o humano sela 8 holdouts inéditos, novo mapeamento cego e receipt de capacidade; o freeze é feito sem chamadas semânticas.
+1. [ ] **M05.5R1-PREFLIGHT-FREEZE:** o humano sela 8 holdouts inéditos, novo mapeamento cego e receipt de capacidade; o freeze é feito sem chamadas semânticas.
 2. [ ] **M05.5R1-EXECUTION-AUTHORIZATION:** decisão humana separada, somente após o preflight retornar pronto e todos os checks determinísticos passarem.
 3. [ ] **M05.5R1-REAL-EXECUTION:** somente sob a autorização específica acima; nunca reutilizar `REAL-EXECUTION-ATTEMPT-001`.
 4. [ ] **M05.5R1-HUMAN-REVIEW-AND-REVEAL:** somente se uma tentativa futura for admissível e tiver pacote cego válido.
