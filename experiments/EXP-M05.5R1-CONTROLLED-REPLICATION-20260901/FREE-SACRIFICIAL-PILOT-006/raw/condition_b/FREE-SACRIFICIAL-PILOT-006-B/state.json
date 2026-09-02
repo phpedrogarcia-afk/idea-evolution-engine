@@ -1,0 +1,402 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "FREE-SACRIFICIAL-PILOT-006-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-09-02T17:39:41.106258",
+  "updated_at": "2026-09-02T17:44:43.727464",
+  "original_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.",
+  "current_idea": "Um diário reflexivo que registra sensações sutis do cotidiano e avalia, por meio de um índice de distração baseado em desempenho de digitação e prompts reflexivos semanais, se fatores como velocidade e taxa de erro reduzem a distração ao digitar.",
+  "human_intent": "Criar um diário reflexivo que registre sensações sutis e avalie se um tempo de resposta do editor abaixo de 16 ms reduz a distração ao digitar.",
+  "problem_statement": "Distração ao digitar devido à latência do editor de texto, dificultando a captura de sensações sutis do dia a dia.",
+  "actors_or_users": [
+    "Usuário que escreve o diário",
+    "Desenvolvedor do editor de texto",
+    "Pesquisador de usabilidade"
+  ],
+  "assumptions": [
+    "Latência abaixo de 16 ms pode ser percebida pelos usuários",
+    "Reduzir latência reduz distração",
+    "Usuários conseguem identificar e registrar sensações sutis",
+    "É possível medir a distração de forma objetiva"
+  ],
+  "ambiguities": [
+    "Como definir e quantificar “distração” ao digitar",
+    "Qual método será usado para medir o tempo de resposta do editor",
+    "O que exatamente constitui “sensações sutis”",
+    "Qual plataforma ou dispositivo será utilizado"
+  ],
+  "strengths": [
+    "Foco na redução de distração",
+    "Uso de métrica objetiva de latência",
+    "Atenção às experiências subjetivas do usuário",
+    "Possibilidade de validar empiricamente o impacto da latência"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+      "why_it_matters": "If users cannot notice the latency difference, the measured correlation with distraction becomes meaningless, undermining the diary's purpose.",
+      "severity": "HIGH",
+      "affected_part": "User Experience / Latency Measurement",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "No validated method exists to objectively measure distraction while typing.",
+      "why_it_matters": "Without a reliable metric, any claimed reduction in distraction cannot be substantiated, rendering the evaluation invalid.",
+      "severity": "HIGH",
+      "affected_part": "Distraction Measurement Module",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Assuming users can consistently identify and record subtle daily sensations is unrealistic.",
+      "why_it_matters": "Inconsistent or inaccurate entries will corrupt the dataset, leading to false conclusions about latency effects.",
+      "severity": "MEDIUM",
+      "affected_part": "Diary Input Interface",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold.",
+      "why_it_matters": "Uncontrolled variance introduces noise, making it impossible to isolate latency as a causal factor for distraction.",
+      "severity": "MEDIUM",
+      "affected_part": "Latency Measurement Engine",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Latency below 16 ms can be perceived by users",
+    "Reducing latency reduces distraction",
+    "Users can reliably identify and log subtle sensations",
+    "Distraction can be measured objectively"
+  ],
+  "contradictions": [
+    "The system claims to measure distraction objectively while relying on subjective self‑reports of sensation",
+    "It assumes latency is a primary cause of distraction despite no evidence that other factors (e.g., UI design) dominate"
+  ],
+  "failure_modes": [
+    "Latency sensor reports inaccurate values due to OS scheduling delays",
+    "Users abandon the diary because the required introspection feels burdensome",
+    "Data analysis misattributes reduced distraction to latency when other variables changed",
+    "Privacy breaches expose sensitive personal reflections"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Calibrated relative latency and keystroke‑dynamics monitoring",
+      "addresses_issues": [
+        "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+        "No validated method exists to objectively measure distraction while typing.",
+        "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requires per‑device calibration phase",
+        "Adds computational overhead for real‑time keystroke analysis",
+        "Potential privacy concerns with detailed typing behavior"
+      ],
+      "novelty_or_difference": "Moves from an absolute 16 ms threshold to device‑specific relative latency changes and behavioral proxies"
+    },
+    {
+      "mechanism": "Controlled micro‑delay experiment with immediate self‑report",
+      "addresses_issues": [
+        "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+        "No validated method exists to objectively measure distraction while typing.",
+        "Assuming users can consistently identify and record subtle daily sensations is unrealistic."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Interrupts natural typing flow",
+        "Self‑report may be biased by demand characteristics",
+        "Limited ecological validity due to artificial delays"
+      ],
+      "novelty_or_difference": "Introduces intentional latency manipulations to directly test perceptibility rather than relying on passive measurement"
+    },
+    {
+      "mechanism": "Wearable physiological sensing combined with diary entries",
+      "addresses_issues": [
+        "No validated method exists to objectively measure distraction while typing.",
+        "Assuming users can consistently identify and record subtle daily sensations is unrealistic.",
+        "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requires users to wear additional hardware",
+        "Increases cost and setup complexity",
+        "Data privacy and processing overhead"
+      ],
+      "novelty_or_difference": "Adds multimodal physiological markers (HRV, skin conductance) to infer distraction, reducing dependence on self‑report and software latency"
+    },
+    {
+      "mechanism": "Performance‑based distraction index using typing speed/error rates and weekly reflective prompts",
+      "addresses_issues": [
+        "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+        "No validated method exists to objectively measure distraction while typing.",
+        "Assuming users can consistently identify and record subtle daily sensations is unrealistic.",
+        "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold."
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Loses fine‑grained latency focus",
+        "Requires longer data collection periods to detect patterns",
+        "May miss subtle, momentary distractions"
+      ],
+      "novelty_or_difference": "Replaces latency measurement with aggregate performance metrics and higher‑level weekly reflections, simplifying data collection while still targeting distraction reduction"
+    }
+  ],
+  "core_mechanism": "Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais",
+  "core_mechanism_justification": "Esta abordagem contorna a limitação de latências abaixo de 16 ms serem imperceptíveis, fornece métricas objetivas mensuráveis e mantém o foco na captura reflexiva das sensações do usuário, alinhando‑se diretamente à intenção humana de entender a relação entre distração e desempenho de digitação.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "9e2ab35200b0724d",
+  "proposal_records": [
+    {
+      "proposal": "Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Esta abordagem contorna a limitação de latências abaixo de 16 ms serem imperceptíveis, fornece métricas objetivas mensuráveis e mantém o foco na captura reflexiva das sensações do usuário, alinhando‑se diretamente à intenção humana de entender a relação entre distração e desempenho de digitação.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Resolve a não perceptibilidade da latência, oferece medida objetiva de distração e preserva o objetivo de registro reflexivo",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Issues: latência <16 ms não perceptível; falta de método objetivo para medir distração"
+    },
+    {
+      "proposal": "Calibrated relative latency and keystroke‑dynamics monitoring",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Wearable physiological sensing combined with diary entries",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Controlled micro‑delay experiment with immediate self‑report",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Interrompe o fluxo natural de digitação e introduz viés de autorrelato, comprometendo a validade ecológica",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais (Justificativa: Resolve a não perceptibilidade da latência, oferece medida objetiva de distração e preserva o objetivo de registro reflexivo | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Calibrated relative latency and keystroke‑dynamics monitoring",
+    "Wearable physiological sensing combined with diary entries"
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Controlled micro‑delay experiment with immediate self‑report",
+      "reason_rejected": "Interrompe o fluxo natural de digitação e introduz viés de autorrelato, comprometendo a validade ecológica",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [monitoramento, relativo, latencia, entrada, exibicao, sessao, acoplado, questionario, curto, percepcao, final, cada, bloco, digitacao].",
+    "Se diferenças de latência de poucos milissegundos são percebidas pelos usuários.",
+    "Precisão e consistência da medição de latência em diferentes hardwares e sistemas operacionais.",
+    "Validade do questionário curto como proxy de distração.",
+    "Impacto potencial de fadiga ao solicitar relatórios frequentes.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Monitoramento relativo de latência de entrada‑para‑exibição por sessão, acoplado a um questionário curto de percepção de distração ao final de cada bloco de digitação.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Monitoramento relativo de latência de entrada‑para‑exibição por sessão, acoplado a um questionário curto de percepção de distração ao final de cada bloco de digitação.' aparece nos testes exploratórios 'Adicionar tarefa secundária de carga cognitiva (ex.: teste visual de reação) após cada bloco e analisar se o tempo de reação varia com a latência medida.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Monitoramento relativo de latência de entrada‑para‑exibição por sessão, acoplado a um questionário curto de percepção de distração ao final de cada bloco de digitação.' aparece nos testes exploratórios 'Aplicar modelos de aprendizado de máquina aos dados de dinâmica de digitação (tempo entre teclas, pressão) para prever pontuações de distração e comparar a importância da latência como feature.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Monitoramento relativo de latência de entrada‑para‑exibição por sessão, acoplado a um questionário curto de percepção de distração ao final de cada bloco de digitação.' aparece nos testes exploratórios 'Testar variações do questionário (escala Likert de 5 vs. 7 pontos, perguntas abertas) para avaliar robustez da medida de distração.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Desenvolver um protótipo que registre a latência de entrada‑para‑exibição por sessão e apresente um questionário breve de distração ao final de cada bloco; conduzir estudo piloto com usuários para analisar correlação entre latência relativa e respostas de distração.' propõe mecanismo rejeitado 'Usar a latência absoluta abaixo de 16 ms como métrica central para avaliar distração.'.; Dependência de realidade do Core 'Acesso a um dispositivo de entrada‑para‑exibição que permita registrar latências com precisão de milissegundos ou menos.' referencia mecanismo rejeitado 'Usar a latência absoluta abaixo de 16 ms como métrica central para avaliar distração.'.; Dependência de realidade do Core 'Um questionário validado para medir percepção subjetiva de distração.' referencia mecanismo rejeitado 'Usar a latência absoluta abaixo de 16 ms como métrica central para avaliar distração.'.; Teste do Core 'Correlacionar latências naturalmente observadas em sessões de uso livre com as respostas ao questionário de distração para validar a relação esperada.' referencia mecanismo rejeitado 'Usar a latência absoluta abaixo de 16 ms como métrica central para avaliar distração.'.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [indice, baseado, desempenho, digitacao, velocidade, taxa, erro, combinado, prompts, reflexivos, semanais].",
+    "Correlação entre velocidade/taxa de erro e percepção subjetiva de distração",
+    "Adesão dos usuários aos prompts reflexivos semanais",
+    "Impacto de variações de hardware/OS nas métricas de desempenho de digitação",
+    "Capacidade do diário reflexivo de capturar sensações sutis de forma consistente",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais' aparece nos testes exploratórios 'Calibrar latência relativa e analisar dinâmicas de keystroke‑dynamics como indicadores suplementares de distração'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais' aparece nos testes exploratórios 'Integrar sensores vestíveis (ex.: frequência cardíaca, galvanic skin response) para comparar sinais fisiológicos com o índice de distração'.; Teste do Core 'Experimento controlado comparando duas condições de latência de editor (<16 ms vs latência padrão) e medindo o índice de distração resultante' referencia mecanismo rejeitado 'Controlled micro‑delay experiment with immediate self‑report'."
+  ],
+  "known_risks": [
+    "Privacidade dos dados de digitação",
+    "Fadiga ou desmotivação dos usuários com auto‑relatos frequentes",
+    "Ruído nos dados de desempenho devido a fatores externos",
+    "Possível viés nos relatos reflexivos"
+  ],
+  "recommended_next_step": "Realizar um estudo piloto com um grupo pequeno de usuários implementando o índice de distração baseado em desempenho e prompts semanais, coletando métricas de digitação e relatos para validar a correlação com a percepção de distração.",
+  "tested_core_mechanism": "Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais",
+  "tested_core_hash": "9e2ab35200b0724d",
+  "reality_dependencies": [
+    "Software de captura de keystrokes com precisão de milissegundos",
+    "Mecanismo para inserir atraso controlado no editor (<16 ms)",
+    "Plataforma para enviar e registrar prompts reflexivos semanais",
+    "Infra‑estrutura de armazenamento criptografado para dados de digitação e diário",
+    "Consentimento informado dos participantes"
+  ],
+  "claims_needing_evidence": [
+    "Reduzir o tempo de resposta do editor para <16 ms diminui a distração ao digitar",
+    "O índice de distração baseado em velocidade e taxa de erro reflete com precisão a distração subjetiva",
+    "Prompts reflexivos semanais aumentam a autoconsciência e reduzem a distração ao longo do tempo"
+  ],
+  "candidate_tests": [
+    "Experimento controlado comparando duas condições de latência de editor (<16 ms vs latência padrão) e medindo o índice de distração resultante",
+    "Validação do índice de distração correlacionando-o com auto‑relatos de distração em momentos aleatórios",
+    "Teste de confiabilidade intra‑sujeito do índice medindo velocidade e taxa de erro em sessões repetidas sem mudança de latência",
+    "Estudo longitudinal de 8 semanas com prompts reflexivos semanais para observar mudanças no índice de distração ao longo do tempo"
+  ],
+  "exploratory_candidate_tests": [
+    "Calibrar latência relativa e analisar dinâmicas de keystroke‑dynamics como indicadores suplementares de distração",
+    "Integrar sensores vestíveis (ex.: frequência cardíaca, galvanic skin response) para comparar sinais fisiológicos com o índice de distração",
+    "Experimento de micro‑delay controlado com auto‑relato imediato para investigar efeitos de atrasos sub‑20 ms"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:39:44.223348",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar um diário reflexivo que registre sensações sutis e ava...' | 4 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:40:41.188250",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "4 vulnerabilidades críticas e 4 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:40:43.509784",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:41:42.591413",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Monitoramento relativo de latência de en...' (Base: MODEL_HYPOTHESIS | Hash: c794c6a086d29c22), 1 aceitas, 2 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:41:45.766312",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Monitoramento relativo de latência de en...' (hash: c794c6a086d29c22), 4 dependências, 3 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:42:41.061463",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:42:44.549426",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "4 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:43:43.845629",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Índice de distração baseado em desempenh...' (Base: MODEL_HYPOTHESIS | Hash: 9e2ab35200b0724d), 1 aceitas, 2 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:43:46.420187",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Índice de distração baseado em desempenh...' (hash: 9e2ab35200b0724d), 5 dependências, 4 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T17:44:43.727451",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

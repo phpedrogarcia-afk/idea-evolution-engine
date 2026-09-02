@@ -1,0 +1,83 @@
+{
+  "step_number": 7,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "4 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Calibrated relative latency and keystroke‑dynamics monitoring\",\"addresses_issues\":[\"Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.\",\"No validated method exists to objectively measure distraction while typing.\",\"Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold.\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requires per‑device calibration phase\",\"Adds computational overhead for real‑time keystroke analysis\",\"Potential privacy concerns with detailed typing behavior\"],\"novelty_or_difference\":\"Moves from an absolute 16 ms threshold to device‑specific relative latency changes and behavioral proxies\"},{\"mechanism\":\"Controlled micro‑delay experiment with immediate self‑report\",\"addresses_issues\":[\"Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.\",\"No validated method exists to objectively measure distraction while typing.\",\"Assuming users can consistently identify and record subtle daily sensations is unrealistic.\"],\"preserves_intent\":true,\"tradeoffs\":[\"Interrupts natural typing flow\",\"Self‑report may be biased by demand characteristics\",\"Limited ecological validity due to artificial delays\"],\"novelty_or_difference\":\"Introduces intentional latency manipulations to directly test perceptibility rather than relying on passive measurement\"},{\"mechanism\":\"Wearable physiological sensing combined with diary entries\",\"addresses_issues\":[\"No validated method exists to objectively measure distraction while typing.\",\"Assuming users can consistently identify and record subtle daily sensations is unrealistic.\",\"Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold.\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requires users to wear additional hardware\",\"Increases cost and setup complexity\",\"Data privacy and processing overhead\"],\"novelty_or_difference\":\"Adds multimodal physiological markers (HRV, skin conductance) to infer distraction, reducing dependence on self‑report and software latency\"},{\"mechanism\":\"Performance‑based distraction index using typing speed/error rates and weekly reflective prompts\",\"addresses_issues\":[\"Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.\",\"No validated method exists to objectively measure distraction while typing.\",\"Assuming users can consistently identify and record subtle daily sensations is unrealistic.\",\"Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold.\"],\"preserves_intent\":true,\"tradeoffs\":[\"Loses fine‑grained latency focus\",\"Requires longer data collection periods to detect patterns\",\"May miss subtle, momentary distractions\"],\"novelty_or_difference\":\"Replaces latency measurement with aggregate performance metrics and higher‑level weekly reflections, simplifying data collection while still targeting distraction reduction\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Calibrated relative latency and keystroke‑dynamics monitoring",
+        "addresses_issues": [
+          "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+          "No validated method exists to objectively measure distraction while typing.",
+          "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold."
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requires per‑device calibration phase",
+          "Adds computational overhead for real‑time keystroke analysis",
+          "Potential privacy concerns with detailed typing behavior"
+        ],
+        "novelty_or_difference": "Moves from an absolute 16 ms threshold to device‑specific relative latency changes and behavioral proxies"
+      },
+      {
+        "mechanism": "Controlled micro‑delay experiment with immediate self‑report",
+        "addresses_issues": [
+          "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+          "No validated method exists to objectively measure distraction while typing.",
+          "Assuming users can consistently identify and record subtle daily sensations is unrealistic."
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Interrupts natural typing flow",
+          "Self‑report may be biased by demand characteristics",
+          "Limited ecological validity due to artificial delays"
+        ],
+        "novelty_or_difference": "Introduces intentional latency manipulations to directly test perceptibility rather than relying on passive measurement"
+      },
+      {
+        "mechanism": "Wearable physiological sensing combined with diary entries",
+        "addresses_issues": [
+          "No validated method exists to objectively measure distraction while typing.",
+          "Assuming users can consistently identify and record subtle daily sensations is unrealistic.",
+          "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold."
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requires users to wear additional hardware",
+          "Increases cost and setup complexity",
+          "Data privacy and processing overhead"
+        ],
+        "novelty_or_difference": "Adds multimodal physiological markers (HRV, skin conductance) to infer distraction, reducing dependence on self‑report and software latency"
+      },
+      {
+        "mechanism": "Performance‑based distraction index using typing speed/error rates and weekly reflective prompts",
+        "addresses_issues": [
+          "Latency below 16 ms is unlikely to be perceptible by most users, making the core metric ineffective.",
+          "No validated method exists to objectively measure distraction while typing.",
+          "Assuming users can consistently identify and record subtle daily sensations is unrealistic.",
+          "Hardware and OS variability will cause latency measurements to fluctuate beyond the 16 ms threshold."
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Loses fine‑grained latency focus",
+          "Requires longer data collection periods to detect patterns",
+          "May miss subtle, momentary distractions"
+        ],
+        "novelty_or_difference": "Replaces latency measurement with aggregate performance metrics and higher‑level weekly reflections, simplifying data collection while still targeting distraction reduction"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T20:42:44.549474+00:00"
+}

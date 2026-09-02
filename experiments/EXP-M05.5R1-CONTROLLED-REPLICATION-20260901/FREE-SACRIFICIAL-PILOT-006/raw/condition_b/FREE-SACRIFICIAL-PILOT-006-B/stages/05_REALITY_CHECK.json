@@ -1,0 +1,55 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Monitoramento relativo de latência de en...' (hash: c794c6a086d29c22), 4 dependências, 3 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Monitoramento relativo de latência de entrada‑para‑exibição por sessão, acoplado a um questionário curto de percepção de distração ao final de cada bloco de digitação.\",\"feasibility_notes\":[\"Medição de latência de entrada‑para‑exibição com temporizadores de alta resolução é suportada pelos navegadores modernos e APIs de sistema operacional.\",\"Integração de um questionário breve ao final de cada bloco de digitação pode ser implementada com bibliotecas de UI existentes.\",\"A análise relativa (comparando blocos dentro do mesmo usuário) reduz a necessidade de controle estrito de variáveis externas.\",\"Requisitos de hardware (monitor com taxa de atualização ≥120 Hz) aumentam a probabilidade de observar latências abaixo de 16 ms.\"],\"reality_dependencies\":[\"Acesso a um dispositivo de entrada‑para‑exibição que permita registrar latências com precisão de milissegundos ou menos.\",\"API de temporização de alta resolução (ex.: Performance.now() ou equivalente nativo).\",\"Um ambiente de digitação controlado (teclado padrão, layout consistente, sem interferência de softwares de terceiros).\",\"Um questionário validado para medir percepção subjetiva de distração.\"],\"claims_needing_evidence\":[\"Latências de editor inferiores a 16 ms reduzem a percepção subjetiva de distração ao digitar.\",\"A medida relativa de latência por sessão reflete com fidelidade a latência percebida pelo usuário.\",\"Pontuações do questionário de distração correlacionam-se negativamente com a latência medida.\"],\"potential_blockers\":[\"Limitações de hardware que impedem alcançar ou medir latências abaixo de 16 ms (ex.: taxa de atualização 60 Hz, buffers de vídeo).\",\"Variabilidade individual na sensibilidade ao atraso, introduzindo ruído nos dados de questionário.\",\"Viés de resposta ou fadiga dos participantes ao preencher múltiplos questionários curtos.\",\"Interferência de processos de sistema que alteram temporariamente a latência (ex.: atualizações de driver, multitarefa).\" ,\"Dificuldade em isolar a latência como única variável causal devido a fatores como iluminação, postura ou carga cognitiva.\"],\"candidate_tests\":[\"Experimento controlado intra‑sujeito: inserir artificialmente atrasos de 8 ms, 16 ms e 24 ms entre input e exibição em blocos de digitação e comparar as pontuações de distração auto‑relatadas.\",\"Correlacionar latências naturalmente observadas em sessões de uso livre com as respostas ao questionário de distração para validar a relação esperada.\",\"Validar a ferramenta de medição comparando-a com gravações de alta velocidade (câmera >240 fps) para confirmar a precisão dos valores <16 ms.\"],\"exploratory_candidate_tests\":[\"Adicionar tarefa secundária de carga cognitiva (ex.: teste visual de reação) após cada bloco e analisar se o tempo de reação varia com a latência medida.\",\"Aplicar modelos de aprendizado de máquina aos dados de dinâmica de digitação (tempo entre teclas, pressão) para prever pontuações de distração e comparar a importância da latência como feature.\",\"Testar variações do questionário (escala Likert de 5 vs. 7 pontos, perguntas abertas) para avaliar robustez da medida de distração.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Monitoramento relativo de latência de entrada‑para‑exibição por sessão, acoplado a um questionário curto de percepção de distração ao final de cada bloco de digitação.",
+    "feasibility_notes": [
+      "Medição de latência de entrada‑para‑exibição com temporizadores de alta resolução é suportada pelos navegadores modernos e APIs de sistema operacional.",
+      "Integração de um questionário breve ao final de cada bloco de digitação pode ser implementada com bibliotecas de UI existentes.",
+      "A análise relativa (comparando blocos dentro do mesmo usuário) reduz a necessidade de controle estrito de variáveis externas.",
+      "Requisitos de hardware (monitor com taxa de atualização ≥120 Hz) aumentam a probabilidade de observar latências abaixo de 16 ms."
+    ],
+    "reality_dependencies": [
+      "Acesso a um dispositivo de entrada‑para‑exibição que permita registrar latências com precisão de milissegundos ou menos.",
+      "API de temporização de alta resolução (ex.: Performance.now() ou equivalente nativo).",
+      "Um ambiente de digitação controlado (teclado padrão, layout consistente, sem interferência de softwares de terceiros).",
+      "Um questionário validado para medir percepção subjetiva de distração."
+    ],
+    "claims_needing_evidence": [
+      "Latências de editor inferiores a 16 ms reduzem a percepção subjetiva de distração ao digitar.",
+      "A medida relativa de latência por sessão reflete com fidelidade a latência percebida pelo usuário.",
+      "Pontuações do questionário de distração correlacionam-se negativamente com a latência medida."
+    ],
+    "potential_blockers": [
+      "Limitações de hardware que impedem alcançar ou medir latências abaixo de 16 ms (ex.: taxa de atualização 60 Hz, buffers de vídeo).",
+      "Variabilidade individual na sensibilidade ao atraso, introduzindo ruído nos dados de questionário.",
+      "Viés de resposta ou fadiga dos participantes ao preencher múltiplos questionários curtos.",
+      "Interferência de processos de sistema que alteram temporariamente a latência (ex.: atualizações de driver, multitarefa).",
+      "Dificuldade em isolar a latência como única variável causal devido a fatores como iluminação, postura ou carga cognitiva."
+    ],
+    "candidate_tests": [
+      "Experimento controlado intra‑sujeito: inserir artificialmente atrasos de 8 ms, 16 ms e 24 ms entre input e exibição em blocos de digitação e comparar as pontuações de distração auto‑relatadas.",
+      "Correlacionar latências naturalmente observadas em sessões de uso livre com as respostas ao questionário de distração para validar a relação esperada.",
+      "Validar a ferramenta de medição comparando-a com gravações de alta velocidade (câmera >240 fps) para confirmar a precisão dos valores <16 ms."
+    ],
+    "exploratory_candidate_tests": [
+      "Adicionar tarefa secundária de carga cognitiva (ex.: teste visual de reação) após cada bloco e analisar se o tempo de reação varia com a latência medida.",
+      "Aplicar modelos de aprendizado de máquina aos dados de dinâmica de digitação (tempo entre teclas, pressão) para prever pontuações de distração e comparar a importância da latência como feature.",
+      "Testar variações do questionário (escala Likert de 5 vs. 7 pontos, perguntas abertas) para avaliar robustez da medida de distração."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T20:41:45.766370+00:00"
+}

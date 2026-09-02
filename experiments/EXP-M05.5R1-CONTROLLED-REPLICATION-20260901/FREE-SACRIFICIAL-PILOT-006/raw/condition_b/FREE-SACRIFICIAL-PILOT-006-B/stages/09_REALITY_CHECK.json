@@ -1,0 +1,56 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Índice de distração baseado em desempenh...' (hash: 9e2ab35200b0724d), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais\",\"feasibility_notes\":[\"Coleta de velocidade e taxa de erro de digitação é tecnicamente viável com software de registro de teclas\",\"Promptes reflexivos semanais podem ser entregues via app ou email sem necessidade de hardware adicional\",\"Cálculo do índice requer definição clara de pesos entre velocidade e erro, mas pode ser ajustado iterativamente\",\"Armazenamento seguro dos dados de digitação e respostas é necessário para conformidade de privacidade\"],\"reality_dependencies\":[\"Software de captura de keystrokes com precisão de milissegundos\",\"Mecanismo para inserir atraso controlado no editor (<16 ms)\",\"Plataforma para enviar e registrar prompts reflexivos semanais\",\"Infra‑estrutura de armazenamento criptografado para dados de digitação e diário\",\"Consentimento informado dos participantes\"],\"claims_needing_evidence\":[\"Reduzir o tempo de resposta do editor para <16 ms diminui a distração ao digitar\",\"O índice de distração baseado em velocidade e taxa de erro reflete com precisão a distração subjetiva\",\"Prompts reflexivos semanais aumentam a autoconsciência e reduzem a distração ao longo do tempo\"],\"potential_blockers\":[\"Dificuldade em medir e garantir latência de editor consistentemente abaixo de 16 ms em diferentes dispositivos\",\"Variabilidade de hardware (teclados, sistemas operacionais) pode introduzir ruído nos dados de digitação\",\"Baixa aderência dos usuários ao preenchimento semanal dos prompts reflexivos\",\"Questões de privacidade e regulamentação ao armazenar logs detalhados de digitação\"],\"candidate_tests\":[\"Experimento controlado comparando duas condições de latência de editor (<16 ms vs latência padrão) e medindo o índice de distração resultante\",\"Validação do índice de distração correlacionando-o com auto‑relatos de distração em momentos aleatórios\",\"Teste de confiabilidade intra‑sujeito do índice medindo velocidade e taxa de erro em sessões repetidas sem mudança de latência\",\"Estudo longitudinal de 8 semanas com prompts reflexivos semanais para observar mudanças no índice de distração ao longo do tempo\"],\"exploratory_candidate_tests\":[\"Calibrar latência relativa e analisar dinâmicas de keystroke‑dynamics como indicadores suplementares de distração\",\"Integrar sensores vestíveis (ex.: frequência cardíaca, galvanic skin response) para comparar sinais fisiológicos com o índice de distração\",\"Experimento de micro‑delay controlado com auto‑relato imediato para investigar efeitos de atrasos sub‑20 ms\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Índice de distração baseado em desempenho de digitação (velocidade e taxa de erro) combinado com prompts reflexivos semanais",
+    "feasibility_notes": [
+      "Coleta de velocidade e taxa de erro de digitação é tecnicamente viável com software de registro de teclas",
+      "Promptes reflexivos semanais podem ser entregues via app ou email sem necessidade de hardware adicional",
+      "Cálculo do índice requer definição clara de pesos entre velocidade e erro, mas pode ser ajustado iterativamente",
+      "Armazenamento seguro dos dados de digitação e respostas é necessário para conformidade de privacidade"
+    ],
+    "reality_dependencies": [
+      "Software de captura de keystrokes com precisão de milissegundos",
+      "Mecanismo para inserir atraso controlado no editor (<16 ms)",
+      "Plataforma para enviar e registrar prompts reflexivos semanais",
+      "Infra‑estrutura de armazenamento criptografado para dados de digitação e diário",
+      "Consentimento informado dos participantes"
+    ],
+    "claims_needing_evidence": [
+      "Reduzir o tempo de resposta do editor para <16 ms diminui a distração ao digitar",
+      "O índice de distração baseado em velocidade e taxa de erro reflete com precisão a distração subjetiva",
+      "Prompts reflexivos semanais aumentam a autoconsciência e reduzem a distração ao longo do tempo"
+    ],
+    "potential_blockers": [
+      "Dificuldade em medir e garantir latência de editor consistentemente abaixo de 16 ms em diferentes dispositivos",
+      "Variabilidade de hardware (teclados, sistemas operacionais) pode introduzir ruído nos dados de digitação",
+      "Baixa aderência dos usuários ao preenchimento semanal dos prompts reflexivos",
+      "Questões de privacidade e regulamentação ao armazenar logs detalhados de digitação"
+    ],
+    "candidate_tests": [
+      "Experimento controlado comparando duas condições de latência de editor (<16 ms vs latência padrão) e medindo o índice de distração resultante",
+      "Validação do índice de distração correlacionando-o com auto‑relatos de distração em momentos aleatórios",
+      "Teste de confiabilidade intra‑sujeito do índice medindo velocidade e taxa de erro em sessões repetidas sem mudança de latência",
+      "Estudo longitudinal de 8 semanas com prompts reflexivos semanais para observar mudanças no índice de distração ao longo do tempo"
+    ],
+    "exploratory_candidate_tests": [
+      "Calibrar latência relativa e analisar dinâmicas de keystroke‑dynamics como indicadores suplementares de distração",
+      "Integrar sensores vestíveis (ex.: frequência cardíaca, galvanic skin response) para comparar sinais fisiológicos com o índice de distração",
+      "Experimento de micro‑delay controlado com auto‑relato imediato para investigar efeitos de atrasos sub‑20 ms"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T20:43:46.420235+00:00"
+}
