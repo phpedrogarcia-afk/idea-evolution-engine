@@ -1,0 +1,58 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'A web/mobile app that lets users manuall...' (hash: 19a34e0dcb795b2f), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"A web/mobile app that lets users manually input the items they have at home and their estimated expiration dates, then generates personalized meal suggestions that use those items before they spoil.\",\"feasibility_notes\":[\"Manual entry is low technical risk but may suffer from user fatigue\",\"Generating meal suggestions based on inventory is feasible using rule‑based or recommendation algorithms\",\"Mobile/web platforms are widely available and support required features\",\"Estimating expiration dates relies on user‑provided data; accuracy cannot be guaranteed\"],\"reality_dependencies\":[\"Consistent user input of pantry items and expiration dates\",\"Accurate mapping of entered items to recipes that use them before spoilage\",\"Access to a comprehensive recipe database with ingredient quantities\",\"Ability to track food waste (e.g., self‑reported waste logs) for measurement\",\"Internet connectivity for data sync and app updates\"],\"claims_needing_evidence\":[\"Personalized meal suggestions reduce household food waste for 1‑2 person households\",\"Users will regularly update pantry inventory with accurate expiration dates\",\"Suggested meals are acceptable and will be prepared by users\",\"Waste reduction can be reliably measured through self‑reported data\"],\"potential_blockers\":[\"User drop‑off due to manual data‑entry burden\",\"Inaccurate expiration dates leading to inappropriate meal suggestions\",\"Limited recipe coverage for diverse dietary preferences\",\"Self‑reporting bias in waste measurement\",\"Privacy concerns about sharing personal food habits\"],\"candidate_tests\":[\"Conduct a 4‑week randomized controlled trial where one group uses the app and a control group does not; measure food waste via weekly waste logs\",\"Perform usability testing on the manual entry flow with 20 participants; assess time taken and error rate\",\"Run an algorithm validation study comparing suggested meals to actual pantry contents to ensure ingredient match before expiry\",\"Survey participants after app use to evaluate satisfaction with meal suggestions and perceived waste reduction\"],\"exploratory_candidate_tests\":[\"Prototype AI‑based image capture to auto‑populate pantry items and compare entry time versus manual entry\",\"Pilot integration with a grocery loyalty program to auto‑import purchase data and assess impact on inventory accuracy\",\"Implement a gamified points system and test its effect on user engagement and frequency of waste reporting\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "A web/mobile app that lets users manually input the items they have at home and their estimated expiration dates, then generates personalized meal suggestions that use those items before they spoil.",
+    "feasibility_notes": [
+      "Manual entry is low technical risk but may suffer from user fatigue",
+      "Generating meal suggestions based on inventory is feasible using rule‑based or recommendation algorithms",
+      "Mobile/web platforms are widely available and support required features",
+      "Estimating expiration dates relies on user‑provided data; accuracy cannot be guaranteed"
+    ],
+    "reality_dependencies": [
+      "Consistent user input of pantry items and expiration dates",
+      "Accurate mapping of entered items to recipes that use them before spoilage",
+      "Access to a comprehensive recipe database with ingredient quantities",
+      "Ability to track food waste (e.g., self‑reported waste logs) for measurement",
+      "Internet connectivity for data sync and app updates"
+    ],
+    "claims_needing_evidence": [
+      "Personalized meal suggestions reduce household food waste for 1‑2 person households",
+      "Users will regularly update pantry inventory with accurate expiration dates",
+      "Suggested meals are acceptable and will be prepared by users",
+      "Waste reduction can be reliably measured through self‑reported data"
+    ],
+    "potential_blockers": [
+      "User drop‑off due to manual data‑entry burden",
+      "Inaccurate expiration dates leading to inappropriate meal suggestions",
+      "Limited recipe coverage for diverse dietary preferences",
+      "Self‑reporting bias in waste measurement",
+      "Privacy concerns about sharing personal food habits"
+    ],
+    "candidate_tests": [
+      "Conduct a 4‑week randomized controlled trial where one group uses the app and a control group does not; measure food waste via weekly waste logs",
+      "Perform usability testing on the manual entry flow with 20 participants; assess time taken and error rate",
+      "Run an algorithm validation study comparing suggested meals to actual pantry contents to ensure ingredient match before expiry",
+      "Survey participants after app use to evaluate satisfaction with meal suggestions and perceived waste reduction"
+    ],
+    "exploratory_candidate_tests": [
+      "Prototype AI‑based image capture to auto‑populate pantry items and compare entry time versus manual entry",
+      "Pilot integration with a grocery loyalty program to auto‑import purchase data and assess impact on inventory accuracy",
+      "Implement a gamified points system and test its effect on user engagement and frequency of waste reporting"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T20:58:50.815312+00:00"
+}
