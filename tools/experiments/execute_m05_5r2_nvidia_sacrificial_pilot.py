@@ -24,8 +24,10 @@ import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Tuple, Type, TypeVar
-import urllib.request
-import urllib.error
+
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from pydantic import BaseModel, ValidationError
 from src.idea_evolution.providers.base import ModelResponse, ModelRunner, ModelUsage
@@ -48,7 +50,6 @@ from tools.experiments.execute_m05_5r1_confirmatory import (
 
 T = TypeVar("T", bound=BaseModel)
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 EXP_DIR = REPO_ROOT / "experiments" / "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION"
 SACRIFICIAL_ATTEMPT_ID = "NVIDIA-NIM-FREE-SACRIFICIAL-PILOT-001"
 PILOT_DIR = EXP_DIR / SACRIFICIAL_ATTEMPT_ID
@@ -134,9 +135,10 @@ class GuardedNvidiaNimRunner(ModelRunner):
         treatment: str,
         temperature: float = 0.3,
         max_tokens: int = 2048,
-        min_call_interval_seconds: float = 1.5,  # 40 RPM baseline -> 1.5s entre chamadas
+        min_call_interval_seconds: float = 1.5,
     ):
-        super().__init__(model_name=NVIDIA_MODEL_ID, temperature=temperature)
+        self.model_name = NVIDIA_MODEL_ID
+        self.temperature = temperature
         self.ledger = ledger
         self.block_id = block_id
         self.treatment = treatment
