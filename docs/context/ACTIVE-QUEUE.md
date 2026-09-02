@@ -7,6 +7,9 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
 
+- [ ] **HUMAN-API-KEY-LOCAL-SETUP-FOR-SACRIFICIAL-PILOT:** criar/selecionar key no console oficial Groq, gravá-la somente na variável de ambiente local `GROQ_API_KEY` e reiniciar a sessão. Não colar a key no chat ou repositório.
+  - **Escopo posterior estrito:** um único bloco sacrificial `M05.4-ATTEMPT-004-IDEA-08`, em `CONDITION_C → CONDITION_B → CONDITION_A`, com guard offline aprovado; `H01`–`H08` e reveal continuam negados.
+
 - [ ] **M05.5R1-HIGHER-CAPACITY-EVIDENCE:** obter capacidade autenticada maior, mantendo provedor, modelo e tratamentos congelados.
   - **Fato autenticado:** a conta `Personal` / `Default Project` está no plano `FREE`, sem limite customizado; `openai/gpt-oss-120b` tem `30 RPM`, `1.000 RPD`, `8.000 TPM`, `200.000 TPD`.
   - **Decisão humana congelada:** `FREE_PATH_REJECTED_FOR_CONFIRMATORY_EXECUTION`; `FREE_CONFIRMATORY_RISK_NOT_DEFENSIBLE`, sem alegar falha provada.

@@ -3,6 +3,16 @@
 > **HISTÓRICO APPEND-ONLY DE TRABALHOS CONCLUÍDOS, CHECKPOINTS E MARCOS.**
 > Nenhuma entrada anterior deve ser apagada ou editada retroativamente.
 
+### [PFI-M05_5R1-GROQ-FREE-MULTIDAY-PREFLIGHT-001] Guard Free Multiday e Preflight Sacrificial
+- **Data:** 2026-09-01
+- **Entrega:** caminho de piloto sacrificial isolado, com contagem Harmony exata, reserva de 2.048 tokens sem crédito prévio de cache, ledger JSONL hash-encadeado, sem retry de transporte, captura pós-resposta de uso/cache/fingerprint, detecção de drift e janela persistente de 24h+5m.
+- **Verificação:** 47 testes offline passaram, incluindo controles negativos de teto TPM, cache, identidade duplicada, ledger adulterado, mutação de schedule, 429, retry, drift, janela precoce e seleção/reveal confirmatórios.
+- **Resultado:** `HUMAN_API_KEY_LOCAL_SETUP_REQUIRED`; `GROQ_API_KEY` não está presente. Nenhuma chamada, token de inferência, leitura de H01–H08, reveal ou célula confirmatória ocorreu.
+- **Piloto autorizado quando autenticado:** somente `M05.4-ATTEMPT-004-IDEA-08`, classificação não confirmatória, ordem congelada `C → B → A`.
+- **Invariantes:** provider/model/tratamentos/holdouts/blinding continuam iguais; `EXECUTION_TEMPORAL_SCHEDULE_CHANGED=YES` somente por `FREE_TIER_CAPACITY_ISOLATION`.
+
+---
+
 ### [PFI-M05_5R1-FREE-PATH-CLOSEOUT-001] Closeout do Caminho Groq Free
 - **Data:** 2026-09-01
 - **Decisão humana:** `FREE_PATH_STATUS=REJECTED_FOR_CONFIRMATORY_EXECUTION` por `FREE_CONFIRMATORY_RISK_NOT_DEFENSIBLE`.

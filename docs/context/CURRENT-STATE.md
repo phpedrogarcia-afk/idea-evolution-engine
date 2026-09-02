@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-014
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-015
 
 ---
 
@@ -32,10 +32,11 @@
   - Auditoria empírica Free: `TRACE_INCOMPLETE`. Em 78 estágios B exatamente reconstituíveis, o máximo foi 3.008 tokens e o subtotal foi 140.321; porém A/C não preservam os payloads necessários e duas cadeias B de repair estão incompletas. Isso não prova compatibilidade Free, não altera o hard bound e não autoriza execução.
   - Decisão humana de closeout: `FREE_CONFIRMATORY_RISK_NOT_DEFENSIBLE`. A rejeição não alega falha comprovada em Free; preserva `B_EXACT_SUBSET_ALREADY_CONSUMES_70_PERCENT_FREE_TPD` e `HISTORICAL_TELEMETRY_INCOMPLETE_FOR_FULL_CAPACITY_RECONSTRUCTION` como conhecimento negativo.
   - Invariante transversal: o guard executável pré-request, com serialização, contagem exata, ledger cumulativo e `ABORTED_CAPACITY` antes do dispatch, continua obrigatório para qualquer futura replicação, independentemente do tier.
-- **Último Checkpoint Imutável:** [`CP-20260901-014`](checkpoints/CP-20260901-014.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-014`
+  - Preflight Free multiday: guard sacrificial offline implementado e 47 controles passaram. A credencial local de API está ausente; o piloto sacrificial permanece não executado e esta autorização não alcança H01–H08 nem reveal.
+- **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-015`
 - **Git Branch:** `main`
-- **Worktree após o closeout Free:** `PENDING_CHECKPOINT_COMMIT`
+- **Worktree após o preflight Free multiday:** `PENDING_CHECKPOINT_COMMIT`
 
 ---
 
@@ -54,10 +55,11 @@
   - `PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001`, que substituiu o bound de contexto inteiro por um envelope tokenizado com `openai-harmony` oficial, sem inferência, reveal ou execução A/B/C.
   - `PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001`, análise offline do trace M05.4 Attempt-004: a reconstrução integral falhou fechada por telemetria ausente; o subconjunto B exato não se aproximou de 8.000 TPM, mas já consumiu 70,16% de 200.000 TPD.
   - `PFI-M05_5R1-FREE-PATH-CLOSEOUT-001`, decisão humana que rejeita Free para a execução confirmatória sem modificar o experimento ou alegar falha empírica comprovada.
+  - `PFI-M05_5R1-GROQ-FREE-MULTIDAY-PREFLIGHT-001`, que implementou e testou o guard pré-request para um único piloto sacrificial; parou antes de qualquer chamada por ausência de credencial local.
 - **Tarefa Ativa Atual:**
-  - `PFI-M05_5R1-FREE-PATH-CLOSEOUT-001` concluída: Free está rejeitado para execução confirmatória.
+  - `PFI-M05_5R1-GROQ-FREE-MULTIDAY-PREFLIGHT-001`: guard offline aprovado; aguarda setup local não secreto de `GROQ_API_KEY` para o piloto sacrificial autorizado.
 - **Próximo Passo Exato:**
-- Obter maior capacidade autenticada mantendo o mesmo provedor, modelo e tratamentos; depois verificar o guard pré-request e fazer um novo gate de capacidade. Free não é mais caminho permitido para a execução confirmatória.
+- Após setup local de `GROQ_API_KEY`, retomar exclusivamente o piloto sacrificial C/B/A. Free continua vedado para holdouts confirmatórios; nenhum bloco H01–H08 está autorizado.
 
 ---
 
