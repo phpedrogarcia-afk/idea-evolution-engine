@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-010
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-012
 
 ---
 
@@ -21,17 +21,18 @@
   - Razão: reutilização de identidade de tentativa, contaminação dos holdouts e interferência de quota/TPD do provedor.
   - Semântica preservada: isto é `EXPERIMENT_EXECUTION_FAILURE`, não `LEAN_L1_REPLICATION_FAILURE`; não é `FAILED`, `REJECTED`, `READY`, `PROVEN` ou `SUPERSEDED`.
   - Evidência: `experiments/EXP-M05.5-CONTROLLED-REPLICATION-20260831/M05.5-ATTEMPT-001-INTEGRITY-AUDIT.md` (commit `26a2a67`).
-- **M05.5R1 (EXP-M05.5R1-CONTROLLED-REPLICATION-20260901):** `OFFLINE_HARNESS_READY_NOT_EXECUTION_AUTHORIZED`
+- **M05.5R1 (EXP-M05.5R1-CONTROLLED-REPLICATION-20260901):** `AUTHENTICATED_CAPACITY_PROVEN_INSUFFICIENT_NOT_EXECUTION_AUTHORIZED`
   - Contrato: `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-PRE-FREEZE-READINESS.md`.
   - Controles offline: namespace/receipt imutável, boundary sintético de holdout e gate de capacidade fail-closed; 12 testes sintéticos passaram.
   - Holdouts: `M05.5R1-HOLDOUT-SET-REV1` foi selado literalmente fora do repositório; receipt hashado está em `experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/`.
   - Blinding: REV1 foi congelada em cofre externo; o repositório tem somente seu commitment, sem reveal.
-  - Capacity design: `CALIBRATED_READY_FOR_AUTHENTICATED_CAPACITY_CHECK`; o cap é `2048`, o envelope máximo específico é `11,226,334` tokens (redução de 58,82% sobre 27,262,976), 208 requests máximos incluindo repairs explícitos, schedule CSPRNG comprometido e pacing de concorrência 1 permanecem congelados offline.
-  - Bloqueios reais: o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), evidência autenticada de capacidade, preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-010`](checkpoints/CP-20260901-010.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-010`
+  - Capacity design: cap `2048`, envelope máximo específico `11.226.334` tokens (redução de 58,82% sobre 27.262.976), 208 requests máximos incluindo repairs explícitos, schedule CSPRNG comprometido e pacing de concorrência 1 permanecem congelados offline.
+  - Evidência autenticada R2: organização `Personal` / `Default Project`, plano `FREE`, sem limites customizados no projeto; `openai/gpt-oss-120b` expõe `30 RPM`, `1.000 RPD`, `8.000 TPM` e `200.000 TPD`. A conta não admite a carga única máxima de `131.072` tokens e não pode garantir o bound diário (gap mínimo de `11.026.334` tokens). Saldos e reset do período não foram expostos pelo console.
+  - Bloqueios reais: a capacidade autenticada atual é insuficiente; o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), preflight e autorização humana separada.
+- **Último Checkpoint Imutável:** [`CP-20260901-012`](checkpoints/CP-20260901-012.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-012`
 - **Git Branch:** `main`
-- **Worktree após a calibração:** `PENDING_CHECKPOINT_COMMIT`
+- **Worktree após a checagem autenticada:** `PENDING_CHECKPOINT_COMMIT`
 
 ---
 
@@ -49,9 +50,9 @@
   - `PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001`, que congelou o cap, bound conservador, schedule neutro, pacing e invalidações sem tocar em holdouts/reveal ou provedor.
   - `PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001`, que substituiu o bound de contexto inteiro por um envelope tokenizado com `openai-harmony` oficial, sem inferência, reveal ou execução A/B/C.
 - **Tarefa Ativa Atual:**
-  - A descoberta de autenticação confirmou `AUTH_SOURCE=NONE`; o login oficial Groq foi aberto e aguarda somente a ação humana legítima. Capacidade da conta permanece `UNKNOWN` e execução real não está autorizada.
+  - `PFI-M05_5R1-AUTHENTICATED-CAPACITY-CHECK-R2` confirmou sessão Groq autenticada e concluiu `NOT_READY_ACCOUNT_CAPACITY` sem calls de inferência, holdouts ou reveal.
 - **Próximo Passo Exato:**
-- Concluir login na conta/projeto Groq pretendidos e, se a checagem futura precisar de headers API, configurar `GROQ_API_KEY` diretamente no ambiente local que a executará — nunca no repositório ou no chat.
+- Decisão humana: obter capacidade autenticada que comporte o bound congelado, autorizar uma recalibração científica separada ou adiar M05.5R1. A execução nesta conta permanece vedada.
 
 ---
 

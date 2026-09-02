@@ -7,18 +7,17 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
 
-- [ ] **HUMAN-DECISION-M05.5R1-AUTHENTICATED-CAPACITY-CHECK:** autorizar obtenção/verificação dos limites e saldos reais da organização/projeto Groq para o envelope M05.5R1 calibrado.
-  - **Fato de partida:** `max_completion_tokens=2048`, envelope máximo `11,226,334`, schedule e pacing estão congelados; remaining TPD da conta real continua não comprovado.
-  - **Bloqueio observado:** não havia `GROQ_API_KEY` configurada localmente nem sessão autenticada no console Groq; receipt `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-001.json` registra somente campos não secretos como `UNKNOWN`.
-  - **Setup legítimo iniciado:** login oficial aberto em `https://console.groq.com/login`; `M05.5R1-AUTH-SETUP-001.json` confirma que nenhum segredo foi lido, gravado ou versionado.
-  - **Escopo possível:** somente evidência autenticada de capacidade, sem chamada semântica, A/B/C, execução real, reveal, alteração de produto ou integração FioOS.
+- [ ] **HUMAN-DECISION-M05.5R1-CAPACITY-STRATEGY:** decidir entre capacidade de provedor maior, recalibração científica separada ou adiamento de M05.5R1.
+  - **Fato autenticado:** a conta `Personal` / `Default Project` está no plano `FREE`, sem limite customizado; `openai/gpt-oss-120b` tem `30 RPM`, `1.000 RPD`, `8.000 TPM`, `200.000 TPD`.
+  - **Gate determinado:** `131.072 > 8.000` torna a solicitação máxima inadmissível; `11.226.334 > 200.000` impede a garantia diária (gap `11.026.334`). `M05.5R1` não pode executar nesta conta.
+  - **Evidência:** `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-R2.json`; nenhuma API call, A/B/C, holdout ou reveal ocorreu.
 
 ---
 
 ## 🟡 NEXT (Condicionado à Decisão Humana)
 
-1. [ ] **M05.5R1-PROVIDER-CAPACITY-EVIDENCE:** obter limites/saldos autenticados da organização/projeto Groq exatos, inclusive remaining TPD, para o envelope congelado.
-2. [ ] **M05.5R1-PREFLIGHT-FREEZE:** somente após capacity readiness aprovada, executar preflight sem chamadas semânticas.
+1. [ ] **M05.5R1-PROVIDER-CAPACITY-EVIDENCE:** somente após uma mudança humana material de conta/projeto/capacidade; não repetir a evidência autenticada atual sem mudança de estado.
+2. [ ] **M05.5R1-PREFLIGHT-FREEZE:** somente após uma decisão humana de capacidade e novo gate autenticado aprovado, executar preflight sem chamadas semânticas.
 3. [ ] **M05.5R1-EXECUTION-AUTHORIZATION:** decisão humana separada, somente após o preflight retornar pronto e todos os checks determinísticos passarem.
 4. [ ] **M05.5R1-REAL-EXECUTION:** somente sob a autorização específica acima; nunca reutilizar `REAL-EXECUTION-ATTEMPT-001`.
 5. [ ] **M05.5R1-HUMAN-REVIEW-AND-REVEAL:** somente se uma tentativa futura for admissível e tiver pacote cego válido.

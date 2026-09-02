@@ -1,0 +1,51 @@
+{
+  "checkpoint_id": "CP-20260901-012",
+  "created_at": "2026-09-01T20:34:31.026887",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_LOOP_MVP",
+  "objective": "Authenticated Groq capacity gate R2",
+  "repository": {
+    "branch": "main",
+    "commit": "76f729c",
+    "worktree_state": "DIRTY"
+  },
+  "completed_tasks": [
+    "Verified the official authenticated Groq console session without accessing credentials",
+    "Read the authenticated Free-plan organization and Default Project limits for openai/gpt-oss-120b",
+    "Determined the frozen hard bound and maximum request are inadmissible without any provider inference call"
+  ],
+  "changed_files": [
+    "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-AUTHENTICATED-CAPACITY-CHECK-R2.json",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [
+    "Authenticated Free capacity is insufficient for the frozen M05.5R1 bound",
+    "A known daily or per-request limit below the frozen requirement is decisive even when remaining-window values are unavailable"
+  ],
+  "tests_executed": [
+    "Authenticated console session and project-scope inspection",
+    "Authenticated limits comparison: 131072 versus 8000 TPM and 11226334 versus 200000 TPD",
+    "Non-secret local API-credential presence check"
+  ],
+  "unresolved_questions": [
+    "Whether a future provider account or project can meet the frozen hard bound",
+    "Current RPD, TPM and TPD remaining values and reset moment are not exposed by this console surface"
+  ],
+  "known_contradictions": [],
+  "known_risks": [],
+  "blockers": [
+    "Authenticated account capacity is insufficient for M05.5R1 execution"
+  ],
+  "next_exact_action": "Human decides whether to obtain higher provider capacity, authorize a separate scientific recalibration, or defer M05.5R1.",
+  "authorized_next_scope": [
+    "Human capacity strategy decision only"
+  ],
+  "do_not_repeat": [
+    "Do not execute M05.5R1 on this Free account",
+    "Do not access holdouts or reveal",
+    "Do not create, print or commit API credentials"
+  ],
+  "recovery_notes": "Read M05.5R1-AUTHENTICATED-CAPACITY-CHECK-R2.json; preserve the negative capacity evidence and do not treat historical practical signal as a capacity guarantee."
+}

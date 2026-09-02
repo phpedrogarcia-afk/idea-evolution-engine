@@ -3,6 +3,14 @@
 > **HISTÓRICO APPEND-ONLY DE TRABALHOS CONCLUÍDOS, CHECKPOINTS E MARCOS.**
 > Nenhuma entrada anterior deve ser apagada ou editada retroativamente.
 
+### [PFI-M05_5R1-AUTHENTICATED-CAPACITY-CHECK-R2] Gate Autenticado de Capacidade Groq
+- **Data:** 2026-09-01
+- **Objetivo:** retomar a evidência de capacidade após login humano oficial, sem executar M05.5R1.
+- **Resultado:** `NOT_READY_ACCOUNT_CAPACITY`. No escopo autenticado `Personal` / `Default Project`, plano `FREE`, `openai/gpt-oss-120b` tem `30 RPM`, `1.000 RPD`, `8.000 TPM` e `200.000 TPD`; não há override de projeto. O bound congelado excede o TPD em `11.026.334` tokens e a maior solicitação possível excede o TPM em `123.072` tokens.
+- **Evidência:** `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-R2.json`; zero chamadas de capacidade/API, zero tokens de chamada, zero holdouts, reveal ou células A/B/C.
+- **Limite:** o console não expõe saldos RPD/TPM/TPD nem reset do período; estes permanecem `UNKNOWN`, mas não alteram os dois gates negativos já determinados pelos limites autenticados.
+- **Próxima decisão humana:** obter capacidade maior, autorizar uma recalibração científica independente ou adiar a replicação. Não executar nesta conta.
+
 ---
 
 ### [PFI-GROQ-AUTH-SETUP-001] Descoberta e Setup Legítimo de Autenticação Groq
@@ -589,4 +597,3 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
-
