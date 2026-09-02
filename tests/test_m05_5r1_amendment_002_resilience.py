@@ -273,14 +273,16 @@ def test_identical_resilience_rule_across_conditions_a_b_c(tmp_path):
         assert guard.strict_schema_replay_success_count == 1
 
 
-def test_attempt_registry_blocks_002_003_and_allows_004():
+def test_attempt_registry_blocks_002_003_004_and_allows_fresh():
     with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
         preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-002")
 
     with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
         preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
 
-    holdouts, sched = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
+    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
+
+    holdouts, sched = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-RESERVED-TEST")
     assert len(holdouts) == 8
     assert len(sched) == 24
-    assert DEFAULT_ATTEMPT_ID == "REAL-EXECUTION-ATTEMPT-004"
