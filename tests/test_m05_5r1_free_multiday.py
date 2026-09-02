@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from hashlib import sha256
 import inspect
 from pathlib import Path
 
@@ -7,7 +8,9 @@ import pytest
 from tools.experiments.m05_5r1_free_multiday import (
     AppendOnlyUsageLedger, CONFIRMATORY_IDS, FREE_TPM, FreePreRequestGuard,
     FROZEN_PILOT_TREATMENT_ORDER, OUTPUT_CAP_TOKENS, QuotaIsolatedBlockWindow,
-    SACRIFICIAL_CLASSIFICATION, GuardedGroqRunner, run_sacrificial_pilot,
+    SACRIFICIAL_CLASSIFICATION, SACRIFICIAL_SOURCE_CONTENT_SHA256,
+    GuardedGroqRunner, load_sacrificial_source, sacrificial_source_path,
+    run_sacrificial_pilot,
 )
 from src.idea_evolution.stages.contracts import BaselineRefineOutput
 
@@ -112,6 +115,15 @@ def test_live_pilot_entry_fails_before_source_or_provider_without_local_auth(tmp
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="HUMAN_API_KEY_LOCAL_SETUP_REQUIRED"):
         run_sacrificial_pilot(tmp_path, tmp_path / "runtime")
+
+
+def test_canonical_attempt_004_source_is_loaded_through_representation_only_adapter():
+    repo_root = Path(__file__).resolve().parents[1]
+    path = sacrificial_source_path(repo_root)
+    normalized = load_sacrificial_source(repo_root)
+    assert path.name == "input.json"
+    assert set(normalized) == {"source_idea"}
+    assert sha256(normalized["source_idea"].encode("utf-8")).hexdigest() == SACRIFICIAL_SOURCE_CONTENT_SHA256
 
 
 def test_transport_is_called_once_and_never_retried(tmp_path):

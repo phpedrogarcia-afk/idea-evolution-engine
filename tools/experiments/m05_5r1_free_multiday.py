@@ -37,6 +37,7 @@ MODEL = "openai/gpt-oss-120b"
 CONFIRMATORY_IDS = frozenset({f"H0{index}" for index in range(1, 9)})
 SACRIFICIAL_SOURCE_ID = "M05.4-ATTEMPT-004-IDEA-08"
 SACRIFICIAL_CLASSIFICATION = "SACRIFICIAL_M05_4_HISTORICAL_NON_CONFIRMATORY"
+SACRIFICIAL_SOURCE_CONTENT_SHA256 = "90928bd682aae8f6193878091dfb3666edc7a3a2e30b302238642bae2fb131a6"
 # This is the frozen permutation for schedule block 1.  The pilot substitutes
 # only its non-confirmatory source; it never selects or reads H08.
 FROZEN_PILOT_TREATMENT_ORDER = ("CONDITION_C", "CONDITION_B", "CONDITION_A")
@@ -379,10 +380,23 @@ class GuardedGroqRunner(ModelRunner):
 def sacrificial_source_path(repo_root: Path) -> Path:
     path = (repo_root / "experiments" / "EXP-M05.4-PROSPECTIVE-RERUN-20260829"
             / "REAL-EXECUTION-ATTEMPT-004" / "raw" / "runs_b"
-            / "EXP-M05.4-IDEA-08-COND-B" / "source_idea.json")
+            / "EXP-M05.4-IDEA-08-COND-B" / "input.json")
     if not path.exists():
         raise RuntimeError("SACRIFICIAL_SOURCE_UNAVAILABLE")
     return path
+
+
+def load_sacrificial_source(repo_root: Path) -> Mapping[str, str]:
+    """Load the canonical Attempt-004 input through a representation-only adapter."""
+    source_data = json.loads(sacrificial_source_path(repo_root).read_text(encoding="utf-8"))
+    original_idea = source_data.get("original_idea")
+    if not isinstance(original_idea, str) or not original_idea:
+        raise RuntimeError("SACRIFICIAL_SOURCE_INVALID")
+    if sha256(original_idea.encode("utf-8")).hexdigest() != SACRIFICIAL_SOURCE_CONTENT_SHA256:
+        raise RuntimeError("SACRIFICIAL_SOURCE_HASH_MISMATCH")
+    # `original_idea` -> `source_idea` changes only the in-memory representation;
+    # the verified UTF-8 content is passed through byte-for-byte unchanged.
+    return {"source_idea": original_idea}
 
 
 def run_sacrificial_pilot(repo_root: Path, runtime_dir: Path) -> Mapping[str, Any]:
@@ -394,8 +408,7 @@ def run_sacrificial_pilot(repo_root: Path, runtime_dir: Path) -> Mapping[str, An
     """
     if not api_credential_available():
         raise RuntimeError("HUMAN_API_KEY_LOCAL_SETUP_REQUIRED")
-    source_path = sacrificial_source_path(repo_root)
-    source_data = json.loads(source_path.read_text(encoding="utf-8"))
+    source_data = load_sacrificial_source(repo_root)
     raw_idea = source_data.get("source_idea")
     if not isinstance(raw_idea, str) or not raw_idea:
         raise RuntimeError("SACRIFICIAL_SOURCE_INVALID")
