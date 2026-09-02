@@ -53,7 +53,7 @@ from tools.experiments.execute_m05_5r1_confirmatory import (
 T = TypeVar("T", bound=BaseModel)
 
 EXP_DIR = REPO_ROOT / "experiments" / "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION"
-SACRIFICIAL_ATTEMPT_ID = "NVIDIA-NIM-FREE-SACRIFICIAL-PILOT-001"
+SACRIFICIAL_ATTEMPT_ID = os.environ.get("SACRIFICIAL_ATTEMPT_ID", "NVIDIA-NIM-FREE-SACRIFICIAL-PILOT-002")
 PILOT_DIR = EXP_DIR / SACRIFICIAL_ATTEMPT_ID
 
 SACRIFICIAL_SOURCE_ID = "M05.4-ATTEMPT-004-IDEA-08"
@@ -362,6 +362,38 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     reviewability: Dict[str, bool] = {}
     review_reasons: Dict[str, str] = {}
 
+    def _save_summary() -> Dict[str, Any]:
+        posts = [e for e in ledger.events if e.get("event") == "post_response"]
+        errors = [e for e in ledger.events if e.get("event") == "post_error"]
+        fps = set(e.get("system_fingerprint") for e in posts if e.get("system_fingerprint"))
+
+        summary = {
+            "attempt_id": SACRIFICIAL_ATTEMPT_ID,
+            "sacrificial_source": SACRIFICIAL_SOURCE_ID,
+            "sacrificial_source_sha256": SACRIFICIAL_SOURCE_CONTENT_SHA256,
+            "provider": "NVIDIA_NIM_FREE",
+            "model": NVIDIA_MODEL_ID,
+            "base_url": NVIDIA_HOSTED_BASE_URL,
+            "expected_inference_price": EXPECTED_INFERENCE_PRICE,
+            "logical_calls_total": sum(c.get("logical_calls", 0) for c in cell_results.values()),
+            "provider_requests_total": len(posts) + len(errors),
+            "http_200_count": len(posts),
+            "http_400_count": sum(1 for e in errors if e.get("http_status") == 400),
+            "http_403_count": sum(1 for e in errors if e.get("http_status") == 403),
+            "http_429_count": sum(1 for e in errors if e.get("http_status") == 429),
+            "other_error_count": sum(1 for e in errors if e.get("http_status") not in (400, 403, 429)),
+            "prompt_tokens_total": sum(e.get("actual_prompt_tokens", 0) for e in posts),
+            "completion_tokens_total": sum(e.get("actual_completion_tokens", 0) for e in posts),
+            "tokens_total": sum(e.get("actual_total_tokens", 0) for e in posts),
+            "unique_fingerprints_count": len(fps),
+            "condition_c_reviewable": reviewability.get("CONDITION_C", False),
+            "condition_b_reviewable": reviewability.get("CONDITION_B", False),
+            "condition_a_reviewable": reviewability.get("CONDITION_A", False),
+            "all_three_reviewable": all(reviewability.get(k, False) for k in ("CONDITION_C", "CONDITION_B", "CONDITION_A")),
+        }
+        (PILOT_DIR / "PILOT-SUMMARY.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+        return summary
+
     print(f"STARTING SACRIFICIAL PILOT on NVIDIA NIM Free ({NVIDIA_MODEL_ID})")
     print(f"Sacrificial Idea SHA-256: {SACRIFICIAL_SOURCE_CONTENT_SHA256}")
     print(f"Order: {' -> '.join(FROZEN_PILOT_ORDER)}\n")
@@ -394,6 +426,7 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     cell_results["CONDITION_C"] = c_cell
     print(f"Condition C -> Terminal: {res_c.terminal_status} | Reviewable: {is_rev_c} ({reason_c})")
     if not is_rev_c:
+        _save_summary()
         raise RuntimeError(f"CONDITION_C_NOT_REVIEWABLE: {reason_c}")
 
     # 2. Executar CONDITION_B (Simple Loop)
@@ -433,6 +466,7 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     cell_results["CONDITION_B"] = b_cell
     print(f"Condition B -> Terminal: {b_term_status} | Reviewable: {is_rev_b} ({reason_b})")
     if not is_rev_b:
+        _save_summary()
         raise RuntimeError(f"CONDITION_B_NOT_REVIEWABLE: {reason_b}")
 
     # 3. Executar CONDITION_A (Baseline)
@@ -463,41 +497,17 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     cell_results["CONDITION_A"] = a_cell
     print(f"Condition A -> Terminal: SUCCESS | Reviewable: {is_rev_a} ({reason_a})")
     if not is_rev_a:
+        _save_summary()
         raise RuntimeError(f"CONDITION_A_NOT_REVIEWABLE: {reason_a}")
 
-    # Coletar estatísticas finais
-    posts = [e for e in ledger.events if e.get("event") == "post_response"]
-    errors = [e for e in ledger.events if e.get("event") == "post_error"]
-    fps = set(e.get("system_fingerprint") for e in posts if e.get("system_fingerprint"))
-
-    summary = {
-        "attempt_id": SACRIFICIAL_ATTEMPT_ID,
-        "sacrificial_source": SACRIFICIAL_SOURCE_ID,
-        "sacrificial_source_sha256": SACRIFICIAL_SOURCE_CONTENT_SHA256,
-        "provider": "NVIDIA_NIM_FREE",
-        "model": NVIDIA_MODEL_ID,
-        "base_url": NVIDIA_HOSTED_BASE_URL,
-        "expected_inference_price": EXPECTED_INFERENCE_PRICE,
-        "logical_calls_total": sum(c["logical_calls"] for c in cell_results.values()),
-        "provider_requests_total": len(posts) + len(errors),
-        "http_200_count": len(posts),
-        "http_400_count": sum(1 for e in errors if e.get("http_status") == 400),
-        "http_429_count": sum(1 for e in errors if e.get("http_status") == 429),
-        "other_error_count": sum(1 for e in errors if e.get("http_status") not in (400, 429)),
-        "prompt_tokens_total": sum(e.get("actual_prompt_tokens", 0) for e in posts),
-        "completion_tokens_total": sum(e.get("actual_completion_tokens", 0) for e in posts),
-        "tokens_total": sum(e.get("actual_total_tokens", 0) for e in posts),
-        "unique_fingerprints_count": len(fps),
-        "condition_c_reviewable": reviewability["CONDITION_C"],
-        "condition_b_reviewable": reviewability["CONDITION_B"],
-        "condition_a_reviewable": reviewability["CONDITION_A"],
-        "all_three_reviewable": all(reviewability.values()),
-    }
-
-    (PILOT_DIR / "PILOT-SUMMARY.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    summary = _save_summary()
     print("\nALL 3 CONDITIONS REVIEWABLE: SUCCESS!")
     return summary
 
 
 if __name__ == "__main__":
-    run_bounded_sacrificial_pilot()
+    try:
+        run_bounded_sacrificial_pilot()
+    except Exception as e:
+        print(f"\nPILOT EXECUTION STOPPED: {e}")
+
