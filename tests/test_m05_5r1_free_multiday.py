@@ -9,7 +9,7 @@ from tools.experiments.m05_5r1_free_multiday import (
     AppendOnlyUsageLedger, CONFIRMATORY_IDS, FREE_TPM, FreePreRequestGuard,
     FROZEN_PILOT_TREATMENT_ORDER, OUTPUT_CAP_TOKENS, QuotaIsolatedBlockWindow,
     SACRIFICIAL_CLASSIFICATION, SACRIFICIAL_SOURCE_CONTENT_SHA256,
-    GuardedGroqRunner, load_sacrificial_source, sacrificial_source_path,
+    GuardedGroqRunner, _sanitized_payload_observability, load_sacrificial_source, sacrificial_source_path,
     run_sacrificial_pilot,
 )
 from src.idea_evolution.stages.contracts import BaselineRefineOutput
@@ -164,6 +164,55 @@ def test_429_aborts_capacity_and_is_not_a_product_response(tmp_path):
                                      "texto", BaselineRefineOutput, "BASELINE_REFINE")
     assert g.closed_outcome == "ABORTED_CAPACITY"
     assert response.parsed is None and response.error.startswith("PROVIDER_EXECUTION_ERROR")
+
+
+def test_400_journals_sanitized_provider_details_and_payload_evidence(tmp_path):
+    class BadRequest(Exception):
+        status_code = 400
+        body = {"error": {"code": "invalid_schema", "message": "schema rejected", "failed_generation": "{}"}}
+        response = type("Response", (), {"headers": {"x-request-id": "req-400"}})()
+    def bad_request(payload):
+        raise BadRequest("schema rejected")
+    g = guard(tmp_path)
+    response = GuardedGroqRunner(g, block_id="PILOT-01", treatment="CONDITION_C", transport=bad_request).generate(
+        "texto", BaselineRefineOutput, "BASELINE_REFINE")
+    event = g.ledger.events[-1]
+    assert response.error == "PROVIDER_EXECUTION_ERROR:BAD_REQUEST"
+    assert event["provider_error_code"] == "invalid_schema"
+    assert event["provider_error_message"] == "schema rejected"
+    assert event["provider_request_id"] == "req-400"
+    assert event["failed_generation_present"] is True
+    assert event["payload_keys"] == ["model", "messages", "response_format", "temperature", "max_completion_tokens"]
+    assert event["model"] == "openai/gpt-oss-120b" and event["stage_name"] == "BASELINE_REFINE"
+
+
+def test_400_without_optional_details_is_journaled_without_secret_leakage(tmp_path):
+    secret = "gsk_secret_should_not_appear"
+    class BadRequest(Exception):
+        status_code = 400
+        body = {"error": {}}
+    def bad_request(payload):
+        payload["Authorization"] = f"Bearer {secret}"
+        raise BadRequest(f"Bearer {secret}")
+    g = guard(tmp_path)
+    GuardedGroqRunner(g, block_id="PILOT-01", treatment="CONDITION_C", transport=bad_request).generate(
+        "texto", BaselineRefineOutput, "BASELINE_REFINE")
+    event = g.ledger.events[-1]
+    serialized = str(event)
+    assert event["provider_error_code"] is None and event["provider_error_message"].startswith("Bearer ")
+    assert event["provider_request_id"] is None and event["failed_generation_present"] is False
+    assert secret not in serialized and "Authorization" not in event["payload_keys"]
+
+
+def test_sanitized_payload_fingerprint_is_deterministic():
+    payload = {
+        "model": "openai/gpt-oss-120b",
+        "messages": [{"role": "system", "content": "system"}, {"role": "user", "content": "user"}],
+        "response_format": {"type": "json_schema", "json_schema": {"name": "example", "strict": True, "schema": {"type": "object"}}},
+        "temperature": 0.3,
+        "max_completion_tokens": 2048,
+    }
+    assert _sanitized_payload_observability(payload) == _sanitized_payload_observability(dict(payload))
 
 
 def test_pilot_entry_has_no_confirmatory_or_reveal_parameter():

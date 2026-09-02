@@ -19,7 +19,11 @@ from typing import Any, Callable, Mapping, Optional, Sequence, Type, TypeVar
 from pydantic import BaseModel, ValidationError
 
 from src.idea_evolution.providers.base import ModelResponse, ModelRunner, ModelUsage
-from src.idea_evolution.providers.native import parse_provider_exception, to_strict_json_schema
+from src.idea_evolution.providers.native import (
+    parse_provider_exception,
+    sanitize_error_message,
+    to_strict_json_schema,
+)
 from tools.experiments.m05_5r1_token_envelope import (
     OUTPUT_CAP_TOKENS,
     _chat_token_count,
@@ -34,6 +38,8 @@ FREE_RPD = 1_000
 FREE_TPM = 8_000
 FREE_TPD = 200_000
 MODEL = "openai/gpt-oss-120b"
+MAX_SANITIZED_ERROR_MESSAGE_CHARS = 512
+SENSITIVE_OBSERVABILITY_KEYS = frozenset({"authorization", "api_key", "groq_api_key"})
 CONFIRMATORY_IDS = frozenset({f"H0{index}" for index in range(1, 9)})
 SACRIFICIAL_SOURCE_ID = "M05.4-ATTEMPT-004-IDEA-08"
 SACRIFICIAL_CLASSIFICATION = "SACRIFICIAL_M05_4_HISTORICAL_NON_CONFIRMATORY"
@@ -49,6 +55,76 @@ def _canonical(value: object) -> str:
 
 def _hash(value: object) -> str:
     return sha256(_canonical(value).encode("utf-8")).hexdigest()
+
+
+def _bounded_sanitized_text(value: object) -> Optional[str]:
+    if not isinstance(value, str) or not value:
+        return None
+    return sanitize_error_message(value)[:MAX_SANITIZED_ERROR_MESSAGE_CHARS]
+
+
+def _sanitized_payload_observability(payload: Mapping[str, Any]) -> Mapping[str, Any]:
+    """Return deterministic, non-secret request evidence without persisting prompt text."""
+    payload_keys = [str(key) for key in payload if str(key).lower() not in SENSITIVE_OBSERVABILITY_KEYS]
+    messages = payload.get("messages")
+    sanitized_messages = []
+    if isinstance(messages, list):
+        for message in messages:
+            if not isinstance(message, Mapping):
+                continue
+            content = message.get("content")
+            sanitized_messages.append({
+                "role": str(message.get("role") or ""),
+                "content_sha256": sha256(str(content or "").encode("utf-8")).hexdigest(),
+            })
+    response_format = payload.get("response_format")
+    sanitized_response_format: Mapping[str, Any] = {}
+    if isinstance(response_format, Mapping):
+        json_schema = response_format.get("json_schema")
+        schema_details: Mapping[str, Any] = {}
+        if isinstance(json_schema, Mapping):
+            schema_details = {
+                "name": str(json_schema.get("name") or ""),
+                "strict": bool(json_schema.get("strict")),
+                "schema_sha256": _hash(json_schema.get("schema") or {}),
+            }
+        sanitized_response_format = {
+            "type": str(response_format.get("type") or ""),
+            "json_schema": schema_details,
+        }
+    sanitized = {
+        "payload_keys": payload_keys,
+        "model": str(payload.get("model") or ""),
+        "messages": sanitized_messages,
+        "response_format": sanitized_response_format,
+        "temperature": payload.get("temperature"),
+        "max_completion_tokens": payload.get("max_completion_tokens"),
+    }
+    return {"payload_keys": payload_keys, "sanitized_payload_sha256": _hash(sanitized)}
+
+
+def _provider_request_id(exc: Exception) -> Optional[str]:
+    response = getattr(exc, "response", None)
+    headers = getattr(response, "headers", None)
+    if not headers:
+        return None
+    for key in ("x-request-id", "request-id", "x-groq-request-id"):
+        value = headers.get(key) or headers.get(key.title())
+        sanitized = _bounded_sanitized_text(value)
+        if sanitized:
+            return sanitized
+    return None
+
+
+def _provider_error_message(exc: Exception, fallback: object) -> Optional[str]:
+    body = getattr(exc, "body", None)
+    if isinstance(body, Mapping):
+        error = body.get("error")
+        if isinstance(error, Mapping):
+            message = _bounded_sanitized_text(error.get("message"))
+            if message:
+                return message
+    return _bounded_sanitized_text(fallback)
 
 
 def _now() -> datetime:
@@ -269,14 +345,37 @@ class FreePreRequestGuard:
                 "timestamp": self.now().isoformat(),
             })
 
-    def post_error(self, decision: PreDispatchDecision, *, http_status: Optional[int], error: str) -> None:
+    def post_error(
+        self,
+        decision: PreDispatchDecision,
+        *,
+        http_status: Optional[int],
+        error: str,
+        provider_error_code: Optional[str] = None,
+        provider_error_message: Optional[str] = None,
+        provider_request_id: Optional[str] = None,
+        failed_generation_present: bool = False,
+        payload: Optional[Mapping[str, Any]] = None,
+        model: str = MODEL,
+        stage_name: Optional[str] = None,
+    ) -> None:
         outcome = "ABORTED_CAPACITY" if http_status == 429 else "INVALID_EXECUTION"
         self._closed_outcome = outcome
+        payload_evidence = _sanitized_payload_observability(payload) if payload else {}
         self.ledger.append({
             "event": "post_error", "request_id": decision.request_id,
             "block_id": decision.block_id, "http_status": http_status,
             "is_429": http_status == 429, "retry_attempt": 0,
-            "outcome": outcome, "error": error, "timestamp": self.now().isoformat(),
+            "outcome": outcome, "error": error,
+            "provider_error_type": error,
+            "provider_error_code": _bounded_sanitized_text(provider_error_code),
+            "provider_error_message": _bounded_sanitized_text(provider_error_message),
+            "provider_request_id": _bounded_sanitized_text(provider_request_id),
+            "failed_generation_present": failed_generation_present,
+            "model": model, "stage_name": stage_name,
+            "condition": decision.treatment,
+            **payload_evidence,
+            "timestamp": self.now().isoformat(),
         })
 
     @property
@@ -358,7 +457,18 @@ class GuardedGroqRunner(ModelRunner):
             response = self.transport(payload)
         except Exception as exc:
             details = parse_provider_exception(exc, provider="groq", attempts=1, retries=0)
-            self.guard.post_error(decision, http_status=details.http_status, error=details.error_type)
+            self.guard.post_error(
+                decision,
+                http_status=details.http_status,
+                error=details.error_type,
+                provider_error_code=_bounded_sanitized_text(details.error_code),
+                provider_error_message=_provider_error_message(exc, details.message_sanitized),
+                provider_request_id=_provider_request_id(exc),
+                failed_generation_present=bool(details.failed_generation),
+                payload=payload,
+                model=MODEL,
+                stage_name=stage_name,
+            )
             return ModelResponse(raw_text="", provider="groq", model=MODEL,
                                  error=f"PROVIDER_EXECUTION_ERROR:{details.error_type}", retry_count=0)
         self.guard.post_response(decision, response)
