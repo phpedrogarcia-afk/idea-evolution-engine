@@ -1,0 +1,48 @@
+{
+  "checkpoint_id": "CP-20260901-014",
+  "created_at": "2026-09-01T22:18:28.897618",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_IDEA_EVOLUTION_LOOP_MVP",
+  "objective": "PFI-M05_5R1-FREE-PATH-CLOSEOUT-001: decisão humana de rejeitar Free para execução confirmatória",
+  "repository": {
+    "branch": "main",
+    "commit": "833f75a",
+    "worktree_state": "DIRTY"
+  },
+  "completed_tasks": [
+    "Registro durável do closeout Free",
+    "Preservação do conhecimento negativo e dos invariantes experimentais"
+  ],
+  "changed_files": [
+    "docs/evidence/PFI-M05_5R1-FREE-PATH-CLOSEOUT-001.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [],
+  "tests_executed": [
+    "Validação documental determinística pendente após sincronização de hashes"
+  ],
+  "unresolved_questions": [
+    "Capacidade autenticada maior ainda não foi obtida",
+    "Telemetria histórica M05.4 continua incompleta para reconstrução integral"
+  ],
+  "known_contradictions": [
+    "TRACE_INCOMPLETE permanece; a decisão rejeita risco, não alega falha Free provada"
+  ],
+  "known_risks": [
+    "Guard pré-request executável continua ausente e é requerido em qualquer tier"
+  ],
+  "blockers": [
+    "Free rejeitado para a execução confirmatória"
+  ],
+  "next_exact_action": "Obter capacidade autenticada maior com o mesmo provedor, modelo e tratamentos; não executar Free.",
+  "authorized_next_scope": [
+    "Evidência de maior capacidade no mesmo provedor/modelo/tratamentos"
+  ],
+  "do_not_repeat": [
+    "Não executar ou otimizar M05.5R1 para Free",
+    "Não tocar em holdouts ou reveal"
+  ],
+  "recovery_notes": "Consulte os recibos de auditoria e closeout antes de qualquer novo gate de capacidade."
+}

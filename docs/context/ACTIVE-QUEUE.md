@@ -7,17 +7,17 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
 
-- [ ] **HUMAN-DECISION-M05.5R1-CAPACITY-STRATEGY:** decidir entre capacidade de provedor maior, recalibração científica separada ou adiamento de M05.5R1.
+- [ ] **M05.5R1-HIGHER-CAPACITY-EVIDENCE:** obter capacidade autenticada maior, mantendo provedor, modelo e tratamentos congelados.
   - **Fato autenticado:** a conta `Personal` / `Default Project` está no plano `FREE`, sem limite customizado; `openai/gpt-oss-120b` tem `30 RPM`, `1.000 RPD`, `8.000 TPM`, `200.000 TPD`.
-  - **Gate determinado:** `131.072 > 8.000` torna a solicitação máxima inadmissível; `11.226.334 > 200.000` impede a garantia diária (gap `11.026.334`). `M05.5R1` não pode executar nesta conta.
+  - **Decisão humana congelada:** `FREE_PATH_REJECTED_FOR_CONFIRMATORY_EXECUTION`; `FREE_CONFIRMATORY_RISK_NOT_DEFENSIBLE`, sem alegar falha provada.
   - **Evidência:** `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-R2.json`; nenhuma API call, A/B/C, holdout ou reveal ocorreu.
-  - **Evidência empírica adicional:** `PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001.md` é `TRACE_INCOMPLETE`: 78 B records exatos ficaram abaixo do TPM por chamada, mas consomem 70,16% do TPD; A/C e duas cadeias de repair não são reconstituíveis. Não use isso como autorização para apostar os holdouts Free.
+  - **Evidência empírica adicional:** `PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001.md` é `TRACE_INCOMPLETE`: 78 B records exatos ficaram abaixo do TPM por chamada, mas consomem 70,16% do TPD; A/C e duas cadeias de repair não são reconstituíveis. Não iniciar campanha de otimização Free nem apostar os holdouts Free.
 
 ---
 
 ## 🟡 NEXT (Condicionado à Decisão Humana)
 
-1. [ ] **M05.5R1-PROVIDER-CAPACITY-EVIDENCE:** somente após uma mudança humana material de conta/projeto/capacidade; não repetir a evidência autenticada atual sem mudança de estado.
+1. [ ] **M05.5R1-PROVIDER-CAPACITY-EVIDENCE:** somente após capacidade autenticada maior no mesmo provedor/modelo; não repetir a evidência atual sem mudança material de conta/projeto/capacidade.
 2. [ ] **M05.5R1-PREFLIGHT-FREEZE:** somente após uma decisão humana de capacidade e novo gate autenticado aprovado, executar preflight sem chamadas semânticas.
 3. [ ] **M05.5R1-EXECUTION-AUTHORIZATION:** decisão humana separada, somente após o preflight retornar pronto e todos os checks determinísticos passarem.
 4. [ ] **M05.5R1-REAL-EXECUTION:** somente sob a autorização específica acima; nunca reutilizar `REAL-EXECUTION-ATTEMPT-001`.
@@ -29,4 +29,5 @@
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
 
 - **M05.5 Attempt 001:** bloqueado como caminho confirmatório; seus artefatos brutos são preservados, mas não são base para revisão humana, reveal ou conclusão de replicação.
+- **Groq Free para M05.5R1 confirmatório:** bloqueado por decisão humana. Não é falha provada; é risco não defensável com holdouts confirmatórios e telemetria histórica incompleta.
 - **Bridge IEE ↔ FioOS:** bloqueado até uma missão e autoridade específicas. `READY_TO_TEST != EXECUTION_AUTHORITY`.

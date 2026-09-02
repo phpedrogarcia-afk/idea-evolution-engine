@@ -3,6 +3,16 @@
 > **HISTÓRICO APPEND-ONLY DE TRABALHOS CONCLUÍDOS, CHECKPOINTS E MARCOS.**
 > Nenhuma entrada anterior deve ser apagada ou editada retroativamente.
 
+### [PFI-M05_5R1-FREE-PATH-CLOSEOUT-001] Closeout do Caminho Groq Free
+- **Data:** 2026-09-01
+- **Decisão humana:** `FREE_PATH_STATUS=REJECTED_FOR_CONFIRMATORY_EXECUTION` por `FREE_CONFIRMATORY_RISK_NOT_DEFENSIBLE`.
+- **Escopo preservado:** nenhuma alteração de A/B/C, schemas, iterações, holdouts, cegamento, provedor ou modelo; nenhuma chamada, reveal ou replicação.
+- **Conhecimento negativo:** `B_EXACT_SUBSET_ALREADY_CONSUMES_70_PERCENT_FREE_TPD` e `HISTORICAL_TELEMETRY_INCOMPLETE_FOR_FULL_CAPACITY_RECONSTRUCTION`. Isto não afirma que uma falha Free foi provada.
+- **Invariante futura:** `CURRENT_PRE_REQUEST_CAPACITY_GUARD_SUFFICIENT=NO` permanece um bloqueio a corrigir antes de qualquer replicação real, independentemente do tier.
+- **Próximo passo autorizado:** `OBTAIN_HIGHER_PROVIDER_CAPACITY_WITH_SAME_PROVIDER_MODEL_AND_TREATMENTS`.
+
+---
+
 ### [PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001] Auditoria Offline do Trace Empírico Free
 - **Data:** 2026-09-01
 - **Objetivo:** avaliar, somente com evidência histórica M05.4 Attempt-004 e contagem local, se a execução M05.5R1 na conta Free seria uma aposta informada, sem alterar o experimento ou chamar o provedor.
