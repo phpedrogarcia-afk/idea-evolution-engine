@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-012
+> Atualizado em: 2026-09-01 | Checkpoint: CP-20260901-013
 
 ---
 
@@ -29,10 +29,11 @@
   - Capacity design: cap `2048`, envelope máximo específico `11.226.334` tokens (redução de 58,82% sobre 27.262.976), 208 requests máximos incluindo repairs explícitos, schedule CSPRNG comprometido e pacing de concorrência 1 permanecem congelados offline.
   - Evidência autenticada R2: organização `Personal` / `Default Project`, plano `FREE`, sem limites customizados no projeto; `openai/gpt-oss-120b` expõe `30 RPM`, `1.000 RPD`, `8.000 TPM` e `200.000 TPD`. A conta não admite a carga única máxima de `131.072` tokens e não pode garantir o bound diário (gap mínimo de `11.026.334` tokens). Saldos e reset do período não foram expostos pelo console.
   - Bloqueios reais: a capacidade autenticada atual é insuficiente; o namespace `REAL-EXECUTION-ATTEMPT-001` não está novo (diretório `raw/` vazio e sem registry, preservado como scar), preflight e autorização humana separada.
-- **Último Checkpoint Imutável:** [`CP-20260901-012`](checkpoints/CP-20260901-012.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-012`
+  - Auditoria empírica Free: `TRACE_INCOMPLETE`. Em 78 estágios B exatamente reconstituíveis, o máximo foi 3.008 tokens e o subtotal foi 140.321; porém A/C não preservam os payloads necessários e duas cadeias B de repair estão incompletas. Isso não prova compatibilidade Free, não altera o hard bound e não autoriza execução.
+- **Último Checkpoint Imutável:** [`CP-20260901-013`](checkpoints/CP-20260901-013.md)
+- **Último Estado Seguro (Last Known Good):** `CP-20260901-013`
 - **Git Branch:** `main`
-- **Worktree após a checagem autenticada:** `PENDING_CHECKPOINT_COMMIT`
+- **Worktree após a auditoria empírica:** `PENDING_CHECKPOINT_COMMIT`
 
 ---
 
@@ -49,10 +50,11 @@
   - `PFI-M05_5R1-REAL-CAPACITY-READINESS-001`, que encontrou TPD restante não comprovado, envelope total de tokens não limitado e ausência de schedule neutro; nenhuma chamada ou tratamento foi feito.
   - `PFI-M05_5R1-CAPACITY-DESIGN-FREEZE-001`, que congelou o cap, bound conservador, schedule neutro, pacing e invalidações sem tocar em holdouts/reveal ou provedor.
   - `PFI-M05_5R1-TOKEN-ENVELOPE-CALIBRATION-001`, que substituiu o bound de contexto inteiro por um envelope tokenizado com `openai-harmony` oficial, sem inferência, reveal ou execução A/B/C.
+  - `PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001`, análise offline do trace M05.4 Attempt-004: a reconstrução integral falhou fechada por telemetria ausente; o subconjunto B exato não se aproximou de 8.000 TPM, mas já consumiu 70,16% de 200.000 TPD.
 - **Tarefa Ativa Atual:**
-  - `PFI-M05_5R1-AUTHENTICATED-CAPACITY-CHECK-R2` confirmou sessão Groq autenticada e concluiu `NOT_READY_ACCOUNT_CAPACITY` sem calls de inferência, holdouts ou reveal.
+  - `PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001` concluída com `TRACE_INCOMPLETE`; nenhuma execução Free é autorizada por esta evidência.
 - **Próximo Passo Exato:**
-- Decisão humana: obter capacidade autenticada que comporte o bound congelado, autorizar uma recalibração científica separada ou adiar M05.5R1. A execução nesta conta permanece vedada.
+- Decisão humana: preservar os holdouts R1 e escolher capacidade maior, recalibração científica separada ou adiamento. A execução nesta conta permanece vedada; a lacuna do trace impede tratar Free como aposta informada suficiente.
 
 ---
 

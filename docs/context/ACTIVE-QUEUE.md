@@ -11,6 +11,7 @@
   - **Fato autenticado:** a conta `Personal` / `Default Project` está no plano `FREE`, sem limite customizado; `openai/gpt-oss-120b` tem `30 RPM`, `1.000 RPD`, `8.000 TPM`, `200.000 TPD`.
   - **Gate determinado:** `131.072 > 8.000` torna a solicitação máxima inadmissível; `11.226.334 > 200.000` impede a garantia diária (gap `11.026.334`). `M05.5R1` não pode executar nesta conta.
   - **Evidência:** `M05.5R1-AUTHENTICATED-CAPACITY-CHECK-R2.json`; nenhuma API call, A/B/C, holdout ou reveal ocorreu.
+  - **Evidência empírica adicional:** `PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001.md` é `TRACE_INCOMPLETE`: 78 B records exatos ficaram abaixo do TPM por chamada, mas consomem 70,16% do TPD; A/C e duas cadeias de repair não são reconstituíveis. Não use isso como autorização para apostar os holdouts Free.
 
 ---
 

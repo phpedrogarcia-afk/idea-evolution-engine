@@ -1,0 +1,51 @@
+{
+  "checkpoint_id": "CP-20260901-013",
+  "created_at": "2026-09-01T22:08:01.935764",
+  "author": "Codex",
+  "phase": "FASE_1_SIMPLE_IDEA_EVOLUTION_LOOP_MVP",
+  "objective": "PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001: análise offline do trace histórico de capacidade",
+  "repository": {
+    "branch": "main",
+    "commit": "3b43943",
+    "worktree_state": "DIRTY"
+  },
+  "completed_tasks": [
+    "Reconstrução conservadora do subconjunto B tokenizável",
+    "Contagem selada R1 sem exposição de conteúdo",
+    "Auditoria de suficiência do guard pré-request"
+  ],
+  "changed_files": [
+    "docs/evidence/PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001.md",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md"
+  ],
+  "new_decisions": [],
+  "tests_executed": [
+    "Tokenização local Harmony/o200k de 78 registros B reconstituíveis",
+    "Inspeção offline dos contratos de capacidade e do harness"
+  ],
+  "unresolved_questions": [
+    "Totais M05.4 A+B+C e replay Free permanecem UNKNOWN por payloads/telemetria ausentes"
+  ],
+  "known_contradictions": [
+    "Resumo histórico de zero repairs não é sustentado: dois traces B têm retry_count=1 e repairs são UNKNOWN_NOT_INSTRUMENTED"
+  ],
+  "known_risks": [
+    "Uma tentativa Free abortada pode consumir/expor holdouts confirmatórios e exigir novo conjunto"
+  ],
+  "blockers": [
+    "Trace histórico insuficiente para provar ajuste Free",
+    "Guard executável por request/cumulativo não existe"
+  ],
+  "next_exact_action": "Aguardar decisão humana de capacidade maior, recalibração científica independente ou adiamento; não executar Free.",
+  "authorized_next_scope": [
+    "Somente decisão humana de estratégia de capacidade"
+  ],
+  "do_not_repeat": [
+    "Não executar M05.5R1 Free",
+    "Não inferir tokens ausentes",
+    "Não acessar reveal"
+  ],
+  "recovery_notes": "Use o recibo da auditoria empírica e preserve o conjunto R1 selado."
+}

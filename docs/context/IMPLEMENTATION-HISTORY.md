@@ -3,6 +3,16 @@
 > **HISTÓRICO APPEND-ONLY DE TRABALHOS CONCLUÍDOS, CHECKPOINTS E MARCOS.**
 > Nenhuma entrada anterior deve ser apagada ou editada retroativamente.
 
+### [PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001] Auditoria Offline do Trace Empírico Free
+- **Data:** 2026-09-01
+- **Objetivo:** avaliar, somente com evidência histórica M05.4 Attempt-004 e contagem local, se a execução M05.5R1 na conta Free seria uma aposta informada, sem alterar o experimento ou chamar o provedor.
+- **Resultado:** `TRACE_INCOMPLETE`. Há 78 estágios B exatamente reconstituíveis: máximo de 3.008 tokens por request e subtotal de 140.321 tokens. A/C não possuem payloads brutos suficientes, duas cadeias B trazem `retry_count=1` sem geração rejeitada/request de repair preservados e retries de transporte não foram instrumentados. Logo, os totais A+B+C, o replay Free e os totais por holdout são `UNKNOWN`, sem estimativa.
+- **Evidência:** `docs/evidence/PFI-M05_5R1-FREE-EMPIRICAL-CAPACITY-AUDIT-001.md`; nenhuma chamada de provedor, inferência, célula A/B/C, reveal ou início de replicação.
+- **Scar / aprendizado:** `TRACE_COMPLETENESS != EXECUTION_SUMMARY_CLAIM`; o registro armazenado não sustenta “zero repairs”. `HARD_BOUND != EMPIRICAL_BEHAVIOR` permanece verdadeiro.
+- **Próxima decisão humana:** não iniciar tentativa Free com os holdouts confirmatórios a partir deste trace incompleto; preservar R1 e decidir por capacidade maior, recalibração científica independente ou adiamento.
+
+---
+
 ### [PFI-M05_5R1-AUTHENTICATED-CAPACITY-CHECK-R2] Gate Autenticado de Capacidade Groq
 - **Data:** 2026-09-01
 - **Objetivo:** retomar a evidência de capacidade após login humano oficial, sem executar M05.5R1.
