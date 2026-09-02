@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
 tools/experiments/execute_m05_5r1_confirmatory.py
-Confirmatory replication execution harness for M05.5R1.
+Confirmatory replication execution harness for M05.5R1 (Rev3 / Amendment 002).
 
 Architecture:
   1. Fail-closed pre-execution verification (hashes, receipts, registry, worktree).
-  2. Append-only registry reservation (configurable attempt_id, e.g. REAL-EXECUTION-ATTEMPT-003).
+  2. Append-only registry reservation (configurable attempt_id, e.g. REAL-EXECUTION-ATTEMPT-004).
   3. Strict CSPRNG-balanced schedule execution (24 cells across 8 blocks).
-  4. Paced Groq execution (concurrency=1, TPM wait, zero retry, fingerprint drift tracking).
-  5. Immutable cell output writing (fail-closed if cell file already exists).
-  6. Deterministic cell reviewability gate (classify_cell_reviewability per frozen scientific contract).
-  7. Post-execution blind review packet rendering (machine-only reveal access, zero leaks).
+  4. Paced Groq execution (concurrency=1, TPM wait, zero generic retry, fingerprint drift tracking).
+  5. Bounded strict-schema resilience: exactly 1 identical schema replay on HTTP 400 json_validate_failed.
+  6. Immutable cell output writing (fail-closed if cell file already exists).
+  7. Deterministic cell reviewability gate (classify_cell_reviewability per frozen scientific contract).
+  8. Post-execution blind review packet rendering (machine-only reveal access, zero leaks).
 """
 
 from __future__ import annotations
@@ -57,7 +58,7 @@ T = TypeVar("T", bound=BaseModel)
 # Constants
 # ---------------------------------------------------------------------------
 EXPERIMENT_ID = "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901"
-DEFAULT_ATTEMPT_ID = "REAL-EXECUTION-ATTEMPT-003"
+DEFAULT_ATTEMPT_ID = "REAL-EXECUTION-ATTEMPT-004"
 PROVIDER = "groq_direct"
 MODEL = "openai/gpt-oss-120b"
 SERVICE_TIER = "FREE"
@@ -70,6 +71,7 @@ FREE_TPD = 200_000
 MAX_CAPACITY_WAIT_SECONDS = 75.0
 CAPACITY_WAIT_SAFETY_MARGIN_SECONDS = 1.0
 MAX_SANITIZED_ERROR_MESSAGE_CHARS = 512
+MAX_IDENTICAL_STRICT_SCHEMA_REPLAYS_PER_LOGICAL_CALL = 1
 SENSITIVE_OBSERVABILITY_KEYS = frozenset({"authorization", "api_key", "groq_api_key"})
 CONFIRMATORY_CLASSIFICATION = "CONFIRMATORY_M05_5R1_REPLICATION"
 CONFIRMATORY_IDS = frozenset({f"H0{index}" for index in range(1, 9)})
@@ -193,6 +195,25 @@ def _provider_error_message(exc: Exception, fallback: object) -> Optional[str]:
             if message:
                 return message
     return _bounded_sanitized_text(fallback)
+
+
+def is_strict_schema_replay_eligible(
+    *,
+    http_status: Optional[int],
+    provider_error_code: Optional[str],
+    failed_generation_present: bool,
+    replay_attempt: int,
+) -> bool:
+    """
+    Exact qualification rule for bounded strict-schema replay per Amendment 002.
+    Only HTTP 400 + json_validate_failed + failed_generation=True qualifies.
+    """
+    return (
+        http_status == 400
+        and provider_error_code == "json_validate_failed"
+        and failed_generation_present is True
+        and replay_attempt < MAX_IDENTICAL_STRICT_SCHEMA_REPLAYS_PER_LOGICAL_CALL
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -324,6 +345,25 @@ class ConfirmatoryPreRequestGuard:
         self._fingerprint: Optional[str] = None
         self._fingerprints: list[str] = []
         self._fingerprint_drift_observed = False
+        self.strict_schema_failure_count = 0
+        self.strict_schema_replay_count = 0
+        self.strict_schema_replay_success_count = 0
+        self.strict_schema_replay_exhausted_count = 0
+        self.condition_schema_replays = {"CONDITION_A": 0, "CONDITION_B": 0, "CONDITION_C": 0}
+
+    def record_strict_schema_failure(self, condition: str) -> None:
+        self.strict_schema_failure_count += 1
+
+    def record_strict_schema_replay_dispatched(self, condition: str) -> None:
+        self.strict_schema_replay_count += 1
+        if condition in self.condition_schema_replays:
+            self.condition_schema_replays[condition] += 1
+
+    def record_strict_schema_replay_success(self, condition: str) -> None:
+        self.strict_schema_replay_success_count += 1
+
+    def record_strict_schema_replay_exhausted(self, condition: str) -> None:
+        self.strict_schema_replay_exhausted_count += 1
 
     def ensure_confirmatory_source(self, source_id: str, classification: str) -> None:
         if source_id not in CONFIRMATORY_IDS or classification != CONFIRMATORY_CLASSIFICATION:
@@ -433,7 +473,8 @@ class ConfirmatoryPreRequestGuard:
         self.ledger.append({"event": "pre_dispatch", **asdict(decision)})
         return decision
 
-    def post_response(self, decision: PreDispatchDecision, response: Mapping[str, Any]) -> None:
+    def post_response(self, decision: PreDispatchDecision, response: Mapping[str, Any],
+                      *, is_schema_replay: bool = False) -> None:
         usage = response.get("usage") or {}
         details = usage.get("prompt_tokens_details") or {}
         cached = int(details.get("cached_tokens") or 0)
@@ -460,7 +501,9 @@ class ConfirmatoryPreRequestGuard:
             "actual_prompt_tokens": prompt, "actual_cached_tokens": cached,
             "actual_completion_tokens": completion, "actual_total_tokens": total,
             "rate_limit_relevant_token_count": total if total else None,
-            "system_fingerprint": fingerprint, "retry_attempt": 0,
+            "system_fingerprint": fingerprint,
+            "retry_attempt": 1 if is_schema_replay else 0,
+            "is_schema_replay": is_schema_replay,
             "rate_limit_remaining_tokens": normalized_headers.get("x-ratelimit-remaining-tokens"),
             "rate_limit_reset_tokens": normalized_headers.get("x-ratelimit-reset-tokens"),
             "timestamp": self.now().isoformat(),
@@ -488,20 +531,26 @@ class ConfirmatoryPreRequestGuard:
         payload: Optional[Mapping[str, Any]] = None,
         model: str = MODEL,
         stage_name: Optional[str] = None,
+        is_replay_eligible: bool = False,
+        strict_schema_replay_exhausted: bool = False,
     ) -> None:
         outcome = "ABORTED_CAPACITY" if http_status == 429 else "INVALID_EXECUTION"
-        self._closed_outcome = outcome
+        if not is_replay_eligible:
+            self._closed_outcome = outcome
         payload_evidence = _sanitized_payload_observability(payload) if payload else {}
         self.ledger.append({
             "event": "post_error", "request_id": decision.request_id,
             "block_id": decision.block_id, "http_status": http_status,
-            "is_429": http_status == 429, "retry_attempt": 0,
+            "is_429": http_status == 429,
+            "retry_attempt": 1 if strict_schema_replay_exhausted else 0,
             "outcome": outcome, "error": error,
             "provider_error_type": error,
             "provider_error_code": _bounded_sanitized_text(provider_error_code),
             "provider_error_message": _bounded_sanitized_text(provider_error_message),
             "provider_request_id": _bounded_sanitized_text(provider_request_id),
             "failed_generation_present": failed_generation_present,
+            "is_replay_eligible": is_replay_eligible,
+            "strict_schema_replay_exhausted": strict_schema_replay_exhausted,
             "model": model, "stage_name": stage_name,
             "condition": decision.treatment,
             **payload_evidence,
@@ -581,24 +630,119 @@ class GuardedGroqConfirmatoryRunner(ModelRunner):
             }},
             "temperature": 0.3, "max_completion_tokens": OUTPUT_CAP_TOKENS,
         }
+        orig_payload_sha256 = _sanitized_payload_observability(payload)["sanitized_payload_sha256"]
+
         try:
             response = self.transport(payload)
         except Exception as exc:
             details = parse_provider_exception(exc, provider="groq", attempts=1, retries=0)
+            err_code = _bounded_sanitized_text(details.error_code)
+            has_failed_gen = bool(details.failed_generation)
+            is_eligible = is_strict_schema_replay_eligible(
+                http_status=details.http_status,
+                provider_error_code=err_code,
+                failed_generation_present=has_failed_gen,
+                replay_attempt=0,
+            )
+
+            if not is_eligible:
+                self.guard.post_error(
+                    decision,
+                    http_status=details.http_status,
+                    error=details.error_type,
+                    provider_error_code=err_code,
+                    provider_error_message=_provider_error_message(exc, details.message_sanitized),
+                    provider_request_id=_provider_request_id(exc),
+                    failed_generation_present=has_failed_gen,
+                    payload=payload,
+                    model=MODEL,
+                    stage_name=stage_name,
+                )
+                return ModelResponse(raw_text="", provider="groq", model=MODEL,
+                                     error=f"PROVIDER_EXECUTION_ERROR:{details.error_type}", retry_count=0)
+
+            # Record eligible anomaly (does not close guard yet)
+            self.guard.record_strict_schema_failure(self.treatment)
             self.guard.post_error(
                 decision,
                 http_status=details.http_status,
                 error=details.error_type,
-                provider_error_code=_bounded_sanitized_text(details.error_code),
+                provider_error_code=err_code,
                 provider_error_message=_provider_error_message(exc, details.message_sanitized),
                 provider_request_id=_provider_request_id(exc),
-                failed_generation_present=bool(details.failed_generation),
+                failed_generation_present=True,
                 payload=payload,
                 model=MODEL,
                 stage_name=stage_name,
+                is_replay_eligible=True,
             )
-            return ModelResponse(raw_text="", provider="groq", model=MODEL,
-                                 error=f"PROVIDER_EXECUTION_ERROR:{details.error_type}", retry_count=0)
+
+            # Replay MUST be identical (verify payload hash)
+            replay_payload_sha256 = _sanitized_payload_observability(payload)["sanitized_payload_sha256"]
+            if orig_payload_sha256 != replay_payload_sha256:
+                self.guard._closed_outcome = "INVALID_EXECUTION"
+                raise RuntimeError("PAYLOAD_IDENTITY_MUTATION_BEFORE_REPLAY")
+
+            request_id_replay = f"{self.block_id}:{self.treatment}:{self._call_number}:{request_kind}:REPLAY_1"
+            self.guard.record_strict_schema_replay_dispatched(self.treatment)
+            self.guard.ledger.append({
+                "event": "schema_replay_dispatch",
+                "logical_call_id": f"{self.block_id}:{self.treatment}:{self._call_number}:{request_kind}",
+                "original_request_id": request_id,
+                "replay_request_id": request_id_replay,
+                "replay_reason": "PROVIDER_STRICT_JSON_SCHEMA_DELIVERY_FAILURE",
+                "payload_identity_verified": True,
+                "sanitized_payload_sha256": orig_payload_sha256,
+                "timestamp": self.guard.now().isoformat(),
+            })
+
+            self.guard.wait_for_tpm_capacity(request_id=request_id_replay, block_id=self.block_id, system=system, user=prompt_text)
+            decision_replay = self.guard.pre_dispatch(
+                request_id=request_id_replay, block_id=self.block_id,
+                classification=CONFIRMATORY_CLASSIFICATION, treatment=self.treatment,
+                call_index=self._call_number, system=system, user=prompt_text,
+            )
+            if not decision_replay.allowed:
+                self.guard._closed_outcome = decision_replay.outcome
+                return ModelResponse(raw_text="", provider="groq", model=MODEL,
+                                     error=decision_replay.outcome, retry_count=1)
+
+            try:
+                response = self.transport(payload)
+            except Exception as exc2:
+                details2 = parse_provider_exception(exc2, provider="groq", attempts=2, retries=1)
+                err_code2 = _bounded_sanitized_text(details2.error_code)
+                has_failed_gen2 = bool(details2.failed_generation)
+                self.guard.record_strict_schema_replay_exhausted(self.treatment)
+                self.guard.post_error(
+                    decision_replay,
+                    http_status=details2.http_status,
+                    error=details2.error_type,
+                    provider_error_code=err_code2,
+                    provider_error_message=_provider_error_message(exc2, details2.message_sanitized),
+                    provider_request_id=_provider_request_id(exc2),
+                    failed_generation_present=has_failed_gen2,
+                    payload=payload,
+                    model=MODEL,
+                    stage_name=stage_name,
+                    strict_schema_replay_exhausted=True,
+                )
+                self.guard._closed_outcome = "INVALID_EXECUTION"
+                return ModelResponse(raw_text="", provider="groq", model=MODEL,
+                                     error=f"STRICT_SCHEMA_REPLAY_EXHAUSTED:{details2.error_type}", retry_count=1)
+
+            # Replay succeeded!
+            self.guard.record_strict_schema_replay_success(self.treatment)
+            self.guard.post_response(decision_replay, response, is_schema_replay=True)
+            usage = response.get("usage") or {}
+            return ModelResponse(
+                raw_text=str(response.get("content") or ""), provider="groq", model=MODEL,
+                usage=ModelUsage(prompt_tokens=usage.get("prompt_tokens"),
+                                 completion_tokens=usage.get("completion_tokens"),
+                                 total_tokens=usage.get("total_tokens")), retry_count=1,
+            )
+
+        # Primary attempt succeeded on first try
         self.guard.post_response(decision, response)
         usage = response.get("usage") or {}
         return ModelResponse(
@@ -1034,6 +1178,7 @@ def run_confirmatory_replication(start_head: str, attempt_id: str = DEFAULT_ATTE
         window.close(last)
 
     # Write REAL-EXECUTION-MANIFEST.json
+    total_provider_requests = len(posts)
     manifest_data = {
         "experiment_id": EXPERIMENT_ID,
         "attempt_id": attempt_id,
@@ -1041,6 +1186,13 @@ def run_confirmatory_replication(start_head: str, attempt_id: str = DEFAULT_ATTE
         "total_cells": len(executed_cells),
         "total_semantic_model_calls": sum(calls_by_cond.values()),
         "calls_by_condition": calls_by_cond,
+        "logical_semantic_calls_total": sum(calls_by_cond.values()),
+        "provider_requests_total": total_provider_requests,
+        "strict_schema_failure_count": guard.strict_schema_failure_count,
+        "strict_schema_replay_count": guard.strict_schema_replay_count,
+        "strict_schema_replay_success_count": guard.strict_schema_replay_success_count,
+        "strict_schema_replay_exhausted_count": guard.strict_schema_replay_exhausted_count,
+        "condition_schema_replays": guard.condition_schema_replays,
         "cells": [
             {
                 "cell_id": c["cell_id"],

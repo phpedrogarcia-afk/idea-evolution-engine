@@ -215,13 +215,15 @@ def test_infrastructure_guard_closed_aborts():
 # 5. Registry & Immutability Tests
 # ---------------------------------------------------------------------------
 
-def test_attempt_002_reuse_is_refused():
+def test_attempt_002_and_003_reuse_is_refused():
     with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
         preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-002")
+    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
 
 
-def test_attempt_003_fresh_reservation_is_allowed():
-    holdout_map, schedule = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
+def test_attempt_004_fresh_reservation_is_allowed():
+    holdout_map, schedule = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
     assert len(holdout_map) == 8
     assert len(schedule) == 24
 
