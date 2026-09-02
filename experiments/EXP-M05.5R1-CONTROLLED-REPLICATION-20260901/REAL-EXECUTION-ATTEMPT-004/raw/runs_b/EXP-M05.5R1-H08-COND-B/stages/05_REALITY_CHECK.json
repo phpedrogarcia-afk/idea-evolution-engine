@@ -1,0 +1,53 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Manual entry of pantry items with approx...' (hash: 65fe82cb5e7bce6b), 4 dependências, 1 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Manual entry of pantry items with approximate expiration dates to generate personalized meal suggestions for individuals cooking for one or two people.\",\"feasibility_notes\":[\"Manual data entry is technically simple to implement with a mobile UI.\",\"Approximate expiration dates can be entered via free‑text or selectable ranges.\",\"Recipe recommendation algorithm can be built using existing ingredient‑to‑recipe matching libraries.\",\"User onboarding must emphasize the value of entering expiration dates accurately.\"],\"reality_dependencies\":[\"Recruitment of participants who cook for one or two people and are willing to log pantry items daily.\",\"A curated recipe database covering common ingredients for small‑household meals.\",\"A reliable method to measure food waste (e.g., self‑reported weight or photo logging).\",\"Baseline data on participants' cooking frequency and waste levels before the intervention.\"],\"claims_needing_evidence\":[\"Providing personalized meal suggestions based on manual pantry entry reduces household food waste.\",\"The intervention changes cooking behavior (e.g., increases use of near‑expiry items).\",\"Users will consistently enter pantry items and expiration dates over the study period.\",\"Approximate expiration dates are sufficient for the suggestion algorithm to avoid recommending soon‑to‑expire items.\"],\"potential_blockers\":[\"User fatigue or drop‑off due to the effort of manual entry.\",\"Inaccurate or overly vague expiration dates leading to poor suggestions.\",\"Difficulty obtaining objective waste measurements (self‑report bias).\",\"Limited recipe coverage for niche or regional ingredients.\"],\"candidate_tests\":[\"Run a 4‑week randomized controlled trial: treatment group uses the manual‑entry app with suggestions, control group uses a baseline app without suggestions; compare self‑reported food waste weight and cooking frequency.\"],\"exploratory_candidate_tests\":[\"Pilot voice‑input for pantry entry to assess impact on data completeness.\",\"Test barcode scanning of pantry items as an alternative data collection method.\",\"Evaluate a gamified reward system to increase manual entry adherence.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Manual entry of pantry items with approximate expiration dates to generate personalized meal suggestions for individuals cooking for one or two people.",
+    "feasibility_notes": [
+      "Manual data entry is technically simple to implement with a mobile UI.",
+      "Approximate expiration dates can be entered via free‑text or selectable ranges.",
+      "Recipe recommendation algorithm can be built using existing ingredient‑to‑recipe matching libraries.",
+      "User onboarding must emphasize the value of entering expiration dates accurately."
+    ],
+    "reality_dependencies": [
+      "Recruitment of participants who cook for one or two people and are willing to log pantry items daily.",
+      "A curated recipe database covering common ingredients for small‑household meals.",
+      "A reliable method to measure food waste (e.g., self‑reported weight or photo logging).",
+      "Baseline data on participants' cooking frequency and waste levels before the intervention."
+    ],
+    "claims_needing_evidence": [
+      "Providing personalized meal suggestions based on manual pantry entry reduces household food waste.",
+      "The intervention changes cooking behavior (e.g., increases use of near‑expiry items).",
+      "Users will consistently enter pantry items and expiration dates over the study period.",
+      "Approximate expiration dates are sufficient for the suggestion algorithm to avoid recommending soon‑to‑expire items."
+    ],
+    "potential_blockers": [
+      "User fatigue or drop‑off due to the effort of manual entry.",
+      "Inaccurate or overly vague expiration dates leading to poor suggestions.",
+      "Difficulty obtaining objective waste measurements (self‑report bias).",
+      "Limited recipe coverage for niche or regional ingredients."
+    ],
+    "candidate_tests": [
+      "Run a 4‑week randomized controlled trial: treatment group uses the manual‑entry app with suggestions, control group uses a baseline app without suggestions; compare self‑reported food waste weight and cooking frequency."
+    ],
+    "exploratory_candidate_tests": [
+      "Pilot voice‑input for pantry entry to assess impact on data completeness.",
+      "Test barcode scanning of pantry items as an alternative data collection method.",
+      "Evaluate a gamified reward system to increase manual entry adherence."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T21:40:04.371897+00:00"
+}

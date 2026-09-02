@@ -1,0 +1,373 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.5R1-H08-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-09-02T18:37:59.003909",
+  "updated_at": "2026-09-02T18:42:09.600751",
+  "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "current_idea": "For individuals cooking for one or two people, provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates, and test whether this reduces food waste and changes cooking behavior.",
+  "human_intent": "Test whether providing meal suggestions based on existing pantry items and their approximate expiration dates changes cooking behavior and reduces food waste.",
+  "problem_statement": "People who cook for one or two individuals tend to waste food because they lack meal suggestions that take into account the ingredients they already have at home and the approximate expiration dates of those ingredients.",
+  "actors_or_users": [
+    "Home cooks preparing meals for one or two people",
+    "Researchers conducting the behavior test"
+  ],
+  "assumptions": [
+    "Users can accurately report the ingredients they have",
+    "Users can estimate the approximate expiration dates of those ingredients",
+    "The system can receive and process this pantry information",
+    "Users will consider and follow the suggested meals",
+    "The change in food waste can be measured"
+  ],
+  "ambiguities": [
+    "How users will input or update their pantry data",
+    "What constitutes an \"approximate\" expiration date",
+    "Which metrics will be used to evaluate behavior change",
+    "How frequently and through which channel suggestions are delivered",
+    "Privacy considerations for users' ingredient data"
+  ],
+  "strengths": [
+    "Addresses food waste for a specific user segment",
+    "Leverages existing food inventory to create relevant suggestions",
+    "Simple, testable hypothesis",
+    "Potential for measurable impact on behavior",
+    "Can be implemented with minimal additional resources"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Dependência de relatórios precisos dos usuários sobre ingredientes e datas de validade",
+      "why_it_matters": "Dados imprecisos comprometem a qualidade das sugestões de refeições, resultando em recomendações inadequadas que podem aumentar, em vez de reduzir, o desperdício de alimentos.",
+      "severity": "HIGH",
+      "affected_part": "Coleta de dados do usuário / Entrada de inventário",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Medição inadequada da redução de desperdício de alimentos",
+      "why_it_matters": "Sem métricas confiáveis, não será possível validar se a solução realmente diminui o desperdício, tornando os resultados do teste inconclusivos.",
+      "severity": "MEDIUM",
+      "affected_part": "Metodologia de avaliação / Métricas de desperdício",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Baixa adesão dos usuários às sugestões de refeições geradas",
+      "why_it_matters": "Mesmo com sugestões relevantes, fatores como preferências pessoais, tempo de preparo e hábitos alimentares podem impedir que os usuários sigam as recomendações, limitando o impacto da solução.",
+      "severity": "MEDIUM",
+      "affected_part": "Comportamento do usuário / Interface de recomendação",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Users can accurately report the ingredients they have",
+    "Users can estimate the approximate expiration dates of those ingredients",
+    "The system can receive and process this pantry information",
+    "Users will consider and follow the suggested meals",
+    "The change in food waste can be measured"
+  ],
+  "contradictions": [
+    "Assume that users will follow suggested meals while also acknowledging that behavior change is historically difficult for meal-planning tools"
+  ],
+  "failure_modes": [
+    "Inaccurate user input leads to irrelevant or unsafe meal suggestions",
+    "System overload or parsing errors when processing diverse ingredient lists",
+    "Privacy breaches if pantry data is stored insecurely",
+    "User disengagement due to repetitive or unappealing recipe recommendations"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Integrar sensores de peso e RFID/barcode nas despensas para capturar automaticamente os itens e suas datas de validade, eliminando a necessidade de relatórios manuais dos usuários.",
+      "addresses_issues": [
+        "Dependência de relatórios precisos dos usuários sobre ingredientes e datas de validade",
+        "Baixa adesão dos usuários às sugestões de refeições geradas"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Custo adicional de hardware e instalação",
+        "Necessidade de manutenção dos sensores",
+        "Possíveis preocupações de privacidade com coleta automática de dados"
+      ],
+      "novelty_or_difference": "Uso de IoT para inventário automático em vez de entrada manual"
+    },
+    {
+      "mechanism": "Adicionar elementos de gamificação (pontos, badges, desafios semanais) e integração com redes sociais para incentivar o uso das sugestões, além de instalar balanças inteligentes nas lixeiras para medir quantitativamente o desperdício de alimentos.",
+      "addresses_issues": [
+        "Baixa adesão dos usuários às sugestões de refeições geradas",
+        "Medição inadequada da redução de desperdício de alimentos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Complexidade de desenvolvimento da camada de gamificação",
+        "Dependência de hardware adicional nas lixeiras",
+        "Risco de foco excessivo em recompensas ao invés de comportamento sustentável"
+      ],
+      "novelty_or_difference": "Combinação de gamificação com medição objetiva de desperdício via balança inteligente"
+    },
+    {
+      "mechanism": "Empregar aprendizado de máquina para prever datas de validade com base em histórico de compras e tipos de alimentos, reduzindo a necessidade de entrada manual, e conduzir um experimento A/B rigoroso (grupo controle vs. intervenção) para medir a mudança de comportamento e a redução de desperdício.",
+      "addresses_issues": [
+        "Dependência de relatórios precisos dos usuários sobre ingredientes e datas de validade",
+        "Medição inadequada da redução de desperdício de alimentos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Precisão das previsões pode ser inferior à informação fornecida pelo usuário",
+        "Necessidade de grandes volumes de dados de compra para treinar os modelos",
+        "Possível viés algorítmico que afete recomendações"
+      ],
+      "novelty_or_difference": "Predição automática de validade e design experimental robusto para avaliação de impacto"
+    }
+  ],
+  "core_mechanism": "Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.",
+  "core_mechanism_justification": "This mechanism directly reflects the user's explicit intent to evaluate how manual pantry‑based suggestions influence cooking habits and food waste, without adding speculative hardware or algorithmic components.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "5c8503c71277ce70",
+  "proposal_records": [
+    {
+      "proposal": "Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "This mechanism directly reflects the user's explicit intent to evaluate how manual pantry‑based suggestions influence cooking habits and food waste, without adding speculative hardware or algorithmic components.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Implement an A/B experimental design with control and intervention groups to evaluate impact on food waste.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Necessary to validate whether the core mechanism changes cooking behavior and reduces waste.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "User explicitly wants to test the effect of suggestions on behavior."
+    },
+    {
+      "proposal": "Integrar sensores de peso e RFID/barcode nas despensas para capturar automaticamente os itens e suas datas de validade, eliminando a necessidade de relatórios manuais dos usuários.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Adicionar elementos de gamificação (pontos, badges, desafios semanais) e integração com redes sociais para incentivar o uso das sugestões, além de instalar balanças inteligentes nas lixeiras para medir quantitativamente o desperdício de alimentos.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Empregar aprendizado de máquina para prever datas de validade com base em histórico de compras e tipos de alimentos, reduzindo a necessidade de entrada manual, e conduzir um experimento A/B rigoroso (grupo controle vs. intervenção) para medir a mudança de comportamento e a redução de desperdício.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Implement an A/B experimental design with control and intervention groups to evaluate impact on food waste. (Justificativa: Necessary to validate whether the core mechanism changes cooking behavior and reduces waste. | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Integrar sensores de peso e RFID/barcode nas despensas para capturar automaticamente os itens e suas datas de validade, eliminando a necessidade de relatórios manuais dos usuários.",
+    "Adicionar elementos de gamificação (pontos, badges, desafios semanais) e integração com redes sociais para incentivar o uso das sugestões, além de instalar balanças inteligentes nas lixeiras para medir quantitativamente o desperdício de alimentos.",
+    "Empregar aprendizado de máquina para prever datas de validade com base em histórico de compras e tipos de alimentos, reduzindo a necessidade de entrada manual, e conduzir um experimento A/B rigoroso (grupo controle vs. intervenção) para medir a mudança de comportamento e a redução de desperdício."
+  ],
+  "rejected_changes": [],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [manual, entry, pantry, items, approximate, expiration, dates, generate, personalized, meal, suggestions, individuals, cooking, one, two, people].",
+    "Reliability of user‑reported ingredient quantities and expiration dates",
+    "Accuracy of measured reduction in food waste",
+    "Sustained user adherence to suggested meals over time",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Manual entry of pantry items with approximate expiration dates to generate personalized meal suggestions for individuals cooking for one or two people.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Manual entry of pantry items with approximate expiration dates to generate personalized meal suggestions for individuals cooking for one or two people.' aparece nos testes exploratórios 'Pilot voice‑input for pantry entry to assess impact on data completeness.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Manual entry of pantry items with approximate expiration dates to generate personalized meal suggestions for individuals cooking for one or two people.' aparece nos testes exploratórios 'Test barcode scanning of pantry items as an alternative data collection method.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Manual entry of pantry items with approximate expiration dates to generate personalized meal suggestions for individuals cooking for one or two people.' aparece nos testes exploratórios 'Evaluate a gamified reward system to increase manual entry adherence.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Run a pilot study where participants manually log pantry items and expiration dates, receive daily meal suggestions, and track food waste and cooking behavior over a 4‑week period, while monitoring engagement and gathering feedback on the gamification features.' propõe mecanismo rejeitado 'Connect to smart appliances and waste sensors for automatic tracking'.; Dependência de realidade do Core 'Recruitment of participants who cook for one or two people and are willing to log pantry items daily.' referencia mecanismo rejeitado 'Implement barcode scanning and image recognition for automatic ingredient capture'.; Dependência de realidade do Core 'A curated recipe database covering common ingredients for small‑household meals.' referencia mecanismo rejeitado 'Implement barcode scanning and image recognition for automatic ingredient capture'.; Dependência de realidade do Core 'Baseline data on participants' cooking frequency and waste levels before the intervention.' referencia mecanismo rejeitado 'Implement barcode scanning and image recognition for automatic ingredient capture'.; Teste do Core 'Run a 4‑week randomized controlled trial: treatment group uses the manual‑entry app with suggestions, control group uses a baseline app without suggestions; compare self‑reported food waste weight and cooking frequency.' referencia mecanismo rejeitado 'Implement barcode scanning and image recognition for automatic ingredient capture'.; Dependência de realidade do Core 'Recruitment of participants who cook for one or two people and are willing to log pantry items daily.' referencia mecanismo rejeitado 'Connect to smart appliances and waste sensors for automatic tracking'.; Dependência de realidade do Core 'A curated recipe database covering common ingredients for small‑household meals.' referencia mecanismo rejeitado 'Connect to smart appliances and waste sensors for automatic tracking'.; Dependência de realidade do Core 'A reliable method to measure food waste (e.g., self‑reported weight or photo logging).' referencia mecanismo rejeitado 'Connect to smart appliances and waste sensors for automatic tracking'.; Dependência de realidade do Core 'Baseline data on participants' cooking frequency and waste levels before the intervention.' referencia mecanismo rejeitado 'Connect to smart appliances and waste sensors for automatic tracking'.; Teste do Core 'Run a 4‑week randomized controlled trial: treatment group uses the manual‑entry app with suggestions, control group uses a baseline app without suggestions; compare self‑reported food waste weight and cooking frequency.' referencia mecanismo rejeitado 'Connect to smart appliances and waste sensors for automatic tracking'.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [provide, personalized, meal, suggestions, based, manually, entered, pantry, items, their, approximate, expiration, dates, individuals, cooking, one, two, people].",
+    "Precisão dos relatórios manuais de ingredientes e datas de validade fornecidos pelos usuários.",
+    "Medição quantitativa da redução de desperdício de alimentos.",
+    "Nível de adesão dos usuários às sugestões de refeições geradas.",
+    "Possível viés nos dados de entrada manual que pode afetar recomendações.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.' aparece nos testes exploratórios 'Prototype RFID/weight‑sensor equipped pantry shelves and evaluate detection accuracy and latency for automatic item capture'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.' aparece nos testes exploratórios 'Develop a machine‑learning model that predicts expiration dates from purchase history; test its prediction error against manually entered dates in a controlled dataset'."
+  ],
+  "known_risks": [
+    "Alta carga de trabalho para os usuários ao inserir manualmente itens e datas de validade.",
+    "Incerteza sobre a confiabilidade das datas de validade estimadas pelos usuários.",
+    "Baixa taxa de engajamento pode limitar a coleta de dados suficiente para análise.",
+    "Privacidade dos dados de consumo caso funcionalidades adicionais sejam introduzidas no futuro."
+  ],
+  "recommended_next_step": "Realizar um estudo piloto com um pequeno grupo de usuários, utilizando o mecanismo manual de sugestões e o desenho experimental A/B, coletando dados de uso e de desperdício para validar a hipótese central.",
+  "tested_core_mechanism": "Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.",
+  "tested_core_hash": "5c8503c71277ce70",
+  "reality_dependencies": [
+    "Recruit participants who cook for one or two people and are willing to log pantry items daily",
+    "Develop a mobile/web interface for manual entry of items and expiration dates",
+    "Implement a method to capture cooking behavior (e.g., meal logs, recipe selections)",
+    "Establish a baseline measurement of food waste (self‑report, weight of trash, or photo diary)",
+    "Access to statistical analysis tools for comparing intervention vs control groups"
+  ],
+  "claims_needing_evidence": [
+    "Personalized suggestions based on pantry data lead to measurable changes in cooking behavior",
+    "The intervention reduces the quantity of food waste compared with a control condition",
+    "Users will consistently and accurately enter pantry items and expiration dates over the study period",
+    "Suggested meals are perceived as useful and increase meal planning confidence"
+  ],
+  "candidate_tests": [
+    "Run a randomized controlled trial (2‑week pilot) where the intervention group receives personalized meal suggestions and the control group receives generic suggestions; measure changes in cooking frequency, recipe diversity, and self‑reported food waste",
+    "Conduct a usability study of the manual entry interface to assess time per entry, error rate, and user satisfaction",
+    "Perform a validation study comparing user‑entered expiration dates with actual product dates (e.g., by scanning barcodes for a subset of items)",
+    "Implement a waste‑tracking protocol (kitchen trash weight before/after meals) to quantify waste reduction attributable to the suggestions"
+  ],
+  "exploratory_candidate_tests": [
+    "Prototype RFID/weight‑sensor equipped pantry shelves and evaluate detection accuracy and latency for automatic item capture",
+    "Add gamification elements (points, badges, weekly challenges) to the suggestion app and run an A/B test measuring engagement metrics and repeat usage",
+    "Develop a machine‑learning model that predicts expiration dates from purchase history; test its prediction error against manually entered dates in a controlled dataset"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:38:02.457111",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Test whether providing meal suggestions based on existing pa...' | 5 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:39:00.778651",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:39:04.156174",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:40:02.273251",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Manual entry of pantry items with approx...' (Base: MODEL_HYPOTHESIS | Hash: 65fe82cb5e7bce6b), 1 aceitas, 1 candidatas, 2 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:40:04.371847",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Manual entry of pantry items with approx...' (hash: 65fe82cb5e7bce6b), 4 dependências, 1 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:41:01.246947",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:41:03.315481",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:42:05.722037",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Provide personalized meal suggestions ba...' (Base: MODEL_HYPOTHESIS | Hash: 5c8503c71277ce70), 1 aceitas, 3 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:42:07.952377",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Provide personalized meal suggestions ba...' (hash: 5c8503c71277ce70), 5 dependências, 4 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T18:42:09.600739",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

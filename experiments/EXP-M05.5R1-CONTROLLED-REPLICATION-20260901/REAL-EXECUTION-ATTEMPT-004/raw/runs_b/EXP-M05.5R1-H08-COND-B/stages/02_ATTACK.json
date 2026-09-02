@@ -1,0 +1,69 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\n  \"critical_issues\": [\n    {\n      \"issue\": \"Dependência de relatórios precisos dos usuários sobre ingredientes e datas de validade\",\n      \"why_it_matters\": \"Dados imprecisos comprometem a qualidade das sugestões de refeições, resultando em recomendações inadequadas que podem aumentar, em vez de reduzir, o desperdício de alimentos.\",\n      \"severity\": \"HIGH\",\n      \"affected_part\": \"Coleta de dados do usuário / Entrada de inventário\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    },\n    {\n      \"issue\": \"Medição inadequada da redução de desperdício de alimentos\",\n      \"why_it_matters\": \"Sem métricas confiáveis, não será possível validar se a solução realmente diminui o desperdício, tornando os resultados do teste inconclusivos.\",\n      \"severity\": \"MEDIUM\",\n      \"affected_part\": \"Metodologia de avaliação / Métricas de desperdício\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    },\n    {\n      \"issue\": \"Baixa adesão dos usuários às sugestões de refeições geradas\",\n      \"why_it_matters\": \"Mesmo com sugestões relevantes, fatores como preferências pessoais, tempo de preparo e hábitos alimentares podem impedir que os usuários sigam as recomendações, limitando o impacto da solução.\",\n      \"severity\": \"MEDIUM\",\n      \"affected_part\": \"Comportamento do usuário / Interface de recomendação\",\n      \"origin\": \"MODEL_HYPOTHESIS\"\n    }\n  ],\n  \"fragile_assumptions\": [\n    \"Users can accurately report the ingredients they have\",\n    \"Users can estimate the approximate expiration dates of those ingredients\",\n    \"The system can receive and process this pantry information\",\n    \"Users will consider and follow the suggested meals\",\n    \"The change in food waste can be measured\"\n  ],\n  \"contradictions\": [\n    \"Assume that users will follow suggested meals while also acknowledging that behavior change is historically difficult for meal-planning tools\"\n  ],\n  \"failure_modes\": [\n    \"Inaccurate user input leads to irrelevant or unsafe meal suggestions\",\n    \"System overload or parsing errors when processing diverse ingredient lists\",\n    \"Privacy breaches if pantry data is stored insecurely\",\n    \"User disengagement due to repetitive or unappealing recipe recommendations\"\n  ],\n  \"missing_information\": [\n    \"Detalhes sobre como o algoritmo estima a data de validade aproximada dos ingredientes\",\n    \"Estratégias de engajamento para incentivar os usuários a registrar seus itens de despensa\",\n    \"Critérios de avaliação quantitativa para medir a redução real de desperdício\",\n    \"Planos de teste piloto, tamanho da amostra e duração do experimento\"\n  ],\n  \"overclaims\": [\n    \"A afirmação de que sugestões baseadas em despensa reduzirão significativamente o desperdício sem evidência empírica prévia\",\n    \"A suposição de que a simples apresentação de receitas alterará o comportamento culinário dos usuários\"\n  ]\n}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Dependência de relatórios precisos dos usuários sobre ingredientes e datas de validade",
+        "why_it_matters": "Dados imprecisos comprometem a qualidade das sugestões de refeições, resultando em recomendações inadequadas que podem aumentar, em vez de reduzir, o desperdício de alimentos.",
+        "severity": "HIGH",
+        "affected_part": "Coleta de dados do usuário / Entrada de inventário",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Medição inadequada da redução de desperdício de alimentos",
+        "why_it_matters": "Sem métricas confiáveis, não será possível validar se a solução realmente diminui o desperdício, tornando os resultados do teste inconclusivos.",
+        "severity": "MEDIUM",
+        "affected_part": "Metodologia de avaliação / Métricas de desperdício",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Baixa adesão dos usuários às sugestões de refeições geradas",
+        "why_it_matters": "Mesmo com sugestões relevantes, fatores como preferências pessoais, tempo de preparo e hábitos alimentares podem impedir que os usuários sigam as recomendações, limitando o impacto da solução.",
+        "severity": "MEDIUM",
+        "affected_part": "Comportamento do usuário / Interface de recomendação",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Users can accurately report the ingredients they have",
+      "Users can estimate the approximate expiration dates of those ingredients",
+      "The system can receive and process this pantry information",
+      "Users will consider and follow the suggested meals",
+      "The change in food waste can be measured"
+    ],
+    "contradictions": [
+      "Assume that users will follow suggested meals while also acknowledging that behavior change is historically difficult for meal-planning tools"
+    ],
+    "failure_modes": [
+      "Inaccurate user input leads to irrelevant or unsafe meal suggestions",
+      "System overload or parsing errors when processing diverse ingredient lists",
+      "Privacy breaches if pantry data is stored insecurely",
+      "User disengagement due to repetitive or unappealing recipe recommendations"
+    ],
+    "missing_information": [
+      "Detalhes sobre como o algoritmo estima a data de validade aproximada dos ingredientes",
+      "Estratégias de engajamento para incentivar os usuários a registrar seus itens de despensa",
+      "Critérios de avaliação quantitativa para medir a redução real de desperdício",
+      "Planos de teste piloto, tamanho da amostra e duração do experimento"
+    ],
+    "overclaims": [
+      "A afirmação de que sugestões baseadas em despensa reduzirão significativamente o desperdício sem evidência empírica prévia",
+      "A suposição de que a simples apresentação de receitas alterará o comportamento culinário dos usuários"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T21:39:00.778704+00:00"
+}

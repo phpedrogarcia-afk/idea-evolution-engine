@@ -1,2 +1,3 @@
 {"experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901", "attempt_id": "REAL-EXECUTION-ATTEMPT-002", "created_at": "2026-09-02T20:54:34.953918+00:00", "start_head": "121f482", "status": "FAILED", "completed_at": "2026-09-02T20:59:48.398665+00:00"}
 {"experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901", "attempt_id": "REAL-EXECUTION-ATTEMPT-003", "created_at": "2026-09-02T21:13:46.690884+00:00", "start_head": "8fb51c7", "status": "FAILED", "completed_at": "2026-09-02T21:13:56.314967+00:00"}
+{"experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901", "attempt_id": "REAL-EXECUTION-ATTEMPT-004", "created_at": "2026-09-02T21:37:53.108827+00:00", "start_head": "8a95f32", "status": "FAILED", "completed_at": "2026-09-02T21:43:15.168204+00:00"}

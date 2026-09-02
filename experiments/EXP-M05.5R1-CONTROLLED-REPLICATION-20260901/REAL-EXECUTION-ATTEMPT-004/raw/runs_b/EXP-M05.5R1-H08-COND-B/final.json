@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R1-H08-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "human_intent": "Test whether providing meal suggestions based on existing pantry items and their approximate expiration dates changes cooking behavior and reduces food waste.",
+  "refined_idea": "For individuals cooking for one or two people, provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates, and test whether this reduces food waste and changes cooking behavior.",
+  "core_mechanism": "Provide personalized meal suggestions based on manually entered pantry items and their approximate expiration dates for individuals cooking for one or two people.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "5c8503c71277ce70",
+  "tested_core_hash": "5c8503c71277ce70",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 0,
+  "recommended_next_step": "Realizar um estudo piloto com um pequeno grupo de usuários, utilizando o mecanismo manual de sugestões e o desenho experimental A/B, coletando dados de uso e de desperdício para validar a hipótese central."
+}

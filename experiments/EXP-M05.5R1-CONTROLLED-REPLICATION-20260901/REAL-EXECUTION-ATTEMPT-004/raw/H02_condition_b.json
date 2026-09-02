@@ -1,0 +1,17 @@
+{
+  "cell_id": "H02-CONDITION_B",
+  "experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-004",
+  "idea_id": "H02",
+  "condition": "CONDITION_B",
+  "raw_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+  "latency_seconds": 6.156,
+  "model_calls": 1,
+  "status": "FAILED",
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nTenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.\n\n### Intenção Humana Preservada\n\n\n### Mecanismo Central\n\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}
