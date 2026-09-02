@@ -1,0 +1,96 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "FREE-SACRIFICIAL-PILOT-001-B",
+  "status": "FAILED",
+  "created_at": "2026-09-02T16:49:22.519615",
+  "updated_at": "2026-09-02T16:49:25.923975",
+  "original_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.",
+  "current_idea": "Um diário digital que permite ao usuário registrar sensações cotidianas enquanto utiliza um editor de texto de alta responsividade (latência <16 ms) e mede, de forma integrada, se essa baixa latência diminui a distração durante a escrita.",
+  "human_intent": "Criar um diário reflexivo que registre sensações cotidianas e avalie se um editor de texto com latência inferior a 16 ms reduz a distração do usuário.",
+  "problem_statement": "Distração ao digitar causada por latência perceptível do editor de texto, dificultando a captura de sensações sutis do dia a dia.",
+  "actors_or_users": [
+    "Usuário que escreve no diário",
+    "Pesquisador ou desenvolvedor que analisa a distração"
+  ],
+  "assumptions": [
+    "Latência abaixo de 16 ms diminui a distração",
+    "Usuários conseguem perceber e relatar sensações sutis",
+    "É possível medir a distração de forma confiável",
+    "A medição de latência pode ser integrada ao diário"
+  ],
+  "ambiguities": [
+    "Como será quantificada a distração do usuário",
+    "Qual método será usado para registrar sensações sutis",
+    "Em que plataforma o diário será implementado",
+    "Se a medição de latência será contínua ou pontual"
+  ],
+  "strengths": [
+    "Foco em melhorar a concentração ao escrever",
+    "Combina registro subjetivo com métrica objetiva",
+    "Objetivo claro de testar impacto da latência",
+    "Potencial para gerar insights sobre ergonomia digital"
+  ],
+  "critical_issues": [],
+  "fragile_assumptions": [],
+  "contradictions": [],
+  "failure_modes": [],
+  "alternatives": [],
+  "core_mechanism": "Medir o tempo de resposta do editor de texto (<16 ms) e correlacioná‑lo com níveis de distração durante a escrita.",
+  "core_mechanism_justification": "",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "",
+  "proposal_records": [],
+  "accepted_changes": [],
+  "candidate_extensions": [
+    "Editor de texto com medição de latência",
+    "Módulo de registro de sensações",
+    "Sistema de avaliação de distração",
+    "Estudo de usabilidade para validar o impacto da latência"
+  ],
+  "rejected_changes": [],
+  "remaining_uncertainties": [],
+  "known_risks": [],
+  "recommended_next_step": "",
+  "tested_core_mechanism": "",
+  "tested_core_hash": "",
+  "reality_dependencies": [],
+  "claims_needing_evidence": [],
+  "candidate_tests": [],
+  "exploratory_candidate_tests": [],
+  "reconstruction_count": 0,
+  "max_reconstructions": 1,
+  "essence_drift_detected": false,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": false,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T16:49:25.920001",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar um diário reflexivo que registre sensações cotidianas ...' | 4 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-02T16:49:25.923966",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 0,
+      "delta_summary": "FALHA: INVALID_EXECUTION:BACKEND_DRIFT_WITHIN_BLOCK"
+    }
+  ]
+}

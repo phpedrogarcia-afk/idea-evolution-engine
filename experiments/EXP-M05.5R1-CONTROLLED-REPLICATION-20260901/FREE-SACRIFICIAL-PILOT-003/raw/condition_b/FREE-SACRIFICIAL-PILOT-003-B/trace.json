@@ -1,0 +1,86 @@
+{
+  "run_id": "FREE-SACRIFICIAL-PILOT-003-B",
+  "status": "FAILED",
+  "total_duration_seconds": 3.1480815410614014,
+  "total_stages_executed": 2,
+  "git_commit": "65b5e0e2a84611f3fc17dc10b56b0889765d1a88",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "Intenção extraída: 'Criar um diário reflexivo que capture sensações sutis do dia...' | 5 premissas mapeadas.",
+      "raw_response": "{\"interpreted_problem\":\"Os usuários se distraem ao digitar e não sabem se reduzir a latência do editor de texto abaixo de 16 ms diminui essa distração, além de quererem registrar sensações sutis do cotidiano.\",\"human_intent\":\"Criar um diário reflexivo que capture sensações sutis do dia a dia e medir se um editor de texto com tempo de resposta inferior a 16 ms reduz a distração ao digitar.\",\"proposed_mechanism\":\"\",\"explicit_mechanism\":\"Manter a latência do editor de texto abaixo de 16 ms e observar se isso diminui a distração durante a escrita no diário.\",\"inferred_candidates\":[\"Diário digital\",\"Editor de texto de baixa latência\",\"Medição de tempo de resposta\",\"Avaliação de distração ao digitar\",\"Interface para captura de sensações\"],\"actors_or_users\":[\"Usuário que escreve no diário\",\"Pessoa que busca refletir sobre sensações diárias\",\"Desenvolvedor do editor de texto\"],\"assumptions\":[\"Latência do editor pode ser mantida consistentemente abaixo de 16 ms\",\"Redução da latência diminui a distração\",\"Usuários conseguem perceber e relatar distração\",\"Sensações sutis podem ser capturadas de forma textual\",\"A medição de distração é viável\"],\"ambiguities\":[\"Como definir e medir \\\"distração\\\" durante a digitação\",\"Qual formato de captura das sensações sutis\",\"Se o diário será aplicativo, web ou outro\",\"Como garantir a latência constante em diferentes dispositivos\",\"Critério para considerar a latência como \\\"abaixo de 16 ms\\\"\"],\"strengths\":[\"Foco em melhorar a concentração ao digitar\",\"Abordagem empírica com métrica clara\",\"Incentiva a autorreflexão diária\",\"Combina captura de sensações com avaliação de usabilidade\",\"Objetivo mensurável de latência\"],\"structured_idea\":\"Um diário reflexivo que registra sensações sutis do cotidiano e inclui um editor de texto cuja latência é mantida abaixo de 16 ms, com o objetivo de avaliar se essa rapidez reduz a distração ao digitar.\"}",
+      "parsed_output": {
+        "interpreted_problem": "Os usuários se distraem ao digitar e não sabem se reduzir a latência do editor de texto abaixo de 16 ms diminui essa distração, além de quererem registrar sensações sutis do cotidiano.",
+        "human_intent": "Criar um diário reflexivo que capture sensações sutis do dia a dia e medir se um editor de texto com tempo de resposta inferior a 16 ms reduz a distração ao digitar.",
+        "proposed_mechanism": "",
+        "explicit_mechanism": "Manter a latência do editor de texto abaixo de 16 ms e observar se isso diminui a distração durante a escrita no diário.",
+        "inferred_candidates": [
+          "Diário digital",
+          "Editor de texto de baixa latência",
+          "Medição de tempo de resposta",
+          "Avaliação de distração ao digitar",
+          "Interface para captura de sensações"
+        ],
+        "actors_or_users": [
+          "Usuário que escreve no diário",
+          "Pessoa que busca refletir sobre sensações diárias",
+          "Desenvolvedor do editor de texto"
+        ],
+        "assumptions": [
+          "Latência do editor pode ser mantida consistentemente abaixo de 16 ms",
+          "Redução da latência diminui a distração",
+          "Usuários conseguem perceber e relatar distração",
+          "Sensações sutis podem ser capturadas de forma textual",
+          "A medição de distração é viável"
+        ],
+        "ambiguities": [
+          "Como definir e medir \"distração\" durante a digitação",
+          "Qual formato de captura das sensações sutis",
+          "Se o diário será aplicativo, web ou outro",
+          "Como garantir a latência constante em diferentes dispositivos",
+          "Critério para considerar a latência como \"abaixo de 16 ms\""
+        ],
+        "strengths": [
+          "Foco em melhorar a concentração ao digitar",
+          "Abordagem empírica com métrica clara",
+          "Incentiva a autorreflexão diária",
+          "Combina captura de sensações com avaliação de usabilidade",
+          "Objetivo mensurável de latência"
+        ],
+        "structured_idea": "Um diário reflexivo que registra sensações sutis do cotidiano e inclui um editor de texto cuja latência é mantida abaixo de 16 ms, com o objetivo de avaliar se essa rapidez reduz a distração ao digitar."
+      },
+      "error": null,
+      "timestamp": "2026-09-02T20:04:40.798392+00:00"
+    },
+    {
+      "step_number": 2,
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "",
+      "raw_response": "",
+      "parsed_output": null,
+      "error": "ABORTED_CAPACITY",
+      "timestamp": "2026-09-02T20:04:40.801696+00:00"
+    }
+  ]
+}

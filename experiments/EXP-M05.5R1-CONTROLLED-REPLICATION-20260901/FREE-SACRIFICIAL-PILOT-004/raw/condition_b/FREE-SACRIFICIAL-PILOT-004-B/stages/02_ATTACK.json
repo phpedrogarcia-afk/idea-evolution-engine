@@ -1,0 +1,65 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"A latência de 16 ms é praticamente imperceptível ao usuário, tornando improvável que sua redução tenha impacto mensurável na distração ao digitar.\",\"why_it_matters\":\"Se o efeito esperado não ocorre, todo o esforço de otimização de latência e a proposta de valor do diário se tornam vazios, desperdiçando recursos de desenvolvimento.\",\"severity\":\"HIGH\",\"affected_part\":\"Mecanismo de Redução de Distração\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"A medição objetiva da distração ao digitar é altamente contestável, pois distração é um estado subjetivo e multifatorial.\",\"why_it_matters\":\"Sem um método confiável de mensuração, não há como validar a hipótese central, comprometendo a credibilidade da solução.\",\"severity\":\"HIGH\",\"affected_part\":\"Métrica de Distração\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"A suposição de que usuários percebem e valorizam sensações sutis registradas carece de evidência empírica, podendo resultar em baixa adoção do diário reflexivo.\",\"why_it_matters\":\"Se os usuários não considerarem valioso o registro de sensações sutis, o produto falhará em gerar engajamento e retenção.\",\"severity\":\"MEDIUM\",\"affected_part\":\"Valor Percebido pelo Usuário\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Latência menor que 16 ms reduz a distração\",\"Usuários percebem e valorizam sensações sutis registradas\",\"É possível medir distração de forma objetiva\"],\"contradictions\":[\"A proposta afirma que a redução de latência melhora a concentração, mas também depende de registros subjetivos de sensações que podem ser distrações em si\"],\"failure_modes\":[\"Medição imprecisa da latência devido a variações de hardware\",\"Coleta de dados de distração enviesada por fatores externos (ruído, humor)\",\"Sobrecarga cognitiva ao tentar registrar sensações sutis enquanto digita\"],\"missing_information\":[\"Estudos controlados que correlacionem latência <16 ms com redução de distração\",\"Métodos validados para quantificar distração de forma objetiva\",\"Preferências reais dos usuários quanto ao registro de sensações sutis\"],\"overclaims\":[\"Afirmar que latência abaixo de 16 ms reduz distração sem evidência empírica\",\"Declarar que todos os usuários valorizarão o registro de sensações sutis\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "A latência de 16 ms é praticamente imperceptível ao usuário, tornando improvável que sua redução tenha impacto mensurável na distração ao digitar.",
+        "why_it_matters": "Se o efeito esperado não ocorre, todo o esforço de otimização de latência e a proposta de valor do diário se tornam vazios, desperdiçando recursos de desenvolvimento.",
+        "severity": "HIGH",
+        "affected_part": "Mecanismo de Redução de Distração",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "A medição objetiva da distração ao digitar é altamente contestável, pois distração é um estado subjetivo e multifatorial.",
+        "why_it_matters": "Sem um método confiável de mensuração, não há como validar a hipótese central, comprometendo a credibilidade da solução.",
+        "severity": "HIGH",
+        "affected_part": "Métrica de Distração",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "A suposição de que usuários percebem e valorizam sensações sutis registradas carece de evidência empírica, podendo resultar em baixa adoção do diário reflexivo.",
+        "why_it_matters": "Se os usuários não considerarem valioso o registro de sensações sutis, o produto falhará em gerar engajamento e retenção.",
+        "severity": "MEDIUM",
+        "affected_part": "Valor Percebido pelo Usuário",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Latência menor que 16 ms reduz a distração",
+      "Usuários percebem e valorizam sensações sutis registradas",
+      "É possível medir distração de forma objetiva"
+    ],
+    "contradictions": [
+      "A proposta afirma que a redução de latência melhora a concentração, mas também depende de registros subjetivos de sensações que podem ser distrações em si"
+    ],
+    "failure_modes": [
+      "Medição imprecisa da latência devido a variações de hardware",
+      "Coleta de dados de distração enviesada por fatores externos (ruído, humor)",
+      "Sobrecarga cognitiva ao tentar registrar sensações sutis enquanto digita"
+    ],
+    "missing_information": [
+      "Estudos controlados que correlacionem latência <16 ms com redução de distração",
+      "Métodos validados para quantificar distração de forma objetiva",
+      "Preferências reais dos usuários quanto ao registro de sensações sutis"
+    ],
+    "overclaims": [
+      "Afirmar que latência abaixo de 16 ms reduz distração sem evidência empírica",
+      "Declarar que todos os usuários valorizarão o registro de sensações sutis"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-02T20:12:10.477539+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": false,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "",
+  "raw_response": "",
+  "parsed_output": null,
+  "error": "ABORTED_CAPACITY",
+  "timestamp": "2026-09-02T20:04:40.801696+00:00"
+}
