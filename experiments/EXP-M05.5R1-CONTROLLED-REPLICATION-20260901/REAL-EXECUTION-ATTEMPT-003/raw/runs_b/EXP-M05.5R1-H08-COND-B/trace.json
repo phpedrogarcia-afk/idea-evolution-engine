@@ -1,0 +1,28 @@
+{
+  "run_id": "EXP-M05.5R1-H08-COND-B",
+  "status": "FAILED",
+  "total_duration_seconds": 3.1606061458587646,
+  "total_stages_executed": 1,
+  "git_commit": "8fb51c7033c511b0051f844ac04421740cbdd39e",
+  "stages": [
+    {
+      "step_number": 1,
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "logical_alias": "default",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": false,
+      "retry_count": 0,
+      "latency_seconds": 0.0,
+      "delta_summary": "",
+      "raw_response": "",
+      "parsed_output": null,
+      "error": "PROVIDER_EXECUTION_ERROR:BAD_REQUEST",
+      "timestamp": "2026-09-02T21:13:56.309728+00:00"
+    }
+  ]
+}

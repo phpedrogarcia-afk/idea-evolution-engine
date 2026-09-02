@@ -1,0 +1,17 @@
+{
+  "cell_id": "H08-CONDITION_B",
+  "experiment_id": "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901",
+  "attempt_id": "REAL-EXECUTION-ATTEMPT-003",
+  "idea_id": "H08",
+  "condition": "CONDITION_B",
+  "raw_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "latency_seconds": 3.162,
+  "model_calls": 1,
+  "status": "FAILED",
+  "terminal_status": "FAILED",
+  "reconstruction_count": 0,
+  "stages_executed": [
+    "UNDERSTAND"
+  ],
+  "rendered_semantic_text": "### Ideia Refinada Final\nAcho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.\n\n### Intenção Humana Preservada\n\n\n### Mecanismo Central\n\n\n### Incertezas Críticas Remanescentes\n\n\n### Próxima Ação Recomendada\n"
+}
