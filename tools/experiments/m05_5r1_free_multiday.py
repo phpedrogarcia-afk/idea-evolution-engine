@@ -178,12 +178,16 @@ class QuotaIsolatedBlockWindow:
 class FreePreRequestGuard:
     """Fail-closed gate evaluated before every provider dispatch."""
 
-    def __init__(self, ledger: AppendOnlyUsageLedger, *, now: Callable[[], datetime] = _now):
+    def __init__(self, ledger: AppendOnlyUsageLedger, *, now: Callable[[], datetime] = _now,
+                 allow_sacrificial_fingerprint_drift: bool = False):
         self.ledger = ledger
         self.now = now
+        self.allow_sacrificial_fingerprint_drift = allow_sacrificial_fingerprint_drift
         self.encoding, self.tokenizer_identity = load_official_tokenizer()
         self._closed_outcome: Optional[str] = None
         self._fingerprint: Optional[str] = None
+        self._fingerprints: list[str] = []
+        self._fingerprint_drift_observed = False
 
     def ensure_pilot_source(self, source_id: str, classification: str) -> None:
         if source_id in CONFIRMATORY_IDS or classification != SACRIFICIAL_CLASSIFICATION:
@@ -235,12 +239,17 @@ class FreePreRequestGuard:
         completion = int(usage.get("completion_tokens") or 0)
         total = int(usage.get("total_tokens") or 0)
         fingerprint = response.get("system_fingerprint")
+        drift_observed = False
         if fingerprint:
             fingerprint = str(fingerprint)
             if self._fingerprint is None:
                 self._fingerprint = fingerprint
             elif self._fingerprint != fingerprint:
-                self._closed_outcome = "INVALID_EXECUTION:BACKEND_DRIFT_WITHIN_BLOCK"
+                drift_observed = True
+                self._fingerprint_drift_observed = True
+                if not self.allow_sacrificial_fingerprint_drift:
+                    self._closed_outcome = "INVALID_EXECUTION:BACKEND_DRIFT_WITHIN_BLOCK"
+            self._fingerprints.append(fingerprint)
         self.ledger.append({
             "event": "post_response", "request_id": decision.request_id,
             "block_id": decision.block_id, "http_status": 200,
@@ -250,6 +259,15 @@ class FreePreRequestGuard:
             "system_fingerprint": fingerprint, "retry_attempt": 0,
             "timestamp": self.now().isoformat(),
         })
+        if drift_observed:
+            self.ledger.append({
+                "event": "fingerprint_drift_observed",
+                "request_id": decision.request_id,
+                "block_id": decision.block_id,
+                "fingerprints_in_order": list(self._fingerprints),
+                "sacrificial_relaxation_applied": self.allow_sacrificial_fingerprint_drift,
+                "timestamp": self.now().isoformat(),
+            })
 
     def post_error(self, decision: PreDispatchDecision, *, http_status: Optional[int], error: str) -> None:
         outcome = "ABORTED_CAPACITY" if http_status == 429 else "INVALID_EXECUTION"
@@ -268,6 +286,14 @@ class FreePreRequestGuard:
     @property
     def fingerprint(self) -> Optional[str]:
         return self._fingerprint
+
+    @property
+    def fingerprints(self) -> tuple[str, ...]:
+        return tuple(self._fingerprints)
+
+    @property
+    def fingerprint_drift_observed(self) -> bool:
+        return self._fingerprint_drift_observed
 
 
 Transport = Callable[[Mapping[str, Any]], Mapping[str, Any]]
@@ -412,11 +438,13 @@ def run_sacrificial_pilot(repo_root: Path, runtime_dir: Path) -> Mapping[str, An
     raw_idea = source_data.get("source_idea")
     if not isinstance(raw_idea, str) or not raw_idea:
         raise RuntimeError("SACRIFICIAL_SOURCE_INVALID")
-    block_id = "FREE-SACRIFICIAL-PILOT-001"
+    block_id = runtime_dir.name
     ledger = AppendOnlyUsageLedger(runtime_dir / "usage-ledger.jsonl")
+    if ledger.events:
+        raise RuntimeError("SACRIFICIAL_PILOT_RESUME_UNSUPPORTED")
     window = QuotaIsolatedBlockWindow(runtime_dir / "block-window.json")
     window.assert_may_start(_now())
-    guard = FreePreRequestGuard(ledger)
+    guard = FreePreRequestGuard(ledger, allow_sacrificial_fingerprint_drift=True)
     guard.ensure_pilot_source(SACRIFICIAL_SOURCE_ID, SACRIFICIAL_CLASSIFICATION)
     guard.assert_frozen_order(FROZEN_PILOT_TREATMENT_ORDER)
 
@@ -463,6 +491,7 @@ def run_sacrificial_pilot(repo_root: Path, runtime_dir: Path) -> Mapping[str, An
     window_state = window.close(last)
     actual = [event for event in posts if event.get("event") == "post_response"]
     summary = {
+        "pilot_attempt_id": block_id,
         "sacrificial_source": SACRIFICIAL_SOURCE_ID,
         "confirmatory_value": "NO",
         "treatment_order": list(FROZEN_PILOT_TREATMENT_ORDER),
@@ -475,7 +504,8 @@ def run_sacrificial_pilot(repo_root: Path, runtime_dir: Path) -> Mapping[str, An
         "max_request_input_tokens": max(int(event["serialized_input_tokens"]) for event in ledger.events if event.get("event") == "pre_dispatch"),
         "max_conservative_request_load": max(int(event["conservative_request_load"]) for event in ledger.events if event.get("event") == "pre_dispatch"),
         "max_actual_request_total": max((int(event.get("actual_total_tokens") or 0) for event in actual), default=0),
-        "system_fingerprint": guard.fingerprint,
+        "system_fingerprints": list(guard.fingerprints),
+        "fingerprint_drift_observed": guard.fingerprint_drift_observed,
         "next_block_window": window_state,
     }
     (runtime_dir / "PILOT-SUMMARY.json").write_text(_canonical(summary), encoding="utf-8")

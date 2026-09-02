@@ -19,8 +19,8 @@ def clock():
     return datetime(2026, 9, 1, tzinfo=timezone.utc)
 
 
-def guard(tmp_path: Path):
-    return FreePreRequestGuard(AppendOnlyUsageLedger(tmp_path / "usage.jsonl"), now=clock)
+def guard(tmp_path: Path, **kwargs):
+    return FreePreRequestGuard(AppendOnlyUsageLedger(tmp_path / "usage.jsonl"), now=clock, **kwargs)
 
 
 def admissible(g, request_id="r1", user="texto curto"):
@@ -87,6 +87,20 @@ def test_fingerprint_drift_and_429_abort(tmp_path):
     third = admissible(g, "three")
     g.post_error(third, http_status=429, error="RATE_LIMIT")
     assert g.closed_outcome == "ABORTED_CAPACITY"
+
+
+def test_sacrificial_fingerprint_drift_is_journaled_without_closing_capacity_pilot(tmp_path):
+    g = guard(tmp_path, allow_sacrificial_fingerprint_drift=True)
+    first = admissible(g, "one")
+    g.post_response(first, {"usage": {}, "system_fingerprint": "fp-a"})
+    second = admissible(g, "two")
+    g.post_response(second, {"usage": {}, "system_fingerprint": "fp-b"})
+    assert g.closed_outcome is None
+    assert g.fingerprint_drift_observed
+    assert g.fingerprints == ("fp-a", "fp-b")
+    drift = g.ledger.events[-1]
+    assert drift["event"] == "fingerprint_drift_observed"
+    assert drift["fingerprints_in_order"] == ["fp-a", "fp-b"]
 
 
 def test_rpm_and_tpm_window_and_restart_survival(tmp_path):
