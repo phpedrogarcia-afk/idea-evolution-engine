@@ -1,0 +1,13 @@
+{
+  "run_id": "NVIDIA-NIM-FREE-SACRIFICIAL-PILOT-001-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.",
+  "total_model_calls": 1,
+  "gate_outcome": "UNKNOWN",
+  "escalation_reason": "UNKNOWN",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 0,
+  "terminal_status": "FIRST_PASS_FAILED",
+  "decision_progress_detected": false,
+  "error": "HTTP_403: {\"status\":403,\"title\":\"Forbidden\",\"detail\":\"Authorization failed\"}"
+}
