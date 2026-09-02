@@ -21,6 +21,8 @@ import sys
 import json
 import time
 import hashlib
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Tuple, Type, TypeVar
