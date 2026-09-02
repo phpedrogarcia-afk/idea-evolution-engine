@@ -326,28 +326,34 @@ class FreePreRequestGuard:
         return None, "ROLLING_WINDOW_UNSAFE"
 
     def wait_for_tpm_capacity(self, *, request_id: str, block_id: str, system: str, user: str) -> None:
-        """Sleep at most once for a not-yet-dispatched request; never retries transport."""
-        now = self.now()
+        """Re-evaluate a not-yet-dispatched request after each bounded, recorded wait."""
         load = _chat_token_count(self.encoding, system, user) + OUTPUT_CAP_TOKENS
         if self._closed_outcome or load > FREE_TPM or self.ledger.reserved_block_load(block_id) + load > FREE_TPD:
             return
-        wait_seconds, reason = self._tpm_wait_plan(now, load)
-        if not wait_seconds:
-            return
-        if wait_seconds is None or wait_seconds > MAX_CAPACITY_WAIT_SECONDS:
-            self.ledger.append({"event": "capacity_wait", "state": "UNSAFE", "request_id": request_id,
+        total_wait_seconds = 0.0
+        while True:
+            now = self.now()
+            wait_seconds, reason = self._tpm_wait_plan(now, load)
+            if wait_seconds == 0.0:
+                return
+            if wait_seconds is None or total_wait_seconds + wait_seconds > MAX_CAPACITY_WAIT_SECONDS:
+                self.ledger.append({"event": "capacity_wait", "state": "UNSAFE", "request_id": request_id,
+                                    "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
+                                    "planned_duration_seconds": wait_seconds, "total_wait_seconds": total_wait_seconds,
+                                    "timestamp": now.isoformat()})
+                return
+            self.ledger.append({"event": "capacity_wait", "state": "STARTED", "request_id": request_id,
                                 "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
-                                "planned_duration_seconds": wait_seconds, "timestamp": now.isoformat()})
-            return
-        self.ledger.append({"event": "capacity_wait", "state": "STARTED", "request_id": request_id,
-                            "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
-                            "planned_duration_seconds": wait_seconds, "timestamp": now.isoformat()})
-        self.sleep(wait_seconds)
-        finished = self.now()
-        self.ledger.append({"event": "capacity_wait", "state": "COMPLETED", "request_id": request_id,
-                            "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
-                            "duration_seconds": max(0.0, (finished - now).total_seconds()),
-                            "timestamp": finished.isoformat()})
+                                "planned_duration_seconds": wait_seconds, "total_wait_seconds": total_wait_seconds,
+                                "timestamp": now.isoformat()})
+            self.sleep(wait_seconds)
+            finished = self.now()
+            elapsed = max(0.0, (finished - now).total_seconds())
+            total_wait_seconds += elapsed
+            self.ledger.append({"event": "capacity_wait", "state": "COMPLETED", "request_id": request_id,
+                                "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
+                                "duration_seconds": elapsed, "total_wait_seconds": total_wait_seconds,
+                                "timestamp": finished.isoformat()})
 
     def pre_dispatch(
         self, *, request_id: str, block_id: str, classification: str,

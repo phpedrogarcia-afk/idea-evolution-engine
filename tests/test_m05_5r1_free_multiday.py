@@ -7,7 +7,7 @@ import pytest
 import tools.experiments.m05_5r1_free_multiday as pilot
 
 from tools.experiments.m05_5r1_free_multiday import (
-    AppendOnlyUsageLedger, CONFIRMATORY_IDS, FREE_TPD, FREE_TPM, FreePreRequestGuard,
+    AppendOnlyUsageLedger, CONFIRMATORY_IDS, FREE_TPD, FREE_TPM, MAX_CAPACITY_WAIT_SECONDS, FreePreRequestGuard,
     FROZEN_PILOT_TREATMENT_ORDER, OUTPUT_CAP_TOKENS, QuotaIsolatedBlockWindow,
     SACRIFICIAL_CLASSIFICATION, SACRIFICIAL_SOURCE_CONTENT_SHA256,
     GuardedGroqRunner, _sanitized_payload_observability, load_sacrificial_source, sacrificial_source_path,
@@ -149,6 +149,30 @@ def test_provider_token_headers_are_preferred_for_bounded_wait(tmp_path):
     g.wait_for_tpm_capacity(request_id="next", block_id="PILOT-01", system="system", user="texto curto")
     completed = g.ledger.events[-1]
     assert completed["event"] == "capacity_wait" and completed["reason"] == "PROVIDER_TOKEN_HEADERS"
+
+
+def test_tpm_wait_reassesses_multiple_times_before_one_dispatch(tmp_path, monkeypatch):
+    current = [clock()]
+    def now():
+        return current[0]
+    def sleep(seconds):
+        current[0] += timedelta(seconds=seconds)
+    g = FreePreRequestGuard(AppendOnlyUsageLedger(tmp_path / "usage.jsonl"), now=now, sleep=sleep)
+    plans = iter([(2.0, "PROVIDER_TOKEN_HEADERS"), (3.0, "ROLLING_WINDOW"), (0.0, "ROLLING_WINDOW")])
+    monkeypatch.setattr(g, "_tpm_wait_plan", lambda now, load: next(plans))
+    g.wait_for_tpm_capacity(request_id="next", block_id="PILOT-01", system="system", user="texto curto")
+    waits = [event for event in g.ledger.events if event.get("event") == "capacity_wait"]
+    assert [event["state"] for event in waits] == ["STARTED", "COMPLETED", "STARTED", "COMPLETED"]
+    assert sum(event.get("duration_seconds", 0) or 0 for event in waits) == 5.0
+    assert not [event for event in g.ledger.events if event.get("event") == "pre_dispatch"]
+    assert all("retry_attempt" not in event for event in waits)
+
+
+def test_tpm_wait_stops_at_total_bound(tmp_path, monkeypatch):
+    g = guard(tmp_path)
+    monkeypatch.setattr(g, "_tpm_wait_plan", lambda now, load: (MAX_CAPACITY_WAIT_SECONDS + 1, "ROLLING_WINDOW"))
+    g.wait_for_tpm_capacity(request_id="next", block_id="PILOT-01", system="system", user="texto curto")
+    assert g.ledger.events[-1]["state"] == "UNSAFE"
 
 
 def test_tpd_and_rpd_remain_hard_limits(tmp_path, monkeypatch):
