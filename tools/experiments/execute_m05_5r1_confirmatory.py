@@ -5,11 +5,11 @@ Confirmatory replication execution harness for M05.5R1.
 
 Architecture:
   1. Fail-closed pre-execution verification (hashes, receipts, registry, worktree).
-  2. Append-only registry reservation (REAL-EXECUTION-ATTEMPT-002).
+  2. Append-only registry reservation (configurable attempt_id, e.g. REAL-EXECUTION-ATTEMPT-003).
   3. Strict CSPRNG-balanced schedule execution (24 cells across 8 blocks).
   4. Paced Groq execution (concurrency=1, TPM wait, zero retry, fingerprint drift tracking).
   5. Immutable cell output writing (fail-closed if cell file already exists).
-  6. Three-way reviewability evaluation (8/8 required).
+  6. Deterministic cell reviewability gate (classify_cell_reviewability per frozen scientific contract).
   7. Post-execution blind review packet rendering (machine-only reveal access, zero leaks).
 """
 
@@ -57,7 +57,7 @@ T = TypeVar("T", bound=BaseModel)
 # Constants
 # ---------------------------------------------------------------------------
 EXPERIMENT_ID = "EXP-M05.5R1-CONTROLLED-REPLICATION-20260901"
-ATTEMPT_ID = "REAL-EXECUTION-ATTEMPT-002"
+DEFAULT_ATTEMPT_ID = "REAL-EXECUTION-ATTEMPT-003"
 PROVIDER = "groq_direct"
 MODEL = "openai/gpt-oss-120b"
 SERVICE_TIER = "FREE"
@@ -75,10 +75,7 @@ CONFIRMATORY_CLASSIFICATION = "CONFIRMATORY_M05_5R1_REPLICATION"
 CONFIRMATORY_IDS = frozenset({f"H0{index}" for index in range(1, 9)})
 
 EXP_DIR = REPO_ROOT / "experiments" / EXPERIMENT_ID
-ATTEMPT_DIR = EXP_DIR / ATTEMPT_ID
-RAW_DIR = ATTEMPT_DIR / "raw"
 REGISTRY_FILE = EXP_DIR / "ATTEMPT-REGISTRY.jsonl"
-LOCK_FILE = ATTEMPT_DIR / ".attempt_immutability_lock"
 
 SEALED_HOLDOUT_PATH = Path(r"C:\Users\phped\Documents\IEE-SealedHoldouts\M05.5R1-HOLDOUT-SET-REV1.sealed.json")
 SEALED_REVEAL_PATH = Path(r"C:\Users\phped\Documents\IEE-SealedHoldouts\M05.5R1-BLINDING-REV1.reveal.json")
@@ -645,6 +642,87 @@ class GuardedGroqConfirmatoryRunner(ModelRunner):
 
 
 # ---------------------------------------------------------------------------
+# Reviewability Classifier (Frozen Scientific Contract)
+# ---------------------------------------------------------------------------
+
+def classify_cell_reviewability(
+    cell_result: Mapping[str, Any],
+    guard_closed_outcome: Optional[str] = None,
+) -> tuple[bool, str]:
+    """
+    Deterministic classification of cell reviewability per frozen scientific contract.
+    Distinguishes domain outcome from infrastructure/harness failure.
+    Enforces that non-empty text alone is NOT sufficient.
+    """
+    if guard_closed_outcome:
+        return False, f"INFRASTRUCTURE_GUARD_CLOSED:{guard_closed_outcome}"
+
+    cond = cell_result.get("condition")
+    error = cell_result.get("error")
+    rendered = str(cell_result.get("rendered_semantic_text") or "").strip()
+
+    if cond == "CONDITION_A":
+        status = cell_result.get("status")
+        parsed = cell_result.get("parsed_output") or {}
+        refined = parsed.get("refined_version", "").strip() if isinstance(parsed, dict) else ""
+        if error:
+            return False, f"A_EXECUTION_ERROR:{error}"
+        if status != "SUCCESS":
+            return False, f"A_STATUS_NOT_SUCCESS:{status}"
+        if not refined:
+            return False, "A_MISSING_REFINED_VERSION"
+        if "### Versão Refinada" not in rendered:
+            return False, "A_MISSING_RENDERED_REFINED_SECTION"
+        return True, "A_VALID_BASELINE_CANDIDATE"
+
+    elif cond == "CONDITION_B":
+        if error:
+            return False, f"B_EXECUTION_ERROR:{error}"
+        term_status = cell_result.get("terminal_status")
+        valid_terms = {"REFINED_IDEA_READY", "COMPLETED", "STABILIZED", "REFINEMENT_INCOMPLETE"}
+        if term_status not in valid_terms:
+            return False, f"B_INVALID_TERMINAL_STATUS:{term_status}"
+        stages = cell_result.get("stages_executed") or []
+        if not isinstance(stages, list) or "FINAL_REVIEW" not in stages:
+            return False, f"B_FINAL_REVIEW_NOT_REACHED:stages={stages}"
+        required_sections = [
+            "### Ideia Refinada Final",
+            "### Intenção Humana Preservada",
+            "### Mecanismo Central",
+            "### Incertezas Críticas Remanescentes",
+            "### Próxima Ação Recomendada",
+        ]
+        for sec in required_sections:
+            if sec not in rendered:
+                return False, f"B_MISSING_SECTION:{sec}"
+        parts = rendered.split("### ")
+        for part in parts[1:]:
+            lines = part.strip().splitlines()
+            if len(lines) <= 1 or not any(line.strip() for line in lines[1:]):
+                header = lines[0] if lines else "unknown"
+                return False, f"B_EMPTY_SECTION_BODY:{header}"
+        return True, f"B_SUBSTANTIVE_CANDIDATE_{term_status}"
+
+    elif cond == "CONDITION_C":
+        if error:
+            return False, f"C_EXECUTION_ERROR:{error}"
+        term_status = cell_result.get("terminal_status")
+        valid_terms = {
+            "COMPLETED", "COMPLETED_DIRECT_ONE_PASS", "COMPLETED_WITH_FOCUSED_ESCALATION",
+            "HUMAN_DECISION_REQUIRED", "DECISION_REQUIRED", "DECISION_SATISFIED", "EARLY_EXIT",
+        }
+        if term_status == "FIRST_PASS_FAILED":
+            return False, "C_FIRST_PASS_FAILED"
+        if term_status not in valid_terms:
+            return False, f"C_INVALID_TERMINAL_STATUS:{term_status}"
+        if not rendered or "### Falha na Execução" in rendered:
+            return False, "C_EXECUTION_FAILURE_TEXT_PRESENT"
+        return True, f"C_SUBSTANTIVE_CANDIDATE_{term_status}"
+
+    return False, f"UNKNOWN_CONDITION:{cond}"
+
+
+# ---------------------------------------------------------------------------
 # Pre-execution Gate & Registry
 # ---------------------------------------------------------------------------
 
@@ -659,7 +737,7 @@ def _registry_entries() -> List[Dict[str, Any]]:
     return entries
 
 
-def preflight_verification() -> tuple[Dict[str, str], tuple[ScheduleEntry, ...]]:
+def preflight_verification(attempt_id: str = DEFAULT_ATTEMPT_ID) -> tuple[Dict[str, str], tuple[ScheduleEntry, ...]]:
     """Strict offline preflight checks."""
     if not M054_FREEZE_MANIFEST.exists():
         raise RuntimeError(f"PREFLIGHT_FAIL: M05.4 manifest missing at {M054_FREEZE_MANIFEST}")
@@ -692,20 +770,21 @@ def preflight_verification() -> tuple[Dict[str, str], tuple[ScheduleEntry, ...]]
         raise RuntimeError("PREFLIGHT_FAIL: Schedule commitment mismatch")
 
     for entry in _registry_entries():
-        if entry.get("attempt_id") == ATTEMPT_ID:
-            raise RuntimeError(f"ATTEMPT_REGISTRY_GUARD: Attempt '{ATTEMPT_ID}' already registered")
+        if entry.get("attempt_id") == attempt_id:
+            raise RuntimeError(f"ATTEMPT_REGISTRY_GUARD: Attempt '{attempt_id}' already registered")
 
-    if ATTEMPT_DIR.exists() and list(ATTEMPT_DIR.glob("**/*.json")):
-        raise RuntimeError(f"ATTEMPT_ALREADY_EXISTS: {ATTEMPT_DIR} contains existing evidence")
+    attempt_path = EXP_DIR / attempt_id
+    if attempt_path.exists() and list(attempt_path.glob("**/*.json")):
+        raise RuntimeError(f"ATTEMPT_ALREADY_EXISTS: {attempt_path} contains existing evidence")
 
     return holdout_map, schedule
 
 
-def reserve_attempt(start_head: str) -> None:
+def reserve_attempt(start_head: str, attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
     EXP_DIR.mkdir(parents=True, exist_ok=True)
     entry = {
         "experiment_id": EXPERIMENT_ID,
-        "attempt_id": ATTEMPT_ID,
+        "attempt_id": attempt_id,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "start_head": start_head,
         "status": "RUNNING",
@@ -714,22 +793,24 @@ def reserve_attempt(start_head: str) -> None:
         fh.write(json.dumps(entry) + "\n")
 
 
-def create_lock(start_head: str) -> None:
-    ATTEMPT_DIR.mkdir(parents=True, exist_ok=True)
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
-    (RAW_DIR / "runs_a").mkdir(parents=True, exist_ok=True)
-    (RAW_DIR / "runs_b").mkdir(parents=True, exist_ok=True)
-    (RAW_DIR / "runs_c").mkdir(parents=True, exist_ok=True)
+def create_lock(start_head: str, attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
+    attempt_path = EXP_DIR / attempt_id
+    raw_path = attempt_path / "raw"
+    attempt_path.mkdir(parents=True, exist_ok=True)
+    raw_path.mkdir(parents=True, exist_ok=True)
+    (raw_path / "runs_a").mkdir(parents=True, exist_ok=True)
+    (raw_path / "runs_b").mkdir(parents=True, exist_ok=True)
+    (raw_path / "runs_c").mkdir(parents=True, exist_ok=True)
     lock_data = {
         "experiment_id": EXPERIMENT_ID,
-        "attempt_id": ATTEMPT_ID,
+        "attempt_id": attempt_id,
         "start_timestamp": datetime.now(timezone.utc).isoformat(),
         "start_head": start_head,
     }
-    LOCK_FILE.write_text(json.dumps(lock_data, indent=2), encoding="utf-8")
+    (attempt_path / ".attempt_immutability_lock").write_text(json.dumps(lock_data, indent=2), encoding="utf-8")
 
 
-def update_attempt_status(status: str) -> None:
+def update_attempt_status(status: str, attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
     if not REGISTRY_FILE.exists():
         return
     lines = REGISTRY_FILE.read_text(encoding="utf-8").splitlines()
@@ -739,7 +820,7 @@ def update_attempt_status(status: str) -> None:
         if not line:
             continue
         entry = json.loads(line)
-        if entry.get("attempt_id") == ATTEMPT_ID:
+        if entry.get("attempt_id") == attempt_id:
             entry["status"] = status
             entry["completed_at"] = datetime.now(timezone.utc).isoformat()
         updated.append(json.dumps(entry))
@@ -757,6 +838,7 @@ def execute_confirmatory_cell(
     raw_idea: str,
     runner: ModelRunner,
     raw_dir: Path,
+    attempt_id: str = DEFAULT_ATTEMPT_ID,
 ) -> Dict[str, Any]:
     cell_id = f"{holdout_id}-{condition}"
     raw_artifact_file = raw_dir / f"{holdout_id}_{condition.lower()}.json"
@@ -793,7 +875,7 @@ def execute_confirmatory_cell(
         raw_payload = {
             "cell_id": cell_id,
             "experiment_id": EXPERIMENT_ID,
-            "attempt_id": ATTEMPT_ID,
+            "attempt_id": attempt_id,
             "idea_id": holdout_id,
             "condition": "CONDITION_A",
             "raw_idea": raw_idea,
@@ -832,7 +914,7 @@ def execute_confirmatory_cell(
         raw_payload = {
             "cell_id": cell_id,
             "experiment_id": EXPERIMENT_ID,
-            "attempt_id": ATTEMPT_ID,
+            "attempt_id": attempt_id,
             "idea_id": holdout_id,
             "condition": "CONDITION_B",
             "raw_idea": raw_idea,
@@ -868,7 +950,7 @@ def execute_confirmatory_cell(
         raw_payload = {
             "cell_id": cell_id,
             "experiment_id": EXPERIMENT_ID,
-            "attempt_id": ATTEMPT_ID,
+            "attempt_id": attempt_id,
             "idea_id": holdout_id,
             "condition": "CONDITION_C",
             "raw_idea": raw_idea,
@@ -892,20 +974,23 @@ def execute_confirmatory_cell(
 # Main Confirmatory Execution Orchestrator
 # ---------------------------------------------------------------------------
 
-def run_confirmatory_replication(start_head: str) -> Dict[str, Any]:
-    holdout_map, schedule = preflight_verification()
-    reserve_attempt(start_head)
-    create_lock(start_head)
+def run_confirmatory_replication(start_head: str, attempt_id: str = DEFAULT_ATTEMPT_ID) -> Dict[str, Any]:
+    holdout_map, schedule = preflight_verification(attempt_id=attempt_id)
+    reserve_attempt(start_head, attempt_id=attempt_id)
+    create_lock(start_head, attempt_id=attempt_id)
 
-    ledger = AppendOnlyUsageLedger(ATTEMPT_DIR / "usage-ledger.jsonl")
-    window = QuotaIsolatedBlockWindow(ATTEMPT_DIR / "block-window.json")
+    attempt_path = EXP_DIR / attempt_id
+    raw_path = attempt_path / "raw"
+
+    ledger = AppendOnlyUsageLedger(attempt_path / "usage-ledger.jsonl")
+    window = QuotaIsolatedBlockWindow(attempt_path / "block-window.json")
     window.assert_may_start(_now())
     guard = ConfirmatoryPreRequestGuard(ledger)
 
     executed_cells: List[Dict[str, Any]] = []
     calls_by_cond = {"CONDITION_A": 0, "CONDITION_B": 0, "CONDITION_C": 0}
 
-    print(f"CONFIRMATORY_EXECUTION_START: Attempt '{ATTEMPT_ID}', {len(schedule)} scheduled cells.")
+    print(f"CONFIRMATORY_EXECUTION_START: Attempt '{attempt_id}', {len(schedule)} scheduled cells.")
 
     for entry in schedule:
         holdout_id = entry.holdout_id
@@ -914,24 +999,34 @@ def run_confirmatory_replication(start_head: str) -> Dict[str, Any]:
         raw_idea = holdout_map[holdout_id]
 
         print(f"\n--- Block {entry.block} Pos {entry.position}: {holdout_id} {condition} ---")
-        runner = GuardedGroqConfirmatoryRunner(guard, block_id=f"{ATTEMPT_ID}-{holdout_id}", treatment=condition)
+        runner = GuardedGroqConfirmatoryRunner(guard, block_id=f"{attempt_id}-{holdout_id}", treatment=condition)
 
         cell_result = execute_confirmatory_cell(
             holdout_id=holdout_id,
             condition=condition,
             raw_idea=raw_idea,
             runner=runner,
-            raw_dir=RAW_DIR,
+            raw_dir=raw_path,
+            attempt_id=attempt_id,
         )
         executed_cells.append(cell_result)
         calls_by_cond[condition] += cell_result["model_calls"]
 
-        if guard.closed_outcome or cell_result["status"] != "SUCCESS":
-            update_attempt_status("FAILED")
-            raise RuntimeError(f"CELL_EXECUTION_FAILED: {cell_result['cell_id']} status={cell_result['status']} guard={guard.closed_outcome}")
+        # Deterministic Reviewability Gate per frozen scientific contract
+        is_reviewable, review_reason = classify_cell_reviewability(cell_result, guard.closed_outcome)
 
-    # All 24 cells completed
-    update_attempt_status("COMPLETED")
+        if guard.closed_outcome:
+            update_attempt_status("FAILED", attempt_id=attempt_id)
+            raise RuntimeError(f"INFRASTRUCTURE_ABORT: {cell_result['cell_id']} guard={guard.closed_outcome}")
+
+        if not is_reviewable:
+            update_attempt_status("FAILED", attempt_id=attempt_id)
+            raise RuntimeError(f"CELL_NOT_REVIEWABLE: {cell_result['cell_id']} reason={review_reason}")
+
+        print(f"  -> Reviewability: PASS ({review_reason})")
+
+    # All 24 cells completed and reviewable
+    update_attempt_status("COMPLETED", attempt_id=attempt_id)
 
     posts = [event for event in ledger.events if event.get("event") in {"post_response", "post_error"}]
     if posts:
@@ -941,7 +1036,7 @@ def run_confirmatory_replication(start_head: str) -> Dict[str, Any]:
     # Write REAL-EXECUTION-MANIFEST.json
     manifest_data = {
         "experiment_id": EXPERIMENT_ID,
-        "attempt_id": ATTEMPT_ID,
+        "attempt_id": attempt_id,
         "executed_at": datetime.now(timezone.utc).isoformat(),
         "total_cells": len(executed_cells),
         "total_semantic_model_calls": sum(calls_by_cond.values()),
@@ -953,12 +1048,13 @@ def run_confirmatory_replication(start_head: str) -> Dict[str, Any]:
                 "condition": c["condition"],
                 "model_calls": c["model_calls"],
                 "status": c["status"],
-                "sha256": sha256_file(RAW_DIR / f"{c['idea_id']}_{c['condition'].lower()}.json"),
+                "terminal_status": c.get("terminal_status"),
+                "sha256": sha256_file(raw_path / f"{c['idea_id']}_{c['condition'].lower()}.json"),
             }
             for c in executed_cells
         ],
     }
-    (ATTEMPT_DIR / "REAL-EXECUTION-MANIFEST.json").write_text(
+    (attempt_path / "REAL-EXECUTION-MANIFEST.json").write_text(
         json.dumps(manifest_data, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
