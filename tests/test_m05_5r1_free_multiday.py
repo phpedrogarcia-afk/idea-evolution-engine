@@ -4,9 +4,10 @@ import inspect
 from pathlib import Path
 
 import pytest
+import tools.experiments.m05_5r1_free_multiday as pilot
 
 from tools.experiments.m05_5r1_free_multiday import (
-    AppendOnlyUsageLedger, CONFIRMATORY_IDS, FREE_TPM, FreePreRequestGuard,
+    AppendOnlyUsageLedger, CONFIRMATORY_IDS, FREE_TPD, FREE_TPM, FreePreRequestGuard,
     FROZEN_PILOT_TREATMENT_ORDER, OUTPUT_CAP_TOKENS, QuotaIsolatedBlockWindow,
     SACRIFICIAL_CLASSIFICATION, SACRIFICIAL_SOURCE_CONTENT_SHA256,
     GuardedGroqRunner, _sanitized_payload_observability, load_sacrificial_source, sacrificial_source_path,
@@ -113,6 +114,58 @@ def test_rpm_and_tpm_window_and_restart_survival(tmp_path):
     denied = admissible(g, "next")
     assert not denied.allowed and denied.outcome == "ABORTED_CAPACITY"
     assert len(AppendOnlyUsageLedger(tmp_path / "usage.jsonl").events) == 2
+
+
+def test_temporarily_blocked_third_request_waits_once_then_dispatches_without_retry(tmp_path):
+    current = [clock()]
+    def now():
+        return current[0]
+    def sleep(seconds):
+        current[0] += timedelta(seconds=seconds)
+    ledger = AppendOnlyUsageLedger(tmp_path / "usage.jsonl")
+    ledger.append({"event": "pre_dispatch", "request_id": "prior", "allowed": True,
+                   "timestamp": now().isoformat(), "conservative_request_load": 7000, "block_id": "PILOT-01"})
+    g = FreePreRequestGuard(ledger, now=now, sleep=sleep)
+    system, user = "system", "texto curto"
+    g.wait_for_tpm_capacity(request_id="next", block_id="PILOT-01", system=system, user=user)
+    decision = g.pre_dispatch(request_id="next", block_id="PILOT-01", classification=SACRIFICIAL_CLASSIFICATION,
+                              treatment="CONDITION_C", call_index=1, system=system, user=user)
+    waits = [event for event in g.ledger.events if event.get("event") == "capacity_wait"]
+    assert decision.allowed and [event["state"] for event in waits] == ["STARTED", "COMPLETED"]
+    assert len([event for event in g.ledger.events if event.get("request_id") == "next" and event.get("event") == "pre_dispatch"]) == 1
+    assert len(AppendOnlyUsageLedger(tmp_path / "usage.jsonl").events) == len(g.ledger.events)
+
+
+def test_provider_token_headers_are_preferred_for_bounded_wait(tmp_path):
+    current = [clock()]
+    def now():
+        return current[0]
+    def sleep(seconds):
+        current[0] += timedelta(seconds=seconds)
+    ledger = AppendOnlyUsageLedger(tmp_path / "usage.jsonl")
+    ledger.append({"event": "post_response", "timestamp": now().isoformat(),
+                   "rate_limit_remaining_tokens": "1", "rate_limit_reset_tokens": "2s"})
+    g = FreePreRequestGuard(ledger, now=now, sleep=sleep)
+    g.wait_for_tpm_capacity(request_id="next", block_id="PILOT-01", system="system", user="texto curto")
+    completed = g.ledger.events[-1]
+    assert completed["event"] == "capacity_wait" and completed["reason"] == "PROVIDER_TOKEN_HEADERS"
+
+
+def test_tpd_and_rpd_remain_hard_limits(tmp_path, monkeypatch):
+    now = clock()
+    ledger = AppendOnlyUsageLedger(tmp_path / "usage.jsonl")
+    ledger.append({"event": "pre_dispatch", "request_id": "tpd", "allowed": True,
+                   "timestamp": now.isoformat(), "conservative_request_load": FREE_TPD, "block_id": "PILOT-01"})
+    assert not FreePreRequestGuard(ledger, now=clock).pre_dispatch(
+        request_id="next", block_id="PILOT-01", classification=SACRIFICIAL_CLASSIFICATION,
+        treatment="CONDITION_C", call_index=1, system="system", user="texto curto").allowed
+    monkeypatch.setattr(pilot, "FREE_RPD", 1)
+    fresh = AppendOnlyUsageLedger(tmp_path / "rpd.jsonl")
+    fresh.append({"event": "pre_dispatch", "request_id": "rpd", "allowed": True,
+                  "timestamp": now.isoformat(), "conservative_request_load": 1, "block_id": "PILOT-01"})
+    assert not FreePreRequestGuard(fresh, now=clock).pre_dispatch(
+        request_id="next", block_id="PILOT-01", classification=SACRIFICIAL_CLASSIFICATION,
+        treatment="CONDITION_C", call_index=1, system="system", user="texto curto").allowed
 
 
 def test_next_block_not_before_survives_restart_and_denies_early_start(tmp_path):

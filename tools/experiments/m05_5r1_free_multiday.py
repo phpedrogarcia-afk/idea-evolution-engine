@@ -14,6 +14,8 @@ from hashlib import sha256
 import json
 import os
 from pathlib import Path
+import re
+import time
 from typing import Any, Callable, Mapping, Optional, Sequence, Type, TypeVar
 
 from pydantic import BaseModel, ValidationError
@@ -38,6 +40,8 @@ FREE_RPD = 1_000
 FREE_TPM = 8_000
 FREE_TPD = 200_000
 MODEL = "openai/gpt-oss-120b"
+MAX_CAPACITY_WAIT_SECONDS = 75.0
+CAPACITY_WAIT_SAFETY_MARGIN_SECONDS = 1.0
 MAX_SANITIZED_ERROR_MESSAGE_CHARS = 512
 SENSITIVE_OBSERVABILITY_KEYS = frozenset({"authorization", "api_key", "groq_api_key"})
 CONFIRMATORY_IDS = frozenset({f"H0{index}" for index in range(1, 9)})
@@ -211,6 +215,14 @@ class AppendOnlyUsageLedger:
             and datetime.fromisoformat(str(event["timestamp"])) >= cutoff
         )
 
+    def requests_in_current_day(self, now: datetime) -> int:
+        cutoff = now - timedelta(hours=24)
+        return sum(
+            1 for event in self._events
+            if event.get("event") == "pre_dispatch" and event.get("allowed")
+            and datetime.fromisoformat(str(event["timestamp"])) >= cutoff
+        )
+
     def reserved_block_load(self, block_id: str) -> int:
         return sum(
             int(event["conservative_request_load"])
@@ -255,10 +267,12 @@ class FreePreRequestGuard:
     """Fail-closed gate evaluated before every provider dispatch."""
 
     def __init__(self, ledger: AppendOnlyUsageLedger, *, now: Callable[[], datetime] = _now,
-                 allow_sacrificial_fingerprint_drift: bool = False):
+                 allow_sacrificial_fingerprint_drift: bool = False,
+                 sleep: Callable[[float], None] = time.sleep):
         self.ledger = ledger
         self.now = now
         self.allow_sacrificial_fingerprint_drift = allow_sacrificial_fingerprint_drift
+        self.sleep = sleep
         self.encoding, self.tokenizer_identity = load_official_tokenizer()
         self._closed_outcome: Optional[str] = None
         self._fingerprint: Optional[str] = None
@@ -272,6 +286,68 @@ class FreePreRequestGuard:
     def assert_frozen_order(self, order: Sequence[str]) -> None:
         if tuple(order) != FROZEN_PILOT_TREATMENT_ORDER:
             raise RuntimeError("SCHEDULE_MUTATION_INVALID_EXECUTION")
+
+    def _tpm_wait_plan(self, now: datetime, load: int) -> tuple[Optional[float], str]:
+        for event in reversed(self.ledger.events):
+            if event.get("event") != "post_response":
+                continue
+            remaining = event.get("rate_limit_remaining_tokens")
+            reset = event.get("rate_limit_reset_tokens")
+            if remaining is None or reset is None:
+                continue
+            try:
+                remaining_tokens = int(str(remaining))
+            except ValueError:
+                break
+            match = re.fullmatch(r"(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s)?", str(reset).strip())
+            if not match:
+                break
+            reset_seconds = int(match.group(1) or 0) * 60 + float(match.group(2) or 0)
+            age = max(0.0, (now - datetime.fromisoformat(str(event["timestamp"]))).total_seconds())
+            if age < reset_seconds:
+                if remaining_tokens >= load:
+                    return 0.0, "PROVIDER_TOKEN_HEADERS"
+                return reset_seconds - age + CAPACITY_WAIT_SAFETY_MARGIN_SECONDS, "PROVIDER_TOKEN_HEADERS"
+            break
+        recent = []
+        cutoff = now - timedelta(minutes=1)
+        for event in self.ledger.events:
+            if event.get("event") == "pre_dispatch" and event.get("allowed"):
+                timestamp = datetime.fromisoformat(str(event["timestamp"]))
+                if timestamp >= cutoff:
+                    recent.append((timestamp, int(event["conservative_request_load"])))
+        used = sum(item[1] for item in recent)
+        if used + load <= FREE_TPM:
+            return 0.0, "ROLLING_WINDOW"
+        for timestamp, reserved in sorted(recent):
+            used -= reserved
+            if used + load <= FREE_TPM:
+                return max(0.0, (timestamp + timedelta(minutes=1) - now).total_seconds()) + CAPACITY_WAIT_SAFETY_MARGIN_SECONDS, "ROLLING_WINDOW"
+        return None, "ROLLING_WINDOW_UNSAFE"
+
+    def wait_for_tpm_capacity(self, *, request_id: str, block_id: str, system: str, user: str) -> None:
+        """Sleep at most once for a not-yet-dispatched request; never retries transport."""
+        now = self.now()
+        load = _chat_token_count(self.encoding, system, user) + OUTPUT_CAP_TOKENS
+        if self._closed_outcome or load > FREE_TPM or self.ledger.reserved_block_load(block_id) + load > FREE_TPD:
+            return
+        wait_seconds, reason = self._tpm_wait_plan(now, load)
+        if not wait_seconds:
+            return
+        if wait_seconds is None or wait_seconds > MAX_CAPACITY_WAIT_SECONDS:
+            self.ledger.append({"event": "capacity_wait", "state": "UNSAFE", "request_id": request_id,
+                                "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
+                                "planned_duration_seconds": wait_seconds, "timestamp": now.isoformat()})
+            return
+        self.ledger.append({"event": "capacity_wait", "state": "STARTED", "request_id": request_id,
+                            "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
+                            "planned_duration_seconds": wait_seconds, "timestamp": now.isoformat()})
+        self.sleep(wait_seconds)
+        finished = self.now()
+        self.ledger.append({"event": "capacity_wait", "state": "COMPLETED", "request_id": request_id,
+                            "block_id": block_id, "started_at": now.isoformat(), "reason": reason,
+                            "duration_seconds": max(0.0, (finished - now).total_seconds()),
+                            "timestamp": finished.isoformat()})
 
     def pre_dispatch(
         self, *, request_id: str, block_id: str, classification: str,
@@ -290,10 +366,13 @@ class FreePreRequestGuard:
         elif self.ledger.reserved_block_load(block_id) + load > FREE_TPD:
             allowed, outcome = False, "ABORTED_CAPACITY"
             self._closed_outcome = outcome
+        elif self.ledger.requests_in_current_day(now) >= FREE_RPD:
+            allowed, outcome = False, "ABORTED_CAPACITY"
+            self._closed_outcome = outcome
         elif self.ledger.requests_in_current_minute(now) >= FREE_RPM:
             allowed, outcome = False, "ABORTED_CAPACITY"
             self._closed_outcome = outcome
-        elif self.ledger.conservative_load_in_current_minute(now) + load > FREE_TPM:
+        elif self._tpm_wait_plan(now, load)[0] not in (0.0,):
             allowed, outcome = False, "ABORTED_CAPACITY"
             self._closed_outcome = outcome
         decision = PreDispatchDecision(
@@ -326,6 +405,10 @@ class FreePreRequestGuard:
                 if not self.allow_sacrificial_fingerprint_drift:
                     self._closed_outcome = "INVALID_EXECUTION:BACKEND_DRIFT_WITHIN_BLOCK"
             self._fingerprints.append(fingerprint)
+        rate_headers = response.get("rate_limit_headers") or {}
+        if not isinstance(rate_headers, Mapping):
+            rate_headers = {}
+        normalized_headers = {str(key).lower(): str(value)[:128] for key, value in rate_headers.items()}
         self.ledger.append({
             "event": "post_response", "request_id": decision.request_id,
             "block_id": decision.block_id, "http_status": 200,
@@ -333,6 +416,8 @@ class FreePreRequestGuard:
             "actual_completion_tokens": completion, "actual_total_tokens": total,
             "rate_limit_relevant_token_count": total if total else None,
             "system_fingerprint": fingerprint, "retry_attempt": 0,
+            "rate_limit_remaining_tokens": normalized_headers.get("x-ratelimit-remaining-tokens"),
+            "rate_limit_reset_tokens": normalized_headers.get("x-ratelimit-reset-tokens"),
             "timestamp": self.now().isoformat(),
         })
         if drift_observed:
@@ -432,6 +517,7 @@ class GuardedGroqRunner(ModelRunner):
         self._call_number += 1
         system, _ = system_instruction(stage_name, output_schema)
         request_id = f"{self.block_id}:{self.treatment}:{self._call_number}:{request_kind}"
+        self.guard.wait_for_tpm_capacity(request_id=request_id, block_id=self.block_id, system=system, user=prompt_text)
         decision = self.guard.pre_dispatch(
             request_id=request_id, block_id=self.block_id,
             classification=SACRIFICIAL_CLASSIFICATION, treatment=self.treatment,
