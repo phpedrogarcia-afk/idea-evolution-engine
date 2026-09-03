@@ -48,6 +48,28 @@
       "verification_source": "NVIDIA Build API & Free Endpoint Docs"
     },
     {
+      "provider": "cerebras",
+      "model_id": "gpt-oss-120b",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 131072 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "5_rpm_30k_tpm_1m_tpd",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-09-03",
+      "verification_source": "Cerebras Inference API & Free Tier Docs"
+    },
+    {
+      "provider": "cerebras",
+      "model_id": "openai/gpt-oss-120b",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 131072 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "5_rpm_30k_tpm_1m_tpd",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-09-03",
+      "verification_source": "Cerebras Inference API & Free Tier Docs"
+    },
+    {
       "provider": "gemini",
       "model_id": "gemini-3.7-flash",
       "status": "ACTIVE",

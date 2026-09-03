@@ -34,6 +34,7 @@ class ModelDefinition(BaseModel):
             "anthropic",
             "openrouter",
             "nvidia_nim",
+            "cerebras",
             "fake",
             "fake_a",
             "fake_b",

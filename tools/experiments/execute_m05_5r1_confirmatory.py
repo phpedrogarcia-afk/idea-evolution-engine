@@ -892,8 +892,12 @@ def preflight_verification(attempt_id: str = DEFAULT_ATTEMPT_ID) -> tuple[Dict[s
         if not ref:
             raise RuntimeError(f"PREFLIGHT_FAIL: {name} not in M05.4 manifest")
         cur = sha256_file(path)
-        # Accept original M05.4 hash or M05.5R2 minimal provider registration amendment on routing.py
-        if name == "routing.py" and cur in {ref, "59ee8aa79e9c71d664341684dee53273aa99ebc4651551d9e62783e2bdd034f5"}:
+        # Accept original M05.4 hash or M05.5R2 minimal provider registration amendments on routing.py
+        if name == "routing.py" and cur in {
+            ref,
+            "59ee8aa79e9c71d664341684dee53273aa99ebc4651551d9e62783e2bdd034f5",
+            "c41e2b6ef2070de37fe7177359c85f68e8e88f7a32cdb8b098f0b512340d6ea7",
+        }:
             continue
         if cur != ref:
             raise RuntimeError(f"PREFLIGHT_FAIL: Treatment hash mismatch on {name}")

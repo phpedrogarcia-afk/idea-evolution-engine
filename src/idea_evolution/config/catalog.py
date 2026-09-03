@@ -130,6 +130,27 @@ class ModelCatalog:
                 last_verified="2026-09-02",
                 verification_source="NVIDIA Build API & Free Endpoint Docs",
             ),
+            # Cerebras Cloud Free
+            ModelCatalogEntry(
+                provider="cerebras",
+                model_id="gpt-oss-120b",
+                status=LifecycleStatus.ACTIVE,
+                cost_class=CostClass.FREE_TIER,
+                free_capacity_type="5_rpm_30k_tpm_1m_tpd",
+                privacy_class=PrivacyClass.STANDARD_PRIVACY,
+                last_verified="2026-09-03",
+                verification_source="Cerebras Inference API & Free Tier Docs",
+            ),
+            ModelCatalogEntry(
+                provider="cerebras",
+                model_id="openai/gpt-oss-120b",
+                status=LifecycleStatus.ACTIVE,
+                cost_class=CostClass.FREE_TIER,
+                free_capacity_type="5_rpm_30k_tpm_1m_tpd",
+                privacy_class=PrivacyClass.STANDARD_PRIVACY,
+                last_verified="2026-09-03",
+                verification_source="Cerebras Inference API & Free Tier Docs",
+            ),
             # Gemini
             ModelCatalogEntry(
                 provider="gemini",
