@@ -24,16 +24,19 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ## 2. Detalhamento Fase a Fase
 
-### Fase 1 (P1) — Service Boundary & Congelamento do Core Lean
+### Fase 1 (P1) — Service Boundary & Congelamento do Core Lean — `COMPLETED`
+- **Status:** `COMPLETED` (Ver [`M06-P1-SERVICE-BOUNDARY-COMPLETION-RECORD.md`](M06-P1-SERVICE-BOUNDARY-COMPLETION-RECORD.md))
 - **Objetivo:** Criar a camada de serviço `IdeaEvolutionService` como fachada desacoplada, encapsulando o `LeanLoopRunner` sem alterar seus contratos internos ou sua validação.
 - **Arquivos Afetados:**
   - `src/idea_evolution/service/__init__.py` [NEW]
+  - `src/idea_evolution/service/contracts.py` [NEW]
   - `src/idea_evolution/service/evolution_service.py` [NEW]
+  - `tests/test_fioideias_v1_service_boundary.py` [NEW]
 - **Oportunidades de Reuso:**
   - `LeanLoopRunner` (`src/idea_evolution/orchestration/lean_loop.py`): Utilizado 100% como motor de inferência sem mutação.
   - `RunTracer` (`src/idea_evolution/tracing/tracer.py`): Gravação de telemetria e deltas em disco.
-- **Testes de Aceite:** Testes unitários comprovando que `IdeaEvolutionService.evolve_idea(idea_text)` invoca o loop Lean L1 e retorna objeto tipado com máximo 2 chamadas.
-- **Condição de Parada (Stop Condition):** Serviço executável em memória sob mocks de teste, sem dependência direta da CLI.
+- **Testes de Aceite:** 11 testes unitários determinísticos passando em `tests/test_fioideias_v1_service_boundary.py`.
+- **Condição de Parada (Stop Condition):** Satisfeita. Serviço executável e testado sem quebra de integridade do core (`LEAN_CORE_HASH_MATCH = YES`).
 
 ---
 

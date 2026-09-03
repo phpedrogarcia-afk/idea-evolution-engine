@@ -28,6 +28,7 @@
   - [`docs/m06-productization/M06-V1-ARCHITECTURE.md`](../m06-productization/M06-V1-ARCHITECTURE.md)
   - [`docs/m06-productization/M06-V1-EXECUTION-PLAN.md`](../m06-productization/M06-V1-EXECUTION-PLAN.md)
   - [`docs/m06-productization/M06-V1-ACCEPTANCE-GATES.md`](../m06-productization/M06-V1-ACCEPTANCE-GATES.md)
+  - [`docs/m06-productization/M06-P1-SERVICE-BOUNDARY-COMPLETION-RECORD.md`](../m06-productization/M06-P1-SERVICE-BOUNDARY-COMPLETION-RECORD.md)
 - **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
 - **Último Estado Seguro (Last Known Good):** `CP-20260901-015`
 - **Git Branch:** `main`
@@ -38,21 +39,22 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Encerramento formal do programa experimental M05.5 (`M05_5_STATUS = COMPLETE`).
-  - Mapeamento e congelamento do Núcleo Científico Lean L1 (`LEAN_V1_CORE_BASELINE`, SHA-256 combinado `e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
-  - Criação do Pacote de Produtização M06 (`M06-FIOIDEIAS-V1-PRODUCT-FREEZE.md`, `M06-LEAN-CORE-MAP.md`, `M06-V1-ARCHITECTURE.md`, `M06-V1-EXECUTION-PLAN.md`, `M06-V1-ACCEPTANCE-GATES.md`).
+  - Implementação e validação da Fase P1 (Service Boundary): `IdeaEvolutionService` (`src/idea_evolution/service/`), contratos de entrada/saída e 11 testes determinísticos adicionados.
+  - Verificação de integridade do Núcleo Científico: `LEAN_CORE_HASH_MATCH = YES` (`e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
+  - Suíte completa de 343 testes passando com 0 falhas.
 - **Tarefa Ativa Atual:**
-  - `M06-PRODUCTIZATION-PACK-FREEZE`: Pacote de transição ciência para produto congelado e documentado; aguarda revisão do supervisor antes de qualquer codificação do MVP.
+  - `M06-P1-SERVICE-BOUNDARY`: Concluída e congelada. Aguarda revisão do supervisor antes de prosseguir para a Fase P2 (`EvolutionArtifact`).
 - **Próximo Passo Exato:**
-  - Supervisor revisa o plano de execução M06 (`M06-V1-EXECUTION-PLAN.md`) e autoriza o início da Fase 1 (P1: Service Boundary).
+  - Supervisor revisa a entrega da Fase P1 e autoriza formalmente o início da Fase P2 (Formalização do `EvolutionArtifact` canônico).
 
 ---
 
 ## 3. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
 
-1. ❌ **NÃO** continuar o programa experimental M05 ou abrir novos pilotos de provedor (`M05.5_STATUS = COMPLETE`).
-2. ❌ **NÃO** fazer da Condição B (Simple Loop) o caminho padrão do produto V1.
-3. ❌ **NÃO** iniciar implementação de código em larga escala antes da aprovação do plano pelo supervisor.
-4. ❌ **NÃO** fazer turismo tecnológico ou adicionar frameworks multiagente arbitrários (LangChain, AutoGen, CrewAI).
+1. ❌ **NÃO** iniciar a Fase P2 (`EvolutionArtifact`) sem autorização formal do supervisor.
+2. ❌ **NÃO** modificar nenhum arquivo do núcleo científico congelado (`LEAN_V1_CORE_BASELINE`).
+3. ❌ **NÃO** fazer da Condição B (Simple Loop) o caminho padrão do produto V1.
+4. ❌ **NÃO** introduzir frameworks multiagente arbitrários (LangChain, AutoGen, CrewAI).
 5. ❌ **NÃO** implementar bridge FioOS com autoridade de execução: `IDEA != REQUIREMENT`, `IDEA != TRUTH`, `IDEA != AUTHORITY`.
+
 
