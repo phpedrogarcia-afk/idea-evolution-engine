@@ -1,0 +1,61 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Armazenamento local criptografado dos da...' (hash: 4bbe5e4981beebfa), 5 dependências, 5 testes do Core, 5 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Armazenamento local criptografado dos dados de saúde com backups automáticos para um drive externo criptografado controlado pelo usuário.\",\"feasibility_notes\":[\"Bibliotecas de criptografia maduras (ex.: libsodium, OpenSSL) permitem criptografia AES‑256 de arquivos locais sem necessidade de hardware especializado\",\"Sistemas operacionais móveis e desktop oferecem APIs para acesso a dispositivos de armazenamento externo e para agendamento de tarefas em background\",\"Implementar backup automático requer apenas monitoramento de alterações de arquivo e cópia para o drive externo, tarefa já comum em aplicativos de sincronização\",\"A gestão de chaves pode ser feita via keystore seguro do SO, reduzindo risco de exposição ao usuário final\"],\"reality_dependencies\":[\"Disponibilidade de um drive externo (USB, SSD, etc.) que o usuário possa conectar ao dispositivo\",\"Suporte do sistema operacional ao acesso de arquivos em modo leitura/escrita ao drive externo sem elevação de privilégios excessiva\",\"API de criptografia segura e armazenamento de chaves fornecida pelo SO (ex.: Android Keystore, iOS Keychain, Windows DPAPI)\",\"Capacidade de agendar tarefas em background ou serviço que monitore alterações de dados para disparar o backup\",\"Mecanismo de montagem automática ou detecção de inserção do drive externo pelo SO\"],\"claims_needing_evidence\":[\"Os arquivos armazenados localmente permanecem indecifráveis sem a chave correta, mesmo se o dispositivo for comprometido\",\"O backup copiado para o drive externo está criptografado com a mesma força de segurança do armazenamento local\",\"A rotina de backup automático não introduz vulnerabilidades de race condition ou corrupção de dados\",\"A perda ou esquecimento da chave de criptografia impede a recuperação dos dados, mas não permite acesso não autorizado\"],\"potential_blockers\":[\"Falha na detecção automática do drive externo em alguns sistemas operacionais (ex.: políticas de segurança corporativa)\",\"Incompatibilidade entre o algoritmo de criptografia usado e o firmware de criptografia do drive externo, levando a falhas de leitura/escrita\",\"Risco de perda de chave se o usuário não fizer backup da chave em local seguro\",\"Impacto de desempenho ao criptografar e descriptografar grandes volumes de dados em tempo real\",\"Restrições de permissões que impedem o aplicativo de escrever em diretórios externos sem consentimento explícito\"],\"candidate_tests\":[\"Verificar que o arquivo de dados de saúde no armazenamento local está criptografado (comparar tamanho e entropia antes/depois)\",\"Simular a inserção de um drive externo e confirmar que o aplicativo detecta o dispositivo dentro de X segundos\",\"Executar a rotina de backup automático e inspecionar o arquivo copiado no drive externo para garantir que está criptografado\",\"Testar a restauração dos dados a partir do backup criptografado usando a chave armazenada no keystore\",\"Medir o tempo de gravação/leitura de dados criptografados versus não criptografados para validar impacto de desempenho aceitável\"],\"exploratory_candidate_tests\":[\"Avaliar a precisão de reconhecimento de voz offline em diferentes ambientes ruidosos usando um modelo local pequeno\",\"Testar a sincronização de dados de saúde com um wearable Bluetooth de baixa energia para garantir latência aceitável\",\"Implementar um protótipo de backup descentralizado via rede P2P (ex.: IPFS) e medir taxa de sucesso de replicação em nós controlados pelo usuário\",\"Executar um modelo de aprendizado de máquina on‑device para detecção de padrões de sintomas e comparar resultados com análise manual\",\"Avaliar a usabilidade de formulários estruturados com validação automática de campos (ex.: unidades, limites fisiológicos)\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Armazenamento local criptografado dos dados de saúde com backups automáticos para um drive externo criptografado controlado pelo usuário.",
+    "feasibility_notes": [
+      "Bibliotecas de criptografia maduras (ex.: libsodium, OpenSSL) permitem criptografia AES‑256 de arquivos locais sem necessidade de hardware especializado",
+      "Sistemas operacionais móveis e desktop oferecem APIs para acesso a dispositivos de armazenamento externo e para agendamento de tarefas em background",
+      "Implementar backup automático requer apenas monitoramento de alterações de arquivo e cópia para o drive externo, tarefa já comum em aplicativos de sincronização",
+      "A gestão de chaves pode ser feita via keystore seguro do SO, reduzindo risco de exposição ao usuário final"
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de um drive externo (USB, SSD, etc.) que o usuário possa conectar ao dispositivo",
+      "Suporte do sistema operacional ao acesso de arquivos em modo leitura/escrita ao drive externo sem elevação de privilégios excessiva",
+      "API de criptografia segura e armazenamento de chaves fornecida pelo SO (ex.: Android Keystore, iOS Keychain, Windows DPAPI)",
+      "Capacidade de agendar tarefas em background ou serviço que monitore alterações de dados para disparar o backup",
+      "Mecanismo de montagem automática ou detecção de inserção do drive externo pelo SO"
+    ],
+    "claims_needing_evidence": [
+      "Os arquivos armazenados localmente permanecem indecifráveis sem a chave correta, mesmo se o dispositivo for comprometido",
+      "O backup copiado para o drive externo está criptografado com a mesma força de segurança do armazenamento local",
+      "A rotina de backup automático não introduz vulnerabilidades de race condition ou corrupção de dados",
+      "A perda ou esquecimento da chave de criptografia impede a recuperação dos dados, mas não permite acesso não autorizado"
+    ],
+    "potential_blockers": [
+      "Falha na detecção automática do drive externo em alguns sistemas operacionais (ex.: políticas de segurança corporativa)",
+      "Incompatibilidade entre o algoritmo de criptografia usado e o firmware de criptografia do drive externo, levando a falhas de leitura/escrita",
+      "Risco de perda de chave se o usuário não fizer backup da chave em local seguro",
+      "Impacto de desempenho ao criptografar e descriptografar grandes volumes de dados em tempo real",
+      "Restrições de permissões que impedem o aplicativo de escrever em diretórios externos sem consentimento explícito"
+    ],
+    "candidate_tests": [
+      "Verificar que o arquivo de dados de saúde no armazenamento local está criptografado (comparar tamanho e entropia antes/depois)",
+      "Simular a inserção de um drive externo e confirmar que o aplicativo detecta o dispositivo dentro de X segundos",
+      "Executar a rotina de backup automático e inspecionar o arquivo copiado no drive externo para garantir que está criptografado",
+      "Testar a restauração dos dados a partir do backup criptografado usando a chave armazenada no keystore",
+      "Medir o tempo de gravação/leitura de dados criptografados versus não criptografados para validar impacto de desempenho aceitável"
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a precisão de reconhecimento de voz offline em diferentes ambientes ruidosos usando um modelo local pequeno",
+      "Testar a sincronização de dados de saúde com um wearable Bluetooth de baixa energia para garantir latência aceitável",
+      "Implementar um protótipo de backup descentralizado via rede P2P (ex.: IPFS) e medir taxa de sucesso de replicação em nós controlados pelo usuário",
+      "Executar um modelo de aprendizado de máquina on‑device para detecção de padrões de sintomas e comparar resultados com análise manual",
+      "Avaliar a usabilidade de formulários estruturados com validação automática de campos (ex.: unidades, limites fisiológicos)"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:12:40.500109+00:00"
+}

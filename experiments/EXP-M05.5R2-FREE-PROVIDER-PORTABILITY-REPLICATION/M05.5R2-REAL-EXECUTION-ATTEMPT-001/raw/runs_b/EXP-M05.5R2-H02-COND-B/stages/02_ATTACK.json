@@ -1,0 +1,60 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "2 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Baixa adesão dos moradores\",\"why_it_matters\":\"Sem participação suficiente, o espaço ficará vazio e não cumprirá seu objetivo de troca de habilidades, desperdiçando recursos e gerando frustração.\",\"severity\":\"HIGH\",\"affected_part\":\"Engajamento da comunidade\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Risco de responsabilidade civil por danos causados durante as trocas de habilidades\",\"why_it_matters\":\"Se um morador realiza um conserto que causa dano, a administração pode ser responsabilizada, desencorajando a participação e expondo o prédio a litígios.\",\"severity\":\"HIGH\",\"affected_part\":\"Legal / Seguro\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Os moradores estão dispostos a compartilhar e receber habilidades\",\"Existe espaço disponível no prédio para a iniciativa\",\"A administração do prédio permite a criação desse espaço\",\"Os residentes têm tempo e recursos para participar\"],\"contradictions\":[\"A premissa de que a administração permitirá o espaço pode entrar em conflito com a necessidade de aprovação formal de alterações nas áreas comuns\"],\"failure_modes\":[\"Falta de moderação leva a trocas de baixa qualidade ou abusivas\",\"Conflitos entre vizinhos por expectativas não alinhadas\",\"Vandalismo ou uso indevido do espaço\",\"Desinteresse gradual após a novidade inicial\"],\"missing_information\":[\"Procedimentos de reserva e uso do espaço\",\"Política de seguro e responsabilidade civil\",\"Mecanismo de avaliação e feedback das trocas\",\"Incentivos ou recompensas para participação contínua\"],\"overclaims\":[\"Afirma que a iniciativa fortalecerá significativamente a coesão da comunidade sem evidência empírica\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Baixa adesão dos moradores",
+        "why_it_matters": "Sem participação suficiente, o espaço ficará vazio e não cumprirá seu objetivo de troca de habilidades, desperdiçando recursos e gerando frustração.",
+        "severity": "HIGH",
+        "affected_part": "Engajamento da comunidade",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Risco de responsabilidade civil por danos causados durante as trocas de habilidades",
+        "why_it_matters": "Se um morador realiza um conserto que causa dano, a administração pode ser responsabilizada, desencorajando a participação e expondo o prédio a litígios.",
+        "severity": "HIGH",
+        "affected_part": "Legal / Seguro",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Os moradores estão dispostos a compartilhar e receber habilidades",
+      "Existe espaço disponível no prédio para a iniciativa",
+      "A administração do prédio permite a criação desse espaço",
+      "Os residentes têm tempo e recursos para participar"
+    ],
+    "contradictions": [
+      "A premissa de que a administração permitirá o espaço pode entrar em conflito com a necessidade de aprovação formal de alterações nas áreas comuns"
+    ],
+    "failure_modes": [
+      "Falta de moderação leva a trocas de baixa qualidade ou abusivas",
+      "Conflitos entre vizinhos por expectativas não alinhadas",
+      "Vandalismo ou uso indevido do espaço",
+      "Desinteresse gradual após a novidade inicial"
+    ],
+    "missing_information": [
+      "Procedimentos de reserva e uso do espaço",
+      "Política de seguro e responsabilidade civil",
+      "Mecanismo de avaliação e feedback das trocas",
+      "Incentivos ou recompensas para participação contínua"
+    ],
+    "overclaims": [
+      "Afirma que a iniciativa fortalecerá significativamente a coesão da comunidade sem evidência empírica"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T14:58:10.182088+00:00"
+}

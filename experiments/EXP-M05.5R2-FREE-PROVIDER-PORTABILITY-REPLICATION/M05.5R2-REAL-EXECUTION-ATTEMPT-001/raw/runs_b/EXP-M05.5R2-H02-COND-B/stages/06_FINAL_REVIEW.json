@@ -1,0 +1,32 @@
+{
+  "step_number": 6,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"Definir critérios de seleção e remuneração do facilitador residente\",\"Formalizar contrato de microseguro com cobertura adequada para incidentes\",\"Desenvolver estratégia de engajamento para garantir participação dos moradores\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A proposta refinada mantém o objetivo central de facilitar a troca de habilidades entre vizinhos, acrescentando apenas medidas de mitigação de risco (facilitador, termo de responsabilidade e microseguro) que não desviam da essência. Não há contradições ontológicas nem acúmulo especulativo de funcionalidades. Os principais pontos a serem resolvidos são a definição do papel do facilitador, a cobertura do seguro e estratégias para estimular a participação, mas não são falhas críticas. Recomenda-se avançar com o piloto proposto.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Definir critérios de seleção e remuneração do facilitador residente",
+      "Formalizar contrato de microseguro com cobertura adequada para incidentes",
+      "Desenvolver estratégia de engajamento para garantir participação dos moradores"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A proposta refinada mantém o objetivo central de facilitar a troca de habilidades entre vizinhos, acrescentando apenas medidas de mitigação de risco (facilitador, termo de responsabilidade e microseguro) que não desviam da essência. Não há contradições ontológicas nem acúmulo especulativo de funcionalidades. Os principais pontos a serem resolvidos são a definição do papel do facilitador, a cobertura do seguro e estratégias para estimular a participação, mas não são falhas críticas. Recomenda-se avançar com o piloto proposto."
+  },
+  "error": null,
+  "timestamp": "2026-09-03T14:59:11.008849+00:00"
+}

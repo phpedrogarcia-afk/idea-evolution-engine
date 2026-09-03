@@ -1,0 +1,69 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Dependência de atualização manual da localização das ferramentas\",\"why_it_matters\":\"Se os mecânicos não registrarem imediatamente onde deixaram cada ferramenta, o sistema exibirá informações incorretas, anulando o benefício esperado de economia de tempo\",\"severity\":\"HIGH\",\"affected_part\":\"Procedimento de registro manual\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Identificação visual insuficiente para ferramentas semelhantes\",\"why_it_matters\":\"Ferramentas com aparência similar podem ser confundidas, levando a colocações errôneas e à necessidade de nova busca, aumentando o tempo gasto\",\"severity\":\"MEDIUM\",\"affected_part\":\"Design de marcação/etiquetagem\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Espaço físico limitado impede a instalação de suportes ou quadros adicionais\",\"why_it_matters\":\"A falta de espaço pode tornar o sistema impraticável ou criar obstruções que atrapalham o fluxo de trabalho dos mecânicos\",\"severity\":\"MEDIUM\",\"affected_part\":\"Layout do galpão\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"As ferramentas consideradas importantes são identificáveis e distintas\",\"Os funcionários estarão dispostos a adotar o novo método físico\",\"O espaço do galpão permite a instalação de suportes ou quadros\",\"As ferramentas não são tão numerosas a ponto de tornar o sistema impraticável\",\"O método físico será mantido e atualizado ao longo do dia\"],\"contradictions\":[\"A proposta afirma ser um método simples e prático, mas requer atualização manual constante, o que pode ser complexo e sujeito a erro\"],\"failure_modes\":[\"Etiquetas, suportes ou quadros podem cair ou ser deslocados, gerando localização incorreta\",\"Esquecimento dos mecânicos de registrar a nova posição da ferramenta\",\"Acúmulo de ferramentas em um único ponto, criando congestionamento e risco de perda\"],\"missing_information\":[\"Número exato e variedade de ferramentas essenciais\",\"Frequência e padrão de movimentação das ferramentas ao longo do dia\",\"Preferências dos mecânicos quanto a métodos de rastreamento\",\"Dimensões e layout atual do galpão\",\"Orçamento disponível para implementar o sistema\"],\"overclaims\":[\"Reduzir significativamente o tempo gasto na busca por ferramentas sem evidência empírica\",\"Garantir que todas as ferramentas estarão sempre no local correto\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Dependência de atualização manual da localização das ferramentas",
+        "why_it_matters": "Se os mecânicos não registrarem imediatamente onde deixaram cada ferramenta, o sistema exibirá informações incorretas, anulando o benefício esperado de economia de tempo",
+        "severity": "HIGH",
+        "affected_part": "Procedimento de registro manual",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Identificação visual insuficiente para ferramentas semelhantes",
+        "why_it_matters": "Ferramentas com aparência similar podem ser confundidas, levando a colocações errôneas e à necessidade de nova busca, aumentando o tempo gasto",
+        "severity": "MEDIUM",
+        "affected_part": "Design de marcação/etiquetagem",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Espaço físico limitado impede a instalação de suportes ou quadros adicionais",
+        "why_it_matters": "A falta de espaço pode tornar o sistema impraticável ou criar obstruções que atrapalham o fluxo de trabalho dos mecânicos",
+        "severity": "MEDIUM",
+        "affected_part": "Layout do galpão",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "As ferramentas consideradas importantes são identificáveis e distintas",
+      "Os funcionários estarão dispostos a adotar o novo método físico",
+      "O espaço do galpão permite a instalação de suportes ou quadros",
+      "As ferramentas não são tão numerosas a ponto de tornar o sistema impraticável",
+      "O método físico será mantido e atualizado ao longo do dia"
+    ],
+    "contradictions": [
+      "A proposta afirma ser um método simples e prático, mas requer atualização manual constante, o que pode ser complexo e sujeito a erro"
+    ],
+    "failure_modes": [
+      "Etiquetas, suportes ou quadros podem cair ou ser deslocados, gerando localização incorreta",
+      "Esquecimento dos mecânicos de registrar a nova posição da ferramenta",
+      "Acúmulo de ferramentas em um único ponto, criando congestionamento e risco de perda"
+    ],
+    "missing_information": [
+      "Número exato e variedade de ferramentas essenciais",
+      "Frequência e padrão de movimentação das ferramentas ao longo do dia",
+      "Preferências dos mecânicos quanto a métodos de rastreamento",
+      "Dimensões e layout atual do galpão",
+      "Orçamento disponível para implementar o sistema"
+    ],
+    "overclaims": [
+      "Reduzir significativamente o tempo gasto na busca por ferramentas sem evidência empírica",
+      "Garantir que todas as ferramentas estarão sempre no local correto"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:13:55.372899+00:00"
+}

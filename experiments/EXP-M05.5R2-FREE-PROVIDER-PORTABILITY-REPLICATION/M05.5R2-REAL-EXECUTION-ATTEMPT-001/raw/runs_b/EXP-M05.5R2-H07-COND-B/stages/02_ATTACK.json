@@ -1,0 +1,61 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "2 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Parsing of the task list may fail for formats not explicitly supported\",\"why_it_matters\":\"If the tool cannot correctly parse the file, it will produce no output or incorrect output, defeating its purpose of quickly identifying blocked tasks\",\"severity\":\"HIGH\",\"affected_part\":\"Parsing module\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Assumes every blocked task has a responsible field\",\"why_it_matters\":\"Tasks without a designated responsible will cause the tool to either crash or omit critical information, leading to incomplete visibility for the user\",\"severity\":\"MEDIUM\",\"affected_part\":\"Filtering/display logic\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"The task list file is stored locally and accessible\",\"Each task contains a boolean field indicating if it is blocked\",\"A field exists that identifies the person or dependency responsible for the block\",\"The user has permission to read the task file\",\"The list format is consistent and parseable\"],\"contradictions\":[\"Assumption that the format is consistent may conflict with real-world task lists that evolve or contain mixed entries\"],\"failure_modes\":[\"File not found or unreadable\",\"Parsing errors due to unexpected delimiters or encoding\",\"Missing or malformed blocked/responsible fields causing runtime exceptions\",\"Performance degradation on very large task files\"],\"missing_information\":[\"Exact file format (e.g., JSON, CSV, YAML) and schema of task entries\",\"Encoding and line-ending conventions of the task file\",\"How multiple blockers for a single task are represented\"],\"overclaims\":[\"Claim that the tool will be \\\"small\\\" despite potentially needing complex format detection and robust error handling\",\"Implied guarantee of \\\"quick\\\" identification without accounting for large file sizes\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Parsing of the task list may fail for formats not explicitly supported",
+        "why_it_matters": "If the tool cannot correctly parse the file, it will produce no output or incorrect output, defeating its purpose of quickly identifying blocked tasks",
+        "severity": "HIGH",
+        "affected_part": "Parsing module",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Assumes every blocked task has a responsible field",
+        "why_it_matters": "Tasks without a designated responsible will cause the tool to either crash or omit critical information, leading to incomplete visibility for the user",
+        "severity": "MEDIUM",
+        "affected_part": "Filtering/display logic",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "The task list file is stored locally and accessible",
+      "Each task contains a boolean field indicating if it is blocked",
+      "A field exists that identifies the person or dependency responsible for the block",
+      "The user has permission to read the task file",
+      "The list format is consistent and parseable"
+    ],
+    "contradictions": [
+      "Assumption that the format is consistent may conflict with real-world task lists that evolve or contain mixed entries"
+    ],
+    "failure_modes": [
+      "File not found or unreadable",
+      "Parsing errors due to unexpected delimiters or encoding",
+      "Missing or malformed blocked/responsible fields causing runtime exceptions",
+      "Performance degradation on very large task files"
+    ],
+    "missing_information": [
+      "Exact file format (e.g., JSON, CSV, YAML) and schema of task entries",
+      "Encoding and line-ending conventions of the task file",
+      "How multiple blockers for a single task are represented"
+    ],
+    "overclaims": [
+      "Claim that the tool will be \"small\" despite potentially needing complex format detection and robust error handling",
+      "Implied guarantee of \"quick\" identification without accounting for large file sizes"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:07:13.319297+00:00"
+}

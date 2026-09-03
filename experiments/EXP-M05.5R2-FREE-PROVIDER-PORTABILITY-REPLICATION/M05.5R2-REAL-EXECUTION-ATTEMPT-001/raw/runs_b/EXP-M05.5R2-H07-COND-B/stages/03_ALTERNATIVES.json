@@ -1,0 +1,61 @@
+{
+  "step_number": 3,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Implementar um parser flexível que reconheça múltiplos formatos (JSON, YAML, CSV) usando bibliotecas de análise robustas e, caso o formato não seja reconhecido, aplicar heurísticas de detecção de padrões para extrair as tarefas bloqueadas.\",\"addresses_issues\":[\"Parsing of the task list may fail for formats not explicitly supported\",\"Assumes every blocked task has a responsible field\"],\"preserves_intent\":true,\"tradeoffs\":[\"Aumento da complexidade do código e dependências externas\",\"Maior consumo de memória e tempo de execução para heurísticas de fallback\"],\"novelty_or_difference\":\"Suporte nativo a vários formatos de lista e degradação graciosa quando o formato é desconhecido\"},{\"mechanism\":\"Exigir um arquivo de esquema de configuração onde o usuário define quais campos correspondem a \\\"status\\\" e \\\"responsável\\\", permitindo que o programa valide a presença desses campos e trate ausências com valores padrão ou mensagens de aviso.\",\"addresses_issues\":[\"Parsing of the task list may fail for formats not explicitly supported\",\"Assumes every blocked task has a responsible field\"],\"preserves_intent\":true,\"tradeoffs\":[\"Necessita que o usuário mantenha um arquivo de esquema adicional\",\"Reduz a experiência \\\"pronta‑para‑usar\\\" para usuários não técnicos\"],\"novelty_or_difference\":\"Abordagem baseada em esquema configurável que adapta o parser ao formato específico do projeto\"},{\"mechanism\":\"Adotar uma arquitetura de plugins onde cada plugin implementa o parser para um tipo de arquivo específico; o núcleo carrega o plugin adequado pelo nome da extensão e, se o campo responsável estiver ausente, exibe \\\"Responsável não especificado\\\" ao lado da tarefa bloqueada.\",\"addresses_issues\":[\"Parsing of the task list may fail for formats not explicitly supported\",\"Assumes every blocked task has a responsible field\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requer desenvolvimento e manutenção de plugins separados\",\"Possível risco de segurança ao carregar plugins de fontes externas\"],\"novelty_or_difference\":\"Sistema extensível que permite adicionar suporte a novos formatos sem alterar o código principal\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Implementar um parser flexível que reconheça múltiplos formatos (JSON, YAML, CSV) usando bibliotecas de análise robustas e, caso o formato não seja reconhecido, aplicar heurísticas de detecção de padrões para extrair as tarefas bloqueadas.",
+        "addresses_issues": [
+          "Parsing of the task list may fail for formats not explicitly supported",
+          "Assumes every blocked task has a responsible field"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Aumento da complexidade do código e dependências externas",
+          "Maior consumo de memória e tempo de execução para heurísticas de fallback"
+        ],
+        "novelty_or_difference": "Suporte nativo a vários formatos de lista e degradação graciosa quando o formato é desconhecido"
+      },
+      {
+        "mechanism": "Exigir um arquivo de esquema de configuração onde o usuário define quais campos correspondem a \"status\" e \"responsável\", permitindo que o programa valide a presença desses campos e trate ausências com valores padrão ou mensagens de aviso.",
+        "addresses_issues": [
+          "Parsing of the task list may fail for formats not explicitly supported",
+          "Assumes every blocked task has a responsible field"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Necessita que o usuário mantenha um arquivo de esquema adicional",
+          "Reduz a experiência \"pronta‑para‑usar\" para usuários não técnicos"
+        ],
+        "novelty_or_difference": "Abordagem baseada em esquema configurável que adapta o parser ao formato específico do projeto"
+      },
+      {
+        "mechanism": "Adotar uma arquitetura de plugins onde cada plugin implementa o parser para um tipo de arquivo específico; o núcleo carrega o plugin adequado pelo nome da extensão e, se o campo responsável estiver ausente, exibe \"Responsável não especificado\" ao lado da tarefa bloqueada.",
+        "addresses_issues": [
+          "Parsing of the task list may fail for formats not explicitly supported",
+          "Assumes every blocked task has a responsible field"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer desenvolvimento e manutenção de plugins separados",
+          "Possível risco de segurança ao carregar plugins de fontes externas"
+        ],
+        "novelty_or_difference": "Sistema extensível que permite adicionar suporte a novos formatos sem alterar o código principal"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:07:25.141097+00:00"
+}

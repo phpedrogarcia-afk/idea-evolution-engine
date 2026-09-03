@@ -1,0 +1,53 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Calendário impresso mensal com linhas pa...' (hash: 50b556dc34e9c2ee), 4 dependências, 3 testes do Core, 2 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Calendário impresso mensal com linhas para cada dia e colunas para os três colaboradores; antes do mês começar, preenche‑se a rotação considerando a carga de trabalho estimada e inclui‑se uma coluna reserva para cobrir ausências.\",\"feasibility_notes\":[\"A impressão de um calendário mensal é simples e de baixo custo.\",\"Requer que a equipe concorde previamente com a carga de trabalho estimada para cada dia.\",\"A coluna reserva permite lidar com ausências inesperadas sem reorganizar todo o plano.\",\"A atualização diária não é necessária, pois a rotação já está predefinida para o mês inteiro.\"],\"reality_dependencies\":[\"Disponibilidade de um calendário impresso com espaço suficiente para linhas de dias e colunas de colaboradores\",\"Precisão na estimativa da carga de trabalho antes do início do mês\",\"Compromisso dos colaboradores em seguir a rotação predefinida\",\"Um colaborador reserva identificado e disponível para cobrir ausências\"],\"claims_needing_evidence\":[\"A rotação predefinida garante que nenhum colaborador execute consistentemente a tarefa menos desejada\",\"A coluna reserva cobre adequadamente todas as ausências inesperadas sem causar conflitos\",\"A equipe consegue manter a aderência ao calendário impresso ao longo de um mês inteiro\"],\"potential_blockers\":[\"Esquecimento ou negligência ao consultar o calendário impresso\",\"Ausências simultâneas que excedam a capacidade da coluna reserva\",\"Erros na estimativa inicial da carga de trabalho que geram desequilíbrio\",\"Dificuldade de acesso ao calendário impresso em ambientes de trabalho remotos\"],\"candidate_tests\":[\"Conduzir um piloto de 30 dias com três colaboradores usando o calendário impresso e registrar quem realiza a tarefa de fechamento a cada dia; analisar a distribuição para verificar se há equilíbrio\",\"Simular ausências inesperadas (ex.: 2 dias de falta) e observar se a coluna reserva cobre adequadamente sem necessidade de replanejamento adicional\",\"Comparar a percepção de justiça dos colaboradores antes e depois da implementação do calendário para validar a aceitação do método\"],\"exploratory_candidate_tests\":[\"Implementar um quadro branco dividido em três colunas com cartões de data movidos diariamente para indicar quem realiza a tarefa de fechamento; avaliar a flexibilidade e aceitação da equipe\",\"Utilizar um sistema de fichas coloridas onde as fichas são embaralhadas diariamente em um pote e a ficha tirada determina o responsável; monitorar a aleatoriedade e a percepção de justiça\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Calendário impresso mensal com linhas para cada dia e colunas para os três colaboradores; antes do mês começar, preenche‑se a rotação considerando a carga de trabalho estimada e inclui‑se uma coluna reserva para cobrir ausências.",
+    "feasibility_notes": [
+      "A impressão de um calendário mensal é simples e de baixo custo.",
+      "Requer que a equipe concorde previamente com a carga de trabalho estimada para cada dia.",
+      "A coluna reserva permite lidar com ausências inesperadas sem reorganizar todo o plano.",
+      "A atualização diária não é necessária, pois a rotação já está predefinida para o mês inteiro."
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de um calendário impresso com espaço suficiente para linhas de dias e colunas de colaboradores",
+      "Precisão na estimativa da carga de trabalho antes do início do mês",
+      "Compromisso dos colaboradores em seguir a rotação predefinida",
+      "Um colaborador reserva identificado e disponível para cobrir ausências"
+    ],
+    "claims_needing_evidence": [
+      "A rotação predefinida garante que nenhum colaborador execute consistentemente a tarefa menos desejada",
+      "A coluna reserva cobre adequadamente todas as ausências inesperadas sem causar conflitos",
+      "A equipe consegue manter a aderência ao calendário impresso ao longo de um mês inteiro"
+    ],
+    "potential_blockers": [
+      "Esquecimento ou negligência ao consultar o calendário impresso",
+      "Ausências simultâneas que excedam a capacidade da coluna reserva",
+      "Erros na estimativa inicial da carga de trabalho que geram desequilíbrio",
+      "Dificuldade de acesso ao calendário impresso em ambientes de trabalho remotos"
+    ],
+    "candidate_tests": [
+      "Conduzir um piloto de 30 dias com três colaboradores usando o calendário impresso e registrar quem realiza a tarefa de fechamento a cada dia; analisar a distribuição para verificar se há equilíbrio",
+      "Simular ausências inesperadas (ex.: 2 dias de falta) e observar se a coluna reserva cobre adequadamente sem necessidade de replanejamento adicional",
+      "Comparar a percepção de justiça dos colaboradores antes e depois da implementação do calendário para validar a aceitação do método"
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar um quadro branco dividido em três colunas com cartões de data movidos diariamente para indicar quem realiza a tarefa de fechamento; avaliar a flexibilidade e aceitação da equipe",
+      "Utilizar um sistema de fichas coloridas onde as fichas são embaralhadas diariamente em um pote e a ficha tirada determina o responsável; monitorar a aleatoriedade e a percepção de justiça"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:06:10.110581+00:00"
+}

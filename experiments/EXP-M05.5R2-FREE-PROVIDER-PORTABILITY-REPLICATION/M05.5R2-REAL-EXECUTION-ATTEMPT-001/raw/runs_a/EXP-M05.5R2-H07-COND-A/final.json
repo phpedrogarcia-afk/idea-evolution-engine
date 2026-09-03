@@ -1,0 +1,35 @@
+{
+  "run_id": "EXP-M05.5R2-H07-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Quero uma ferramenta de linha de comando pequena que leia uma lista de tarefas do projeto e mostre apenas as que estão marcadas como bloqueadas, junto com a pessoa ou dependência indicada na própria lista.",
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "Uma ferramenta de linha de comando compacta que lê um arquivo de lista de tarefas (ex.: Markdown, CSV ou JSON) e exibe apenas as tarefas marcadas como bloqueadas, incluindo a pessoa responsável ou a dependência especificada.",
+    "strengths": [
+      "Foco em um problema concreto – identificar bloqueios – o que traz valor imediato ao time",
+      "Implementação simples e rápida, ideal para protótipos ou uso interno",
+      "Pode ser integrada a pipelines CI/CD ou scripts de automação",
+      "Baixo custo de manutenção devido ao escopo limitado",
+      "Flexível quanto ao formato de entrada, permitindo uso em diferentes projetos"
+    ],
+    "weaknesses": [
+      "Escopo muito estreito pode limitar adoção em equipes que precisam de funcionalidades adicionais (ex.: edição, relatórios)",
+      "Necessita de um formato de lista padronizado; listas não estruturadas podem gerar parsing falho",
+      "Falta de interface gráfica pode ser um obstáculo para usuários menos técnicos",
+      "Gerenciamento de dependências (ex.: múltiplas pessoas ou blocos) pode ficar complexo sem um modelo de dados robusto",
+      "Sem suporte nativo a autenticação ou controle de acesso, o que pode ser problemático em ambientes corporativos"
+    ],
+    "refined_version": "**blocked-tasks** – um utilitário CLI escrito em Python (ou Go) que aceita um argumento `--file <caminho>` e um parâmetro `--format <markdown|csv|json>`. O programa analisa cada linha da lista, reconhece a marcação `blocked` (ex.: `- [ ] Task name #blocked @user` ou coluna `status=blocked`), extrai o responsável (`@user`) ou a dependência (`depends on: <task>`), e imprime uma tabela formatada (ou JSON) contendo: ID, descrição da tarefa, responsável/dependência e data de criação, se disponível. Flags adicionais permitem: `--output json|table`, `--sort date|priority`, e `--filter <regex>` para refinar ainda mais a visualização. O código inclui testes unitários e documentação de exemplo, facilitando extensões futuras como integração com sistemas de issue‑tracking (Jira, GitHub Issues).",
+    "next_steps": [
+      "Definir os formatos de entrada suportados (ex.: Markdown checklist, CSV com colunas padrão, JSON de tarefas)",
+      "Especificar a sintaxe de marcação de bloqueio e de referência a responsáveis/dependências",
+      "Escolher a linguagem de implementação (Python com argparse ou Go com cobra)",
+      "Criar um protótipo de parser que identifica tarefas bloqueadas e extrai metadados",
+      "Implementar opções de saída (tabela simples via tabulate ou JSON) e flags de filtro/ordenação",
+      "Escrever testes unitários para cada formato de entrada e caso de uso",
+      "Documentar uso com exemplos de arquivos de lista e comandos típicos",
+      "Publicar o pacote em um repositório (GitHub) e disponibilizar via PyPI ou como binário"
+    ]
+  }
+}

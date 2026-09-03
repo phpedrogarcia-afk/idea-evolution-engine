@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H03-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Na minha cidade, muita gente deixa de usar a praça perto da estação depois do fim da tarde. Acho que pode ser porque ela parece insegura, mas também pode ser porque não há nada que convide as pessoas a permanecer ali. Queria explorar uma ideia para mudar isso.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R2-H08-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "human_intent": "To test whether providing meal suggestions based on the user's current pantry items and their approximate expiry dates changes the cooking behavior of small‑household cooks and reduces food waste.",
+  "refined_idea": "Develop a lightweight application for small‑household cooks to manually record pantry ingredients and their approximate expiry dates, generate tailored meal suggestions, and track self‑reported food waste to evaluate behavioral change.",
+  "core_mechanism": "Manual entry of pantry items with expiry dates, generation of meal suggestions based on that data, and collection of self‑reported food‑waste metrics for pre‑ and post‑intervention analysis.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "3fd2096fa6d1c09a",
+  "tested_core_hash": "7f1de05b97918eb4",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 4,
+  "accepted_changes_count": 2,
+  "rejected_changes_count": 0,
+  "recommended_next_step": "Conduct a pilot study with a small group of target users to validate the manual entry core mechanism, assess suggestion relevance, and evaluate the feasibility of self‑reported waste tracking."
+}

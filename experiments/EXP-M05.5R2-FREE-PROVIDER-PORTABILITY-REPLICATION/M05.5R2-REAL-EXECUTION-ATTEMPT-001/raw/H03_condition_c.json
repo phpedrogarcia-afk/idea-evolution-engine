@@ -1,0 +1,25 @@
+{
+  "cell_id": "H03-CONDITION_C",
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "H03",
+  "condition": "CONDITION_C",
+  "raw_idea": "Na minha cidade, muita gente deixa de usar a praça perto da estação depois do fim da tarde. Acho que pode ser porque ela parece insegura, mas também pode ser porque não há nada que convide as pessoas a permanecer ali. Queria explorar uma ideia para mudar isso.",
+  "latency_seconds": 12.118,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "parsed_output": {
+    "run_id": "EXP-M05.5R2-H03-COND-C",
+    "topology": "LEAN_IEE_L1",
+    "original_idea": "Na minha cidade, muita gente deixa de usar a praça perto da estação depois do fim da tarde. Acho que pode ser porque ela parece insegura, mas também pode ser porque não há nada que convide as pessoas a permanecer ali. Queria explorar uma ideia para mudar isso.",
+    "total_model_calls": 1,
+    "gate_outcome": "REQUEST_HUMAN_DECISION",
+    "escalation_reason": "NONE",
+    "authority_spoofing_detected": false,
+    "unsupported_candidate_count": 4,
+    "terminal_status": "HUMAN_DECISION_REQUIRED",
+    "decision_progress_detected": true
+  },
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.5R2-H03-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Na minha cidade, muita gente deixa de usar a praça perto da estação depois do fim da tarde. Acho que pode ser porque ela parece insegura, mas também pode ser porque não há nada que convide as pessoas a permanecer ali. Queria explorar uma ideia para mudar isso.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Explorar ideias para tornar a praça mais segura e atrativa, de modo a aumentar sua ocupação no período da noite.\n- **Problema Interpretado:** Pouca utilização da praça próxima à estação após o fim da tarde, possivelmente devido à percepção de insegurança e à falta de elementos que incentivem a permanência das pessoas.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Instalar iluminação de alta qualidade, mobiliário urbano confortável e programar atividades culturais/eventos noturnos na praça para criar um ambiente convidativo e melhorar a percepção de segurança.\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** A combinação de melhor iluminação e programação de eventos costuma aumentar a sensação de segurança e atrair público em espaços públicos subutilizados.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Aumentar a presença de segurança privada ou policial na praça durante a noite.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Custo recorrente com pessoal de segurança, Dependência de recursos humanos que podem ser limitados\n2. **Instalar câmeras de vigilância (CFTV) com monitoramento ao vivo.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Preocupações com privacidade dos cidadãos, Investimento em infraestrutura de rede e monitoramento\n3. **Transformar a praça em um mercado noturno com barracas de comida e artesanato.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Necessidade de licenças comerciais, Possível aumento de lixo e necessidade de limpeza adicional\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 4\n\n## 7. Próximo Passo Recomendado\n\nRealizar pesquisa de opinião com residentes e usuários da praça, seguida de estudo de viabilidade técnica e financeira das intervenções propostas.\n"
+}

@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H04-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Quero organizar meus registros pessoais de saúde e sintomas para perceber padrões antes das consultas, mas não quero enviar esses dados para aplicativos, contas online ou serviços de terceiros. Preciso conseguir usar isso no meu próprio computador.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

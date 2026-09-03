@@ -1,0 +1,25 @@
+{
+  "cell_id": "H02-CONDITION_C",
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-001",
+  "idea_id": "H02",
+  "condition": "CONDITION_C",
+  "raw_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+  "latency_seconds": 15.429,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "parsed_output": {
+    "run_id": "EXP-M05.5R2-H02-COND-C",
+    "topology": "LEAN_IEE_L1",
+    "original_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+    "total_model_calls": 1,
+    "gate_outcome": "REQUEST_HUMAN_DECISION",
+    "escalation_reason": "NONE",
+    "authority_spoofing_detected": false,
+    "unsupported_candidate_count": 3,
+    "terminal_status": "HUMAN_DECISION_REQUIRED",
+    "decision_progress_detected": true
+  },
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.5R2-H02-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Criar um espaço pequeno dentro dos prédios que facilite a troca de habilidades entre vizinhos, promovendo apoio mútuo e fortalecimento da comunidade.\n- **Problema Interpretado:** Falta de um ponto de contato estruturado nos edifícios residenciais para que vizinhos troquem habilidades (ex.: jardinagem, pequenos consertos, idiomas), resultando em oportunidades perdidas de colaboração comunitária.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Um pequeno espaço físico (ex.: mural ou cantinho) no hall ou corredor do prédio onde residentes podem anunciar e solicitar trocas de habilidades.\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** Um ponto físico visível incentiva a descoberta espontânea de necessidades e ofertas, reduzindo barreiras de comunicação e estimulando interações presenciais.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Plataforma digital interna ao condomínio (app ou grupo de mensagens) para anunciar e combinar trocas de habilidades.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Requer acesso à internet, Risco de baixa adesão ao canal digital, Privacidade de dados\n2. **Quadro de avisos tradicional (papel) na entrada do prédio.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Atualização manual frequente, Espaço limitado para detalhes, Desgaste físico\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 3\n\n## 7. Próximo Passo Recomendado\n\nRealizar uma pesquisa rápida com os residentes para validar interesse e coletar sugestões sobre formato e governança; com base nos resultados, criar um protótipo piloto (ex.: quadro de avisos) em um prédio piloto.\n"
+}

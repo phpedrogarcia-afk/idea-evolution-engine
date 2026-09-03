@@ -1,0 +1,32 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"Ferramentas podem se soltar se o ímã perder força\",\"Confusão de cores se houver muitas ferramentas semelhantes\",\"Desorganização se o painel não for mantido limpo e ordenado\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada mantém o núcleo original – um painel magnético vertical com suportes coloridos – atendendo ao objetivo de um método físico e prático para localizar ferramentas. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os riscos identificados são conhecidos, mas não impedem a viabilidade. Recomenda-se prosseguir com a construção do protótipo.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Ferramentas podem se soltar se o ímã perder força",
+      "Confusão de cores se houver muitas ferramentas semelhantes",
+      "Desorganização se o painel não for mantido limpo e ordenado"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A ideia refinada mantém o núcleo original – um painel magnético vertical com suportes coloridos – atendendo ao objetivo de um método físico e prático para localizar ferramentas. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os riscos identificados são conhecidos, mas não impedem a viabilidade. Recomenda-se prosseguir com a construção do protótipo."
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:15:54.953635+00:00"
+}

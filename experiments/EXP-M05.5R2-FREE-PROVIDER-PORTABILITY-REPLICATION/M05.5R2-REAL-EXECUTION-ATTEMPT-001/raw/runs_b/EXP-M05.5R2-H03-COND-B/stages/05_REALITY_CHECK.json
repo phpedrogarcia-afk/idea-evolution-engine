@@ -1,0 +1,59 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Organizar eventos comunitários temporári...' (hash: 66ba0af75f88ad28), 5 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Organizar eventos comunitários temporários ao entardecer, com iluminação portátil, voluntários locais e presença policial limitada para gerar vigilância natural.\",\"feasibility_notes\":[\"Disponibilidade de voluntários locais para atuar como observadores durante o evento\",\"Logística de transporte, montagem e manutenção da iluminação portátil\",\"Coordenação com a polícia para definir limites de presença e responsabilidades\",\"Condições climáticas esperadas para o período do entardecer\",\"Custo e tempo de aquisição/aluguel dos equipamentos de iluminação\"],\"reality_dependencies\":[\"Equipamento de iluminação portátil suficiente para cobrir a área da praça\",\"Acordo formal com a corporação policial local sobre presença limitada e apoio emergencial\",\"Rede de voluntários residentes dispostos a participar e ser treinados\",\"Permissão da administração municipal para uso temporário da praça à noite\",\"Condições meteorológicas favoráveis (ausência de chuva forte ou ventos intensos)\"],\"claims_needing_evidence\":[\"Eventos comunitários ao entardecer aumentam a percepção de segurança dos usuários da praça\",\"A iluminação portátil fornece nível de luminosidade adequado para reduzir comportamentos de risco\",\"A presença limitada de policiais, combinada com vigilância natural dos voluntários, é suficiente para prevenir incidentes\"],\"potential_blockers\":[\"Recusa ou baixa adesão dos voluntários locais\",\"Restrições legais ou burocráticas que impeçam a presença policial limitada\",\"Falha ou insuficiência dos equipamentos de iluminação (curto-circuito, baixa autonomia)\",\"Clima adverso que impossibilite a realização do evento ao ar livre\",\"Aumento de ruído ou incômodo que gere reclamações da comunidade\"],\"candidate_tests\":[\"Realizar um piloto de evento de 2 horas em um fim de tarde e aplicar questionário de percepção de segurança antes e depois\",\"Medir níveis de iluminância com luxímetro em pontos críticos da praça durante o evento para validar adequação da iluminação portátil\",\"Registrar número de incidentes ou chamadas à polícia nas 24h antes, durante e após o evento piloto\",\"Avaliar taxa de participação dos voluntários e comparar com metas estabelecidas\",\"Observar fluxo de pedestres na praça durante o evento usando contagem manual ou sensores de movimento\"],\"exploratory_candidate_tests\":[\"Testar iluminação inteligente alimentada por energia solar com sensores de movimento em um período de 1 semana para comparar consumo e eficácia luminosa\",\"Implementar um aplicativo móvel para relatos de segurança em tempo real e analisar taxa de uso pelos usuários da praça\",\"Organizar um mercado noturno piloto com vendedores locais e equipe de segurança privada para comparar impacto na atratividade e segurança da praça\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Organizar eventos comunitários temporários ao entardecer, com iluminação portátil, voluntários locais e presença policial limitada para gerar vigilância natural.",
+    "feasibility_notes": [
+      "Disponibilidade de voluntários locais para atuar como observadores durante o evento",
+      "Logística de transporte, montagem e manutenção da iluminação portátil",
+      "Coordenação com a polícia para definir limites de presença e responsabilidades",
+      "Condições climáticas esperadas para o período do entardecer",
+      "Custo e tempo de aquisição/aluguel dos equipamentos de iluminação"
+    ],
+    "reality_dependencies": [
+      "Equipamento de iluminação portátil suficiente para cobrir a área da praça",
+      "Acordo formal com a corporação policial local sobre presença limitada e apoio emergencial",
+      "Rede de voluntários residentes dispostos a participar e ser treinados",
+      "Permissão da administração municipal para uso temporário da praça à noite",
+      "Condições meteorológicas favoráveis (ausência de chuva forte ou ventos intensos)"
+    ],
+    "claims_needing_evidence": [
+      "Eventos comunitários ao entardecer aumentam a percepção de segurança dos usuários da praça",
+      "A iluminação portátil fornece nível de luminosidade adequado para reduzir comportamentos de risco",
+      "A presença limitada de policiais, combinada com vigilância natural dos voluntários, é suficiente para prevenir incidentes"
+    ],
+    "potential_blockers": [
+      "Recusa ou baixa adesão dos voluntários locais",
+      "Restrições legais ou burocráticas que impeçam a presença policial limitada",
+      "Falha ou insuficiência dos equipamentos de iluminação (curto-circuito, baixa autonomia)",
+      "Clima adverso que impossibilite a realização do evento ao ar livre",
+      "Aumento de ruído ou incômodo que gere reclamações da comunidade"
+    ],
+    "candidate_tests": [
+      "Realizar um piloto de evento de 2 horas em um fim de tarde e aplicar questionário de percepção de segurança antes e depois",
+      "Medir níveis de iluminância com luxímetro em pontos críticos da praça durante o evento para validar adequação da iluminação portátil",
+      "Registrar número de incidentes ou chamadas à polícia nas 24h antes, durante e após o evento piloto",
+      "Avaliar taxa de participação dos voluntários e comparar com metas estabelecidas",
+      "Observar fluxo de pedestres na praça durante o evento usando contagem manual ou sensores de movimento"
+    ],
+    "exploratory_candidate_tests": [
+      "Testar iluminação inteligente alimentada por energia solar com sensores de movimento em um período de 1 semana para comparar consumo e eficácia luminosa",
+      "Implementar um aplicativo móvel para relatos de segurança em tempo real e analisar taxa de uso pelos usuários da praça",
+      "Organizar um mercado noturno piloto com vendedores locais e equipe de segurança privada para comparar impacto na atratividade e segurança da praça"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:02:26.634716+00:00"
+}

@@ -1,0 +1,57 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Ler um arquivo JSON contendo a lista de ...' (hash: ebc86f02e093a27d), 4 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Ler um arquivo JSON contendo a lista de tarefas, validar contra um esquema simples que inclui os campos `blocked` (boolean) e `responsible` (string), filtrar as tarefas onde `blocked` é true e imprimir cada tarefa junto ao seu campo `responsible`.\",\"feasibility_notes\":[\"A leitura e validação de JSON são suportadas por bibliotecas padrão em praticamente todas as linguagens de programação modernas.\",\"A verificação de tipos (boolean para `blocked` e string para `responsible`) pode ser implementada com validação de esquema simples ou checagens ad‑hoc sem necessidade de infraestrutura externa.\",\"Filtrar e imprimir resultados é uma operação de O(n) trivial, mesmo para listas de tarefas de tamanho moderado.\",\"Nenhum requisito de hardware ou dependência externa além de acesso ao sistema de arquivos é necessário.\"],\"reality_dependencies\":[\"Acesso de leitura ao arquivo contendo a lista de tarefas (caminho fornecido pelo usuário).\",\"Um parser JSON compatível com o padrão ECMA‑404 (por exemplo, `json` em Python, `JSON.parse` em JavaScript, etc.).\",\"Um mecanismo de validação de esquema simples que garante a presença e os tipos corretos dos campos `blocked` e `responsible`.\",\"Capacidade de escrever na saída padrão (stdout) para exibir as tarefas filtradas.\"],\"claims_needing_evidence\":[\"O arquivo de entrada será um JSON válido que corresponde ao esquema esperado.\",\"Todas as tarefas marcadas como `blocked: true` possuirão um campo `responsible` do tipo string.\",\"A ferramenta imprimirá exatamente uma linha por tarefa bloqueada, contendo o identificador da tarefa e o valor de `responsible`.\",\"A validação de esquema rejeitará arquivos que não contenham os campos obrigatórios ou que tenham tipos incompatíveis.\"],\"potential_blockers\":[\"Arquivo de entrada malformado ou não‑JSON, causando falha no parsing.\",\"Ausência do campo `responsible` em tarefas bloqueadas, levando a erro de validação se o esquema for estrito.\",\"Problemas de permissões de leitura no caminho do arquivo fornecido.\",\"Tamanhos de arquivo muito grandes que excedam a memória disponível para o parser JSON.\"],\"candidate_tests\":[\"Teste com um arquivo JSON válido contendo várias tarefas, algumas com `blocked: true` e outras com `blocked: false`; verificar se apenas as tarefas bloqueadas são exibidas com o responsável correto.\",\"Teste com um arquivo JSON onde uma tarefa bloqueada omite o campo `responsible`; confirmar que a ferramenta falha a validação conforme o esquema definido.\",\"Teste com um arquivo JSON malformado (ex.: vírgula extra ou chaves não fechadas); garantir que a ferramenta reporta erro de parsing e não produz saída inesperada.\",\"Teste com um arquivo JSON vazio ou contendo uma lista vazia; assegurar que a ferramenta termina silenciosamente sem erros.\",\"Teste de permissões insuficientes ao tentar ler o arquivo; validar que a ferramenta relata erro de acesso ao arquivo.\"],\"exploratory_candidate_tests\":[\"Implementar um parser tolerante que detecte automaticamente formatos alternativos (YAML, CSV, linha‑por‑linha) e converta para o modelo JSON interno antes da validação.\",\"Avaliar um mecanismo de plugin que permita ao usuário fornecer seu próprio parser ou transformador de dados, mantendo o núcleo focado apenas na filtragem de tarefas bloqueadas.\",\"Testar comportamento da ferramenta quando o campo `responsible` está presente mas vazio ou contém valores nulos, e decidir se deve exibir um placeholder como \\\"<no owner>\\\" ou emitir aviso.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Ler um arquivo JSON contendo a lista de tarefas, validar contra um esquema simples que inclui os campos `blocked` (boolean) e `responsible` (string), filtrar as tarefas onde `blocked` é true e imprimir cada tarefa junto ao seu campo `responsible`.",
+    "feasibility_notes": [
+      "A leitura e validação de JSON são suportadas por bibliotecas padrão em praticamente todas as linguagens de programação modernas.",
+      "A verificação de tipos (boolean para `blocked` e string para `responsible`) pode ser implementada com validação de esquema simples ou checagens ad‑hoc sem necessidade de infraestrutura externa.",
+      "Filtrar e imprimir resultados é uma operação de O(n) trivial, mesmo para listas de tarefas de tamanho moderado.",
+      "Nenhum requisito de hardware ou dependência externa além de acesso ao sistema de arquivos é necessário."
+    ],
+    "reality_dependencies": [
+      "Acesso de leitura ao arquivo contendo a lista de tarefas (caminho fornecido pelo usuário).",
+      "Um parser JSON compatível com o padrão ECMA‑404 (por exemplo, `json` em Python, `JSON.parse` em JavaScript, etc.).",
+      "Um mecanismo de validação de esquema simples que garante a presença e os tipos corretos dos campos `blocked` e `responsible`.",
+      "Capacidade de escrever na saída padrão (stdout) para exibir as tarefas filtradas."
+    ],
+    "claims_needing_evidence": [
+      "O arquivo de entrada será um JSON válido que corresponde ao esquema esperado.",
+      "Todas as tarefas marcadas como `blocked: true` possuirão um campo `responsible` do tipo string.",
+      "A ferramenta imprimirá exatamente uma linha por tarefa bloqueada, contendo o identificador da tarefa e o valor de `responsible`.",
+      "A validação de esquema rejeitará arquivos que não contenham os campos obrigatórios ou que tenham tipos incompatíveis."
+    ],
+    "potential_blockers": [
+      "Arquivo de entrada malformado ou não‑JSON, causando falha no parsing.",
+      "Ausência do campo `responsible` em tarefas bloqueadas, levando a erro de validação se o esquema for estrito.",
+      "Problemas de permissões de leitura no caminho do arquivo fornecido.",
+      "Tamanhos de arquivo muito grandes que excedam a memória disponível para o parser JSON."
+    ],
+    "candidate_tests": [
+      "Teste com um arquivo JSON válido contendo várias tarefas, algumas com `blocked: true` e outras com `blocked: false`; verificar se apenas as tarefas bloqueadas são exibidas com o responsável correto.",
+      "Teste com um arquivo JSON onde uma tarefa bloqueada omite o campo `responsible`; confirmar que a ferramenta falha a validação conforme o esquema definido.",
+      "Teste com um arquivo JSON malformado (ex.: vírgula extra ou chaves não fechadas); garantir que a ferramenta reporta erro de parsing e não produz saída inesperada.",
+      "Teste com um arquivo JSON vazio ou contendo uma lista vazia; assegurar que a ferramenta termina silenciosamente sem erros.",
+      "Teste de permissões insuficientes ao tentar ler o arquivo; validar que a ferramenta relata erro de acesso ao arquivo."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar um parser tolerante que detecte automaticamente formatos alternativos (YAML, CSV, linha‑por‑linha) e converta para o modelo JSON interno antes da validação.",
+      "Avaliar um mecanismo de plugin que permita ao usuário fornecer seu próprio parser ou transformador de dados, mantendo o núcleo focado apenas na filtragem de tarefas bloqueadas.",
+      "Testar comportamento da ferramenta quando o campo `responsible` está presente mas vazio ou contém valores nulos, e decidir se deve exibir um placeholder como \"<no owner>\" ou emitir aviso."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:08:55.249483+00:00"
+}

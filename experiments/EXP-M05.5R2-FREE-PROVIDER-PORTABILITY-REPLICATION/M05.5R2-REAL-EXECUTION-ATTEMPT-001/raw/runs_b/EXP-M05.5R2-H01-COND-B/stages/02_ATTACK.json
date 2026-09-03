@@ -1,0 +1,68 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Ausência de um mecanismo formal de registro das rotações\",\"why_it_matters\":\"Sem um registro claro, é fácil que a mesma pessoa receba repetidamente a tarefa mais desagradável, gerando percepção de injustiça e desmotivação\",\"severity\":\"HIGH\",\"affected_part\":\"Processo de atribuição de tarefas\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"A suposição de que a rotatividade diária garante justiça ignora a variabilidade de dificuldade das tarefas\",\"why_it_matters\":\"Algumas tarefas são intrinsecamente mais pesadas ou indesejáveis; rotacionar diariamente pode ainda resultar em carga desigual, comprometendo a equidade\",\"severity\":\"HIGH\",\"affected_part\":\"Mecanismo de justiça/fairness\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Falta de plano de contingência para ausências ou atrasos dos colaboradores\",\"why_it_matters\":\"Se um colaborador falta, a rotação quebra e pode deixar tarefas críticas sem responsável, impactando o fechamento da cafeteria\",\"severity\":\"MEDIUM\",\"affected_part\":\"Continuidade operacional\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Os três colaboradores têm disponibilidade constante para discutir a divisão de tarefas\",\"Existe um conjunto limitado e estável de tarefas de fechamento que pode ser listado\",\"Os colaboradores aceitam usar ferramentas simples como papel, quadro ou planilha\",\"A rotatividade diária é suficiente para garantir justiça\"],\"contradictions\":[\"A proposta de \\\"rotatividade diária\\\" conflita com a necessidade de um registro estável para garantir que ninguém receba repetidamente a tarefa mais chata\",\"A afirmação de \\\"não usar sistema de gestão\\\" entra em conflito com a necessidade de rastrear e validar as rotações de forma confiável\"],\"failure_modes\":[\"Esquecimento ou erro humano ao atualizar a rotação diária, levando a atribuições duplicadas\",\"Desentendimentos entre os colaboradores sobre quem deve executar qual tarefa, gerando conflitos\",\"Tarefas críticas não realizadas devido a ausência ou falha na comunicação\"],\"missing_information\":[\"Lista completa e detalhada das tarefas de fechamento, incluindo grau de dificuldade ou atratividade\",\"Critério objetivo para classificar qual tarefa é a \\\"mais chata\\\"\",\"Procedimento específico para lidar com ausências inesperadas ou trocas de turno\",\"Frequência exata de rotação (diária, por turno, etc.) e quem será responsável por registrar a rotação\"],\"overclaims\":[\"A afirmação de que o método será \\\"simples e justo\\\" sem evidência de um mecanismo de verificação\",\"A garantia de que ninguém ficará permanentemente com a tarefa menos desejada apenas pela rotatividade diária\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Ausência de um mecanismo formal de registro das rotações",
+        "why_it_matters": "Sem um registro claro, é fácil que a mesma pessoa receba repetidamente a tarefa mais desagradável, gerando percepção de injustiça e desmotivação",
+        "severity": "HIGH",
+        "affected_part": "Processo de atribuição de tarefas",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "A suposição de que a rotatividade diária garante justiça ignora a variabilidade de dificuldade das tarefas",
+        "why_it_matters": "Algumas tarefas são intrinsecamente mais pesadas ou indesejáveis; rotacionar diariamente pode ainda resultar em carga desigual, comprometendo a equidade",
+        "severity": "HIGH",
+        "affected_part": "Mecanismo de justiça/fairness",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Falta de plano de contingência para ausências ou atrasos dos colaboradores",
+        "why_it_matters": "Se um colaborador falta, a rotação quebra e pode deixar tarefas críticas sem responsável, impactando o fechamento da cafeteria",
+        "severity": "MEDIUM",
+        "affected_part": "Continuidade operacional",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Os três colaboradores têm disponibilidade constante para discutir a divisão de tarefas",
+      "Existe um conjunto limitado e estável de tarefas de fechamento que pode ser listado",
+      "Os colaboradores aceitam usar ferramentas simples como papel, quadro ou planilha",
+      "A rotatividade diária é suficiente para garantir justiça"
+    ],
+    "contradictions": [
+      "A proposta de \"rotatividade diária\" conflita com a necessidade de um registro estável para garantir que ninguém receba repetidamente a tarefa mais chata",
+      "A afirmação de \"não usar sistema de gestão\" entra em conflito com a necessidade de rastrear e validar as rotações de forma confiável"
+    ],
+    "failure_modes": [
+      "Esquecimento ou erro humano ao atualizar a rotação diária, levando a atribuições duplicadas",
+      "Desentendimentos entre os colaboradores sobre quem deve executar qual tarefa, gerando conflitos",
+      "Tarefas críticas não realizadas devido a ausência ou falha na comunicação"
+    ],
+    "missing_information": [
+      "Lista completa e detalhada das tarefas de fechamento, incluindo grau de dificuldade ou atratividade",
+      "Critério objetivo para classificar qual tarefa é a \"mais chata\"",
+      "Procedimento específico para lidar com ausências inesperadas ou trocas de turno",
+      "Frequência exata de rotação (diária, por turno, etc.) e quem será responsável por registrar a rotação"
+    ],
+    "overclaims": [
+      "A afirmação de que o método será \"simples e justo\" sem evidência de um mecanismo de verificação",
+      "A garantia de que ninguém ficará permanentemente com a tarefa menos desejada apenas pela rotatividade diária"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:04:25.429469+00:00"
+}

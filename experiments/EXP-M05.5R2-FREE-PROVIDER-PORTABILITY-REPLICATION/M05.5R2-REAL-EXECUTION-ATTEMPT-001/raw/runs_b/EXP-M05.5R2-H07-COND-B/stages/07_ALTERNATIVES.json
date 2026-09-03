@@ -1,0 +1,61 @@
+{
+  "step_number": 7,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Implement a tolerant parser that first attempts to detect the file format (JSON, YAML, CSV, or simple line‑based) and then uses a generic data model; for any blocked task lacking a \\\"responsible\\\" field, insert a placeholder like \\\"<no owner>\\\" and emit a warning.\",\"addresses_issues\":[\"Parsing of the task list may fail for formats not explicitly supported\",\"Assumes every blocked task has a responsible field\"],\"preserves_intent\":true,\"tradeoffs\":[\"Adds complexity to the codebase and increases binary size\",\"Placeholder may hide data‑quality problems, requiring users to monitor warnings\"],\"novelty_or_difference\":\"Formato‑agnóstico com fallback automático e preenchimento de campos ausentes\"},{\"mechanism\":\"Restrict the tool to a single, well‑defined format (e.g., JSON) and provide a concise schema; include a validation step that reports missing \\\"responsible\\\" fields and skips those tasks rather than crashing.\",\"addresses_issues\":[\"Parsing of the task list may fail for formats not explicitly supported\",\"Assumes every blocked task has a responsible field\"],\"preserves_intent\":true,\"tradeoffs\":[\"Limits usability to users who can produce the exact format\",\"Tasks without a responsible field are omitted, potentially losing information\"],\"novelty_or_difference\":\"Abordagem de \\\"formato único\\\" com validação estrita para garantir robustez\"},{\"mechanism\":\"Design a plugin‑based architecture where core logic loads a parser plugin supplied by the user (e.g., via a simple script); the core also treats missing \\\"responsible\\\" fields as optional and displays \\\"Unassigned\\\" when absent.\",\"addresses_issues\":[\"Parsing of the task list may fail for formats not explicitly supported\",\"Assumes every blocked task has a responsible field\"],\"preserves_intent\":true,\"tradeoffs\":[\"Requires users to write or install plugins, raising the entry barrier\",\"Runtime overhead of dynamic loading and potential security considerations\"],\"novelty_or_difference\":\"Extensibilidade via plugins que permitem suporte a novos formatos e tratamento flexível de campos ausentes\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Implement a tolerant parser that first attempts to detect the file format (JSON, YAML, CSV, or simple line‑based) and then uses a generic data model; for any blocked task lacking a \"responsible\" field, insert a placeholder like \"<no owner>\" and emit a warning.",
+        "addresses_issues": [
+          "Parsing of the task list may fail for formats not explicitly supported",
+          "Assumes every blocked task has a responsible field"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Adds complexity to the codebase and increases binary size",
+          "Placeholder may hide data‑quality problems, requiring users to monitor warnings"
+        ],
+        "novelty_or_difference": "Formato‑agnóstico com fallback automático e preenchimento de campos ausentes"
+      },
+      {
+        "mechanism": "Restrict the tool to a single, well‑defined format (e.g., JSON) and provide a concise schema; include a validation step that reports missing \"responsible\" fields and skips those tasks rather than crashing.",
+        "addresses_issues": [
+          "Parsing of the task list may fail for formats not explicitly supported",
+          "Assumes every blocked task has a responsible field"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Limits usability to users who can produce the exact format",
+          "Tasks without a responsible field are omitted, potentially losing information"
+        ],
+        "novelty_or_difference": "Abordagem de \"formato único\" com validação estrita para garantir robustez"
+      },
+      {
+        "mechanism": "Design a plugin‑based architecture where core logic loads a parser plugin supplied by the user (e.g., via a simple script); the core also treats missing \"responsible\" fields as optional and displays \"Unassigned\" when absent.",
+        "addresses_issues": [
+          "Parsing of the task list may fail for formats not explicitly supported",
+          "Assumes every blocked task has a responsible field"
+        ],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requires users to write or install plugins, raising the entry barrier",
+          "Runtime overhead of dynamic loading and potential security considerations"
+        ],
+        "novelty_or_difference": "Extensibilidade via plugins que permitem suporte a novos formatos e tratamento flexível de campos ausentes"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:08:25.430116+00:00"
+}

@@ -1,0 +1,31 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"Risco de perda de dados caso o drive externo falhe sem cópia adicional\",\"Complexidade do processo de backup que pode levar a erros de usuário\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada mantém o propósito central de privacidade e controle local dos dados de saúde, alinhando‑se ao Core testado sem introduzir contradições ontológicas ou desvios de essência. O recurso de backup automático para um drive externo criptografado é uma extensão coerente e não ornamental. Não há falhas críticas não resolvidas, embora permaneçam questões materiais relacionadas à confiabilidade do backup e à usabilidade que devem ser monitoradas. Recomenda‑se a liberação da ideia refinada.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Risco de perda de dados caso o drive externo falhe sem cópia adicional",
+      "Complexidade do processo de backup que pode levar a erros de usuário"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A ideia refinada mantém o propósito central de privacidade e controle local dos dados de saúde, alinhando‑se ao Core testado sem introduzir contradições ontológicas ou desvios de essência. O recurso de backup automático para um drive externo criptografado é uma extensão coerente e não ornamental. Não há falhas críticas não resolvidas, embora permaneçam questões materiais relacionadas à confiabilidade do backup e à usabilidade que devem ser monitoradas. Recomenda‑se a liberação da ideia refinada."
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:12:55.404924+00:00"
+}

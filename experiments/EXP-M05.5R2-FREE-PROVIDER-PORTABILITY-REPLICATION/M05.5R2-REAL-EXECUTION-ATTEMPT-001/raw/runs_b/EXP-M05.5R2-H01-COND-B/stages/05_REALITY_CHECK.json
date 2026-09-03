@@ -1,0 +1,54 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Cartões de papel rotativos com registro ...' (hash: 40fcba466672ecae), 5 dependências, 3 testes do Core, 2 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Cartões de papel rotativos com registro em um pequeno livro de controle\",\"feasibility_notes\":[\"Método requer apenas papel, cartões e um pequeno livro de controle, sem necessidade de tecnologia adicional\",\"Implementação é rápida e de baixo custo\",\"Processo é visual e fácil de entender por todos os colaboradores\",\"Requer disciplina diária para mover o cartão e registrar a tarefa concluída\"],\"reality_dependencies\":[\"Disponibilidade de cartões de papel suficientemente duráveis\",\"Um pequeno livro ou caderno para registrar a rotação diariamente\",\"Compromisso dos três colaboradores de atualizar o registro a cada mudança de turno\",\"Um local físico acessível onde o cartão e o livro ficarão armazenados\",\"Procedimento claro de quem inicia a rotação no primeiro dia\"],\"claims_needing_evidence\":[\"A rotação de cartões garante que nenhum colaborador execute repetidamente a tarefa menos desejada\",\"O registro em livro impede esquecimentos ou duplicações de atribuição\",\"Os colaboradores percebem o sistema como justo ao longo de várias semanas\"],\"potential_blockers\":[\"Cartões podem ser perdidos, rasgados ou extraviados\",\"Erros de anotação no livro podem quebrar a sequência de rotação\",\"Esquecimento ou resistência dos colaboradores em atualizar o registro diariamente\",\"Conflitos de agenda que impeçam a troca física do cartão no horário previsto\"],\"candidate_tests\":[\"Conduzir um piloto de 2 semanas com os três colaboradores usando o sistema de cartões e registrar quem executa a tarefa a cada dia\",\"Auditar o livro de controle ao final da semana para verificar se a sequência de rotação foi mantida sem falhas\",\"Aplicar um questionário de percepção de justiça aos colaboradores após o piloto para validar a aceitação do método\"],\"exploratory_candidate_tests\":[\"Testar um sistema de fichas coloridas fixas em um quadro semanal com token de backup para comparar facilidade de uso\",\"Experimentar um calendário de papel dividido em blocos de três dias com assinatura de conclusão e coluna de substituto para avaliar se oferece melhor rastreio de responsabilidade\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Cartões de papel rotativos com registro em um pequeno livro de controle",
+    "feasibility_notes": [
+      "Método requer apenas papel, cartões e um pequeno livro de controle, sem necessidade de tecnologia adicional",
+      "Implementação é rápida e de baixo custo",
+      "Processo é visual e fácil de entender por todos os colaboradores",
+      "Requer disciplina diária para mover o cartão e registrar a tarefa concluída"
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de cartões de papel suficientemente duráveis",
+      "Um pequeno livro ou caderno para registrar a rotação diariamente",
+      "Compromisso dos três colaboradores de atualizar o registro a cada mudança de turno",
+      "Um local físico acessível onde o cartão e o livro ficarão armazenados",
+      "Procedimento claro de quem inicia a rotação no primeiro dia"
+    ],
+    "claims_needing_evidence": [
+      "A rotação de cartões garante que nenhum colaborador execute repetidamente a tarefa menos desejada",
+      "O registro em livro impede esquecimentos ou duplicações de atribuição",
+      "Os colaboradores percebem o sistema como justo ao longo de várias semanas"
+    ],
+    "potential_blockers": [
+      "Cartões podem ser perdidos, rasgados ou extraviados",
+      "Erros de anotação no livro podem quebrar a sequência de rotação",
+      "Esquecimento ou resistência dos colaboradores em atualizar o registro diariamente",
+      "Conflitos de agenda que impeçam a troca física do cartão no horário previsto"
+    ],
+    "candidate_tests": [
+      "Conduzir um piloto de 2 semanas com os três colaboradores usando o sistema de cartões e registrar quem executa a tarefa a cada dia",
+      "Auditar o livro de controle ao final da semana para verificar se a sequência de rotação foi mantida sem falhas",
+      "Aplicar um questionário de percepção de justiça aos colaboradores após o piloto para validar a aceitação do método"
+    ],
+    "exploratory_candidate_tests": [
+      "Testar um sistema de fichas coloridas fixas em um quadro semanal com token de backup para comparar facilidade de uso",
+      "Experimentar um calendário de papel dividido em blocos de três dias com assinatura de conclusão e coluna de substituto para avaliar se oferece melhor rastreio de responsabilidade"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:05:10.604408+00:00"
+}

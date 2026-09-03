@@ -1,0 +1,56 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Instalar um painel magnético na parede c...' (hash: 415b28941d52e096), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Instalar um painel magnético na parede com suportes magnéticos coloridos que fixam as ferramentas essenciais, garantindo que cada ferramenta tenha um local designado e visualmente identificável.\",\"feasibility_notes\":[\"A solução depende apenas de componentes físicos simples (painel magnético, suportes, tintas ou plásticos coloridos) e não requer software ou energia elétrica.\",\"A montagem pode ser feita em qualquer parede estruturalmente capaz de suportar o peso das ferramentas mais pesadas.\",\"A identificação por cor funciona desde que o operador reconheça consistentemente as cores atribuídas a cada ferramenta.\",\"Ferramentas não magnéticas podem ser adaptadas com bases de metal ou fitas magnéticas para aderir ao painel.\"],\"reality_dependencies\":[\"Disponibilidade de painéis magnéticos com força de atração suficiente para suportar o peso das ferramentas de reparo de bicicletas.\",\"Fornecimento de suportes magnéticos coloridos que possam ser fixados ao painel sem comprometer a força magnética.\",\"Espaço de parede livre de obstruções e com capacidade de carga adequada.\",\"Compatibilidade das ferramentas (ou adaptação) para que possam ser fixadas magneticamente.\"],\"claims_needing_evidence\":[\"O painel magnético escolhido suportará o peso máximo de uma chave de corrente ou alicate sem deslizar.\",\"A cor dos suportes será percebida de forma consistente pelos usuários em diferentes condições de iluminação.\",\"Ferramentas adaptadas com bases magnéticas manterão a aderência ao painel durante uso normal.\",\"A instalação do painel não causará danos estruturais à parede do galpão.\"],\"potential_blockers\":[\"Ferramentas que não possuem partes metálicas ferromagnéticas e não podem ser adaptadas facilmente.\",\"Força magnética insuficiente para ferramentas pesadas, exigindo reforço ou solução alternativa.\",\"Limitações de espaço na parede que impedem a disposição organizada de todos os suportes.\",\"Custo ou disponibilidade limitada de suportes magnéticos coloridos de alta qualidade.\"],\"candidate_tests\":[\"Teste de carga: pendurar cada ferramenta essencial no suporte correspondente e medir se há deslizamento após 5 minutos de uso contínuo.\",\"Teste de visibilidade: solicitar a diferentes operadores que identifiquem a ferramenta correta apenas pela cor dos suportes em iluminação padrão e baixa.\",\"Teste de durabilidade: simular 30 dias de uso diário, verificando desgaste dos suportes e perda de força magnética.\",\"Teste de instalação: montar o painel em uma parede típica do galpão e avaliar tempo, esforço e necessidade de reforços estruturais.\"],\"exploratory_candidate_tests\":[\"Avaliar a viabilidade de etiquetar ferramentas com chips RFID e usar um leitor portátil para localização em tempo real.\",\"Testar pequenos beacons Bluetooth acoplados a cada conjunto de ferramentas e desenvolver um aplicativo móvel que indique proximidade.\",\"Experimentar um painel magnético fino combinado com sensores de proximidade capacitiva para detectar a presença da ferramenta sem contato visual.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Instalar um painel magnético na parede com suportes magnéticos coloridos que fixam as ferramentas essenciais, garantindo que cada ferramenta tenha um local designado e visualmente identificável.",
+    "feasibility_notes": [
+      "A solução depende apenas de componentes físicos simples (painel magnético, suportes, tintas ou plásticos coloridos) e não requer software ou energia elétrica.",
+      "A montagem pode ser feita em qualquer parede estruturalmente capaz de suportar o peso das ferramentas mais pesadas.",
+      "A identificação por cor funciona desde que o operador reconheça consistentemente as cores atribuídas a cada ferramenta.",
+      "Ferramentas não magnéticas podem ser adaptadas com bases de metal ou fitas magnéticas para aderir ao painel."
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de painéis magnéticos com força de atração suficiente para suportar o peso das ferramentas de reparo de bicicletas.",
+      "Fornecimento de suportes magnéticos coloridos que possam ser fixados ao painel sem comprometer a força magnética.",
+      "Espaço de parede livre de obstruções e com capacidade de carga adequada.",
+      "Compatibilidade das ferramentas (ou adaptação) para que possam ser fixadas magneticamente."
+    ],
+    "claims_needing_evidence": [
+      "O painel magnético escolhido suportará o peso máximo de uma chave de corrente ou alicate sem deslizar.",
+      "A cor dos suportes será percebida de forma consistente pelos usuários em diferentes condições de iluminação.",
+      "Ferramentas adaptadas com bases magnéticas manterão a aderência ao painel durante uso normal.",
+      "A instalação do painel não causará danos estruturais à parede do galpão."
+    ],
+    "potential_blockers": [
+      "Ferramentas que não possuem partes metálicas ferromagnéticas e não podem ser adaptadas facilmente.",
+      "Força magnética insuficiente para ferramentas pesadas, exigindo reforço ou solução alternativa.",
+      "Limitações de espaço na parede que impedem a disposição organizada de todos os suportes.",
+      "Custo ou disponibilidade limitada de suportes magnéticos coloridos de alta qualidade."
+    ],
+    "candidate_tests": [
+      "Teste de carga: pendurar cada ferramenta essencial no suporte correspondente e medir se há deslizamento após 5 minutos de uso contínuo.",
+      "Teste de visibilidade: solicitar a diferentes operadores que identifiquem a ferramenta correta apenas pela cor dos suportes em iluminação padrão e baixa.",
+      "Teste de durabilidade: simular 30 dias de uso diário, verificando desgaste dos suportes e perda de força magnética.",
+      "Teste de instalação: montar o painel em uma parede típica do galpão e avaliar tempo, esforço e necessidade de reforços estruturais."
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a viabilidade de etiquetar ferramentas com chips RFID e usar um leitor portátil para localização em tempo real.",
+      "Testar pequenos beacons Bluetooth acoplados a cada conjunto de ferramentas e desenvolver um aplicativo móvel que indique proximidade.",
+      "Experimentar um painel magnético fino combinado com sensores de proximidade capacitiva para detectar a presença da ferramenta sem contato visual."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:14:40.233087+00:00"
+}

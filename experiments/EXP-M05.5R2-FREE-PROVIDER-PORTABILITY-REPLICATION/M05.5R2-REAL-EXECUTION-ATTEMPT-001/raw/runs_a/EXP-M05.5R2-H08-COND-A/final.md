@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.5R2-H08-COND-A
+
+## Ideia Original
+> Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.
+
+## Resumo do Modelo
+A proposta visa reduzir o desperdício de alimentos entre quem cozinha para 1‑2 pessoas, oferecendo sugestões de refeições personalizadas com base nos itens já disponíveis em casa e nas datas de validade aproximadas, e testando se essa intervenção altera o comportamento de compra e consumo.
+
+## Versão Refinada
+Desenvolver um aplicativo móvel "MealSaver" que permite ao usuário registrar rapidamente os alimentos disponíveis (via foto, código de barras ou entrada manual) e, a partir dessas informações, gera sugestões de receitas otimizadas para 1‑2 porções, priorizando ingredientes próximos da data de validade. O app inclui alertas de validade, opções de substituição e um painel de acompanhamento de desperdício (quantidade de alimentos descartados por semana). Para validar a hipótese, conduzir um estudo controlado de 8 semanas com duas coortes: grupo de intervenção (uso do app) e grupo de controle (sem sugestões). Métricas principais: redução percentual de peso de alimentos descartados, frequência de uso do app, e mudança nas compras de supermercado.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Foco em um segmento de consumo pequeno, onde o desperdício costuma ser maior por porções inadequadas, Abordagem personalizada que pode aumentar a relevância das sugestões, Potencial de impacto ambiental positivo ao reduzir alimentos descartados, Facilidade de implementação inicial via aplicativo ou web app simples, Métrica clara (redução de desperdício) para avaliação de eficácia
+- **Fracos:** Dependência de usuários inserirem ou escanearem corretamente os itens da despensa, o que pode gerar atrito, Necessidade de integrar bases de dados de validade de alimentos, que podem variar por marca e região, Desafio de medir o desperdício de forma objetiva sem exigir auto‑relato detalhado, Escalabilidade limitada se o protótipo não for adaptado a diferentes hábitos culinários, Possível viés de seleção: participantes já motivados a reduzir desperdício podem não representar a população geral
+
+## Próximos Passos
+Definir requisitos mínimos do MVP (registro de itens, algoritmo de sugestão, alertas de validade), Criar protótipo de interface e fluxo de usuário, Desenvolver algoritmo simples de correspondência de receitas usando base de dados aberta de receitas, Planejar desenho experimental (tamanho da amostra, critérios de inclusão, métricas de desperdício), Recrutar 30‑50 participantes que cozinham para 1‑2 pessoas e obter consentimento, Implementar coleta de dados (pesagem de resíduos domésticos ou auto‑relato estruturado), Executar o estudo piloto de 8 semanas e analisar resultados estatísticos, Iterar o produto com base no feedback e nos achados do piloto

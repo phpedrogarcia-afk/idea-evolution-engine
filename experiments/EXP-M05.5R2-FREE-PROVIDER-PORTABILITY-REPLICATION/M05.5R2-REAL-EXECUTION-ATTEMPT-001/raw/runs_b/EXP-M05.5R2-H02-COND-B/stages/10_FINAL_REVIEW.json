@@ -1,0 +1,33 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"Potential low participation leading to underutilization of the space\",\"Liability concerns despite the responsibility term and micro‑insurance\",\"Costs of insurance and management may exceed the allocated budget\",\"Reliance on a single resident facilitator could cause operational failures\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"The refined idea preserves the original intent of a small internal space for skill exchange among residents. Added supervision and micro‑insurance are appropriate risk mitigations, not ornamental features. No ontological contradictions or essence drift were detected. Remaining material issues are limited to participation risk, liability handling, budget constraints, and facilitator dependency, none of which constitute fatal flaws. The proposal is ready for implementation pending pilot testing.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Potential low participation leading to underutilization of the space",
+      "Liability concerns despite the responsibility term and micro‑insurance",
+      "Costs of insurance and management may exceed the allocated budget",
+      "Reliance on a single resident facilitator could cause operational failures"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "The refined idea preserves the original intent of a small internal space for skill exchange among residents. Added supervision and micro‑insurance are appropriate risk mitigations, not ornamental features. No ontological contradictions or essence drift were detected. Remaining material issues are limited to participation risk, liability handling, budget constraints, and facilitator dependency, none of which constitute fatal flaws. The proposal is ready for implementation pending pilot testing."
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:00:10.230156+00:00"
+}

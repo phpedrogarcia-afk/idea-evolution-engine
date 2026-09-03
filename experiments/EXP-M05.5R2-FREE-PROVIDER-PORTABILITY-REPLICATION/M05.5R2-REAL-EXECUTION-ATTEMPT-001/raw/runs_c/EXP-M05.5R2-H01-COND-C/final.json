@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H01-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Quero uma forma simples de dividir as tarefas de fechamento da minha pequena cafeteria entre três pessoas, sem precisar instalar um sistema de gestão. As tarefas mudam um pouco de dia para dia e ninguém deve ficar sempre com a parte mais chata.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

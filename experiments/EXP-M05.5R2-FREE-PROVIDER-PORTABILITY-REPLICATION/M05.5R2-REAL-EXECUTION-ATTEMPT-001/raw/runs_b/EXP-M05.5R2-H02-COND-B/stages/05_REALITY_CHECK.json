@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Cantinho de Habilidades rotativo, aberto...' (hash: 271da1bfba0ecd9b), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Cantinho de Habilidades rotativo, aberto em horários supervisionados por um facilitador residente, com assinatura de termo de responsabilidade e cobertura de microseguro do condomínio.\",\"feasibility_notes\":[\"A criação de um espaço físico dedicado dentro do condomínio é logisticamente viável se houver área subutilizada.\",\"A supervisão por um residente facilitador pode ser organizada através de rodízio voluntário ou remuneração simbólica.\",\"A assinatura de termo de responsabilidade é simples de implementar em papel ou digitalmente.\",\"A cobertura de microseguro pode ser negociada com a seguradora do condomínio, desde que o risco seja bem definido.\"],\"reality_dependencies\":[\"Disponibilidade de um espaço físico adequado dentro do condomínio\",\"Aprovação do conselho condominial para destinar o espaço e autorizar o microseguro\",\"Contratação ou aceitação de um residente como facilitador supervisor nas horas definidas\",\"Aceite da seguradora para emitir um microseguro que cubra danos decorrentes das trocas de habilidades\",\"Conformidade legal dos termos de responsabilidade com a legislação local\"],\"claims_needing_evidence\":[\"O microseguro proposto cobre efetivamente incidentes típicos de trocas de habilidades (ex.: danos a plantas, ferramentas ou lesões pessoais)\",\"A presença de um facilitador residente reduz significativamente a ocorrência de incidentes ou conflitos\",\"A assinatura do termo de responsabilidade tem efeito vinculante e é reconhecida em caso de disputa\",\"O modelo rotativo de uso do espaço mantém alta taxa de ocupação e engajamento dos moradores\"],\"potential_blockers\":[\"Falta de espaço disponível ou necessidade de reformas para adequar o local\",\"Dificuldade em encontrar residentes dispostos a assumir a função de facilitador de forma regular\",\"Recusa da seguradora em oferecer cobertura ou custos elevados do microseguro\",\"Resistência dos moradores a assinar termos de responsabilidade por medo de responsabilidade legal\",\"Burocracia ou restrições do regulamento interno do condomínio que impeçam a criação do espaço\"],\"candidate_tests\":[\"Realizar um piloto de 1 mês com o facilitador residente presente e registrar número de incidentes comparado a um período sem supervisão\",\"Simular uma situação de dano (ex.: quebra de ferramenta) e submeter a reclamação ao microseguro para validar cobertura e tempo de resposta\",\"Coletar assinaturas de termo de responsabilidade de um grupo de moradores e testar sua validade em um cenário de disputa hipotética\",\"Monitorar a ocupação do espaço rotativo durante diferentes horários para validar a eficácia do cronograma proposto\"],\"exploratory_candidate_tests\":[\"Desenvolver e testar uma versão digital da agenda de trocas de habilidades para comparar engajamento com o modelo físico\",\"Implementar um sistema de cartões de troca colados em mural e avaliar se aumenta a frequência de trocas\",\"Experimentar diferentes modelos de supervisão (ex.: supervisão remota via vídeo vs. presencial) para medir impacto no risco\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Cantinho de Habilidades rotativo, aberto em horários supervisionados por um facilitador residente, com assinatura de termo de responsabilidade e cobertura de microseguro do condomínio.",
+    "feasibility_notes": [
+      "A criação de um espaço físico dedicado dentro do condomínio é logisticamente viável se houver área subutilizada.",
+      "A supervisão por um residente facilitador pode ser organizada através de rodízio voluntário ou remuneração simbólica.",
+      "A assinatura de termo de responsabilidade é simples de implementar em papel ou digitalmente.",
+      "A cobertura de microseguro pode ser negociada com a seguradora do condomínio, desde que o risco seja bem definido."
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de um espaço físico adequado dentro do condomínio",
+      "Aprovação do conselho condominial para destinar o espaço e autorizar o microseguro",
+      "Contratação ou aceitação de um residente como facilitador supervisor nas horas definidas",
+      "Aceite da seguradora para emitir um microseguro que cubra danos decorrentes das trocas de habilidades",
+      "Conformidade legal dos termos de responsabilidade com a legislação local"
+    ],
+    "claims_needing_evidence": [
+      "O microseguro proposto cobre efetivamente incidentes típicos de trocas de habilidades (ex.: danos a plantas, ferramentas ou lesões pessoais)",
+      "A presença de um facilitador residente reduz significativamente a ocorrência de incidentes ou conflitos",
+      "A assinatura do termo de responsabilidade tem efeito vinculante e é reconhecida em caso de disputa",
+      "O modelo rotativo de uso do espaço mantém alta taxa de ocupação e engajamento dos moradores"
+    ],
+    "potential_blockers": [
+      "Falta de espaço disponível ou necessidade de reformas para adequar o local",
+      "Dificuldade em encontrar residentes dispostos a assumir a função de facilitador de forma regular",
+      "Recusa da seguradora em oferecer cobertura ou custos elevados do microseguro",
+      "Resistência dos moradores a assinar termos de responsabilidade por medo de responsabilidade legal",
+      "Burocracia ou restrições do regulamento interno do condomínio que impeçam a criação do espaço"
+    ],
+    "candidate_tests": [
+      "Realizar um piloto de 1 mês com o facilitador residente presente e registrar número de incidentes comparado a um período sem supervisão",
+      "Simular uma situação de dano (ex.: quebra de ferramenta) e submeter a reclamação ao microseguro para validar cobertura e tempo de resposta",
+      "Coletar assinaturas de termo de responsabilidade de um grupo de moradores e testar sua validade em um cenário de disputa hipotética",
+      "Monitorar a ocupação do espaço rotativo durante diferentes horários para validar a eficácia do cronograma proposto"
+    ],
+    "exploratory_candidate_tests": [
+      "Desenvolver e testar uma versão digital da agenda de trocas de habilidades para comparar engajamento com o modelo físico",
+      "Implementar um sistema de cartões de troca colados em mural e avaliar se aumenta a frequência de trocas",
+      "Experimentar diferentes modelos de supervisão (ex.: supervisão remota via vídeo vs. presencial) para medir impacto no risco"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T14:58:55.089574+00:00"
+}

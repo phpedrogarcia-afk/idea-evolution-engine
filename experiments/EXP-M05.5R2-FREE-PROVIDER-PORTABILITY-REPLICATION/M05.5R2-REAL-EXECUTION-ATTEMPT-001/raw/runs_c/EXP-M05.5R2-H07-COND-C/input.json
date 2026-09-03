@@ -1,0 +1,11 @@
+{
+  "run_id": "EXP-M05.5R2-H07-COND-C",
+  "created_at": "2026-09-03T15:09:25.606186+00:00",
+  "original_idea": "Quero uma ferramenta de linha de comando pequena que leia uma lista de tarefas do projeto e mostre apenas as que estão marcadas como bloqueadas, junto com a pessoa ou dependência indicada na própria lista.",
+  "metadata": {
+    "topology": "LEAN_IEE_L1",
+    "max_allowed_calls": 2,
+    "git_commit": "3b3f70419011d059a1199665343bf8e2e1444a62",
+    "environment_pid": 12096
+  }
+}

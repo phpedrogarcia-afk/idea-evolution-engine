@@ -1,0 +1,61 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Espaço físico interno denominado \"Cantin...' (hash: d3f490adf7eb0934), 5 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Espaço físico interno denominado \\\"Cantinho de Habilidades\\\" onde moradores trocam serviços sob supervisão de um facilitador residente, com termo de responsabilidade e microseguro do condomínio.\",\"feasibility_notes\":[\"A existência de um espaço interno disponível no prédio é plausível, mas depende da aprovação da administração e da alocação de metros quadrados adequados.\",\"A supervisão por um facilitador residente requer voluntariado ou remuneração, o que pode ser viável mediante acordo interno.\",\"A formalização de termo de responsabilidade e a contratação de microseguro são procedimentos administrativos já utilizados em condomínios, porém exigem aprovação da seguradora e da assembleia.\",\"A dinâmica de troca de serviços entre vizinhos costuma ser bem recebida em comunidades, mas depende de engajamento ativo dos moradores.\"],\"reality_dependencies\":[\"Aprovação da administração do condomínio para destinar um cômodo ao \\\"Cantinho de Habilidades\\\".\",\"Contratação ou designação de um facilitador residente com disponibilidade regular para supervisionar as trocas.\",\"Elaboração e assinatura de termo de responsabilidade por todos os participantes.\",\"Contratação de um microseguro que cubra incidentes ocorridos no espaço e nas atividades realizadas.\",\"Conformidade com normas de segurança e acessibilidade do prédio (ex.: saída de emergência, capacidade de ocupação).\"],\"claims_needing_evidence\":[\"O microseguro proposto cobre danos materiais e pessoais decorrentes das atividades de jardinagem, consertos e aulas de idioma.\",\"Um facilitador residente pode monitorar efetivamente as trocas sem criar gargalos ou atrasos.\",\"Os moradores estão dispostos a assinar termos de responsabilidade e a participar ativamente do espaço.\",\"A presença do espaço físico interno aumenta a frequência de trocas de habilidades em comparação com um modelo apenas digital.\",\"A estrutura física do condomínio permite a instalação segura de um espaço dedicado sem necessidade de reformas estruturais significativas.\"],\"potential_blockers\":[\"Recusa da administração em liberar espaço interno devido a prioridades de uso ou custos de adequação.\",\"Dificuldade em encontrar um facilitador residente comprometido ou em financiar sua remuneração.\",\"Custos elevados ou exclusões da apólice de microseguro que tornem a cobertura inviável.\",\"Baixa adesão dos moradores ao termo de responsabilidade ou ao uso do espaço por falta de interesse ou medo de responsabilidade.\",\"Restrições legais ou regulatórias que impeçam a realização de atividades de reparo ou ensino dentro de áreas residenciais compartilhadas.\"],\"candidate_tests\":[\"Realizar um piloto de 2 semanas alocando uma sala comum como \\\"Cantinho de Habilidades\\\" e medir número de trocas realizadas e incidentes ocorridos.\",\"Conduzir uma pesquisa com os moradores para validar interesse e disposição em assinar o termo de responsabilidade antes do lançamento oficial.\",\"Negociar com uma seguradora um contrato de microseguro e solicitar uma simulação de sinistro para validar cobertura e custos.\",\"Treinar um morador voluntário como facilitador e observar sua capacidade de supervisionar as atividades em um dia‑a‑dia de uso.\",\"Inspecionar a sala designada quanto a requisitos de segurança (capacidade, saída de emergência, acessibilidade) e obter aprovação do corpo técnico do condomínio.\"],\"exploratory_candidate_tests\":[\"Testar estações rotativas de habilidades instaladas em áreas comuns (sala de festas, corredor principal) com agenda pré‑definida e monitoramento leve para avaliar viabilidade de uso compartilhado sem um espaço dedicado.\",\"Estabelecer parceria piloto com um coworking local para usar uma sala externa como \\\"Cantinho de Habilidades\\\" durante fins de semana e analisar custos e aceitação dos moradores.\",\"Desenvolver um protótipo de plataforma digital de agendamento e reputação para complementar o espaço físico e medir se a integração digital aumenta a frequência de trocas.\",\"Implementar um programa de microseguro coletivo para áreas comuns rotativas e comparar a eficácia de cobertura versus o modelo de seguro específico do espaço interno.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Espaço físico interno denominado \"Cantinho de Habilidades\" onde moradores trocam serviços sob supervisão de um facilitador residente, com termo de responsabilidade e microseguro do condomínio.",
+    "feasibility_notes": [
+      "A existência de um espaço interno disponível no prédio é plausível, mas depende da aprovação da administração e da alocação de metros quadrados adequados.",
+      "A supervisão por um facilitador residente requer voluntariado ou remuneração, o que pode ser viável mediante acordo interno.",
+      "A formalização de termo de responsabilidade e a contratação de microseguro são procedimentos administrativos já utilizados em condomínios, porém exigem aprovação da seguradora e da assembleia.",
+      "A dinâmica de troca de serviços entre vizinhos costuma ser bem recebida em comunidades, mas depende de engajamento ativo dos moradores."
+    ],
+    "reality_dependencies": [
+      "Aprovação da administração do condomínio para destinar um cômodo ao \"Cantinho de Habilidades\".",
+      "Contratação ou designação de um facilitador residente com disponibilidade regular para supervisionar as trocas.",
+      "Elaboração e assinatura de termo de responsabilidade por todos os participantes.",
+      "Contratação de um microseguro que cubra incidentes ocorridos no espaço e nas atividades realizadas.",
+      "Conformidade com normas de segurança e acessibilidade do prédio (ex.: saída de emergência, capacidade de ocupação)."
+    ],
+    "claims_needing_evidence": [
+      "O microseguro proposto cobre danos materiais e pessoais decorrentes das atividades de jardinagem, consertos e aulas de idioma.",
+      "Um facilitador residente pode monitorar efetivamente as trocas sem criar gargalos ou atrasos.",
+      "Os moradores estão dispostos a assinar termos de responsabilidade e a participar ativamente do espaço.",
+      "A presença do espaço físico interno aumenta a frequência de trocas de habilidades em comparação com um modelo apenas digital.",
+      "A estrutura física do condomínio permite a instalação segura de um espaço dedicado sem necessidade de reformas estruturais significativas."
+    ],
+    "potential_blockers": [
+      "Recusa da administração em liberar espaço interno devido a prioridades de uso ou custos de adequação.",
+      "Dificuldade em encontrar um facilitador residente comprometido ou em financiar sua remuneração.",
+      "Custos elevados ou exclusões da apólice de microseguro que tornem a cobertura inviável.",
+      "Baixa adesão dos moradores ao termo de responsabilidade ou ao uso do espaço por falta de interesse ou medo de responsabilidade.",
+      "Restrições legais ou regulatórias que impeçam a realização de atividades de reparo ou ensino dentro de áreas residenciais compartilhadas."
+    ],
+    "candidate_tests": [
+      "Realizar um piloto de 2 semanas alocando uma sala comum como \"Cantinho de Habilidades\" e medir número de trocas realizadas e incidentes ocorridos.",
+      "Conduzir uma pesquisa com os moradores para validar interesse e disposição em assinar o termo de responsabilidade antes do lançamento oficial.",
+      "Negociar com uma seguradora um contrato de microseguro e solicitar uma simulação de sinistro para validar cobertura e custos.",
+      "Treinar um morador voluntário como facilitador e observar sua capacidade de supervisionar as atividades em um dia‑a‑dia de uso.",
+      "Inspecionar a sala designada quanto a requisitos de segurança (capacidade, saída de emergência, acessibilidade) e obter aprovação do corpo técnico do condomínio."
+    ],
+    "exploratory_candidate_tests": [
+      "Testar estações rotativas de habilidades instaladas em áreas comuns (sala de festas, corredor principal) com agenda pré‑definida e monitoramento leve para avaliar viabilidade de uso compartilhado sem um espaço dedicado.",
+      "Estabelecer parceria piloto com um coworking local para usar uma sala externa como \"Cantinho de Habilidades\" durante fins de semana e analisar custos e aceitação dos moradores.",
+      "Desenvolver um protótipo de plataforma digital de agendamento e reputação para complementar o espaço físico e medir se a integração digital aumenta a frequência de trocas.",
+      "Implementar um programa de microseguro coletivo para áreas comuns rotativas e comparar a eficácia de cobertura versus o modelo de seguro específico do espaço interno."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T14:59:55.527842+00:00"
+}

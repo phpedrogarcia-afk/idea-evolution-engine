@@ -1,0 +1,59 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Manual entry of pantry items with expiry...' (hash: 7f1de05b97918eb4), 5 dependências, 4 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Manual entry of pantry items with expiry dates, generation of meal suggestions based on that data, and collection of self-reported food-waste metrics for pre- and post-intervention analysis.\",\"feasibility_notes\":[\"Manual data entry is low‑tech and readily implementable on any smartphone platform\",\"Meal‑suggestion algorithms can be built using simple rule‑based matching to pantry contents and expiry dates\",\"Self‑reported waste metrics are easy to capture but rely on user honesty and recall\",\"Overall system is lightweight and does not require complex hardware or external services\"],\"reality_dependencies\":[\"Recruitment of a representative sample of small‑household cooks willing to use the app for the study duration\",\"Baseline measurement of participants' typical cooking habits and food‑waste levels\",\"Reliable self‑reporting mechanisms (e.g., daily logs or prompts) to capture waste before and after intervention\",\"Stable internet connectivity only for optional data backup; core functions work offline\",\"Ethical approval and informed consent for collecting behavioral data\"],\"claims_needing_evidence\":[\"Providing pantry‑based meal suggestions leads to a measurable change in cooking behavior\",\"The intervention reduces the amount of food waste reported by participants\",\"Self‑reported waste data correlate sufficiently with actual waste to serve as a valid outcome measure\",\"The suggestion engine produces recipes that users find acceptable and feasible to prepare\"],\"potential_blockers\":[\"Low user compliance with manual entry of pantry items and expiry dates\",\"Inaccurate or inconsistent self‑reporting of food waste\",\"Participant attrition over the study period\",\"Bias introduced by participants' desire to appear more sustainable\",\"Limited statistical power due to small sample size\"],\"candidate_tests\":[\"Run a randomized controlled trial where one group uses the app and a control group follows usual habits; compare pre‑ and post‑intervention waste reports\",\"Measure entry compliance rates by tracking frequency and completeness of pantry logs over a 4‑week period\",\"Conduct a usability survey to assess perceived usefulness and ease of use of the meal‑suggestion feature\",\"Validate self‑reported waste by spot‑checking a subset of participants with actual waste audits\"],\"exploratory_candidate_tests\":[\"Evaluate an image‑capture prototype that auto‑populates pantry items against manual entry for accuracy and speed\",\"Test an AI‑based visual waste‑logging module by comparing estimated waste from photos to manual weight measurements\",\"Assess user acceptance of a pre‑loaded common‑item list with default expiry estimates versus fully manual entry\",\"Prototype an adaptive recommendation system that learns from user feedback and compare its suggestion relevance to the rule‑based core engine\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Manual entry of pantry items with expiry dates, generation of meal suggestions based on that data, and collection of self-reported food-waste metrics for pre- and post-intervention analysis.",
+    "feasibility_notes": [
+      "Manual data entry is low‑tech and readily implementable on any smartphone platform",
+      "Meal‑suggestion algorithms can be built using simple rule‑based matching to pantry contents and expiry dates",
+      "Self‑reported waste metrics are easy to capture but rely on user honesty and recall",
+      "Overall system is lightweight and does not require complex hardware or external services"
+    ],
+    "reality_dependencies": [
+      "Recruitment of a representative sample of small‑household cooks willing to use the app for the study duration",
+      "Baseline measurement of participants' typical cooking habits and food‑waste levels",
+      "Reliable self‑reporting mechanisms (e.g., daily logs or prompts) to capture waste before and after intervention",
+      "Stable internet connectivity only for optional data backup; core functions work offline",
+      "Ethical approval and informed consent for collecting behavioral data"
+    ],
+    "claims_needing_evidence": [
+      "Providing pantry‑based meal suggestions leads to a measurable change in cooking behavior",
+      "The intervention reduces the amount of food waste reported by participants",
+      "Self‑reported waste data correlate sufficiently with actual waste to serve as a valid outcome measure",
+      "The suggestion engine produces recipes that users find acceptable and feasible to prepare"
+    ],
+    "potential_blockers": [
+      "Low user compliance with manual entry of pantry items and expiry dates",
+      "Inaccurate or inconsistent self‑reporting of food waste",
+      "Participant attrition over the study period",
+      "Bias introduced by participants' desire to appear more sustainable",
+      "Limited statistical power due to small sample size"
+    ],
+    "candidate_tests": [
+      "Run a randomized controlled trial where one group uses the app and a control group follows usual habits; compare pre‑ and post‑intervention waste reports",
+      "Measure entry compliance rates by tracking frequency and completeness of pantry logs over a 4‑week period",
+      "Conduct a usability survey to assess perceived usefulness and ease of use of the meal‑suggestion feature",
+      "Validate self‑reported waste by spot‑checking a subset of participants with actual waste audits"
+    ],
+    "exploratory_candidate_tests": [
+      "Evaluate an image‑capture prototype that auto‑populates pantry items against manual entry for accuracy and speed",
+      "Test an AI‑based visual waste‑logging module by comparing estimated waste from photos to manual weight measurements",
+      "Assess user acceptance of a pre‑loaded common‑item list with default expiry estimates versus fully manual entry",
+      "Prototype an adaptive recommendation system that learns from user feedback and compare its suggestion relevance to the rule‑based core engine"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T14:57:10.773454+00:00"
+}

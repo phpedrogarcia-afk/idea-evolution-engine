@@ -1,0 +1,60 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Painel magnético vertical com suportes c...' (hash: 4cfa561fd9f4a90e), 5 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Painel magnético vertical com suportes coloridos designados para cada ferramenta essencial.\",\"feasibility_notes\":[\"Os suportes coloridos podem ser fabricados em plástico ou metal e fixados ao painel magnético sem comprometer a força magnética\",\"A força magnética necessária depende do peso e do material das ferramentas (ex.: chaves de fenda, alicates)\",\"A instalação requer apenas parafusos ou suportes de fixação na parede, o que é simples em um galpão de bicicletas\",\"A codificação por cores facilita a identificação visual rápida, desde que a iluminação do ambiente seja adequada\",\"O painel pode ser dimensionado modularmente para acomodar diferentes quantidades de ferramentas\"],\"reality_dependencies\":[\"Painel magnético de aço ou material ferromagnético com força de retenção suficiente\",\"Ímãs de neodímio ou outro tipo de ímã de alta potência para garantir a fixação das ferramentas\",\"Suportes coloridos (plástico, alumínio pintado ou outro material) projetados para acomodar as formas das ferramentas\",\"Método de fixação do painel à parede (parafusos, buchas, suportes)\",\"Ferramentas que contenham componentes ferromagnéticos ou a adição de inserções magnéticas quando necessário\"],\"claims_needing_evidence\":[\"As ferramentas permanecerão firmemente fixas ao painel durante o uso normal e vibrações típicas de um galpão\",\"A codificação por cores permitirá a localização instantânea das ferramentas em diferentes condições de iluminação\",\"O painel magnético suportará o peso combinado das ferramentas sem deformar ou perder magnetismo ao longo do tempo\"],\"potential_blockers\":[\"Ferramentas feitas de materiais não magnéticos (ex.: alumínio puro, plástico) que não aderem ao painel\",\"Desgaste dos ímãs que reduz a força de retenção com o tempo\",\"Corrosão dos ímãs ou do painel em ambientes úmidos ou com exposição a produtos químicos\",\"Limitações de espaço na parede que impedem a instalação de um painel suficientemente grande\",\"Risco de lesões se ferramentas pesadas caírem devido a fixação inadequada\"],\"candidate_tests\":[\"Teste de carga: pendurar cada ferramenta no suporte correspondente e medir a força necessária para removê‑la\",\"Teste de resistência ao impacto: simular vibrações e batidas típicas do ambiente e observar se as ferramentas permanecem fixas\",\"Teste de visibilidade: avaliar a rapidez com que um operador identifica a ferramenta correta sob diferentes níveis de iluminação\",\"Teste de durabilidade: expor o painel a ciclos de uso diário por 30 dias e verificar perda de magnetismo ou desgaste dos suportes\",\"Teste de instalação: medir o tempo e a facilidade de fixação do painel na parede usando os métodos de montagem previstos\"],\"exploratory_candidate_tests\":[\"Desenvolver um aplicativo móvel que lê códigos QR colados nas ferramentas e registra a posição em tempo real; testar a precisão da localização via QR em diferentes ângulos de leitura\",\"Implementar etiquetas RFID em cada ferramenta e instalar um leitor RFID fixo; medir a latência e a taxa de detecção quando a ferramenta está fora de sua posição designada\",\"Criar um shadow board com recortes de silhueta e sensores de peso discretos; validar se o display LED indica corretamente a ausência da ferramenta\",\"Avaliar a combinação de QR code + RFID para redundância de rastreamento; comparar custos e complexidade de integração\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Painel magnético vertical com suportes coloridos designados para cada ferramenta essencial.",
+    "feasibility_notes": [
+      "Os suportes coloridos podem ser fabricados em plástico ou metal e fixados ao painel magnético sem comprometer a força magnética",
+      "A força magnética necessária depende do peso e do material das ferramentas (ex.: chaves de fenda, alicates)",
+      "A instalação requer apenas parafusos ou suportes de fixação na parede, o que é simples em um galpão de bicicletas",
+      "A codificação por cores facilita a identificação visual rápida, desde que a iluminação do ambiente seja adequada",
+      "O painel pode ser dimensionado modularmente para acomodar diferentes quantidades de ferramentas"
+    ],
+    "reality_dependencies": [
+      "Painel magnético de aço ou material ferromagnético com força de retenção suficiente",
+      "Ímãs de neodímio ou outro tipo de ímã de alta potência para garantir a fixação das ferramentas",
+      "Suportes coloridos (plástico, alumínio pintado ou outro material) projetados para acomodar as formas das ferramentas",
+      "Método de fixação do painel à parede (parafusos, buchas, suportes)",
+      "Ferramentas que contenham componentes ferromagnéticos ou a adição de inserções magnéticas quando necessário"
+    ],
+    "claims_needing_evidence": [
+      "As ferramentas permanecerão firmemente fixas ao painel durante o uso normal e vibrações típicas de um galpão",
+      "A codificação por cores permitirá a localização instantânea das ferramentas em diferentes condições de iluminação",
+      "O painel magnético suportará o peso combinado das ferramentas sem deformar ou perder magnetismo ao longo do tempo"
+    ],
+    "potential_blockers": [
+      "Ferramentas feitas de materiais não magnéticos (ex.: alumínio puro, plástico) que não aderem ao painel",
+      "Desgaste dos ímãs que reduz a força de retenção com o tempo",
+      "Corrosão dos ímãs ou do painel em ambientes úmidos ou com exposição a produtos químicos",
+      "Limitações de espaço na parede que impedem a instalação de um painel suficientemente grande",
+      "Risco de lesões se ferramentas pesadas caírem devido a fixação inadequada"
+    ],
+    "candidate_tests": [
+      "Teste de carga: pendurar cada ferramenta no suporte correspondente e medir a força necessária para removê‑la",
+      "Teste de resistência ao impacto: simular vibrações e batidas típicas do ambiente e observar se as ferramentas permanecem fixas",
+      "Teste de visibilidade: avaliar a rapidez com que um operador identifica a ferramenta correta sob diferentes níveis de iluminação",
+      "Teste de durabilidade: expor o painel a ciclos de uso diário por 30 dias e verificar perda de magnetismo ou desgaste dos suportes",
+      "Teste de instalação: medir o tempo e a facilidade de fixação do painel na parede usando os métodos de montagem previstos"
+    ],
+    "exploratory_candidate_tests": [
+      "Desenvolver um aplicativo móvel que lê códigos QR colados nas ferramentas e registra a posição em tempo real; testar a precisão da localização via QR em diferentes ângulos de leitura",
+      "Implementar etiquetas RFID em cada ferramenta e instalar um leitor RFID fixo; medir a latência e a taxa de detecção quando a ferramenta está fora de sua posição designada",
+      "Criar um shadow board com recortes de silhueta e sensores de peso discretos; validar se o display LED indica corretamente a ausência da ferramenta",
+      "Avaliar a combinação de QR code + RFID para redundância de rastreamento; comparar custos e complexidade de integração"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:15:40.385537+00:00"
+}

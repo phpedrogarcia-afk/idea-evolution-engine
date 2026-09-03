@@ -1,0 +1,54 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Implementar um parser simples para um fo...' (hash: 21b6322d30f757c5), 4 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Implementar um parser simples para um formato de arquivo definido (por exemplo, JSON) que extrai as tarefas cujo campo \\\"status\\\" é \\\"blocked\\\" e imprime o título da tarefa junto ao campo \\\"responsavel\\\".\",\"feasibility_notes\":[\"O parser pode ser implementado em poucas linhas usando bibliotecas padrão de JSON disponíveis na maioria das linguagens (ex.: json em Python, JSON.parse em Node.js).\",\"A lógica de filtragem (status == \\\"blocked\\\") e a concatenação do título com o responsável são operações triviais de manipulação de objetos.\",\"Requisitos de linha de comando (receber caminho do arquivo, imprimir resultados) são bem‑estabelecidos e não exigem infraestrutura adicional.\"],\"reality_dependencies\":[\"Um arquivo de entrada JSON válido contendo objetos de tarefa com os campos \\\"title\\\", \\\"status\\\" e \\\"responsavel\\\".\",\"Biblioteca de parsing JSON compatível com a linguagem de implementação escolhida.\",\"Ambiente de execução que permita leitura de arquivos e escrita na saída padrão (stdout).\",\"Codificação de texto (UTF‑8) consistente entre o arquivo de entrada e o programa.\"],\"claims_needing_evidence\":[\"O parser identifica corretamente todas as tarefas cujo campo \\\"status\\\" tem o valor exato \\\"blocked\\\" (sensível a maiúsculas/minúsculas).\",\"O programa exibe o título da tarefa seguido exatamente do valor do campo \\\"responsavel\\\" sem alterações ou formatação inesperada.\"],\"potential_blockers\":[\"Arquivo JSON malformado ou com sintaxe inválida impede o parsing e pode causar falha do programa.\",\"Ausência de um dos campos esperados (ex.: \\\"responsavel\\\" ou \\\"title\\\") em alguma tarefa bloqueada gera erro ou saída incompleta.\",\"Problemas de permissão de leitura no caminho do arquivo fornecido ao comando.\",\"Tamanhos de arquivo muito grandes podem exceder limites de memória ou tempo de execução em ambientes restritos.\"],\"candidate_tests\":[\"Teste unitário com um arquivo JSON contendo três tarefas, duas com \\\"status\\\":\\\"blocked\\\" e uma com outro status; verificar que a saída lista apenas as duas tarefas bloqueadas e mostra seus respectivos \\\"responsavel\\\".\",\"Teste de tratamento de arquivo JSON inexistente: o programa deve emitir mensagem de erro clara e retornar código de saída não‑zero.\",\"Teste de JSON malformado: garantir que o programa captura a exceção de parsing e informa o usuário sem gerar stack trace inesperado.\",\"Teste de tarefa bloqueada sem campo \\\"responsavel\\\": o programa deve exibir um placeholder (ex.: \\\"Responsavel não especificado\\\") ou mensagem de aviso conforme especificado no código.\",\"Teste de linha de comando com caminho relativo e absoluto para validar o correto manuseio de argumentos de arquivo.\"],\"exploratory_candidate_tests\":[\"Implementar um parser que aceita tanto JSON quanto YAML e validar com arquivos de exemplo em cada formato.\",\"Desenvolver um mecanismo de configuração onde o usuário define quais chaves correspondem a \\\"status\\\" e \\\"responsavel\\\" e testar a correta leitura desse esquema.\",\"Criar uma arquitetura de plugins que permite adicionar suporte a CSV; testar o carregamento dinâmico do plugin e a extração de tarefas bloqueadas a partir de um CSV de exemplo.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Implementar um parser simples para um formato de arquivo definido (por exemplo, JSON) que extrai as tarefas cujo campo \"status\" é \"blocked\" e imprime o título da tarefa junto ao campo \"responsavel\".",
+    "feasibility_notes": [
+      "O parser pode ser implementado em poucas linhas usando bibliotecas padrão de JSON disponíveis na maioria das linguagens (ex.: json em Python, JSON.parse em Node.js).",
+      "A lógica de filtragem (status == \"blocked\") e a concatenação do título com o responsável são operações triviais de manipulação de objetos.",
+      "Requisitos de linha de comando (receber caminho do arquivo, imprimir resultados) são bem‑estabelecidos e não exigem infraestrutura adicional."
+    ],
+    "reality_dependencies": [
+      "Um arquivo de entrada JSON válido contendo objetos de tarefa com os campos \"title\", \"status\" e \"responsavel\".",
+      "Biblioteca de parsing JSON compatível com a linguagem de implementação escolhida.",
+      "Ambiente de execução que permita leitura de arquivos e escrita na saída padrão (stdout).",
+      "Codificação de texto (UTF‑8) consistente entre o arquivo de entrada e o programa."
+    ],
+    "claims_needing_evidence": [
+      "O parser identifica corretamente todas as tarefas cujo campo \"status\" tem o valor exato \"blocked\" (sensível a maiúsculas/minúsculas).",
+      "O programa exibe o título da tarefa seguido exatamente do valor do campo \"responsavel\" sem alterações ou formatação inesperada."
+    ],
+    "potential_blockers": [
+      "Arquivo JSON malformado ou com sintaxe inválida impede o parsing e pode causar falha do programa.",
+      "Ausência de um dos campos esperados (ex.: \"responsavel\" ou \"title\") em alguma tarefa bloqueada gera erro ou saída incompleta.",
+      "Problemas de permissão de leitura no caminho do arquivo fornecido ao comando.",
+      "Tamanhos de arquivo muito grandes podem exceder limites de memória ou tempo de execução em ambientes restritos."
+    ],
+    "candidate_tests": [
+      "Teste unitário com um arquivo JSON contendo três tarefas, duas com \"status\":\"blocked\" e uma com outro status; verificar que a saída lista apenas as duas tarefas bloqueadas e mostra seus respectivos \"responsavel\".",
+      "Teste de tratamento de arquivo JSON inexistente: o programa deve emitir mensagem de erro clara e retornar código de saída não‑zero.",
+      "Teste de JSON malformado: garantir que o programa captura a exceção de parsing e informa o usuário sem gerar stack trace inesperado.",
+      "Teste de tarefa bloqueada sem campo \"responsavel\": o programa deve exibir um placeholder (ex.: \"Responsavel não especificado\") ou mensagem de aviso conforme especificado no código.",
+      "Teste de linha de comando com caminho relativo e absoluto para validar o correto manuseio de argumentos de arquivo."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar um parser que aceita tanto JSON quanto YAML e validar com arquivos de exemplo em cada formato.",
+      "Desenvolver um mecanismo de configuração onde o usuário define quais chaves correspondem a \"status\" e \"responsavel\" e testar a correta leitura desse esquema.",
+      "Criar uma arquitetura de plugins que permite adicionar suporte a CSV; testar o carregamento dinâmico do plugin e a extração de tarefas bloqueadas a partir de um CSV de exemplo."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T15:07:55.238304+00:00"
+}

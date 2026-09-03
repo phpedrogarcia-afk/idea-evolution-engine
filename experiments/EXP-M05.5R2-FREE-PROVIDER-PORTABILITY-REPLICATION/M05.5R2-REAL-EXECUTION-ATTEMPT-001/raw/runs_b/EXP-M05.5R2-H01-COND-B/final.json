@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R2-H01-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Quero uma forma simples de dividir as tarefas de fechamento da minha pequena cafeteria entre três pessoas, sem precisar instalar um sistema de gestão. As tarefas mudam um pouco de dia para dia e ninguém deve ficar sempre com a parte mais chata.",
+  "human_intent": "Encontrar um método simples para repartir as tarefas de fechamento entre três colaboradores, garantindo rotatividade e evitando que a mesma pessoa execute sempre a tarefa menos desejada, sem necessidade de software ou sistema de gestão.",
+  "refined_idea": "Método manual simples para rotacionar as tarefas de fechamento entre três colaboradores, garantindo variação diária e evitando que a mesma pessoa execute sempre a tarefa menos desejada.",
+  "core_mechanism": "Calendário impresso mensal com linhas para cada dia e colunas para os três colaboradores; antes do mês começar, preenche‑se a rotação considerando a carga de trabalho estimada e inclui‑se uma coluna reserva para cobrir ausências.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "50b556dc34e9c2ee",
+  "tested_core_hash": "50b556dc34e9c2ee",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Imprimir o calendário mensal, definir a rotação inicial baseada na carga estimada, treinar a equipe para atualização diária e estabelecer um plano de contingência simples (ex.: colaborador reserva) para ausências inesperadas."
+}
