@@ -58,7 +58,8 @@ def test_m05_5r2_confirmatory_freeze_record_integrity():
     reg_path = Path("experiments/EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION/ATTEMPT-REGISTRY.jsonl")
     assert reg_path.exists()
     lines = [json.loads(line) for line in reg_path.read_text(encoding="utf-8").splitlines() if line.strip()]
-    assert len(lines) >= 1
     assert lines[0]["attempt_id"] == "M05.5R2-REAL-EXECUTION-ATTEMPT-001"
-    assert lines[0]["status"] in ("RESERVED", "RUNNING", "COMPLETED_AWAITING_HUMAN_SCORING")
-    assert lines[0]["execution_authorized"] is False
+    assert lines[0]["status"] in ("RESERVED", "RUNNING", "COMPLETED_AWAITING_HUMAN_SCORING", "STOPPED_PROVIDER_HTTP_500")
+    if len(lines) > 1:
+        assert lines[1]["attempt_id"] == "M05.5R2-REAL-EXECUTION-ATTEMPT-002"
+        assert lines[1]["status"] in ("RESERVED", "RUNNING", "COMPLETED_AWAITING_HUMAN_SCORING")

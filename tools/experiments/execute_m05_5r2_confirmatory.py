@@ -61,7 +61,7 @@ T = TypeVar("T", bound=BaseModel)
 # Constants
 # ---------------------------------------------------------------------------
 EXPERIMENT_ID = "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION"
-DEFAULT_ATTEMPT_ID = "M05.5R2-REAL-EXECUTION-ATTEMPT-001"
+DEFAULT_ATTEMPT_ID = "M05.5R2-REAL-EXECUTION-ATTEMPT-002"
 PROVIDER = "cerebras"
 SCIENTIFIC_MODEL = SCIENTIFIC_MODEL_ID  # "openai/gpt-oss-120b"
 TRANSPORT_MODEL = CEREBRAS_TRANSPORT_MODEL_ID  # "gpt-oss-120b"
@@ -69,6 +69,10 @@ SERVICE_TIER = "FREE_TRIAL"
 CONCURRENCY = 1
 OUTPUT_CAP = 4096
 OUTPUT_CAP_SYMMETRY = "A_4096_B_4096_C_4096"
+
+MAX_IDENTICAL_HTTP500_REPLAYS_PER_LOGICAL_CALL = 1
+MAX_TOTAL_HTTP500_REPLAYS_PER_ATTEMPT = 1
+SDK_MAX_RETRIES = 0
 
 EFFECTIVE_RPM = 5
 EFFECTIVE_TPM = 30000
@@ -238,11 +242,32 @@ class TokenAwarePacer:
 
 
 # ---------------------------------------------------------------------------
+# Attempt Resilience Tracker (HTTP 500 Bounded Amendment 001)
+# ---------------------------------------------------------------------------
+class AttemptResilienceTracker:
+    """
+    Rastreia o orçamento global de resiliência HTTP 500 por tentativa confirmatória.
+    Sob a Emenda 001:
+      MAX_IDENTICAL_HTTP500_REPLAYS_PER_LOGICAL_CALL = 1
+      MAX_TOTAL_HTTP500_REPLAYS_PER_ATTEMPT = 1
+      SDK_MAX_RETRIES = 0
+    """
+
+    def __init__(self, max_attempt_http500_replays: int = MAX_TOTAL_HTTP500_REPLAYS_PER_ATTEMPT):
+        self.max_attempt_http500_replays = max_attempt_http500_replays
+        self.http500_replays_used = 0
+        self.http500_errors_seen = 0
+        self.http500_replay_successes = 0
+        self.http500_replay_exhausted = False
+
+
+# ---------------------------------------------------------------------------
 # Confirmatory ModelRunner
 # ---------------------------------------------------------------------------
 class ConfirmatoryCerebrasRunner(ModelRunner):
     """
-    Executor ModelRunner com verificação de cotas, token-aware pacing e teto de 4096 tokens.
+    Executor ModelRunner com verificação de cotas, token-aware pacing,
+    teto de 4096 tokens e resiliência estrita a HTTP 500 (Emenda 001).
     """
 
     def __init__(
@@ -251,6 +276,7 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
         pacer: TokenAwarePacer,
         cell_id: str,
         treatment: str,
+        tracker: Optional[AttemptResilienceTracker] = None,
         temperature: float = 0.3,
         max_tokens: int = OUTPUT_CAP,
     ):
@@ -261,6 +287,7 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
         self.pacer = pacer
         self.cell_id = cell_id
         self.treatment = treatment
+        self.tracker = tracker or AttemptResilienceTracker()
         self.call_count = 0
         self.closed_outcome: Optional[str] = None
         self.builder = CerebrasTransportBuilder(
@@ -333,19 +360,20 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
             temperature=self.temperature,
             max_tokens=self.max_tokens,
         )
+        payload_sha256 = self.builder.compute_sanitized_payload_sha256(payload)
         headers = self.builder.build_headers()
         req_data = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
-            f"{self.builder.base_url}/chat/completions",
-            data=req_data,
-            headers=headers,
-            method="POST",
-        )
 
         # Registrar despacho no pacer
         self.pacer.record_dispatch(reserved_request_tokens)
 
-        try:
+        def _execute_http_request(is_replay: bool = False) -> ModelResponse[T]:
+            req = urllib.request.Request(
+                f"{self.builder.base_url}/chat/completions",
+                data=req_data,
+                headers=headers,
+                method="POST",
+            )
             with urllib.request.urlopen(req, timeout=120) as resp:
                 resp_bytes = resp.read()
                 resp_json = json.loads(resp_bytes.decode("utf-8"))
@@ -358,7 +386,7 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
                 actual_comp = usage_info.get("completion_tokens", 0)
                 cap_util = round(actual_comp / self.max_tokens, 4) if self.max_tokens else 0.0
 
-                # 5. Monitoramento do Teto de 4096 tokens
+                # Monitoramento do Teto de 4096 tokens
                 if actual_comp >= self.max_tokens or finish_reason == "length":
                     self.ledger.append({
                         "event": "output_cap_binding",
@@ -379,6 +407,8 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
                     "treatment": self.treatment,
                     "stage_name": actual_stage,
                     "http_status": 200,
+                    "is_http500_replay": is_replay,
+                    "sanitized_payload_sha256": payload_sha256,
                     "actual_prompt_tokens": usage_info.get("prompt_tokens", 0),
                     "actual_completion_tokens": actual_comp,
                     "actual_total_tokens": usage_info.get("total_tokens", 0),
@@ -415,6 +445,98 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
                     ),
                     system_fingerprint=fp,
                 )
+
+        try:
+            return _execute_http_request(is_replay=False)
+        except urllib.error.HTTPError as e:
+            if e.code == 500:
+                self.tracker.http500_errors_seen += 1
+                self.ledger.append({
+                    "event": "provider_error",
+                    "request_id": request_id,
+                    "cell_id": self.cell_id,
+                    "treatment": self.treatment,
+                    "stage_name": actual_stage,
+                    "http_status": 500,
+                    "error": str(e),
+                    "sanitized_payload_sha256": payload_sha256,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                })
+
+                # Verificar se o orçamento de replay da tentativa foi esgotado
+                if self.tracker.http500_replays_used >= self.tracker.max_attempt_http500_replays:
+                    self.tracker.http500_replay_exhausted = True
+                    self.ledger.append({
+                        "event": "http500_replay_budget_exhausted",
+                        "request_id": request_id,
+                        "cell_id": self.cell_id,
+                        "treatment": self.treatment,
+                        "stage_name": actual_stage,
+                        "replays_used": self.tracker.http500_replays_used,
+                        "max_allowed": self.tracker.max_attempt_http500_replays,
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    })
+                    self.closed_outcome = "HTTP500_ATTEMPT_BUDGET_EXHAUSTED"
+                    raise RuntimeError("HTTP500_ATTEMPT_BUDGET_EXHAUSTED: Max 1 HTTP500 replay allowed per attempt.")
+
+                # Autorizar exatamente 1 replay idêntico
+                self.tracker.http500_replays_used += 1
+                replay_payload = self.builder.build_request_payload(
+                    messages=messages,
+                    schema_cls=actual_schema,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens,
+                )
+                replay_sha256 = self.builder.compute_sanitized_payload_sha256(replay_payload)
+                if replay_sha256 != payload_sha256:
+                    raise RuntimeError(f"REPLAY_MUTATION_DETECTED: {payload_sha256} != {replay_sha256}")
+
+                self.ledger.append({
+                    "event": "http500_replay_authorized",
+                    "request_id": request_id,
+                    "cell_id": self.cell_id,
+                    "treatment": self.treatment,
+                    "stage_name": actual_stage,
+                    "replay_number": self.tracker.http500_replays_used,
+                    "sanitized_payload_sha256": replay_sha256,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                })
+
+                # Requisito 6: Esperar pelo menos 15s + re-entrar no token-aware pacer
+                time.sleep(15.0)
+                self.pacer.wait_if_needed(reserved_request_tokens, f"{request_id}:REPLAY", self.cell_id)
+                self.pacer.record_dispatch(reserved_request_tokens)
+
+                try:
+                    res = _execute_http_request(is_replay=True)
+                    self.tracker.http500_replay_successes += 1
+                    return res
+                except Exception as replay_err:
+                    self.closed_outcome = "HTTP500_REPLAY_FAILED"
+                    self.ledger.append({
+                        "event": "http500_replay_failed",
+                        "request_id": request_id,
+                        "cell_id": self.cell_id,
+                        "treatment": self.treatment,
+                        "stage_name": actual_stage,
+                        "error": str(replay_err),
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    })
+                    raise RuntimeError(f"HTTP500_REPLAY_FAILED: Replay failed with {replay_err}")
+
+            else:
+                self.closed_outcome = f"PROVIDER_HTTP_{e.code}"
+                self.ledger.append({
+                    "event": "provider_error",
+                    "request_id": request_id,
+                    "cell_id": self.cell_id,
+                    "treatment": self.treatment,
+                    "stage_name": actual_stage,
+                    "http_status": e.code,
+                    "error": str(e),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                })
+                raise
 
         except Exception as e:
             self.closed_outcome = "PROVIDER_FAILURE"
@@ -752,6 +874,7 @@ def run_confirmatory_replication(attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
     ledger_path = attempt_dir / "usage-ledger.jsonl"
     ledger = AppendOnlyUsageLedger(ledger_path)
     pacer = TokenAwarePacer(ledger)
+    tracker = AttemptResilienceTracker(max_attempt_http500_replays=MAX_TOTAL_HTTP500_REPLAYS_PER_ATTEMPT)
 
     # 2. Atualizar registro para RUNNING
     # Ler linhas do registro e atualizar status
@@ -777,29 +900,45 @@ def run_confirmatory_replication(attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
     # 3. Executar as 24 células
     executed_cells = 0
     results: List[Dict[str, Any]] = []
-    for idx, entry in enumerate(schedule, 1):
-        hid = entry.holdout_id
-        cond = entry.condition
-        print(f"\n[{idx}/24] Executing Block {entry.block} | Holdout {hid} | Condition {cond}")
-        raw_idea = holdout_map[hid]
-        runner = ConfirmatoryCerebrasRunner(
-            ledger=ledger,
-            pacer=pacer,
-            cell_id=f"{hid}-{cond}",
-            treatment=cond,
-            temperature=0.3,
-            max_tokens=OUTPUT_CAP,
-        )
-        cell_res = execute_cell(
-            holdout_id=hid,
-            condition=cond,
-            raw_idea=raw_idea,
-            runner=runner,
-            raw_dir=raw_dir,
-            attempt_id=attempt_id,
-        )
-        results.append(cell_res)
-        executed_cells += 1
+    try:
+        for idx, entry in enumerate(schedule, 1):
+            hid = entry.holdout_id
+            cond = entry.condition
+            print(f"\n[{idx}/24] Executing Block {entry.block} | Holdout {hid} | Condition {cond}")
+            raw_idea = holdout_map[hid]
+            runner = ConfirmatoryCerebrasRunner(
+                ledger=ledger,
+                pacer=pacer,
+                cell_id=f"{hid}-{cond}",
+                treatment=cond,
+                tracker=tracker,
+                temperature=0.3,
+                max_tokens=OUTPUT_CAP,
+            )
+            cell_res = execute_cell(
+                holdout_id=hid,
+                condition=cond,
+                raw_idea=raw_idea,
+                runner=runner,
+                raw_dir=raw_dir,
+                attempt_id=attempt_id,
+            )
+            results.append(cell_res)
+            executed_cells += 1
+    except Exception as exc:
+        print(f"\nEXECUTION_HALTED: {exc}")
+        # Atualizar registro para STOPPED_FAILED
+        reg_lines = [json.loads(l) for l in REGISTRY_FILE.read_text(encoding="utf-8").splitlines() if l.strip()]
+        for line in reg_lines:
+            if line.get("attempt_id") == attempt_id:
+                line["status"] = "STOPPED_FAILED"
+                line["stopped_at"] = datetime.now(timezone.utc).isoformat()
+                line["cells_executed"] = executed_cells
+                line["error"] = str(exc)
+        with open(REGISTRY_FILE, "w", encoding="utf-8") as f:
+            for l in reg_lines:
+                f.write(json.dumps(l) + "\n")
+        raise
 
     print(f"\nALL {executed_cells}/24 CELLS EXECUTED SUCCESSFULLY!")
 
@@ -808,11 +947,21 @@ def run_confirmatory_replication(attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
 
     # 5. Salvar resumo executivo da replicação
     posts = [e for e in ledger.events if e.get("event") == "post_response"]
+    errs = [e for e in ledger.events if e.get("event") == "provider_error"]
     waits = [e for e in ledger.events if e.get("event") == "capacity_wait"]
+    replays = [e for e in ledger.events if e.get("event") == "http500_replay_authorized"]
+
     comp_tokens = [e.get("actual_completion_tokens", 0) for e in posts]
     max_comp = max(comp_tokens) if comp_tokens else 0
     max_util = max(e.get("output_cap_utilization_ratio", 0.0) for e in posts) if posts else 0.0
     exact_caps = sum(1 for c in comp_tokens if c == OUTPUT_CAP)
+
+    http400 = sum(1 for e in errs if e.get("http_status") == 400)
+    http401 = sum(1 for e in errs if e.get("http_status") == 401)
+    http403 = sum(1 for e in errs if e.get("http_status") == 403)
+    http429 = sum(1 for e in errs if e.get("http_status") == 429)
+    http500 = sum(1 for e in errs if e.get("http_status") == 500)
+    http502_504 = sum(1 for e in errs if e.get("http_status") in (502, 503, 504))
 
     summary = {
         "attempt_id": attempt_id,
@@ -823,8 +972,20 @@ def run_confirmatory_replication(attempt_id: str = DEFAULT_ATTEMPT_ID) -> None:
         "output_cap": OUTPUT_CAP,
         "cells_expected": 24,
         "cells_executed": executed_cells,
-        "provider_requests_total": len(posts),
+        "logical_calls_total": len(posts) - len(replays),
+        "provider_requests_total": len(posts) + len(errs),
         "http_200_count": len(posts),
+        "http_400_count": http400,
+        "http_401_count": http401,
+        "http_403_count": http403,
+        "http_429_count": http429,
+        "http_500_count": http500,
+        "http_502_504_count": http502_504,
+        "http500_replay_count": len(replays),
+        "http500_replay_success_count": tracker.http500_replay_successes,
+        "http500_replay_exhausted_count": 1 if tracker.http500_replay_exhausted else 0,
+        "http500_attempt_budget_exhausted": tracker.http500_replay_exhausted,
+        "unplanned_retry_count": 0,
         "capacity_wait_count": len(waits),
         "capacity_wait_seconds_total": sum(w.get("wait_seconds", 0.0) for w in waits),
         "prompt_tokens_total": sum(e.get("actual_prompt_tokens", 0) for e in posts),
