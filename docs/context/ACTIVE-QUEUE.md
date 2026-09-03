@@ -7,21 +7,27 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
  
-- [ ] **MVP-01-ARCHITECTURAL-SPECIFICATION:** Especificar a arquitetura e interfaces de produto do **Simple Idea Evolution Loop MVP** (Fase 1), consolidando a **Condição C (Lean Loop L1 + Early Epistemic Gate)** como motor de inferência padrão provisório e a **Condição A (Single Refine)** como baseline/fallback.
-- [ ] **MVP-02-CONTRACTS-AND-SCHEMAS:** Congelar schemas Pydantic de entrada, saída e auditoria do MVP de acordo com a doutrina epistemológica (`OPERATING-DOCTRINE.md`).
+- [ ] **M06-SUPERVISOR-REVIEW-AND-PHASE-P1-AUTHORIZATION:** Supervisor revisa o pacote de produtização M06 ([`M06-V1-EXECUTION-PLAN.md`](../m06-productization/M06-V1-EXECUTION-PLAN.md) e [`M06-V1-ACCEPTANCE-GATES.md`](../m06-productization/M06-V1-ACCEPTANCE-GATES.md)) e autoriza formalmente o início da Fase P1 (Service Boundary).
  
 ---
  
-## 🟡 NEXT (Condicionado à Decisão Humana)
+## 🟡 NEXT (Condicionado à Aprovação do Plano pelo Supervisor)
  
- 1. [ ] **MVP-03-CLI-AND-RUNNER-INTERFACE:** Implementar CLI ergonômico para maturação de ideias individuais pelo usuário final.
- 2. [ ] **MVP-04-INVARIANT-TEST-SUITE:** Escrever testes determinísticos de ponta a ponta para validação de integridade epistêmica do MVP.
- 3. [ ] **KNOWLEDGE-TRANSFER-PRESERVATION:** Manter a fronteira com FioOS estritamente respeitada: `IDEA != REQUIREMENT`, `IDEA != TRUTH`, `IDEA != AUTHORITY`.
+ 1. [ ] **P1-LEAN-CORE-SERVICE-BOUNDARY:** Implementar a camada de serviço `IdeaEvolutionService` desacoplada, encapsulando o `LeanLoopRunner`.
+ 2. [ ] **P2-EVOLUTION-ARTIFACT-SCHEMA:** Formalizar o schema Pydantic unificado de produto `EvolutionArtifact`.
+ 3. [ ] **P3-PROVENANCE-ONTOLOGY-GUARD:** Integrar salvaguardas ontológicas e rotulagem estrita de proveniência (`CORE_USER_EXPLICIT` vs `MODEL_CANDIDATE`).
+ 4. [ ] **P4-PROVIDER-ZERO-COST-GUARD:** Formalizar o `ProviderAdapter` com isolamento de transporte e garantia fail-closed de custo de bolso zero.
+ 5. [ ] **P5-CLI-LEAN-DEFAULT:** Atualizar a CLI oficial (`iee evolve`) para adotar a Condição C (Lean L1 Default) como padrão.
+ 6. [ ] **P6-HUMAN-RESULT-RENDERER:** Implementar o renderizador limpo de Markdown focado no usuário final, sem jargões ou ruídos de laboratório.
+ 7. [ ] **P7-E2E-ACCEPTANCE:** Executar bateria de testes ponta a ponta com casos reais e validar os 12 portões de aceitação do V1.
+ 8. [ ] **P8-PRODUCT-FREEZE:** Congelamento final e liberação do FioIdeias V1.
  
 ---
  
 ## 🔴 BLOCKED (Tarefas Bloqueadas)
  
- - **Experimentos confirmatórios adicionais para M05.5:** Bloqueado (`M05_5_STATUS = COMPLETE`). Nenhum piloto sacrificial, benchmark ou teste de provedor adicional está autorizado.
+ - **Implementação de código do MVP antes da revisão do plano:** Bloqueado (`MAP_FREEZE_DESIGN_PLAN` concluído; aguarda autorização humana).
+ - **Experimentos confirmatórios adicionais para M05.5:** Bloqueado (`M05.5_STATUS = COMPLETE`). Nenhum piloto sacrificial, benchmark ou teste de provedor adicional está autorizado.
  - **Uso de Condição B (Simple Loop) em produção:** Bloqueado até que receba proteções arquiteturais comprovadas contra spoofing de autoridade e contradições ontológicas.
- - **Bridge IEE ↔ FioOS:** Bloqueado até autorização formal e marcos futuros.
+ - **Bridge IEE ↔ FioOS com autoridade de execução:** Bloqueado até autorização formal e marcos futuros (`ADVISORY_SHADOW_NO_AUTHORITY`).
+

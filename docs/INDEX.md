@@ -81,3 +81,15 @@
 | :--- | :--- |
 | [`EXPERIMENT-PROTOCOL.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/EXPERIMENT-PROTOCOL.md) | Protocolo metodológico para condução de testes empíricos |
 | [`EXPERIMENT-BACKLOG.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/experiments/EXPERIMENT-BACKLOG.md) | Backlog de experimentos científicos planejados |
+
+---
+
+## 🚀 Produto V1 — FioIdeias V1 Lean L1 Default (`docs/m06-productization/`)
+| Arquivo | Descrição |
+| :--- | :--- |
+| [`M06-FIOIDEIAS-V1-PRODUCT-FREEZE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-FIOIDEIAS-V1-PRODUCT-FREEZE.md) | Congelamento da decisão de produto: Lean L1 como padrão oficial |
+| [`M06-LEAN-CORE-MAP.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-LEAN-CORE-MAP.md) | Mapeamento e hashes criptográficos do Núcleo Científico Lean L1 |
+| [`M06-V1-ARCHITECTURE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-V1-ARCHITECTURE.md) | Arquitetura de produto, contratos de usuário e fronteiras de serviço |
+| [`M06-V1-EXECUTION-PLAN.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-V1-EXECUTION-PLAN.md) | Plano sequencial de implementação em 8 fases (P1 a P8) |
+| [`M06-V1-ACCEPTANCE-GATES.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-V1-ACCEPTANCE-GATES.md) | 12 portões de aceitação verificáveis e não-objetivos explícitos |
+
