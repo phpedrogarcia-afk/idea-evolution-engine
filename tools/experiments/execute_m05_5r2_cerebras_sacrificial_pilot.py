@@ -535,7 +535,7 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
         "status": "SUCCESS" if bool(res_a.get("success")) else "FAILED",
         "terminal_status": "SUCCESS" if bool(res_a.get("success")) else "FAILED",
         "rendered_semantic_text": rendered_a,
-        "parsed_output": a_final_data,
+        "parsed_output": parsed_a,
         "logical_calls": 1,
     }
     is_rev_a, reason_a = classify_cell_reviewability(a_cell, runner_a.closed_outcome)

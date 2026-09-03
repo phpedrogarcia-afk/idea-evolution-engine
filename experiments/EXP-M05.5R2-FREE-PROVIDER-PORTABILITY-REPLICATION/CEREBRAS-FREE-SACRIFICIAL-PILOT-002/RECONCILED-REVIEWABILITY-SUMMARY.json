@@ -1,0 +1,12 @@
+{
+  "attempt_id": "CEREBRAS-FREE-SACRIFICIAL-PILOT-002",
+  "execution_plane": "OFFLINE_EVIDENCE_RECONCILIATION_NO_NETWORK",
+  "condition_c_reviewable": true,
+  "condition_c_reason": "C_SUBSTANTIVE_CANDIDATE_HUMAN_DECISION_REQUIRED",
+  "condition_b_reviewable": true,
+  "condition_b_reason": "B_SUBSTANTIVE_CANDIDATE_REFINEMENT_INCOMPLETE",
+  "condition_a_reviewable": true,
+  "condition_a_reason": "A_VALID_BASELINE_CANDIDATE",
+  "all_three_reviewable": true,
+  "reconciliation_verdict": "PASS"
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-001",
+  "created_at": "2026-09-03T11:05:00-03:00",
+  "holdout_manifest": {
+    "receipt_file": "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-HOLDOUT-SET-REV1-RECEIPT.json",
+    "holdout_set_id": "M05.5R1-HOLDOUT-SET-REV1",
+    "holdout_set_sha256": "9b2a3b004a3b5533072bf7b6974ed17ee0180b61788621eefa03e1da12092cb9",
+    "holdout_count": 8,
+    "holdout_ids": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08"]
+  },
+  "treatment_hashes": {
+    "baseline.py": "2e13d038640a5ec7f36a8054a6fe4ce55c162b966bd56ba7aee891ce12fc729e",
+    "simple_loop.py": "043fc79f16c0b049d1e116146c9f9930cb5ca54918e0d2b3c05a761dac6f27e5",
+    "lean_loop.py": "8e3551f87dc9c1b9a6bf225f96d6b50fe6bb48441eaa94e569438918fa6056d0",
+    "early_epistemic_gate.py": "2bc13fdff123964f7b1e103ab52d41d61d7ca130eed07bdc1b7a0583063ebb62",
+    "routing.py": "c41e2b6ef2070de37fe7177359c85f68e8e88f7a32cdb8b098f0b512340d6ea7",
+    "native.py": "39a5d735e6043dafe592b3a861a7bff03b96714c72b18bab326f79f956430f06",
+    "router.py": "bb1f7b57bc8e42cd4e50b2e241d7ba847791d7e4c6d6a11deecf1f7703aa36a9",
+    "cerebras.py": "3a648b227c8782fe6b1d38f0683a5a25c5a4caec31010bc04d74da44acca81ed"
+  },
+  "schema_hashes": {
+    "BaselineRefineOutput": "c2c8752488f958483615c43c6d1dc5b276f3c69023e81316adbf66e75ac23477",
+    "UnderstandOutput": "6edc070391c27330138e38efb29b00e9ee460087eae67821176048d8373007e4",
+    "AttackOutput": "dc4978e44ce59e4b71093802b43c98f862ccfe889b57af45f2fb501752b7dae5",
+    "AlternativesOutput": "52a48e2f994a9697cac9a58bfaec09c7b1825ad6f52fb87486642cd05dc09ddf",
+    "SynthesizeOutput": "c18e791efd3f704443bc332d1092314540750e53b34f61773c68c04731a92c38",
+    "RealityCheckOutput": "de09b0c71ce5ab1c9f436b2c5c9a5a44ebce0e4e3729e045ef4573e2e1344626",
+    "FinalReviewOutput": "3721318d2ca1433b93e451ebedf6dbdd3240c348630cf4b118a15225d3685dc8",
+    "LeanFirstPassOutput": "96a58ba279ced2fa330ec55afa4dc51e123388b92b4dd187183576afb8cc9d5c"
+  },
+  "prompt_hashes": {
+    "baseline_refine_v0_1.md": "5af454e40f7cc04a47fa70cb184853ba5c071f33b34ebd108bb196e7eecb7f5a",
+    "understand_v0_1.md": "e16069b7e752eedefeb7b0e28ef0d2808c29db09968b114c1281a5328a32ef08",
+    "attack_v0_1.md": "25fc6ef40308562f3becf660b3836d808604305b1ab5b0c61027562ac7c77b5f",
+    "alternatives_v0_1.md": "a10eed5802033520b694fa4755e875aaf7203ee364c205dbdf263411cc008238",
+    "synthesize_v0_1.md": "e09ee31c2111e3d96e3e807a4a2afb853b137200ee5a5743af1aa5020809efae",
+    "reality_check_v0_1.md": "cc9a212ba2a1b218572c2c25ff2749368757496073a03159c9f4e26d8256b170",
+    "final_review_v0_1.md": "3fe51c9fa883c1a7c498c5c87cbbf3a6b72c58452793fd4293732511984a215e"
+  },
+  "provider_configuration": {
+    "provider": "cerebras",
+    "scientific_model": "openai/gpt-oss-120b",
+    "transport_model": "gpt-oss-120b",
+    "base_url": "https://api.cerebras.ai/v1",
+    "access_class": "TIME_AND_CREDIT_BOUNDED_FREE_TRIAL",
+    "out_of_pocket_cost_policy": "ZERO",
+    "concurrency": 1,
+    "output_cap": 4096,
+    "output_cap_symmetry": "A_4096_B_4096_C_4096",
+    "temperature": 0.3,
+    "max_retries": 0,
+    "response_format": "strict json_schema"
+  },
+  "pacing_policy": {
+    "type": "BOUNDED_SERIAL_PACING",
+    "concurrency": 1,
+    "min_call_interval_seconds": 12.5,
+    "unplanned_retries": 0,
+    "wait_does_not_increment_call_count": true
+  },
+  "blind_commitment": {
+    "receipt_file": "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-BLINDING-REV1-RECEIPT.json",
+    "blinding_revision": 1,
+    "reveal_commitment_sha256": "d2de9ac1bbcd76c7aaef639b0b61d63dd355f1bea96f9d1c0f41ef7d434eed02"
+  },
+  "execution_order_reference": {
+    "receipt_file": "experiments/EXP-M05.5R1-CONTROLLED-REPLICATION-20260901/M05.5R1-CAPACITY-DESIGN-FREEZE.json",
+    "schedule_commitment_sha256": "05f948a49bdf11e7233dce98771359e216339989818cf46782d014ee94af7983",
+    "algorithm": "CSPRNG_BASE_PERMUTATION_PLUS_BALANCED_ROTATIONS_V1",
+    "holdout_order": ["H08", "H02", "H03", "H01", "H07", "H04", "H05", "H06"],
+    "base_permutation": ["CONDITION_C", "CONDITION_B", "CONDITION_A"],
+    "total_cells": 24
+  },
+  "reviewability_contract": {
+    "required_three_way_reviewable": "8/8",
+    "partial_packet_forbidden": true
+  },
+  "methodological_classification": {
+    "change_class": "PROVIDER_PORTABILITY_PLUS_PROSPECTIVE_OUTPUT_ENVELOPE_AMENDMENT",
+    "output_cap_amendment_receipt": "experiments/EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION/M05.5R2-OUTPUT-CAP-AMENDMENT-001.md",
+    "sacrificial_phase": "CLOSED_SUCCESSFULLY",
+    "cerebras_free_portability_status": "PROVEN_ENOUGH_FREEZE_AND_USE",
+    "confirmatory_execution_authorized": false,
+    "h01_h08_executed": false
+  },
+  "attempt_registry_state": {
+    "registry_file": "experiments/EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION/ATTEMPT-REGISTRY.jsonl",
+    "status": "RESERVED_PENDING_SUPERVISOR_AUTHORIZATION",
+    "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-001"
+  }
+}
