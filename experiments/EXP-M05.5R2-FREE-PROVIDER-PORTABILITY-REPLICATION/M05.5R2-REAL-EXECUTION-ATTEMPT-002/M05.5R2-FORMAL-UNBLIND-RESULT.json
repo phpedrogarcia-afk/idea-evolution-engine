@@ -1,0 +1,521 @@
+{
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-002",
+  "valid_execution_commit": "5390a22",
+  "human_review_freeze_commit": "fe81936",
+  "unblind_timestamp": "2026-09-03T16:39:11.589177-03:00",
+  "human_evaluator_confirmation": "THE HUMAN EXPLICITLY CONFIRMS THAT THEY PERSONALLY COMPLETED ALL 8 BLINDED HOLDOUT REVIEWS.",
+  "human_review_validity": "VALID",
+  "holdouts_scored": "8/8",
+  "pre_unblind_gate": {
+    "confirmatory_attempt": "M05.5R2-REAL-EXECUTION-ATTEMPT-002",
+    "execution_validity": "VALID_FOR_BLINDED_HUMAN_REVIEW",
+    "cells_executed": "24/24",
+    "a_reviewable": "8/8",
+    "b_reviewable": "8/8",
+    "c_reviewable": "8/8",
+    "three_way_reviewable": "8/8",
+    "human_review_freeze_commit": "fe81936",
+    "human_review_validity": "VALID",
+    "holdouts_scored": "8/8",
+    "formal_unblind_pre": "NO",
+    "reveal_accessed_pre": "NO",
+    "blind_commitment_integrity": "PASS"
+  },
+  "reveal_cryptographic_verification": {
+    "reveal_commitment_sha256": "d2de9ac1bbcd76c7aaef639b0b61d63dd355f1bea96f9d1c0f41ef7d434eed02",
+    "computed_reveal_entries_sha256": "d2de9ac1bbcd76c7aaef639b0b61d63dd355f1bea96f9d1c0f41ef7d434eed02",
+    "status": "PASS"
+  },
+  "formal_unblind": "YES",
+  "reveal_accessed": "YES",
+  "holdout_mappings": {
+    "H01": {
+      "R1": "B",
+      "R2": "A",
+      "R3": "C",
+      "treatment_to_label": {
+        "A": "R2",
+        "B": "R1",
+        "C": "R3"
+      }
+    },
+    "H02": {
+      "R1": "A",
+      "R2": "B",
+      "R3": "C",
+      "treatment_to_label": {
+        "A": "R1",
+        "B": "R2",
+        "C": "R3"
+      }
+    },
+    "H03": {
+      "R1": "B",
+      "R2": "C",
+      "R3": "A",
+      "treatment_to_label": {
+        "A": "R3",
+        "B": "R1",
+        "C": "R2"
+      }
+    },
+    "H04": {
+      "R1": "A",
+      "R2": "B",
+      "R3": "C",
+      "treatment_to_label": {
+        "A": "R1",
+        "B": "R2",
+        "C": "R3"
+      }
+    },
+    "H05": {
+      "R1": "A",
+      "R2": "B",
+      "R3": "C",
+      "treatment_to_label": {
+        "A": "R1",
+        "B": "R2",
+        "C": "R3"
+      }
+    },
+    "H06": {
+      "R1": "B",
+      "R2": "C",
+      "R3": "A",
+      "treatment_to_label": {
+        "A": "R3",
+        "B": "R1",
+        "C": "R2"
+      }
+    },
+    "H07": {
+      "R1": "A",
+      "R2": "C",
+      "R3": "B",
+      "treatment_to_label": {
+        "A": "R1",
+        "B": "R3",
+        "C": "R2"
+      }
+    },
+    "H08": {
+      "R1": "A",
+      "R2": "B",
+      "R3": "C",
+      "treatment_to_label": {
+        "A": "R1",
+        "B": "R2",
+        "C": "R3"
+      }
+    }
+  },
+  "holdout_unblinded_table": [
+    {
+      "holdout_id": "H01",
+      "r1_treatment": "B",
+      "r2_treatment": "A",
+      "r3_treatment": "C",
+      "first_place_treatment": "A",
+      "second_place_treatment": "C",
+      "third_place_treatment": "B",
+      "continue_treatment": "A",
+      "a_secondary_score": 46,
+      "b_secondary_score": 21,
+      "c_secondary_score": 40
+    },
+    {
+      "holdout_id": "H02",
+      "r1_treatment": "A",
+      "r2_treatment": "B",
+      "r3_treatment": "C",
+      "first_place_treatment": "C",
+      "second_place_treatment": "A",
+      "third_place_treatment": "B",
+      "continue_treatment": "C",
+      "a_secondary_score": 37,
+      "b_secondary_score": 15,
+      "c_secondary_score": 47
+    },
+    {
+      "holdout_id": "H03",
+      "r1_treatment": "B",
+      "r2_treatment": "C",
+      "r3_treatment": "A",
+      "first_place_treatment": "C",
+      "second_place_treatment": "A",
+      "third_place_treatment": "B",
+      "continue_treatment": "C",
+      "a_secondary_score": 32,
+      "b_secondary_score": 25,
+      "c_secondary_score": 48
+    },
+    {
+      "holdout_id": "H04",
+      "r1_treatment": "A",
+      "r2_treatment": "B",
+      "r3_treatment": "C",
+      "first_place_treatment": "C",
+      "second_place_treatment": "A",
+      "third_place_treatment": "B",
+      "continue_treatment": "C",
+      "a_secondary_score": 33,
+      "b_secondary_score": 16,
+      "c_secondary_score": 44
+    },
+    {
+      "holdout_id": "H05",
+      "r1_treatment": "A",
+      "r2_treatment": "B",
+      "r3_treatment": "C",
+      "first_place_treatment": "C",
+      "second_place_treatment": "A",
+      "third_place_treatment": "B",
+      "continue_treatment": "C",
+      "a_secondary_score": 27,
+      "b_secondary_score": 16,
+      "c_secondary_score": 48
+    },
+    {
+      "holdout_id": "H06",
+      "r1_treatment": "B",
+      "r2_treatment": "C",
+      "r3_treatment": "A",
+      "first_place_treatment": "C",
+      "second_place_treatment": "A",
+      "third_place_treatment": "B",
+      "continue_treatment": "C",
+      "a_secondary_score": 30,
+      "b_secondary_score": 19,
+      "c_secondary_score": 49
+    },
+    {
+      "holdout_id": "H07",
+      "r1_treatment": "A",
+      "r2_treatment": "C",
+      "r3_treatment": "B",
+      "first_place_treatment": "C",
+      "second_place_treatment": "A",
+      "third_place_treatment": "B",
+      "continue_treatment": "C",
+      "a_secondary_score": 33,
+      "b_secondary_score": 16,
+      "c_secondary_score": 49
+    },
+    {
+      "holdout_id": "H08",
+      "r1_treatment": "A",
+      "r2_treatment": "B",
+      "r3_treatment": "C",
+      "first_place_treatment": "A",
+      "second_place_treatment": "C",
+      "third_place_treatment": "B",
+      "continue_treatment": "A",
+      "a_secondary_score": 44,
+      "b_secondary_score": 15,
+      "c_secondary_score": 37
+    }
+  ],
+  "primary_ordinal_aggregate": {
+    "A_ordinal_points": 18,
+    "B_ordinal_points": 8,
+    "C_ordinal_points": 22,
+    "A_first_count": 2,
+    "B_first_count": 0,
+    "C_first_count": 6,
+    "A_second_count": 6,
+    "B_second_count": 0,
+    "C_second_count": 2,
+    "A_third_count": 0,
+    "B_third_count": 8,
+    "C_third_count": 0
+  },
+  "primary_replication_result": "PASS",
+  "continue_aggregate": {
+    "A_continue_count": 2,
+    "B_continue_count": 0,
+    "C_continue_count": 6,
+    "continue_convergence": "PASS"
+  },
+  "secondary_dimensional_aggregate": {
+    "A_secondary_total": 282,
+    "B_secondary_total": 143,
+    "C_secondary_total": 362,
+    "A_secondary_mean": 3.525,
+    "B_secondary_mean": 1.7875,
+    "C_secondary_mean": 4.525,
+    "secondary_convergence": "PASS"
+  },
+  "dimension_by_dimension_aggregate": {
+    "1. Preservação de Intenção": {
+      "A_total": 32,
+      "B_total": 26,
+      "C_total": 37,
+      "winner": "C"
+    },
+    "2. Ganho de Clareza": {
+      "A_total": 33,
+      "B_total": 11,
+      "C_total": 38,
+      "winner": "C"
+    },
+    "3. Crítica Útil": {
+      "A_total": 27,
+      "B_total": 17,
+      "C_total": 35,
+      "winner": "C"
+    },
+    "4. Novidade Útil": {
+      "A_total": 27,
+      "B_total": 15,
+      "C_total": 32,
+      "winner": "C"
+    },
+    "5. Controle de Premissas": {
+      "A_total": 24,
+      "B_total": 10,
+      "C_total": 37,
+      "winner": "C"
+    },
+    "6. Utilidade Decisória": {
+      "A_total": 30,
+      "B_total": 11,
+      "C_total": 37,
+      "winner": "C"
+    },
+    "7. Honestidade Epistêmica": {
+      "A_total": 26,
+      "B_total": 15,
+      "C_total": 40,
+      "winner": "C"
+    },
+    "8. Preservação Criativa": {
+      "A_total": 25,
+      "B_total": 12,
+      "C_total": 35,
+      "winner": "C"
+    },
+    "9. Moderação Apropriada": {
+      "A_total": 25,
+      "B_total": 9,
+      "C_total": 37,
+      "winner": "C"
+    },
+    "10. Acionabilidade Pertinente": {
+      "A_total": 33,
+      "B_total": 17,
+      "C_total": 34,
+      "winner": "C"
+    }
+  },
+  "preregistered_dimension_comparisons": {
+    "assumption_control": {
+      "A": 24,
+      "B": 10,
+      "C": 37,
+      "C_gt_B": true
+    },
+    "appropriate_moderation": {
+      "A": 25,
+      "B": 9,
+      "C": 37,
+      "C_gt_B": true
+    },
+    "useful_criticism": {
+      "A": 27,
+      "B": 17,
+      "C": 35,
+      "B_gt_C": false
+    },
+    "useful_novelty": {
+      "A": 27,
+      "B": 15,
+      "C": 32,
+      "B_gt_C": false
+    }
+  },
+  "call_efficiency": {
+    "A_logical_calls_total": 8,
+    "B_logical_calls_total": 80,
+    "C_logical_calls_total": 11,
+    "c_ratio_of_b_calls": 0.1375,
+    "call_efficiency_criterion": "PASS"
+  },
+  "replication_pattern_list": {
+    "items": [
+      {
+        "id": "RPL-1",
+        "description": "C highest ordinal",
+        "status": "PASS"
+      },
+      {
+        "id": "RPL-2",
+        "description": "C highest secondary",
+        "status": "PASS"
+      },
+      {
+        "id": "RPL-3",
+        "description": "C > B Assumption Control",
+        "status": "PASS"
+      },
+      {
+        "id": "RPL-4",
+        "description": "C > B Appropriate Moderation",
+        "status": "PASS"
+      },
+      {
+        "id": "RPL-5",
+        "description": "C CONTINUE >= B",
+        "status": "PASS"
+      },
+      {
+        "id": "RPL-6",
+        "description": "C calls <= 25% B calls",
+        "status": "PASS"
+      },
+      {
+        "id": "RPL-7",
+        "description": "B retains higher Useful Criticism OR Useful Novelty than C in at least one",
+        "status": "FAIL"
+      }
+    ],
+    "rpl_pass_count": "6/7",
+    "full_pattern": "FAIL"
+  },
+  "prediction_replication": [
+    {
+      "prediction_id": "PRED-01",
+      "description": "Topology mechanics: C calls <= 25% of B calls",
+      "m05_4_status": "SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "C=11 vs B=80 (13.75%)",
+      "interpretation": "Robustly replicated across both providers."
+    },
+    {
+      "prediction_id": "PRED-02",
+      "description": "Addition control: C produces fewer speculative unanchored assumptions than B",
+      "m05_4_status": "SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "Dimension 5 (Assumption Control): C=37 (mean 4.625) vs B=10 (mean 1.250)",
+      "interpretation": "Replicated with decisive margin."
+    },
+    {
+      "prediction_id": "PRED-03",
+      "description": "Decision regressions: C accumulates fewer DecisionRegression events than B",
+      "m05_4_status": "NOT_TESTABLE_FROM_THIS_RUN",
+      "m05_5r2_status": "NOT_TESTABLE",
+      "evidence": "Variable not instrumented in production inference runner",
+      "interpretation": "Preserved as theoretically open."
+    },
+    {
+      "prediction_id": "PRED-04",
+      "description": "Fertile idea preservation: C preserves intent in incubative holdout (H02) better than A and B",
+      "m05_4_status": "NOT_SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "In H02: Intent C=5 vs A=4 vs B=3; C won 1st place (47 pts)",
+      "interpretation": "Supported in M05.5R2 with strict superiority over both A and B."
+    },
+    {
+      "prediction_id": "PRED-05",
+      "description": "Pressure restriction: C avoids premature rationalizing pressure on incubative holdout (H02)",
+      "m05_4_status": "SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "In H02: Moderation C=5 vs A=3 vs B=1; Assumption Control C=5 vs A=3 vs B=1",
+      "interpretation": "Replicated decisively."
+    },
+    {
+      "prediction_id": "PRED-06",
+      "description": "Human authority: In normative holdout (H06), C defers to human decision without imposing fabricated choice",
+      "m05_4_status": "SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "In H06: C recommended member survey before imposing criteria; Moderation=5, Control=5; 1st place (49 pts)",
+      "interpretation": "Replicated decisively."
+    },
+    {
+      "prediction_id": "PRED-07",
+      "description": "Trap resistance: In simple tool holdout (H07), C resists unrequested ornamental features",
+      "m05_4_status": "SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "In H07: C isolated minimal regex approach vs complex parser before scaling; Moderation=5, Control=5; 1st place (49 pts)",
+      "interpretation": "Replicated decisively."
+    },
+    {
+      "prediction_id": "PRED-08",
+      "description": "Uncertainty discrimination: In testable product hypothesis (H08), C separates value uncertainty from local test",
+      "m05_4_status": "SUPPORTED",
+      "m05_5r2_status": "SUPPORTED",
+      "evidence": "In H08: C labeled MODEL_HYPOTHESIS with epistemic honesty 5/5; placed 2nd (37 pts) behind A (44 pts)",
+      "interpretation": "Supported, though Baseline A produced superior practical trial design."
+    },
+    {
+      "prediction_id": "PRED-09",
+      "description": "Persistence alignment: Lower Pe correlates positively with human preference",
+      "m05_4_status": "NOT_TESTABLE_FROM_THIS_RUN",
+      "m05_5r2_status": "NOT_TESTABLE",
+      "evidence": "Pe metric not instrumented independently in runtime",
+      "interpretation": "Preserved as open theoretical hypothesis."
+    },
+    {
+      "prediction_id": "PRED-10",
+      "description": "DecisionDelta limitation: DecisionDelta alone does not explain full human preference",
+      "m05_4_status": "NOT_TESTABLE_FROM_THIS_RUN",
+      "m05_5r2_status": "NOT_TESTABLE",
+      "evidence": "DecisionDelta not instrumented independently in runtime",
+      "interpretation": "Preserved as open theoretical hypothesis."
+    }
+  ],
+  "m05_4_comparison": {
+    "m05_4_rank_order": [
+      "C",
+      "B",
+      "A"
+    ],
+    "m05_4_ordinal_totals": {
+      "C": 21,
+      "B": 18,
+      "A": 9
+    },
+    "m05_4_secondary_totals": {
+      "C": 309,
+      "B": 277,
+      "A": 221
+    },
+    "m05_5r2_rank_order": [
+      "C",
+      "A",
+      "B"
+    ],
+    "m05_5r2_ordinal_totals": {
+      "C": 22,
+      "A": 18,
+      "B": 8
+    },
+    "m05_5r2_secondary_totals": {
+      "C": 362,
+      "A": 282,
+      "B": 143
+    },
+    "direction_replicated": "PARTIAL",
+    "rank_order_replicated": "PASS_C_WINS",
+    "continue_pattern_replicated": "YES",
+    "secondary_pattern_replicated": "PASS_C_WINS",
+    "comparative_notes": "Condition C replicates as the decisive superior treatment. Condition B experienced severe collapse due to hallucination and ontological error traces caught by deterministic validators, allowing Baseline Condition A to overtake B."
+  },
+  "execution_context": {
+    "change_class": "PROVIDER_PORTABILITY_PLUS_PROSPECTIVE_OUTPUT_ENVELOPE_AMENDMENT",
+    "serving_provider": "Cerebras Cloud (gpt-oss-120b)",
+    "output_cap_tokens": 4096,
+    "resilience_amendment": "M05.5R2-HTTP500-RESILIENCE-AMENDMENT-001 (0 retries executed)",
+    "scientific_model": "openai/gpt-oss-120b",
+    "prompts_schemas_holdouts_rubric": "IDENTICAL_FROZEN_UNCHANGED"
+  },
+  "lean_l1_status": "REPLICATED_PRIMARY_WITH_PARTIAL_PATTERN_SUPPORT",
+  "causal_mechanism_status": "UNRESOLVED",
+  "product_decision": {
+    "default_treatment": "Condition C (Lean Loop L1)",
+    "escalation_treatment": "Condition B (Simple Loop) - suspended / requires architectural hardening before production use",
+    "baseline_role": "Condition A (Single Refine Baseline) - valid fallback / minimal comparison baseline"
+  },
+  "m05_5_status": "COMPLETE"
+}
