@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.5R2-H04-COND-A
+
+## Ideia Original
+> Quero organizar meus registros pessoais de saúde e sintomas para perceber padrões antes das consultas, mas não quero enviar esses dados para aplicativos, contas online ou serviços de terceiros. Preciso conseguir usar isso no meu próprio computador.
+
+## Resumo do Modelo
+O usuário deseja criar um sistema local para registrar dados de saúde e sintomas, permitindo a análise de padrões antes das consultas médicas, sem depender de serviços online ou de terceiros.
+
+## Versão Refinada
+Desenvolver um aplicativo desktop de código aberto, instalável localmente, que permita ao usuário inserir, organizar e analisar registros de saúde e sintomas. O programa deve oferecer um banco de dados criptografado, interface simples para entrada de dados, recursos de filtragem e visualização (gráficos de frequência, tendências temporais) e exportação segura (CSV ou PDF). Opcionalmente, incluir módulos plug‑in para integração com dispositivos de medição (ex.: medidor de pressão) via Bluetooth, mantendo todos os dados restritos ao computador do usuário.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Privacidade total dos dados pessoais, Controle total sobre o armazenamento e acesso, Possibilidade de personalizar o registro conforme necessidades individuais, Redução de risco de vazamento de informações sensíveis
+- **Fracos:** Necessidade de conhecimento técnico para instalar/configurar o software, Responsabilidade de backup e segurança dos dados recai sobre o usuário, Falta de integração automática com dispositivos médicos ou aplicativos de saúde, Possível dificuldade em gerar visualizações avançadas sem ferramentas adicionais
+
+## Próximos Passos
+Definir requisitos funcionais detalhados (campos de registro, tipos de visualização, exportação), Escolher a pilha tecnológica (ex.: Python + SQLite + PyQt ou Electron + Node.js), Criar um protótipo de interface de entrada de dados e visualização básica, Implementar criptografia de banco de dados (ex.: SQLCipher), Testar backup local automático e restauração de dados, Documentar processo de instalação e uso para usuários não técnicos, Publicar o código em um repositório público com licença permissiva para que a comunidade possa contribuir

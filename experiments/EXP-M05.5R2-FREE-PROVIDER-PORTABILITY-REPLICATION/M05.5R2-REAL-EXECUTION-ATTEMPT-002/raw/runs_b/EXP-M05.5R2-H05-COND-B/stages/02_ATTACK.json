@@ -1,0 +1,79 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "4 vulnerabilidades críticas e 5 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Dependência excessiva da conformidade dos usuários ao devolver ferramentas ao local designado\",\"why_it_matters\":\"Se os mecânicos não seguirem consistentemente o novo procedimento, o sistema perde sua utilidade e o tempo gasto na busca não será reduzido\",\"severity\":\"HIGH\",\"affected_part\":\"Comportamento dos usuários / processos operacionais\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Etiquetagem física de cada ferramenta pode ser trabalhosa e sujeita a desgaste\",\"why_it_matters\":\"A manutenção das etiquetas aumenta o custo operacional e pode tornar o sistema inutilizável quando as marcas desaparecem\",\"severity\":\"MEDIUM\",\"affected_part\":\"Etiquetagem das ferramentas\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"O sistema proposto assume que a localização das ferramentas é estática durante o dia\",\"why_it_matters\":\"Em um ambiente de reparo, as ferramentas são frequentemente movidas entre bicicletas, tornando um rastreamento estático ineficaz\",\"severity\":\"HIGH\",\"affected_part\":\"Mecanismo de rastreamento de ferramentas\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Instalação de suportes ou quadros pode obstruir o espaço de trabalho e criar riscos de segurança\",\"why_it_matters\":\"Obstruções podem aumentar o risco de acidentes e reduzir a eficiência ao invés de melhorá‑la\",\"severity\":\"MEDIUM\",\"affected_part\":\"Layout do galpão\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"As ferramentas podem ser fixadas ou etiquetadas de forma física\",\"O espaço do galpão permite a instalação de suportes ou quadros\",\"Os usuários irão seguir o sistema de organização proposto\",\"Não há restrição de orçamento para materiais simples\",\"As ferramentas são suficientemente distintas para serem identificadas visualmente\"],\"contradictions\":[\"Afirma que o sistema reduzirá o tempo de busca, mas pressupõe que os usuários já manterão a disciplina de reposição, o que contradiz o problema original de desorganização\",\"Assume ausência de restrição orçamentária, porém a instalação de suportes e etiquetas implica custos ocultos de mão‑de‑obra e manutenção\"],\"failure_modes\":[\"Etiquetas se desgastam ou ficam ilegíveis\",\"Ferramentas continuam sendo deixadas em locais não previstos, anulando o benefício esperado\",\"A adição de suportes cria desordem adicional, aumentando o tempo de busca\",\"Instalação pode danificar o piso ou gerar riscos de tropeço\",\"Adoção parcial pelos usuários gera cobertura incompleta do sistema\"],\"missing_information\":[\"Número exato e tipos de ferramentas que precisam ser rastreadas\",\"Fluxo detalhado de movimentação das ferramentas durante o dia\",\"Estimativa de custo total de materiais e mão‑de‑obra para implementação\",\"Tempo necessário para etiquetar e instalar o sistema\",\"Métricas atuais de tempo gasto na busca de ferramentas para comparar com melhorias\"],\"overclaims\":[\"Afirmar que o sistema permitirá \\\"identificar rapidamente\\\" a localização das ferramentas sem evidência de velocidade real\",\"Declarar que haverá \\\"redução significativa\\\" no tempo de busca sem dados de baseline ou testes piloto\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Dependência excessiva da conformidade dos usuários ao devolver ferramentas ao local designado",
+        "why_it_matters": "Se os mecânicos não seguirem consistentemente o novo procedimento, o sistema perde sua utilidade e o tempo gasto na busca não será reduzido",
+        "severity": "HIGH",
+        "affected_part": "Comportamento dos usuários / processos operacionais",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Etiquetagem física de cada ferramenta pode ser trabalhosa e sujeita a desgaste",
+        "why_it_matters": "A manutenção das etiquetas aumenta o custo operacional e pode tornar o sistema inutilizável quando as marcas desaparecem",
+        "severity": "MEDIUM",
+        "affected_part": "Etiquetagem das ferramentas",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "O sistema proposto assume que a localização das ferramentas é estática durante o dia",
+        "why_it_matters": "Em um ambiente de reparo, as ferramentas são frequentemente movidas entre bicicletas, tornando um rastreamento estático ineficaz",
+        "severity": "HIGH",
+        "affected_part": "Mecanismo de rastreamento de ferramentas",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Instalação de suportes ou quadros pode obstruir o espaço de trabalho e criar riscos de segurança",
+        "why_it_matters": "Obstruções podem aumentar o risco de acidentes e reduzir a eficiência ao invés de melhorá‑la",
+        "severity": "MEDIUM",
+        "affected_part": "Layout do galpão",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "As ferramentas podem ser fixadas ou etiquetadas de forma física",
+      "O espaço do galpão permite a instalação de suportes ou quadros",
+      "Os usuários irão seguir o sistema de organização proposto",
+      "Não há restrição de orçamento para materiais simples",
+      "As ferramentas são suficientemente distintas para serem identificadas visualmente"
+    ],
+    "contradictions": [
+      "Afirma que o sistema reduzirá o tempo de busca, mas pressupõe que os usuários já manterão a disciplina de reposição, o que contradiz o problema original de desorganização",
+      "Assume ausência de restrição orçamentária, porém a instalação de suportes e etiquetas implica custos ocultos de mão‑de‑obra e manutenção"
+    ],
+    "failure_modes": [
+      "Etiquetas se desgastam ou ficam ilegíveis",
+      "Ferramentas continuam sendo deixadas em locais não previstos, anulando o benefício esperado",
+      "A adição de suportes cria desordem adicional, aumentando o tempo de busca",
+      "Instalação pode danificar o piso ou gerar riscos de tropeço",
+      "Adoção parcial pelos usuários gera cobertura incompleta do sistema"
+    ],
+    "missing_information": [
+      "Número exato e tipos de ferramentas que precisam ser rastreadas",
+      "Fluxo detalhado de movimentação das ferramentas durante o dia",
+      "Estimativa de custo total de materiais e mão‑de‑obra para implementação",
+      "Tempo necessário para etiquetar e instalar o sistema",
+      "Métricas atuais de tempo gasto na busca de ferramentas para comparar com melhorias"
+    ],
+    "overclaims": [
+      "Afirmar que o sistema permitirá \"identificar rapidamente\" a localização das ferramentas sem evidência de velocidade real",
+      "Declarar que haverá \"redução significativa\" no tempo de busca sem dados de baseline ou testes piloto"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:45:23.560472+00:00"
+}

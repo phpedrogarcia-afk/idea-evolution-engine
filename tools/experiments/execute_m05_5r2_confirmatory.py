@@ -759,27 +759,29 @@ def render_human_review_packet(raw_dir: Path, attempt_dir: Path, holdout_map: Di
     if not SEALED_REVEAL_PATH.exists():
         raise RuntimeError("REVEAL_MISSING: Sealed reveal file not found")
     reveal_data = json.loads(SEALED_REVEAL_PATH.read_text(encoding="utf-8"))
-    mappings = reveal_data["mappings"]
+    entries = reveal_data.get("reveal_entries", [])
+    mappings = {e["holdout_id"]: e["treatment_to_review_label"] for e in entries}
 
     packets: List[BlindReviewPacket] = []
     for hid in sorted(holdout_map.keys()):
         raw_idea = holdout_map[hid]
-        mapping = mappings[hid]
+        t2r = mappings[hid]
+        r2t = {v: k for k, v in t2r.items()}
 
         data_a = json.loads((raw_dir / f"{hid}_condition_a.json").read_text(encoding="utf-8"))
         data_b = json.loads((raw_dir / f"{hid}_condition_b.json").read_text(encoding="utf-8"))
         data_c = json.loads((raw_dir / f"{hid}_condition_c.json").read_text(encoding="utf-8"))
 
         content_by_condition = {
-            "CONDITION_A": data_a["rendered_semantic_text"],
-            "CONDITION_B": data_b["rendered_semantic_text"],
-            "CONDITION_C": data_c["rendered_semantic_text"],
+            "A": data_a["rendered_semantic_text"],
+            "B": data_b["rendered_semantic_text"],
+            "C": data_c["rendered_semantic_text"],
         }
 
         items = [
-            BlindReviewItem(label="RESULTADO 1", content_text=content_by_condition[mapping["R1"]]),
-            BlindReviewItem(label="RESULTADO 2", content_text=content_by_condition[mapping["R2"]]),
-            BlindReviewItem(label="RESULTADO 3", content_text=content_by_condition[mapping["R3"]]),
+            BlindReviewItem(label="RESULTADO 1", content_text=content_by_condition[r2t["R1"]]),
+            BlindReviewItem(label="RESULTADO 2", content_text=content_by_condition[r2t["R2"]]),
+            BlindReviewItem(label="RESULTADO 3", content_text=content_by_condition[r2t["R3"]]),
         ]
         packets.append(BlindReviewPacket(idea_id=hid, raw_idea=raw_idea, items=items))
 

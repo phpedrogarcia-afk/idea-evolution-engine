@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H06-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "O nosso clube de leitura recebe poucos lugares para encontros presenciais e temos de decidir quem participa quando há mais interessados do que vagas. Não quero que vire uma disputa por rapidez de inscrição, mas também não sei qual critério seria justo para todos.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

@@ -1,0 +1,33 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"Dados imprecisos podem gerar sugestões inadequadas\",\"Fadiga ou desmotivação do usuário ao registrar manualmente os ingredientes\",\"Risco de vazamento ou uso indevido de informações de inventário doméstico\",\"Limitação de escalabilidade se a solução depender exclusivamente de entrada manual\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada preserva o propósito central de reduzir desperdício de alimentos e avaliar mudanças de comportamento, mantendo o mecanismo core de entrada manual de ingredientes e datas de validade. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os riscos identificados permanecem como questões materiais a serem mitigadas, mas não impedem a viabilidade. Recomenda-se avançar com o MVP conforme planejado.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "Dados imprecisos podem gerar sugestões inadequadas",
+      "Fadiga ou desmotivação do usuário ao registrar manualmente os ingredientes",
+      "Risco de vazamento ou uso indevido de informações de inventário doméstico",
+      "Limitação de escalabilidade se a solução depender exclusivamente de entrada manual"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A ideia refinada preserva o propósito central de reduzir desperdício de alimentos e avaliar mudanças de comportamento, mantendo o mecanismo core de entrada manual de ingredientes e datas de validade. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os riscos identificados permanecem como questões materiais a serem mitigadas, mas não impedem a viabilidade. Recomenda-se avançar com o MVP conforme planejado."
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:28:38.097093+00:00"
+}

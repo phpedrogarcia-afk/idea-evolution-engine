@@ -1,0 +1,55 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "1 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Data loss due to lack of automated backup\",\"why_it_matters\":\"If the user stores health data only locally and the application does not implement robust backup or versioning, a hardware failure, accidental deletion, or corruption could permanently erase critical medical information, jeopardizing future care decisions.\",\"severity\":\"HIGH\",\"affected_part\":\"Data storage and persistence\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"O usuário possui um computador capaz de executar software localmente\",\"O usuário está disposto a inserir manualmente os dados de saúde e sintomas\",\"O usuário deseja visualizar padrões por meio de gráficos ou tabelas simples\",\"Não há necessidade de integração automática com sistemas de saúde externos\",\"O usuário tem algum nível de familiaridade com gerenciamento de arquivos ou aplicativos de desktop\"],\"contradictions\":[\"O usuário quer evitar qualquer envio de dados a terceiros, mas ainda precisa compartilhar informações relevantes com profissionais de saúde durante consultas, criando um ponto de tensão entre privacidade e utilidade\"],\"failure_modes\":[\"Perda de dados por falha de hardware ou ausência de backup\",\"Erros de entrada manual que podem levar a análises incorretas\",\"Interpretação equivocada dos padrões visualizados sem suporte clínico\",\"Vulnerabilidades de segurança local que permitem acesso não autorizado ao dispositivo\"],\"missing_information\":[\"Especificação de criptografia ou proteção dos arquivos locais\",\"Estratégia de backup (ex.: exportação automática, sincronização com mídia externa)\",\"Detalhes sobre como o aplicativo lida com formatos de dados médicos padrão (ex.: HL7, FHIR)\",\"Requisitos de acessibilidade para usuários com deficiências\"],\"overclaims\":[\"Afirma que o aplicativo pode identificar padrões clínicos significativos sem nenhum suporte de análise avançada ou validação médica\",\"Alega que a privacidade total é garantida apenas por armazenar dados localmente, ignorando riscos de acesso físico ou malware\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Data loss due to lack of automated backup",
+        "why_it_matters": "If the user stores health data only locally and the application does not implement robust backup or versioning, a hardware failure, accidental deletion, or corruption could permanently erase critical medical information, jeopardizing future care decisions.",
+        "severity": "HIGH",
+        "affected_part": "Data storage and persistence",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "O usuário possui um computador capaz de executar software localmente",
+      "O usuário está disposto a inserir manualmente os dados de saúde e sintomas",
+      "O usuário deseja visualizar padrões por meio de gráficos ou tabelas simples",
+      "Não há necessidade de integração automática com sistemas de saúde externos",
+      "O usuário tem algum nível de familiaridade com gerenciamento de arquivos ou aplicativos de desktop"
+    ],
+    "contradictions": [
+      "O usuário quer evitar qualquer envio de dados a terceiros, mas ainda precisa compartilhar informações relevantes com profissionais de saúde durante consultas, criando um ponto de tensão entre privacidade e utilidade"
+    ],
+    "failure_modes": [
+      "Perda de dados por falha de hardware ou ausência de backup",
+      "Erros de entrada manual que podem levar a análises incorretas",
+      "Interpretação equivocada dos padrões visualizados sem suporte clínico",
+      "Vulnerabilidades de segurança local que permitem acesso não autorizado ao dispositivo"
+    ],
+    "missing_information": [
+      "Especificação de criptografia ou proteção dos arquivos locais",
+      "Estratégia de backup (ex.: exportação automática, sincronização com mídia externa)",
+      "Detalhes sobre como o aplicativo lida com formatos de dados médicos padrão (ex.: HL7, FHIR)",
+      "Requisitos de acessibilidade para usuários com deficiências"
+    ],
+    "overclaims": [
+      "Afirma que o aplicativo pode identificar padrões clínicos significativos sem nenhum suporte de análise avançada ou validação médica",
+      "Alega que a privacidade total é garantida apenas por armazenar dados localmente, ignorando riscos de acesso físico ou malware"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:42:23.203394+00:00"
+}

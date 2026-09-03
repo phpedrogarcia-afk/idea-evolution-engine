@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H07-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Quero uma ferramenta de linha de comando pequena que leia uma lista de tarefas do projeto e mostre apenas as que estão marcadas como bloqueadas, junto com a pessoa ou dependência indicada na própria lista.",
+  "total_model_calls": 2,
+  "gate_outcome": "ESCALATE_FOCUSED",
+  "escalation_reason": "COMPETING_MECHANISMS",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 2,
+  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "decision_progress_detected": true
+}

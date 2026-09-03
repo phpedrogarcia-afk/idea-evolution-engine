@@ -1,0 +1,56 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Armazenamento local criptografado (AES‑2...' (hash: 979ef0f50fe9e27c), 4 dependências, 5 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Armazenamento local criptografado (AES‑256) com versionamento interno que gera snapshots diários imutáveis em um diretório oculto.\",\"feasibility_notes\":[\"A criptografia AES‑256 é amplamente suportada por bibliotecas maduras e pode ser integrada sem necessidade de hardware especializado.\",\"Versionamento interno baseado em snapshots diários pode ser implementado usando técnicas de cópia em escrita (copy‑on‑write) ou arquivos de log incremental, exigindo apenas espaço de armazenamento adicional moderado.\",\"Manter um diretório oculto no sistema de arquivos é factível em todos os principais sistemas operacionais, embora a definição de \\\"oculto\\\" varie (ex.: atributos de arquivo no Windows, ponto inicial '.' no Unix).\"],\"reality_dependencies\":[\"Biblioteca de criptografia que ofereça implementação auditada de AES‑256 (ex.: OpenSSL, libsodium).\",\"Acesso ao sistema de arquivos com permissões para criar e proteger um diretório oculto e armazenar arquivos de snapshot.\",\"Um mecanismo confiável de versionamento (ex.: sistema de arquivos que suporte snapshots ou camada de aplicação que registre versões).\",\"Gerenciamento seguro de chaves de criptografia (ex.: armazenamento em keystore protegido por senha do usuário).\"],\"claims_needing_evidence\":[\"AES‑256, quando usado com modo de operação adequado e gerenciamento correto de IVs/nonce, fornece confidencialidade robusta contra ataques práticos atuais.\",\"Snapshots diários armazenados em um diretório oculto permanecem imutáveis a menos que a chave de criptografia seja comprometida ou o usuário altere deliberadamente os arquivos.\",\"O armazenamento local criptografado impede acesso não autorizado mesmo que o dispositivo seja fisicamente roubado, desde que a chave não seja exposta.\"],\"potential_blockers\":[\"Falha na proteção das chaves de criptografia (ex.: armazenamento em texto plano ou reutilização de senhas fracas).\",\"Limitações de permissão do usuário que impedem a criação ou ocultação do diretório de snapshots.\",\"Corruptela de arquivos de snapshot devido a falhas de energia ou hardware, comprometendo a capacidade de recuperação.\",\"Desempenho degradado em máquinas com recursos limitados ao gerar snapshots diários criptografados.\"],\"candidate_tests\":[\"Verificar que dados criptografados com a biblioteca escolhida podem ser descriptografados corretamente usando a mesma chave e parâmetros (modo, IV).\",\"Simular a criação de um snapshot diário e tentar modificar o arquivo resultante; confirmar que a alteração é detectada ou que a versão original permanece intacta.\",\"Testar a invisibilidade do diretório oculto para processos não privilegiados em diferentes sistemas operacionais (ex.: listar arquivos sem atributos de ocultação).\",\"Medir o tempo de criação e recuperação de snapshots para garantir que o overhead seja aceitável em hardware de baixa potência.\",\"Avaliar a resistência a ataques de força bruta ao tentar derivar a chave a partir da senha do usuário usando parâmetros de KDF (ex.: PBKDF2, Argon2).\"],\"exploratory_candidate_tests\":[\"Implementar um agendador que copie backups criptografados para um dispositivo externo (pendrive ou disco de rede) e validar a integridade dos arquivos após a transferência.\",\"Testar a restauração de dados a partir de backups externos em diferentes sistemas operacionais para garantir compatibilidade.\",\"Avaliar a eficácia de um mecanismo P2P de sincronização ponto‑a‑ponto, medindo latência e consistência dos dados replicados entre nós confiáveis.\",\"Simular falhas de rede durante a sincronização P2P e observar a capacidade de recuperação e reconciliação de versões conflitantes.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Armazenamento local criptografado (AES‑256) com versionamento interno que gera snapshots diários imutáveis em um diretório oculto.",
+    "feasibility_notes": [
+      "A criptografia AES‑256 é amplamente suportada por bibliotecas maduras e pode ser integrada sem necessidade de hardware especializado.",
+      "Versionamento interno baseado em snapshots diários pode ser implementado usando técnicas de cópia em escrita (copy‑on‑write) ou arquivos de log incremental, exigindo apenas espaço de armazenamento adicional moderado.",
+      "Manter um diretório oculto no sistema de arquivos é factível em todos os principais sistemas operacionais, embora a definição de \"oculto\" varie (ex.: atributos de arquivo no Windows, ponto inicial '.' no Unix)."
+    ],
+    "reality_dependencies": [
+      "Biblioteca de criptografia que ofereça implementação auditada de AES‑256 (ex.: OpenSSL, libsodium).",
+      "Acesso ao sistema de arquivos com permissões para criar e proteger um diretório oculto e armazenar arquivos de snapshot.",
+      "Um mecanismo confiável de versionamento (ex.: sistema de arquivos que suporte snapshots ou camada de aplicação que registre versões).",
+      "Gerenciamento seguro de chaves de criptografia (ex.: armazenamento em keystore protegido por senha do usuário)."
+    ],
+    "claims_needing_evidence": [
+      "AES‑256, quando usado com modo de operação adequado e gerenciamento correto de IVs/nonce, fornece confidencialidade robusta contra ataques práticos atuais.",
+      "Snapshots diários armazenados em um diretório oculto permanecem imutáveis a menos que a chave de criptografia seja comprometida ou o usuário altere deliberadamente os arquivos.",
+      "O armazenamento local criptografado impede acesso não autorizado mesmo que o dispositivo seja fisicamente roubado, desde que a chave não seja exposta."
+    ],
+    "potential_blockers": [
+      "Falha na proteção das chaves de criptografia (ex.: armazenamento em texto plano ou reutilização de senhas fracas).",
+      "Limitações de permissão do usuário que impedem a criação ou ocultação do diretório de snapshots.",
+      "Corruptela de arquivos de snapshot devido a falhas de energia ou hardware, comprometendo a capacidade de recuperação.",
+      "Desempenho degradado em máquinas com recursos limitados ao gerar snapshots diários criptografados."
+    ],
+    "candidate_tests": [
+      "Verificar que dados criptografados com a biblioteca escolhida podem ser descriptografados corretamente usando a mesma chave e parâmetros (modo, IV).",
+      "Simular a criação de um snapshot diário e tentar modificar o arquivo resultante; confirmar que a alteração é detectada ou que a versão original permanece intacta.",
+      "Testar a invisibilidade do diretório oculto para processos não privilegiados em diferentes sistemas operacionais (ex.: listar arquivos sem atributos de ocultação).",
+      "Medir o tempo de criação e recuperação de snapshots para garantir que o overhead seja aceitável em hardware de baixa potência.",
+      "Avaliar a resistência a ataques de força bruta ao tentar derivar a chave a partir da senha do usuário usando parâmetros de KDF (ex.: PBKDF2, Argon2)."
+    ],
+    "exploratory_candidate_tests": [
+      "Implementar um agendador que copie backups criptografados para um dispositivo externo (pendrive ou disco de rede) e validar a integridade dos arquivos após a transferência.",
+      "Testar a restauração de dados a partir de backups externos em diferentes sistemas operacionais para garantir compatibilidade.",
+      "Avaliar a eficácia de um mecanismo P2P de sincronização ponto‑a‑ponto, medindo latência e consistência dos dados replicados entre nós confiáveis.",
+      "Simular falhas de rede durante a sincronização P2P e observar a capacidade de recuperação e reconciliação de versões conflitantes."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:44:08.444682+00:00"
+}

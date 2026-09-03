@@ -1,0 +1,59 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Aplicativo desktop que registra, armazen...' (hash: 37dc10eb40323942), 5 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Aplicativo desktop que registra, armazena e analisa dados de saúde exclusivamente no computador do usuário, mantendo todos os dados sob controle total do usuário.\",\"feasibility_notes\":[\"Armazenamento local de dados de saúde é tecnicamente viável usando bancos de dados embarcados (ex.: SQLite)\",\"Análises estatísticas simples podem ser executadas offline sem necessidade de recursos de computação em nuvem\",\"A interface gráfica pode ser desenvolvida com frameworks multiplataforma (Electron, Qt, .NET)\",\"Criptografia local pode ser implementada com bibliotecas maduras (libsodium, OpenSSL)\",\"Manter todos os dados offline elimina dependências de conectividade de rede\"],\"reality_dependencies\":[\"Sistema de arquivos do SO com permissões de leitura/escrita para o usuário\",\"Biblioteca de criptografia local para proteger arquivos de dados\",\"Framework UI para criar o aplicativo desktop\",\"Banco de dados embutido para armazenamento estruturado (ex.: SQLite)\",\"Mecanismo de visualização de gráficos (ex.: D3.js, Matplotlib)\"],\"claims_needing_evidence\":[\"Os dados permanecem totalmente privados e inacessíveis a terceiros sem a chave do usuário\",\"As análises de padrões fornecem insights clínicos relevantes antes de consultas médicas\",\"O aplicativo funciona de forma consistente em diferentes sistemas operacionais (Windows, macOS, Linux)\"],\"potential_blockers\":[\"Restrições de permissões de escrita em diretórios protegidos pelo SO\",\"Desempenho degradado ao lidar com grandes volumes de dados de saúde\",\"Necessidade de que o usuário mantenha backups locais para evitar perda de dados\",\"Possíveis vulnerabilidades na implementação da criptografia local\",\"Curva de aprendizado do usuário para inserir e interpretar dados de saúde\"],\"candidate_tests\":[\"Verificar que o aplicativo grava e lê arquivos de dados apenas no diretório local do usuário\",\"Testar a integridade e confidencialidade dos arquivos usando criptografia local (encriptação/descriptação)\",\"Executar rotinas de análise de dados (ex.: detecção de tendências, correlações) e validar resultados contra um conjunto de dados de teste conhecido\",\"Medir o consumo de recursos (CPU, memória) ao processar 10.000 registros de saúde\",\"Confirmar que nenhum tráfego de rede é gerado durante operações de registro, armazenamento e análise\"],\"exploratory_candidate_tests\":[\"Avaliar a sincronização opcional criptografada com serviços de nuvem (ex.: Dropbox, Google Drive) mantendo chaves geridas localmente\",\"Testar exportação automática de snapshots versionados para disco externo ou unidade USB em intervalos configuráveis\",\"Prototipar backup ponto‑a‑ponto (P2P) criptografado entre dispositivos confiáveis usando IPFS ou protocolos similares\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Aplicativo desktop que registra, armazena e analisa dados de saúde exclusivamente no computador do usuário, mantendo todos os dados sob controle total do usuário.",
+    "feasibility_notes": [
+      "Armazenamento local de dados de saúde é tecnicamente viável usando bancos de dados embarcados (ex.: SQLite)",
+      "Análises estatísticas simples podem ser executadas offline sem necessidade de recursos de computação em nuvem",
+      "A interface gráfica pode ser desenvolvida com frameworks multiplataforma (Electron, Qt, .NET)",
+      "Criptografia local pode ser implementada com bibliotecas maduras (libsodium, OpenSSL)",
+      "Manter todos os dados offline elimina dependências de conectividade de rede"
+    ],
+    "reality_dependencies": [
+      "Sistema de arquivos do SO com permissões de leitura/escrita para o usuário",
+      "Biblioteca de criptografia local para proteger arquivos de dados",
+      "Framework UI para criar o aplicativo desktop",
+      "Banco de dados embutido para armazenamento estruturado (ex.: SQLite)",
+      "Mecanismo de visualização de gráficos (ex.: D3.js, Matplotlib)"
+    ],
+    "claims_needing_evidence": [
+      "Os dados permanecem totalmente privados e inacessíveis a terceiros sem a chave do usuário",
+      "As análises de padrões fornecem insights clínicos relevantes antes de consultas médicas",
+      "O aplicativo funciona de forma consistente em diferentes sistemas operacionais (Windows, macOS, Linux)"
+    ],
+    "potential_blockers": [
+      "Restrições de permissões de escrita em diretórios protegidos pelo SO",
+      "Desempenho degradado ao lidar com grandes volumes de dados de saúde",
+      "Necessidade de que o usuário mantenha backups locais para evitar perda de dados",
+      "Possíveis vulnerabilidades na implementação da criptografia local",
+      "Curva de aprendizado do usuário para inserir e interpretar dados de saúde"
+    ],
+    "candidate_tests": [
+      "Verificar que o aplicativo grava e lê arquivos de dados apenas no diretório local do usuário",
+      "Testar a integridade e confidencialidade dos arquivos usando criptografia local (encriptação/descriptação)",
+      "Executar rotinas de análise de dados (ex.: detecção de tendências, correlações) e validar resultados contra um conjunto de dados de teste conhecido",
+      "Medir o consumo de recursos (CPU, memória) ao processar 10.000 registros de saúde",
+      "Confirmar que nenhum tráfego de rede é gerado durante operações de registro, armazenamento e análise"
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a sincronização opcional criptografada com serviços de nuvem (ex.: Dropbox, Google Drive) mantendo chaves geridas localmente",
+      "Testar exportação automática de snapshots versionados para disco externo ou unidade USB em intervalos configuráveis",
+      "Prototipar backup ponto‑a‑ponto (P2P) criptografado entre dispositivos confiáveis usando IPFS ou protocolos similares"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:43:08.182474+00:00"
+}

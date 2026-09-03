@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Usar um quadro de tarefas com um token f...' (hash: 7a5282030f46e5e0), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Usar um quadro de tarefas com um token físico (por exemplo, um cartão colorido) que indica quem deve fechar a cafeteria; o token é passado diariamente ao próximo funcionário, estabelecendo rotação.\",\"feasibility_notes\":[\"Requer apenas um quadro visível e um token físico, custos praticamente nulos\",\"Não depende de infraestrutura digital ou conectividade\",\"A implementação pode ser feita em poucos minutos por qualquer membro da equipe\",\"A rotação diária é simples de entender e seguir\",\"A mudança de responsabilidade ocorre de forma tangível, facilitando a memorização\"],\"reality_dependencies\":[\"Quadro de tarefas fixado em local de alta visibilidade para todos os funcionários\",\"Token físico durável (ex.: cartão plastificado) que possa ser manipulado diariamente\",\"Compromisso dos três funcionários de mover o token ao final de cada turno\",\"Procedimento claro de quem é responsável por mover o token caso o responsável esteja ausente\",\"Registro de dias em que o token não foi movido para auditoria interna\"],\"claims_needing_evidence\":[\"A rotação diária reduz a percepção de carga desigual entre os funcionários\",\"O uso de um token físico garante que a pessoa correta seja identificada sem ambiguidades\",\"A simples presença do token no quadro aumenta a taxa de cumprimento da tarefa de fechamento\"],\"potential_blockers\":[\"Token pode ser perdido, danificado ou esquecido em outro local\",\"Funcionário pode esquecer de mover o token ao final do turno\",\"Falta de clareza quando há substituição ou ausência inesperada de um funcionário\",\"Quadro pode ficar obstruído ou fora de vista em ambientes movimentados\",\"Resistência cultural à mudança de hábito estabelecido\"],\"candidate_tests\":[\"Executar um piloto de 2 semanas onde o token é passado diariamente e registrar se o responsável pelo fechamento corresponde ao token em cada dia\",\"Realizar entrevista curta com os três funcionários após o piloto para avaliar percepção de justiça e carga de trabalho\",\"Verificar se há dias em que o token não foi movido e analisar as causas (esquecimento, ausência, etc.)\",\"Medir o tempo gasto para localizar o responsável antes e depois da implementação do token\"],\"exploratory_candidate_tests\":[\"Testar um calendário impresso mensal com rotas pré‑definidas para comparar a aderência ao token físico\",\"Implementar um sorteio diário com nomes em um pote e registrar a aceitação dos funcionários em comparação ao método do token\",\"Avaliar a combinação de token físico + caixas de verificação no quadro para melhorar a rastreabilidade da conclusão da tarefa\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Usar um quadro de tarefas com um token físico (por exemplo, um cartão colorido) que indica quem deve fechar a cafeteria; o token é passado diariamente ao próximo funcionário, estabelecendo rotação.",
+    "feasibility_notes": [
+      "Requer apenas um quadro visível e um token físico, custos praticamente nulos",
+      "Não depende de infraestrutura digital ou conectividade",
+      "A implementação pode ser feita em poucos minutos por qualquer membro da equipe",
+      "A rotação diária é simples de entender e seguir",
+      "A mudança de responsabilidade ocorre de forma tangível, facilitando a memorização"
+    ],
+    "reality_dependencies": [
+      "Quadro de tarefas fixado em local de alta visibilidade para todos os funcionários",
+      "Token físico durável (ex.: cartão plastificado) que possa ser manipulado diariamente",
+      "Compromisso dos três funcionários de mover o token ao final de cada turno",
+      "Procedimento claro de quem é responsável por mover o token caso o responsável esteja ausente",
+      "Registro de dias em que o token não foi movido para auditoria interna"
+    ],
+    "claims_needing_evidence": [
+      "A rotação diária reduz a percepção de carga desigual entre os funcionários",
+      "O uso de um token físico garante que a pessoa correta seja identificada sem ambiguidades",
+      "A simples presença do token no quadro aumenta a taxa de cumprimento da tarefa de fechamento"
+    ],
+    "potential_blockers": [
+      "Token pode ser perdido, danificado ou esquecido em outro local",
+      "Funcionário pode esquecer de mover o token ao final do turno",
+      "Falta de clareza quando há substituição ou ausência inesperada de um funcionário",
+      "Quadro pode ficar obstruído ou fora de vista em ambientes movimentados",
+      "Resistência cultural à mudança de hábito estabelecido"
+    ],
+    "candidate_tests": [
+      "Executar um piloto de 2 semanas onde o token é passado diariamente e registrar se o responsável pelo fechamento corresponde ao token em cada dia",
+      "Realizar entrevista curta com os três funcionários após o piloto para avaliar percepção de justiça e carga de trabalho",
+      "Verificar se há dias em que o token não foi movido e analisar as causas (esquecimento, ausência, etc.)",
+      "Medir o tempo gasto para localizar o responsável antes e depois da implementação do token"
+    ],
+    "exploratory_candidate_tests": [
+      "Testar um calendário impresso mensal com rotas pré‑definidas para comparar a aderência ao token físico",
+      "Implementar um sorteio diário com nomes em um pote e registrar a aceitação dos funcionários em comparação ao método do token",
+      "Avaliar a combinação de token físico + caixas de verificação no quadro para melhorar a rastreabilidade da conclusão da tarefa"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:36:23.137347+00:00"
+}

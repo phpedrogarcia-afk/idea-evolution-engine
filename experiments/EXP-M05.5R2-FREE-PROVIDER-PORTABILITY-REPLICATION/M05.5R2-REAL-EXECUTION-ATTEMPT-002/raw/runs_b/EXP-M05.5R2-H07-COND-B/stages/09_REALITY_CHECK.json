@@ -1,0 +1,56 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Desenvolver um script Python que usa arg...' (hash: 4fdd2572aab09384), 4 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Desenvolver um script Python que usa argparse para receber o caminho do arquivo JSON, carrega o conteúdo com a biblioteca padrão json, filtra as tarefas onde \\\"blocked\\\": true e imprime a pessoa ou dependência em formato tabular.\",\"feasibility_notes\":[\"Implementar a ferramenta em Python usando apenas bibliotecas padrão é tecnicamente viável em qualquer ambiente com Python 3.x instalado.\",\"O parsing de argumentos com argparse e o carregamento de JSON com a biblioteca json são operações bem‑documentadas e de baixo risco.\",\"A geração de saída tabular pode ser feita com formatação de strings simples, sem necessidade de dependências externas.\"],\"reality_dependencies\":[\"Python 3.x runtime (versão >=3.6)\",\"Acesso de leitura ao arquivo JSON especificado\",\"Estrutura do JSON contendo, ao menos, os campos \\\"blocked\\\" (boolean) e \\\"person\\\" ou \\\"dependency\\\" para cada tarefa\",\"Permissões de arquivo adequadas para leitura\"],\"claims_needing_evidence\":[\"Argparse consegue receber corretamente um caminho de arquivo passado como argumento de linha de comando\",\"A biblioteca json padrão consegue desserializar o conteúdo do arquivo sem erros quando o JSON está bem‑formado\",\"Filtrar tarefas onde \\\"blocked\\\": true produz o subconjunto esperado de itens\",\"A impressão em formato tabular exibe corretamente a pessoa ou dependência associada a cada tarefa bloqueada\"],\"potential_blockers\":[\"Arquivo JSON malformado ou incompatível com o esquema esperado\",\"Tarefas que não possuam os campos \\\"person\\\" ou \\\"dependency\\\", gerando valores ausentes na saída\",\"Problemas de permissão que impeçam a leitura do arquivo\",\"Diferenças de comportamento entre versões de Python que afetem o módulo json ou argparse\"],\"candidate_tests\":[\"Teste unitário com um arquivo JSON de exemplo contendo três tarefas, duas marcadas como \\\"blocked\\\": true, verificando que a saída lista exatamente essas duas tarefas com as informações corretas de pessoa/dependência.\",\"Teste de erro ao fornecer um caminho de arquivo inexistente, confirmando que o script exibe uma mensagem de erro clara e encerra com código de saída não‑zero.\",\"Teste de entrada JSON onde uma tarefa bloqueada carece do campo \\\"person\\\" e tem apenas \\\"dependency\\\", garantindo que a saída mostre a dependência correta.\",\"Teste de desempenho com um arquivo JSON grande (10.000 tarefas) para validar que o script completa a filtragem e impressão em tempo aceitável.\",\"Teste de compatibilidade passando o caminho do arquivo usando aspas e espaços, assegurando que argparse interpreta corretamente o argumento.\"],\"exploratory_candidate_tests\":[\"Comparar a implementação Python com um script shell que utiliza jq para filtrar tarefas bloqueadas, medindo tempo de execução e consumo de memória.\",\"Avaliar a viabilidade de portar a funcionalidade para um binário Go autônomo, incluindo análise de complexidade de desenvolvimento versus benefício de distribuição.\",\"Investigar a possibilidade de gerar a saída em formatos alternativos (CSV, Markdown) e testar a aceitação pelos usuários finais.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Desenvolver um script Python que usa argparse para receber o caminho do arquivo JSON, carrega o conteúdo com a biblioteca padrão json, filtra as tarefas onde \"blocked\": true e imprime a pessoa ou dependência em formato tabular.",
+    "feasibility_notes": [
+      "Implementar a ferramenta em Python usando apenas bibliotecas padrão é tecnicamente viável em qualquer ambiente com Python 3.x instalado.",
+      "O parsing de argumentos com argparse e o carregamento de JSON com a biblioteca json são operações bem‑documentadas e de baixo risco.",
+      "A geração de saída tabular pode ser feita com formatação de strings simples, sem necessidade de dependências externas."
+    ],
+    "reality_dependencies": [
+      "Python 3.x runtime (versão >=3.6)",
+      "Acesso de leitura ao arquivo JSON especificado",
+      "Estrutura do JSON contendo, ao menos, os campos \"blocked\" (boolean) e \"person\" ou \"dependency\" para cada tarefa",
+      "Permissões de arquivo adequadas para leitura"
+    ],
+    "claims_needing_evidence": [
+      "Argparse consegue receber corretamente um caminho de arquivo passado como argumento de linha de comando",
+      "A biblioteca json padrão consegue desserializar o conteúdo do arquivo sem erros quando o JSON está bem‑formado",
+      "Filtrar tarefas onde \"blocked\": true produz o subconjunto esperado de itens",
+      "A impressão em formato tabular exibe corretamente a pessoa ou dependência associada a cada tarefa bloqueada"
+    ],
+    "potential_blockers": [
+      "Arquivo JSON malformado ou incompatível com o esquema esperado",
+      "Tarefas que não possuam os campos \"person\" ou \"dependency\", gerando valores ausentes na saída",
+      "Problemas de permissão que impeçam a leitura do arquivo",
+      "Diferenças de comportamento entre versões de Python que afetem o módulo json ou argparse"
+    ],
+    "candidate_tests": [
+      "Teste unitário com um arquivo JSON de exemplo contendo três tarefas, duas marcadas como \"blocked\": true, verificando que a saída lista exatamente essas duas tarefas com as informações corretas de pessoa/dependência.",
+      "Teste de erro ao fornecer um caminho de arquivo inexistente, confirmando que o script exibe uma mensagem de erro clara e encerra com código de saída não‑zero.",
+      "Teste de entrada JSON onde uma tarefa bloqueada carece do campo \"person\" e tem apenas \"dependency\", garantindo que a saída mostre a dependência correta.",
+      "Teste de desempenho com um arquivo JSON grande (10.000 tarefas) para validar que o script completa a filtragem e impressão em tempo aceitável.",
+      "Teste de compatibilidade passando o caminho do arquivo usando aspas e espaços, assegurando que argparse interpreta corretamente o argumento."
+    ],
+    "exploratory_candidate_tests": [
+      "Comparar a implementação Python com um script shell que utiliza jq para filtrar tarefas bloqueadas, medindo tempo de execução e consumo de memória.",
+      "Avaliar a viabilidade de portar a funcionalidade para um binário Go autônomo, incluindo análise de complexidade de desenvolvimento versus benefício de distribuição.",
+      "Investigar a possibilidade de gerar a saída em formatos alternativos (CSV, Markdown) e testar a aceitação pelos usuários finais."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:40:08.447271+00:00"
+}

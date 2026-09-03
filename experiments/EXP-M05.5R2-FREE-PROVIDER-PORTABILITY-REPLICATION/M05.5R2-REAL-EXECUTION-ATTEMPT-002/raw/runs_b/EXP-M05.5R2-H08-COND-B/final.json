@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R2-H08-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "human_intent": "Testar se oferecer sugestões de refeições baseadas nos ingredientes disponíveis e na validade aproximada reduz o desperdício de alimentos e altera o comportamento de compra/cozinha desses usuários.",
+  "refined_idea": "Oferecer sugestões de refeições personalizadas para quem cozinha para uma ou duas pessoas, usando os ingredientes que já possui em casa e a validade aproximada, com o objetivo de reduzir o desperdício de alimentos e avaliar mudanças de comportamento.",
+  "core_mechanism": "Algoritmo que gera sugestões de refeições a partir do inventário de ingredientes inserido manualmente pelo usuário e das datas de validade aproximadas fornecidas por ele.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "b2bcd2c0c9ca715c",
+  "tested_core_hash": "b2bcd2c0c9ca715c",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 5,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 2,
+  "recommended_next_step": "Desenvolver um protótipo MVP que permita ao usuário cadastrar manualmente seus ingredientes e datas de validade, gerar sugestões de refeições e conduzir um estudo piloto com um grupo pequeno de usuários para medir a redução de desperdício e a aceitação das recomendações"
+}

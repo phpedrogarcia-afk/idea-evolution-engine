@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H01-COND-B",
+  "created_at": "2026-09-03T17:35:08.924817+00:00",
+  "original_idea": "Quero uma forma simples de dividir as tarefas de fechamento da minha pequena cafeteria entre três pessoas, sem precisar instalar um sistema de gestão. As tarefas mudam um pouco de dia para dia e ninguém deve ficar sempre com a parte mais chata.",
+  "metadata": {
+    "topology": "STANDARD_6_STAGE",
+    "routing_config_hash": "2def2f481db1befaabb4fac9e6da28c92a01c5127d93c02aa09e3fd2981ebc6c",
+    "routing_schema_version": "1.0.0",
+    "git_commit": "128f061018cdafdc9e8481d67705706eccef7977",
+    "environment_pid": 9752
+  }
+}

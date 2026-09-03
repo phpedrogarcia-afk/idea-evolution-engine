@@ -1,0 +1,68 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"A rotação manual pode falhar em garantir justiça quando as tarefas variam em grau de desagradabilidade\",\"why_it_matters\":\"Sem um mecanismo objetivo para classificar a dificuldade de cada tarefa, a percepção dos funcionários pode divergir, gerando ressentimento e diminuição da moral\",\"severity\":\"HIGH\",\"affected_part\":\"Mecanismo de distribuição de tarefas\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Dependência de atualização diária manual aumenta risco de erro humano\",\"why_it_matters\":\"Se a lista não for atualizada corretamente, a pessoa designada pode acabar recebendo a tarefa mais chata repetidamente, contrariando o objetivo principal\",\"severity\":\"MEDIUM\",\"affected_part\":\"Processo de manutenção da lista\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Ausência de um mecanismo de verificação ou penalidade para não‑conformidade\",\"why_it_matters\":\"Funcionários podem simplesmente ignorar a rotação se acharem conveniente, pois não há controle nem consequência, comprometendo a eficácia do método\",\"severity\":\"MEDIUM\",\"affected_part\":\"Compliance do esquema de rotação\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"As tarefas de fechamento variam ligeiramente a cada dia\",\"Os três funcionários têm disponibilidade para assumir diferentes tarefas\",\"Existe um local físico onde a lista de tarefas pode ser exibida\",\"Os funcionários concordam em seguir um esquema de rotação\",\"Não há restrições de tempo que impeçam a atualização manual diária\"],\"contradictions\":[\"A proposta afirma ser \\\"simples\\\" e ao mesmo tempo garante que \\\"ninguém ficará sempre com a parte mais chata\\\" sem nenhum sistema de controle, o que pode ser contraditório em prática\"],\"failure_modes\":[\"Esquecimento de atualizar a lista diária\",\"Erro ao atribuir a tarefa mais desagradável ao mesmo funcionário várias vezes\",\"Desacordo entre funcionários sobre qual tarefa é a mais desagradável\",\"Ausência inesperada de um funcionário quebra a rotação planejada\"],\"missing_information\":[\"Quais são exatamente as tarefas de fechamento e como são classificadas em termos de dificuldade\",\"Frequência e padrão desejado de rotação (ex.: ciclo de 3 dias, 6 dias, etc.)\",\"Procedimento para lidar com ausências ou trocas de turno\",\"Critérios para validar que a rotação está sendo seguida corretamente\"],\"overclaims\":[\"A afirmação de que o método manual \\\"garante\\\" que ninguém ficará sempre responsável pela tarefa mais desagradável\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "A rotação manual pode falhar em garantir justiça quando as tarefas variam em grau de desagradabilidade",
+        "why_it_matters": "Sem um mecanismo objetivo para classificar a dificuldade de cada tarefa, a percepção dos funcionários pode divergir, gerando ressentimento e diminuição da moral",
+        "severity": "HIGH",
+        "affected_part": "Mecanismo de distribuição de tarefas",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Dependência de atualização diária manual aumenta risco de erro humano",
+        "why_it_matters": "Se a lista não for atualizada corretamente, a pessoa designada pode acabar recebendo a tarefa mais chata repetidamente, contrariando o objetivo principal",
+        "severity": "MEDIUM",
+        "affected_part": "Processo de manutenção da lista",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Ausência de um mecanismo de verificação ou penalidade para não‑conformidade",
+        "why_it_matters": "Funcionários podem simplesmente ignorar a rotação se acharem conveniente, pois não há controle nem consequência, comprometendo a eficácia do método",
+        "severity": "MEDIUM",
+        "affected_part": "Compliance do esquema de rotação",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "As tarefas de fechamento variam ligeiramente a cada dia",
+      "Os três funcionários têm disponibilidade para assumir diferentes tarefas",
+      "Existe um local físico onde a lista de tarefas pode ser exibida",
+      "Os funcionários concordam em seguir um esquema de rotação",
+      "Não há restrições de tempo que impeçam a atualização manual diária"
+    ],
+    "contradictions": [
+      "A proposta afirma ser \"simples\" e ao mesmo tempo garante que \"ninguém ficará sempre com a parte mais chata\" sem nenhum sistema de controle, o que pode ser contraditório em prática"
+    ],
+    "failure_modes": [
+      "Esquecimento de atualizar a lista diária",
+      "Erro ao atribuir a tarefa mais desagradável ao mesmo funcionário várias vezes",
+      "Desacordo entre funcionários sobre qual tarefa é a mais desagradável",
+      "Ausência inesperada de um funcionário quebra a rotação planejada"
+    ],
+    "missing_information": [
+      "Quais são exatamente as tarefas de fechamento e como são classificadas em termos de dificuldade",
+      "Frequência e padrão desejado de rotação (ex.: ciclo de 3 dias, 6 dias, etc.)",
+      "Procedimento para lidar com ausências ou trocas de turno",
+      "Critérios para validar que a rotação está sendo seguida corretamente"
+    ],
+    "overclaims": [
+      "A afirmação de que o método manual \"garante\" que ninguém ficará sempre responsável pela tarefa mais desagradável"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:35:38.942723+00:00"
+}

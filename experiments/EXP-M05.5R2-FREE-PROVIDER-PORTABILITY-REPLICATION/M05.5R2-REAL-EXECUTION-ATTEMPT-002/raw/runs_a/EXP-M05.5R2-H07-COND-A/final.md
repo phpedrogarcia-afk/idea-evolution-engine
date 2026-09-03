@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — EXP-M05.5R2-H07-COND-A
+
+## Ideia Original
+> Quero uma ferramenta de linha de comando pequena que leia uma lista de tarefas do projeto e mostre apenas as que estão marcadas como bloqueadas, junto com a pessoa ou dependência indicada na própria lista.
+
+## Resumo do Modelo
+Uma ferramenta de linha de comando chamada blocked‑tasks que lê um arquivo de lista de tarefas (JSON, YAML ou CSV), filtra as entradas marcadas como bloqueadas e exibe, em formato tabular, a tarefa, a pessoa responsável ou a dependência indicada, com opções de cores e exportação.
+
+## Versão Refinada
+blocked‑tasks – um utilitário CLI escrito em Python que aceita um argumento `--file` apontando para um arquivo de tarefas (JSON, YAML ou CSV). Cada tarefa deve possuir os campos `id`, `title`, `status` (ex.: "blocked"), e opcionalmente `owner` ou `depends_on`. O comando filtra as tarefas onde `status == "blocked"` e imprime uma tabela com colunas: ID, Título, Responsável/Dependência. Flags adicionais incluem `--output json|csv|table`, `--color` para realçar bloqueios, e `--filter-owner <nome>` para restringir por responsável. O código está estruturado em módulos de parsing, filtragem e renderização, facilitando extensões futuras como integração com APIs de gerenciamento de projetos.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Foco claro em um problema específico – identificar bloqueios, Implementação simples e rápida em linguagens como Python ou Go, Utilidade imediata para equipes que já mantêm listas de tarefas em texto, Pode ser integrada a pipelines CI/CD ou scripts de automação, Saída legível e opcionalmente colorida facilita a visualização
+- **Fracos:** Depende de um formato de entrada bem‑definido; listas não padronizadas exigirão adaptação, Funcionalidade limitada a bloqueios – não cobre outras métricas de gerenciamento, Sem interface gráfica ou integração direta com ferramentas como Jira ou Trello, Gerenciamento de dependências complexas (ex.: múltiplas dependências) pode ficar confuso, Requer manutenção para suportar novos formatos ou opções de saída
+
+## Próximos Passos
+Definir o esquema de entrada suportado (ex.: exemplo JSON/YAML/CSV), Criar repositório GitHub e configurar ambiente Python (virtualenv, dependências), Implementar módulo de parsing que detecta automaticamente o formato do arquivo, Desenvolver função de filtragem que seleciona tarefas com `status == "blocked"`, Construir renderizador de tabela com cores opcional usando a biblioteca `tabulate` ou similar, Adicionar argumentos de linha de comando com `argparse` para `--file`, `--output`, `--color`, etc., Escrever testes unitários para parsing, filtragem e saída em diferentes formatos, Documentar uso, exemplos de arquivos de tarefas e instruções de instalação (pip), Publicar o pacote no PyPI e criar um release no GitHub

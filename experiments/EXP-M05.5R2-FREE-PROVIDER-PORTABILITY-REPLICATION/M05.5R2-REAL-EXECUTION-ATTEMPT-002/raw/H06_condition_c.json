@@ -1,0 +1,25 @@
+{
+  "cell_id": "H06-CONDITION_C",
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-002",
+  "idea_id": "H06",
+  "condition": "CONDITION_C",
+  "raw_idea": "O nosso clube de leitura recebe poucos lugares para encontros presenciais e temos de decidir quem participa quando há mais interessados do que vagas. Não quero que vire uma disputa por rapidez de inscrição, mas também não sei qual critério seria justo para todos.",
+  "latency_seconds": 15.415,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "parsed_output": {
+    "run_id": "EXP-M05.5R2-H06-COND-C",
+    "topology": "LEAN_IEE_L1",
+    "original_idea": "O nosso clube de leitura recebe poucos lugares para encontros presenciais e temos de decidir quem participa quando há mais interessados do que vagas. Não quero que vire uma disputa por rapidez de inscrição, mas também não sei qual critério seria justo para todos.",
+    "total_model_calls": 1,
+    "gate_outcome": "REQUEST_HUMAN_DECISION",
+    "escalation_reason": "NONE",
+    "authority_spoofing_detected": false,
+    "unsupported_candidate_count": 4,
+    "terminal_status": "HUMAN_DECISION_REQUIRED",
+    "decision_progress_detected": true
+  },
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.5R2-H06-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> O nosso clube de leitura recebe poucos lugares para encontros presenciais e temos de decidir quem participa quando há mais interessados do que vagas. Não quero que vire uma disputa por rapidez de inscrição, mas também não sei qual critério seria justo para todos.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Definir um critério de alocação que seja percebido como justo por todos, evitando competição baseada em rapidez de inscrição.\n- **Problema Interpretado:** O clube de leitura tem número limitado de vagas para encontros presenciais, e há mais interessados que vagas, necessitando um método de seleção justo.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Sorteio aleatório entre os inscritos antes do encontro\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** Um sorteio elimina a vantagem de quem se inscreve rapidamente, garantindo igualdade de chances para todos os interessados.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Primeiro a chegar (first‑come‑first‑served)** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Favorece quem tem disponibilidade imediata, criando competição de velocidade, Pode excluir membros que não conseguem se inscrever rapidamente\n2. **Prioridade baseada em frequência de participação passada** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Requer registro de frequência passada, Pode ser percebido como injusto por novos membros, Complexidade de cálculo da prioridade\n3. **Sistema de pontos (contribuição, organização de sessões, etc.)** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Necessita definição clara de critérios de pontuação, Risco de manipulação ou disputa por pontos, Maior carga administrativa\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 4\n\n## 7. Próximo Passo Recomendado\n\nRealizar uma enquete entre os membros para coletar preferências sobre os critérios de alocação e, em seguida, pilotar o método escolhido no próximo encontro presencial.\n"
+}

@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R2-H04-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Quero organizar meus registros pessoais de saúde e sintomas para perceber padrões antes das consultas, mas não quero enviar esses dados para aplicativos, contas online ou serviços de terceiros. Preciso conseguir usar isso no meu próprio computador.",
+  "human_intent": "Criar uma solução que permita registrar, armazenar e analisar dados de saúde no próprio computador, mantendo total privacidade e controle sobre as informações.",
+  "refined_idea": "Um aplicativo desktop que permite ao usuário registrar, armazenar e analisar seus dados de saúde localmente, com criptografia forte e recursos de recuperação de dados integrados, garantindo total privacidade e controle sem depender de serviços externos.",
+  "core_mechanism": "Armazenamento local criptografado (AES‑256) com versionamento interno que gera snapshots diários imutáveis em um diretório oculto.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "979ef0f50fe9e27c",
+  "tested_core_hash": "979ef0f50fe9e27c",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 1,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Desenvolver o mecanismo central de armazenamento criptografado com versionamento interno, criar protótipo de snapshots diários e validar a usabilidade do processo de restauração com usuários‑teste; depois, avaliar a necessidade de implementar o agendador de backups externos como funcionalidade opcional."
+}

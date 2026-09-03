@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R2-H06-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "O nosso clube de leitura recebe poucos lugares para encontros presenciais e temos de decidir quem participa quando há mais interessados do que vagas. Não quero que vire uma disputa por rapidez de inscrição, mas também não sei qual critério seria justo para todos.",
+  "human_intent": "Find a fair criterion for selecting participants that does not turn into a race based on rapid sign‑up and is acceptable to all members.",
+  "refined_idea": "Implement a fixed rotating schedule with a shared calendar and limited sign‑up windows, complemented by a randomized weighted lottery per cycle to allocate spots fairly.",
+  "core_mechanism": "Fixed rotating schedule with shared calendar and limited sign‑up windows",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "c701335b96432878",
+  "tested_core_hash": "c701335b96432878",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 2,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 1,
+  "recommended_next_step": "Run a pilot cycle using the rotating schedule with limited sign‑up windows and the weighted lottery, monitor member feedback, and refine the ticket allocation rules before full rollout."
+}

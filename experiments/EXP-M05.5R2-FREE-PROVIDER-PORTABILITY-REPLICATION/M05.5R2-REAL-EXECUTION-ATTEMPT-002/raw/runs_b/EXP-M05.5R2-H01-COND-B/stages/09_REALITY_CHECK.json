@@ -1,0 +1,57 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Quadro de tarefas com tokens coloridos q...' (hash: cde4105b5ac1d755), 5 dependências, 3 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Quadro de tarefas com tokens coloridos que indicam o grau de desagradabilidade da tarefa; ao final do dia o token é passado para o próximo funcionário, assegurando rotação diária baseada na carga percebida.\",\"feasibility_notes\":[\"O método requer apenas um quadro físico e um conjunto limitado de tokens coloridos, o que o torna barato e fácil de implementar.\",\"A rotação diária baseada na troca de token elimina a necessidade de software ou processos digitais complexos.\",\"A simplicidade do sistema depende de que todos os funcionários compreendam e concordem com a escala de desagradabilidade representada pelas cores.\",\"A prática diária de passar o token pode ser incorporada à rotina de encerramento sem grande esforço adicional.\"],\"reality_dependencies\":[\"Um quadro de tarefas fixo em local visível para todos os funcionários.\",\"Um conjunto de tokens coloridos (ex.: verde, amarelo, vermelho) cujas cores estejam previamente definidas como indicadores de carga percebida.\",\"Procedimento escrito que descreva como atribuir cores aos tokens antes do início da rotação.\",\"Compromisso dos três funcionários de trocar o token ao final de cada dia de trabalho.\",\"Um local de armazenamento seguro para o token durante a troca para evitar perda ou dano.\"],\"claims_needing_evidence\":[\"As cores dos tokens refletem de forma consistente a percepção individual de carga dos funcionários.\",\"A troca diária do token garante uma distribuição equitativa da tarefa de fechamento ao longo da semana.\",\"Os funcionários manterão a disciplina de passar o token todos os dias sem esquecer ou omitir a troca.\",\"A percepção de justiça aumentará a satisfação e o desempenho dos funcionários ao usar o sistema.\"],\"potential_blockers\":[\"Ambiguidade na definição de \\\"grau de desagradabilidade\\\" pode gerar interpretações diferentes entre os funcionários.\",\"Esquecimento ou atraso na troca do token ao final do dia, interrompendo a rotação planejada.\",\"Perda ou dano dos tokens coloridos, exigindo reposição ou substituição.\",\"Resistência cultural a um método manual que dependa de vigilância constante.\",\"Limitações de espaço físico para o quadro em ambientes de trabalho apertados.\"],\"candidate_tests\":[\"Conduzir um piloto de 2 semanas com os três funcionários, registrando diariamente quem recebeu o token e coletando uma pesquisa de percepção de justiça ao final da semana.\",\"Medir a taxa de cumprimento da troca do token (percentual de dias em que a troca ocorreu corretamente) durante o piloto.\",\"Comparar o número de vezes que cada funcionário realizou a tarefa de fechamento antes e depois da implementação do sistema para verificar equilíbrio de carga.\"],\"exploratory_candidate_tests\":[\"Testar a inclusão de um checklist impresso diário para verificação de conformidade após a troca do token, avaliando se melhora a aderência ao processo.\",\"Implementar um registro semanal em papel para monitorar a distribuição das tarefas e ajustar manualmente as rotações, observando se isso aumenta a percepção de equidade.\",\"Experimentar um conjunto alternativo de tokens (ex.: formas diferentes em vez de cores) para avaliar se a representação visual afeta a clareza e a aceitação do método.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Quadro de tarefas com tokens coloridos que indicam o grau de desagradabilidade da tarefa; ao final do dia o token é passado para o próximo funcionário, assegurando rotação diária baseada na carga percebida.",
+    "feasibility_notes": [
+      "O método requer apenas um quadro físico e um conjunto limitado de tokens coloridos, o que o torna barato e fácil de implementar.",
+      "A rotação diária baseada na troca de token elimina a necessidade de software ou processos digitais complexos.",
+      "A simplicidade do sistema depende de que todos os funcionários compreendam e concordem com a escala de desagradabilidade representada pelas cores.",
+      "A prática diária de passar o token pode ser incorporada à rotina de encerramento sem grande esforço adicional."
+    ],
+    "reality_dependencies": [
+      "Um quadro de tarefas fixo em local visível para todos os funcionários.",
+      "Um conjunto de tokens coloridos (ex.: verde, amarelo, vermelho) cujas cores estejam previamente definidas como indicadores de carga percebida.",
+      "Procedimento escrito que descreva como atribuir cores aos tokens antes do início da rotação.",
+      "Compromisso dos três funcionários de trocar o token ao final de cada dia de trabalho.",
+      "Um local de armazenamento seguro para o token durante a troca para evitar perda ou dano."
+    ],
+    "claims_needing_evidence": [
+      "As cores dos tokens refletem de forma consistente a percepção individual de carga dos funcionários.",
+      "A troca diária do token garante uma distribuição equitativa da tarefa de fechamento ao longo da semana.",
+      "Os funcionários manterão a disciplina de passar o token todos os dias sem esquecer ou omitir a troca.",
+      "A percepção de justiça aumentará a satisfação e o desempenho dos funcionários ao usar o sistema."
+    ],
+    "potential_blockers": [
+      "Ambiguidade na definição de \"grau de desagradabilidade\" pode gerar interpretações diferentes entre os funcionários.",
+      "Esquecimento ou atraso na troca do token ao final do dia, interrompendo a rotação planejada.",
+      "Perda ou dano dos tokens coloridos, exigindo reposição ou substituição.",
+      "Resistência cultural a um método manual que dependa de vigilância constante.",
+      "Limitações de espaço físico para o quadro em ambientes de trabalho apertados."
+    ],
+    "candidate_tests": [
+      "Conduzir um piloto de 2 semanas com os três funcionários, registrando diariamente quem recebeu o token e coletando uma pesquisa de percepção de justiça ao final da semana.",
+      "Medir a taxa de cumprimento da troca do token (percentual de dias em que a troca ocorreu corretamente) durante o piloto.",
+      "Comparar o número de vezes que cada funcionário realizou a tarefa de fechamento antes e depois da implementação do sistema para verificar equilíbrio de carga."
+    ],
+    "exploratory_candidate_tests": [
+      "Testar a inclusão de um checklist impresso diário para verificação de conformidade após a troca do token, avaliando se melhora a aderência ao processo.",
+      "Implementar um registro semanal em papel para monitorar a distribuição das tarefas e ajustar manualmente as rotações, observando se isso aumenta a percepção de equidade.",
+      "Experimentar um conjunto alternativo de tokens (ex.: formas diferentes em vez de cores) para avaliar se a representação visual afeta a clareza e a aceitação do método."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:37:23.450807+00:00"
+}

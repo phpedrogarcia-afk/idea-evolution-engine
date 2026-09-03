@@ -1,0 +1,82 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "5 vulnerabilidades críticas e 5 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Dependência de conhecimento preciso dos usuários sobre os itens que possuem em casa\",\"why_it_matters\":\"Se os usuários não souberem ou não registrarem corretamente o que têm, as sugestões serão imprecisas, reduzindo a eficácia da solução e possivelmente aumentando o desperdício\",\"severity\":\"HIGH\",\"affected_part\":\"User Input\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Estimativa de datas de validade pelos usuários\",\"why_it_matters\":\"Datas de validade incorretas podem levar a recomendações que utilizam alimentos já estragados ou, ao contrário, descartam alimentos ainda consumíveis, comprometendo a confiança no sistema\",\"severity\":\"HIGH\",\"affected_part\":\"Ingredient Metadata\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Aderência dos usuários às sugestões de refeição\",\"why_it_matters\":\"A proposta assume que os usuários seguirão as recomendações; baixa aderência anulará o objetivo de reduzir desperdício e invalidará a medição de mudança de comportamento\",\"severity\":\"MEDIUM\",\"affected_part\":\"Recommendation Engine\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Medição confiável da mudança de comportamento e do desperdício\",\"why_it_matters\":\"Sem um método robusto para quantificar o desperdício antes e depois, não será possível validar a hipótese central, tornando os resultados inconclusivos\",\"severity\":\"MEDIUM\",\"affected_part\":\"Behavior Measurement\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Privacidade e segurança dos dados de inventário doméstico\",\"why_it_matters\":\"Coletar informações detalhadas sobre alimentos em casa pode gerar preocupações de privacidade, levando a baixa participação ou a requisitos regulatórios que dificultam a implementação\",\"severity\":\"LOW\",\"affected_part\":\"Data Collection\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"os usuários têm conhecimento básico dos itens que possuem em casa\",\"as datas de validade dos alimentos são conhecidas ou estimáveis\",\"os usuários seguirão as sugestões de refeição propostas\",\"há um método viável para medir a mudança de comportamento e o desperdício de alimentos\"],\"contradictions\":[],\"failure_modes\":[\"Incorreta catalogação de ingredientes leva a recomendações inadequadas\",\"Subestimação das datas de validade causa risco de consumo de alimentos estragados\",\"Baixa taxa de aceitação das sugestões impede a redução de desperdício\",\"Medição imprecisa gera resultados estatísticos enganosos\",\"Vazamento de dados de inventário doméstico gera desconfiança e abandono\"],\"missing_information\":[\"Qual é a taxa atual de desperdício de alimentos entre cozinheiros individuais ou de duas pessoas?\",\"Qual método específico será usado para medir a mudança de comportamento (ex.: auto‑relato, sensores de peso, análise de compras)?\",\"Quais recursos de interface (app, web, integração com smart fridge) serão disponibilizados?\",\"Como será garantida a atualização contínua do inventário doméstico?\",\"Existe algum estudo prévio que correlacione sugestões de refeições com redução de desperdício?\"],\"overclaims\":[\"A ideia assume que sugestões personalizadas reduzirão significativamente o desperdício sem evidência empírica prévia\",\"A proposta afirma que a mudança de comportamento será mensurável e atribuível exclusivamente ao sistema de recomendações\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Dependência de conhecimento preciso dos usuários sobre os itens que possuem em casa",
+        "why_it_matters": "Se os usuários não souberem ou não registrarem corretamente o que têm, as sugestões serão imprecisas, reduzindo a eficácia da solução e possivelmente aumentando o desperdício",
+        "severity": "HIGH",
+        "affected_part": "User Input",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Estimativa de datas de validade pelos usuários",
+        "why_it_matters": "Datas de validade incorretas podem levar a recomendações que utilizam alimentos já estragados ou, ao contrário, descartam alimentos ainda consumíveis, comprometendo a confiança no sistema",
+        "severity": "HIGH",
+        "affected_part": "Ingredient Metadata",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Aderência dos usuários às sugestões de refeição",
+        "why_it_matters": "A proposta assume que os usuários seguirão as recomendações; baixa aderência anulará o objetivo de reduzir desperdício e invalidará a medição de mudança de comportamento",
+        "severity": "MEDIUM",
+        "affected_part": "Recommendation Engine",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Medição confiável da mudança de comportamento e do desperdício",
+        "why_it_matters": "Sem um método robusto para quantificar o desperdício antes e depois, não será possível validar a hipótese central, tornando os resultados inconclusivos",
+        "severity": "MEDIUM",
+        "affected_part": "Behavior Measurement",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Privacidade e segurança dos dados de inventário doméstico",
+        "why_it_matters": "Coletar informações detalhadas sobre alimentos em casa pode gerar preocupações de privacidade, levando a baixa participação ou a requisitos regulatórios que dificultam a implementação",
+        "severity": "LOW",
+        "affected_part": "Data Collection",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "os usuários têm conhecimento básico dos itens que possuem em casa",
+      "as datas de validade dos alimentos são conhecidas ou estimáveis",
+      "os usuários seguirão as sugestões de refeição propostas",
+      "há um método viável para medir a mudança de comportamento e o desperdício de alimentos"
+    ],
+    "contradictions": [],
+    "failure_modes": [
+      "Incorreta catalogação de ingredientes leva a recomendações inadequadas",
+      "Subestimação das datas de validade causa risco de consumo de alimentos estragados",
+      "Baixa taxa de aceitação das sugestões impede a redução de desperdício",
+      "Medição imprecisa gera resultados estatísticos enganosos",
+      "Vazamento de dados de inventário doméstico gera desconfiança e abandono"
+    ],
+    "missing_information": [
+      "Qual é a taxa atual de desperdício de alimentos entre cozinheiros individuais ou de duas pessoas?",
+      "Qual método específico será usado para medir a mudança de comportamento (ex.: auto‑relato, sensores de peso, análise de compras)?",
+      "Quais recursos de interface (app, web, integração com smart fridge) serão disponibilizados?",
+      "Como será garantida a atualização contínua do inventário doméstico?",
+      "Existe algum estudo prévio que correlacione sugestões de refeições com redução de desperdício?"
+    ],
+    "overclaims": [
+      "A ideia assume que sugestões personalizadas reduzirão significativamente o desperdício sem evidência empírica prévia",
+      "A proposta afirma que a mudança de comportamento será mensurável e atribuível exclusivamente ao sistema de recomendações"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:26:38.441829+00:00"
+}

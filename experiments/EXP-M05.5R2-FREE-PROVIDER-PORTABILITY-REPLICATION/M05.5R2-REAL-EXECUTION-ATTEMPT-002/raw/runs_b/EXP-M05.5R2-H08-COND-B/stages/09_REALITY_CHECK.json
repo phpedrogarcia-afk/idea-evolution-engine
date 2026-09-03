@@ -1,0 +1,56 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Algoritmo que gera sugestões de refeiçõe...' (hash: b2bcd2c0c9ca715c), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Algoritmo que gera sugestões de refeições a partir do inventário de ingredientes inserido manualmente pelo usuário e das datas de validade aproximadas fornecidas por ele.\",\"feasibility_notes\":[\"A lógica de geração de receitas a partir de um conjunto de ingredientes e datas de validade é implementável com técnicas de filtragem e otimização de restrições simples.\",\"Requer uma base de dados de receitas estruturada com informações de ingredientes e tempos de preparo, o que já está disponível em repositórios públicos.\",\"A interface de entrada manual pode ser projetada com autocomplete para minimizar erros de digitação.\",\"O cálculo de prioridade de uso baseado na proximidade da validade pode ser feito com regras de negócio simples (ex.: FIFO de validade).\"],\"reality_dependencies\":[\"Disponibilidade de usuários dispostos a inserir manualmente seu inventário e datas de validade aproximadas.\",\"Precisão razoável das datas de validade fornecidas pelos usuários (até ±3 dias).\",\"Acesso a uma base de dados de receitas que cubra a maioria dos ingredientes domésticos comuns.\",\"Infraestrutura de armazenamento segura para manter o inventário do usuário de forma persistente.\"],\"claims_needing_evidence\":[\"Sugestões de refeições baseadas em validade reduzem o desperdício de alimentos em casa.\",\"A ferramenta altera o comportamento de compra/cozinha dos usuários, incentivando o consumo de itens próximos da expiração.\",\"Usuários conseguem inserir manualmente seu inventário de forma consistente ao longo do tempo.\",\"O algoritmo gera receitas que são percebidas como úteis e praticáveis pelos usuários.\"],\"potential_blockers\":[\"Fadiga ou abandono devido ao esforço de entrada manual dos ingredientes e datas de validade.\",\"Incerteza nas datas de validade fornecidas pelos usuários, levando a recomendações inadequadas.\",\"Limitações da base de receitas que podem não cobrir combinações específicas de ingredientes disponíveis.\",\"Questões de privacidade e segurança dos dados de inventário armazenados no servidor.\"],\"candidate_tests\":[\"Realizar um estudo piloto de 4‑6 semanas com 30‑50 usuários domésticos e medir a quantidade de alimentos descartados antes e depois do uso da aplicação.\",\"A/B test: grupo controle usando apenas lista de compras vs. grupo experimental recebendo sugestões baseadas em validade; comparar mudanças no volume de compras de itens perecíveis.\",\"Coletar métricas de engajamento (número de entradas de inventário por semana, taxa de aceitação das sugestões) e correlacionar com relatos de redução de desperdício.\",\"Entrevistas qualitativas pós‑uso para validar a percepção de utilidade das receitas sugeridas e identificar pontos de fricção na entrada manual.\"],\"exploratory_candidate_tests\":[\"Teste de integração com geladeira inteligente via API aberta para captura automática de estoque e datas de validade estimadas; comparar precisão e engajamento contra entrada manual.\",\"Prototipar reconhecimento de imagem usando a câmera do smartphone para escanear itens da despensa; avaliar acurácia da extração de validade e impacto na adoção.\",\"Implementar um módulo de gamificação que recompensa usuários por registrar ingredientes; medir se a pontuação aumenta a frequência de entrada de dados e reduz o desperdício comparado ao fluxo básico.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Algoritmo que gera sugestões de refeições a partir do inventário de ingredientes inserido manualmente pelo usuário e das datas de validade aproximadas fornecidas por ele.",
+    "feasibility_notes": [
+      "A lógica de geração de receitas a partir de um conjunto de ingredientes e datas de validade é implementável com técnicas de filtragem e otimização de restrições simples.",
+      "Requer uma base de dados de receitas estruturada com informações de ingredientes e tempos de preparo, o que já está disponível em repositórios públicos.",
+      "A interface de entrada manual pode ser projetada com autocomplete para minimizar erros de digitação.",
+      "O cálculo de prioridade de uso baseado na proximidade da validade pode ser feito com regras de negócio simples (ex.: FIFO de validade)."
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de usuários dispostos a inserir manualmente seu inventário e datas de validade aproximadas.",
+      "Precisão razoável das datas de validade fornecidas pelos usuários (até ±3 dias).",
+      "Acesso a uma base de dados de receitas que cubra a maioria dos ingredientes domésticos comuns.",
+      "Infraestrutura de armazenamento segura para manter o inventário do usuário de forma persistente."
+    ],
+    "claims_needing_evidence": [
+      "Sugestões de refeições baseadas em validade reduzem o desperdício de alimentos em casa.",
+      "A ferramenta altera o comportamento de compra/cozinha dos usuários, incentivando o consumo de itens próximos da expiração.",
+      "Usuários conseguem inserir manualmente seu inventário de forma consistente ao longo do tempo.",
+      "O algoritmo gera receitas que são percebidas como úteis e praticáveis pelos usuários."
+    ],
+    "potential_blockers": [
+      "Fadiga ou abandono devido ao esforço de entrada manual dos ingredientes e datas de validade.",
+      "Incerteza nas datas de validade fornecidas pelos usuários, levando a recomendações inadequadas.",
+      "Limitações da base de receitas que podem não cobrir combinações específicas de ingredientes disponíveis.",
+      "Questões de privacidade e segurança dos dados de inventário armazenados no servidor."
+    ],
+    "candidate_tests": [
+      "Realizar um estudo piloto de 4‑6 semanas com 30‑50 usuários domésticos e medir a quantidade de alimentos descartados antes e depois do uso da aplicação.",
+      "A/B test: grupo controle usando apenas lista de compras vs. grupo experimental recebendo sugestões baseadas em validade; comparar mudanças no volume de compras de itens perecíveis.",
+      "Coletar métricas de engajamento (número de entradas de inventário por semana, taxa de aceitação das sugestões) e correlacionar com relatos de redução de desperdício.",
+      "Entrevistas qualitativas pós‑uso para validar a percepção de utilidade das receitas sugeridas e identificar pontos de fricção na entrada manual."
+    ],
+    "exploratory_candidate_tests": [
+      "Teste de integração com geladeira inteligente via API aberta para captura automática de estoque e datas de validade estimadas; comparar precisão e engajamento contra entrada manual.",
+      "Prototipar reconhecimento de imagem usando a câmera do smartphone para escanear itens da despensa; avaliar acurácia da extração de validade e impacto na adoção.",
+      "Implementar um módulo de gamificação que recompensa usuários por registrar ingredientes; medir se a pontuação aumenta a frequência de entrada de dados e reduz o desperdício comparado ao fluxo básico."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:28:23.135579+00:00"
+}

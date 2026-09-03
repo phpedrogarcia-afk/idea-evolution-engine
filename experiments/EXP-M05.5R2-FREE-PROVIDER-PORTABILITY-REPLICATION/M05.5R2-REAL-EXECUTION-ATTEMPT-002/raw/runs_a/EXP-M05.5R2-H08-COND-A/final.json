@@ -1,0 +1,36 @@
+{
+  "run_id": "EXP-M05.5R2-H08-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "A proposta visa reduzir o desperdício de alimentos entre quem cozinha para uma ou duas pessoas, oferecendo sugestões de refeições baseadas nos itens já disponíveis em casa e nas datas de validade aproximadas, e testando se essa intervenção altera o comportamento de compra e consumo.",
+    "strengths": [
+      "Foco em um segmento de alto risco de desperdício (cozinheiros solo ou em casal)",
+      "Uso de dados já disponíveis (inventário doméstico e validade) para gerar recomendações personalizadas",
+      "Abordagem prática que pode ser implementada via aplicativo ou serviço web",
+      "Potencial de gerar economia doméstica além do benefício ambiental",
+      "Facilidade de mensurar resultados através de registro de alimentos descartados"
+    ],
+    "weaknesses": [
+      "Dependência de entrada manual ou de leitura de códigos de barras, o que pode ser trabalhoso para o usuário",
+      "Possível resistência dos usuários em compartilhar informações sobre estoque doméstico por questões de privacidade",
+      "Desafio de integrar preferências alimentares, restrições dietéticas e habilidades culinárias nas recomendações",
+      "Dificuldade em isolar o efeito da intervenção em um estudo controlado, devido a variáveis externas (promoções de supermercado, hábitos de compra)",
+      "Escalabilidade limitada se o protótipo exigir hardware específico (ex.: leitores de RFID)"
+    ],
+    "refined_version": "Desenvolver um aplicativo móvel que, ao escanear códigos de barras ou inserir manualmente os itens da despensa, crie um inventário com datas de validade estimadas. O algoritmo gera sugestões de refeições otimizadas para consumir os alimentos que estão próximos do vencimento, levando em conta preferências de sabor, restrições dietéticas e tempo disponível para cozinhar. O app inclui notificações de \"última chance\" e permite que o usuário registre o que foi efetivamente preparado e o que foi descartado. Para validar a hipótese, conduzir um estudo piloto de quatro semanas com dois grupos: um grupo recebe as sugestões personalizadas (intervenção) e o outro usa apenas um planner de compras tradicional (controle). O principal indicador será a redução percentual de peso de alimentos descartados, complementado por métricas de engajamento no app e satisfação do usuário.",
+    "next_steps": [
+      "Especificar requisitos funcionais do aplicativo (escaneamento, cadastro de validade, algoritmo de sugestão, registro de descarte)",
+      "Desenvolver um protótipo mínimo viável (MVP) em plataforma cross‑platform (ex.: React Native)",
+      "Definir métricas de sucesso (percentual de redução de desperdício, taxa de uso diário, NPS)",
+      "Planejar desenho experimental: tamanho da amostra, critérios de inclusão, randomização e grupo controle",
+      "Obter aprovação ética/institucional para coleta de dados de consumo doméstico",
+      "Recrutar participantes (cozinheiros solo ou casais) e conduzir treinamento inicial sobre uso do app",
+      "Executar o estudo piloto de 4‑6 semanas, coletando dados de inventário e descarte",
+      "Analisar os resultados estatisticamente e comparar com o grupo controle",
+      "Iterar o design do algoritmo com base no feedback e nos dados obtidos"
+    ]
+  }
+}

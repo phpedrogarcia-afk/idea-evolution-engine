@@ -1,0 +1,12 @@
+{
+  "run_id": "EXP-M05.5R2-H02-COND-C",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

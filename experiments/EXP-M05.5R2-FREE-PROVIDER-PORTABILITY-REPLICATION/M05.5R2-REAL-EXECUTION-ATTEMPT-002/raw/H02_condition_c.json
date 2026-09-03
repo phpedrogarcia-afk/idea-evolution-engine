@@ -1,0 +1,25 @@
+{
+  "cell_id": "H02-CONDITION_C",
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-002",
+  "idea_id": "H02",
+  "condition": "CONDITION_C",
+  "raw_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+  "latency_seconds": 14.708,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "parsed_output": {
+    "run_id": "EXP-M05.5R2-H02-COND-C",
+    "topology": "LEAN_IEE_L1",
+    "original_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+    "total_model_calls": 1,
+    "gate_outcome": "REQUEST_HUMAN_DECISION",
+    "escalation_reason": "NONE",
+    "authority_spoofing_detected": false,
+    "unsupported_candidate_count": 3,
+    "terminal_status": "HUMAN_DECISION_REQUIRED",
+    "decision_progress_detected": true
+  },
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.5R2-H02-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Create a small shared space or system that enables neighbors to trade skills such as gardening, simple repairs, or language tutoring.\n- **Problema Interpretado:** Residents lack a structured way to exchange skills and help each other within residential buildings.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** Install a community skill‑exchange board (physical or digital) in a common area where residents can post offers and requests.\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** A centralized board lowers coordination friction and makes skill exchange visible, encouraging participation.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Organize periodic in‑person skill‑swap meetups coordinated by residents.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Scheduling constraints for participants, Requires a facilitator each session, Limited to attendees present at the time\n2. **Develop a building‑specific mobile app for posting and matching skill offers.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Development and maintenance costs, Potential privacy concerns with user data, Requires residents to have compatible devices\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 3\n\n## 7. Próximo Passo Recomendado\n\nConduct a resident survey to gauge interest and preferred format, then pilot the chosen mechanism in a common area of one building.\n"
+}

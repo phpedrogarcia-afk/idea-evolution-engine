@@ -1,0 +1,66 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Baixa adesão dos moradores\",\"why_it_matters\":\"Sem participação suficiente, o espaço torna-se subutilizado e não justifica custos ou esforço de manutenção\",\"severity\":\"HIGH\",\"affected_part\":\"Engajamento da comunidade\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Responsabilidade legal por danos ou acidentes\",\"why_it_matters\":\"Se um vizinho causar dano ao realizar um reparo, a administração pode ser responsabilizada, gerando litígios e custos\",\"severity\":\"HIGH\",\"affected_part\":\"Gestão de risco e seguros\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"Escassez de espaço físico adequado\",\"why_it_matters\":\"A proposta depende de um local dedicado; se o prédio não dispõe de área livre, a ideia falha logisticamente\",\"severity\":\"MEDIUM\",\"affected_part\":\"Infraestrutura do prédio\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"Os moradores têm disposição para compartilhar e receber ajuda\",\"Existe disponibilidade de um espaço físico dentro do prédio\",\"Os residentes têm habilidades variadas que podem ser úteis uns aos outros\",\"A administração do prédio permite a criação desse espaço\",\"A comunicação entre vizinhos será suficiente para coordenar as trocas\"],\"contradictions\":[],\"failure_modes\":[\"Desinteresse prolongado leva ao abandono do espaço\",\"Conflitos entre vizinhos por qualidade ou confiabilidade das trocas\",\"Uso indevido do espaço para fins não previstos (ex.: armazenamento)\",\"Incidentes de segurança que desencadeiam reclamações formais\"],\"missing_information\":[\"Política de seguros ou responsabilidade civil do condomínio\",\"Mecanismo de incentivo ou recompensa para participação\",\"Detalhes sobre como será feita a mediação ou moderação das trocas\",\"Orçamento para manutenção e limpeza do espaço\"],\"overclaims\":[\"A ideia assume que a simples existência de um ponto de encontro garantirá troca efetiva de habilidades sem necessidade de estrutura organizacional\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Baixa adesão dos moradores",
+        "why_it_matters": "Sem participação suficiente, o espaço torna-se subutilizado e não justifica custos ou esforço de manutenção",
+        "severity": "HIGH",
+        "affected_part": "Engajamento da comunidade",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Responsabilidade legal por danos ou acidentes",
+        "why_it_matters": "Se um vizinho causar dano ao realizar um reparo, a administração pode ser responsabilizada, gerando litígios e custos",
+        "severity": "HIGH",
+        "affected_part": "Gestão de risco e seguros",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "Escassez de espaço físico adequado",
+        "why_it_matters": "A proposta depende de um local dedicado; se o prédio não dispõe de área livre, a ideia falha logisticamente",
+        "severity": "MEDIUM",
+        "affected_part": "Infraestrutura do prédio",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "Os moradores têm disposição para compartilhar e receber ajuda",
+      "Existe disponibilidade de um espaço físico dentro do prédio",
+      "Os residentes têm habilidades variadas que podem ser úteis uns aos outros",
+      "A administração do prédio permite a criação desse espaço",
+      "A comunicação entre vizinhos será suficiente para coordenar as trocas"
+    ],
+    "contradictions": [],
+    "failure_modes": [
+      "Desinteresse prolongado leva ao abandono do espaço",
+      "Conflitos entre vizinhos por qualidade ou confiabilidade das trocas",
+      "Uso indevido do espaço para fins não previstos (ex.: armazenamento)",
+      "Incidentes de segurança que desencadeiam reclamações formais"
+    ],
+    "missing_information": [
+      "Política de seguros ou responsabilidade civil do condomínio",
+      "Mecanismo de incentivo ou recompensa para participação",
+      "Detalhes sobre como será feita a mediação ou moderação das trocas",
+      "Orçamento para manutenção e limpeza do espaço"
+    ],
+    "overclaims": [
+      "A ideia assume que a simples existência de um ponto de encontro garantirá troca efetiva de habilidades sem necessidade de estrutura organizacional"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:29:23.089100+00:00"
+}

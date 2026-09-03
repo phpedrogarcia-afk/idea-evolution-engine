@@ -1,0 +1,368 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.5R2-H02-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-09-03T14:28:53.319124",
+  "updated_at": "2026-09-03T14:31:23.108301",
+  "original_idea": "Tenho pensado que prédios residenciais poderiam ter um espaço pequeno para troca de habilidades entre vizinhos: alguém ajuda com plantas, outro com consertos simples, outro com idiomas. Ainda não sei se isso seria um mural, encontros presenciais ou alguma outra coisa.",
+  "current_idea": "Criar um espaço físico dedicado dentro de edifícios residenciais onde os moradores possam agendar sessões de troca de habilidades, com responsabilidade formal e seguro comunitário, promovendo o engajamento local e a confiança entre vizinhos.",
+  "human_intent": "Criar um pequeno espaço dentro de prédios residenciais que facilite a troca de habilidades entre vizinhos, permitindo que um ajude outro em áreas específicas, embora ainda não tenha definido o formato desse espaço.",
+  "problem_statement": "Falta de um ponto de encontro organizado nos edifícios residenciais para que os moradores troquem habilidades e ajudem uns aos outros em tarefas como jardinagem, pequenos reparos ou aprendizado de idiomas.",
+  "actors_or_users": [
+    "residentes",
+    "vizinhos"
+  ],
+  "assumptions": [
+    "Os moradores têm disposição para compartilhar e receber ajuda",
+    "Existe disponibilidade de um espaço físico dentro do prédio",
+    "Os residentes têm habilidades variadas que podem ser úteis uns aos outros",
+    "A administração do prédio permite a criação desse espaço",
+    "A comunicação entre vizinhos será suficiente para coordenar as trocas"
+  ],
+  "ambiguities": [
+    "Qual será o formato exato do espaço (mural, encontros, outro)",
+    "Como será feita a organização e o agendamento das trocas",
+    "Quem será responsável pela manutenção e atualização do espaço",
+    "Como garantir a participação e o engajamento dos moradores"
+  ],
+  "strengths": [
+    "Aproveita conhecimentos e habilidades já presentes na comunidade",
+    "Promove senso de comunidade e cooperação",
+    "Pode ser implementado com baixo custo",
+    "Facilita a resolução de pequenos problemas cotidianos",
+    "Estimula aprendizado mútuo"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Baixa adesão dos moradores",
+      "why_it_matters": "Sem participação suficiente, o espaço torna-se subutilizado e não justifica custos ou esforço de manutenção",
+      "severity": "HIGH",
+      "affected_part": "Engajamento da comunidade",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Responsabilidade legal por danos ou acidentes",
+      "why_it_matters": "Se um vizinho causar dano ao realizar um reparo, a administração pode ser responsabilizada, gerando litígios e custos",
+      "severity": "HIGH",
+      "affected_part": "Gestão de risco e seguros",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Escassez de espaço físico adequado",
+      "why_it_matters": "A proposta depende de um local dedicado; se o prédio não dispõe de área livre, a ideia falha logisticamente",
+      "severity": "MEDIUM",
+      "affected_part": "Infraestrutura do prédio",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "Os moradores têm disposição para compartilhar e receber ajuda",
+    "Existe disponibilidade de um espaço físico dentro do prédio",
+    "Os residentes têm habilidades variadas que podem ser úteis uns aos outros",
+    "A administração do prédio permite a criação desse espaço",
+    "A comunicação entre vizinhos será suficiente para coordenar as trocas"
+  ],
+  "contradictions": [],
+  "failure_modes": [
+    "Desinteresse prolongado leva ao abandono do espaço",
+    "Conflitos entre vizinhos por qualidade ou confiabilidade das trocas",
+    "Uso indevido do espaço para fins não previstos (ex.: armazenamento)",
+    "Incidentes de segurança que desencadeiam reclamações formais"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.",
+      "addresses_issues": [
+        "Baixa adesão dos moradores",
+        "Responsabilidade legal por danos ou acidentes",
+        "Escassez de espaço físico adequado"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requer que os moradores possuam dispositivos compatíveis ou óculos AR",
+        "Dependência de conexão de internet estável e de suporte técnico",
+        "Interação presencial reduzida, podendo enfraquecer o senso de comunidade"
+      ],
+      "novelty_or_difference": "Uso de realidade aumentada para transformar áreas comuns em espaços de troca de habilidades temporários e sem ocupação física."
+    },
+    {
+      "mechanism": "Instalar módulos de mobiliário flexível (mesas dobráveis, cadeiras empilháveis, divisórias leves) em corredores ou áreas de passagem já existentes, criando micro‑espaços pop‑up que podem ser configurados rapidamente para sessões de troca de habilidades.",
+      "addresses_issues": [
+        "Baixa adesão dos moradores",
+        "Escassez de espaço físico adequado"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "O espaço ainda compete com outras funções dos corredores, podendo gerar atritos com quem não usa o módulo",
+        "Necessita de manutenção e organização regular dos módulos",
+        "Responsabilidade legal ainda presente, exigindo sinalização clara e seguro para uso temporário"
+      ],
+      "novelty_or_difference": "Aproveitamento dinâmico de áreas subutilizadas com mobiliário modular, permitindo que o espaço apareça e desapareça conforme a demanda."
+    },
+    {
+      "mechanism": "Implementar um programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com um sistema de agendamento online, termo de responsabilidade assinado digitalmente e um mecanismo de avaliação por pares para incentivar a participação.",
+      "addresses_issues": [
+        "Baixa adesão dos moradores",
+        "Responsabilidade legal por danos ou acidentes",
+        "Escassez de espaço físico adequado"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Depende da disponibilidade e limpeza das salas comuns, podendo gerar conflitos de uso",
+        "Exige gerenciamento de agendamentos e coleta de assinaturas digitais",
+        "A eficácia do programa pode variar conforme o engajamento dos vizinhos"
+      ],
+      "novelty_or_difference": "Combinação de agendamento digital, termo de responsabilidade e avaliação por pares para criar um ambiente de troca de habilidades seguro e socialmente incentivado dentro de salas já existentes."
+    }
+  ],
+  "core_mechanism": "Programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.",
+  "core_mechanism_justification": "Atende diretamente à intenção humana de um espaço físico dedicado, aproveitando áreas já disponíveis e garantindo formalização legal e proteção via seguro, facilitando a adoção sem necessidade de construção de novos ambientes.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "8b94b2b06ef37749",
+  "proposal_records": [
+    {
+      "proposal": "Programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Atende diretamente à intenção humana de um espaço físico dedicado, aproveitando áreas já disponíveis e garantindo formalização legal e proteção via seguro, facilitando a adoção sem necessidade de construção de novos ambientes.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Implementar um programa de \"Noites de Habilidade\" em salas multifuncionais existentes, com agendamento online, termo de responsabilidade assinado digitalmente e mecanismo de avaliação por pares.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Alinha-se ao núcleo desejado de um espaço físico dedicado, incorpora responsabilidade formal e seguro, e utiliza infra‑estrutura já existente, reduzindo necessidade de novos espaços.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Intenção explícita do usuário de criar um espaço físico com responsabilidade formal e seguro comunitário."
+    },
+    {
+      "proposal": "Instalar módulos de mobiliário flexível (mesas dobráveis, cadeiras empilháveis, divisórias leves) em corredores ou áreas de passagem já existentes, criando micro‑espaços pop‑up configuráveis para sessões de troca de habilidades.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Não corresponde ao requisito de um espaço físico dedicado e introduz dependência tecnológica que não foi solicitada pelo usuário.",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Implementar um programa de \"Noites de Habilidade\" em salas multifuncionais existentes, com agendamento online, termo de responsabilidade assinado digitalmente e mecanismo de avaliação por pares. (Justificativa: Alinha-se ao núcleo desejado de um espaço físico dedicado, incorpora responsabilidade formal e seguro, e utiliza infra‑estrutura já existente, reduzindo necessidade de novos espaços. | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Instalar módulos de mobiliário flexível (mesas dobráveis, cadeiras empilháveis, divisórias leves) em corredores ou áreas de passagem já existentes, criando micro‑espaços pop‑up configuráveis para sessões de troca de habilidades."
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.",
+      "reason_rejected": "Não corresponde ao requisito de um espaço físico dedicado e introduz dependência tecnológica que não foi solicitada pelo usuário.",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [horarios, fixos, horas, areas, comuns, existentes, assinatura, termo, responsabilidade, seguro, comunitario].",
+    "Baixa adesão dos moradores ao horário fixo",
+    "Como garantir que o termo de responsabilidade seja aceito por todos",
+    "Capacidade do espaço físico para atender demanda simultânea",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Horários fixos de \"Horas de Troca de Habilidades\" em áreas comuns existentes, com assinatura de termo de responsabilidade e seguro comunitário.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Horários fixos de \"Horas de Troca de Habilidades\" em áreas comuns existentes, com assinatura de termo de responsabilidade e seguro comunitário.' aparece nos testes exploratórios 'Criar um mural informativo de anúncios de trocas de habilidades e medir seu impacto na visibilidade das sessões'.; Dependência de realidade do Core 'Contratação de uma apólice de seguro que cubra danos pessoais e materiais durante as sessões de troca de habilidades' referencia mecanismo rejeitado 'Plataforma digital de matchmaking de habilidades integrada ao aplicativo do condomínio, com pequenos quiosques modulares opcionais para demonstrações presenciais'.; Dependência de realidade do Core 'Implementação de um sistema (digital ou físico) para coleta de assinaturas de termos de responsabilidade pelos participantes' referencia mecanismo rejeitado 'Plataforma digital de matchmaking de habilidades integrada ao aplicativo do condomínio, com pequenos quiosques modulares opcionais para demonstrações presenciais'.; Teste do Core 'Testar o processo de assinatura de termo de responsabilidade (digital ou em papel) com um grupo de moradores e avaliar a taxa de conclusão e compreensão' referencia mecanismo rejeitado 'Plataforma digital de matchmaking de habilidades integrada ao aplicativo do condomínio, com pequenos quiosques modulares opcionais para demonstrações presenciais'.; Teste do Core 'Conduzir uma pesquisa pré‑piloto com residentes para medir interesse e disposição a participar nas \"Horas de Troca de Habilidades\"' referencia mecanismo rejeitado 'Plataforma digital de matchmaking de habilidades integrada ao aplicativo do condomínio, com pequenos quiosques modulares opcionais para demonstrações presenciais'.",
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [programa, noites, habilidade, salas, multifuncionais, existentes, como, lavanderias, salas, reuniao, agendamento, online, termo, responsabilidade, assinado, digitalmente, seguro, comunitario, cobrir, eventuais, danos].",
+    "Baixa adesão dos moradores ao programa de troca de habilidades",
+    "Definição precisa das coberturas e limites do seguro comunitário",
+    "Conflitos de agenda e disponibilidade das salas multifuncionais",
+    "Procedimentos de verificação de competências e qualidade das trocas",
+    "Custos operacionais de manutenção da plataforma de agendamento e dos termos de responsabilidade",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.' aparece nos testes exploratórios 'Experimentar um programa de \"Noites de Habilidade\" em ambientes externos (pátios ou terraços) para comparar engajamento com o modelo interno'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Realizar um piloto do programa \"Noites de Habilidade\" em uma sala comum selecionada, desenvolvendo o sistema de agendamento online, o termo de responsabilidade digital e estabelecendo um acordo de seguro comunitário; coletar feedback dos residentes para validar a aceitação e ajustar processos antes de expandir para outras áreas.' propõe mecanismo rejeitado 'Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.'.; Dependência de realidade do Core 'Contratação de uma apólice de seguro comunitário que cubra danos materiais e pessoais ocorridos durante as sessões' referencia mecanismo rejeitado 'Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.'.; Dependência de realidade do Core 'Integração com um provedor de assinatura digital que cumpra requisitos legais de validade' referencia mecanismo rejeitado 'Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.'.; Dependência de realidade do Core 'Definição e aceitação de um termo de responsabilidade que seja juridicamente vinculante para os participantes' referencia mecanismo rejeitado 'Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.'.; Teste do Core 'Realizar um piloto de 4 semanas em um prédio selecionado usando o sistema de agendamento online e medir taxa de reserva e comparecimento' referencia mecanismo rejeitado 'Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.'.; Teste do Core 'Entrevistar a administração do condomínio para validar a viabilidade de liberar salas e identificar requisitos de segurança' referencia mecanismo rejeitado 'Criar uma plataforma de realidade aumentada (AR) que projeta um \"hub\" virtual nas áreas comuns dos edifícios, permitindo que vizinhos agendem e realizem trocas de habilidades via dispositivos móveis ou óculos AR, sem necessidade de espaço físico dedicado.'."
+  ],
+  "known_risks": [
+    "Participação insuficiente pode tornar o espaço subutilizado",
+    "Reclamações ou processos por danos durante as sessões de troca",
+    "Sobrecarga de gerenciamento de agendamentos e assinaturas digitais",
+    "Conflitos de uso das salas comuns com outras atividades do condomínio"
+  ],
+  "recommended_next_step": "Realizar um piloto do programa \"Noites de Habilidade\" em uma sala comum selecionada, desenvolvendo o sistema de agendamento online, o termo de responsabilidade digital e estabelecendo um acordo de seguro comunitário; coletar feedback dos residentes para validar a aceitação e ajustar processos antes de expandir para outras áreas.",
+  "tested_core_mechanism": "Programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.",
+  "tested_core_hash": "8b94b2b06ef37749",
+  "reality_dependencies": [
+    "Aprovação formal da administração do condomínio para uso das salas multifuncionais como \"Noites de Habilidade\"",
+    "Contratação de uma apólice de seguro comunitário que cubra danos materiais e pessoais ocorridos durante as sessões",
+    "Integração com um provedor de assinatura digital que cumpra requisitos legais de validade",
+    "Implementação ou adoção de um sistema de agendamento online acessível a todos os moradores",
+    "Definição e aceitação de um termo de responsabilidade que seja juridicamente vinculante para os participantes"
+  ],
+  "claims_needing_evidence": [
+    "Os moradores irão reservar e comparecer às sessões de troca de habilidades com frequência suficiente para justificar o uso das salas",
+    "O seguro comunitário será acionado e pagará indenizações de forma rápida e sem burocracia excessiva",
+    "O termo de responsabilidade assinado digitalmente será respeitado e reduzirá efetivamente o risco de litígios",
+    "A plataforma de agendamento online terá baixa taxa de falhas e será intuitiva para usuários de todas as idades"
+  ],
+  "candidate_tests": [
+    "Realizar um piloto de 4 semanas em um prédio selecionado usando o sistema de agendamento online e medir taxa de reserva e comparecimento",
+    "Testar a assinatura digital do termo de responsabilidade com um grupo de moradores e avaliar a taxa de aceitação e compreensão",
+    "Solicitar cotações a seguradoras e conduzir um teste de processo de reclamação simulada para validar cobertura e tempo de resposta",
+    "Entrevistar a administração do condomínio para validar a viabilidade de liberar salas e identificar requisitos de segurança"
+  ],
+  "exploratory_candidate_tests": [
+    "Instalar módulos de mobiliário flexível em corredores e avaliar a aceitação dos moradores para criar micro‑espaços pop‑up de troca de habilidades",
+    "Desenvolver um protótipo de plataforma de realidade aumentada que projete um hub virtual nas áreas comuns e testar a usabilidade com um grupo de residentes",
+    "Experimentar um programa de \"Noites de Habilidade\" em ambientes externos (pátios ou terraços) para comparar engajamento com o modelo interno"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:29:08.170066",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar um pequeno espaço dentro de prédios residenciais que f...' | 5 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:29:23.089046",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 vulnerabilidades críticas e 4 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:29:38.183051",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:29:53.359701",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Horários fixos de \"Horas de Troca de Hab...' (Base: MODEL_HYPOTHESIS | Hash: 611c779b9ebc1e02), 1 aceitas, 3 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:30:08.213661",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Horários fixos de \"Horas de Troca de Hab...' (hash: 611c779b9ebc1e02), 4 dependências, 4 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:30:22.949559",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:30:38.246605",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:30:53.375949",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Programa de \"Noites de Habilidade\" em sa...' (Base: MODEL_HYPOTHESIS | Hash: 8b94b2b06ef37749), 1 aceitas, 1 candidatas, 1 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:31:08.268372",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Programa de \"Noites de Habilidade\" em sa...' (hash: 8b94b2b06ef37749), 5 dependências, 4 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:31:23.108288",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

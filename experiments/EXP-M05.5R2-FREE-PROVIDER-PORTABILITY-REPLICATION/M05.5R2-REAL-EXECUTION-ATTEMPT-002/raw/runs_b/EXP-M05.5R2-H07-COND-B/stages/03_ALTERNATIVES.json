@@ -1,0 +1,52 @@
+{
+  "step_number": 3,
+  "stage_id": "ALTERNATIVES",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "alternatives_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 mecanismos alternativos gerados.",
+  "raw_response": "{\"alternatives\":[{\"mechanism\":\"Escrever um script shell que usa `jq` para filtrar o JSON da lista de tarefas, extraindo apenas as entradas com o campo `blocked` true e exibindo o responsável ou a dependência associada.\",\"addresses_issues\":[],\"preserves_intent\":true,\"tradeoffs\":[\"Depende de que o usuário tenha `jq` instalado, limitado a formatos JSON simples\",\"Menos flexível para extensões futuras como filtros avançados ou saída customizada\"],\"novelty_or_difference\":\"Abordagem mínima e baseada em ferramentas padrão de Unix, sem necessidade de linguagem de programação adicional.\"},{\"mechanism\":\"Desenvolver uma CLI em Python usando `argparse` para receber o arquivo de tarefas e `pandas` ou `json` para processar os dados, filtrando as tarefas bloqueadas e formatando a saída com cores ANSI.\",\"addresses_issues\":[],\"preserves_intent\":true,\"tradeoffs\":[\"Requer ambiente Python e dependências (`pandas` opcional)\",\"Maior tempo de desenvolvimento comparado ao script shell\"],\"novelty_or_difference\":\"Permite lógica mais complexa, como múltiplos critérios de filtragem e relatórios resumidos, mantendo a simplicidade de uso.\"},{\"mechanism\":\"Criar um binário compilado em Go que lê a lista de tarefas (JSON ou YAML), aplica filtros de bloqueio e imprime a pessoa ou dependência, distribuindo um único executável portátil.\",\"addresses_issues\":[],\"preserves_intent\":true,\"tradeoffs\":[\"Curva de aprendizado para quem não conhece Go\",\"Compilação necessária para diferentes plataformas\"],\"novelty_or_difference\":\"Entrega uma ferramenta autossuficiente, de alta performance e sem dependências externas, ideal para ambientes de CI/CD.\"}]}",
+  "parsed_output": {
+    "alternatives": [
+      {
+        "mechanism": "Escrever um script shell que usa `jq` para filtrar o JSON da lista de tarefas, extraindo apenas as entradas com o campo `blocked` true e exibindo o responsável ou a dependência associada.",
+        "addresses_issues": [],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Depende de que o usuário tenha `jq` instalado, limitado a formatos JSON simples",
+          "Menos flexível para extensões futuras como filtros avançados ou saída customizada"
+        ],
+        "novelty_or_difference": "Abordagem mínima e baseada em ferramentas padrão de Unix, sem necessidade de linguagem de programação adicional."
+      },
+      {
+        "mechanism": "Desenvolver uma CLI em Python usando `argparse` para receber o arquivo de tarefas e `pandas` ou `json` para processar os dados, filtrando as tarefas bloqueadas e formatando a saída com cores ANSI.",
+        "addresses_issues": [],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Requer ambiente Python e dependências (`pandas` opcional)",
+          "Maior tempo de desenvolvimento comparado ao script shell"
+        ],
+        "novelty_or_difference": "Permite lógica mais complexa, como múltiplos critérios de filtragem e relatórios resumidos, mantendo a simplicidade de uso."
+      },
+      {
+        "mechanism": "Criar um binário compilado em Go que lê a lista de tarefas (JSON ou YAML), aplica filtros de bloqueio e imprime a pessoa ou dependência, distribuindo um único executável portátil.",
+        "addresses_issues": [],
+        "preserves_intent": true,
+        "tradeoffs": [
+          "Curva de aprendizado para quem não conhece Go",
+          "Compilação necessária para diferentes plataformas"
+        ],
+        "novelty_or_difference": "Entrega uma ferramenta autossuficiente, de alta performance e sem dependências externas, ideal para ambientes de CI/CD."
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:38:38.070707+00:00"
+}

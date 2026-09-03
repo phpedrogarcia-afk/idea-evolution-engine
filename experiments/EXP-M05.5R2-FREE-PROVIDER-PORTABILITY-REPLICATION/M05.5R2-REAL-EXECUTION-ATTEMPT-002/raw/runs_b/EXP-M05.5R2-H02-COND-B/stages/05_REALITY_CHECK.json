@@ -1,0 +1,56 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Horários fixos de \"Horas de Troca de Hab...' (hash: 611c779b9ebc1e02), 4 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Horários fixos de \\\"Horas de Troca de Habilidades\\\" em áreas comuns existentes, com assinatura de termo de responsabilidade e seguro comunitário.\",\"feasibility_notes\":[\"A definição de horários fixos pode ser organizada via calendário compartilhado sem necessidade de nova infraestrutura física\",\"A assinatura de termo de responsabilidade pode ser implementada digitalmente ou em papel, reduzindo custos operacionais\",\"A exigência de seguro comunitário requer apenas a contratação de uma apólice padrão para eventos residenciais\",\"A logística de reserva de espaços comuns já existe em muitos condomínios, facilitando a adoção imediata\"],\"reality_dependencies\":[\"Aprovação da administração do condomínio para uso das áreas comuns nos horários propostos\",\"Contratação de uma apólice de seguro que cubra danos pessoais e materiais durante as sessões de troca de habilidades\",\"Implementação de um sistema (digital ou físico) para coleta de assinaturas de termos de responsabilidade pelos participantes\",\"Conformidade com normas locais de responsabilidade civil e regulamentos de uso de áreas comuns\"],\"claims_needing_evidence\":[\"Horários fixos aumentam a taxa de participação dos moradores nas trocas de habilidades\",\"A apólice de seguro proposta cobre efetivamente incidentes que possam ocorrer durante as sessões\",\"Os termos de responsabilidade assinados reduzem significativamente o risco de litígios para o condomínio\",\"A reserva de áreas comuns em horários pré-determinados não gera conflitos com outras atividades do prédio\"],\"potential_blockers\":[\"Recusa da administração do condomínio em liberar áreas comuns nos horários sugeridos\",\"Custos elevados ou dificuldade de encontrar uma apólice de seguro adequada para o tipo de atividade\",\"Baixa adesão dos moradores devido a falta de interesse ou desconhecimento do programa\",\"Conflitos de agenda que impeçam a reserva consistente dos espaços\"],\"candidate_tests\":[\"Realizar um piloto de 4 semanas em um prédio selecionado, reservando uma área comum em horários fixos e medindo a taxa de participação\",\"Testar o processo de assinatura de termo de responsabilidade (digital ou em papel) com um grupo de moradores e avaliar a taxa de conclusão e compreensão\",\"Obter cotações de seguro de pelo menos três seguradoras e validar se a cobertura proposta atende aos requisitos de responsabilidade civil\",\"Conduzir uma pesquisa pré‑piloto com residentes para medir interesse e disposição a participar nas \\\"Horas de Troca de Habilidades\\\"\"],\"exploratory_candidate_tests\":[\"Desenvolver um protótipo de plataforma digital de matchmaking de habilidades e testar sua aceitação em um grupo piloto\",\"Implementar um carrinho móvel de ferramentas/kits de habilidades em um corredor e avaliar o uso via QR code\",\"Criar um mural informativo de anúncios de trocas de habilidades e medir seu impacto na visibilidade das sessões\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Horários fixos de \"Horas de Troca de Habilidades\" em áreas comuns existentes, com assinatura de termo de responsabilidade e seguro comunitário.",
+    "feasibility_notes": [
+      "A definição de horários fixos pode ser organizada via calendário compartilhado sem necessidade de nova infraestrutura física",
+      "A assinatura de termo de responsabilidade pode ser implementada digitalmente ou em papel, reduzindo custos operacionais",
+      "A exigência de seguro comunitário requer apenas a contratação de uma apólice padrão para eventos residenciais",
+      "A logística de reserva de espaços comuns já existe em muitos condomínios, facilitando a adoção imediata"
+    ],
+    "reality_dependencies": [
+      "Aprovação da administração do condomínio para uso das áreas comuns nos horários propostos",
+      "Contratação de uma apólice de seguro que cubra danos pessoais e materiais durante as sessões de troca de habilidades",
+      "Implementação de um sistema (digital ou físico) para coleta de assinaturas de termos de responsabilidade pelos participantes",
+      "Conformidade com normas locais de responsabilidade civil e regulamentos de uso de áreas comuns"
+    ],
+    "claims_needing_evidence": [
+      "Horários fixos aumentam a taxa de participação dos moradores nas trocas de habilidades",
+      "A apólice de seguro proposta cobre efetivamente incidentes que possam ocorrer durante as sessões",
+      "Os termos de responsabilidade assinados reduzem significativamente o risco de litígios para o condomínio",
+      "A reserva de áreas comuns em horários pré-determinados não gera conflitos com outras atividades do prédio"
+    ],
+    "potential_blockers": [
+      "Recusa da administração do condomínio em liberar áreas comuns nos horários sugeridos",
+      "Custos elevados ou dificuldade de encontrar uma apólice de seguro adequada para o tipo de atividade",
+      "Baixa adesão dos moradores devido a falta de interesse ou desconhecimento do programa",
+      "Conflitos de agenda que impeçam a reserva consistente dos espaços"
+    ],
+    "candidate_tests": [
+      "Realizar um piloto de 4 semanas em um prédio selecionado, reservando uma área comum em horários fixos e medindo a taxa de participação",
+      "Testar o processo de assinatura de termo de responsabilidade (digital ou em papel) com um grupo de moradores e avaliar a taxa de conclusão e compreensão",
+      "Obter cotações de seguro de pelo menos três seguradoras e validar se a cobertura proposta atende aos requisitos de responsabilidade civil",
+      "Conduzir uma pesquisa pré‑piloto com residentes para medir interesse e disposição a participar nas \"Horas de Troca de Habilidades\""
+    ],
+    "exploratory_candidate_tests": [
+      "Desenvolver um protótipo de plataforma digital de matchmaking de habilidades e testar sua aceitação em um grupo piloto",
+      "Implementar um carrinho móvel de ferramentas/kits de habilidades em um corredor e avaliar o uso via QR code",
+      "Criar um mural informativo de anúncios de trocas de habilidades e medir seu impacto na visibilidade das sessões"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:30:08.213726+00:00"
+}

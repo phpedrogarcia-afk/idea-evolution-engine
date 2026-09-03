@@ -1,0 +1,58 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Script shell que utiliza `jq` para filtr...' (hash: dafcae798a6e3097), 4 dependências, 6 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Script shell que utiliza `jq` para filtrar o JSON da lista de tarefas, selecionando as entradas com o campo `blocked` true e exibindo o responsável ou a dependência associada.\",\"feasibility_notes\":[\"O uso de `jq` em um script shell é tecnicamente viável e requer apenas um interpretador POSIX‑compatible e o binário `jq`.\",\"A lógica de filtragem (`.[] | select(.blocked == true) | .owner // .dependency`) pode ser expressa em uma única linha de `jq`, facilitando a manutenção.\",\"A formatação de saída pode ser feita com `printf` ou `echo` sem necessidade de bibliotecas adicionais.\",\"O script pode aceitar o caminho do arquivo JSON como argumento, permitindo reutilização em diferentes projetos.\"],\"reality_dependencies\":[\"Instalação do binário `jq` (versão >= 1.5) no ambiente onde o script será executado.\",\"Formato de entrada JSON consistente, contendo os campos `blocked`, `owner` ou `dependency` em cada objeto de tarefa.\",\"Shell compatível com POSIX (bash, dash, etc.) que suporte expansão de variáveis e redirecionamento de arquivos.\",\"Permissões de leitura no arquivo de tarefas fornecido ao script.\"],\"claims_needing_evidence\":[\"`jq` consegue selecionar corretamente todas as tarefas onde `blocked` é true, independentemente da ordem dos campos no objeto JSON.\",\"A expressão de `jq` proposta (`.[] | select(.blocked == true) | .owner // .dependency`) retorna exatamente o valor esperado (responsável ou dependência) para cada tarefa bloqueada.\",\"O script lida corretamente com tarefas que possuam apenas `owner` ou apenas `dependency` sem gerar erros.\",\"Desempenho aceitável para arquivos JSON de até alguns milhares de linhas em ambientes típicos de CI/CD.\"],\"potential_blockers\":[\"Ausência ou versão incompatível do `jq` no sistema alvo.\",\"JSON malformado ou ausente dos campos esperados (`blocked`, `owner`, `dependency`).\",\"Diferenças de comportamento entre shells (por exemplo, uso de recursos não‑POSIX que podem falhar em `dash`).\",\"Problemas de permissão que impedem a leitura do arquivo de tarefas ou a execução do script.\"],\"candidate_tests\":[\"Fornecer um arquivo JSON de exemplo contendo três tarefas, duas com `blocked: true` e uma com `blocked: false`; executar o script e verificar se a saída lista apenas as duas tarefas bloqueadas com os respectivos `owner` ou `dependency`.\",\"Modificar o JSON para remover o campo `owner` de uma tarefa bloqueada e garantir que o script exiba o campo `dependency` como fallback.\",\"Testar o script com um arquivo JSON vazio ou com estrutura inválida e confirmar que ele falha graciosamente com mensagem de erro clara.\",\"Executar o script em diferentes shells (bash, dash, zsh) para validar compatibilidade.\",\"Verificar que o script funciona com diferentes versões de `jq` (1.5, 1.6, 1.7) sem alterações de código.\",\"Medir o tempo de execução em um arquivo JSON com 10.000 tarefas para garantir que o tempo de processamento permanece dentro de limites razoáveis (< 1 s).\"],\"exploratory_candidate_tests\":[\"Desenvolver uma CLI em Python usando `argparse` e `json`/`pandas` para reproduzir a mesma funcionalidade e comparar desempenho e ergonomia.\",\"Criar um binário Go que aceita tanto JSON quanto YAML, aplicando filtros de bloqueio e oferecendo opções de formatação colorida.\",\"Adicionar suporte a saída em formato de tabela (ex.: `column -t`) para melhorar legibilidade, testando a integração com o script shell existente.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Script shell que utiliza `jq` para filtrar o JSON da lista de tarefas, selecionando as entradas com o campo `blocked` true e exibindo o responsável ou a dependência associada.",
+    "feasibility_notes": [
+      "O uso de `jq` em um script shell é tecnicamente viável e requer apenas um interpretador POSIX‑compatible e o binário `jq`.",
+      "A lógica de filtragem (`.[] | select(.blocked == true) | .owner // .dependency`) pode ser expressa em uma única linha de `jq`, facilitando a manutenção.",
+      "A formatação de saída pode ser feita com `printf` ou `echo` sem necessidade de bibliotecas adicionais.",
+      "O script pode aceitar o caminho do arquivo JSON como argumento, permitindo reutilização em diferentes projetos."
+    ],
+    "reality_dependencies": [
+      "Instalação do binário `jq` (versão >= 1.5) no ambiente onde o script será executado.",
+      "Formato de entrada JSON consistente, contendo os campos `blocked`, `owner` ou `dependency` em cada objeto de tarefa.",
+      "Shell compatível com POSIX (bash, dash, etc.) que suporte expansão de variáveis e redirecionamento de arquivos.",
+      "Permissões de leitura no arquivo de tarefas fornecido ao script."
+    ],
+    "claims_needing_evidence": [
+      "`jq` consegue selecionar corretamente todas as tarefas onde `blocked` é true, independentemente da ordem dos campos no objeto JSON.",
+      "A expressão de `jq` proposta (`.[] | select(.blocked == true) | .owner // .dependency`) retorna exatamente o valor esperado (responsável ou dependência) para cada tarefa bloqueada.",
+      "O script lida corretamente com tarefas que possuam apenas `owner` ou apenas `dependency` sem gerar erros.",
+      "Desempenho aceitável para arquivos JSON de até alguns milhares de linhas em ambientes típicos de CI/CD."
+    ],
+    "potential_blockers": [
+      "Ausência ou versão incompatível do `jq` no sistema alvo.",
+      "JSON malformado ou ausente dos campos esperados (`blocked`, `owner`, `dependency`).",
+      "Diferenças de comportamento entre shells (por exemplo, uso de recursos não‑POSIX que podem falhar em `dash`).",
+      "Problemas de permissão que impedem a leitura do arquivo de tarefas ou a execução do script."
+    ],
+    "candidate_tests": [
+      "Fornecer um arquivo JSON de exemplo contendo três tarefas, duas com `blocked: true` e uma com `blocked: false`; executar o script e verificar se a saída lista apenas as duas tarefas bloqueadas com os respectivos `owner` ou `dependency`.",
+      "Modificar o JSON para remover o campo `owner` de uma tarefa bloqueada e garantir que o script exiba o campo `dependency` como fallback.",
+      "Testar o script com um arquivo JSON vazio ou com estrutura inválida e confirmar que ele falha graciosamente com mensagem de erro clara.",
+      "Executar o script em diferentes shells (bash, dash, zsh) para validar compatibilidade.",
+      "Verificar que o script funciona com diferentes versões de `jq` (1.5, 1.6, 1.7) sem alterações de código.",
+      "Medir o tempo de execução em um arquivo JSON com 10.000 tarefas para garantir que o tempo de processamento permanece dentro de limites razoáveis (< 1 s)."
+    ],
+    "exploratory_candidate_tests": [
+      "Desenvolver uma CLI em Python usando `argparse` e `json`/`pandas` para reproduzir a mesma funcionalidade e comparar desempenho e ergonomia.",
+      "Criar um binário Go que aceita tanto JSON quanto YAML, aplicando filtros de bloqueio e oferecendo opções de formatação colorida.",
+      "Adicionar suporte a saída em formato de tabela (ex.: `column -t`) para melhorar legibilidade, testando a integração com o script shell existente."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:39:08.477751+00:00"
+}

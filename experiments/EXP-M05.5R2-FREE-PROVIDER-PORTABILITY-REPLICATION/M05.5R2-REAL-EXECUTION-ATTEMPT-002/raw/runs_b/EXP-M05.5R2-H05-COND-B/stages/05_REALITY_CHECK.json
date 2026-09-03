@@ -1,0 +1,60 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Quadro de sombras magnético com comparti...' (hash: e807132e343481c7), 5 dependências, 5 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Quadro de sombras magnético com compartimentos coloridos e registro visual de entrada/saída\",\"feasibility_notes\":[\"A estrutura magnética pode sustentar ferramentas leves a moderadas sem necessidade de energia externa\",\"Compartimentos coloridos facilitam a associação visual e não exigem tecnologia adicional\",\"O registro visual de entrada/saída pode ser implementado com papel ou aplicativo simples, exigindo apenas disciplina dos usuários\",\"A sombra projetada depende da iluminação ambiente, mas pode ser otimizada com iluminação controlada\",\"O custo de materiais (magnéticos, tintas, etiquetas) é baixo e disponível comercialmente\"],\"reality_dependencies\":[\"Disponibilidade de placas magnéticas suficientemente fortes para suportar o peso das ferramentas previstas\",\"Materiais de construção dos compartimentos (plástico, metal, madeira) que permitam coloração durável\",\"Um sistema de registro visual (quadro branco, aplicativo ou planilha) que seja acessível a todos os usuários\",\"Condições de iluminação adequadas para que as sombras projetadas sejam visíveis e consistentes\",\"Procedimentos operacionais claros para que os usuários anotem entrada e saída das ferramentas\"],\"claims_needing_evidence\":[\"Ferramentas armazenadas em compartimentos coloridos são localizadas mais rapidamente que em prateleiras não organizadas\",\"O registro visual de entrada/saída reduz erros de esquecimento de devolução em pelo menos 30%\",\"A sombra magnética fornece uma indicação visual confiável da presença da ferramenta no compartimento\",\"A combinação de cor e sombra mantém a organização mesmo em ambientes de alta rotatividade\"],\"potential_blockers\":[\"Ferramentas muito pesadas podem superar a força magnética disponível\",\"Desgaste da coloração dos compartimentos ao longo do tempo pode confundir a identificação\",\"Falha humana ao registrar corretamente a entrada/saída das ferramentas\",\"Iluminação inadequada que elimina ou distorce a sombra projetada\",\"Interferência magnética de outros equipamentos que afete a aderência\"],\"candidate_tests\":[\"Medir o tempo médio de localização de uma ferramenta usando o quadro de sombras versus um método tradicional em 30 sessões de teste\",\"Testar a capacidade de carga de diferentes placas magnéticas com pesos variando de 0,5 kg a 5 kg\",\"Avaliar a legibilidade da sombra sob diferentes níveis de iluminação (luz natural, fluorescente, baixa luminosidade)\",\"Realizar um estudo de 2 semanas registrando erros de devolução antes e depois da implementação do registro visual\",\"Verificar a durabilidade da coloração dos compartimentos após 500 ciclos de uso (limpeza, desgaste)\"],\"exploratory_candidate_tests\":[\"Avaliar a precisão de localização de ferramentas equipadas com chips RFID usando um scanner portátil em um ambiente similar ao quadro de sombras\",\"Testar a latência e confiabilidade de beacons BLE fixados nas ferramentas ao serem detectados por um aplicativo móvel\",\"Implementar um protótipo de câmera de visão computacional no teto para comparar a taxa de detecção automática com a taxa de localização manual do quadro de sombras\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Quadro de sombras magnético com compartimentos coloridos e registro visual de entrada/saída",
+    "feasibility_notes": [
+      "A estrutura magnética pode sustentar ferramentas leves a moderadas sem necessidade de energia externa",
+      "Compartimentos coloridos facilitam a associação visual e não exigem tecnologia adicional",
+      "O registro visual de entrada/saída pode ser implementado com papel ou aplicativo simples, exigindo apenas disciplina dos usuários",
+      "A sombra projetada depende da iluminação ambiente, mas pode ser otimizada com iluminação controlada",
+      "O custo de materiais (magnéticos, tintas, etiquetas) é baixo e disponível comercialmente"
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de placas magnéticas suficientemente fortes para suportar o peso das ferramentas previstas",
+      "Materiais de construção dos compartimentos (plástico, metal, madeira) que permitam coloração durável",
+      "Um sistema de registro visual (quadro branco, aplicativo ou planilha) que seja acessível a todos os usuários",
+      "Condições de iluminação adequadas para que as sombras projetadas sejam visíveis e consistentes",
+      "Procedimentos operacionais claros para que os usuários anotem entrada e saída das ferramentas"
+    ],
+    "claims_needing_evidence": [
+      "Ferramentas armazenadas em compartimentos coloridos são localizadas mais rapidamente que em prateleiras não organizadas",
+      "O registro visual de entrada/saída reduz erros de esquecimento de devolução em pelo menos 30%",
+      "A sombra magnética fornece uma indicação visual confiável da presença da ferramenta no compartimento",
+      "A combinação de cor e sombra mantém a organização mesmo em ambientes de alta rotatividade"
+    ],
+    "potential_blockers": [
+      "Ferramentas muito pesadas podem superar a força magnética disponível",
+      "Desgaste da coloração dos compartimentos ao longo do tempo pode confundir a identificação",
+      "Falha humana ao registrar corretamente a entrada/saída das ferramentas",
+      "Iluminação inadequada que elimina ou distorce a sombra projetada",
+      "Interferência magnética de outros equipamentos que afete a aderência"
+    ],
+    "candidate_tests": [
+      "Medir o tempo médio de localização de uma ferramenta usando o quadro de sombras versus um método tradicional em 30 sessões de teste",
+      "Testar a capacidade de carga de diferentes placas magnéticas com pesos variando de 0,5 kg a 5 kg",
+      "Avaliar a legibilidade da sombra sob diferentes níveis de iluminação (luz natural, fluorescente, baixa luminosidade)",
+      "Realizar um estudo de 2 semanas registrando erros de devolução antes e depois da implementação do registro visual",
+      "Verificar a durabilidade da coloração dos compartimentos após 500 ciclos de uso (limpeza, desgaste)"
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a precisão de localização de ferramentas equipadas com chips RFID usando um scanner portátil em um ambiente similar ao quadro de sombras",
+      "Testar a latência e confiabilidade de beacons BLE fixados nas ferramentas ao serem detectados por um aplicativo móvel",
+      "Implementar um protótipo de câmera de visão computacional no teto para comparar a taxa de detecção automática com a taxa de localização manual do quadro de sombras"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:46:08.522373+00:00"
+}

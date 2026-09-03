@@ -1,0 +1,10 @@
+{
+  "run_id": "EXP-M05.5R2-H08-COND-A",
+  "created_at": "2026-09-03T17:28:38.311866+00:00",
+  "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "metadata": {
+    "topology": "BASELINE_SINGLE_PROMPT",
+    "git_commit": "128f061018cdafdc9e8481d67705706eccef7977",
+    "environment_pid": 9752
+  }
+}

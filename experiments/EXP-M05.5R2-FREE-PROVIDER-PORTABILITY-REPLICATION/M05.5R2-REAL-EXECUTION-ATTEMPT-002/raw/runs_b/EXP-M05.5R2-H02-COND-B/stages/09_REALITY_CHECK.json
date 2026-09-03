@@ -1,0 +1,59 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Programa de \"Noites de Habilidade\" em sa...' (hash: 8b94b2b06ef37749), 5 dependências, 4 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Programa de \\\"Noites de Habilidade\\\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.\",\"feasibility_notes\":[\"A criação de um calendário online para reservar salas existentes é tecnicamente simples e pode ser implementada com ferramentas de agendamento já disponíveis.\",\"A assinatura digital de termos de responsabilidade pode ser integrada a plataformas de documentos eletrônicos, reduzindo a necessidade de processos presenciais.\",\"A contratação de um seguro comunitário requer a definição clara de coberturas e limites, mas é viável mediante negociação com seguradoras locais.\",\"A disponibilidade de salas multifuncionais depende da aprovação da administração do condomínio, mas muitas edificações já possuem esses espaços para uso comum.\",\"A aceitação dos moradores depende de comunicação clara e de incentivos para participação, o que pode ser suportado por campanhas internas.\"],\"reality_dependencies\":[\"Aprovação formal da administração do condomínio para uso das salas multifuncionais como \\\"Noites de Habilidade\\\"\",\"Contratação de uma apólice de seguro comunitário que cubra danos materiais e pessoais ocorridos durante as sessões\",\"Integração com um provedor de assinatura digital que cumpra requisitos legais de validade\",\"Implementação ou adoção de um sistema de agendamento online acessível a todos os moradores\",\"Definição e aceitação de um termo de responsabilidade que seja juridicamente vinculante para os participantes\"],\"claims_needing_evidence\":[\"Os moradores irão reservar e comparecer às sessões de troca de habilidades com frequência suficiente para justificar o uso das salas\",\"O seguro comunitário será acionado e pagará indenizações de forma rápida e sem burocracia excessiva\",\"O termo de responsabilidade assinado digitalmente será respeitado e reduzirá efetivamente o risco de litígios\",\"A plataforma de agendamento online terá baixa taxa de falhas e será intuitiva para usuários de todas as idades\"],\"potential_blockers\":[\"Recusa da administração do condomínio em liberar salas para uso externo ou necessidade de reformas para adequação\",\"Custos elevados ou falta de disponibilidade de um seguro comunitário adequado\",\"Baixa adesão dos moradores devido a falta de interesse ou desconhecimento do programa\",\"Problemas técnicos na integração do sistema de agendamento com os sistemas de segurança do prédio\",\"Dificuldade em fazer cumprir o termo de responsabilidade em caso de incidentes\"],\"candidate_tests\":[\"Realizar um piloto de 4 semanas em um prédio selecionado usando o sistema de agendamento online e medir taxa de reserva e comparecimento\",\"Testar a assinatura digital do termo de responsabilidade com um grupo de moradores e avaliar a taxa de aceitação e compreensão\",\"Solicitar cotações a seguradoras e conduzir um teste de processo de reclamação simulada para validar cobertura e tempo de resposta\",\"Entrevistar a administração do condomínio para validar a viabilidade de liberar salas e identificar requisitos de segurança\"],\"exploratory_candidate_tests\":[\"Instalar módulos de mobiliário flexível em corredores e avaliar a aceitação dos moradores para criar micro‑espaços pop‑up de troca de habilidades\",\"Desenvolver um protótipo de plataforma de realidade aumentada que projete um hub virtual nas áreas comuns e testar a usabilidade com um grupo de residentes\",\"Experimentar um programa de \\\"Noites de Habilidade\\\" em ambientes externos (pátios ou terraços) para comparar engajamento com o modelo interno\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Programa de \"Noites de Habilidade\" em salas multifuncionais existentes (como lavanderias ou salas de reunião), com agendamento online, termo de responsabilidade assinado digitalmente e seguro comunitário para cobrir eventuais danos.",
+    "feasibility_notes": [
+      "A criação de um calendário online para reservar salas existentes é tecnicamente simples e pode ser implementada com ferramentas de agendamento já disponíveis.",
+      "A assinatura digital de termos de responsabilidade pode ser integrada a plataformas de documentos eletrônicos, reduzindo a necessidade de processos presenciais.",
+      "A contratação de um seguro comunitário requer a definição clara de coberturas e limites, mas é viável mediante negociação com seguradoras locais.",
+      "A disponibilidade de salas multifuncionais depende da aprovação da administração do condomínio, mas muitas edificações já possuem esses espaços para uso comum.",
+      "A aceitação dos moradores depende de comunicação clara e de incentivos para participação, o que pode ser suportado por campanhas internas."
+    ],
+    "reality_dependencies": [
+      "Aprovação formal da administração do condomínio para uso das salas multifuncionais como \"Noites de Habilidade\"",
+      "Contratação de uma apólice de seguro comunitário que cubra danos materiais e pessoais ocorridos durante as sessões",
+      "Integração com um provedor de assinatura digital que cumpra requisitos legais de validade",
+      "Implementação ou adoção de um sistema de agendamento online acessível a todos os moradores",
+      "Definição e aceitação de um termo de responsabilidade que seja juridicamente vinculante para os participantes"
+    ],
+    "claims_needing_evidence": [
+      "Os moradores irão reservar e comparecer às sessões de troca de habilidades com frequência suficiente para justificar o uso das salas",
+      "O seguro comunitário será acionado e pagará indenizações de forma rápida e sem burocracia excessiva",
+      "O termo de responsabilidade assinado digitalmente será respeitado e reduzirá efetivamente o risco de litígios",
+      "A plataforma de agendamento online terá baixa taxa de falhas e será intuitiva para usuários de todas as idades"
+    ],
+    "potential_blockers": [
+      "Recusa da administração do condomínio em liberar salas para uso externo ou necessidade de reformas para adequação",
+      "Custos elevados ou falta de disponibilidade de um seguro comunitário adequado",
+      "Baixa adesão dos moradores devido a falta de interesse ou desconhecimento do programa",
+      "Problemas técnicos na integração do sistema de agendamento com os sistemas de segurança do prédio",
+      "Dificuldade em fazer cumprir o termo de responsabilidade em caso de incidentes"
+    ],
+    "candidate_tests": [
+      "Realizar um piloto de 4 semanas em um prédio selecionado usando o sistema de agendamento online e medir taxa de reserva e comparecimento",
+      "Testar a assinatura digital do termo de responsabilidade com um grupo de moradores e avaliar a taxa de aceitação e compreensão",
+      "Solicitar cotações a seguradoras e conduzir um teste de processo de reclamação simulada para validar cobertura e tempo de resposta",
+      "Entrevistar a administração do condomínio para validar a viabilidade de liberar salas e identificar requisitos de segurança"
+    ],
+    "exploratory_candidate_tests": [
+      "Instalar módulos de mobiliário flexível em corredores e avaliar a aceitação dos moradores para criar micro‑espaços pop‑up de troca de habilidades",
+      "Desenvolver um protótipo de plataforma de realidade aumentada que projete um hub virtual nas áreas comuns e testar a usabilidade com um grupo de residentes",
+      "Experimentar um programa de \"Noites de Habilidade\" em ambientes externos (pátios ou terraços) para comparar engajamento com o modelo interno"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:31:08.268425+00:00"
+}

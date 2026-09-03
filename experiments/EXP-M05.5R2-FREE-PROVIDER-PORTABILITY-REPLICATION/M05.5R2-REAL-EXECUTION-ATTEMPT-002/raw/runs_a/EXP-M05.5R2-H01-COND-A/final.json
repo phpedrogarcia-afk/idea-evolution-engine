@@ -1,0 +1,31 @@
+{
+  "run_id": "EXP-M05.5R2-H01-COND-A",
+  "topology": "BASELINE_SINGLE_PROMPT",
+  "original_idea": "Quero uma forma simples de dividir as tarefas de fechamento da minha pequena cafeteria entre três pessoas, sem precisar instalar um sistema de gestão. As tarefas mudam um pouco de dia para dia e ninguém deve ficar sempre com a parte mais chata.",
+  "success": true,
+  "error": null,
+  "parsed_output": {
+    "summary": "Criar um sistema de rodízio simples, usando um quadro branco ou planilha impressa, que distribua diariamente as tarefas de fechamento entre as três pessoas, garantindo que ninguém fique sempre com a tarefa mais desagradável.",
+    "strengths": [
+      "Nenhum custo adicional ou necessidade de software",
+      "Fácil de implementar e adaptar às mudanças diárias",
+      "Transparência visual para todos os membros",
+      "Flexibilidade para ajustar a ordem de rodízio"
+    ],
+    "weaknesses": [
+      "Depende da disciplina para atualizar o quadro/planilha",
+      "Risco de esquecimento ou erro humano na rotação",
+      "Pode ser menos eficiente se houver muitas variações de tarefas",
+      "Sem registro automático de quem realizou cada tarefa"
+    ],
+    "refined_version": "Utilizar um quadro branco (ou folha A4) dividido em colunas para cada dia da semana e linhas para as tarefas de fechamento (ex.: limpar bancada, fechar caixa, organizar estoque). Cada pessoa recebe uma cor de marcador. A cada dia, as tarefas são preenchidas em ordem rotativa, de modo que a pessoa que fez a tarefa \"chata\" ontem passa para a próxima tarefa e assim sucessivamente, garantindo que a carga seja distribuída equitativamente. Um pequeno algoritmo de rodízio pode ser anotado no quadro para referência, e a cada semana a sequência recomeça. Caso haja variações, basta trocar as posições no quadro antes do início do turno.",
+    "next_steps": [
+      "Listar todas as tarefas de fechamento e classificá‑las por grau de “chateação”",
+      "Desenhar o quadro branco ou criar a planilha com dias e tarefas",
+      "Definir a ordem de rodízio e registrar a sequência de cores",
+      "Treinar a equipe para atualizar o quadro ao final de cada turno",
+      "Testar o sistema por uma semana e recolher feedback",
+      "Ajustar a rotação ou adicionar notas conforme necessário"
+    ]
+  }
+}

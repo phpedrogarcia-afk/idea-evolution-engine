@@ -1,0 +1,355 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "EXP-M05.5R2-H03-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-09-03T14:32:24.970887",
+  "updated_at": "2026-09-03T14:34:52.981343",
+  "original_idea": "Na minha cidade, muita gente deixa de usar a praça perto da estação depois do fim da tarde. Acho que pode ser porque ela parece insegura, mas também pode ser porque não há nada que convide as pessoas a permanecer ali. Queria explorar uma ideia para mudar isso.",
+  "current_idea": "Transformar a praça próxima à estação em um espaço noturno seguro e atrativo mediante iluminação inteligente e sustentável, estimulando a permanência de usuários após o fim da tarde.",
+  "human_intent": "Buscar ideias que tornem a praça mais segura e atrativa, incentivando seu uso no período da noite.",
+  "problem_statement": "A praça próxima à estação deixa de ser utilizada após o fim da tarde, possivelmente devido à percepção de insegurança e à falta de elementos que atraiam as pessoas a permanecerem lá.",
+  "actors_or_users": [
+    "Moradores da cidade",
+    "Usuários da estação de transporte",
+    "Visitantes da região",
+    "Autoridades municipais",
+    "Organizadores de eventos locais"
+  ],
+  "assumptions": [
+    "A percepção de insegurança impede as pessoas de permanecerem na praça à noite",
+    "A falta de atrações ou infraestrutura contribui para a baixa frequência",
+    "Melhorias na segurança e atratividade podem aumentar o uso da praça",
+    "Existem recursos ou vontade política para implementar mudanças"
+  ],
+  "ambiguities": [
+    "Quais são os fatores específicos que geram a sensação de insegurança?",
+    "O que exatamente falta na praça que poderia convidar as pessoas a ficar?",
+    "Qual é o orçamento disponível ou quem seria responsável pela implementação?",
+    "Qual é a prioridade dos diferentes grupos de usuários"
+  ],
+  "strengths": [
+    "Problema claramente identificado",
+    "Localização estratégica próximo à estação, potencial de alto fluxo",
+    "Intenção de melhorar a qualidade de vida urbana",
+    "Abertura para explorar múltiplas soluções"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Dependência excessiva da percepção de insegurança sem evidência empírica",
+      "why_it_matters": "Se a percepção não for a causa principal, investimentos em iluminação, vigilância ou policiamento podem não aumentar o uso da praça, desperdiçando recursos públicos e gerando descrédito nas iniciativas municipais.",
+      "severity": "HIGH",
+      "affected_part": "Fundamento da proposta (segurança)",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "Suposição de recursos ou vontade política disponíveis sem validação",
+      "why_it_matters": "Implementar melhorias requer financiamento e aprovação governamental; a falta desses apoios pode impedir a execução, tornando a proposta inviável independentemente da qualidade das intervenções.",
+      "severity": "MEDIUM",
+      "affected_part": "Viabilidade de implementação",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "A percepção de insegurança impede as pessoas de permanecerem na praça à noite",
+    "A falta de atrações ou infraestrutura contribui para a baixa frequência",
+    "Melhorias na segurança e atratividade podem aumentar o uso da praça",
+    "Existem recursos ou vontade política para implementar mudanças"
+  ],
+  "contradictions": [
+    "Assume que há vontade política e recursos disponíveis, mas não há evidência de apoio municipal ou orçamento alocado",
+    "Afirma que a falta de atrações reduz o uso, porém a mesma praça pode ser usada para eventos temporários sem necessidade de infraestrutura permanente"
+  ],
+  "failure_modes": [
+    "Instalação de iluminação ou câmeras pode atrair comportamentos indesejados, como aglomerações de grupos marginalizados",
+    "Intervenções de segurança podem criar sensação de vigilância excessiva, afastando usuários legítimos",
+    "Investimentos em infraestrutura podem gerar aumento de custos de manutenção que a cidade não consegue sustentar"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Instalar iluminação inteligente com sensores de presença e integração a um painel de dados de criminalidade e fluxo de pedestres, permitindo ajustes baseados em evidências reais",
+      "addresses_issues": [
+        "Dependência excessiva da percepção de insegurança sem evidência empírica",
+        "Suposição de recursos ou vontade política disponíveis sem validação"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Custo inicial mais elevado para sensores e plataforma de dados",
+        "Necessidade de manutenção técnica especializada",
+        "Possíveis preocupações com privacidade dos dados coletados"
+      ],
+      "novelty_or_difference": "Uso de tecnologia de iluminação adaptativa alimentada por dados reais para validar necessidade de segurança"
+    },
+    {
+      "mechanism": "Criar um programa de vigilância comunitária onde moradores e frequentadores registram incidentes via aplicativo móvel, complementado por rondas voluntárias de segurança em horários críticos",
+      "addresses_issues": [
+        "Dependência excessiva da percepção de insegurança sem evidência empírica",
+        "Suposição de recursos ou vontade política disponíveis sem validação"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requer coordenação e treinamento de voluntários",
+        "Risco de fadiga ou baixa participação ao longo do tempo",
+        "Possível responsabilidade legal para organizadores"
+      ],
+      "novelty_or_difference": "Envolvimento direto da comunidade para gerar dados de segurança e reduzir a necessidade de recursos governamentais"
+    },
+    {
+      "mechanism": "Lançar um projeto piloto pop‑up com iluminação solar portátil e eventos noturnos temporários, medindo a frequência de uso por contadores de pedestres para validar demanda antes de investimentos permanentes",
+      "addresses_issues": [
+        "Dependência excessiva da percepção de insegurança sem evidência empírica",
+        "Suposição de recursos ou vontade política disponíveis sem validação"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Solução temporária que pode não gerar impacto de longo prazo",
+        "Dependência de condições climáticas para energia solar",
+        "Logística de montagem e desmontagem frequente"
+      ],
+      "novelty_or_difference": "Abordagem experimental de curto prazo que gera evidência empírica antes de comprometer recursos permanentes"
+    }
+  ],
+  "core_mechanism": "Instalar iluminação inteligente alimentada por energia solar, com sensores de presença que ajustam a intensidade luminosa conforme o fluxo de pedestres e integram dados de uso para otimização contínua.",
+  "core_mechanism_justification": "A solução combina segurança (iluminação adaptativa) e sustentabilidade (energia solar), atendendo diretamente ao desejo do usuário de tornar a praça mais segura e atrativa à noite, ao mesmo tempo que permite monitorar a efetividade da medida.",
+  "core_mechanism_basis": "VALID_USER_DERIVATION",
+  "core_mechanism_hash": "f0d9d42ba6c8290e",
+  "proposal_records": [
+    {
+      "proposal": "Instalar iluminação inteligente alimentada por energia solar, com sensores de presença que ajustam a intensidade luminosa conforme o fluxo de pedestres e integram dados de uso para otimização contínua.",
+      "ontology_state": "CORE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "A solução combina segurança (iluminação adaptativa) e sustentabilidade (energia solar), atendendo diretamente ao desejo do usuário de tornar a praça mais segura e atrativa à noite, ao mesmo tempo que permite monitorar a efetividade da medida.",
+      "promotion_basis": "VALID_USER_DERIVATION",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Instalar iluminação inteligente alimentada por energia solar, com sensores de presença que ajustam a intensidade luminosa conforme o fluxo de pedestres e integram dados de uso para otimização contínua.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Alinha‑se com a intenção explícita do usuário de melhorar segurança e atratividade usando iluminação sustentável.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Trade‑offs considerados aceitáveis (custo inicial, necessidade de manutenção técnica) e potencial de impacto positivo baseado em estudos de iluminação adaptativa."
+    },
+    {
+      "proposal": "Criar um programa de vigilância comunitária onde moradores e frequentadores registram incidentes via aplicativo móvel, complementado por rondas voluntárias de segurança em horários críticos.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Lançar um projeto piloto pop‑up com iluminação solar portátil e eventos noturnos temporários, medindo a frequência de uso por contadores de pedestres para validar demanda antes de investimentos permanentes.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Instalar iluminação inteligente alimentada por energia solar, com sensores de presença que ajustam a intensidade luminosa conforme o fluxo de pedestres e integram dados de uso para otimização contínua. (Justificativa: Alinha‑se com a intenção explícita do usuário de melhorar segurança e atratividade usando iluminação sustentável. | Base: VALID_USER_DERIVATION)"
+  ],
+  "candidate_extensions": [
+    "Criar um programa de vigilância comunitária onde moradores e frequentadores registram incidentes via aplicativo móvel, complementado por rondas voluntárias de segurança em horários críticos.",
+    "Lançar um projeto piloto pop‑up com iluminação solar portátil e eventos noturnos temporários, medindo a frequência de uso por contadores de pedestres para validar demanda antes de investimentos permanentes."
+  ],
+  "rejected_changes": [],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [instalar, iluminacao, adaptativa, alimentada, paineis, solares, sensores, movimento, aumentam, luminosidade, quando, presenca, coletar, dados, uso, validar, eficacia].",
+    "Disponibilidade de financiamento para a instalação dos painéis solares",
+    "Aceitação da comunidade em relação aos sensores de movimento",
+    "Manutenção a longo prazo dos equipamentos",
+    "Efetividade real na redução da percepção de insegurança",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Instalar iluminação adaptativa alimentada por painéis solares, com sensores de movimento que aumentam a luminosidade quando há presença de pessoas, e coletar dados de uso para validar a eficácia.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Instalar iluminação adaptativa alimentada por painéis solares, com sensores de movimento que aumentam a luminosidade quando há presença de pessoas, e coletar dados de uso para validar a eficácia.' aparece nos testes exploratórios 'Organizar evento cultural noturno com iluminação decorativa para avaliar aumento de público'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Instalar iluminação adaptativa alimentada por painéis solares, com sensores de movimento que aumentam a luminosidade quando há presença de pessoas, e coletar dados de uso para validar a eficácia.' aparece nos testes exploratórios 'Montar mercado noturno temporário usando iluminação LED portátil para medir incremento de fluxo de visitantes'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Realizar um projeto piloto de iluminação adaptativa em uma zona da praça, obter orçamentos, buscar parcerias com fornecedores de energia solar e avaliar a aceitação da comunidade antes de expandir para toda a área.' propõe mecanismo rejeitado 'Organizar um mercado noturno itinerante com iluminação temporária de LED e barracas de vendedores locais, financiado por micro‑subvenções e crowdfunding da comunidade.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Realizar um projeto piloto de iluminação adaptativa em uma zona da praça, obter orçamentos, buscar parcerias com fornecedores de energia solar e avaliar a aceitação da comunidade antes de expandir para toda a área.' propõe mecanismo rejeitado 'Criar patrulhas de segurança comunitária apoiadas por um aplicativo móvel que permite denúncias em tempo real e comunicação direta com a polícia local em um programa piloto.'.; Dependência de realidade do Core 'Aprovação municipal para modificação da iluminação pública' referencia mecanismo rejeitado 'Organizar um mercado noturno itinerante com iluminação temporária de LED e barracas de vendedores locais, financiado por micro‑subvenções e crowdfunding da comunidade.'.; Teste do Core 'Instalar unidade piloto com iluminação adaptativa; registrar frequência de ativação e níveis de iluminação' referencia mecanismo rejeitado 'Organizar um mercado noturno itinerante com iluminação temporária de LED e barracas de vendedores locais, financiado por micro‑subvenções e crowdfunding da comunidade.'.; Teste do Core 'Medir produção de energia solar versus consumo da iluminação ao longo de três meses' referencia mecanismo rejeitado 'Organizar um mercado noturno itinerante com iluminação temporária de LED e barracas de vendedores locais, financiado por micro‑subvenções e crowdfunding da comunidade.'.; Dependência de realidade do Core 'Nível adequado de irradiação solar no local ao longo do ano' referencia mecanismo rejeitado 'Criar patrulhas de segurança comunitária apoiadas por um aplicativo móvel que permite denúncias em tempo real e comunicação direta com a polícia local em um programa piloto.'.; Teste do Core 'Realizar pesquisas de percepção de segurança antes e depois da instalação' referencia mecanismo rejeitado 'Criar patrulhas de segurança comunitária apoiadas por um aplicativo móvel que permite denúncias em tempo real e comunicação direta com a polícia local em um programa piloto.'.",
+    "Efetividade dos sensores de presença na percepção de segurança dos usuários.",
+    "Aceitação da comunidade para coleta e uso de dados de fluxo de pedestres.",
+    "Desempenho da energia solar em períodos prolongados de baixa insolação.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_IN_EXPLORATORY: Mecanismo do Core 'Instalar iluminação inteligente alimentada por energia solar, com sensores de presença que ajustam a intensidade luminosa conforme o fluxo de pedestres e integram dados de uso para otimização contínua.' aparece nos testes exploratórios 'Organizar eventos noturnos temporários com iluminação solar portátil e monitorar o aumento de presença de pedestres usando contadores de fluxo'."
+  ],
+  "known_risks": [
+    "Custo inicial elevado para aquisição e instalação dos sensores e da infraestrutura solar.",
+    "Privacidade dos dados coletados sobre fluxo de pedestres.",
+    "Manutenção técnica especializada necessária para garantir operação contínua."
+  ],
+  "recommended_next_step": "Conduzir estudo de viabilidade técnica e financeira da iluminação inteligente solar, incluindo consulta à comunidade local, análise de custos de instalação e manutenção, e definição de métricas de monitoramento para validar o impacto na segurança e uso da praça.",
+  "tested_core_mechanism": "Instalar iluminação inteligente alimentada por energia solar, com sensores de presença que ajustam a intensidade luminosa conforme o fluxo de pedestres e integram dados de uso para otimização contínua.",
+  "tested_core_hash": "f0d9d42ba6c8290e",
+  "reality_dependencies": [
+    "Disponibilidade de área adequada para instalação de painéis solares com orientação otimizada",
+    "Fornecedores certificados de sensores de presença compatíveis com controle de intensidade luminosa",
+    "Infraestrutura de rede (Wi‑Fi ou LPWAN) para transmissão dos dados de uso em tempo real",
+    "Armazenamento de energia (baterias) dimensionado para garantir operação durante a noite e dias nublados",
+    "Aprovações municipais para instalação de equipamentos de iluminação pública alimentados por energia solar",
+    "Políticas de privacidade e segurança para o armazenamento e tratamento dos dados de fluxo de pedestres"
+  ],
+  "claims_needing_evidence": [
+    "Os painéis solares instalados na praça gerarão energia suficiente para alimentar a iluminação inteligente durante toda a noite",
+    "Os sensores de presença ajustarão a intensidade luminosa de forma a melhorar a percepção de segurança dos usuários",
+    "A coleta e análise dos dados de uso permitirão otimizações que reduzem consumo energético sem comprometer a segurança",
+    "A iluminação inteligente reduzirá a incidência de incidentes criminais ou aumentará a frequência de uso noturno da praça"
+  ],
+  "candidate_tests": [
+    "Medir a produção de energia dos painéis solares instalados durante diferentes condições climáticas e comparar com o consumo energético da iluminação ao longo da noite",
+    "Testar a resposta dos sensores de presença ao variar o número de pedestres e verificar a correlação entre fluxo detectado e ajuste de intensidade luminosa",
+    "Avaliar a latência e confiabilidade da transmissão de dados de uso para a plataforma de análise em cenários de alta demanda",
+    "Realizar um estudo piloto de 4 semanas comparando a frequência de uso noturno da praça antes e depois da ativação da iluminação inteligente",
+    "Analisar o impacto da iluminação ajustada nos relatos de segurança dos usuários por meio de questionários antes e depois da implementação"
+  ],
+  "exploratory_candidate_tests": [
+    "Implementar um aplicativo móvel de vigilância comunitária e medir a taxa de registro de incidentes em comparação com períodos sem o aplicativo",
+    "Organizar eventos noturnos temporários com iluminação solar portátil e monitorar o aumento de presença de pedestres usando contadores de fluxo",
+    "Testar rondas voluntárias de segurança em horários críticos e avaliar a percepção de segurança dos frequentadores da praça"
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:32:38.284281",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Buscar ideias que tornem a praça mais segura e atrativa, inc...' | 4 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:32:53.330638",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "2 vulnerabilidades críticas e 3 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:33:08.141913",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:33:23.532914",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Instalar iluminação adaptativa alimentad...' (Base: MODEL_HYPOTHESIS | Hash: 67df1b2713ad8e84), 1 aceitas, 1 candidatas, 2 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:33:38.573592",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Instalar iluminação adaptativa alimentad...' (hash: 67df1b2713ad8e84), 5 dependências, 5 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:33:53.226252",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:34:08.116394",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:34:23.485321",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Instalar iluminação inteligente alimenta...' (Base: VALID_USER_DERIVATION | Hash: f0d9d42ba6c8290e), 1 aceitas, 2 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:34:38.323217",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Instalar iluminação inteligente alimenta...' (hash: f0d9d42ba6c8290e), 6 dependências, 5 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T14:34:52.981331",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "run_id": "EXP-M05.5R2-H01-COND-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "original_idea": "Quero uma forma simples de dividir as tarefas de fechamento da minha pequena cafeteria entre três pessoas, sem precisar instalar um sistema de gestão. As tarefas mudam um pouco de dia para dia e ninguém deve ficar sempre com a parte mais chata.",
+  "human_intent": "Encontrar um método simples e manual para distribuir as tarefas de fechamento entre três funcionários, com rotação ou variação diária, sem necessidade de instalar software ou ferramentas digitais.",
+  "refined_idea": "Método manual simples usando um quadro de tarefas com tokens coloridos que indicam o grau de desagradabilidade da tarefa de fechamento, rotacionado diariamente entre os três funcionários, garantindo que a carga percebida seja considerada na rotação.",
+  "core_mechanism": "Quadro de tarefas com tokens coloridos que indicam o grau de desagradabilidade da tarefa; ao final do dia o token é passado para o próximo funcionário, assegurando rotação diária baseada na carga percebida.",
+  "core_mechanism_basis": "MODEL_HYPOTHESIS",
+  "core_mechanism_hash": "cde4105b5ac1d755",
+  "tested_core_hash": "cde4105b5ac1d755",
+  "reconstruction_count": 1,
+  "essence_drift_detected": true,
+  "ontology_contradiction_detected": true,
+  "critical_issues_count": 3,
+  "alternatives_count": 3,
+  "accepted_changes_count": 1,
+  "rejected_changes_count": 2,
+  "recommended_next_step": "Criar o quadro de tarefas e os tokens coloridos, definir claramente o significado de cada cor, treinar a equipe sobre o uso diário, iniciar um período piloto de uma semana e coletar feedback para ajustar o processo se necessário"
+}

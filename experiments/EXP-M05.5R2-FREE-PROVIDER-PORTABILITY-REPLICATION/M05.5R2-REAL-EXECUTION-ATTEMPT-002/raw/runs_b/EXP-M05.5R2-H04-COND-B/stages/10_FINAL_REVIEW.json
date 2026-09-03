@@ -1,0 +1,32 @@
+{
+  "step_number": 10,
+  "stage_id": "FINAL_REVIEW",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "final_review_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True.",
+  "raw_response": "{\"material_issues_remaining\":[\"O diretório de snapshots pode consumir significativamente o espaço em disco se não houver política de retenção\",\"Se o usuário perder a chave de criptografia, todos os dados, incluindo backups, tornam‑se irrecuperáveis\",\"Configurações complexas de backup externo podem ser ignoradas pelos usuários, reduzindo a eficácia da proteção adicional\"],\"essence_drift_detected\":false,\"speculative_accretion_detected\":false,\"ontology_contradiction_detected\":false,\"drift_explanation\":\"\",\"unresolved_critical_issue\":false,\"recommendation\":\"REFINED_IDEA_READY\",\"review_summary\":\"A ideia refinada mantém o propósito central de registrar, armazenar e analisar dados de saúde localmente, garantindo privacidade total sem dependências externas. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os principais riscos (uso de espaço em disco, perda de chave e complexidade de backup externo) foram identificados, mas não impedem a viabilidade da proposta. Recomenda‑se avançar com a implementação do mecanismo de armazenamento criptografado e versionamento, conforme o próximo passo sugerido.\"}",
+  "parsed_output": {
+    "material_issues_remaining": [
+      "O diretório de snapshots pode consumir significativamente o espaço em disco se não houver política de retenção",
+      "Se o usuário perder a chave de criptografia, todos os dados, incluindo backups, tornam‑se irrecuperáveis",
+      "Configurações complexas de backup externo podem ser ignoradas pelos usuários, reduzindo a eficácia da proteção adicional"
+    ],
+    "essence_drift_detected": false,
+    "speculative_accretion_detected": false,
+    "ontology_contradiction_detected": false,
+    "drift_explanation": "",
+    "unresolved_critical_issue": false,
+    "recommendation": "REFINED_IDEA_READY",
+    "review_summary": "A ideia refinada mantém o propósito central de registrar, armazenar e analisar dados de saúde localmente, garantindo privacidade total sem dependências externas. Não há desvio de essência, acúmulo especulativo ou contradições ontológicas. Os principais riscos (uso de espaço em disco, perda de chave e complexidade de backup externo) foram identificados, mas não impedem a viabilidade da proposta. Recomenda‑se avançar com a implementação do mecanismo de armazenamento criptografado e versionamento, conforme o próximo passo sugerido."
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:44:23.096507+00:00"
+}

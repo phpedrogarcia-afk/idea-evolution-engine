@@ -1,0 +1,53 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Algoritmo que combina os ingredientes di...' (hash: f91fba8b511cb291), 4 dependências, 2 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Algoritmo que combina os ingredientes disponíveis e suas datas de validade aproximadas para gerar sugestões de refeições que priorizam o consumo de alimentos próximos ao vencimento.\",\"feasibility_notes\":[\"A lógica de combinação de ingredientes e datas de validade é computacionalmente simples e pode ser implementada em dispositivos móveis.\",\"Requer que o usuário registre manualmente os itens e suas datas de validade, o que pode ser viável para cozinheiros de 1‑2 pessoas.\",\"A precisão das datas de validade depende da entrada do usuário; erros de digitação podem afetar a qualidade das sugestões.\",\"O algoritmo pode ser otimizado para priorizar itens próximos ao vencimento sem comprometer a qualidade nutricional ou gustativa das refeições.\"],\"reality_dependencies\":[\"Disponibilidade de um inventário doméstico confiável fornecido pelo usuário (lista de ingredientes e datas de validade).\",\"Capacidade do aplicativo de armazenar e atualizar localmente essas informações de forma segura.\",\"Mecanismo de cálculo que avalia a proximidade da data de validade e gera combinações de receitas viáveis.\",\"Interface de usuário que permite inserção rápida e edição das datas de validade.\"],\"claims_needing_evidence\":[\"Sugestões baseadas em validade aproximada reduzem efetivamente o desperdício de alimentos em lares de 1‑2 pessoas.\",\"O uso do algoritmo altera o comportamento de compra/cozinha, levando a escolhas mais conscientes sobre consumo de alimentos próximos ao vencimento.\",\"A geração automática de refeições a partir de itens existentes aumenta a frequência de preparo de refeições caseiras.\"],\"potential_blockers\":[\"Baixa adesão dos usuários em registrar manualmente datas de validade para cada item.\",\"Erros de entrada de dados que geram sugestões inadequadas ou inseguras (ex.: consumo de alimentos já vencidos).\",\"Limitações de privacidade que impedem o armazenamento de informações detalhadas sobre o estoque doméstico.\",\"Resistência cultural a mudar hábitos alimentares baseados em recomendações automatizadas.\"],\"candidate_tests\":[\"Teste A/B com dois grupos de usuários: um recebe sugestões baseadas em validade aproximada e outro recebe sugestões genéricas; medir a diferença no volume de alimentos descartados ao longo de 4 semanas.\",\"Coleta de dados de uso do aplicativo (número de sugestões aceitas, frequência de atualização do inventário) e correlação com relatórios de desperdício auto‑reportados pelos participantes.\"],\"exploratory_candidate_tests\":[\"Avaliar a eficácia de um scanner de código de barras com IA para capturar automaticamente itens domésticos e suas datas de validade, comparando a taxa de preenchimento de inventário com a entrada manual.\",\"Implementar um desafio gamificado semanal que destaca ingredientes próximos ao vencimento e oferece recompões; medir o impacto adicional no desperdício em relação ao algoritmo base.\",\"Testar a integração passiva com sensores IoT (balança inteligente, sensores de porta) para detectar presença e validade dos alimentos, comparando a precisão do inventário automático com a entrada manual.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Algoritmo que combina os ingredientes disponíveis e suas datas de validade aproximadas para gerar sugestões de refeições que priorizam o consumo de alimentos próximos ao vencimento.",
+    "feasibility_notes": [
+      "A lógica de combinação de ingredientes e datas de validade é computacionalmente simples e pode ser implementada em dispositivos móveis.",
+      "Requer que o usuário registre manualmente os itens e suas datas de validade, o que pode ser viável para cozinheiros de 1‑2 pessoas.",
+      "A precisão das datas de validade depende da entrada do usuário; erros de digitação podem afetar a qualidade das sugestões.",
+      "O algoritmo pode ser otimizado para priorizar itens próximos ao vencimento sem comprometer a qualidade nutricional ou gustativa das refeições."
+    ],
+    "reality_dependencies": [
+      "Disponibilidade de um inventário doméstico confiável fornecido pelo usuário (lista de ingredientes e datas de validade).",
+      "Capacidade do aplicativo de armazenar e atualizar localmente essas informações de forma segura.",
+      "Mecanismo de cálculo que avalia a proximidade da data de validade e gera combinações de receitas viáveis.",
+      "Interface de usuário que permite inserção rápida e edição das datas de validade."
+    ],
+    "claims_needing_evidence": [
+      "Sugestões baseadas em validade aproximada reduzem efetivamente o desperdício de alimentos em lares de 1‑2 pessoas.",
+      "O uso do algoritmo altera o comportamento de compra/cozinha, levando a escolhas mais conscientes sobre consumo de alimentos próximos ao vencimento.",
+      "A geração automática de refeições a partir de itens existentes aumenta a frequência de preparo de refeições caseiras."
+    ],
+    "potential_blockers": [
+      "Baixa adesão dos usuários em registrar manualmente datas de validade para cada item.",
+      "Erros de entrada de dados que geram sugestões inadequadas ou inseguras (ex.: consumo de alimentos já vencidos).",
+      "Limitações de privacidade que impedem o armazenamento de informações detalhadas sobre o estoque doméstico.",
+      "Resistência cultural a mudar hábitos alimentares baseados em recomendações automatizadas."
+    ],
+    "candidate_tests": [
+      "Teste A/B com dois grupos de usuários: um recebe sugestões baseadas em validade aproximada e outro recebe sugestões genéricas; medir a diferença no volume de alimentos descartados ao longo de 4 semanas.",
+      "Coleta de dados de uso do aplicativo (número de sugestões aceitas, frequência de atualização do inventário) e correlação com relatórios de desperdício auto‑reportados pelos participantes."
+    ],
+    "exploratory_candidate_tests": [
+      "Avaliar a eficácia de um scanner de código de barras com IA para capturar automaticamente itens domésticos e suas datas de validade, comparando a taxa de preenchimento de inventário com a entrada manual.",
+      "Implementar um desafio gamificado semanal que destaca ingredientes próximos ao vencimento e oferece recompões; medir o impacto adicional no desperdício em relação ao algoritmo base.",
+      "Testar a integração passiva com sensores IoT (balança inteligente, sensores de porta) para detectar presença e validade dos alimentos, comparando a precisão do inventário automático com a entrada manual."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:27:23.102273+00:00"
+}

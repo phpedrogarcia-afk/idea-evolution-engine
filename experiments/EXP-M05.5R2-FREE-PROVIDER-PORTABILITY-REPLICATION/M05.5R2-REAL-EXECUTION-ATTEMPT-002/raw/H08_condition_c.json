@@ -1,0 +1,25 @@
+{
+  "cell_id": "H08-CONDITION_C",
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-002",
+  "idea_id": "H08",
+  "condition": "CONDITION_C",
+  "raw_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+  "latency_seconds": 1.739,
+  "model_calls": 1,
+  "status": "SUCCESS",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "parsed_output": {
+    "run_id": "EXP-M05.5R2-H08-COND-C",
+    "topology": "LEAN_IEE_L1",
+    "original_idea": "Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.",
+    "total_model_calls": 1,
+    "gate_outcome": "REQUEST_HUMAN_DECISION",
+    "escalation_reason": "NONE",
+    "authority_spoofing_detected": false,
+    "unsupported_candidate_count": 3,
+    "terminal_status": "HUMAN_DECISION_REQUIRED",
+    "decision_progress_detected": true
+  },
+  "rendered_semantic_text": "# Pacote Lean de Maturação — Run EXP-M05.5R2-H08-COND-C\n\n**Status:** `HUMAN_DECISION_REQUIRED` | **Chamadas de Modelo Utilizadas:** 1 (Max: 2)\n\n---\n\n## 1. Fonte Humana Imutável (SourceAnchor)\n\n> Acho que pessoas que cozinham para uma ou duas pessoas desperdiçam menos alimentos se receberem sugestões de refeições baseadas no que já têm em casa e no prazo de validade aproximado. Gostaria de testar se isso realmente muda o comportamento delas.\n\n\n## 2. Intenção & Problema Estruturado (Lean First Pass)\n\n- **Intenção do Usuário:** Test whether providing meal suggestions based on current pantry contents and near‑expiry items changes cooking behavior and reduces food waste.\n- **Problema Interpretado:** Food waste among individuals cooking for one or two people, caused by lack of awareness of existing ingredients and their approximate expiration dates.\n\n## 3. Mecanismo Primário Proposto\n\n**Mecanismo:** A recommendation engine that generates meal ideas using ingredients already present at home, weighted by their proximity to expiration dates.\n- **Base de Autoridade Auditada:** `MODEL_HYPOTHESIS`\n- **Justificativa:** By surfacing meals that use soon‑to‑expire items, users are nudged to consume them before they spoil, thereby reducing waste.\n\n\n## 4. Alternativas Concorrentes Identificadas\n\n1. **Generic recipe recommendation system that suggests meals based on user preferences without considering pantry inventory or expiry dates.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Does not address waste issue, May increase grocery shopping\n2. **Manual meal‑planning calendar where users schedule meals and manually track ingredient usage and expiration.** (Base: `MODEL_HYPOTHESIS`)\n   - *Tradeoffs:* Higher user effort, Potential for missed expiry items\n\n\n## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n\n- **Veredito do Gate:** `REQUEST_HUMAN_DECISION`\n- **Motivo de Escalação:** `NONE`\n- **Explicação:** A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.\n- **Autoridade Usurpada Detectada:** `False`\n- **Candidatos Não Ancorados:** 3\n\n## 7. Próximo Passo Recomendado\n\nDevelop a minimal viable recommendation prototype, recruit a small pilot group of solo/dual‑cook households, and measure food waste before and after exposure to the system.\n"
+}

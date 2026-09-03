@@ -1,0 +1,40 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "0 vulnerabilidades críticas e 4 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[],\"fragile_assumptions\":[\"A lista de tarefas contém um marcador explícito que indica que a tarefa está bloqueada\",\"A pessoa responsável ou a dependência está indicada de forma reconhecível na mesma linha da tarefa\",\"O arquivo da lista está acessível localmente ao executar a ferramenta\"],\"contradictions\":[],\"failure_modes\":[\"A ferramenta pode não reconhecer diferentes formatos ou variações de marcadores de bloqueio\",\"Incapacidade de extrair corretamente a pessoa responsável ou dependência se houver múltiplas entradas ou formatação inesperada\",\"Problemas de desempenho ou falhas ao processar arquivos de lista muito grandes ou com codificação não‑UTF‑8\",\"Comportamento inesperado quando linhas estão comentadas ou contêm tarefas que não seguem o padrão esperado\"],\"missing_information\":[\"Formato exato da lista de tarefas (ex.: texto livre, CSV, Markdown, JSON)\",\"Exemplos concretos dos marcadores que indicam bloqueio e da sintaxe usada para indicar a pessoa ou dependência\",\"Requisitos de saída desejada (por exemplo, apenas texto, JSON estruturado, ordenação)\",\"Como lidar com tarefas que não possuem marcador de bloqueio ou responsável\"],\"overclaims\":[]}",
+  "parsed_output": {
+    "critical_issues": [],
+    "fragile_assumptions": [
+      "A lista de tarefas contém um marcador explícito que indica que a tarefa está bloqueada",
+      "A pessoa responsável ou a dependência está indicada de forma reconhecível na mesma linha da tarefa",
+      "O arquivo da lista está acessível localmente ao executar a ferramenta"
+    ],
+    "contradictions": [],
+    "failure_modes": [
+      "A ferramenta pode não reconhecer diferentes formatos ou variações de marcadores de bloqueio",
+      "Incapacidade de extrair corretamente a pessoa responsável ou dependência se houver múltiplas entradas ou formatação inesperada",
+      "Problemas de desempenho ou falhas ao processar arquivos de lista muito grandes ou com codificação não‑UTF‑8",
+      "Comportamento inesperado quando linhas estão comentadas ou contêm tarefas que não seguem o padrão esperado"
+    ],
+    "missing_information": [
+      "Formato exato da lista de tarefas (ex.: texto livre, CSV, Markdown, JSON)",
+      "Exemplos concretos dos marcadores que indicam bloqueio e da sintaxe usada para indicar a pessoa ou dependência",
+      "Requisitos de saída desejada (por exemplo, apenas texto, JSON estruturado, ordenação)",
+      "Como lidar com tarefas que não possuem marcador de bloqueio ou responsável"
+    ],
+    "overclaims": []
+  },
+  "error": null,
+  "timestamp": "2026-09-03T17:38:23.114980+00:00"
+}
