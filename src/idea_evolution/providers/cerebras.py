@@ -16,6 +16,7 @@ Invariantes estritas:
 from __future__ import annotations
 
 import os
+import sys
 import re
 import json
 import hashlib
@@ -52,8 +53,21 @@ def sanitize_cerebras_credential(text: str) -> str:
 
 
 def get_cerebras_api_key() -> Optional[str]:
-    """Recupera a chave da Cerebras da variável de ambiente CEREBRAS_API_KEY."""
-    return os.environ.get("CEREBRAS_API_KEY")
+    """Recupera a chave da Cerebras da variável de ambiente CEREBRAS_API_KEY ou do registro do usuário no Windows."""
+    key = os.environ.get("CEREBRAS_API_KEY")
+    if key and len(key.strip()) > 0:
+        return key.strip()
+    if sys.platform == "win32":
+        try:
+            import winreg
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment") as k:
+                val, _ = winreg.QueryValueEx(k, "CEREBRAS_API_KEY")
+                if val and len(str(val).strip()) > 0:
+                    os.environ["CEREBRAS_API_KEY"] = str(val).strip()
+                    return str(val).strip()
+        except Exception:
+            pass
+    return None
 
 
 def is_cerebras_key_present() -> bool:

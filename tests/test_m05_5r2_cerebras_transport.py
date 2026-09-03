@@ -123,7 +123,7 @@ def test_credential_sanitization():
 
 
 def test_absence_of_key_raises_fail_closed_before_network(monkeypatch):
-    monkeypatch.delenv("CEREBRAS_API_KEY", raising=False)
+    monkeypatch.setattr("src.idea_evolution.providers.cerebras.get_cerebras_api_key", lambda: None)
     assert not is_cerebras_key_present()
 
     runner = CerebrasRunner()
