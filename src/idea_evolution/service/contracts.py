@@ -13,16 +13,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 from src.idea_evolution.orchestration.lean_loop import LeanRunResult
-
-
-class TreatmentMode(str, Enum):
-    """
-    Modos de tratamento suportados pela camada de serviço do FioIdeias V1.
-    O padrão inegociável de produto é LEAN_L1 (Condição C).
-    """
-    LEAN_L1 = "LEAN_L1"                          # Padrão de produto: Lean L1 + Early Epistemic Gate
-    FAST_FALLBACK = "FAST_FALLBACK"              # Fallback de contingência / Sanity Baseline (Condição A)
-    SUSPENDED_DEEP_LOOP = "SUSPENDED_DEEP_LOOP"  # Suspenso do caminho padrão; pesquisa interna isolada (Condição B)
+from src.idea_evolution.artifacts.evolution_artifact import EvolutionArtifact, TreatmentMode
 
 
 class ServiceFailureType(str, Enum):
@@ -72,4 +63,5 @@ class EvolutionResponse(BaseModel):
     error_message: Optional[str] = None
     lean_result: Optional[LeanRunResult] = None
     baseline_result: Optional[Dict[str, Any]] = None
+    artifact: Optional[EvolutionArtifact] = None
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())

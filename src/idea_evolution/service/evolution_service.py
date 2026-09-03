@@ -22,6 +22,7 @@ from src.idea_evolution.service.contracts import (
     TreatmentMode,
     ServiceFailureType,
 )
+from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
 
 
 class IdeaEvolutionService:
@@ -154,6 +155,14 @@ class IdeaEvolutionService:
         # Parada deliberada por ausência de trabalho útil (STOP_NO_USEFUL_WORK)
         fail_type = ServiceFailureType.DOMAIN_DECISION_OR_STOP if status == "STOP_NO_USEFUL_WORK" else None
 
+        # Geração determinística do EvolutionArtifact de produto (Custo = 0 chamadas)
+        artifact = EvolutionArtifactMapper.map_lean_result(
+            lean_res,
+            original_idea=request.raw_idea,
+            model_name=request.model_name or getattr(self.runner, "default_model", None),
+            provider=getattr(self.runner, "provider", None),
+        )
+
         return EvolutionResponse(
             success=True,
             run_id=lean_res.run_id,
@@ -165,6 +174,7 @@ class IdeaEvolutionService:
             decision_progress_detected=lean_res.decision_progress_detected,
             failure_type=fail_type,
             lean_result=lean_res,
+            artifact=artifact,
         )
 
     def _execute_fast_fallback(self, request: EvolutionRequest, run_id: str) -> EvolutionResponse:
@@ -194,6 +204,16 @@ class IdeaEvolutionService:
         success = base_res.get("success", False)
         error_msg = base_res.get("error")
 
+        artifact = None
+        if success:
+            artifact = EvolutionArtifactMapper.map_baseline_result(
+                base_res,
+                original_idea=request.raw_idea,
+                run_id=run_id,
+                model_name=request.model_name or getattr(self.runner, "default_model", None),
+                provider=getattr(self.runner, "provider", None),
+            )
+
         return EvolutionResponse(
             success=success,
             run_id=run_id,
@@ -204,6 +224,7 @@ class IdeaEvolutionService:
             failure_type=None if success else ServiceFailureType.PROVIDER_FAILURE,
             error_message=error_msg,
             baseline_result=base_res,
+            artifact=artifact,
         )
 
     def _execute_suspended_deep_loop(self, request: EvolutionRequest, run_id: str) -> EvolutionResponse:
@@ -245,6 +266,15 @@ class IdeaEvolutionService:
             )
 
         success = (state.run_status.value == "COMPLETED")
+        artifact = None
+        if success:
+            artifact = EvolutionArtifactMapper.map_simple_state(
+                state,
+                run_id=run_id,
+                model_name=request.model_name or getattr(self.runner, "default_model", None),
+                provider=getattr(self.runner, "provider", None),
+            )
+
         return EvolutionResponse(
             success=success,
             run_id=run_id,
@@ -253,4 +283,5 @@ class IdeaEvolutionService:
             terminal_status=state.run_status.value,
             total_model_calls=state.reconstruction_attempts + 1,  # Telemetria nominal
             failure_type=None if success else ServiceFailureType.DOMAIN_DECISION_OR_STOP,
+            artifact=artifact,
         )

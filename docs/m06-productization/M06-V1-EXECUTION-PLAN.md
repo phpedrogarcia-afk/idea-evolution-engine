@@ -40,16 +40,20 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 2 (P2) — Artefato Canônico de Evolução (`EvolutionArtifact`)
-- **Objetivo:** Formalizar o schema Pydantic unificado de produto `EvolutionArtifact`, consolidando o resultado de `LeanRunResult`, `LeanFirstPassOutput` e `FocusedEscalationOutput` em uma estrutura limpa e imutável.
+### Fase 2 (P2) — Artefato Canônico de Evolução (`EvolutionArtifact`) — `COMPLETED`
+- **Status:** `COMPLETED` (Ver [`M06-P2-EVOLUTION-ARTIFACT-COMPLETION-RECORD.md`](M06-P2-EVOLUTION-ARTIFACT-COMPLETION-RECORD.md))
+- **Objetivo:** Formalizar o schema Pydantic unificado de produto `EvolutionArtifact`, consolidando o resultado de `LeanRunResult`, `LeanFirstPassOutput`, `FocusedEscalationOutput` e `DecisionDeltaRecord` em uma estrutura limpa, versionada e imutável.
 - **Arquivos Afetados:**
-  - `src/idea_evolution/domain/evolution_artifact.py` [NEW]
-  - `src/idea_evolution/contracts/artifact_schemas.py` [NEW/ADAPT]
+  - `src/idea_evolution/artifacts/__init__.py` [NEW]
+  - `src/idea_evolution/artifacts/evolution_artifact.py` [NEW]
+  - `src/idea_evolution/artifacts/mapper.py` [NEW]
+  - `src/idea_evolution/service/contracts.py` [MODIFY]
+  - `src/idea_evolution/service/evolution_service.py` [MODIFY]
+  - `tests/test_evolution_artifact.py` [NEW]
 - **Oportunidades de Reuso:**
-  - Campos estruturados de `LeanFirstPassOutput` e `FocusedEscalationOutput` (`domain/early_epistemic_gate.py`).
-  - Conceito de `DecisionDeltaRecord` (`domain/early_epistemic_gate.py`).
-- **Testes de Aceite:** Validação de serialização/desserialização JSON bidirecional do `EvolutionArtifact` com validação de invariantes.
-- **Condição de Parada:** Artefato gerado com integridade de hash e validação estrita de schema.
+  - `LeanRunResult`, `LeanFirstPassOutput`, `FocusedEscalationOutput`, `DecisionDeltaRecord`, `SourceAnchor`.
+- **Testes de Aceite:** 20 testes determinísticos passando em `tests/test_evolution_artifact.py`.
+- **Condição de Parada:** Satisfeita. Artefato canônico integrado ao serviço sem mutação no núcleo científico (`LEAN_CORE_HASH_MATCH = YES`).
 
 ---
 
