@@ -477,13 +477,21 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     b_final_data = json.loads((b_final_dir / "final.json").read_text(encoding="utf-8")) if (b_final_dir / "final.json").exists() else {}
 
     b_term_status = state_b.status.value if hasattr(state_b.status, "value") else str(state_b.status)
+    rendered_b = (
+        f"### Ideia Refinada Final\n{state_b.current_idea or state_b.original_idea}\n\n"
+        f"### Intenção Humana Preservada\n{state_b.human_intent}\n\n"
+        f"### Mecanismo Central\n{state_b.core_mechanism}\n\n"
+        f"### Incertezas Críticas Remanescentes\n"
+        + "\n".join(f"- {u}" for u in state_b.remaining_uncertainties)
+        + f"\n\n### Próxima Ação Recomendada\n{state_b.recommended_next_step}"
+    )
     b_cell = {
         "cell_id": f"{SACRIFICIAL_ATTEMPT_ID}-B",
         "condition": "CONDITION_B",
         "status": "SUCCESS" if state_b.status.value == "SUCCESS" else "FAILED",
         "terminal_status": b_term_status,
         "stages_executed": [s.stage_id for s in state_b.stage_history],
-        "rendered_semantic_text": b_final_md,
+        "rendered_semantic_text": rendered_b,
         "parsed_output": b_final_data,
         "logical_calls": len(state_b.stage_history),
     }
@@ -509,12 +517,24 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     a_final_md = (a_final_dir / "final.md").read_text(encoding="utf-8") if (a_final_dir / "final.md").exists() else ""
     a_final_data = json.loads((a_final_dir / "final.json").read_text(encoding="utf-8")) if (a_final_dir / "final.json").exists() else {}
 
+    parsed_a = a_final_data.get("parsed_output", {}) if isinstance(a_final_data, dict) else {}
+    strengths_a = parsed_a.get("strengths", []) if isinstance(parsed_a.get("strengths"), list) else []
+    weaknesses_a = parsed_a.get("weaknesses", []) if isinstance(parsed_a.get("weaknesses"), list) else []
+    next_steps_a = parsed_a.get("next_steps", []) if isinstance(parsed_a.get("next_steps"), list) else []
+    rendered_a = (
+        f"### Resumo\n{parsed_a.get('summary', '')}\n\n"
+        f"### Versão Refinada\n{parsed_a.get('refined_version', '')}\n\n"
+        f"### Pontos Fortes e Fracos\n"
+        f"- **Fortes:** {', '.join(strengths_a)}\n"
+        f"- **Fracos:** {', '.join(weaknesses_a)}\n\n"
+        f"### Próximos Passos\n{', '.join(next_steps_a)}"
+    )
     a_cell = {
         "cell_id": f"{SACRIFICIAL_ATTEMPT_ID}-A",
         "condition": "CONDITION_A",
         "status": "SUCCESS" if bool(res_a.get("success")) else "FAILED",
         "terminal_status": "SUCCESS" if bool(res_a.get("success")) else "FAILED",
-        "rendered_semantic_text": a_final_md,
+        "rendered_semantic_text": rendered_a,
         "parsed_output": a_final_data,
         "logical_calls": 1,
     }
