@@ -37,6 +37,17 @@
       "replacement_if_deprecated": "openai/gpt-oss-120b"
     },
     {
+      "provider": "nvidia_nim",
+      "model_id": "openai/gpt-oss-120b",
+      "status": "ACTIVE",
+      "capabilities": { "structured_output": true, "reasoning": true, "context_window": 131072 },
+      "cost_class": "FREE_TIER",
+      "free_capacity_type": "40_rpm",
+      "privacy_class": "STANDARD_PRIVACY",
+      "last_verified": "2026-09-02",
+      "verification_source": "NVIDIA Build API & Free Endpoint Docs"
+    },
+    {
       "provider": "gemini",
       "model_id": "gemini-3.7-flash",
       "status": "ACTIVE",

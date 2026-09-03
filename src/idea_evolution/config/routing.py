@@ -27,7 +27,18 @@ class ModelDefinition(BaseModel):
 
     @field_validator("provider")
     def validate_provider(cls, v: str) -> str:
-        allowed = {"groq", "openai", "gemini", "anthropic", "openrouter", "fake", "fake_a", "fake_b", "fake_c"}
+        allowed = {
+            "groq",
+            "openai",
+            "gemini",
+            "anthropic",
+            "openrouter",
+            "nvidia_nim",
+            "fake",
+            "fake_a",
+            "fake_b",
+            "fake_c",
+        }
         if v.lower() not in allowed and not v.lower().startswith("fake"):
             raise ValueError(f"Provedor '{v}' não suportado. Provedores válidos: {allowed}")
         return v.lower()

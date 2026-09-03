@@ -119,6 +119,17 @@ class ModelCatalog:
                 last_verified="2026-08-26",
                 verification_source="GroqCloud Deprecations Notice (August 16, 2026)",
             ),
+            # NVIDIA NIM Free
+            ModelCatalogEntry(
+                provider="nvidia_nim",
+                model_id="openai/gpt-oss-120b",
+                status=LifecycleStatus.ACTIVE,
+                cost_class=CostClass.FREE_TIER,
+                free_capacity_type="40_rpm",
+                privacy_class=PrivacyClass.STANDARD_PRIVACY,
+                last_verified="2026-09-02",
+                verification_source="NVIDIA Build API & Free Endpoint Docs",
+            ),
             # Gemini
             ModelCatalogEntry(
                 provider="gemini",
