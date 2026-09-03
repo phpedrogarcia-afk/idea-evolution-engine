@@ -1,0 +1,586 @@
+{
+  "experiment_id": "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION",
+  "attempt_id": "M05.5R2-REAL-EXECUTION-ATTEMPT-002",
+  "status": "HUMAN_REVIEW_COMPLETED_FROZEN_BEFORE_UNBLIND",
+  "completed_at": "2026-09-03T16:20:35.950018-03:00",
+  "blind_packet_file": "M05.5R2-HUMAN-BLIND-REVIEW-PACKET.md",
+  "blind_packet_sha256": "9b14b815ff82d1be2f8bfbc2e9dcf273609e543a75948183760758a91087d92e",
+  "human_review_form_file": "M05.5R2-HUMAN-REVIEW-FORM.md",
+  "human_review_form_sha256": "8dd3f04ebd00a68a114ec41e743298d395a603a108164d6955665ece7d5ec603",
+  "blinding_invariants": {
+    "formal_unblind": false,
+    "reveal_accessed": false,
+    "treatment_identities_revealed": false,
+    "condition_mapping_present": false,
+    "a_b_c_interpretation_present": false
+  },
+  "summary": {
+    "holdout_count": 8,
+    "dimensions_per_holdout": 10,
+    "total_scores_collected": 240,
+    "ordinal_points": {
+      "RESULTADO 1": 14,
+      "RESULTADO 2": 16,
+      "RESULTADO 3": 18
+    },
+    "rank_counts": {
+      "RESULTADO 1": {
+        "first": 1,
+        "second": 4,
+        "third": 3
+      },
+      "RESULTADO 2": {
+        "first": 4,
+        "second": 0,
+        "third": 4
+      },
+      "RESULTADO 3": {
+        "first": 3,
+        "second": 4,
+        "third": 1
+      }
+    },
+    "continue_counts": {
+      "RESULTADO 1": 1,
+      "RESULTADO 2": 4,
+      "RESULTADO 3": 3
+    },
+    "secondary_totals": {
+      "RESULTADO 1": 239,
+      "RESULTADO 2": 254,
+      "RESULTADO 3": 294
+    },
+    "secondary_means": {
+      "RESULTADO 1": 2.9875,
+      "RESULTADO 2": 3.175,
+      "RESULTADO 3": 3.675
+    },
+    "primary_blind_ranking": [
+      "RESULTADO 3",
+      "RESULTADO 2",
+      "RESULTADO 1"
+    ]
+  },
+  "holdouts": {
+    "H01": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 4
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 4
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 5
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 4
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 1,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 21,
+        "RESULTADO 2": 46,
+        "RESULTADO 3": 40
+      },
+      "ranking": {
+        "first_place": "RESULTADO 2",
+        "second_place": "RESULTADO 3",
+        "third_place": "RESULTADO 1"
+      },
+      "continue_preference": "RESULTADO 2"
+    },
+    "H02": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 3,
+          "RESULTADO 3": 5
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 4
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 4
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 37,
+        "RESULTADO 2": 15,
+        "RESULTADO 3": 47
+      },
+      "ranking": {
+        "first_place": "RESULTADO 3",
+        "second_place": "RESULTADO 1",
+        "third_place": "RESULTADO 2"
+      },
+      "continue_preference": "RESULTADO 3"
+    },
+    "H03": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 4
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 2
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 25,
+        "RESULTADO 2": 48,
+        "RESULTADO 3": 32
+      },
+      "ranking": {
+        "first_place": "RESULTADO 2",
+        "second_place": "RESULTADO 3",
+        "third_place": "RESULTADO 1"
+      },
+      "continue_preference": "RESULTADO 2"
+    },
+    "H04": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 3,
+          "RESULTADO 3": 4
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 4
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 4
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 33,
+        "RESULTADO 2": 16,
+        "RESULTADO 3": 44
+      },
+      "ranking": {
+        "first_place": "RESULTADO 3",
+        "second_place": "RESULTADO 1",
+        "third_place": "RESULTADO 2"
+      },
+      "continue_preference": "RESULTADO 3"
+    },
+    "H05": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 3,
+          "RESULTADO 3": 5
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 4
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 5
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 27,
+        "RESULTADO 2": 16,
+        "RESULTADO 3": 48
+      },
+      "ranking": {
+        "first_place": "RESULTADO 3",
+        "second_place": "RESULTADO 1",
+        "third_place": "RESULTADO 2"
+      },
+      "continue_preference": "RESULTADO 3"
+    },
+    "H06": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 3
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 1,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 1,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 2,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 4
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 19,
+        "RESULTADO 2": 49,
+        "RESULTADO 3": 30
+      },
+      "ranking": {
+        "first_place": "RESULTADO 2",
+        "second_place": "RESULTADO 3",
+        "third_place": "RESULTADO 1"
+      },
+      "continue_preference": "RESULTADO 2"
+    },
+    "H07": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 3
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 1
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 4,
+          "RESULTADO 3": 2
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 1
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 1
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 1
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 3,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 1
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 5,
+          "RESULTADO 3": 2
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 33,
+        "RESULTADO 2": 49,
+        "RESULTADO 3": 16
+      },
+      "ranking": {
+        "first_place": "RESULTADO 2",
+        "second_place": "RESULTADO 1",
+        "third_place": "RESULTADO 3"
+      },
+      "continue_preference": "RESULTADO 2"
+    },
+    "H08": {
+      "dimensions": {
+        "1. Preservação de Intenção": {
+          "RESULTADO 1": 5,
+          "RESULTADO 2": 3,
+          "RESULTADO 3": 4
+        },
+        "2. Ganho de Clareza": {
+          "RESULTADO 1": 5,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "3. Crítica Útil": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 3
+        },
+        "4. Novidade Útil": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 3
+        },
+        "5. Controle de Premissas": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "6. Utilidade Decisória": {
+          "RESULTADO 1": 5,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 3
+        },
+        "7. Honestidade Epistêmica": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 5
+        },
+        "8. Preservação Criativa": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "9. Moderação Apropriada": {
+          "RESULTADO 1": 4,
+          "RESULTADO 2": 1,
+          "RESULTADO 3": 4
+        },
+        "10. Acionabilidade Pertinente": {
+          "RESULTADO 1": 5,
+          "RESULTADO 2": 2,
+          "RESULTADO 3": 3
+        }
+      },
+      "secondary_total": {
+        "RESULTADO 1": 44,
+        "RESULTADO 2": 15,
+        "RESULTADO 3": 37
+      },
+      "ranking": {
+        "first_place": "RESULTADO 1",
+        "second_place": "RESULTADO 3",
+        "third_place": "RESULTADO 2"
+      },
+      "continue_preference": "RESULTADO 1"
+    }
+  }
+}
