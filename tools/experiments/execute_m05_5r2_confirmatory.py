@@ -52,6 +52,7 @@ from tools.experiments.m05_5r1_capacity_design import ScheduleEntry, build_balan
 from tools.experiments.m05_5r1_token_envelope import (
     _chat_token_count,
     load_official_tokenizer,
+    system_instruction as get_system_instruction,
 )
 
 T = TypeVar("T", bound=BaseModel)
@@ -273,39 +274,62 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
 
     def generate(
         self,
-        user_prompt: str,
+        prompt_text: Optional[str] = None,
         output_schema: Optional[Type[T]] = None,
-        system_instruction: str = "",
+        stage_name: Optional[str] = None,
+        model_name: Optional[str] = None,
+        max_repairs: int = 1,
+        system_prompt: Optional[str] = None,
+        user_prompt: Optional[str] = None,
+        schema: Optional[Type[T]] = None,
+        system_instruction: Optional[str] = None,
+        **kwargs: Any,
     ) -> ModelResponse[T]:
+        actual_prompt = prompt_text if prompt_text is not None else (user_prompt or "")
+        actual_schema = output_schema if output_schema is not None else schema
+        actual_stage = stage_name or (actual_schema.__name__ if actual_schema else "RAW")
+
         self.call_count += 1
         request_id = f"{self.cell_id}:{self.treatment}:{self.call_count}"
-        stage_name = output_schema.__name__ if output_schema else "RAW"
 
-        # 1. Estimar tokens de entrada e reserva
-        input_tokens = _chat_token_count(self.harmony_encoding, system_instruction, user_prompt)
+        # 1. Obter instrução do sistema
+        sys_inst = ""
+        if system_prompt:
+            sys_inst = system_prompt
+        elif system_instruction:
+            sys_inst = system_instruction
+        elif actual_schema:
+            sys_inst, _ = get_system_instruction(actual_stage, actual_schema)
+
+        # 2. Estimar tokens de entrada e reserva
+        input_tokens = _chat_token_count(self.harmony_encoding, sys_inst, actual_prompt)
         reserved_request_tokens = input_tokens + self.max_tokens
 
-        # 2. Token-Aware Pacing
+        # 3. Token-Aware Pacing
         self.pacer.wait_if_needed(reserved_request_tokens, request_id, self.cell_id)
 
-        # 3. Registrar pre_dispatch
+        # 4. Registrar pre_dispatch
         self.ledger.append({
             "event": "pre_dispatch",
             "request_id": request_id,
             "cell_id": self.cell_id,
             "treatment": self.treatment,
-            "stage_name": stage_name,
+            "stage_name": actual_stage,
             "estimated_input_tokens": input_tokens,
             "reserved_output_tokens": self.max_tokens,
             "reserved_request_tokens": reserved_request_tokens,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         })
 
-        # 4. Construir payload
-        payload = self.builder.build_payload(
-            user_prompt=user_prompt,
-            system_instruction=system_instruction,
-            schema_cls=output_schema,
+        # 5. Construir mensagens e payload
+        messages = []
+        if sys_inst:
+            messages.append({"role": "system", "content": sys_inst})
+        messages.append({"role": "user", "content": actual_prompt})
+
+        payload = self.builder.build_request_payload(
+            messages=messages,
+            schema_cls=actual_schema,
             temperature=self.temperature,
             max_tokens=self.max_tokens,
         )
@@ -353,7 +377,7 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
                     "request_id": request_id,
                     "cell_id": self.cell_id,
                     "treatment": self.treatment,
-                    "stage_name": stage_name,
+                    "stage_name": actual_stage,
                     "http_status": 200,
                     "actual_prompt_tokens": usage_info.get("prompt_tokens", 0),
                     "actual_completion_tokens": actual_comp,
@@ -367,9 +391,9 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
                 })
 
                 parsed_data = None
-                if output_schema:
+                if actual_schema:
                     try:
-                        parsed_data = output_schema.model_validate_json(content)
+                        parsed_data = actual_schema.model_validate_json(content)
                     except ValidationError as ve:
                         self.ledger.append({
                             "event": "validation_error",
@@ -399,7 +423,7 @@ class ConfirmatoryCerebrasRunner(ModelRunner):
                 "request_id": request_id,
                 "cell_id": self.cell_id,
                 "treatment": self.treatment,
-                "stage_name": stage_name,
+                "stage_name": actual_stage,
                 "error": str(e),
                 "timestamp": datetime.now(timezone.utc).isoformat(),
             })
