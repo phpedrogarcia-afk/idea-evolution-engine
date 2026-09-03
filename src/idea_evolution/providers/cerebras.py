@@ -203,7 +203,7 @@ class CerebrasRunner(ModelRunner):
         self,
         model_name: str = SCIENTIFIC_MODEL_ID,
         temperature: float = 0.3,
-        max_output_tokens: int = 2048,
+        max_output_tokens: int = 4096,
         base_url: str = CEREBRAS_HOSTED_BASE_URL,
         transport_callable: Optional[Any] = None,
     ):

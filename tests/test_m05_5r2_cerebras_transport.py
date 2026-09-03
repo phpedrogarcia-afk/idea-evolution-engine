@@ -135,7 +135,7 @@ def test_mock_transport_execution_success():
     def mock_transport(payload):
         assert payload["model"] == "gpt-oss-120b"
         assert payload["temperature"] == 0.3
-        assert payload["max_completion_tokens"] == 2048
+        assert payload["max_completion_tokens"] == 4096
         return {
             "content": json.dumps({
                 "summary": "Resumo",

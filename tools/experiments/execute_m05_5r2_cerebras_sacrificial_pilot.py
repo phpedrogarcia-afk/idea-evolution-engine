@@ -54,7 +54,8 @@ from tools.experiments.execute_m05_5r1_confirmatory import (
 T = TypeVar("T", bound=BaseModel)
 
 EXP_DIR = REPO_ROOT / "experiments" / "EXP-M05.5R2-FREE-PROVIDER-PORTABILITY-REPLICATION"
-SACRIFICIAL_ATTEMPT_ID = os.environ.get("SACRIFICIAL_ATTEMPT_ID", "CEREBRAS-FREE-SACRIFICIAL-PILOT-001")
+OUTPUT_CAP_TOKENS = 4096
+SACRIFICIAL_ATTEMPT_ID = os.environ.get("SACRIFICIAL_ATTEMPT_ID", "CEREBRAS-FREE-SACRIFICIAL-PILOT-002")
 PILOT_DIR = EXP_DIR / SACRIFICIAL_ATTEMPT_ID
 
 SACRIFICIAL_SOURCE_ID = "M05.4-ATTEMPT-004-IDEA-08"
@@ -137,7 +138,7 @@ class GuardedCerebrasRunner(ModelRunner):
         block_id: str,
         treatment: str,
         temperature: float = 0.3,
-        max_tokens: int = 2048,
+        max_tokens: int = OUTPUT_CAP_TOKENS,
         min_call_interval_seconds: float = 12.5,  # 5 RPM baseline -> 12.5s entre chamadas
     ):
         self.model_name = SCIENTIFIC_MODEL_ID
@@ -238,6 +239,9 @@ class GuardedCerebrasRunner(ModelRunner):
                 content = message.get("content", "")
                 usage_info = resp_json.get("usage", {})
                 fp = resp_json.get("system_fingerprint")
+                finish_reason = choice.get("finish_reason")
+                actual_comp = usage_info.get("completion_tokens", 0)
+                cap_util = round(actual_comp / self.max_tokens, 4) if self.max_tokens else 0.0
 
                 # Registrar sucesso no ledger
                 self.ledger.append({
@@ -248,8 +252,11 @@ class GuardedCerebrasRunner(ModelRunner):
                     "stage_name": stage_name,
                     "http_status": 200,
                     "actual_prompt_tokens": usage_info.get("prompt_tokens", 0),
-                    "actual_completion_tokens": usage_info.get("completion_tokens", 0),
+                    "actual_completion_tokens": actual_comp,
                     "actual_total_tokens": usage_info.get("total_tokens", 0),
+                    "configured_output_cap": self.max_tokens,
+                    "output_cap_utilization_ratio": cap_util,
+                    "finish_reason": finish_reason,
                     "system_fingerprint": fp,
                     "timestamp": datetime.now(timezone.utc).isoformat(),
                 })
@@ -378,6 +385,12 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
         posts = [e for e in ledger.events if e.get("event") == "post_response"]
         errors = [e for e in ledger.events if e.get("event") == "post_error"]
         fps = set(e.get("system_fingerprint") for e in posts if e.get("system_fingerprint"))
+        comp_tokens_list = [e.get("actual_completion_tokens", 0) for e in posts]
+        max_comp = max(comp_tokens_list) if comp_tokens_list else 0
+        cap_utils = [e.get("output_cap_utilization_ratio", 0.0) for e in posts]
+        max_util = max(cap_utils) if cap_utils else 0.0
+        exact_cap_count = sum(1 for c in comp_tokens_list if c == OUTPUT_CAP_TOKENS)
+        binding_cap = exact_cap_count > 0
 
         s = {
             "attempt_id": SACRIFICIAL_ATTEMPT_ID,
@@ -388,6 +401,7 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
             "transport_model": CEREBRAS_TRANSPORT_MODEL_ID,
             "base_url": CEREBRAS_HOSTED_BASE_URL,
             "expected_inference_price": EXPECTED_INFERENCE_PRICE,
+            "output_cap_tokens": OUTPUT_CAP_TOKENS,
             "logical_calls_total": sum(c.get("logical_calls", 0) for c in cell_results.values()),
             "provider_requests_total": len(posts) + len(errors),
             "http_200_count": len(posts),
@@ -398,6 +412,10 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
             "prompt_tokens_total": sum(e.get("actual_prompt_tokens", 0) for e in posts),
             "completion_tokens_total": sum(e.get("actual_completion_tokens", 0) for e in posts),
             "tokens_total": sum(e.get("actual_total_tokens", 0) for e in posts),
+            "max_completion_tokens_observed": max_comp,
+            "max_output_cap_utilization": max_util,
+            "requests_at_exact_cap": exact_cap_count,
+            "output_cap_4096_binding": binding_cap,
             "unique_fingerprints_count": len(fps),
             "condition_c_reviewable": reviewability.get("CONDITION_C", False),
             "condition_b_reviewable": reviewability.get("CONDITION_B", False),
