@@ -1,0 +1,54 @@
+{
+  "step_number": 9,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 2,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Aplicativo de diário com editor de texto...' (hash: 789d2a0454b7a0f0), 4 dependências, 3 testes do Core, 3 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.\",\"feasibility_notes\":[\"Latência de entrada abaixo de 16 ms é tecnicamente viável em hardware de alta performance, mas depende de drivers de teclado, APIs de temporização de alta resolução e de um loop de renderização otimizado.\",\"A captura de métricas de distração pode ser feita via auto‑relatos imediatos (escala de distração) ou proxies como taxa de erros de digitação, mas requer validação de confiabilidade.\",\"Implementar um modo de latência ajustável requer controle dinâmico da fila de eventos de entrada e possivelmente bypass de buffers do sistema operacional.\",\"Integração de registro de sensações diárias e métricas de distração exige um design de UI que minimize interferência adicional ao fluxo de escrita.\"],\"reality_dependencies\":[\"Hardware de entrada (teclado/trackpad) com capacidade de resposta <16 ms e drivers que exponham timestamps de eventos de forma precisa.\",\"Sistema operacional e bibliotecas que suportem timers de alta resolução (ex.: Windows QueryPerformanceCounter, Linux clock_gettime) e permitam ajuste de buffering de eventos de entrada.\",\"Mecanismo de sincronização interno que possa controlar e medir a latência real entre pressionamento da tecla e exibição do caractere na tela.\",\"Método validado para medir distração (questionário de autopercepção, taxa de erros, métricas fisiológicas) que seja aplicável em contexto de diário diário.\"],\"claims_needing_evidence\":[\"Latência de entrada <16 ms reduz a sensação de distração ao digitar em comparação com latências padrão (~50 ms).\",\"Os usuários conseguem perceber diferenças de latência dentro da faixa de 10‑30 ms ao escrever em um diário reflexivo.\",\"Métricas de distração auto‑relatadas correlacionam significativamente com indicadores objetivos como taxa de erros de digitação ou tempo de pausa entre teclas.\"],\"potential_blockers\":[\"Limitações de temporização do SO que impedem alcançar latência consistentemente abaixo de 16 ms.\",\"Variabilidade individual na percepção de latência que pode obscurecer efeitos estatísticos.\",\"Dificuldade em isolar o efeito da latência de outros fatores que influenciam distração (estado emocional, ergonomia, fadiga).\",\"Resistência dos usuários a preencher questionários de distração a cada entrada, afetando a qualidade dos dados.\"],\"candidate_tests\":[\"Teste controlado de latência: participantes escrevem entradas de diário em duas condições (latência <16 ms vs latência padrão ~50 ms) enquanto registram auto‑avaliação de distração após cada sessão.\" ,\"Validação de latência: medir o tempo real entre evento de tecla (timestamp do driver) e renderização do caractere usando logs de alta resolução para confirmar que o modo <16 ms está sendo entregue ao usuário.\" ,\"Teste de correlação: coletar taxa de erros de digitação e intervalos entre teclas em ambas as condições e analisar correlação com auto‑relatos de distração.\"],\"exploratory_candidate_tests\":[\"Explorar latência entre 10 ms e 30 ms para identificar o ponto de percepção humana onde a distração começa a mudar perceptivelmente.\",\"Avaliar um editor de texto com feedback háptico leve sincronizado à tecla como alternativa à latência ultra‑baixa, medindo distração via métricas fisiológicas (frequência cardíaca, GSR).\",\"Testar um módulo de IA que gera prompts de reflexão curtos dentro do diário, mantendo latência padrão (~30 ms), para observar se a redução da carga cognitiva afeta a percepção de distração.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.",
+    "feasibility_notes": [
+      "Latência de entrada abaixo de 16 ms é tecnicamente viável em hardware de alta performance, mas depende de drivers de teclado, APIs de temporização de alta resolução e de um loop de renderização otimizado.",
+      "A captura de métricas de distração pode ser feita via auto‑relatos imediatos (escala de distração) ou proxies como taxa de erros de digitação, mas requer validação de confiabilidade.",
+      "Implementar um modo de latência ajustável requer controle dinâmico da fila de eventos de entrada e possivelmente bypass de buffers do sistema operacional.",
+      "Integração de registro de sensações diárias e métricas de distração exige um design de UI que minimize interferência adicional ao fluxo de escrita."
+    ],
+    "reality_dependencies": [
+      "Hardware de entrada (teclado/trackpad) com capacidade de resposta <16 ms e drivers que exponham timestamps de eventos de forma precisa.",
+      "Sistema operacional e bibliotecas que suportem timers de alta resolução (ex.: Windows QueryPerformanceCounter, Linux clock_gettime) e permitam ajuste de buffering de eventos de entrada.",
+      "Mecanismo de sincronização interno que possa controlar e medir a latência real entre pressionamento da tecla e exibição do caractere na tela.",
+      "Método validado para medir distração (questionário de autopercepção, taxa de erros, métricas fisiológicas) que seja aplicável em contexto de diário diário."
+    ],
+    "claims_needing_evidence": [
+      "Latência de entrada <16 ms reduz a sensação de distração ao digitar em comparação com latências padrão (~50 ms).",
+      "Os usuários conseguem perceber diferenças de latência dentro da faixa de 10‑30 ms ao escrever em um diário reflexivo.",
+      "Métricas de distração auto‑relatadas correlacionam significativamente com indicadores objetivos como taxa de erros de digitação ou tempo de pausa entre teclas."
+    ],
+    "potential_blockers": [
+      "Limitações de temporização do SO que impedem alcançar latência consistentemente abaixo de 16 ms.",
+      "Variabilidade individual na percepção de latência que pode obscurecer efeitos estatísticos.",
+      "Dificuldade em isolar o efeito da latência de outros fatores que influenciam distração (estado emocional, ergonomia, fadiga).",
+      "Resistência dos usuários a preencher questionários de distração a cada entrada, afetando a qualidade dos dados."
+    ],
+    "candidate_tests": [
+      "Teste controlado de latência: participantes escrevem entradas de diário em duas condições (latência <16 ms vs latência padrão ~50 ms) enquanto registram auto‑avaliação de distração após cada sessão.",
+      "Validação de latência: medir o tempo real entre evento de tecla (timestamp do driver) e renderização do caractere usando logs de alta resolução para confirmar que o modo <16 ms está sendo entregue ao usuário.",
+      "Teste de correlação: coletar taxa de erros de digitação e intervalos entre teclas em ambas as condições e analisar correlação com auto‑relatos de distração."
+    ],
+    "exploratory_candidate_tests": [
+      "Explorar latência entre 10 ms e 30 ms para identificar o ponto de percepção humana onde a distração começa a mudar perceptivelmente.",
+      "Avaliar um editor de texto com feedback háptico leve sincronizado à tecla como alternativa à latência ultra‑baixa, medindo distração via métricas fisiológicas (frequência cardíaca, GSR).",
+      "Testar um módulo de IA que gera prompts de reflexão curtos dentro do diário, mantendo latência padrão (~30 ms), para observar se a redução da carga cognitiva afeta a percepção de distração."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T13:53:29.027855+00:00"
+}

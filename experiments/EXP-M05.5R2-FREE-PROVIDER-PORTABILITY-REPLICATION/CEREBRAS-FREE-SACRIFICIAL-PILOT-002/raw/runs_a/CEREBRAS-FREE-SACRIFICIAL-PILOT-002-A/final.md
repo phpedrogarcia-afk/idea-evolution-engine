@@ -1,0 +1,17 @@
+# Baseline de Refinamento de Ideia — CEREBRAS-FREE-SACRIFICIAL-PILOT-002-A
+
+## Ideia Original
+> Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.
+
+## Resumo do Modelo
+Um aplicativo de diário reflexivo que permite ao usuário registrar sensações sutis do dia a dia enquanto avalia se um editor de texto com latência inferior a 16 ms diminui a distração durante a escrita.
+
+## Versão Refinada
+Desenvolver um aplicativo de diário digital com modo "Foco" que inclui um editor de texto otimizado para latência < 16 ms, mas que registra a latência de forma opcional e apresenta ao usuário um painel de insights: (1) registro de sensações (texto livre, emojis, tags), (2) métricas de latência e tempo de escrita, (3) comparativo de foco (ex.: número de interrupções detectadas). O app oferece prompts diários para capturar sensações sutis e permite ao usuário ativar/desativar o monitoramento de latência, focando na experiência de escrita fluida antes de analisar os dados.
+
+## Pontos Fortes e Fracos
+- **Fortes:** Fomenta a autoconsciência e a prática de reflexão diária, Captura detalhes sensoriais que normalmente passam despercebidos, Objetiva melhorar a concentração ao associar baixa latência do editor a menor distração, Possibilidade de gerar dados mensuráveis sobre desempenho de escrita, Apelo para usuários que buscam ambientes de escrita ultra‑responsivos
+- **Fracos:** Medir com precisão a latência do editor pode ser tecnicamente complexo, A correlação entre latência < 16 ms e redução de distração não está comprovada, Exige recursos de desenvolvimento avançados (benchmark de I/O, otimização de UI), Pode atrair um nicho muito restrito de usuários altamente sensíveis à latência, Risco de sobrecarregar o usuário com métricas ao invés de focar na reflexão
+
+## Próximos Passos
+Pesquisar bibliotecas e técnicas para medir e garantir latência < 16 ms em editores de texto web/desktop, Criar um protótipo mínimo do editor com modo de foco e registro opcional de latência, Conduzir testes de usabilidade com usuários para validar se a baixa latência realmente reduz distrações, Desenvolver um conjunto de prompts diários que ajudem a capturar sensações sutis, Implementar um painel de insights que correlacione latência, tempo de escrita e auto‑relatos de foco, Planejar um roadmap de lançamento beta e coleta de feedback para iterar o produto

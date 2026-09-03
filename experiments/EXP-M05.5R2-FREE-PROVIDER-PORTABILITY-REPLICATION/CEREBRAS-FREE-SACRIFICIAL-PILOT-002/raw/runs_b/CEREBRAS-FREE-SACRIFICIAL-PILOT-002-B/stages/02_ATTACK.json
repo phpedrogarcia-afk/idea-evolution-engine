@@ -1,0 +1,66 @@
+{
+  "step_number": 2,
+  "stage_id": "ATTACK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "attack_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados.",
+  "raw_response": "{\"critical_issues\":[{\"issue\":\"Latência abaixo de 16 ms não é perceptível pelos usuários humanos\",\"why_it_matters\":\"Se a diferença de latência não pode ser percebida, qualquer medição de redução de distração baseada nesse parâmetro será inválida, comprometendo todo o objetivo da ideia\",\"severity\":\"HIGH\",\"affected_part\":\"Medição de latência e avaliação de distração\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"A redução de distração atribuída à latência do editor pode ser confundida com outros fatores (ex.: ergonomia, fluxo de trabalho, estado emocional)\",\"why_it_matters\":\"Sem controle experimental rigoroso, a correlação entre latência e distração pode ser espúria, levando a conclusões enganosas\",\"severity\":\"MEDIUM\",\"affected_part\":\"Análise de causalidade\",\"origin\":\"MODEL_HYPOTHESIS\"},{\"issue\":\"A captura de sensações sutis depende de introspecção precisa, que é notoriamente inconsistente entre indivíduos\",\"why_it_matters\":\"Dados de diário podem ser ruidosos ou falsos, reduzindo a utilidade do registro para qualquer análise significativa\",\"severity\":\"HIGH\",\"affected_part\":\"Coleta de dados subjetivos\",\"origin\":\"MODEL_HYPOTHESIS\"}],\"fragile_assumptions\":[\"latência abaixo de 16 ms pode ser percebida pelos usuários\",\"menor latência reduz distração\",\"os usuários conseguem identificar e relatar sensações sutis\"],\"contradictions\":[\"Assume que usuários não percebem a latência, mas ao mesmo tempo assume que percebem a diferença de latência para reduzir distração\",\"A ideia propõe medir um benefício (redução de distração) que ainda não foi demonstrado como existente\"],\"failure_modes\":[\"O editor não consegue registrar latência com precisão de sub‑milissegundos\",\"Os usuários abandonam o diário por fadiga ou falta de motivação\",\"Os dados subjetivos são tão ruidosos que impossibilitam análise estatística\"],\"missing_information\":[\"Estudos empíricos que definam o limiar de percepção humana para latência de teclado/edição\",\"Métricas base de distração sem intervenção de latência\",\"Métodos validados para quantificar sensações sutis de forma confiável\"],\"overclaims\":[\"Afirmar que latência <16 ms reduz distração sem evidência experimental\",\"Prometer que um diário reflexivo pode capturar todas as sensações sutis do cotidiano\"]}",
+  "parsed_output": {
+    "critical_issues": [
+      {
+        "issue": "Latência abaixo de 16 ms não é perceptível pelos usuários humanos",
+        "why_it_matters": "Se a diferença de latência não pode ser percebida, qualquer medição de redução de distração baseada nesse parâmetro será inválida, comprometendo todo o objetivo da ideia",
+        "severity": "HIGH",
+        "affected_part": "Medição de latência e avaliação de distração",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "A redução de distração atribuída à latência do editor pode ser confundida com outros fatores (ex.: ergonomia, fluxo de trabalho, estado emocional)",
+        "why_it_matters": "Sem controle experimental rigoroso, a correlação entre latência e distração pode ser espúria, levando a conclusões enganosas",
+        "severity": "MEDIUM",
+        "affected_part": "Análise de causalidade",
+        "origin": "MODEL_HYPOTHESIS"
+      },
+      {
+        "issue": "A captura de sensações sutis depende de introspecção precisa, que é notoriamente inconsistente entre indivíduos",
+        "why_it_matters": "Dados de diário podem ser ruidosos ou falsos, reduzindo a utilidade do registro para qualquer análise significativa",
+        "severity": "HIGH",
+        "affected_part": "Coleta de dados subjetivos",
+        "origin": "MODEL_HYPOTHESIS"
+      }
+    ],
+    "fragile_assumptions": [
+      "latência abaixo de 16 ms pode ser percebida pelos usuários",
+      "menor latência reduz distração",
+      "os usuários conseguem identificar e relatar sensações sutis"
+    ],
+    "contradictions": [
+      "Assume que usuários não percebem a latência, mas ao mesmo tempo assume que percebem a diferença de latência para reduzir distração",
+      "A ideia propõe medir um benefício (redução de distração) que ainda não foi demonstrado como existente"
+    ],
+    "failure_modes": [
+      "O editor não consegue registrar latência com precisão de sub‑milissegundos",
+      "Os usuários abandonam o diário por fadiga ou falta de motivação",
+      "Os dados subjetivos são tão ruidosos que impossibilitam análise estatística"
+    ],
+    "missing_information": [
+      "Estudos empíricos que definam o limiar de percepção humana para latência de teclado/edição",
+      "Métricas base de distração sem intervenção de latência",
+      "Métodos validados para quantificar sensações sutis de forma confiável"
+    ],
+    "overclaims": [
+      "Afirmar que latência <16 ms reduz distração sem evidência experimental",
+      "Prometer que um diário reflexivo pode capturar todas as sensações sutis do cotidiano"
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T13:51:53.183321+00:00"
+}

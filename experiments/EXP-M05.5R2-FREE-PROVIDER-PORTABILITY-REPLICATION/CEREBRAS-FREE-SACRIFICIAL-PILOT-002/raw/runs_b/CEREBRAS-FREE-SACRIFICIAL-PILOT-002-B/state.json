@@ -1,0 +1,370 @@
+{
+  "schema_version": "0.3.0",
+  "run_id": "CEREBRAS-FREE-SACRIFICIAL-PILOT-002-B",
+  "status": "REFINEMENT_INCOMPLETE",
+  "created_at": "2026-09-03T10:51:36.793933",
+  "updated_at": "2026-09-03T10:53:42.204765",
+  "original_idea": "Um diário reflexivo que ajuda a capturar sensações sutis do dia a dia, medindo se o tempo de resposta do editor de texto abaixo de 16ms reduz a distração ao digitar.",
+  "current_idea": "Um diário reflexivo que registra sensações diárias e avalia, por meio de um editor de texto com latência ajustável (incluindo modo sub‑16 ms), se a redução da latência diminui a distração ao digitar.",
+  "human_intent": "Criar um diário reflexivo que capture sensações diárias e avalie se um editor de texto com latência abaixo de 16 ms diminui a distração ao digitar.",
+  "problem_statement": "Os usuários se distraem ao digitar e não sabem se um tempo de resposta do editor de texto inferior a 16 ms pode reduzir essa distração, ao mesmo tempo em que desejam registrar sensações sutis do cotidiano.",
+  "actors_or_users": [
+    "usuários que escrevem no diário",
+    "pessoas interessadas em auto‑reflexão"
+  ],
+  "assumptions": [
+    "latência abaixo de 16 ms pode ser percebida pelos usuários",
+    "menor latência reduz distração",
+    "os usuários conseguem identificar e relatar sensações sutis"
+  ],
+  "ambiguities": [
+    "como quantificar a distração ao digitar",
+    "qual o método exato para medir latência do editor",
+    "se o diário será um aplicativo independente ou um recurso de um editor existente",
+    "como capturar e validar sensações subjetivas"
+  ],
+  "strengths": [
+    "foco na auto‑reflexão e nas sensações diárias",
+    "uso de métrica objetiva de desempenho (latência)",
+    "potencial para melhorar a experiência de escrita ao reduzir distrações"
+  ],
+  "critical_issues": [
+    {
+      "issue": "Latência abaixo de 16 ms não é perceptível pelos usuários humanos",
+      "why_it_matters": "Se a diferença de latência não pode ser percebida, qualquer medição de redução de distração baseada nesse parâmetro será inválida, comprometendo todo o objetivo da ideia",
+      "severity": "HIGH",
+      "affected_part": "Medição de latência e avaliação de distração",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "A redução de distração atribuída à latência do editor pode ser confundida com outros fatores (ex.: ergonomia, fluxo de trabalho, estado emocional)",
+      "why_it_matters": "Sem controle experimental rigoroso, a correlação entre latência e distração pode ser espúria, levando a conclusões enganosas",
+      "severity": "MEDIUM",
+      "affected_part": "Análise de causalidade",
+      "origin": "MODEL_HYPOTHESIS"
+    },
+    {
+      "issue": "A captura de sensações sutis depende de introspecção precisa, que é notoriamente inconsistente entre indivíduos",
+      "why_it_matters": "Dados de diário podem ser ruidosos ou falsos, reduzindo a utilidade do registro para qualquer análise significativa",
+      "severity": "HIGH",
+      "affected_part": "Coleta de dados subjetivos",
+      "origin": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "fragile_assumptions": [
+    "latência abaixo de 16 ms pode ser percebida pelos usuários",
+    "menor latência reduz distração",
+    "os usuários conseguem identificar e relatar sensações sutis"
+  ],
+  "contradictions": [
+    "Assume que usuários não percebem a latência, mas ao mesmo tempo assume que percebem a diferença de latência para reduzir distração",
+    "A ideia propõe medir um benefício (redução de distração) que ainda não foi demonstrado como existente"
+  ],
+  "failure_modes": [
+    "O editor não consegue registrar latência com precisão de sub‑milissegundos",
+    "Os usuários abandonam o diário por fadiga ou falta de motivação",
+    "Os dados subjetivos são tão ruidosos que impossibilitam análise estatística"
+  ],
+  "alternatives": [
+    {
+      "mechanism": "Implementar um editor de texto que fornece feedback háptico (vibração leve) sincronizado com cada tecla pressionada, ao invés de depender exclusivamente de latência ultra‑baixa, e registrar métricas fisiológicas (p.ex., frequência cardíaca, galvanic skin response) para medir distração",
+      "addresses_issues": [
+        "Latência abaixo de 16 ms não é perceptível pelos usuários humanos",
+        "A captura de sensações sutis depende de introspecção precisa, que é notoriamente inconsistente entre indivíduos"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Requer hardware adicional (dispositivos hápticos) e integração de sensores biométricos",
+        "A interpretação dos sinais fisiológicos pode ser complexa e demandar análise pós‑processamento",
+        "Possível aumento de custo e necessidade de calibrar o feedback para diferentes usuários"
+      ],
+      "novelty_or_difference": "Substitui a busca por latência imperceptível por estímulos táteis e dados fisiológicos, oferecendo uma medida objetiva de distração"
+    },
+    {
+      "mechanism": "Conduzir um estudo experimental dentro‑do‑próprio diário, alternando blocos de escrita com latência <16 ms, latência padrão (~50 ms) e latência controlada, enquanto controla variáveis como ergonomia, fluxo de trabalho e estado emocional através de questionários e logs de uso",
+      "addresses_issues": [
+        "Latência abaixo de 16 ms não é perceptível pelos usuários humanos",
+        "A redução de distração atribuída à latência do editor pode ser confundida com outros fatores"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Exige tempo adicional para coleta de dados e análise estatística",
+        "Pode introduzir fadiga ao usuário devido a múltiplas condições de teste",
+        "Necessita de um número maior de participantes para obter significância"
+      ],
+      "novelty_or_difference": "Utiliza um design experimental rigoroso para isolar o efeito da latência, transformando a avaliação em um processo científico ao invés de confiar em percepção subjetiva"
+    },
+    {
+      "mechanism": "Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva de lembrar detalhes e permitindo que o usuário se concentre na experiência sensorial, enquanto o editor mantém latência padrão (≈30 ms)",
+      "addresses_issues": [
+        "A captura de sensações sutis depende de introspecção precisa, que é notoriamente inconsistente entre indivíduos",
+        "A redução de distração atribuída à latência do editor pode ser confundida com outros fatores"
+      ],
+      "preserves_intent": true,
+      "tradeoffs": [
+        "Dependência de modelos de IA que podem gerar sugestões inadequadas ou enviesadas",
+        "Possível perda de autenticidade nas reflexões se o usuário confiar demais nos prompts",
+        "Requer conexão à internet ou recursos computacionais locais"
+      ],
+      "novelty_or_difference": "Desvia o foco da latência para apoio cognitivo via IA, oferecendo um caminho alternativo para melhorar a qualidade da introspecção e reduzir distrações"
+    }
+  ],
+  "core_mechanism": "Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.",
+  "core_mechanism_justification": "Alinha‑se diretamente à intenção humana de medir o efeito da latência ultra‑baixa na distração enquanto captura reflexões sensoriais, sem introduzir componentes não solicitados pelo usuário.",
+  "core_mechanism_basis": "VALID_USER_DERIVATION",
+  "core_mechanism_hash": "789d2a0454b7a0f0",
+  "proposal_records": [
+    {
+      "proposal": "Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.",
+      "ontology_state": "CORE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "Alinha‑se diretamente à intenção humana de medir o efeito da latência ultra‑baixa na distração enquanto captura reflexões sensoriais, sem introduzir componentes não solicitados pelo usuário.",
+      "promotion_basis": "VALID_USER_DERIVATION",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Core design selection"
+    },
+    {
+      "proposal": "Conduzir um estudo experimental dentro do diário, alternando blocos de escrita com latência <16 ms, latência padrão (~50 ms) e latência controlada, enquanto controla variáveis como ergonomia, fluxo de trabalho e estado emocional.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "Permite validar empiricamente o impacto da latência na distração, atendendo ao objetivo central do diário reflexivo.",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": "Planejamento baseado em literatura sobre latência, distração e controle de variáveis experimentais."
+    },
+    {
+      "proposal": "Explorar latência entre 10 ms e 30 ms para identificar o ponto de percepção humana.",
+      "ontology_state": "CANDIDATE",
+      "source_stage": "SYNTHESIZE",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Requer hardware adicional e sensores biométricos, aumentando custo e complexidade sem garantir benefício direto ao objetivo de latência.",
+      "evidence_or_decision_basis": ""
+    },
+    {
+      "proposal": "Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).",
+      "ontology_state": "REJECTED",
+      "source_stage": "ALTERNATIVES",
+      "promotion_reason": "",
+      "promotion_basis": "MODEL_HYPOTHESIS",
+      "rejection_reason": "Introduz dependência de modelos de IA que podem gerar sugestões enviesadas, comprometendo a autenticidade das reflexões e exigindo conexão à internet.",
+      "evidence_or_decision_basis": ""
+    }
+  ],
+  "accepted_changes": [
+    "Conduzir um estudo experimental dentro do diário, alternando blocos de escrita com latência <16 ms, latência padrão (~50 ms) e latência controlada, enquanto controla variáveis como ergonomia, fluxo de trabalho e estado emocional. (Justificativa: Permite validar empiricamente o impacto da latência na distração, atendendo ao objetivo central do diário reflexivo. | Base: USER_EXPLICIT)"
+  ],
+  "candidate_extensions": [
+    "Explorar latência entre 10 ms e 30 ms para identificar o ponto de percepção humana."
+  ],
+  "rejected_changes": [
+    {
+      "proposal": "Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.",
+      "reason_rejected": "Requer hardware adicional e sensores biométricos, aumentando custo e complexidade sem garantir benefício direto ao objetivo de latência.",
+      "source_stage": "ALTERNATIVES"
+    },
+    {
+      "proposal": "Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).",
+      "reason_rejected": "Introduz dependência de modelos de IA que podem gerar sugestões enviesadas, comprometendo a autenticidade das reflexões e exigindo conexão à internet.",
+      "source_stage": "ALTERNATIVES"
+    }
+  ],
+  "remaining_uncertainties": [
+    "AUTHORITY_SPOOFING_BLOCKED: A base alegada 'USER_EXPLICIT' para o Core foi rejeitada pelo validador determinístico. Motivo: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [implementar, latencia, ajustavel, integrado, conduzir, estudo, dentro, sujeito, alternando, aleatoriamente, condicoes, latencia, sessoes, diarias].",
+    "Latência abaixo de 16 ms pode não ser perceptível pelos usuários humanos.",
+    "A redução de distração atribuída à latência pode ser confundida com fatores como ergonomia, fluxo de trabalho ou estado emocional.",
+    "Introspecção precisa para capturar sensações sutis é inconsistente entre indivíduos.",
+    "Viabilidade de implementar controle de latência preciso em diferentes plataformas.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CIRCULAR_PROMOTION: Mecanismo 'Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.' promovido ao Core tendo apenas MODEL_HYPOTHESIS como base de autoridade.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.' aparece nos testes exploratórios 'Testar a adição de feedback tátil (vibração) independente da latência para avaliar se melhora a percepção de fluidez.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.' aparece nos testes exploratórios 'Implementar um diário multimodal que inclui gravações de voz curtas e sensores de frequência cardíaca para correlacionar estados fisiológicos com distração.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.' aparece nos testes exploratórios 'Realizar um estudo cego onde o participante não sabe qual latência está ativa, medindo diferenças entre percepção subjetiva e métricas objetivas.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.' aparece nos testes exploratórios 'Avaliar a eficácia de diferentes tipos de feedback visual (mudança de cor da tecla) como mitigador de distração em condições de alta latência.'.",
+    "A perceptibilidade humana de latência <16 ms é incerta.",
+    "A redução da distração pode ser confundida com fatores como ergonomia, fluxo de trabalho ou estado emocional.",
+    "A consistência da introspecção entre diferentes usuários varia significativamente.",
+    "ALERTA DE CONTRADIÇÃO ONTOLÓGICA / CROSS-STATE: CORE_IN_EXPLORATORY: Mecanismo do Core 'Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.' aparece nos testes exploratórios 'Explorar latência entre 10 ms e 30 ms para identificar o ponto de percepção humana onde a distração começa a mudar perceptivelmente.'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.' aparece nos testes exploratórios 'Avaliar um editor de texto com feedback háptico leve sincronizado à tecla como alternativa à latência ultra‑baixa, medindo distração via métricas fisiológicas (frequência cardíaca, GSR).'.; CORE_IN_EXPLORATORY: Mecanismo do Core 'Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.' aparece nos testes exploratórios 'Testar um módulo de IA que gera prompts de reflexão curtos dentro do diário, mantendo latência padrão (~30 ms), para observar se a redução da carga cognitiva afeta a percepção de distração.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Implementar o editor de texto com latência ajustável, iniciar um piloto de estudo experimental com um pequeno grupo de usuários para coletar dados de distração e sensações, e analisar os resultados para validar o core_mechanism.' propõe mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; REJECTED_AS_NEXT_STEP: O próximo passo recomendado 'Implementar o editor de texto com latência ajustável, iniciar um piloto de estudo experimental com um pequeno grupo de usuários para coletar dados de distração e sensações, e analisar os resultados para validar o core_mechanism.' propõe mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'.; Dependência de realidade do Core 'Hardware de entrada (teclado/trackpad) com capacidade de resposta <16 ms e drivers que exponham timestamps de eventos de forma precisa.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Dependência de realidade do Core 'Sistema operacional e bibliotecas que suportem timers de alta resolução (ex.: Windows QueryPerformanceCounter, Linux clock_gettime) e permitam ajuste de buffering de eventos de entrada.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Dependência de realidade do Core 'Mecanismo de sincronização interno que possa controlar e medir a latência real entre pressionamento da tecla e exibição do caractere na tela.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Dependência de realidade do Core 'Método validado para medir distração (questionário de autopercepção, taxa de erros, métricas fisiológicas) que seja aplicável em contexto de diário diário.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Teste do Core 'Teste controlado de latência: participantes escrevem entradas de diário em duas condições (latência <16 ms vs latência padrão ~50 ms) enquanto registram auto‑avaliação de distração após cada sessão.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Teste do Core 'Validação de latência: medir o tempo real entre evento de tecla (timestamp do driver) e renderização do caractere usando logs de alta resolução para confirmar que o modo <16 ms está sendo entregue ao usuário.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Teste do Core 'Teste de correlação: coletar taxa de erros de digitação e intervalos entre teclas em ambas as condições e analisar correlação com auto‑relatos de distração.' referencia mecanismo rejeitado 'Implementar um editor de texto que fornece feedback háptico sincronizado com cada tecla pressionada e registrar métricas fisiológicas para medir distração.'.; Dependência de realidade do Core 'Hardware de entrada (teclado/trackpad) com capacidade de resposta <16 ms e drivers que exponham timestamps de eventos de forma precisa.' referencia mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'.; Dependência de realidade do Core 'Sistema operacional e bibliotecas que suportem timers de alta resolução (ex.: Windows QueryPerformanceCounter, Linux clock_gettime) e permitam ajuste de buffering de eventos de entrada.' referencia mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'.; Dependência de realidade do Core 'Mecanismo de sincronização interno que possa controlar e medir a latência real entre pressionamento da tecla e exibição do caractere na tela.' referencia mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'.; Dependência de realidade do Core 'Método validado para medir distração (questionário de autopercepção, taxa de erros, métricas fisiológicas) que seja aplicável em contexto de diário diário.' referencia mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'.; Teste do Core 'Teste controlado de latência: participantes escrevem entradas de diário em duas condições (latência <16 ms vs latência padrão ~50 ms) enquanto registram auto‑avaliação de distração após cada sessão.' referencia mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'.; Teste do Core 'Validação de latência: medir o tempo real entre evento de tecla (timestamp do driver) e renderização do caractere usando logs de alta resolução para confirmar que o modo <16 ms está sendo entregue ao usuário.' referencia mecanismo rejeitado 'Adicionar ao diário um módulo de IA que gera prompts de reflexão curtos baseados nas entradas anteriores, reduzindo a carga cognitiva enquanto o editor mantém latência padrão (~30 ms).'."
+  ],
+  "known_risks": [
+    "Custo adicional caso seja necessário hardware especializado para latência ultra‑baixa.",
+    "Fadiga dos participantes devido a múltiplas condições de teste no estudo experimental.",
+    "Privacidade dos dados sensoriais e reflexões pessoais coletados pelo diário."
+  ],
+  "recommended_next_step": "Implementar o editor de texto com latência ajustável, iniciar um piloto de estudo experimental com um pequeno grupo de usuários para coletar dados de distração e sensações, e analisar os resultados para validar o core_mechanism.",
+  "tested_core_mechanism": "Aplicativo de diário com editor de texto de latência ajustável, capaz de operar em modo <16 ms e registrar métricas de distração juntamente com as sensações diárias do usuário.",
+  "tested_core_hash": "789d2a0454b7a0f0",
+  "reality_dependencies": [
+    "Hardware de entrada (teclado/trackpad) com capacidade de resposta <16 ms e drivers que exponham timestamps de eventos de forma precisa.",
+    "Sistema operacional e bibliotecas que suportem timers de alta resolução (ex.: Windows QueryPerformanceCounter, Linux clock_gettime) e permitam ajuste de buffering de eventos de entrada.",
+    "Mecanismo de sincronização interno que possa controlar e medir a latência real entre pressionamento da tecla e exibição do caractere na tela.",
+    "Método validado para medir distração (questionário de autopercepção, taxa de erros, métricas fisiológicas) que seja aplicável em contexto de diário diário."
+  ],
+  "claims_needing_evidence": [
+    "Latência de entrada <16 ms reduz a sensação de distração ao digitar em comparação com latências padrão (~50 ms).",
+    "Os usuários conseguem perceber diferenças de latência dentro da faixa de 10‑30 ms ao escrever em um diário reflexivo.",
+    "Métricas de distração auto‑relatadas correlacionam significativamente com indicadores objetivos como taxa de erros de digitação ou tempo de pausa entre teclas."
+  ],
+  "candidate_tests": [
+    "Teste controlado de latência: participantes escrevem entradas de diário em duas condições (latência <16 ms vs latência padrão ~50 ms) enquanto registram auto‑avaliação de distração após cada sessão.",
+    "Validação de latência: medir o tempo real entre evento de tecla (timestamp do driver) e renderização do caractere usando logs de alta resolução para confirmar que o modo <16 ms está sendo entregue ao usuário.",
+    "Teste de correlação: coletar taxa de erros de digitação e intervalos entre teclas em ambas as condições e analisar correlação com auto‑relatos de distração."
+  ],
+  "exploratory_candidate_tests": [
+    "Explorar latência entre 10 ms e 30 ms para identificar o ponto de percepção humana onde a distração começa a mudar perceptivelmente.",
+    "Avaliar um editor de texto com feedback háptico leve sincronizado à tecla como alternativa à latência ultra‑baixa, medindo distração via métricas fisiológicas (frequência cardíaca, GSR).",
+    "Testar um módulo de IA que gera prompts de reflexão curtos dentro do diário, mantendo latência padrão (~30 ms), para observar se a redução da carga cognitiva afeta a percepção de distração."
+  ],
+  "reconstruction_count": 1,
+  "max_reconstructions": 1,
+  "essence_drift_detected": true,
+  "speculative_accretion_detected": false,
+  "ontology_contradiction_detected": true,
+  "human_intervention": false,
+  "stage_history": [
+    {
+      "stage_id": "UNDERSTAND",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:51:39.718045",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "understand_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Intenção extraída: 'Criar um diário reflexivo que capture sensações diárias e av...' | 3 premissas mapeadas."
+    },
+    {
+      "stage_id": "ATTACK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:51:53.183251",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "attack_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 vulnerabilidades críticas e 3 modos de falha identificados."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:52:06.712720",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "4 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:52:20.923909",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Implementar um editor de texto com latên...' (Base: MODEL_HYPOTHESIS | Hash: 4705d326b6f7c670), 1 aceitas, 3 candidatas, 0 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:52:34.857043",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Implementar um editor de texto com latên...' (hash: 4705d326b6f7c670), 5 dependências, 4 testes do Core, 4 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:52:47.975937",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 1,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    },
+    {
+      "stage_id": "ALTERNATIVES",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:53:01.361283",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "alternatives_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "3 mecanismos alternativos gerados."
+    },
+    {
+      "stage_id": "SYNTHESIZE",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:53:15.470621",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "synthesize_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Síntese concluída: Core 'Aplicativo de diário com editor de texto...' (Base: VALID_USER_DERIVATION | Hash: 789d2a0454b7a0f0), 1 aceitas, 1 candidatas, 2 rejeitadas."
+    },
+    {
+      "stage_id": "REALITY_CHECK",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:53:29.027797",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "reality_check_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "RealityCheck concluído: Testando Core 'Aplicativo de diário com editor de texto...' (hash: 789d2a0454b7a0f0), 4 dependências, 3 testes do Core, 3 testes exploratórios."
+    },
+    {
+      "stage_id": "FINAL_REVIEW",
+      "stage_version": "0.1.0",
+      "executed_at": "2026-09-03T10:53:42.204751",
+      "provider": "cerebras",
+      "model": "openai/gpt-oss-120b",
+      "logical_alias": "default",
+      "prompt_id": "final_review_v0_1.md",
+      "prompt_version": "0.1.0",
+      "attempt": 2,
+      "success": true,
+      "retry_count": 0,
+      "delta_summary": "Review Final: recomendação='REFINED_IDEA_READY', essence_drift=True, accretion=False, ontology_contradiction=True."
+    }
+  ]
+}

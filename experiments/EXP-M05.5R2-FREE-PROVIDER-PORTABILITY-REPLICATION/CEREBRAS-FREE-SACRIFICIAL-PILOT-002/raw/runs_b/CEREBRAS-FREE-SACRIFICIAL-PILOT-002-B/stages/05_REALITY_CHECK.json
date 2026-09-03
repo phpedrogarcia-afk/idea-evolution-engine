@@ -1,0 +1,56 @@
+{
+  "step_number": 5,
+  "stage_id": "REALITY_CHECK",
+  "stage_version": "0.1.0",
+  "logical_alias": "default",
+  "provider": "cerebras",
+  "model": "openai/gpt-oss-120b",
+  "prompt_id": "reality_check_v0_1.md",
+  "prompt_version": "0.1.0",
+  "attempt": 1,
+  "success": true,
+  "retry_count": 0,
+  "latency_seconds": 0.0,
+  "delta_summary": "RealityCheck concluído: Testando Core 'Implementar um editor de texto com latên...' (hash: 4705d326b6f7c670), 5 dependências, 4 testes do Core, 4 testes exploratórios.",
+  "raw_response": "{\"target_core_mechanism\":\"Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.\",\"feasibility_notes\":[\"A implementação de um editor de texto com latência controlada em torno de 10 ms é tecnicamente viável usando buffers de entrada customizados e APIs de baixo nível (ex.: WebAssembly, Electron, ou aplicações nativas).\",\"Um estudo dentro‑sujeito que alterna latências diariamente requer um protocolo de randomização simples (ex.: algoritmo de Fisher‑Yates) e registro automático da condição usada em cada sessão.\",\"A coleta de dados de distração pode ser feita via auto‑relato no diário reflexivo (escala de Likert) e/ou métricas objetivas como número de erros de digitação ou tempo entre teclas.\"],\"reality_dependencies\":[\"Hardware capaz de registrar e aplicar latência inferior a 16 ms de forma consistente (ex.: teclado de baixa latência, monitor de alta taxa de atualização).\",\"Sistema operacional e drivers que permitam controle preciso do buffer de entrada sem interferência de processos de fundo.\",\"Mecanismo de randomização e registro automático da condição de latência para garantir validade interna do estudo.\",\"Participante(s) disposto(s) a usar o editor diariamente por um período suficiente para detectar diferenças (ex.: 2‑4 semanas).\",\"Ferramentas de análise estatística para comparar medidas de distração entre as duas condições.\"],\"claims_needing_evidence\":[\"Latência de teclado abaixo de 16 ms reduz a sensação de distração ao digitar em comparação com latências maiores (ex.: 30 ms).\",\"Os usuários percebem diferenças de latência tão pequenas quando a diferença está na faixa de 10 ms vs 30 ms.\",\"Auto‑relatos diários são um indicador confiável da distração cognitiva durante a digitação.\"],\"potential_blockers\":[\"Limitações do sistema operacional que introduzem jitter ou variação de latência acima do alvo.\",\"Fadiga ou desmotivação do participante ao longo de sessões diárias prolongadas, afetando a consistência dos relatos.\",\"Dificuldade em isolar a latência do editor de outras fontes de atraso (ex.: renderização da UI, latência de rede).\",\"Questões éticas ou de privacidade relacionadas ao registro contínuo de dados de digitação.\"],\"candidate_tests\":[\"Medir a latência real do editor em ambas condições (10 ms e 30 ms) usando um script de benchmark de pressionamento de teclas.\",\"Conduzir um estudo piloto de 5‑7 dias onde o participante alterna aleatoriamente entre as duas latências e registra a percepção de distração no diário.\",\"Comparar estatisticamente as pontuações de distração auto‑relatadas entre as duas condições usando teste t pareado.\",\"Analisar métricas objetivas de digitação (número de erros, tempo entre teclas) para verificar correlação com a latência.\"],\"exploratory_candidate_tests\":[\"Testar a adição de feedback tátil (vibração) independente da latência para avaliar se melhora a percepção de fluidez.\",\"Implementar um diário multimodal que inclui gravações de voz curtas e sensores de frequência cardíaca para correlacionar estados fisiológicos com distração.\",\"Realizar um estudo cego onde o participante não sabe qual latência está ativa, medindo diferenças entre percepção subjetiva e métricas objetivas.\",\"Avaliar a eficácia de diferentes tipos de feedback visual (mudança de cor da tecla) como mitigador de distração em condições de alta latência.\"]}",
+  "parsed_output": {
+    "target_core_mechanism": "Implementar um editor de texto com latência ajustável (ex.: 10 ms vs 30 ms) integrado ao diário reflexivo e conduzir um estudo dentro‑sujeito, alternando aleatoriamente as condições de latência em sessões diárias.",
+    "feasibility_notes": [
+      "A implementação de um editor de texto com latência controlada em torno de 10 ms é tecnicamente viável usando buffers de entrada customizados e APIs de baixo nível (ex.: WebAssembly, Electron, ou aplicações nativas).",
+      "Um estudo dentro‑sujeito que alterna latências diariamente requer um protocolo de randomização simples (ex.: algoritmo de Fisher‑Yates) e registro automático da condição usada em cada sessão.",
+      "A coleta de dados de distração pode ser feita via auto‑relato no diário reflexivo (escala de Likert) e/ou métricas objetivas como número de erros de digitação ou tempo entre teclas."
+    ],
+    "reality_dependencies": [
+      "Hardware capaz de registrar e aplicar latência inferior a 16 ms de forma consistente (ex.: teclado de baixa latência, monitor de alta taxa de atualização).",
+      "Sistema operacional e drivers que permitam controle preciso do buffer de entrada sem interferência de processos de fundo.",
+      "Mecanismo de randomização e registro automático da condição de latência para garantir validade interna do estudo.",
+      "Participante(s) disposto(s) a usar o editor diariamente por um período suficiente para detectar diferenças (ex.: 2‑4 semanas).",
+      "Ferramentas de análise estatística para comparar medidas de distração entre as duas condições."
+    ],
+    "claims_needing_evidence": [
+      "Latência de teclado abaixo de 16 ms reduz a sensação de distração ao digitar em comparação com latências maiores (ex.: 30 ms).",
+      "Os usuários percebem diferenças de latência tão pequenas quando a diferença está na faixa de 10 ms vs 30 ms.",
+      "Auto‑relatos diários são um indicador confiável da distração cognitiva durante a digitação."
+    ],
+    "potential_blockers": [
+      "Limitações do sistema operacional que introduzem jitter ou variação de latência acima do alvo.",
+      "Fadiga ou desmotivação do participante ao longo de sessões diárias prolongadas, afetando a consistência dos relatos.",
+      "Dificuldade em isolar a latência do editor de outras fontes de atraso (ex.: renderização da UI, latência de rede).",
+      "Questões éticas ou de privacidade relacionadas ao registro contínuo de dados de digitação."
+    ],
+    "candidate_tests": [
+      "Medir a latência real do editor em ambas condições (10 ms e 30 ms) usando um script de benchmark de pressionamento de teclas.",
+      "Conduzir um estudo piloto de 5‑7 dias onde o participante alterna aleatoriamente entre as duas latências e registra a percepção de distração no diário.",
+      "Comparar estatisticamente as pontuações de distração auto‑relatadas entre as duas condições usando teste t pareado.",
+      "Analisar métricas objetivas de digitação (número de erros, tempo entre teclas) para verificar correlação com a latência."
+    ],
+    "exploratory_candidate_tests": [
+      "Testar a adição de feedback tátil (vibração) independente da latência para avaliar se melhora a percepção de fluidez.",
+      "Implementar um diário multimodal que inclui gravações de voz curtas e sensores de frequência cardíaca para correlacionar estados fisiológicos com distração.",
+      "Realizar um estudo cego onde o participante não sabe qual latência está ativa, medindo diferenças entre percepção subjetiva e métricas objetivas.",
+      "Avaliar a eficácia de diferentes tipos de feedback visual (mudança de cor da tecla) como mitigador de distração em condições de alta latência."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-09-03T13:52:34.857096+00:00"
+}
