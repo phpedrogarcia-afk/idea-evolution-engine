@@ -458,13 +458,13 @@ def run_bounded_sacrificial_pilot() -> Dict[str, Any]:
     b_final_md = (b_final_dir / "final.md").read_text(encoding="utf-8") if (b_final_dir / "final.md").exists() else ""
     b_final_data = json.loads((b_final_dir / "final.json").read_text(encoding="utf-8")) if (b_final_dir / "final.json").exists() else {}
 
-    b_term_status = state_b.terminal_status.value if hasattr(state_b.terminal_status, "value") else str(state_b.terminal_status)
+    b_term_status = state_b.status.value if hasattr(state_b.status, "value") else str(state_b.status)
     b_cell = {
         "cell_id": f"{SACRIFICIAL_ATTEMPT_ID}-B",
         "condition": "CONDITION_B",
         "status": "SUCCESS" if state_b.status.value == "SUCCESS" else "FAILED",
         "terminal_status": b_term_status,
-        "stages_executed": [s.stage.name if hasattr(s.stage, "name") else str(s.stage) for s in state_b.stage_history],
+        "stages_executed": [s.stage_id for s in state_b.stage_history],
         "rendered_semantic_text": b_final_md,
         "parsed_output": b_final_data,
         "logical_calls": len(state_b.stage_history),
