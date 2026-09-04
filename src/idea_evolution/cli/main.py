@@ -277,6 +277,17 @@ def run_evolve(args: argparse.Namespace, runner: Optional[ModelRunner] = None) -
         print("[ERRO OPERACIONAL] ARTIFACT_MISSING: Nenhum artefato produzido pela evolução.", file=sys.stderr)
         return 1
 
+    # Persistência do artefato canônico para inspeção e auditoria sem chamadas adicionais de modelo
+    if response.run_id and runs_dir:
+        run_folder = Path(runs_dir) / response.run_id
+        if run_folder.exists():
+            try:
+                (run_folder / "evolution_artifact.json").write_text(
+                    response.artifact.model_dump_json(indent=2), encoding="utf-8"
+                )
+            except Exception:
+                pass
+
     rendered_text = HumanResultRenderer.render(response.artifact)
     print(rendered_text)
     return 0
