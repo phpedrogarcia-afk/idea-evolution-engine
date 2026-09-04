@@ -109,14 +109,19 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 6 (P6) — Renderizador Humano Limpo (`HumanResultRenderer`)
-- **Objetivo:** Implementar o renderizador de Markdown focado no usuário final, sem jargões de laboratório ou resíduos de validação.
+### Fase 6 (P6) — Renderizador Humano Limpo (`HumanResultRenderer`) — [COMPLETED]
+- **Objetivo:** Implementar o renderizador de Markdown focado no usuário final, sem jargões de laboratório ou resíduos de validação, integrado centralizadamente à CLI `iee evolve`.
 - **Arquivos Afetados:**
-  - `src/idea_evolution/presentation/renderer.py` [NEW]
+  - `src/idea_evolution/rendering/__init__.py` [NEW]
+  - `src/idea_evolution/rendering/human_result.py` [NEW]
+  - `src/idea_evolution/cli/main.py` [MODIFY]
+  - `tests/test_fioideias_v1_human_renderer.py` [NEW]
+  - `docs/m06-productization/M06-P6-HUMAN-RESULT-RENDERER-COMPLETION-RECORD.md` [NEW]
 - **Oportunidades de Reuso:**
-  - Estrutura visual de `to_human_markdown()` em `domain/state.py` e `_render_markdown()` em `orchestration/lean_loop.py`.
-- **Testes de Aceite:** Validação de saída em Markdown contendo exatamente as 9 seções de produto prescritas, com zero menções a "Condição A/B/C", "M05" ou contadores de tokens brutos (salvo `--debug`).
-- **Condição de Parada:** Artefato gerado legível, esteticamente agradável e navegável.
+  - `sanitize_secret_text` para mascaramento de segredos.
+  - Formato Markdown compatível para exibição em terminal e persistência.
+- **Testes de Aceite:** 22 testes determinísticos em `tests/test_fioideias_v1_human_renderer.py` aprovados, cobrindo todas as 9 seções canônicas, honestidade epistêmica de autoridade, supressão de jargões experimentais e determinismo. Total da suíte: 445 testes verdes.
+- **Condição de Parada:** Satisfeita. `HUMAN_RESULT_RENDERER_EXISTS = YES`, `RENDERER_MODEL_CALLS = 0`, `DEFAULT_CLI_USES_HUMAN_RENDERER = YES`, `CLI_JSON_OUTPUT_UNCHANGED = YES`, `ORIGINAL_IDEA_VISIBLE = YES`, `REFINED_IDEA_VISIBLE = YES`, `DERIVED_INTENT_NOT_PRESENTED_AS_EXPLICIT = YES`, `LEAN_CORE_HASH_MATCH = YES`.
 
 ---
 

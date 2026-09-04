@@ -23,6 +23,7 @@ from src.idea_evolution.service.contracts import (
     ServiceFailureType,
 )
 from src.idea_evolution.service.evolution_service import IdeaEvolutionService
+from src.idea_evolution.rendering.human_result import HumanResultRenderer
 from src.idea_evolution.config.cost_policy import (
     ProviderConfig,
     CostEligibility,
@@ -271,36 +272,13 @@ def run_evolve(args: argparse.Namespace, runner: Optional[ModelRunner] = None) -
         print(f"[ERRO OPERACIONAL] {fail_code}: {sanitized_err}", file=sys.stderr)
         return 1
 
-    art = response.artifact
-    print("=" * 70)
-    print("                    FIOIDEIAS V1 — MATURAÇÃO DE IDEIA")
-    print("=" * 70)
-    clean_idea = response.raw_idea.strip().replace("\n", " ")
-    idea_display = clean_idea[:65] + "..." if len(clean_idea) > 65 else clean_idea
-    print(f"  Ideia Original:     {idea_display}")
-    if art and art.human_intent:
-        print(f"  Intenção Derivada:  {art.human_intent}")
-    if art and art.refined_idea:
-        print(f"  Mecanismo Proposto: {art.refined_idea}")
-    print(f"  Status:             {response.terminal_status}")
-    print(f"  ID da Execução:     {response.run_id}")
-    print(f"  Chamadas de IA:     {response.total_model_calls}")
+    # 7. Renderização humana canônica de produto via HumanResultRenderer (M06 P6)
+    if response.artifact is None:
+        print("[ERRO OPERACIONAL] ARTIFACT_MISSING: Nenhum artefato produzido pela evolução.", file=sys.stderr)
+        return 1
 
-    if response.human_decision_requested:
-        print("-" * 70)
-        print("  [AVISO] BIFURCAÇÃO NORMATIVA DETECTADA")
-        print("  Esta ideia exige uma decisão humana soberana para prosseguir.")
-        if art and art.human_decision_description:
-            print(f"  Descrição da Escolha: {art.human_decision_description}")
-
-    if art and art.uncertainties:
-        print("-" * 70)
-        print(f"  Incertezas Rastreadas ({len(art.uncertainties)}):")
-        for u in art.uncertainties[:3]:
-            print(f"    - {u}")
-
-    print("=" * 70)
-    print(f"[OK] Artefato canônico salvo em runs/{response.run_id}/")
+    rendered_text = HumanResultRenderer.render(response.artifact)
+    print(rendered_text)
     return 0
 
 
