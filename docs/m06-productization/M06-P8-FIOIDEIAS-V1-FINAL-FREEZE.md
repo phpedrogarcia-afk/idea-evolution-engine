@@ -3,11 +3,12 @@
 > **PROGRAMA:** M06 — Productization  
 > **FASE:** P8 — Final Freeze & Release  
 > **PRODUTO:** FioIdeias V1 — Lean L1 Default  
-> **VERSÃO:** `1.0.0` (Tag: `v1.0.0`)  
+> **VERSÃO CANÔNICA:** `1.0.1` (Tag: `v1.0.1` / Tag Base Imutável: `v1.0.0`)  
 > **DATA DE CONGELAMENTO:** 2026-09-04  
 > **STATUS:** `RELEASED_AND_LOCKED`  
 > **HASH DO NÚCLEO CIENTÍFICO (SHA-256):** `e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600` (`LEAN_CORE_CHANGED = NO`)  
-> **CHAMADAS DE MODELO AO VIVO NA P8:** `0` (Custo de Bolso: `$0.00`)
+> **CHAMADAS DE MODELO AO VIVO NA P8:** `0` (Custo de Bolso: `$0.00`)  
+> **PATCH DE EMPACOTAMENTO (v1.0.1):** Descoberta canônica de pacotes no `pyproject.toml` (`src/__init__.py` e `[tool.setuptools.packages.find]`)
 
 ---
 
@@ -158,5 +159,6 @@ A auditoria final de liberação comprovou formalmente o empacotamento canônico
 $$\mathbf{P8\_FINAL\_AUDIT = PASS}$$
 $$\mathbf{PYPROJECT\_CONSOLE\_SCRIPT\_STATUS = PROVEN}$$
 $$\mathbf{FIOIDEIAS\_V1\_STATUS = RELEASED}$$
+$$\mathbf{CANONICAL\_RELEASE = v1.0.1}$$
 $$\mathbf{M06\_STATUS = COMPLETE}$$
 $$\mathbf{PROJECT\_V1\_STATUS = FINISHED}$$

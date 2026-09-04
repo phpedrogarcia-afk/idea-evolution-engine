@@ -40,14 +40,15 @@
   - [`docs/m06-productization/M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md`](../m06-productization/M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md)
   - [`docs/m06-productization/M06-CLOSURE-RECORD.md`](../m06-productization/M06-CLOSURE-RECORD.md)
   - [`FIOIDEIAS-V1-RELEASE-MANIFEST.json`](../../FIOIDEIAS-V1-RELEASE-MANIFEST.json)
-- **Versão do Produto:** `1.0.0` (Tag: `v1.0.0`)
+- **Versão do Produto:** `1.0.1` (Tag: `v1.0.1` / Tag Base Imutável: `v1.0.0`)
 - **Status do Produto:** `RELEASED`
 - **Status do M06:** `COMPLETE`
 - **Auditoria Final de Release (P8 Final Audit):** `PASS`
 - **Status do Console Script:** `PROVEN` (`iee evolve`)
+- **Patch de Empacotamento:** `v1.0.1` (Inclusão de `src/__init__.py` e declaração de descoberta de pacotes em `pyproject.toml`)
 - **Status Global do Projeto V1:** `FINISHED`
 - **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
-- **Último Estado Seguro (Last Known Good):** `v1.0.0`
+- **Último Estado Seguro (Last Known Good):** `v1.0.1`
 - **Git Branch:** `main`
 - **Worktree:** `CLEAN`
 
@@ -56,11 +57,12 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Conclusão da Fase P8 (Final Freeze, Release & Final Release Audit): Comprovação prática da instalação editável canônica (`pip install -e .`), resolução do script de console `iee`, execução de comandos de ajuda (`iee --help`, `iee evolve --help`), execução offline de smoke (`--dry-run` e `--dry-run --json`) e bloqueio da Condição B (`--condition-b`), sem chamadas de modelo (`LIVE_MODEL_CALLS = 0`). Confirmação explícita da autoria cognitiva humana sobre todos os 8 casos de aceite da Fase P7 (`HUMAN_COGNITIVE_AUTHORSHIP = CONFIRMED_BY_EVALUATOR`, `HUMAN_PRODUCT_ACCEPTANCE = PASS`).
+  - Liberação do Patch de Empacotamento `v1.0.1`: Publicação formal da correção canônica de descoberta de pacotes para o script de console `iee` declarado em `pyproject.toml`, mantendo a tag `v1.0.0` imutável.
+  - Comprovação prática da instalação editável canônica (`pip install -e .`), resolução do script de console `iee`, execução de comandos de ajuda (`iee --help`, `iee evolve --help`), execução offline de smoke (`--dry-run` e `--dry-run --json`) e bloqueio da Condição B (`--condition-b`), sem chamadas de modelo (`LIVE_MODEL_CALLS = 0`). Confirmação explícita da autoria cognitiva humana sobre todos os 8 casos de aceite da Fase P7 (`HUMAN_COGNITIVE_AUTHORSHIP = CONFIRMED_BY_EVALUATOR`, `HUMAN_PRODUCT_ACCEPTANCE = PASS`).
   - Verificação de integridade do Núcleo Científico: `LEAN_CORE_HASH_MATCH = YES` (`e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
   - Suíte completa de regressão: 445/445 testes determinísticos verdes.
 - **Tarefa Ativa Atual:**
-  - `M06-P8-FINAL-RELEASE-AUDIT`: Concluída e congelada. FioIdeias V1 auditado, lançado e finalizado.
+  - `M06-PATCH-RELEASE-v1.0.1`: Concluída e congelada. FioIdeias v1.0.1 empacotado, auditado e lançado.
 - **Próximo Passo Exato:**
   - Parada formal conforme doutrina (`PROJECT_V1_STATUS = FINISHED`). Decisão humana soberana sobre quaisquer etapas pós-V1.
 

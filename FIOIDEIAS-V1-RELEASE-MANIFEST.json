@@ -1,9 +1,25 @@
 {
   "product_name": "FioIdeias",
   "product_title": "FioIdeias V1 — Lean L1 Default",
-  "version": "1.0.0",
-  "release_tag": "v1.0.0",
-  "release_commit": "20300439a1cd7d7c4486d125d8cb7434ea165447",
+  "version": "1.0.1",
+  "release_tag": "v1.0.1",
+  "release_date": "2026-09-04",
+  "previous_release": {
+    "version": "1.0.0",
+    "release_tag": "v1.0.0",
+    "release_commit": "20300439a1cd7d7c4486d125d8cb7434ea165447",
+    "status": "IMMUTABLE_SUPERSEDED_BY_PACKAGING_PATCH",
+    "v1_0_0_immutable": true,
+    "known_issue": "Canonical console-script packaging required a bounded fix after original tag."
+  },
+  "packaging_patch": {
+    "patch_version": "1.0.1",
+    "reason": "Ensure setuptools packages discovery includes src root so installed iee console script resolves identically across environments.",
+    "changes": [
+      "src/__init__.py added to make src discoverable as package root",
+      "pyproject.toml: [tool.setuptools.packages.find] where = ['.'], include = ['src*'] declared"
+    ]
+  },
   "status": "RELEASED",
   "scientific_core_sha256": "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600",
   "scientific_core_status": "FROZEN_INVARIANT",

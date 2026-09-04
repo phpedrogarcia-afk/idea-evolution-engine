@@ -5,8 +5,9 @@
 > **DATA DE ENCERRAMENTO:** 2026-09-04  
 > **STATUS DO PROGRAMA M06:** `COMPLETE`  
 > **STATUS DO FIOIDEIAS V1:** `RELEASE_READY` / `RELEASED`  
-> **VERSÃO FINAL:** `1.0.0` (Tag: `v1.0.0`)  
-> **HASH DO NÚCLEO CIENTÍFICO (SHA-256):** `e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600` (`LEAN_CORE_CHANGED = NO`)
+> **VERSÃO CANÔNICA VIGENTE:** `1.0.1` (Tag: `v1.0.1` / Tag Base Imutável: `v1.0.0`)  
+> **HASH DO NÚCLEO CIENTÍFICO (SHA-256):** `e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600` (`LEAN_CORE_CHANGED = NO`)  
+> **PATCH DE EMPACOTAMENTO:** `v1.0.1` (Correção canônica da descoberta de pacotes em `pyproject.toml` para script `iee`)
 
 ---
 
@@ -40,10 +41,11 @@ Todas as 8 fases de transição e engenharia de produto foram executadas, audita
 ## 3. Conclusão Formal
 
 O programa **M06 — Productization** está formalmente encerrado com a auditoria de instalação e liberação aprovada (`P8_FINAL_AUDIT = PASS`).
-O produto de software **FioIdeias V1** está empacotado, versionado (`1.0.0`), com script de console canônico comprovado (`PYPROJECT_CONSOLE_SCRIPT_STATUS = PROVEN`), documentado e pronto para uso humano.
+O produto de software **FioIdeias V1** está empacotado, versionado (`1.0.1`, com tag base `v1.0.0` imutável), com script de console canônico comprovado (`PYPROJECT_CONSOLE_SCRIPT_STATUS = PROVEN`), documentado e pronto para uso humano.
 Decisões sobre versões futuras (V1.1, interfaces adicionais, novos provedores ou integrações) pertencem exclusivamente à deliberação e soberania humanas.
 
 $$\mathbf{M06\_STATUS = COMPLETE}$$
 $$\mathbf{P8\_FINAL\_AUDIT = PASS}$$
 $$\mathbf{FIOIDEIAS\_V1\_STATUS = RELEASED}$$
+$$\mathbf{CANONICAL\_RELEASE = v1.0.1}$$
 $$\mathbf{PROJECT\_V1\_STATUS = FINISHED}$$
