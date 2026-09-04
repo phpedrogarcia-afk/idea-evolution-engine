@@ -57,16 +57,20 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 3 (P3) — Proveniência Estrita e Salvaguardas Ontológicas
-- **Objetivo:** Integrar a rotulagem de proveniência (`CORE_USER_EXPLICIT` vs `MODEL_CANDIDATE`) diretamente no `EvolutionArtifact`, impedindo que sugestões do modelo sejam atribuídas ao usuário.
+### Fase 3 (P3) — Proveniência Estrita e Salvaguardas Ontológicas — `COMPLETED`
+- **Status:** `COMPLETED` (Ver [`M06-P3-PROVENANCE-ONTOLOGY-COMPLETION-RECORD.md`](M06-P3-PROVENANCE-ONTOLOGY-COMPLETION-RECORD.md))
+- **Objetivo:** Endurecer o `EvolutionArtifact` para garantir deterministicamente que nenhuma inferência ou hipótese do modelo usurpe a autoridade humana (`USER_EXPLICIT != VALID_USER_DERIVATION != MODEL_CANDIDATE != UNKNOWN`).
 - **Arquivos Afetados:**
-  - `src/idea_evolution/domain/evolution_artifact.py` [MODIFY]
+  - `src/idea_evolution/artifacts/provenance.py` [NEW]
+  - `src/idea_evolution/artifacts/evolution_artifact.py` [MODIFY]
+  - `src/idea_evolution/artifacts/mapper.py` [MODIFY]
+  - `src/idea_evolution/artifacts/__init__.py` [MODIFY]
   - `src/idea_evolution/service/evolution_service.py` [MODIFY]
+  - `tests/test_fioideias_v1_provenance_guard.py` [NEW]
 - **Oportunidades de Reuso:**
-  - `AuthorityProofValidator` (`domain/grounding.py`): Rebaixamento determinístico para `MODEL_HYPOTHESIS`.
-  - `SourceAnchor` (`domain/epistemic_contracts.py`): Preservação da entrada original.
-- **Testes de Aceite:** Testes adversariais garantindo que tentativas de spoofing de autoridade pelo modelo geram proposições explicitamente marcadas como `MODEL_CANDIDATE` ou `REJECTED`.
-- **Condição de Parada:** Zero vazamento de conceitos gerados por IA para o bloco de intenção e premissas explícitas do usuário.
+  - `AuthorityProofValidator` (`domain/grounding.py`), `SourceAnchor` (`domain/epistemic_contracts.py`), `PromotionAuthorityBasis`, `OntologyState`.
+- **Testes de Aceite:** 20 testes adversariais passando em `tests/test_fioideias_v1_provenance_guard.py`. Total da suíte: 383 testes verdes.
+- **Condição de Parada:** Satisfeita. `UNLABELED_SEMANTIC_ITEM_COUNT = 0`, zero modelo chamando modelo, integridade do hash do núcleo científico preservada (`LEAN_CORE_HASH_MATCH = YES`).
 
 ---
 

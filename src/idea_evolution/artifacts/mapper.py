@@ -11,7 +11,8 @@ from typing import Optional, Dict, Any, List
 from datetime import datetime
 
 from src.idea_evolution.orchestration.lean_loop import LeanRunResult
-from src.idea_evolution.domain.state import SimpleIdeaState, PromotionAuthorityBasis
+from src.idea_evolution.domain.state import SimpleIdeaState, PromotionAuthorityBasis, OntologyState
+from src.idea_evolution.domain.grounding import AuthorityProofValidator
 from src.idea_evolution.artifacts.evolution_artifact import (
     EvolutionArtifact,
     CritiqueItem,
@@ -108,14 +109,23 @@ class EvolutionArtifactMapper:
                 desc = first_pass.human_choice_description or "Decisão normativa de valor humano necessária"
                 uncertainties.append(f"Ponto de decisão humana: {desc}")
 
-        # 6. Possibilidades Concorrentes (Garantia de Não-Autoridade)
+        # 6. Possibilidades Concorrentes (Garantia de Não-Autoridade e Preservação de Status)
         candidates: List[CandidatePossibility] = []
+        rejected_options = []
+        if lean_res.decision_delta and lean_res.decision_delta.rejected_options:
+            rejected_options = [r.lower() for r in lean_res.decision_delta.rejected_options]
+
         if first_pass:
             for alt in first_pass.competing_alternatives:
+                is_rejected = any(
+                    alt.mechanism.lower() in rej or rej in alt.mechanism.lower()
+                    for rej in rejected_options
+                )
                 candidates.append(
                     CandidatePossibility(
                         mechanism=alt.mechanism,
                         authority_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+                        ontology_state=OntologyState.REJECTED if is_rejected else OntologyState.CANDIDATE,
                         justification=alt.justification or "",
                         tradeoffs=list(alt.tradeoffs),
                     )
@@ -143,12 +153,15 @@ class EvolutionArtifactMapper:
             treatment_mode=TreatmentMode.LEAN_L1,
             terminal_status=lean_res.terminal_status,
             original_idea=orig_idea,
+            original_idea_authority=PromotionAuthorityBasis.USER_EXPLICIT,
             human_intent=human_intent,
             intent_provenance=intent_prov,
             refined_idea=refined_idea,
+            refined_idea_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             what_changed=what_changed,
             critique=critique_items,
             assumptions=assumptions,
+            assumptions_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             uncertainties=uncertainties,
             candidate_possibilities=candidates,
             recommended_next_action=next_action,
@@ -195,12 +208,15 @@ class EvolutionArtifactMapper:
             treatment_mode=TreatmentMode.FAST_FALLBACK,
             terminal_status="COMPLETED" if baseline_data.get("success", False) else "BASELINE_FAILED",
             original_idea=original_idea,
+            original_idea_authority=PromotionAuthorityBasis.USER_EXPLICIT,
             human_intent=intent,
             intent_provenance=PromotionAuthorityBasis.VALID_USER_DERIVATION,
             refined_idea=refined,
+            refined_idea_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             what_changed=[],  # Sem fabricação
             critique=critique_items,
             assumptions=[],   # Sem fabricação
+            assumptions_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             uncertainties=[], # Sem fabricação
             candidate_possibilities=[], # Sem fabricação
             recommended_next_action=next_step,
@@ -223,6 +239,8 @@ class EvolutionArtifactMapper:
     ) -> EvolutionArtifact:
         """
         Mapeia a Condição B (Simple Loop) para pesquisa interna/experimental isolada.
+        Garante que tentativas de spoofing de autoridade nos registros internos de proposta
+        sejam contidas na fronteira de produto.
         """
         critique_items: List[CritiqueItem] = []
         for issue in state.critical_issues:
@@ -232,6 +250,7 @@ class EvolutionArtifactMapper:
                     severity=issue.severity.upper() if issue.severity else "MEDIUM",
                     why_it_matters=issue.why_it_matters or "",
                     affected_aspect=issue.affected_part or "",
+                    authority_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
                 )
             )
 
@@ -239,28 +258,40 @@ class EvolutionArtifactMapper:
         for alt in state.alternatives:
             candidates.append(
                 CandidatePossibility(
-                    mechanism=alt.alternative_summary,
+                    mechanism=alt.mechanism,
                     authority_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
-                    justification=alt.why_considered or "",
-                    tradeoffs=list(alt.pros_and_cons),
+                    ontology_state=OntologyState.CANDIDATE,
+                    justification=alt.novelty_or_difference or "",
+                    tradeoffs=list(alt.tradeoffs),
                 )
             )
 
-        changes = [c.change_description for c in state.accepted_changes]
+        # Auditoria determinística de propostas para conter spoofing antes de entrar no artefato
+        for p in state.proposal_records:
+            if p.promotion_basis == PromotionAuthorityBasis.USER_EXPLICIT:
+                is_valid, _, _ = AuthorityProofValidator.validate_user_explicit(state.original_idea, p.proposal)
+                if not is_valid:
+                    # Contenção de spoofing: demove deterministamente para MODEL_HYPOTHESIS
+                    p.promotion_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
+        changes = list(state.accepted_changes)
         next_step = state.candidate_tests[0] if state.candidate_tests else "Revisar relatório de deliberação."
 
         return EvolutionArtifact(
             artifact_id=f"ART-{run_id}",
             run_id=run_id,
             treatment_mode=TreatmentMode.SUSPENDED_DEEP_LOOP,
-            terminal_status=state.run_status.value,
+            terminal_status=state.status.value if hasattr(state, "status") else getattr(state, "run_status", "COMPLETED"),
             original_idea=state.original_idea,
+            original_idea_authority=PromotionAuthorityBasis.USER_EXPLICIT,
             human_intent=state.human_intent or state.original_idea,
             intent_provenance=PromotionAuthorityBasis.VALID_USER_DERIVATION,
             refined_idea=state.current_idea or state.original_idea,
+            refined_idea_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             what_changed=changes,
             critique=critique_items,
             assumptions=list(state.reality_dependencies),
+            assumptions_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             uncertainties=[],
             candidate_possibilities=candidates,
             recommended_next_action=next_step,
@@ -270,5 +301,5 @@ class EvolutionArtifactMapper:
             scientific_core_hash=None,
             model_name=model_name,
             provider=provider,
-            total_model_calls=state.reconstruction_attempts + 1,
+            total_model_calls=getattr(state, "reconstruction_count", 0) + 1,
         )

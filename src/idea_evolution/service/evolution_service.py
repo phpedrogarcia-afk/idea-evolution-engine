@@ -265,7 +265,8 @@ class IdeaEvolutionService:
                 error_message=f"Exceção no loop profundo suspenso: {str(e)}",
             )
 
-        success = (state.run_status.value == "COMPLETED")
+        stat_val = state.status.value if hasattr(state, "status") else getattr(state, "run_status", "COMPLETED")
+        success = (stat_val in ("COMPLETED", "REFINED_IDEA_READY"))
         artifact = None
         if success:
             artifact = EvolutionArtifactMapper.map_simple_state(
@@ -280,8 +281,8 @@ class IdeaEvolutionService:
             run_id=run_id,
             treatment_used=TreatmentMode.SUSPENDED_DEEP_LOOP,
             raw_idea=request.raw_idea,
-            terminal_status=state.run_status.value,
-            total_model_calls=state.reconstruction_attempts + 1,  # Telemetria nominal
+            terminal_status=stat_val,
+            total_model_calls=getattr(state, "reconstruction_attempts", 0) + 1,  # Telemetria nominal
             failure_type=None if success else ServiceFailureType.DOMAIN_DECISION_OR_STOP,
             artifact=artifact,
         )
