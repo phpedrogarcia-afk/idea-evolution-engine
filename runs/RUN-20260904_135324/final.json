@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135324",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um dispensador automático de ração para gatos acionado por peso do prato, com alerta sonoro e notificação quando o reservatório estiver com menos de 200g.",
+  "total_model_calls": 2,
+  "gate_outcome": "ESCALATE_FOCUSED",
+  "escalation_reason": "MATERIAL_VULNERABILITY",
+  "authority_spoofing_detected": true,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "decision_progress_detected": true
+}

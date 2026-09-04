@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135444",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma rede de assinatura B2B onde engenheiros de diferentes empresas trocam revisões de código anonimizadas e auditadas por pares especialistas com SLA garantido de 4 horas, em vez de depender apenas de revisores internos sobrecarregados.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

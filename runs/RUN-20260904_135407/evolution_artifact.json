@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "ART-RUN-20260904_135407",
+  "run_id": "RUN-20260904_135407",
+  "treatment_mode": "LEAN_L1",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "created_at": "2026-09-04T13:54:08.861951",
+  "original_idea": "Um aplicativo desktop que grava automaticamente o contexto do que o usuário estava lendo ou programando quando salvou um bookmark, para que 3 meses depois ele consiga lembrar exatamente a linha de raciocínio daquele momento sem esforço.",
+  "original_idea_authority": "USER_EXPLICIT",
+  "human_intent": "Permitir que o usuário lembre exatamente o que estava lendo ou programando no momento em que salvou um bookmark, facilitando a retomada de tarefas ou a revisão de ideias após um período prolongado.",
+  "intent_provenance": "VALID_USER_DERIVATION",
+  "refined_idea": "Captura automática de snapshots do ambiente de trabalho no momento do bookmark: registra metadados da janela ativa (aplicativo, título, posição de rolagem), conteúdo visível (texto, código), arquivos abertos e estado do editor; armazena esses dados criptografados localmente com timestamp; fornece interface de busca por data para restaurar o snapshot em um visualizador dedicado.",
+  "refined_idea_authority": "MODEL_HYPOTHESIS",
+  "what_changed": [
+    "Nova opção: Anotações manuais do usuário (texto livre ou screenshots) associadas ao bookmark",
+    "Nova opção: Gravação de vídeo da tela no momento do bookmark"
+  ],
+  "critique": [
+    {
+      "vulnerability": "Exposição de informações sensíveis capturadas (códigos proprietários, documentos confidenciais)",
+      "severity": "HIGH",
+      "why_it_matters": "Uma violação poderia revelar propriedade intelectual ou dados pessoais, gerando danos legais e de reputação",
+      "affected_aspect": "Privacidade e Segurança dos Dados",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    },
+    {
+      "vulnerability": "Sobrecarga de desempenho durante a captura automática",
+      "severity": "MEDIUM",
+      "why_it_matters": "Pode degradar a experiência do usuário, especialmente em máquinas com recursos limitados",
+      "affected_aspect": "Usabilidade",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    },
+    {
+      "vulnerability": "Acúmulo de armazenamento devido a snapshots frequentes",
+      "severity": "MEDIUM",
+      "why_it_matters": "Pode esgotar o espaço em disco, levando à perda de dados ou necessidade de limpeza manual",
+      "affected_aspect": "Recursos de Sistema",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    },
+    {
+      "vulnerability": "Risco de corrupção ou perda dos snapshots armazenados",
+      "severity": "MEDIUM",
+      "why_it_matters": "Se os dados não forem recuperáveis, o objetivo principal da aplicação falha",
+      "affected_aspect": "Confiabilidade",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "assumptions": [
+    "O sistema operacional permite hooks para captura de estado da janela sem violar políticas de segurança",
+    "Os principais editores de código expõem APIs para obter o conteúdo visível e a posição do cursor",
+    "Os usuários aceitam que o aplicativo armazene snapshots criptografados localmente",
+    "O volume de dados capturados pode ser gerenciado com compressão e retenção automática"
+  ],
+  "assumptions_authority": "MODEL_HYPOTHESIS",
+  "uncertainties": [
+    "Quais regulamentações de privacidade (ex.: GDPR) se aplicam ao armazenamento automático de contexto",
+    "Como implementar suporte multiplataforma (Windows, macOS, Linux) de forma consistente",
+    "Qual será a estratégia ideal de retenção (ex.: deletar snapshots após X meses)",
+    "Aceitação do usuário quanto a permissões necessárias para captura automática",
+    "Qual a definição exata de \"contexto\" (texto visível vs todo o documento)",
+    "Como lidar com múltiplas janelas ou aplicativos simultâneos ao salvar o bookmark",
+    "Quais dados são considerados sensíveis e precisam de tratamento especial",
+    "Como garantir que a restauração reproduza fielmente o estado original (por exemplo, dependências externas)",
+    "Ponto de decisão humana: É necessário que o usuário decida se autoriza a captura automática de todo o contexto, definindo políticas de privacidade (ex.: exclusão de arquivos sensíveis) e aceitando trade‑offs entre conveniência e risco de exposição de dados."
+  ],
+  "candidate_possibilities": [
+    {
+      "mechanism": "Anotações manuais do usuário (texto livre ou screenshots) associadas ao bookmark",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "O usuário registra explicitamente o que considera relevante, evitando captura automática de dados irrelevantes.",
+      "tradeoffs": [
+        "Depende da disciplina do usuário",
+        "Pode omitir detalhes críticos",
+        "Requer esforço adicional no momento do bookmark"
+      ]
+    },
+    {
+      "mechanism": "Gravação de vídeo da tela no momento do bookmark",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "Um vídeo captura exatamente o que estava na tela, incluindo interações.",
+      "tradeoffs": [
+        "Armazenamento intensivo",
+        "Dificuldade de indexação e busca posterior",
+        "Privacidade ainda mais crítica"
+      ]
+    }
+  ],
+  "recommended_next_action": "Decisão humana requerida: É necessário que o usuário decida se autoriza a captura automática de todo o contexto, definindo políticas de privacidade (ex.: exclusão de arquivos sensíveis) e aceitando trade‑offs entre conveniência e risco de exposição de dados.",
+  "human_decision_required": true,
+  "human_decision_description": "É necessário que o usuário decida se autoriza a captura automática de todo o contexto, definindo políticas de privacidade (ex.: exclusão de arquivos sensíveis) e aceitando trade‑offs entre conveniência e risco de exposição de dados.",
+  "source_anchor": {
+    "source_id": "SRC-HUMAN-0acbda6d",
+    "source_kind": "HUMAN_INPUT",
+    "content_hash": "0acbda6d79b62387c25f00b7f04f8d1aede44d7518eed20bd0c459241661cdcb",
+    "original_content": "Um aplicativo desktop que grava automaticamente o contexto do que o usuário estava lendo ou programando quando salvou um bookmark, para que 3 meses depois ele consiga lembrar exatamente a linha de raciocínio daquele momento sem esforço.",
+    "provenance": "Original human input prompt",
+    "created_at": "2026-09-04T13:54:07.044744",
+    "authority_class": "SOVEREIGN_HUMAN_INTENT"
+  },
+  "scientific_core_hash": "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600",
+  "model_name": null,
+  "provider": null,
+  "total_model_calls": 1
+}

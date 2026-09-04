@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135417",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um jogo de cartas narrativo analógico sobre arqueologia intergaláctica onde cada carta é um fragmento físico de diário rasgado e os jogadores precisam deduzir a civilização extinta costurando as pistas poéticas sem regras formais de pontuação.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

@@ -125,15 +125,22 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 7 (P7) — Casos Reais de Ponta a Ponta & Auditoria de Aceite
-- **Objetivo:** Executar o motor FioIdeias V1 sobre um conjunto de ideias reais representativas (ferramentas simples, ideias férteis, hipóteses de produto) para auditar qualidade e estabilidade.
-- **Arquivos Afetados:**
-  - `tests/e2e/test_fioideias_v1_e2e.py` [NEW]
-- **Oportunidades de Reuso:**
-  - Fixtures de teste existentes (`fixtures/`).
-  - Modos determinísticos de `FakeModelRunner` e credenciais gratuitas reais disponíveis.
-- **Testes de Aceite:** 100% dos 12 portões de aceitação do V1 satisfeitos.
-- **Condição de Parada:** Todos os testes de ponta a ponta verdes e sem regressões na suíte global (332+ testes passando).
+### Fase 7 (P7) — Casos Reais de Ponta a Ponta & Auditoria de Aceite — `COMPLETED`
+- **Status:** `COMPLETED` (Ver [`M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md`](M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md), [`M06-P7-REAL-E2E-RESULTS.json`](M06-P7-REAL-E2E-RESULTS.json), [`M06-P7-HUMAN-ACCEPTANCE-PACKET.md`](M06-P7-HUMAN-ACCEPTANCE-PACKET.md))
+- **Objetivo:** Executar o motor FioIdeias V1 sobre um conjunto de 8 ideias reais representativas através da CLI pública `iee evolve` sob política estrita de custo zero (`OUT_OF_POCKET_COST = ZERO`), avaliando os 12 portões de aceitação do V1.
+- **Arquivos Criados/Afetados:**
+  - `docs/m06-productization/M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md` [NEW]
+  - `docs/m06-productization/M06-P7-REAL-E2E-RESULTS.json` [NEW]
+  - `docs/m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md` [NEW]
+  - `src/idea_evolution/cli/main.py` [MODIFY - persistência de `evolution_artifact.json` no diretório de run]
+- **Resultados de Aceite:**
+  - 8/8 casos reais executados com sucesso (10 chamadas no total, média 1.25 chamadas/caso).
+  - 1 smoke test de fallback rápido (`--fast`) aprovado (1 chamada).
+  - 1 teste negativo de Condição B rejeitado com sucesso (não exposta publicamente).
+  - 12/12 portões de aceitação satisfeitos (`P7_ACCEPTANCE = PASS`).
+  - Suíte de regressão global: 445/445 testes verdes.
+  - Custo de bolso total: `$0.00`.
+- **Condição de Parada:** Satisfeita. `P7_ACCEPTANCE = PASS`, `V1_BLOCKERS = 0`, integridade do núcleo científico preservada (`LEAN_CORE_HASH_MATCH = YES`). Parada formal para revisão do supervisor antes da Fase P8.
 
 ---
 

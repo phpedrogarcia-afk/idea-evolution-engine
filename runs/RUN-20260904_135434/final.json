@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135434",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma plataforma comunitária de empréstimo de ferramentas entre vizinhos do mesmo condomínio, onde precisamos decidir se quem atrasar a devolução paga uma multa financeira obrigatória ou perde pontos de reputação comunitária ficando suspenso temporariamente.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 2,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

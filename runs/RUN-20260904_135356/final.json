@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135356",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "app pra quando a gente esquece onde guardou as coisas em casa... tipo tira foto da gaveta e depois pergunta onde ta a fita isolante ou o passaporte sem ter q ficar procurando tudo bagunçado",
+  "total_model_calls": 2,
+  "gate_outcome": "ESCALATE_FOCUSED",
+  "escalation_reason": "MATERIAL_VULNERABILITY",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 4,
+  "terminal_status": "COMPLETED_WITH_FOCUSED_ESCALATION",
+  "decision_progress_detected": true
+}

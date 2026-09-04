@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135407",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Um aplicativo desktop que grava automaticamente o contexto do que o usuário estava lendo ou programando quando salvou um bookmark, para que 3 meses depois ele consiga lembrar exatamente a linha de raciocínio daquele momento sem esforço.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

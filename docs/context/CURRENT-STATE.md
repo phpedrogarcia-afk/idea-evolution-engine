@@ -34,6 +34,9 @@
   - [`docs/m06-productization/M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md`](../m06-productization/M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md)
   - [`docs/m06-productization/M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md`](../m06-productization/M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md)
   - [`docs/m06-productization/M06-P6-HUMAN-RESULT-RENDERER-COMPLETION-RECORD.md`](../m06-productization/M06-P6-HUMAN-RESULT-RENDERER-COMPLETION-RECORD.md)
+  - [`docs/m06-productization/M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md`](../m06-productization/M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md)
+  - [`docs/m06-productization/M06-P7-REAL-E2E-RESULTS.json`](../m06-productization/M06-P7-REAL-E2E-RESULTS.json)
+  - [`docs/m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md`](../m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md)
 - **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
 - **Último Estado Seguro (Last Known Good):** `CP-20260901-015`
 - **Git Branch:** `main`
@@ -44,20 +47,19 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Implementação e validação da Fase P6 (Human Result Renderer): Criação do renderizador determinístico de apresentação `HumanResultRenderer` em `src/idea_evolution/rendering/human_result.py` e integração centralizada com a CLI oficial `iee evolve`. Apresentação limpa em Markdown sem inferência semântica (`RENDERER_MODEL_CALLS = 0`), preservação fiel da ideia original, enquadramento explícito da proposta do sistema, diferenciação entre intenção expressa e intenção derivada, tratamento de `HUMAN_DECISION_REQUIRED` como estado de domínio legítimo, omissão limpa de seções vazias, mascaramento total de segredos e supressão de termos experimentais/enums internos. 22 novos testes determinísticos em `tests/test_fioideias_v1_human_renderer.py`.
+  - Execução e auditoria formal da Fase P7 (Real End-to-End V1 Acceptance): Execução de 8 casos reais de teste de aceitação através da CLI pública `iee evolve` sob o provedor `cerebras` com custo de bolso zero (`$0.00`). Persistência canônica de `evolution_artifact.json` em cada run (`runs/<run_id>/evolution_artifact.json`). Todos os 8 casos reais geraram artefatos válidos e saídas renderizadas limpas via `HumanResultRenderer`. 2 casos acionaram escalação focada e 6 casos identificaram necessidade de decisão humana soberana (`HUMAN_DECISION_REQUIRED`), contendo o consumo de chamadas (média 1.25 chamadas/run). Smoke test de Condição A (`--fast`) aprovado em 1 chamada. Teste negativo de Condição B rejeitado com sucesso pelo parser da CLI. Todos os 12 portões de aceitação do V1 satisfeitos (`P7_ACCEPTANCE = PASS`, `V1_BLOCKERS = 0`).
   - Verificação de integridade do Núcleo Científico: `LEAN_CORE_HASH_MATCH = YES` (`e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
-  - Suíte completa de 445 testes passando com 0 falhas.
-  - Custo de Bolso e chamadas reais de modelo na P6: `0` chamadas (`$0.00`).
+  - Suíte completa de regressão: 445/445 testes passando.
 - **Tarefa Ativa Atual:**
-  - `M06-P6-HUMAN-RESULT-RENDERER`: Concluída e congelada. Aguarda revisão do supervisor antes de prosseguir para a Fase P7 (Casos Reais de Ponta a Ponta & Auditoria de Aceite).
+  - `M06-P7-REAL-E2E-ACCEPTANCE`: Concluída e registrada. Trabalho formalmente paralisado para revisão do supervisor antes de qualquer início da Fase P8 (Product V1 Freeze).
 - **Próximo Passo Exato:**
-  - Supervisor revisa a entrega da Fase P6 e autoriza formalmente o início da Fase P7 (Implementação de `tests/e2e/test_fioideias_v1_e2e.py`).
+  - Supervisor revisa a entrega da Fase P7 e o pacote humano (`docs/m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md`), autorizando formalmente o avanço para a Fase P8 (Congelamento Final do Produto V1 & Documentação).
 
 ---
 
 ## 3. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
 
-1. ❌ **NÃO** iniciar a Fase P7 sem autorização formal do supervisor.
+1. ❌ **NÃO** iniciar a Fase P8 (Final Freeze) sem autorização formal do supervisor.
 2. ❌ **NÃO** modificar nenhum arquivo do núcleo científico congelado (`LEAN_V1_CORE_BASELINE`).
 3. ❌ **NÃO** reintroduzir a Condição B ou loops de 6 etapas como rota padrão da CLI.
 4. ❌ **NÃO** permitir fallback silencioso ou automático para rotas tarifadas/pagas.

@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-20260904_135452",
+  "topology": "LEAN_IEE_L1",
+  "original_idea": "Uma mochila ergonômica modular onde os compartimentos de peso (laptop, garrafa térmica, ferramentas) se reposicionam automaticamente ou mecanicamente ao longo da coluna conforme a inclinação do corpo ao caminhar ou pedalar para reduzir a dor lombar.",
+  "total_model_calls": 1,
+  "gate_outcome": "REQUEST_HUMAN_DECISION",
+  "escalation_reason": "NONE",
+  "authority_spoofing_detected": false,
+  "unsupported_candidate_count": 3,
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "decision_progress_detected": true
+}

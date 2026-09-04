@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "ART-RUN-20260904_135425",
+  "run_id": "RUN-20260904_135425",
+  "treatment_mode": "LEAN_L1",
+  "terminal_status": "HUMAN_DECISION_REQUIRED",
+  "created_at": "2026-09-04T13:54:26.947162",
+  "original_idea": "Um serviço de mentoria reversa para líderes de empresas tradicionais aprenderem sobre novas tecnologias e IA.",
+  "original_idea_authority": "USER_EXPLICIT",
+  "human_intent": "Create a reverse‑mentorship service that pairs senior executives with junior technologists so leaders can learn about new tech and AI directly from those on the front lines.",
+  "intent_provenance": "VALID_USER_DERIVATION",
+  "refined_idea": "Pair each senior leader with a junior employee (or external expert) who acts as a mentor on a scheduled basis (e.g., weekly 1‑hour sessions) to discuss recent developments, use‑cases, and strategic implications of emerging technologies and AI.",
+  "refined_idea_authority": "MODEL_HYPOTHESIS",
+  "what_changed": [
+    "Nova opção: Traditional executive training programs (workshops, seminars, MOOCs) delivered by external vendors.",
+    "Nova opção: Hiring external consultants to advise leaders on technology strategy.",
+    "Nova opção: Internal innovation labs where leaders observe pilot projects."
+  ],
+  "critique": [
+    {
+      "vulnerability": "Resistance from senior leaders who may view reverse mentorship as a threat to authority",
+      "severity": "HIGH",
+      "why_it_matters": "Can lead to low participation and undermine the program’s credibility",
+      "affected_aspect": "Adoption",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    },
+    {
+      "vulnerability": "Overburdening junior mentors with additional responsibilities",
+      "severity": "MEDIUM",
+      "why_it_matters": "May reduce their productivity and lead to burnout",
+      "affected_aspect": "Employee wellbeing",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    },
+    {
+      "vulnerability": "Potential leakage of confidential strategic information",
+      "severity": "HIGH",
+      "why_it_matters": "Could expose the company to competitive risk",
+      "affected_aspect": "Security",
+      "authority_basis": "MODEL_HYPOTHESIS"
+    }
+  ],
+  "assumptions": [
+    "Senior executives are open to being mentored by junior staff",
+    "Junior mentors have sufficient expertise and communication skills",
+    "The organization will allocate time for mentorship sessions",
+    "Confidentiality and trust can be maintained",
+    "Mentorship will lead to actionable insights for the leader"
+  ],
+  "assumptions_authority": "MODEL_HYPOTHESIS",
+  "uncertainties": [
+    "Best pricing model (subscription vs per‑session)",
+    "Scalability across multiple business units",
+    "Legal liability for advice given during sessions",
+    "Cultural fit in highly hierarchical organizations",
+    "How to match mentors and mentees based on industry relevance and personality fit",
+    "Compensation or recognition model for junior mentors",
+    "Optimal frequency and duration of sessions",
+    "Metrics to evaluate learning impact",
+    "Ponto de decisão humana: Selection of mentor‑mentee pairings, determination of compensation/reward structures for junior mentors, and definition of success criteria require normative decisions aligned with company values and culture."
+  ],
+  "candidate_possibilities": [
+    {
+      "mechanism": "Traditional executive training programs (workshops, seminars, MOOCs) delivered by external vendors.",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "Common alternative to on‑the‑job learning.",
+      "tradeoffs": [
+        "Higher cost, less personalization",
+        "Less interactive"
+      ]
+    },
+    {
+      "mechanism": "Hiring external consultants to advise leaders on technology strategy.",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "Consulting is a well‑known route for expertise acquisition.",
+      "tradeoffs": [
+        "Expensive, may lack internal knowledge transfer"
+      ]
+    },
+    {
+      "mechanism": "Internal innovation labs where leaders observe pilot projects.",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "Leaders can learn by observing internal experiments.",
+      "tradeoffs": [
+        "Leaders may not get focused, one‑on‑one guidance"
+      ]
+    }
+  ],
+  "recommended_next_action": "Decisão humana requerida: Selection of mentor‑mentee pairings, determination of compensation/reward structures for junior mentors, and definition of success criteria require normative decisions aligned with company values and culture.",
+  "human_decision_required": true,
+  "human_decision_description": "Selection of mentor‑mentee pairings, determination of compensation/reward structures for junior mentors, and definition of success criteria require normative decisions aligned with company values and culture.",
+  "source_anchor": {
+    "source_id": "SRC-HUMAN-0b147216",
+    "source_kind": "HUMAN_INPUT",
+    "content_hash": "0b147216dc1ee8b00b32c8164a9ebcf70633cbccc6b4688961e4bcd3e606dea7",
+    "original_content": "Um serviço de mentoria reversa para líderes de empresas tradicionais aprenderem sobre novas tecnologias e IA.",
+    "provenance": "Original human input prompt",
+    "created_at": "2026-09-04T13:54:25.768880",
+    "authority_class": "SOVEREIGN_HUMAN_INTENT"
+  },
+  "scientific_core_hash": "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600",
+  "model_name": null,
+  "provider": null,
+  "total_model_calls": 1
+}
