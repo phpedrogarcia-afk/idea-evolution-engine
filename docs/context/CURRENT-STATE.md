@@ -43,6 +43,9 @@
 - **Versão do Produto:** `1.0.0` (Tag: `v1.0.0`)
 - **Status do Produto:** `RELEASED`
 - **Status do M06:** `COMPLETE`
+- **Auditoria Final de Release (P8 Final Audit):** `PASS`
+- **Status do Console Script:** `PROVEN` (`iee evolve`)
+- **Status Global do Projeto V1:** `FINISHED`
 - **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
 - **Último Estado Seguro (Last Known Good):** `v1.0.0`
 - **Git Branch:** `main`
@@ -53,14 +56,13 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Conclusão da Fase P8 (Final Freeze & Release): Auditoria e congelamento dos metadados de empacotamento (`pyproject.toml` na versão `1.0.0`), atualização do guia canônico do usuário (`README.md`), geração do manifesto de release legível por máquina (`FIOIDEIAS-V1-RELEASE-MANIFEST.json`), registro formal de encerramento do Programa M06 (`M06-CLOSURE-RECORD.md`) e registro de congelamento final (`M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md`).
+  - Conclusão da Fase P8 (Final Freeze, Release & Final Release Audit): Comprovação prática da instalação editável canônica (`pip install -e .`), resolução do script de console `iee`, execução de comandos de ajuda (`iee --help`, `iee evolve --help`), execução offline de smoke (`--dry-run` e `--dry-run --json`) e bloqueio da Condição B (`--condition-b`), sem chamadas de modelo (`LIVE_MODEL_CALLS = 0`). Confirmação explícita da autoria cognitiva humana sobre todos os 8 casos de aceite da Fase P7 (`HUMAN_COGNITIVE_AUTHORSHIP = CONFIRMED_BY_EVALUATOR`, `HUMAN_PRODUCT_ACCEPTANCE = PASS`).
   - Verificação de integridade do Núcleo Científico: `LEAN_CORE_HASH_MATCH = YES` (`e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
   - Suíte completa de regressão: 445/445 testes determinísticos verdes.
-  - Custo de Bolso e chamadas reais de modelo na P8: `0` chamadas (`$0.00`).
 - **Tarefa Ativa Atual:**
-  - `M06-P8-FINAL-FREEZE-AND-RELEASE`: Concluída e congelada. FioIdeias V1 lançado formalmente.
+  - `M06-P8-FINAL-RELEASE-AUDIT`: Concluída e congelada. FioIdeias V1 auditado, lançado e finalizado.
 - **Próximo Passo Exato:**
-  - Parada formal conforme doutrina. Decisão humana soberana sobre os rumos futuros do ecossistema após o lançamento da V1.
+  - Parada formal conforme doutrina (`PROJECT_V1_STATUS = FINISHED`). Decisão humana soberana sobre quaisquer etapas pós-V1.
 
 ---
 

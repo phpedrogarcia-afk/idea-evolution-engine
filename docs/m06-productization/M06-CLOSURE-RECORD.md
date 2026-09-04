@@ -39,9 +39,11 @@ Todas as 8 fases de transição e engenharia de produto foram executadas, audita
 
 ## 3. Conclusão Formal
 
-O programa **M06 — Productization** está formalmente encerrado.
-O produto de software **FioIdeias V1** está empacotado, versionado (`1.0.0`), documentado e pronto para uso humano.
+O programa **M06 — Productization** está formalmente encerrado com a auditoria de instalação e liberação aprovada (`P8_FINAL_AUDIT = PASS`).
+O produto de software **FioIdeias V1** está empacotado, versionado (`1.0.0`), com script de console canônico comprovado (`PYPROJECT_CONSOLE_SCRIPT_STATUS = PROVEN`), documentado e pronto para uso humano.
 Decisões sobre versões futuras (V1.1, interfaces adicionais, novos provedores ou integrações) pertencem exclusivamente à deliberação e soberania humanas.
 
 $$\mathbf{M06\_STATUS = COMPLETE}$$
-$$\mathbf{FIOIDEIAS\_V1\_STATUS = RELEASE_READY}$$
+$$\mathbf{P8\_FINAL\_AUDIT = PASS}$$
+$$\mathbf{FIOIDEIAS\_V1\_STATUS = RELEASED}$$
+$$\mathbf{PROJECT\_V1\_STATUS = FINISHED}$$

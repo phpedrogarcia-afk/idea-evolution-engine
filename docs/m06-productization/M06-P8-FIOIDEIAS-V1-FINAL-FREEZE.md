@@ -141,7 +141,22 @@ Os seguintes itens foram registrados para evolução subsequente, sem bloquear a
 
 ---
 
-## 8. Veredito Final de Conclusão da Fase P8
+## 8. Auditoria de Instalação Canônica e Script de Console (Final Release Audit)
 
+A auditoria final de liberação comprovou formalmente o empacotamento canônico do produto:
+1. **Instalação Editável:** `pip install -e .` executado com sucesso (`EDITABLE_INSTALL = PASS`).
+2. **Resolução do Binário:** O script `iee` resolveu para o executável gerado (`INSTALLED_IEE_RESOLVES = YES` em `Scripts/iee.exe`).
+3. **Execução de Ajuda:** `iee --help` e `iee evolve --help` executados fora do repositório com saída limpa (`IEE_HELP = PASS`, `IEE_EVOLVE_HELP = PASS`).
+4. **Execução Offline de Smoke:** `iee evolve "..." --dry-run` e `--dry-run --json` executados offline sem inferência (`INSTALLED_IEE_DRY_RUN = PASS`, `LIVE_MODEL_CALLS = 0`).
+5. **Bloqueio da Condição B:** `iee evolve "..." --condition-b` rejeitado pelo parser (`INSTALLED_CONDITION_B_PUBLIC = NO`).
+6. **Autoria Cognitiva Humana:** Confirmada expressamente pelo avaliador humano para todos os 8 casos (`HUMAN_COGNITIVE_AUTHORSHIP = CONFIRMED_BY_EVALUATOR`).
+
+---
+
+## 9. Veredito Final de Conclusão da Fase P8 e Encerramento do Projeto V1
+
+$$\mathbf{P8\_FINAL\_AUDIT = PASS}$$
+$$\mathbf{PYPROJECT\_CONSOLE\_SCRIPT\_STATUS = PROVEN}$$
 $$\mathbf{FIOIDEIAS\_V1\_STATUS = RELEASED}$$
 $$\mathbf{M06\_STATUS = COMPLETE}$$
+$$\mathbf{PROJECT\_V1\_STATUS = FINISHED}$$

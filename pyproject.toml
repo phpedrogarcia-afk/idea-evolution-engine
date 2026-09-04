@@ -16,3 +16,7 @@ dependencies = [
 
 [project.scripts]
 iee = "src.idea_evolution.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
