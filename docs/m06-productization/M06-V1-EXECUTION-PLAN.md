@@ -91,14 +91,21 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 5 (P5) — Ponto de Entrada Estável (CLI `iee evolve`)
-- **Objetivo:** Atualizar a CLI oficial em `src/idea_evolution/cli/main.py` para apontar `FioIdeias V1 — Lean L1 Default` como a topologia e caminho de execução padrão.
+### Fase 5 (P5) — Ponto de Entrada Estável (CLI `iee evolve`) — [COMPLETED]
+- **Objetivo:** Estabelecer a CLI oficial em `src/idea_evolution/cli/main.py` apontando `FioIdeias V1 — Lean L1 Default` como a rota padrão incondicional através do `IdeaEvolutionService`, sem bypass e sem expor loops experimentais.
 - **Arquivos Afetados:**
   - `src/idea_evolution/cli/main.py` [MODIFY]
+  - `src/idea_evolution/cli/__init__.py` [NEW]
+  - `pyproject.toml` [NEW]
+  - `iee.cmd` [NEW]
+  - `iee` [NEW]
+  - `tests/test_fioideias_v1_cli.py` [NEW]
+  - `docs/m06-productization/M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md` [NEW]
 - **Oportunidades de Reuso:**
-  - Estrutura de subparsers `argparse` existente (`iee evolve`, `iee inspect-run`).
-- **Testes de Aceite:** `iee evolve -i "Ideia de teste"` invoca o `IdeaEvolutionService` com Lean L1 por padrão; Condição B só é acessível via flag explícita `--experimental-deep-loop` e emite aviso de suspensão.
-- **Condição de Parada:** CLI executável em linha de comando com ergonomia simples.
+  - Estrutura de subparsers `argparse` existente, roteada exclusivamente para `IdeaEvolutionService`.
+  - Empacotamento padrão com `pyproject.toml` e wrappers de terminal.
+- **Testes de Aceite:** 20 testes determinísticos em `tests/test_fioideias_v1_cli.py` cobrindo roteamento, serialização de `EvolutionArtifact`, sanitização e tratamento de erros operacionais. Total da suíte: 423 testes verdes.
+- **Condição de Parada:** Satisfeita. `CLI_ENTRY_POINT_EXISTS = YES`, `IEE_EVOLVE_WORKS = YES`, `CLI_DEFAULT_TREATMENT = LEAN_L1`, `CLI_USES_IDEA_EVOLUTION_SERVICE = YES`, `CLI_BYPASSES_SERVICE = NO`, `CONDITION_B_PUBLICLY_EXPOSED = NO`, `LEAN_CORE_HASH_MATCH = YES`.
 
 ---
 

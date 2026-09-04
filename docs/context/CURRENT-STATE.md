@@ -1,7 +1,7 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-03 | Fase: M06 — PRODUCTIZATION
+> Atualizado em: 2026-09-04 | Fase: M06 — PRODUCTIZATION
 
 ---
 
@@ -32,6 +32,7 @@
   - [`docs/m06-productization/M06-P2-EVOLUTION-ARTIFACT-COMPLETION-RECORD.md`](../m06-productization/M06-P2-EVOLUTION-ARTIFACT-COMPLETION-RECORD.md)
   - [`docs/m06-productization/M06-P3-PROVENANCE-ONTOLOGY-COMPLETION-RECORD.md`](../m06-productization/M06-P3-PROVENANCE-ONTOLOGY-COMPLETION-RECORD.md)
   - [`docs/m06-productization/M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md`](../m06-productization/M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md)
+  - [`docs/m06-productization/M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md`](../m06-productization/M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md)
 - **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
 - **Último Estado Seguro (Last Known Good):** `CP-20260901-015`
 - **Git Branch:** `main`
@@ -42,23 +43,23 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Implementação e validação da Fase P4 (Operational Provider Boundary & Zero-Cost Guard): Criação de `cost_policy.py` (`CostEligibility`, `ProviderConfig`, `ZeroCostGuard`), integração fail-closed no `IdeaEvolutionService`, classificação tipada de erros (`PROVIDER_AUTH_FAILURE`, `PROVIDER_RATE_LIMIT`, `PROVIDER_SERVER_FAILURE`, `PROVIDER_UNAVAILABLE`, `COST_POLICY_BLOCKED`), sanitização ativa de credenciais e 20 novos testes determinísticos em `tests/test_fioideias_v1_provider_guard.py`.
+  - Implementação e validação da Fase P5 (Stable User Entry Point / `iee evolve` $\to$ Lean L1): Reescrita da CLI `iee evolve` em `src/idea_evolution/cli/main.py` delegando exclusivamente para `IdeaEvolutionService` com `TreatmentMode.LEAN_L1` como padrão incondicional. Remoção de flags da Condição B do subcomando `evolve`. Suporte a entrada posicional e flags `--idea` / `--idea-file`. Emissão limpa de `EvolutionArtifact` (v1.0) em modo `--json`. Distinção estrita entre desfecho epistêmico (código 0 para `HUMAN_DECISION_REQUIRED`) e falhas operacionais (código 1). Sanitização total de credenciais. Adição de empacotamento com console script `iee` e wrappers de shell. 20 novos testes determinísticos em `tests/test_fioideias_v1_cli.py`.
   - Verificação de integridade do Núcleo Científico: `LEAN_CORE_HASH_MATCH = YES` (`e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
-  - Suíte completa de 403 testes passando com 0 falhas.
-  - Custo de Bolso e chamadas reais de modelo na P4: `0` chamadas (`$0.00`).
+  - Suíte completa de 423 testes passando com 0 falhas.
+  - Custo de Bolso e chamadas reais de modelo na P5: `0` chamadas (`$0.00`).
 - **Tarefa Ativa Atual:**
-  - `M06-P4-PROVIDER-BOUNDARY`: Concluída e congelada. Aguarda revisão do supervisor antes de prosseguir para a Fase P5 (Ponto de Entrada Estável CLI `iee evolve`).
+  - `M06-P5-STABLE-ENTRY-POINT`: Concluída e congelada. Aguarda revisão do supervisor antes de prosseguir para a Fase P6 (Renderizador Humano Limpo `HumanResultRenderer`).
 - **Próximo Passo Exato:**
-  - Supervisor revisa a entrega da Fase P4 e autoriza formalmente o início da Fase P5 (Atualização do CLI `iee evolve` para Lean L1 por padrão).
+  - Supervisor revisa a entrega da Fase P5 e autoriza formalmente o início da Fase P6 (Implementação de `src/idea_evolution/presentation/renderer.py`).
 
 ---
 
 ## 3. O Que Explicitamente NÃO Fazer (DO-NOT-DO)
 
-1. ❌ **NÃO** iniciar a Fase P5 sem autorização formal do supervisor.
+1. ❌ **NÃO** iniciar a Fase P6 sem autorização formal do supervisor.
 2. ❌ **NÃO** modificar nenhum arquivo do núcleo científico congelado (`LEAN_V1_CORE_BASELINE`).
-3. ❌ **NÃO** permitir fallback silencioso ou automático para rotas tarifadas/pagas.
-4. ❌ **NÃO** implementar renderizador humano prematuro (P6) ou persistência de banco de dados (P8).
+3. ❌ **NÃO** reintroduzir a Condição B ou loops de 6 etapas como rota padrão da CLI.
+4. ❌ **NÃO** permitir fallback silencioso ou automático para rotas tarifadas/pagas.
 5. ❌ **NÃO** introduzir frameworks multiagente arbitrários (LangChain, AutoGen, CrewAI).
 6. ❌ **NÃO** implementar bridge FioOS com autoridade de execução: `IDEA != REQUIREMENT`, `IDEA != TRUTH`, `IDEA != AUTHORITY`.
 
