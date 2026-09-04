@@ -23,6 +23,13 @@ from src.idea_evolution.service.contracts import (
     ServiceFailureType,
 )
 from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
+from src.idea_evolution.config.catalog import ModelCatalog
+from src.idea_evolution.config.cost_policy import (
+    ProviderConfig,
+    CostEligibility,
+    ZeroCostGuard,
+    sanitize_secret_text,
+)
 
 
 class IdeaEvolutionService:
@@ -37,11 +44,15 @@ class IdeaEvolutionService:
         default_treatment: TreatmentMode = TreatmentMode.LEAN_L1,
         runs_dir: Optional[Path] = None,
         negative_knowledge_pool: Optional[List[NegativeKnowledgeRecord]] = None,
+        provider_config: Optional[ProviderConfig] = None,
+        catalog: Optional[ModelCatalog] = None,
     ):
         self.runner = runner
         self.default_treatment = default_treatment
         self.runs_dir = runs_dir
         self.negative_knowledge_pool = negative_knowledge_pool or []
+        self.provider_config = provider_config
+        self.catalog = catalog or ModelCatalog()
 
     def evolve(self, request: EvolutionRequest) -> EvolutionResponse:
         """Executa a evolução de uma ideia conforme o contrato de requisição."""
@@ -62,17 +73,44 @@ class IdeaEvolutionService:
 
         treatment = request.treatment_mode or self.default_treatment
 
-        # 2. Rota Padrão de Produto: LEAN_L1 (Condição C)
+        # 2. Resolução e validação da fronteira de provedor e guarda de custo zero (P4)
+        effective_provider_config = request.provider_config or self.provider_config
+        if effective_provider_config is None:
+            effective_provider_config = ProviderConfig.infer_from_runner(
+                self.runner, model_name=request.model_name, catalog=self.catalog
+            )
+
+        is_valid, block_reason = ZeroCostGuard.validate_provider_config(
+            effective_provider_config, catalog=self.catalog
+        )
+        if not is_valid:
+            fail_type = (
+                ServiceFailureType.STRUCTURED_OUTPUT_FAILURE
+                if "STRUCTURED_OUTPUT" in (block_reason or "")
+                else ServiceFailureType.COST_POLICY_BLOCKED
+            )
+            return EvolutionResponse(
+                success=False,
+                run_id=run_id_str,
+                treatment_used=treatment,
+                raw_idea=request.raw_idea or "",
+                terminal_status="COST_POLICY_BLOCKED" if fail_type == ServiceFailureType.COST_POLICY_BLOCKED else "STRUCTURED_OUTPUT_FAILURE",
+                failure_type=fail_type,
+                error_message=sanitize_secret_text(block_reason or "Bloqueado pela governança de custo zero."),
+                provider_config=effective_provider_config,
+            )
+
+        # 3. Rota Padrão de Produto: LEAN_L1 (Condição C)
         if treatment == TreatmentMode.LEAN_L1:
-            return self._execute_lean(request, run_id_str)
+            return self._execute_lean(request, run_id_str, provider_config=effective_provider_config)
 
-        # 3. Rota de Contingência / Sanity: FAST_FALLBACK (Condição A)
+        # 4. Rota de Contingência / Sanity: FAST_FALLBACK (Condição A)
         elif treatment == TreatmentMode.FAST_FALLBACK:
-            return self._execute_fast_fallback(request, run_id_str)
+            return self._execute_fast_fallback(request, run_id_str, provider_config=effective_provider_config)
 
-        # 4. Rota Suspensa de Pesquisa: SUSPENDED_DEEP_LOOP (Condição B)
+        # 5. Rota Suspensa de Pesquisa: SUSPENDED_DEEP_LOOP (Condição B)
         elif treatment == TreatmentMode.SUSPENDED_DEEP_LOOP:
-            return self._execute_suspended_deep_loop(request, run_id_str)
+            return self._execute_suspended_deep_loop(request, run_id_str, provider_config=effective_provider_config)
 
         else:
             return EvolutionResponse(
@@ -83,6 +121,7 @@ class IdeaEvolutionService:
                 terminal_status="UNKNOWN_TREATMENT",
                 failure_type=ServiceFailureType.INVALID_INPUT,
                 error_message=f"Modo de tratamento desconhecido: {treatment}",
+                provider_config=effective_provider_config,
             )
 
     def evolve_idea(
@@ -91,6 +130,7 @@ class IdeaEvolutionService:
         treatment_mode: TreatmentMode = TreatmentMode.LEAN_L1,
         run_id: Optional[str] = None,
         model_name: Optional[str] = None,
+        provider_config: Optional[ProviderConfig] = None,
     ) -> EvolutionResponse:
         """Método de conveniência para invocar o serviço a partir de texto cru."""
         req = EvolutionRequest(
@@ -98,6 +138,7 @@ class IdeaEvolutionService:
             treatment_mode=treatment_mode,
             run_id=run_id,
             model_name=model_name,
+            provider_config=provider_config,
         )
         return self.evolve(req)
 
@@ -105,7 +146,12 @@ class IdeaEvolutionService:
     # Executores Internos
     # ---------------------------------------------------------------------------
 
-    def _execute_lean(self, request: EvolutionRequest, run_id: str) -> EvolutionResponse:
+    def _execute_lean(
+        self,
+        request: EvolutionRequest,
+        run_id: str,
+        provider_config: Optional[ProviderConfig] = None,
+    ) -> EvolutionResponse:
         """Delega a execução ao orquestrador imutável LeanLoopRunner."""
         lean_runner = LeanLoopRunner(
             runner=self.runner,
@@ -120,14 +166,17 @@ class IdeaEvolutionService:
                 run_id=run_id,
             )
         except Exception as e:
+            err_sanitized = sanitize_secret_text(str(e))
+            fail_type = self._classify_error(err_sanitized, default=ServiceFailureType.INTERNAL_APPLICATION_FAILURE)
             return EvolutionResponse(
                 success=False,
                 run_id=run_id,
                 treatment_used=TreatmentMode.LEAN_L1,
                 raw_idea=request.raw_idea,
-                terminal_status="INTERNAL_APPLICATION_FAILURE",
-                failure_type=ServiceFailureType.INTERNAL_APPLICATION_FAILURE,
-                error_message=f"Exceção não tratada na camada de serviço: {str(e)}",
+                terminal_status="INTERNAL_APPLICATION_FAILURE" if fail_type == ServiceFailureType.INTERNAL_APPLICATION_FAILURE else fail_type.value,
+                failure_type=fail_type,
+                error_message=f"Falha na camada de serviço: {err_sanitized}",
+                provider_config=provider_config,
             )
 
         # Mapeamento do resultado do Lean L1
@@ -135,7 +184,16 @@ class IdeaEvolutionService:
 
         # Caso de falha na primeira passada (ex: erro de provider ou JSON corrompido)
         if status == "FIRST_PASS_FAILED":
-            failure_type = ServiceFailureType.STRUCTURED_OUTPUT_FAILURE
+            raw_err = ""
+            if lean_res.final_markdown and "Não foi possível gerar a análise inicial da ideia:" in lean_res.final_markdown:
+                raw_err = lean_res.final_markdown.split("Não foi possível gerar a análise inicial da ideia:")[-1].strip()
+            err_sanitized = sanitize_secret_text(raw_err)
+            failure_type = self._classify_error(err_sanitized, default=ServiceFailureType.STRUCTURED_OUTPUT_FAILURE)
+            err_msg = (
+                f"Falha na análise inicial da ideia pelo modelo: {err_sanitized}"
+                if err_sanitized
+                else "Falha na análise inicial da ideia pelo modelo."
+            )
             return EvolutionResponse(
                 success=False,
                 run_id=lean_res.run_id,
@@ -145,8 +203,9 @@ class IdeaEvolutionService:
                 total_model_calls=lean_res.total_model_calls,
                 decision_progress_detected=False,
                 failure_type=failure_type,
-                error_message="Falha na análise inicial da ideia pelo modelo.",
+                error_message=err_msg,
                 lean_result=lean_res,
+                provider_config=provider_config,
             )
 
         # Parada deliberada por decisão normativa humana (não é crash!)
@@ -175,9 +234,15 @@ class IdeaEvolutionService:
             failure_type=fail_type,
             lean_result=lean_res,
             artifact=artifact,
+            provider_config=provider_config,
         )
 
-    def _execute_fast_fallback(self, request: EvolutionRequest, run_id: str) -> EvolutionResponse:
+    def _execute_fast_fallback(
+        self,
+        request: EvolutionRequest,
+        run_id: str,
+        provider_config: Optional[ProviderConfig] = None,
+    ) -> EvolutionResponse:
         """Executa a Condição A (Baseline) como fallback rápido explícito."""
         baseline_runner = BaselineRunner(
             runner=self.runner,
@@ -191,18 +256,22 @@ class IdeaEvolutionService:
                 runs_dir=self.runs_dir,
             )
         except Exception as e:
+            err_sanitized = sanitize_secret_text(str(e))
+            fail_type = self._classify_error(err_sanitized, default=ServiceFailureType.INTERNAL_APPLICATION_FAILURE)
             return EvolutionResponse(
                 success=False,
                 run_id=run_id,
                 treatment_used=TreatmentMode.FAST_FALLBACK,
                 raw_idea=request.raw_idea,
                 terminal_status="INTERNAL_APPLICATION_FAILURE",
-                failure_type=ServiceFailureType.INTERNAL_APPLICATION_FAILURE,
-                error_message=f"Exceção no fallback rápido: {str(e)}",
+                failure_type=fail_type,
+                error_message=f"Exceção no fallback rápido: {err_sanitized}",
+                provider_config=provider_config,
             )
 
         success = base_res.get("success", False)
         error_msg = base_res.get("error")
+        sanitized_error = sanitize_secret_text(error_msg) if error_msg else None
 
         artifact = None
         if success:
@@ -214,6 +283,8 @@ class IdeaEvolutionService:
                 provider=getattr(self.runner, "provider", None),
             )
 
+        fail_type = None if success else self._classify_error(sanitized_error or "", default=ServiceFailureType.PROVIDER_FAILURE)
+
         return EvolutionResponse(
             success=success,
             run_id=run_id,
@@ -221,13 +292,19 @@ class IdeaEvolutionService:
             raw_idea=request.raw_idea,
             terminal_status="COMPLETED" if success else "BASELINE_FAILED",
             total_model_calls=1,
-            failure_type=None if success else ServiceFailureType.PROVIDER_FAILURE,
-            error_message=error_msg,
+            failure_type=fail_type,
+            error_message=sanitized_error,
             baseline_result=base_res,
             artifact=artifact,
+            provider_config=provider_config,
         )
 
-    def _execute_suspended_deep_loop(self, request: EvolutionRequest, run_id: str) -> EvolutionResponse:
+    def _execute_suspended_deep_loop(
+        self,
+        request: EvolutionRequest,
+        run_id: str,
+        provider_config: Optional[ProviderConfig] = None,
+    ) -> EvolutionResponse:
         """Execução controlada da Condição B para pesquisa interna/experimental."""
         if not request.allow_experimental_deep_loop:
             return EvolutionResponse(
@@ -241,6 +318,7 @@ class IdeaEvolutionService:
                     "A Condição B (Simple Loop) está formalmente suspensa do caminho padrão de produto V1. "
                     "Para fins exclusivos de pesquisa interna isolada, passe allow_experimental_deep_loop=True."
                 ),
+                provider_config=provider_config,
             )
 
         simple_runner = SimpleLoopRunner(
@@ -255,14 +333,17 @@ class IdeaEvolutionService:
                 run_id=run_id,
             )
         except Exception as e:
+            err_sanitized = sanitize_secret_text(str(e))
+            fail_type = self._classify_error(err_sanitized, default=ServiceFailureType.INTERNAL_APPLICATION_FAILURE)
             return EvolutionResponse(
                 success=False,
                 run_id=run_id,
                 treatment_used=TreatmentMode.SUSPENDED_DEEP_LOOP,
                 raw_idea=request.raw_idea,
                 terminal_status="INTERNAL_APPLICATION_FAILURE",
-                failure_type=ServiceFailureType.INTERNAL_APPLICATION_FAILURE,
-                error_message=f"Exceção no loop profundo suspenso: {str(e)}",
+                failure_type=fail_type,
+                error_message=f"Exceção no loop profundo suspenso: {err_sanitized}",
+                provider_config=provider_config,
             )
 
         stat_val = state.status.value if hasattr(state, "status") else getattr(state, "run_status", "COMPLETED")
@@ -285,4 +366,26 @@ class IdeaEvolutionService:
             total_model_calls=getattr(state, "reconstruction_attempts", 0) + 1,  # Telemetria nominal
             failure_type=None if success else ServiceFailureType.DOMAIN_DECISION_OR_STOP,
             artifact=artifact,
+            provider_config=provider_config,
         )
+
+    @staticmethod
+    def _classify_error(
+        err_text: str,
+        default: ServiceFailureType = ServiceFailureType.PROVIDER_FAILURE,
+    ) -> ServiceFailureType:
+        """Classifica erros de provedor/transporte na taxonomia tipada de ServiceFailureType."""
+        low = err_text.lower()
+        if any(k in low for k in ["401", "403", "unauthorized", "api_key_absent", "forbidden", "auth_failure", "invalid api key"]):
+            return ServiceFailureType.PROVIDER_AUTH_FAILURE
+        if any(k in low for k in ["429", "rate limit", "rate_limit", "quota", "too many requests", "tpm", "rpm"]):
+            return ServiceFailureType.PROVIDER_RATE_LIMIT
+        if any(k in low for k in ["500", "502", "503", "504", "internal server error", "bad gateway", "service unavailable", "gateway timeout"]):
+            return ServiceFailureType.PROVIDER_SERVER_FAILURE
+        if any(k in low for k in ["connection refused", "timeout", "timed out", "urlopen error", "network unreachable", "dns", "connection reset"]):
+            return ServiceFailureType.PROVIDER_UNAVAILABLE
+        if any(k in low for k in ["cost_policy", "cost_limit", "unknown_cost"]):
+            return ServiceFailureType.COST_POLICY_BLOCKED
+        if any(k in low for k in ["validation_error", "json_schema", "schema_invalid", "jsondecodeerror", "structured_output"]):
+            return ServiceFailureType.STRUCTURED_OUTPUT_FAILURE
+        return default

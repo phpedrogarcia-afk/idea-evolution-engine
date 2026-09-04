@@ -14,12 +14,18 @@ from pydantic import BaseModel, Field
 
 from src.idea_evolution.orchestration.lean_loop import LeanRunResult
 from src.idea_evolution.artifacts.evolution_artifact import EvolutionArtifact, TreatmentMode
+from src.idea_evolution.config.cost_policy import ProviderConfig
 
 
 class ServiceFailureType(str, Enum):
     """Taxonomia tipada de desfechos operacionais e falhas do serviço."""
     INVALID_INPUT = "INVALID_INPUT"
     PROVIDER_FAILURE = "PROVIDER_FAILURE"
+    PROVIDER_AUTH_FAILURE = "PROVIDER_AUTH_FAILURE"
+    PROVIDER_RATE_LIMIT = "PROVIDER_RATE_LIMIT"
+    PROVIDER_SERVER_FAILURE = "PROVIDER_SERVER_FAILURE"
+    PROVIDER_UNAVAILABLE = "PROVIDER_UNAVAILABLE"
+    COST_POLICY_BLOCKED = "COST_POLICY_BLOCKED"
     STRUCTURED_OUTPUT_FAILURE = "STRUCTURED_OUTPUT_FAILURE"
     DOMAIN_DECISION_OR_STOP = "DOMAIN_DECISION_OR_STOP"
     INTERNAL_APPLICATION_FAILURE = "INTERNAL_APPLICATION_FAILURE"
@@ -34,6 +40,7 @@ class EvolutionRequest(BaseModel):
     treatment_mode: TreatmentMode = TreatmentMode.LEAN_L1
     run_id: Optional[str] = None
     model_name: Optional[str] = None
+    provider_config: Optional[ProviderConfig] = None
     metadata: Dict[str, Any] = Field(default_factory=dict)
     allow_experimental_deep_loop: bool = False  # Trava explícita contra uso acidental de Condição B
 
@@ -64,4 +71,5 @@ class EvolutionResponse(BaseModel):
     lean_result: Optional[LeanRunResult] = None
     baseline_result: Optional[Dict[str, Any]] = None
     artifact: Optional[EvolutionArtifact] = None
+    provider_config: Optional[ProviderConfig] = None
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())

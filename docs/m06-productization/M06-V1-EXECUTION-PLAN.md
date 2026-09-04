@@ -74,17 +74,20 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 4 (P4) — Fronteira de Provedor e Guard de Custo Zero
-- **Objetivo:** Isolar o `ProviderAdapter` para desacoplar a inferência do provedor físico atual, implementando o guard determinístico contra qualquer chamada paga (`OUT_OF_POCKET_COST = ZERO`).
+### Fase 4 (P4) — Fronteira de Provedor e Guard de Custo Zero — `COMPLETED`
+- **Status:** `COMPLETED` (Ver [`M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md`](M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md))
+- **Objetivo:** Estabelecer a fronteira operacional desacoplada de provedor, reutilizando o `ModelRunner` sem duplicações e implementando o guard determinístico contra qualquer chamada paga (`OUT_OF_POCKET_COST = ZERO`, `PAID_INFERENCE_ALLOWED = NO`, `UNKNOWN_COST_FAIL_CLOSED = YES`).
 - **Arquivos Afetados:**
-  - `src/idea_evolution/providers/adapter.py` [NEW]
   - `src/idea_evolution/config/cost_policy.py` [NEW]
+  - `src/idea_evolution/service/contracts.py` [MODIFY]
+  - `src/idea_evolution/service/evolution_service.py` [MODIFY]
+  - `tests/test_fioideias_v1_provider_guard.py` [NEW]
 - **Oportunidades de Reuso:**
-  - `NativeModelRunner` (`providers/native.py`).
-  - `CerebrasModelRunner` (`providers/cerebras.py`).
-  - Mecanismos de preflight e ledger de tokens já construídos em M05.5R2.
-- **Testes de Aceite:** Testes unitários comprovando que ausência de chave ou rate limit (429) emite erro tipado fail-closed, sem qualquer tentativa de fallback pago.
-- **Condição de Parada:** Guard de custo zero ativo e testado offline.
+  - `ModelRunner` (`providers/base.py` - frozen).
+  - `ModelCatalog`, `CostClass`, `LifecycleStatus` (`config/catalog.py`).
+  - `CerebrasRunner` (`providers/cerebras.py`).
+- **Testes de Aceite:** 20 testes determinísticos passando em `tests/test_fioideias_v1_provider_guard.py`. Total da suíte: 403 testes verdes.
+- **Condição de Parada:** Satisfeita. `EXISTING_PROVIDER_ABSTRACTION_REUSED = YES`, `NEW_PROVIDER_ABSTRACTION_CREATED = NO`, `OUT_OF_POCKET_COST = ZERO`, `LEAN_CORE_HASH_MATCH = YES`.
 
 ---
 
