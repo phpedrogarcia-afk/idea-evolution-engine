@@ -144,14 +144,21 @@ O plano de transição é dividido em 8 fases delimitadas e auditáveis, prioriz
 
 ---
 
-### Fase 8 (P8) — Congelamento Final do Produto V1 & Documentação
-- **Objetivo:** Atualizar a documentação viva (`CURRENT-STATE.md`, `ACTIVE-QUEUE.md`, `INDEX.md`) e congelar a versão V1.
-- **Arquivos Afetados:**
-  - `docs/context/CURRENT-STATE.md`
-  - `docs/context/ACTIVE-QUEUE.md`
-  - `docs/INDEX.md`
-- **Testes de Aceite:** `test_continuity.py` verde, suíte completa aprovada, worktree limpa e commit final de produto registrado.
-- **Condição de Parada:** Tag ou release de produto V1 formalizada.
+### Fase 8 (P8) — Congelamento Final do Produto V1 & Documentação — `COMPLETED`
+- **Status:** `COMPLETED` (Ver [`M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md`](M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md), [`M06-CLOSURE-RECORD.md`](M06-CLOSURE-RECORD.md), [`FIOIDEIAS-V1-RELEASE-MANIFEST.json`](../../FIOIDEIAS-V1-RELEASE-MANIFEST.json))
+- **Objetivo:** Auditar metadados de empacotamento, atualizar a documentação viva do repositório (`README.md`, `CURRENT-STATE.md`, `ACTIVE-QUEUE.md`, `INDEX.md`), verificar a integridade invariante do núcleo científico, gerar manifesto de release e formalizar a versão canônica 1.0.0 (`v1.0.0`).
+- **Arquivos Criados/Afetados:**
+  - `pyproject.toml` [MODIFY - versão 1.0.0 e metadados refinados]
+  - `README.md` [MODIFY - quickstart e documentação canônica de usuário do V1]
+  - `FIOIDEIAS-V1-RELEASE-MANIFEST.json` [NEW - manifesto legível por máquina]
+  - `docs/m06-productization/M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md` [NEW - registro de congelamento]
+  - `docs/m06-productization/M06-CLOSURE-RECORD.md` [NEW - encerramento formal do programa M06]
+  - `docs/m06-productization/M06-V1-ACCEPTANCE-GATES.md` [MODIFY - status PASS em todos os 12 portões]
+  - `docs/context/CURRENT-STATE.md` [MODIFY - snapshot de produto released]
+  - `docs/context/ACTIVE-QUEUE.md` [MODIFY - encerramento do M06]
+  - `docs/INDEX.md` [MODIFY - indexação dos artefatos finais]
+- **Testes de Aceite:** 445/445 testes passando, integridade do hash do núcleo científico intacta (`LEAN_CORE_HASH_MATCH = YES`), worktree limpa e tag `v1.0.0` gerada.
+- **Condição de Parada:** Satisfeita. `FIOIDEIAS_V1_STATUS = RELEASED`, `M06_STATUS = COMPLETE`. Parada definitiva para decisão humana sobre próximos passos pós-V1.
 
 ---
 

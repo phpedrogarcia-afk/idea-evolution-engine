@@ -37,8 +37,14 @@
   - [`docs/m06-productization/M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md`](../m06-productization/M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md)
   - [`docs/m06-productization/M06-P7-REAL-E2E-RESULTS.json`](../m06-productization/M06-P7-REAL-E2E-RESULTS.json)
   - [`docs/m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md`](../m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md)
+  - [`docs/m06-productization/M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md`](../m06-productization/M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md)
+  - [`docs/m06-productization/M06-CLOSURE-RECORD.md`](../m06-productization/M06-CLOSURE-RECORD.md)
+  - [`FIOIDEIAS-V1-RELEASE-MANIFEST.json`](../../FIOIDEIAS-V1-RELEASE-MANIFEST.json)
+- **Versão do Produto:** `1.0.0` (Tag: `v1.0.0`)
+- **Status do Produto:** `RELEASED`
+- **Status do M06:** `COMPLETE`
 - **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
-- **Último Estado Seguro (Last Known Good):** `CP-20260901-015`
+- **Último Estado Seguro (Last Known Good):** `v1.0.0`
 - **Git Branch:** `main`
 - **Worktree:** `CLEAN`
 
@@ -47,13 +53,14 @@
 ## 2. Status do Trabalho
 
 - **Último Trabalho Concluído:**
-  - Execução e auditoria formal da Fase P7 (Real End-to-End V1 Acceptance): Execução de 8 casos reais de teste de aceitação através da CLI pública `iee evolve` sob o provedor `cerebras` com custo de bolso zero (`$0.00`). Persistência canônica de `evolution_artifact.json` em cada run (`runs/<run_id>/evolution_artifact.json`). Todos os 8 casos reais geraram artefatos válidos e saídas renderizadas limpas via `HumanResultRenderer`. 2 casos acionaram escalação focada e 6 casos identificaram necessidade de decisão humana soberana (`HUMAN_DECISION_REQUIRED`), contendo o consumo de chamadas (média 1.25 chamadas/run). Smoke test de Condição A (`--fast`) aprovado em 1 chamada. Teste negativo de Condição B rejeitado com sucesso pelo parser da CLI. Todos os 12 portões de aceitação do V1 satisfeitos (`P7_ACCEPTANCE = PASS`, `V1_BLOCKERS = 0`).
+  - Conclusão da Fase P8 (Final Freeze & Release): Auditoria e congelamento dos metadados de empacotamento (`pyproject.toml` na versão `1.0.0`), atualização do guia canônico do usuário (`README.md`), geração do manifesto de release legível por máquina (`FIOIDEIAS-V1-RELEASE-MANIFEST.json`), registro formal de encerramento do Programa M06 (`M06-CLOSURE-RECORD.md`) e registro de congelamento final (`M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md`).
   - Verificação de integridade do Núcleo Científico: `LEAN_CORE_HASH_MATCH = YES` (`e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600`).
-  - Suíte completa de regressão: 445/445 testes passando.
+  - Suíte completa de regressão: 445/445 testes determinísticos verdes.
+  - Custo de Bolso e chamadas reais de modelo na P8: `0` chamadas (`$0.00`).
 - **Tarefa Ativa Atual:**
-  - `M06-P7-REAL-E2E-ACCEPTANCE`: Concluída e registrada. Trabalho formalmente paralisado para revisão do supervisor antes de qualquer início da Fase P8 (Product V1 Freeze).
+  - `M06-P8-FINAL-FREEZE-AND-RELEASE`: Concluída e congelada. FioIdeias V1 lançado formalmente.
 - **Próximo Passo Exato:**
-  - Supervisor revisa a entrega da Fase P7 e o pacote humano (`docs/m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md`), autorizando formalmente o avanço para a Fase P8 (Congelamento Final do Produto V1 & Documentação).
+  - Parada formal conforme doutrina. Decisão humana soberana sobre os rumos futuros do ecossistema após o lançamento da V1.
 
 ---
 

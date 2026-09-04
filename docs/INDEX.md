@@ -92,4 +92,17 @@
 | [`M06-V1-ARCHITECTURE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-V1-ARCHITECTURE.md) | Arquitetura de produto, contratos de usuário e fronteiras de serviço |
 | [`M06-V1-EXECUTION-PLAN.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-V1-EXECUTION-PLAN.md) | Plano sequencial de implementação em 8 fases (P1 a P8) |
 | [`M06-V1-ACCEPTANCE-GATES.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-V1-ACCEPTANCE-GATES.md) | 12 portões de aceitação verificáveis e não-objetivos explícitos |
+| [`M06-P1-SERVICE-BOUNDARY-COMPLETION-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P1-SERVICE-BOUNDARY-COMPLETION-RECORD.md) | Registro de conclusão da Fase P1 (Service Boundary) |
+| [`M06-P2-EVOLUTION-ARTIFACT-COMPLETION-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P2-EVOLUTION-ARTIFACT-COMPLETION-RECORD.md) | Registro de conclusão da Fase P2 (EvolutionArtifact v1.0) |
+| [`M06-P3-PROVENANCE-ONTOLOGY-COMPLETION-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P3-PROVENANCE-ONTOLOGY-COMPLETION-RECORD.md) | Registro de conclusão da Fase P3 (Provenance & Ontology Guard) |
+| [`M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P4-PROVIDER-BOUNDARY-COMPLETION-RECORD.md) | Registro de conclusão da Fase P4 (Zero-Cost Guard) |
+| [`M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P5-STABLE-ENTRY-POINT-COMPLETION-RECORD.md) | Registro de conclusão da Fase P5 (CLI `iee evolve`) |
+| [`M06-P6-HUMAN-RESULT-RENDERER-COMPLETION-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P6-HUMAN-RESULT-RENDERER-COMPLETION-RECORD.md) | Registro de conclusão da Fase P6 (Human Result Renderer) |
+| [`M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P7-REAL-E2E-ACCEPTANCE-RECORD.md) | Registro de conclusão da Fase P7 (Casos Reais E2E) |
+| [`M06-P7-HUMAN-ACCEPTANCE-PACKET.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P7-HUMAN-ACCEPTANCE-PACKET.md) | Pacote de Aceite Humano com as saídas renderizadas dos 8 casos |
+| [`M06-P7-REAL-E2E-RESULTS.json`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P7-REAL-E2E-RESULTS.json) | Dados brutos e metadados dos 8 casos de teste E2E |
+| [`M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-P8-FIOIDEIAS-V1-FINAL-FREEZE.md) | Registro de congelamento final e liberação da versão 1.0.0 |
+| [`M06-CLOSURE-RECORD.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/m06-productization/M06-CLOSURE-RECORD.md) | Registro formal de encerramento do Programa M06 |
+| [`FIOIDEIAS-V1-RELEASE-MANIFEST.json`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/FIOIDEIAS-V1-RELEASE-MANIFEST.json) | Manifesto de release legível por máquina do produto V1 |
+
 
