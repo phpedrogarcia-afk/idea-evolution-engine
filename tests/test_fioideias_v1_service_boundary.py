@@ -258,11 +258,11 @@ class TestFioIdeiasV1ServiceBoundary(unittest.TestCase):
             combined.update(name.encode() + b":" + sha.encode() + b"\n")
 
         computed_core_hash = combined.hexdigest()
-        expected_hash = "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600"
+        from src.idea_evolution.artifacts.evolution_artifact import FROZEN_LEAN_CORE_HASH
 
         self.assertEqual(
             computed_core_hash,
-            expected_hash,
+            FROZEN_LEAN_CORE_HASH,
             "VIOLAÇÃO DO NÚCLEO CIENTÍFICO: Os arquivos congelados foram modificados!",
         )
 

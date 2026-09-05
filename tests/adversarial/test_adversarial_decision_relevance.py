@@ -1,0 +1,497 @@
+"""
+tests/adversarial/test_adversarial_decision_relevance.py
+Suíte de testes adversariais e de conformidade para Relevância Decisória e Qualidade de Resposta
+(FIOIDEIAS-V1.1-RQ-01).
+
+Cobre:
+1. Caso Canônico de Regressão WhatsApp SaaS em Descoberta (Severity != Priority).
+2. Contra-regressão de Segurança em Pré-Produção (Segurança torna-se prioridade agora).
+3. Caso de Controle com Solicitação Explícita de Segurança pelo Usuário.
+4. Caso de Controle com Bloqueador Fatal de Viabilidade Técnica.
+5. Caso de Controle com Decisão Normativa Humana Soberana (Zero chamadas extras).
+6. Caso de Mecanismos Concorrentes com Linha de Base de Status Quo Gratuito.
+7. Guarda contra Falsa Precisão Numérica (<200 ms sem evidência).
+8. Preservação de Critérios Estruturados de Falseamento.
+9. Invariantes de Autoridade e Prova de Proveniência (USER_EXPLICIT, VALID_USER_DERIVATION, MODEL_HYPOTHESIS).
+10. Rubrica de Avaliação de Qualidade Humana por Dimensão.
+11. Invariante Lean L1: max_model_calls <= 2.
+"""
+
+import unittest
+import tempfile
+from pathlib import Path
+from typing import Dict, Any
+
+from src.idea_evolution.domain.state import PromotionAuthorityBasis, OntologyState
+from src.idea_evolution.domain.epistemic_contracts import SourceAnchor
+from src.idea_evolution.domain.decision_relevance import (
+    IdeaStage,
+    RiskCategory,
+    DecisionRelevance,
+    AlternativeCategory,
+    FalsificationCriterion,
+    FalsePrecisionGuard,
+    DecisionRelevancePolicy,
+    NextActionArbitrationPolicy,
+)
+from src.idea_evolution.domain.early_epistemic_gate import (
+    LeanFirstPassOutput,
+    FocusedEscalationOutput,
+    LeanCandidateMechanism,
+    LeanVulnerability,
+    GateOutcome,
+    EscalationReason,
+    EarlyEpistemicGate,
+)
+from src.idea_evolution.orchestration.lean_loop import LeanLoopRunner, LEAN_L1_MAX_MODEL_CALLS
+from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
+from src.idea_evolution.providers.fake import FakeModelRunner
+
+
+def evaluate_human_quality_rubric(artifact) -> Dict[str, str]:
+    """
+    Rubrica determinística de avaliação de qualidade humana por dimensão (Seção 19).
+    NÃO emite score numérico artificial; emite julgamentos explícitos por dimensão.
+    """
+    judgments = {}
+
+    # 1. INTENT_FIDELITY
+    if artifact.original_idea.strip() and artifact.human_intent.strip():
+        judgments["INTENT_FIDELITY"] = "PASS_PRESERVED"
+    else:
+        judgments["INTENT_FIDELITY"] = "FAIL_DRIFT_OR_MISSING"
+
+    # 2. STAGE_ALIGNMENT
+    # Refinamento não pode se transformar em implementação de infraestrutura técnica se a ideia for inicial
+    is_infra = any(t in artifact.refined_idea.lower() for t in ["e2ee", "aes-256", "tls 1.3", "certificate pinning"])
+    if is_infra and not DecisionRelevancePolicy.is_user_explicit_security_request(artifact.original_idea):
+        judgments["STAGE_ALIGNMENT"] = "FAIL_TECH_INFRA_MUTATION"
+    else:
+        judgments["STAGE_ALIGNMENT"] = "PASS_ALIGNED"
+
+    # 3. DECISION_RELEVANCE
+    # Próximo passo não pode ser 'implementar criptografia' em descoberta
+    rec_lower = artifact.recommended_next_action.lower()
+    if any(kw in rec_lower for kw in ["implementar criptografia", "desenvolver e2ee", "configurar tls"]):
+        if not DecisionRelevancePolicy.is_user_explicit_security_request(artifact.original_idea):
+            judgments["DECISION_RELEVANCE"] = "FAIL_IRRELEVANT_IMPL_BEFORE_DISCOVERY"
+        else:
+            judgments["DECISION_RELEVANCE"] = "PASS_EXPLICIT_SECURITY"
+    else:
+        judgments["DECISION_RELEVANCE"] = "PASS_ACTIONABLE_NOW"
+
+    # 4. UNSUPPORTED_SPECIFICITY
+    has_unsupported_metrics = len(FalsePrecisionGuard.detect_unsupported_metrics(artifact.refined_idea, artifact.original_idea)) > 0
+    if has_unsupported_metrics:
+        judgments["UNSUPPORTED_SPECIFICITY"] = "FAIL_UNSUPPORTED_NUMERICAL_PRECISION"
+    else:
+        judgments["UNSUPPORTED_SPECIFICITY"] = "PASS_GUARDED"
+
+    # 5. FALSIFIABILITY
+    if any("validar" in rec_lower or "teste" in rec_lower or "entrevistar" in rec_lower or "falsifica" in rec_lower for _ in [1]):
+        judgments["FALSIFIABILITY"] = "PASS_EMPIRICALLY_TESTABLE"
+    else:
+        judgments["FALSIFIABILITY"] = "WEAK"
+
+    # 6. ACTIONABILITY
+    if artifact.recommended_next_action and len(artifact.recommended_next_action.strip()) > 10:
+        judgments["ACTIONABILITY"] = "PASS_CLEAR_NEXT_STEP"
+    else:
+        judgments["ACTIONABILITY"] = "FAIL_VAGUE"
+
+    # 7. AUTHORITY_PRESERVATION
+    if (
+        artifact.original_idea_authority == PromotionAuthorityBasis.USER_EXPLICIT
+        and artifact.intent_provenance in (PromotionAuthorityBasis.VALID_USER_DERIVATION, PromotionAuthorityBasis.USER_EXPLICIT)
+        and artifact.refined_idea_authority == PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    ):
+        judgments["AUTHORITY_PRESERVATION"] = "PASS_STRICT_BOUNDARIES"
+    else:
+        judgments["AUTHORITY_PRESERVATION"] = "FAIL_SPOOFED"
+
+    return judgments
+
+
+class TestAdversarialDecisionRelevance(unittest.TestCase):
+
+    def setUp(self):
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.runs_dir = Path(self.temp_dir.name)
+        self.whatsapp_idea = (
+            "Um SaaS para ajudar pequenas empresas a recuperar orçamentos e cotações esquecidas no WhatsApp. "
+            "O vendedor marca uma mensagem com a tag de cotação e o sistema agenda lembretes de follow-up automáticos."
+        )
+
+    def tearDown(self):
+        self.temp_dir.cleanup()
+
+    def test_whatsapp_saas_discovery_regression_case(self):
+        """
+        Caso Canônico de Regressão (Seção 16 & 21):
+        - Ideia em estágio de DESCOBERTA / VALIDAÇÃO.
+        - Risco de segurança/privacidade rotulado como HIGH severidade.
+        - Incertezas de negócio: adoção manual, disposição a pagar, status quo gratuito (etiquetas).
+        - A escalação NÃO pode priorizar segurança sobre falseamento de negócio.
+        - A ideia refinada NÃO pode mutar para arquitetura de criptografia (E2EE, AES-256).
+        - A métrica não ancorada '<200 ms' deve ser rejeitada/sanitizada.
+        - O próximo passo final DEVE pertencer à classe de falseamento de descoberta.
+        """
+        first_pass = {
+            "interpreted_problem": "Pequenas empresas perdem vendas porque cotações enviadas no WhatsApp são esquecidas sem follow-up.",
+            "human_intent": "Recuperar cotações esquecidas no WhatsApp com marcação simples e lembretes.",
+            "primary_mechanism": {
+                "mechanism": "Sistema de marcação manual com lembretes automáticos de follow-up para vendedores",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+                "justification": "Estrutura central extraída da ideia do usuário",
+                "tradeoffs": ["Depende da disciplina do vendedor em etiquetar"],
+                "alternative_category": "OTHER",
+            },
+            "competing_alternatives": [
+                {
+                    "mechanism": "Etiquetas nativas gratuitas do WhatsApp Business",
+                    "is_explicit_in_source": False,
+                    "claimed_basis": "MODEL_HYPOTHESIS",
+                    "justification": "Status quo gratuito utilizado atualmente",
+                    "tradeoffs": ["Gratuito, mas sem lembretes automatizados"],
+                    "alternative_category": "STATUS_QUO",
+                },
+                {
+                    "mechanism": "Planilha Excel / Google Sheets compartilhada",
+                    "is_explicit_in_source": False,
+                    "claimed_basis": "MODEL_HYPOTHESIS",
+                    "justification": "Substituto comum de baixo custo",
+                    "tradeoffs": ["Exige digitação dupla fora do WhatsApp"],
+                    "alternative_category": "SUBSTITUTE",
+                },
+            ],
+            "key_assumptions": [
+                "Vendedores esquecem de cobrar clientes",
+                "Lojistas estão dispostos a pagar mensalidade por isso",
+            ],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Vazamento de conversas e conformidade LGPD no armazenamento de chats",
+                    "why_it_matters": "Multas regulatórias e quebra de confiança dos clientes",
+                    "severity": "HIGH",
+                    "affected_aspect": "Privacidade",
+                    "category": "SECURITY",
+                    "decision_relevance": "LATER",
+                },
+                {
+                    "vulnerability": "Falta de adesão do vendedor em marcar mensagens manualmente",
+                    "why_it_matters": "Inviabiliza a captura das cotações na origem",
+                    "severity": "HIGH",
+                    "affected_aspect": "Adoção do Usuário",
+                    "category": "USER_BEHAVIOR",
+                    "decision_relevance": "CRITICAL_NOW",
+                },
+            ],
+            "remaining_uncertainties": [
+                "Disposição a pagar de pequenas empresas frente a etiquetas gratuitas",
+            ],
+            "requires_human_normative_choice": False,
+            "human_choice_description": "",
+            "proposed_next_action": "Validar com 5 lojistas se a dor de esquecimento compensa o atrito de marcação manual.",
+            "idea_stage": "DISCOVERY",
+            "idea_stage_justification": "Ideia conceitual inicial sem base de usuários ativos ou produto construído.",
+            "falsification_criteria": [
+                {
+                    "hypothesis": "Lojistas esquecem cotações e pagarão por follow-up",
+                    "what_would_kill_it": "Lojistas afirmarem que etiquetas gratuitas já resolvem 100% ou se recusarem a marcar manualmente",
+                    "lowest_cost_discriminating_test": "Teste concierge manual de 3 dias com 5 lojistas usando etiquetas",
+                }
+            ],
+            "engineering_requirements": [
+                "Criptografia de dados em repouso na infraestrutura de persistência"
+            ],
+        }
+
+        # Simulação da escalação focada que tentou mutar a hipótese para segurança e inventou <200ms
+        escalation_mutated = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "Sistema de marcação manual",
+            "focused_critique_or_analysis": "Análise de segurança: implementar TLS 1.3 e latência <200 ms.",
+            "resolved_tradeoffs": ["Adotada cifra AES-256"],
+            "discriminating_tests": ["Teste de penetração e auditoria criptográfica"],
+            "hypothesis_mutated": True,
+            "mutated_hypothesis_description": "Plataforma de mensagens com criptografia E2EE, cifra AES-256 e latência <200 ms",
+            "decision_progress_made": True,
+            "updated_next_action": "Implementar criptografia de ponta a ponta com E2EE e AES-256 no backend",
+            "candidate_updated_next_action": "Implementar criptografia de ponta a ponta com E2EE e AES-256 no backend",
+        }
+
+        fake_runner = FakeModelRunner(
+            custom_responses={
+                "LEAN_FIRST_PASS": first_pass,
+                "FOCUSED_ESCALATION": escalation_mutated,
+            }
+        )
+        lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = lean_runner.run(self.whatsapp_idea)
+
+        # Mapeia para EvolutionArtifact
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # 1. SEGURANÇA REGISTRADA E SEVERIDADE PRESERVADA
+        security_critiques = [c for c in artifact.critique if "lgpd" in c.vulnerability.lower() or "vazamento" in c.vulnerability.lower() or "segurança" in c.vulnerability.lower()]
+        self.assertTrue(len(security_critiques) >= 1)
+        self.assertEqual(security_critiques[0].severity, "HIGH")
+
+        # 2. SEGURANÇA NÃO SE TORNA A PRIORIDADE GLOBAL IMEDIATA (SEVERITY != PRIORITY)
+        # O gate priorizou a incerteza de USER_BEHAVIOR (CRITICAL_NOW) sobre a de SECURITY (LATER)
+        first_vuln = result.first_pass.material_vulnerabilities[0]
+        self.assertEqual(first_vuln.category, RiskCategory.SECURITY)
+        self.assertEqual(first_vuln.decision_relevance, DecisionRelevance.LATER)
+
+        user_behavior_vuln = result.first_pass.material_vulnerabilities[1]
+        self.assertEqual(user_behavior_vuln.category, RiskCategory.USER_BEHAVIOR)
+        self.assertEqual(user_behavior_vuln.decision_relevance, DecisionRelevance.CRITICAL_NOW)
+
+        # 3. HIPÓTESE DE PRODUTO NÃO FOI MUTADA PARA CRIPTOGRAFIA/SEGURANÇA
+        self.assertNotIn("E2EE", artifact.refined_idea)
+        self.assertNotIn("AES-256", artifact.refined_idea)
+        self.assertIn("marcação", artifact.refined_idea.lower())
+
+        # 4. AFIRMAÇÃO NÃO SUPORTADA DE LATÊNCIA <200 MS REJEITADA / REBAIXADA
+        self.assertNotIn("<200 ms", artifact.refined_idea)
+        for crit in artifact.critique:
+            self.assertNotIn("<200 ms", crit.vulnerability)
+
+        # 5. PRÓXIMO PASSO FINAL PERTENCE À CLASSE DE FALSEAMENTO DE DESCOBERTA
+        self.assertNotIn("implementar criptografia", artifact.recommended_next_action.lower())
+        self.assertNotIn("desenvolver e2ee", artifact.recommended_next_action.lower())
+        self.assertTrue(
+            "validar" in artifact.recommended_next_action.lower()
+            or "lojistas" in artifact.recommended_next_action.lower()
+            or "etiquetas" in artifact.recommended_next_action.lower()
+        )
+
+        # 6. RUBRICA DE AVALIAÇÃO DE QUALIDADE HUMANA
+        rubric = evaluate_human_quality_rubric(artifact)
+        self.assertEqual(rubric["INTENT_FIDELITY"], "PASS_PRESERVED")
+        self.assertEqual(rubric["STAGE_ALIGNMENT"], "PASS_ALIGNED")
+        self.assertEqual(rubric["DECISION_RELEVANCE"], "PASS_ACTIONABLE_NOW")
+        self.assertEqual(rubric["UNSUPPORTED_SPECIFICITY"], "PASS_GUARDED")
+        self.assertEqual(rubric["FALSIFIABILITY"], "PASS_EMPIRICALLY_TESTABLE")
+        self.assertEqual(rubric["ACTIONABILITY"], "PASS_CLEAR_NEXT_STEP")
+        self.assertEqual(rubric["AUTHORITY_PRESERVATION"], "PASS_STRICT_BOUNDARIES")
+
+    def test_preproduction_security_countercase(self):
+        """
+        Contra-regressão de Segurança em Pré-Produção (Seção 17):
+        - Estágio = PRE_PRODUCTION.
+        - Hipótese de negócio já validada.
+        - Defeito crítico de segurança existente.
+        - O sistema DEVE reconhecer que em PRE_PRODUCTION, segurança HIGH é CRITICAL_NOW!
+        """
+        first_pass = LeanFirstPassOutput(
+            interpreted_problem="Processamento de pagamentos médicos em fase final de homologação.",
+            human_intent="Homologar gateway de pagamento para clínicas médicas.",
+            primary_mechanism=LeanCandidateMechanism(
+                mechanism="Gateway de checkout com conciliação bancária",
+                is_explicit_in_source=True,
+                claimed_basis=PromotionAuthorityBasis.USER_EXPLICIT,
+                justification="Definido pelo usuário",
+            ),
+            key_assumptions=[],
+            material_ambiguities=[],
+            material_vulnerabilities=[
+                LeanVulnerability(
+                    vulnerability="Tokens de API de provedor e chaves privadas expostos em logs de auditoria",
+                    why_it_matters="Comprometimento total das credenciais financeiras da clínica",
+                    severity="HIGH",
+                    category=RiskCategory.SECURITY,
+                    decision_relevance=DecisionRelevance.UNKNOWN,
+                )
+            ],
+            remaining_uncertainties=[],
+            requires_human_normative_choice=False,
+            proposed_next_action="Realizar lançamento piloto com 10 clínicas.",
+            idea_stage=IdeaStage.PRE_PRODUCTION,
+        )
+
+        anchor = SourceAnchor.create_human_input_anchor("Homologação de pagamentos médicos pré-produção")
+        eval_result = EarlyEpistemicGate.evaluate(
+            source_anchor=anchor,
+            first_pass=first_pass,
+        )
+
+        # Em PRE_PRODUCTION, segurança HIGH legítima DEVE ser escalada como prioridade agora
+        self.assertEqual(eval_result.outcome, GateOutcome.ESCALATE_FOCUSED)
+        self.assertEqual(eval_result.escalation_reason, EscalationReason.MATERIAL_VULNERABILITY)
+        self.assertEqual(first_pass.material_vulnerabilities[0].decision_relevance, DecisionRelevance.CRITICAL_NOW)
+        self.assertIn("CRITICAL_NOW", eval_result.rent_record.expected_decision_delta)
+
+    def test_explicit_user_security_request_case(self):
+        """
+        Caso de Controle: Solicitação Explícita de Segurança pelo Usuário (Seção 18).
+        Mesmo em estágio DISCOVERY, se o usuário pede expressamente análise de segurança,
+        a segurança DEVE ser tratada como prioridade imediata.
+        """
+        idea_with_security_prompt = "Preciso de uma análise rigorosa da segurança e privacidade dos dados de um SaaS de mensagens."
+        first_pass = LeanFirstPassOutput(
+            interpreted_problem="Análise de riscos de segurança em mensagens.",
+            human_intent="Avaliar postura de segurança e privacidade.",
+            primary_mechanism=LeanCandidateMechanism(
+                mechanism="Arquitetura de mensageria com auditoria de segurança",
+                is_explicit_in_source=False,
+                claimed_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+            ),
+            material_vulnerabilities=[
+                LeanVulnerability(
+                    vulnerability="Ausência de rotação de chaves e risco de interceptação",
+                    why_it_matters="Vulnerabilidade crítica de segurança",
+                    severity="HIGH",
+                    category=RiskCategory.SECURITY,
+                )
+            ],
+            idea_stage=IdeaStage.DISCOVERY,
+        )
+
+        anchor = SourceAnchor.create_human_input_anchor(idea_with_security_prompt)
+        eval_result = EarlyEpistemicGate.evaluate(
+            source_anchor=anchor,
+            first_pass=first_pass,
+        )
+
+        self.assertEqual(eval_result.outcome, GateOutcome.ESCALATE_FOCUSED)
+        self.assertEqual(eval_result.escalation_reason, EscalationReason.MATERIAL_VULNERABILITY)
+        self.assertEqual(first_pass.material_vulnerabilities[0].decision_relevance, DecisionRelevance.CRITICAL_NOW)
+
+    def test_technical_feasibility_blocker_case(self):
+        """
+        Caso de Controle: Bloqueador Fatal de Viabilidade Técnica em Descoberta (Seção 18).
+        Uma inviabilidade técnica central (ex: API impossível) em DISCOVERY é CRITICAL_NOW.
+        """
+        first_pass = LeanFirstPassOutput(
+            interpreted_problem="Integração de WhatsApp.",
+            human_intent="Automatizar leitura de WhatsApp pessoal.",
+            primary_mechanism=LeanCandidateMechanism(
+                mechanism="Interceptação direta de pacotes do WhatsApp sem API oficial",
+                is_explicit_in_source=False,
+                claimed_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+            ),
+            material_vulnerabilities=[
+                LeanVulnerability(
+                    vulnerability="Bloqueio imediato do chip e banimento permanente da conta pelo WhatsApp por tráfego não oficial",
+                    why_it_matters="Inviabiliza totalmente a operação do produto no dia 1",
+                    severity="HIGH",
+                    category=RiskCategory.TECHNICAL_FEASIBILITY,
+                )
+            ],
+            idea_stage=IdeaStage.DISCOVERY,
+        )
+
+        anchor = SourceAnchor.create_human_input_anchor("Automação de WhatsApp via interceptação de pacotes")
+        eval_result = EarlyEpistemicGate.evaluate(
+            source_anchor=anchor,
+            first_pass=first_pass,
+        )
+
+        self.assertEqual(eval_result.outcome, GateOutcome.ESCALATE_FOCUSED)
+        self.assertEqual(eval_result.escalation_reason, EscalationReason.MATERIAL_VULNERABILITY)
+        self.assertEqual(first_pass.material_vulnerabilities[0].decision_relevance, DecisionRelevance.CRITICAL_NOW)
+
+    def test_human_normative_choice_control_case(self):
+        """
+        Caso de Controle: Decisão Normativa Humana Soberana (Seção 18).
+        Missing Human Authority -> REQUEST_HUMAN_DECISION com 0 chamadas adicionais de IA.
+        """
+        first_pass = {
+            "interpreted_problem": "Bifurcação de modelo de negócio.",
+            "human_intent": "Definir se a plataforma deve monetizar cobrando de quem contrata ou cobrando de quem presta o serviço.",
+            "primary_mechanism": {
+                "mechanism": "Cobrança mista",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": ["Decisão normativa sobre quem deve pagar"],
+            "material_vulnerabilities": [],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": True,
+            "human_choice_description": "Definir se o modelo cobrará do contratante ou do prestador.",
+            "proposed_next_action": "Definir preferência de modelo.",
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
+        lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = lean_runner.run("Ideia de marketplace de serviços gerais")
+
+        self.assertEqual(result.total_model_calls, 1)
+        self.assertEqual(result.gate_result.outcome, GateOutcome.REQUEST_HUMAN_DECISION)
+        self.assertEqual(result.terminal_status, "HUMAN_DECISION_REQUIRED")
+        self.assertTrue(result.human_decision_requested)
+
+    def test_false_precision_guard_detection_and_downgrade(self):
+        """
+        Guarda contra Falsa Precisão Numérica (Seção 11).
+        Verifica detecção e rebaixamento de métricas inventadas sem evidência.
+        """
+        text_with_fake_precision = "O sistema garante latência <200 ms e uptime de 99.99% com resposta em 50ms."
+        source_anchor_text = "Quero um app simples de mensagens."
+
+        unsupported = FalsePrecisionGuard.detect_unsupported_metrics(text_with_fake_precision, source_anchor_text)
+        self.assertTrue(len(unsupported) >= 2)
+        self.assertIn("<200 ms", unsupported)
+
+        sanitized, downgraded = FalsePrecisionGuard.sanitize_unsupported_precision(text_with_fake_precision, source_anchor_text)
+        self.assertTrue(downgraded)
+        self.assertNotIn("<200 ms", sanitized)
+        self.assertIn("MÉTRICA NÃO MEDIDA", sanitized)
+
+    def test_falsification_criteria_structure_and_preservation(self):
+        """
+        Critérios Estruturados de Falseamento (Seção 12).
+        Verifica que o contrato tipado preserva hipótese, evento destrutivo e teste discriminativo.
+        """
+        fc = FalsificationCriterion(
+            hypothesis="Vendedores usarão etiquetas para recuperar cotações",
+            what_would_kill_it="Taxa de abandono superior a 80% nos primeiros 2 dias",
+            lowest_cost_discriminating_test="Acompanhar 3 vendedores por 1 dia sem software",
+        )
+        self.assertEqual(fc.hypothesis, "Vendedores usarão etiquetas para recuperar cotações")
+        self.assertIn("80%", fc.what_would_kill_it)
+        self.assertIn("sem software", fc.lowest_cost_discriminating_test)
+
+    def test_authority_and_provenance_invariants(self):
+        """
+        Verificação Estrita de Invariantes de Autoridade e Prova de Proveniência (Seção 23).
+        """
+        idea_text = "Um aplicativo para gerenciar estoque de pequenas padarias."
+        first_pass = {
+            "interpreted_problem": "Padarias perdem insumos perecíveis por falta de controle simples.",
+            "human_intent": "Gerenciar estoque de pequenas padarias sem ERP pesado.",
+            "primary_mechanism": {
+                "mechanism": "Controle visual de validade com alertas coloridos",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Testar em uma padaria amiga",
+            "idea_stage": "DISCOVERY",
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
+        lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = lean_runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # Prova formal dos 5 invariantes inegociáveis
+        self.assertEqual(artifact.original_idea_authority, PromotionAuthorityBasis.USER_EXPLICIT)
+        self.assertEqual(artifact.intent_provenance, PromotionAuthorityBasis.VALID_USER_DERIVATION)
+        self.assertEqual(artifact.refined_idea_authority, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
+        self.assertEqual(artifact.source_anchor.original_content, idea_text)
+        self.assertTrue(result.total_model_calls <= LEAN_L1_MAX_MODEL_CALLS)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

@@ -20,6 +20,14 @@ from src.idea_evolution.artifacts.evolution_artifact import (
     TreatmentMode,
     FROZEN_LEAN_CORE_HASH,
 )
+from src.idea_evolution.domain.decision_relevance import (
+    IdeaStage,
+    RiskCategory,
+    DecisionRelevance,
+    FalsePrecisionGuard,
+    NextActionArbitrationPolicy,
+    DecisionRelevancePolicy,
+)
 
 
 class EvolutionArtifactMapper:
@@ -50,14 +58,37 @@ class EvolutionArtifactMapper:
             else PromotionAuthorityBasis.USER_EXPLICIT
         )
 
-        # 2. Ideia Refinada Canônica
+        # 2. Ideia Refinada Canônica (Separação entre Refinamento de Produto e Requisito Técnico)
+        stage = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN) if first_pass else IdeaStage.UNKNOWN
+        base_mechanism = (
+            first_pass.primary_mechanism.mechanism
+            if first_pass and first_pass.primary_mechanism and first_pass.primary_mechanism.mechanism
+            else orig_idea
+        )
+        deferred_security_requirement: Optional[str] = None
+
         refined_idea = ""
         if escalation and escalation.hypothesis_mutated and escalation.mutated_hypothesis_description:
-            refined_idea = escalation.mutated_hypothesis_description
+            # Em descoberta/validação, não permite que controles técnicos/segurança mutem a hipótese de produto
+            if (
+                stage in (IdeaStage.DISCOVERY, IdeaStage.VALIDATION, IdeaStage.UNKNOWN)
+                and DecisionRelevancePolicy.is_engineering_security_override(
+                    escalation.mutated_hypothesis_description, base_mechanism
+                )
+                and not DecisionRelevancePolicy.is_user_explicit_security_request(orig_idea)
+            ):
+                refined_idea = base_mechanism
+                deferred_security_requirement = escalation.mutated_hypothesis_description
+            else:
+                refined_idea = escalation.mutated_hypothesis_description
         elif first_pass and first_pass.primary_mechanism and first_pass.primary_mechanism.mechanism:
             refined_idea = first_pass.primary_mechanism.mechanism
         else:
             refined_idea = orig_idea
+
+        # Sanitização de precisão numérica sem evidência declarada
+        sanitized_refined, _ = FalsePrecisionGuard.sanitize_unsupported_precision(refined_idea, source_text=orig_idea)
+        refined_idea = sanitized_refined
 
 
         # 3. O Que Mudou (Deltas Estruturais)
@@ -98,6 +129,15 @@ class EvolutionArtifactMapper:
                     affected_aspect="Focalização",
                 )
             )
+        if deferred_security_requirement:
+            critique_items.append(
+                CritiqueItem(
+                    vulnerability=f"Requisito Técnico/Segurança Identificado: {deferred_security_requirement}",
+                    severity="HIGH",
+                    why_it_matters="Requisito de engenharia preservado como especificação técnica sem descaracterizar a proposta de produto em estágio inicial.",
+                    affected_aspect="Segurança / Infraestrutura",
+                )
+            )
 
         # 5. Premissas e Incertezas
         assumptions = list(first_pass.key_assumptions) if first_pass else []
@@ -131,7 +171,7 @@ class EvolutionArtifactMapper:
                     )
                 )
 
-        # 7. Próximo Passo Recomendado e Autoridade Normativa
+        # 7. Próximo Passo Recomendado e Autoridade Normativa (Arbitragem Determinística)
         human_decision = lean_res.human_decision_requested or (
             first_pass is not None and first_pass.requires_human_normative_choice
         )
@@ -140,12 +180,19 @@ class EvolutionArtifactMapper:
         next_action = ""
         if human_decision:
             next_action = f"Decisão humana requerida: {human_desc or 'Definir preferência normativa antes de avançar.'}"
-        elif escalation and escalation.updated_next_action:
-            next_action = escalation.updated_next_action
-        elif first_pass and first_pass.proposed_next_action:
-            next_action = first_pass.proposed_next_action
         else:
-            next_action = "Avaliar formulação refinada."
+            fp_action = first_pass.proposed_next_action if first_pass else ""
+            esc_action = escalation.updated_next_action if escalation else None
+            next_action, _ = NextActionArbitrationPolicy.arbitrate(
+                first_pass_next_action=fp_action,
+                escalation_candidate_next_action=esc_action,
+                stage=stage,
+                original_idea=orig_idea,
+                requires_human_decision=human_decision,
+                human_decision_description=human_desc,
+            )
+            if not next_action:
+                next_action = "Avaliar formulação refinada."
 
         return EvolutionArtifact(
             artifact_id=f"ART-{run_id}",

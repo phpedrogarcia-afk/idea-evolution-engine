@@ -24,6 +24,14 @@ from src.idea_evolution.domain.early_epistemic_gate import (
     EpistemicRentRecord,
     GateEvaluationResult,
 )
+from src.idea_evolution.domain.decision_relevance import (
+    IdeaStage,
+    RiskCategory,
+    DecisionRelevance,
+    FalsePrecisionGuard,
+    NextActionArbitrationPolicy,
+    DecisionRelevancePolicy,
+)
 from src.idea_evolution.providers.base import ModelRunner, ModelResponse
 from src.idea_evolution.tracing.tracer import RunTracer
 
@@ -81,7 +89,16 @@ class LeanLoopRunner:
         first_pass_prompt_template = (
             "Você é o analista do Lean Idea Evolution Engine.\n"
             "Analise a ideia original abaixo e produza uma estruturação mínima focada em intenção, mecanismo e riscos:\n"
-            "IDEIA HUMANA:\n{idea}\n"
+            "IDEIA HUMANA:\n{idea}\n\n"
+            "DIRETRIZES DE QUALIDADE E RELEVÂNCIA DECISÓRIA:\n"
+            "1. Identifique o estágio interpretado da ideia (idea_stage: DISCOVERY, VALIDATION, PROTOTYPE, MVP, PRE_PRODUCTION, etc.).\n"
+            "2. Distinga severidade de prioridade imediata (Severity != Priority). Em estágio inicial (DISCOVERY/VALIDATION), "
+            "vulnerabilidades de segurança, privacidade ou conformidade devem ser registradas com severidade real (ex: HIGH), "
+            "mas sua relevância para a decisão imediata é LATER, priorizando incertezas que possam invalidar a hipótese central ou o problema.\n"
+            "3. Não permita que requisitos não-funcionais de engenharia/segurança (ex: criptografia E2EE, AES-256, TLS 1.3) redefinam a hipótese de produto.\n"
+            "4. Nunca introduza alegações numéricas precisas (ex: '<200 ms', '99.99%') sem base de evidência declarada.\n"
+            "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (ex: planilhas, etiquetas manuais, fazer nada).\n"
+            "6. Forneça critérios de falseamento estruturados (hipótese, observação destrutiva, teste discriminativo de menor custo).\n"
         )
         user_prompt_1 = first_pass_prompt_template.replace("{idea}", original_idea)
 
@@ -128,6 +145,12 @@ class LeanLoopRunner:
                 final_markdown=failed_md,
             )
 
+        # Sanitização de precisão numérica não ancorada na saída inicial
+        sanitized_mech, _ = FalsePrecisionGuard.sanitize_unsupported_precision(
+            first_pass_output.primary_mechanism.mechanism, source_text=original_idea
+        )
+        first_pass_output.primary_mechanism.mechanism = sanitized_mech
+
         # 3. Avaliação determinística do Early Epistemic Gate (Custo = 0 chamadas)
         gate_result = EarlyEpistemicGate.evaluate(
             source_anchor=source_anchor,
@@ -159,8 +182,13 @@ class LeanLoopRunner:
                     "Você é o especialista de escalação focada do Lean IEE.\n"
                     f"Razão de Escalação: {gate_result.escalation_reason.value}\n"
                     f"Explicação da Incerteza: {gate_result.explanation}\n"
-                    f"Mecanismo Alvo: {first_pass_output.primary_mechanism.mechanism}\n"
-                    "Resolva estritamente a incerteza especificada sem reescrever dimensões não relacionadas.\n"
+                    f"Mecanismo Alvo: {first_pass_output.primary_mechanism.mechanism}\n\n"
+                    "DIRETRIZES E LIMITES DE ESCOPO:\n"
+                    "1. Resolva estritamente a incerteza especificada sem reescrever dimensões não relacionadas.\n"
+                    "2. O alvo da escalação NÃO se torna automaticamente a prioridade global do projeto.\n"
+                    "3. Não converta mitigação ou requisito não-funcional em refinamento da proposta de produto sem justificativa.\n"
+                    "4. Não invente métricas de desempenho ou custo sem medição.\n"
+                    "5. Retorne candidato a próximo passo (candidate_updated_next_action), não ação final autoritativa.\n"
                 )
 
                 res_2: ModelResponse = self.runner.generate(
@@ -171,6 +199,19 @@ class LeanLoopRunner:
                 )
                 escalation_output = res_2.parsed  # type: ignore
 
+                # Sanitização de precisão na resposta de escalação
+                if escalation_output:
+                    if escalation_output.mutated_hypothesis_description:
+                        sanitized_mut, _ = FalsePrecisionGuard.sanitize_unsupported_precision(
+                            escalation_output.mutated_hypothesis_description, source_text=original_idea
+                        )
+                        escalation_output.mutated_hypothesis_description = sanitized_mut
+                    if escalation_output.focused_critique_or_analysis:
+                        sanitized_crit, _ = FalsePrecisionGuard.sanitize_unsupported_precision(
+                            escalation_output.focused_critique_or_analysis, source_text=original_idea
+                        )
+                        escalation_output.focused_critique_or_analysis = sanitized_crit
+
                 # Harvest Magentic-One: Stall / Progress Detection
                 if escalation_output and not escalation_output.decision_progress_made:
                     decision_progress = False
@@ -178,20 +219,33 @@ class LeanLoopRunner:
                 else:
                     terminal_status = "COMPLETED_WITH_FOCUSED_ESCALATION"
 
-        # 5. Construir DecisionDeltaRecord
+        # 5. Arbitragem determinística do Próximo Passo (Severity != Priority & Next Action Policy)
+        stage = getattr(first_pass_output, "idea_stage", IdeaStage.UNKNOWN)
+        cand_action = escalation_output.updated_next_action if escalation_output else None
+        final_next_action, next_action_chg = NextActionArbitrationPolicy.arbitrate(
+            first_pass_next_action=first_pass_output.proposed_next_action,
+            escalation_candidate_next_action=cand_action,
+            stage=stage,
+            original_idea=original_idea,
+            requires_human_decision=human_decision_req,
+            human_decision_description=first_pass_output.human_choice_description if first_pass_output else None,
+        )
+
+        # Atualiza a ação no escalation_output se foi arbitrada
+        if escalation_output:
+            escalation_output.updated_next_action = final_next_action
+
+        # Construir DecisionDeltaRecord
         delta_id = f"DELTA-{tracer.run_id[:8]}"
         before_unc = first_pass_output.remaining_uncertainties.copy()
         after_unc = before_unc.copy()
         resolved = []
-        next_action_chg = False
 
         if escalation_output:
             if escalation_output.focused_critique_or_analysis:
                 resolved.append(f"Crítica focada em {gate_result.escalation_reason.value}")
             if escalation_output.resolved_tradeoffs:
                 resolved.extend(escalation_output.resolved_tradeoffs)
-            if escalation_output.updated_next_action and escalation_output.updated_next_action != first_pass_output.proposed_next_action:
-                next_action_chg = True
 
         delta_record = DecisionDeltaRecord(
             delta_id=delta_id,
@@ -214,6 +268,7 @@ class LeanLoopRunner:
             escalation_output=escalation_output,
             calls_used=calls_used,
             terminal_status=terminal_status,
+            final_next_action=final_next_action,
         )
 
         # 7. Persistir final.json e final.md via tracer
@@ -257,6 +312,7 @@ class LeanLoopRunner:
         escalation_output: Optional[FocusedEscalationOutput],
         calls_used: int,
         terminal_status: str,
+        final_next_action: str = "",
     ) -> str:
         lines = []
         lines.append(f"# Pacote Lean de Maturação — Run {run_id}\n")
@@ -267,7 +323,10 @@ class LeanLoopRunner:
 
         lines.append("## 2. Intenção & Problema Estruturado (Lean First Pass)\n")
         lines.append(f"- **Intenção do Usuário:** {first_pass.human_intent}")
-        lines.append(f"- **Problema Interpretado:** {first_pass.interpreted_problem}\n")
+        lines.append(f"- **Problema Interpretado:** {first_pass.interpreted_problem}")
+        if getattr(first_pass, "idea_stage", None):
+            lines.append(f"- **Estágio Interpretado da Ideia:** `{first_pass.idea_stage.value}`")
+        lines.append("\n")
 
         lines.append("## 3. Mecanismo Primário Proposto\n")
         prim = first_pass.primary_mechanism
@@ -280,9 +339,18 @@ class LeanLoopRunner:
         if first_pass.competing_alternatives:
             lines.append("## 4. Alternativas Concorrentes Identificadas\n")
             for idx, alt in enumerate(first_pass.competing_alternatives, 1):
-                lines.append(f"{idx}. **{alt.mechanism}** (Base: `{alt.claimed_basis.value}`)")
+                cat_label = f" [{alt.alternative_category.value}]" if getattr(alt, "alternative_category", None) else ""
+                lines.append(f"{idx}. **{alt.mechanism}**{cat_label} (Base: `{alt.claimed_basis.value}`)")
                 if alt.tradeoffs:
                     lines.append(f"   - *Tradeoffs:* {', '.join(alt.tradeoffs)}")
+            lines.append("\n")
+
+        if getattr(first_pass, "falsification_criteria", None):
+            lines.append("## 4.1. Critérios de Falseamento Empírico\n")
+            for fc in first_pass.falsification_criteria:
+                lines.append(f"- **Hipótese:** {fc.hypothesis}")
+                lines.append(f"  - *O que a derrubaria:* {fc.what_would_kill_it}")
+                lines.append(f"  - *Teste mais barato:* {fc.lowest_cost_discriminating_test}")
             lines.append("\n")
 
         lines.append("## 5. Avaliação do Early Epistemic Gate (Custo = 0 chamadas)\n")
@@ -306,7 +374,7 @@ class LeanLoopRunner:
             lines.append(f"- **Progresso Decisório:** `{escalation_output.decision_progress_made}`\n")
 
         lines.append("## 7. Próximo Passo Recomendado\n")
-        next_act = escalation_output.updated_next_action if (escalation_output and escalation_output.updated_next_action) else first_pass.proposed_next_action
-        lines.append(f"{next_act or 'Validar protótipo diretamente com o usuário.'}\n")
+        chosen_action = final_next_action or (escalation_output.updated_next_action if (escalation_output and escalation_output.updated_next_action) else first_pass.proposed_next_action)
+        lines.append(f"{chosen_action or 'Validar protótipo diretamente com o usuário.'}\n")
 
         return "\n".join(lines)

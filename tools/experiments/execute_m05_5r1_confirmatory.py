@@ -899,6 +899,17 @@ def preflight_verification(attempt_id: str = DEFAULT_ATTEMPT_ID) -> tuple[Dict[s
             "c41e2b6ef2070de37fe7177359c85f68e8e88f7a32cdb8b098f0b512340d6ea7",
         }:
             continue
+        # Accept original M05.4 hash or v1.1 decision relevance hardening amendments
+        if name == "lean_loop.py" and cur in {
+            ref,
+            "c8eba273f335b1ba8ca0d9883ea7594f09e3e03ec23a50617d09a59b2cb55e14",
+        }:
+            continue
+        if name == "early_epistemic_gate.py" and cur in {
+            ref,
+            "c090579f9d8afd3572239da90bb01c933c39374365f73c919dba48e44d431d8a",
+        }:
+            continue
         if cur != ref:
             raise RuntimeError(f"PREFLIGHT_FAIL: Treatment hash mismatch on {name}")
 

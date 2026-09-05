@@ -9,11 +9,22 @@ import hashlib
 from datetime import datetime
 from enum import Enum
 from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from src.idea_evolution.domain.state import OntologyState, PromotionAuthorityBasis
 from src.idea_evolution.domain.epistemic_contracts import SourceAnchor, SourceAnchorKind, NegativeKnowledgeRecord
 from src.idea_evolution.domain.grounding import AuthorityProofValidator, GroundingRecord
+from src.idea_evolution.domain.decision_relevance import (
+    IdeaStage,
+    RiskCategory,
+    DecisionRelevance,
+    AlternativeCategory,
+    FalsificationCriterion,
+    EngineeringRequirement,
+    DecisionRelevancePolicy,
+    FalsePrecisionGuard,
+    NextActionArbitrationPolicy,
+)
 
 
 class GateOutcome(str, Enum):
@@ -43,27 +54,27 @@ class EpistemicRentDecision(str, Enum):
 
 
 class LeanCandidateMechanism(BaseModel):
-    """Mecanismo ou hipótese proposta na primeira passada."""
+    """Proposed candidate mechanism."""
     mechanism: str
     is_explicit_in_source: bool = False
     claimed_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
     justification: str = ""
     tradeoffs: List[str] = Field(default_factory=list)
+    alternative_category: AlternativeCategory = AlternativeCategory.OTHER
 
 
 class LeanVulnerability(BaseModel):
-    """Vulnerabilidade ou risco material identificado na primeira passada."""
+    """Material vulnerability or risk."""
     vulnerability: str
     why_it_matters: str
     severity: str = "MEDIUM"  # HIGH | MEDIUM | LOW
     affected_aspect: str = ""
+    category: RiskCategory = RiskCategory.UNKNOWN
+    decision_relevance: DecisionRelevance = DecisionRelevance.UNKNOWN
 
 
 class LeanFirstPassOutput(BaseModel):
-    """
-    Contrato Pydantic para o estágio LEAN_FIRST_PASS (1 chamada de modelo).
-    Mapeia a interpretação mínima estruturada sem inchaço multiestágio.
-    """
+    """Lean first pass output contract."""
     interpreted_problem: str
     human_intent: str
     primary_mechanism: LeanCandidateMechanism
@@ -75,6 +86,10 @@ class LeanFirstPassOutput(BaseModel):
     requires_human_normative_choice: bool = False
     human_choice_description: str = ""
     proposed_next_action: str = ""
+    idea_stage: IdeaStage = IdeaStage.UNKNOWN
+    idea_stage_justification: str = ""
+    falsification_criteria: List[FalsificationCriterion] = Field(default_factory=list)
+    engineering_requirements: List[str] = Field(default_factory=list)
 
 
 class FocusedEscalationOutput(BaseModel):
@@ -91,6 +106,17 @@ class FocusedEscalationOutput(BaseModel):
     mutated_hypothesis_description: str = ""
     decision_progress_made: bool = True
     updated_next_action: str = ""
+    candidate_updated_next_action: Optional[str] = None
+    falsification_criteria: List[FalsificationCriterion] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def sync_candidate_next_action(self) -> FocusedEscalationOutput:
+        """Sincroniza updated_next_action e candidate_updated_next_action bidirecionalmente."""
+        if not self.candidate_updated_next_action and self.updated_next_action:
+            self.candidate_updated_next_action = self.updated_next_action
+        elif not self.updated_next_action and self.candidate_updated_next_action:
+            self.updated_next_action = self.candidate_updated_next_action
+        return self
 
 
 class DecisionDeltaEventType(str, Enum):
@@ -288,16 +314,33 @@ class EarlyEpistemicGate:
                 explanation="A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.",
             )
 
-        # 5. Avaliar vulnerabilidades materiais severas (HIGH severity)
+        # 5. Avaliar vulnerabilidades com base em Relevância Decisória no Estágio (Severity != Priority)
+        stage = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN)
         severe_vulns = [v for v in first_pass.material_vulnerabilities if v.severity.upper() == "HIGH"]
-        if severe_vulns:
+        escalatable_vulns: List[Tuple[LeanVulnerability, DecisionRelevance]] = []
+
+        for v in first_pass.material_vulnerabilities:
+            rel = DecisionRelevancePolicy.evaluate_vulnerability_relevance(
+                vulnerability_text=v.vulnerability,
+                severity=v.severity,
+                category=getattr(v, "category", RiskCategory.UNKNOWN),
+                stage=stage,
+                original_idea=original_text,
+                explicit_relevance=getattr(v, "decision_relevance", DecisionRelevance.UNKNOWN),
+            )
+            v.decision_relevance = rel
+            if rel in (DecisionRelevance.CRITICAL_NOW, DecisionRelevance.HIGH_NOW):
+                escalatable_vulns.append((v, rel))
+
+        if escalatable_vulns:
+            target_vuln, target_rel = escalatable_vulns[0]
             rent = EpistemicRentRecord(
-                record_id=f"RENT-{hashlib.sha256(severe_vulns[0].vulnerability.encode()).hexdigest()[:8]}",
+                record_id=f"RENT-{hashlib.sha256(target_vuln.vulnerability.encode()).hexdigest()[:8]}",
                 escalation_reason=EscalationReason.MATERIAL_VULNERABILITY,
-                expected_decision_delta=f"Expor e mitigar falha crítica: {severe_vulns[0].vulnerability}",
+                expected_decision_delta=f"Expor e mitigar incerteza crítica para decisão imediata ({target_rel.value}): {target_vuln.vulnerability}",
                 additional_call_cost=1,
                 rent_decision=EpistemicRentDecision.JUSTIFIED,
-                justification_summary="Vulnerabilidade severa identificada cujo teste ou crítica focada altera diretamente o próximo passo humano.",
+                justification_summary=f"Vulnerabilidade com relevância decisória imediata ({target_rel.value}) identificada para o estágio {stage.value}.",
             )
             return GateEvaluationResult(
                 outcome=GateOutcome.ESCALATE_FOCUSED,
@@ -307,7 +350,7 @@ class EarlyEpistemicGate:
                 unsupported_candidate_count=unsupported_count,
                 negative_knowledge_match=neg_match,
                 rent_record=rent,
-                explanation=f"Escalação justificada para crítica focada de vulnerabilidade HIGH: {severe_vulns[0].vulnerability}",
+                explanation=f"Escalação justificada para crítica focada de vulnerabilidade com relevância decisória {target_rel.value} no estágio {stage.value}: {target_vuln.vulnerability}",
             )
 
         # 6. Avaliar múltiplos mecanismos técnicos concorrentes genuínos
