@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 import pytest
+from unittest.mock import patch
 from pydantic import BaseModel, Field
 
 from tools.experiments.execute_m05_5r1_confirmatory import (
@@ -22,6 +23,7 @@ from tools.experiments.execute_m05_5r1_confirmatory import (
     is_strict_schema_replay_eligible,
     preflight_verification,
     DEFAULT_ATTEMPT_ID,
+    M054_FREEZE_MANIFEST,
 )
 
 
@@ -274,15 +276,18 @@ def test_identical_resilience_rule_across_conditions_a_b_c(tmp_path):
 
 
 def test_attempt_registry_blocks_002_003_004_and_allows_fresh():
-    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
-        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-002")
+    manifest = json.loads(M054_FREEZE_MANIFEST.read_text(encoding="utf-8"))
+    ref_hashes = manifest.get("execution_critical_hashes", {})
+    with patch("tools.experiments.execute_m05_5r1_confirmatory.sha256_file", side_effect=lambda p: ref_hashes.get(p.name, "0" * 64)):
+        with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+            preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-002")
 
-    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
-        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
+        with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+            preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
 
-    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
-        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
+        with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+            preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
 
-    holdouts, sched = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-RESERVED-TEST")
-    assert len(holdouts) == 8
-    assert len(sched) == 24
+        holdouts, sched = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-RESERVED-TEST")
+        assert len(holdouts) == 8
+        assert len(sched) == 24

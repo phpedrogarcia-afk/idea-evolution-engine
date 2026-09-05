@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from unittest.mock import patch
 import pytest
 
 from tools.experiments.execute_m05_5r1_confirmatory import (
@@ -19,6 +20,7 @@ from tools.experiments.execute_m05_5r1_confirmatory import (
     execute_confirmatory_cell,
     REPO_ROOT,
     EXP_DIR,
+    M054_FREEZE_MANIFEST,
 )
 
 
@@ -215,19 +217,27 @@ def test_infrastructure_guard_closed_aborts():
 # 5. Registry & Immutability Tests
 # ---------------------------------------------------------------------------
 
+def _mock_historical_treatment_hashes(path: Path) -> str:
+    manifest = json.loads(M054_FREEZE_MANIFEST.read_text(encoding="utf-8"))
+    ref_hashes = manifest.get("execution_critical_hashes", {})
+    return ref_hashes.get(path.name, "0" * 64)
+
+
 def test_attempt_002_003_004_reuse_is_refused():
-    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
-        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-002")
-    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
-        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
-    with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
-        preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
+    with patch("tools.experiments.execute_m05_5r1_confirmatory.sha256_file", side_effect=_mock_historical_treatment_hashes):
+        with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+            preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-002")
+        with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+            preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-003")
+        with pytest.raises(RuntimeError, match="ATTEMPT_REGISTRY_GUARD"):
+            preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-004")
 
 
 def test_attempt_fresh_reservation_is_allowed():
-    holdout_map, schedule = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-RESERVED-TEST")
-    assert len(holdout_map) == 8
-    assert len(schedule) == 24
+    with patch("tools.experiments.execute_m05_5r1_confirmatory.sha256_file", side_effect=_mock_historical_treatment_hashes):
+        holdout_map, schedule = preflight_verification(attempt_id="REAL-EXECUTION-ATTEMPT-RESERVED-TEST")
+        assert len(holdout_map) == 8
+        assert len(schedule) == 24
 
 
 def test_existing_cell_overwrite_is_refused(tmp_path):

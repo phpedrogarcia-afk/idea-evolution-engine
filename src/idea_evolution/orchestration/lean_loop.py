@@ -95,9 +95,9 @@ class LeanLoopRunner:
             "2. Distinga severidade de prioridade imediata (Severity != Priority). Em estágio inicial (DISCOVERY/VALIDATION), "
             "vulnerabilidades de segurança, privacidade ou conformidade devem ser registradas com severidade real (ex: HIGH), "
             "mas sua relevância para a decisão imediata é LATER, priorizando incertezas que possam invalidar a hipótese central ou o problema.\n"
-            "3. Não permita que requisitos não-funcionais de engenharia/segurança (ex: criptografia E2EE, AES-256, TLS 1.3) redefinam a hipótese de produto.\n"
-            "4. Nunca introduza alegações numéricas precisas (ex: '<200 ms', '99.99%') sem base de evidência declarada.\n"
-            "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (ex: planilhas, etiquetas manuais, fazer nada).\n"
+            "3. Não permita que requisitos não-funcionais de engenharia ou segurança (ex: criptografia, protocolos de rede, infraestrutura) redefinam a hipótese de produto.\n"
+            "4. Nunca introduza alegações numéricas precisas (métricas de tempo, latência, porcentagem, moeda ou multiplicadores) sem base de evidência declarada.\n"
+            "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (ex: processos manuais, planilhas, ferramentas existentes, fazer nada).\n"
             "6. Forneça critérios de falseamento estruturados (hipótese, observação destrutiva, teste discriminativo de menor custo).\n"
         )
         user_prompt_1 = first_pass_prompt_template.replace("{idea}", original_idea)

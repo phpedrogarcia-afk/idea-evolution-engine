@@ -95,18 +95,38 @@ class EngineeringRequirement(BaseModel):
     is_non_functional: bool = True
 
 
+class MetricEvidenceBasis(str, Enum):
+    """Bases legítimas de evidência para métricas e números."""
+    UNSUPPORTED = "UNSUPPORTED"
+    USER_SUPPLIED = "USER_SUPPLIED"
+    DETERMINISTIC_CALCULATION = "DETERMINISTIC_CALCULATION"
+    MEASURED = "MEASURED"
+    EXTERNAL_EVIDENCE = "EXTERNAL_EVIDENCE"
+    EXPLICIT_HYPOTHESIS = "EXPLICIT_HYPOTHESIS"
+
+
 class FalsePrecisionGuard:
     """
     Guarda determinístico contra falsa precisão numérica sem evidência declarada.
-    Detecta métricas quantitativas (ex: '<200 ms', '99.99%', '50ms') não fundamentadas.
+    Detecta métricas quantitativas (ex: '<200 ms', '99.9%', 'R$ 12.37', '3.4x', '85% conversion', '50 ms latency')
+    sem base de evidência declarada (USER_SUPPLIED, DETERMINISTIC_CALCULATION, MEASURED, EXTERNAL_EVIDENCE, EXPLICIT_HYPOTHESIS).
     """
 
-    METRIC_PATTERN = re.compile(
-        r"(?:<\s*\d+(?:\.\d+)?\s*(?:ms|s|%|min|h)|"
-        r"\b\d+(?:\.\d+)?\s*(?:ms|s|%|bps|kbps|mbps)\b|"
-        r"\b99\.\d+%\b)",
-        re.IGNORECASE
-    )
+    METRIC_PATTERNS = [
+        r"(?:[<>≤≥~]\s*\d+(?:[\.,]\d+)?\s*(?:ms|s|min|h|%|bps|kbps|mbps|gbps|rps|req/s))",
+        r"(?:\b\d+(?:[\.,]\d+)?\s*(?:ms|s|min|h)\b(?:\s+(?:latency|latência))?)",
+        r"(?:\b\d+(?:[\.,]\d+)?\s*%(?:\s*(?:conversion|conversão|disponibilidade|uptime|precisão|accuracy|retenção|churn))?)",
+        r"(?:(?:R\$|\$|USD|EUR)\s*\d+(?:[\.,]\d{1,2})?|\b\d+(?:[\.,]\d{1,2})\s*(?:reais|dólares|euros|usd|brl|eur)\b)",
+        r"(?:\b\d+(?:[\.,]\d+)?x\b)",
+    ]
+    METRIC_PATTERN = re.compile("|".join(METRIC_PATTERNS), re.IGNORECASE)
+
+    SUPPORTED_CONTEXT_TAGS = {
+        MetricEvidenceBasis.DETERMINISTIC_CALCULATION: ["calculado", "determinístico", "calculation", "calculada"],
+        MetricEvidenceBasis.MEASURED: ["medido", "medida", "measured", "benchmark", "telemetria"],
+        MetricEvidenceBasis.EXTERNAL_EVIDENCE: ["evidência", "external_evidence", "citação", "estudo", "fonte"],
+        MetricEvidenceBasis.EXPLICIT_HYPOTHESIS: ["hipótese", "explicit_hypothesis", "meta", "alvo", "estimativa"],
+    }
 
     SECURITY_TECH_TERMS = [
         "e2ee", "end-to-end encryption", "criptografia ponta a ponta",
@@ -115,31 +135,57 @@ class FalsePrecisionGuard:
     ]
 
     @classmethod
-    def detect_unsupported_metrics(cls, text: str, source_text: str = "") -> List[str]:
-        """Detecta números ou métricas de precisão que não constam da fonte humana original."""
+    def detect_unsupported_metrics(
+        cls,
+        text: str,
+        source_text: str = "",
+        evidence_basis: Optional[Union[str, MetricEvidenceBasis]] = None,
+    ) -> List[str]:
+        """Detecta números ou métricas de precisão que não constam de base de evidência declarada."""
+        if evidence_basis:
+            basis_str = str(evidence_basis.value if hasattr(evidence_basis, "value") else evidence_basis).upper()
+            if basis_str in {
+                "USER_SUPPLIED",
+                "DETERMINISTIC_CALCULATION",
+                "MEASURED",
+                "EXTERNAL_EVIDENCE",
+                "EXPLICIT_HYPOTHESIS",
+            }:
+                return []
+
+        text_lower = text.lower()
+        for basis_enum, tags in cls.SUPPORTED_CONTEXT_TAGS.items():
+            if any(f"[{tag}" in text_lower or f"({tag}" in text_lower for tag in tags):
+                return []
+
         matches = cls.METRIC_PATTERN.findall(text)
         unsupported = []
         for m in matches:
             clean_m = m.strip()
-            # Se não consta literalmente da ideia humana original, é não suportado
+            # Se consta da fonte fornecida pelo usuário, é USER_SUPPLIED
             if source_text and clean_m.lower() in source_text.lower():
                 continue
             unsupported.append(clean_m)
         return unsupported
 
     @classmethod
-    def sanitize_unsupported_precision(cls, text: str, source_text: str = "") -> Tuple[str, bool]:
+    def sanitize_unsupported_precision(
+        cls,
+        text: str,
+        source_text: str = "",
+        evidence_basis: Optional[Union[str, MetricEvidenceBasis]] = None,
+    ) -> Tuple[str, bool]:
         """
         Rebaixa asserções numéricas de precisão não suportadas para anotações de medição requerida.
         Retorna (texto_sanitizado, houve_rebaixamento).
         """
-        unsupported = cls.detect_unsupported_metrics(text, source_text)
+        unsupported = cls.detect_unsupported_metrics(text, source_text=source_text, evidence_basis=evidence_basis)
         if not unsupported:
             return text, False
 
         sanitized = text
         for m in unsupported:
-            sanitized = sanitized.replace(m, f"[MÉTRICA NÃO MEDIDA: medição necessária]")
+            sanitized = sanitized.replace(m, "[MÉTRICA NÃO MEDIDA: medição necessária]")
         return sanitized, True
 
 
@@ -164,14 +210,14 @@ class DecisionRelevancePolicy:
     }
 
     SECURITY_KEYWORDS = [
-        "segurança", "security", "privacidade", "privacy", "lgpd",
+        "segurança", "security", "privacidade", "privacy",
         "criptografia", "encryption", "vazamento", "e2ee", "aes", "tls",
-        "compliance", "conformidade", "dados sensíveis"
+        "compliance", "conformidade", "dados sensíveis", "regulatório"
     ]
 
     USER_SECURITY_REQUEST_KEYWORDS = [
-        "segurança", "privacidade", "lgpd", "criptografia", "security",
-        "vazamento", "auditoria de segurança", "proteger dados"
+        "segurança", "privacidade", "criptografia", "security",
+        "vazamento", "auditoria de segurança", "proteger dados", "sigilo"
     ]
 
     @classmethod
@@ -257,16 +303,16 @@ class DecisionRelevancePolicy:
     def is_engineering_security_override(cls, candidate_text: str, original_mechanism: str) -> bool:
         """
         Verifica se uma hipótese mutada ou proposta substitui a função de produto
-        por uma arquitetura puramente técnica de criptografia/segurança (E2EE, AES, TLS).
+        por uma arquitetura puramente técnica de infraestrutura ou criptografia (E2EE, AES, TLS).
         """
         cand_lower = candidate_text.lower()
         orig_lower = original_mechanism.lower()
 
-        # Se menciona múltiplos termos de segurança/criptografia
+        # Se menciona termos técnicos de infraestrutura/segurança/criptografia
         tech_hits = sum(1 for term in FalsePrecisionGuard.SECURITY_TECH_TERMS if term in cand_lower)
         if tech_hits >= 1:
-            # Se a ideia original não era sobre segurança (ex: era sobre cotações esquecidas no WhatsApp)
-            # e a nova descrição transformou o mecanismo em 'arquitetura de criptografia'
+            # Se o mecanismo original de produto não era sobre infraestrutura/segurança
+            # e a nova descrição transformou a proposta em requisitos puramente técnicos
             if not any(term in orig_lower for term in FalsePrecisionGuard.SECURITY_TECH_TERMS):
                 return True
         return False
@@ -281,7 +327,7 @@ class NextActionArbitrationPolicy:
     TECHNICAL_IMPLEMENTATION_KEYWORDS = [
         "implementar criptografia", "desenvolver e2ee", "configurar tls",
         "implementar aes", "arquitetura de segurança", "certificate pinning",
-        "desenvolver backend seguro", "implementar autenticação mfa"
+        "desenvolver backend seguro", "implementar autenticação mfa", "auditoria de segurança"
     ]
 
     @classmethod
@@ -293,6 +339,7 @@ class NextActionArbitrationPolicy:
         original_idea: str,
         requires_human_decision: bool = False,
         human_decision_description: Optional[str] = None,
+        candidate_risk_category: RiskCategory = RiskCategory.UNKNOWN,
     ) -> Tuple[str, bool]:
         """
         Arbitra deterministicamente o próximo passo final.
@@ -322,7 +369,10 @@ class NextActionArbitrationPolicy:
             # Se a escalação tentar propor implementação técnica/segurança precoce
             # sem que o usuário tenha pedido segurança explicitamente
             if not DecisionRelevancePolicy.is_user_explicit_security_request(original_idea):
-                if any(kw in cand_lower for kw in cls.TECHNICAL_IMPLEMENTATION_KEYWORDS):
+                if (
+                    candidate_risk_category in DecisionRelevancePolicy.SECURITY_PRIVACY_CATEGORIES
+                    or any(kw in cand_lower for kw in cls.TECHNICAL_IMPLEMENTATION_KEYWORDS)
+                ):
                     # Rejeita o override unilateral da escalação!
                     # Mantém o próximo passo de falseamento de descoberta da primeira passada
                     return first_pass, False

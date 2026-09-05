@@ -30,9 +30,14 @@ from src.idea_evolution.domain.decision_relevance import (
     DecisionRelevance,
     AlternativeCategory,
     FalsificationCriterion,
+    MetricEvidenceBasis,
     FalsePrecisionGuard,
     DecisionRelevancePolicy,
     NextActionArbitrationPolicy,
+)
+from src.idea_evolution.artifacts.evolution_artifact import (
+    FROZEN_LEAN_CORE_HASH_V1_0,
+    FROZEN_LEAN_CORE_HASH_V1_1,
 )
 from src.idea_evolution.domain.early_epistemic_gate import (
     LeanFirstPassOutput,
@@ -491,6 +496,281 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         self.assertEqual(artifact.refined_idea_authority, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
         self.assertEqual(artifact.source_anchor.original_content, idea_text)
         self.assertTrue(result.total_model_calls <= LEAN_L1_MAX_MODEL_CALLS)
+
+    def test_false_precision_guard_generalized_comprehensive(self):
+        """
+        Teste exaustivo da generalização do FalsePrecisionGuard (Seção 10):
+        Verifica os 6 casos mínimos de números/métricas não suportadas:
+        - <200 ms
+        - 99.9%
+        - R$ 12.37
+        - 3.4x
+        - 85% conversion
+        - 50 ms latency
+        E verifica os 5 casos suportados por base de evidência legítima:
+        - USER_SUPPLIED
+        - DETERMINISTIC_CALCULATION
+        - MEASURED
+        - EXTERNAL_EVIDENCE
+        - EXPLICIT_HYPOTHESIS
+        """
+        # 1. Casos não suportados (devem ser detectados)
+        unsupported_cases = [
+            ("<200 ms", "<200 ms"),
+            ("99.9%", "99.9%"),
+            ("R$ 12.37", "R$ 12.37"),
+            ("3.4x", "3.4x"),
+            ("85% conversion", "85% conversion"),
+            ("50 ms latency", "50 ms latency"),
+        ]
+        for expr, expected_token in unsupported_cases:
+            detected = FalsePrecisionGuard.detect_unsupported_metrics(f"O resultado projetado é {expr}.")
+            self.assertTrue(
+                len(detected) > 0,
+                f"Falha ao detectar métrica não suportada: {expr}"
+            )
+            sanitized, downgraded = FalsePrecisionGuard.sanitize_unsupported_precision(f"Meta de {expr} fixada.")
+            self.assertTrue(downgraded, f"Falha ao rebaixar métrica não suportada: {expr}")
+            self.assertIn("MÉTRICA NÃO MEDIDA", sanitized)
+
+        # 2. Casos suportados (NÃO devem ser rebaixados nem marcados como falsos)
+        # 2.1 USER_SUPPLIED via texto fonte original
+        src_text = "Quero vender a assinatura por R$ 12.37 e garantir resposta em <200 ms."
+        cand_text = "Plataforma com preço de R$ 12.37 e tempo <200 ms."
+        detected_user = FalsePrecisionGuard.detect_unsupported_metrics(cand_text, source_text=src_text)
+        self.assertEqual(detected_user, [])
+
+        # 2.2 USER_SUPPLIED via flag de base de evidência
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("R$ 12.37", evidence_basis=MetricEvidenceBasis.USER_SUPPLIED),
+            []
+        )
+
+        # 2.3 DETERMINISTIC_CALCULATION (via tag ou flag)
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("[CALCULADO: 3.4x baseado na relação de custos]"),
+            []
+        )
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("3.4x", evidence_basis=MetricEvidenceBasis.DETERMINISTIC_CALCULATION),
+            []
+        )
+
+        # 2.4 MEASURED (via tag ou flag)
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("[MEDIDO: 50 ms latency em benchmark local]"),
+            []
+        )
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("50 ms latency", evidence_basis=MetricEvidenceBasis.MEASURED),
+            []
+        )
+
+        # 2.5 EXTERNAL_EVIDENCE (via tag ou flag)
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("[EVIDÊNCIA: 85% conversion segundo estudo de mercado]"),
+            []
+        )
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("85% conversion", evidence_basis=MetricEvidenceBasis.EXTERNAL_EVIDENCE),
+            []
+        )
+
+        # 2.6 EXPLICIT_HYPOTHESIS (via tag ou flag)
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("[HIPÓTESE: meta de 99.9% de uptime para testar viabilidade]"),
+            []
+        )
+        self.assertEqual(
+            FalsePrecisionGuard.detect_unsupported_metrics("99.9%", evidence_basis=MetricEvidenceBasis.EXPLICIT_HYPOTHESIS),
+            []
+        )
+
+    def test_decision_relevance_policy_generalized_no_overfit(self):
+        """
+        Verifica que DecisionRelevancePolicy opera estritamente sobre conceitos tipados (Seção 11):
+        - Estágio da ideia (IdeaStage)
+        - Categoria de risco (RiskCategory)
+        - Relevância decisória (DecisionRelevance)
+        - Severidade vs Prioridade (Severity != Priority)
+        Sem qualquer overfit ou hardcoding de nichos específicos.
+        """
+        # Teste com domínio genérico (sem WhatsApp/SaaS/nomes específicos)
+        # Em DISCOVERY, risco de conformidade/segurança HIGH deve ter relevância LATER
+        relevance_disc = DecisionRelevancePolicy.evaluate_vulnerability_relevance(
+            vulnerability_text="Ausência de política formal de conformidade documental",
+            severity="HIGH",
+            category=RiskCategory.COMPLIANCE,
+            stage=IdeaStage.DISCOVERY,
+            original_idea="Ideia de clube de assinatura de cafés artesanais.",
+        )
+        self.assertEqual(relevance_disc, DecisionRelevance.LATER)
+
+        # Em DISCOVERY, risco de comportamento do usuário HIGH deve ter relevância CRITICAL_NOW
+        relevance_user = DecisionRelevancePolicy.evaluate_vulnerability_relevance(
+            vulnerability_text="Assinantes cancelam após a primeira remessa por falta de novidade",
+            severity="HIGH",
+            category=RiskCategory.USER_BEHAVIOR,
+            stage=IdeaStage.DISCOVERY,
+            original_idea="Ideia de clube de assinatura de cafés artesanais.",
+        )
+        self.assertEqual(relevance_user, DecisionRelevance.CRITICAL_NOW)
+
+        # Em PRE_PRODUCTION, o mesmo risco de conformidade/segurança HIGH torna-se CRITICAL_NOW
+        relevance_preprod = DecisionRelevancePolicy.evaluate_vulnerability_relevance(
+            vulnerability_text="Ausência de política formal de conformidade documental",
+            severity="HIGH",
+            category=RiskCategory.COMPLIANCE,
+            stage=IdeaStage.PRE_PRODUCTION,
+            original_idea="Ideia de clube de assinatura de cafés artesanais.",
+        )
+        self.assertEqual(relevance_preprod, DecisionRelevance.CRITICAL_NOW)
+
+    def test_next_action_arbitration_comprehensive_matrix(self):
+        """
+        Verifica a matriz determinística de arbitragem de próximo passo (Seção 12):
+        1. DISCOVERY + HIGH later-stage security -> discovery falsification wins.
+        2. PRE_PRODUCTION + critical security -> security may win.
+        3. EXPLICIT USER SECURITY REQUEST -> security may win.
+        4. HUMAN NORMATIVE CHOICE -> AI does not override human authority.
+        """
+        fp_action = "Entrevistar 10 potenciais clientes para validar o problema real."
+        sec_candidate = "Implementar arquitetura de segurança com criptografia TLS e auditoria."
+
+        # 1. DISCOVERY + HIGH later-stage security -> discovery falsification wins
+        action1, chg1 = NextActionArbitrationPolicy.arbitrate(
+            first_pass_next_action=fp_action,
+            escalation_candidate_next_action=sec_candidate,
+            stage=IdeaStage.DISCOVERY,
+            original_idea="Sistema de agendamento de consultas veterinárias.",
+            candidate_risk_category=RiskCategory.SECURITY,
+        )
+        self.assertEqual(action1, fp_action)
+        self.assertFalse(chg1)
+
+        # 2. PRE_PRODUCTION + critical security -> security candidate wins
+        action2, chg2 = NextActionArbitrationPolicy.arbitrate(
+            first_pass_next_action=fp_action,
+            escalation_candidate_next_action=sec_candidate,
+            stage=IdeaStage.PRE_PRODUCTION,
+            original_idea="Sistema de agendamento de consultas veterinárias.",
+            candidate_risk_category=RiskCategory.SECURITY,
+        )
+        self.assertEqual(action2, sec_candidate)
+        self.assertTrue(chg2)
+
+        # 3. EXPLICIT USER SECURITY REQUEST -> security candidate wins
+        action3, chg3 = NextActionArbitrationPolicy.arbitrate(
+            first_pass_next_action=fp_action,
+            escalation_candidate_next_action=sec_candidate,
+            stage=IdeaStage.DISCOVERY,
+            original_idea="Sistema com foco em segurança rigorosa e sigilo médico.",
+            candidate_risk_category=RiskCategory.SECURITY,
+        )
+        self.assertEqual(action3, sec_candidate)
+        self.assertTrue(chg3)
+
+        # 4. HUMAN NORMATIVE CHOICE -> AI does not override human authority
+        action4, chg4 = NextActionArbitrationPolicy.arbitrate(
+            first_pass_next_action=fp_action,
+            escalation_candidate_next_action=sec_candidate,
+            stage=IdeaStage.DISCOVERY,
+            original_idea="Sistema de agendamento de consultas veterinárias.",
+            requires_human_decision=True,
+            human_decision_description="Definir política de cancelamento com ou sem cobrança de taxa.",
+        )
+        self.assertIn("Decisão humana requerida", action4)
+        self.assertIn("Definir política de cancelamento", action4)
+        self.assertFalse(chg4)
+
+    def test_engineering_requirement_preserved_in_critique(self):
+        """
+        Verifica a preservação de requisitos de engenharia sob critique (Seção 9):
+        - ENGINEERING_REQUIREMENT_PRESERVED = YES
+        - ENGINEERING_REQUIREMENT_MUTATES_PRODUCT = NO
+        """
+        idea_text = "Plataforma de delivery hiperlocal de quitandas de bairro."
+        first_pass = {
+            "interpreted_problem": "Quitandas locais perdem vendas para grandes redes.",
+            "human_intent": "Conectar quitandas a clientes vizinhos.",
+            "primary_mechanism": {
+                "mechanism": "Catálogo compartilhado via link web direto",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Vazamento de banco de dados e tráfego de senhas em texto puro",
+                    "why_it_matters": "Comprometimento das credenciais das quitandas",
+                    "severity": "HIGH",
+                    "category": "SECURITY",
+                    "decision_relevance": "LATER",
+                },
+                {
+                    "vulnerability": "Quitandeiros não têm tempo de alimentar o catálogo online no dia a dia",
+                    "why_it_matters": "Inviabiliza a atualização dos produtos e gera catálogo fantasma",
+                    "severity": "HIGH",
+                    "category": "USER_BEHAVIOR",
+                    "decision_relevance": "CRITICAL_NOW",
+                }
+            ],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Validar catálogo com 3 quitandeiros vizinhos",
+            "idea_stage": "DISCOVERY",
+        }
+
+        # Simula escalação focada que propõe mutação técnica
+        escalation_data = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "Catálogo compartilhado via link web direto",
+            "focus_area": "Segurança de dados",
+            "hypothesis_mutated": True,
+            "mutated_hypothesis_description": "Implementar criptografia AES-256 e TLS 1.3 com autenticação multifator",
+            "focused_critique_or_analysis": "Análise técnica de proteção do tráfego",
+            "updated_next_action": "Configurar TLS 1.3 e implementar AES",
+            "decision_progress_made": True,
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={
+            "LEAN_FIRST_PASS": first_pass,
+            "FOCUSED_ESCALATION": escalation_data,
+        })
+        lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = lean_runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # 1. Proposta de produto NÃO foi mutada para requisitos de infraestrutura
+        self.assertNotIn("AES-256", artifact.refined_idea)
+        self.assertNotIn("TLS 1.3", artifact.refined_idea)
+        self.assertIn("catálogo", artifact.refined_idea.lower())
+
+        # 2. Requisito técnico foi PRESERVADO em critique_items
+        crit_texts = [c.vulnerability for c in artifact.critique]
+        self.assertTrue(
+            any("Requisito Técnico/Segurança Identificado" in ct and "AES-256" in ct for ct in crit_texts),
+            "Requisito técnico não foi preservado sob critique!"
+        )
+
+    def test_frozen_lean_core_hash_separation(self):
+        """
+        Verifica separação e coexistência de identidades de hash de núcleo (Seção 6):
+        - V1_0_1_FROZEN_CORE_IDENTITY_PRESERVED = YES
+        - V1_1_CANDIDATE_CORE_IDENTITY_SEPARATE = YES
+        """
+        self.assertEqual(
+            FROZEN_LEAN_CORE_HASH_V1_0,
+            "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600",
+            "Hash do núcleo científico v1.0.1 foi alterado retroativamente!"
+        )
+        self.assertNotEqual(
+            FROZEN_LEAN_CORE_HASH_V1_0,
+            FROZEN_LEAN_CORE_HASH_V1_1,
+            "Candidato v1.1 deve ter identidade separada da baseline histórica v1.0.1!"
+        )
 
 
 if __name__ == "__main__":
