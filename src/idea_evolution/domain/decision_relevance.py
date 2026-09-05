@@ -14,8 +14,9 @@ Invariantes Centrais:
 
 from __future__ import annotations
 import re
+import unicodedata
 from enum import Enum
-from typing import List, Optional, Tuple, Any
+from typing import List, Optional, Tuple, Any, Union
 from pydantic import BaseModel, Field
 
 from src.idea_evolution.domain.state import PromotionAuthorityBasis
@@ -102,6 +103,37 @@ class DecisionRelevance(str, Enum):
     LATER = "LATER"
     NOT_DECISION_RELEVANT_NOW = "NOT_DECISION_RELEVANT_NOW"
     UNKNOWN = "UNKNOWN"
+
+
+class FocusType(str, Enum):
+    """Tipo de foco solicitado para a análise."""
+    PRODUCT = "PRODUCT"
+    MARKET = "MARKET"
+    TECHNICAL = "TECHNICAL"
+    SECURITY = "SECURITY"
+    COMPLIANCE = "COMPLIANCE"
+    UNKNOWN = "UNKNOWN"
+
+
+class FocusBasis(str, Enum):
+    """Base de autoridade da determinação do foco."""
+    USER_EXPLICIT = "USER_EXPLICIT"
+    MODEL_INFERRED = "MODEL_INFERRED"
+    DEFAULT = "DEFAULT"
+
+
+class UserRequestedFocus(BaseModel):
+    """
+    Contrato explícito de foco solicitado pelo usuário (Seções 4 e 5).
+    Invariantes:
+    1. MENTION != REQUEST
+    2. TECHNICAL_CONTENT != TECHNICAL_PRIORITY_REQUEST
+    3. MODEL_INFERRED_FOCUS nunca adquire autoridade de USER_EXPLICIT.
+    """
+    focus_type: FocusType = FocusType.UNKNOWN
+    basis: FocusBasis = FocusBasis.DEFAULT
+    evidence_span: str = ""
+    is_technical: bool = False
 
 
 class AlternativeCategory(str, Enum):
@@ -369,7 +401,8 @@ class DecisionRelevancePolicy:
     SECURITY_KEYWORDS = [
         "segurança", "security", "privacidade", "privacy",
         "criptografia", "encryption", "vazamento", "e2ee", "aes", "tls",
-        "compliance", "conformidade", "dados sensíveis", "regulatório"
+        "compliance", "conformidade", "dados sensíveis", "regulatório",
+        "rbac", "pen test", "pentest", "controle de acesso", "access control"
     ]
 
     ENGINEERING_KEYWORDS = [
@@ -379,50 +412,200 @@ class DecisionRelevancePolicy:
         "escalabilidade técnica", "gpu infrastructure"
     ]
 
-    USER_SECURITY_REQUEST_KEYWORDS = [
-        "segurança", "privacidade", "criptografia", "security",
-        "vazamento", "auditoria de segurança", "proteger dados", "sigilo"
+    REQUEST_DIRECTIVES = [
+        r"(?:quero|gostaria de|desejo|peço que|peco que|solicito que|minha prioridade|meu foco|meu objetivo)\s+(?:especificamente\s+)?(?:agora\s+)?(?:nesta análise\s+|nesta analise\s+)?(?:é|e|deve ser)?\s*(?:focar|priorizar|analisar|avaliar|escolher|decidir|fazer|executar|realizar|tratar|revisar|auditar)",
+        r"(?:quero|gostaria de|desejo)\s+especificamente\s+que\s+(?:esta análise\s+|esta analise\s+)?(?:priorize|foque|avalie|analise)",
+        r"\b(?:priorize|priorizem|foque|foquem|analise|analisem|avalie|avaliem|audite|auditem)\s+(?:especificamente\s+)?",
+        r"\b(?:faça|faca|façam|facam|realize|realizem|execute|executem|conduza|conduzam)\s+(?:uma\s+)?(?:auditoria|pen\s*test|avaliação\s+técnica|avaliacao\s+tecnica)",
+        r"\b(?:com\s+foco\s+(?:em|na|no|nas|nos)|foco\s+(?:em|na|no|nas|nos)|focado\s+(?:em|na|no|nas|nos)|focada\s+(?:em|na|no|nas|nos)|com\s+ênfase\s+(?:em|na|no|nas|nos)|com\s+enfase\s+(?:em|na|no|nas|nos)|focused\s+on)\b",
+        r"(?:help\s+me|please)\s+(?:evaluate|analyze|assess|audit|choose|decide)",
+        r"(?:i\s+want\s+to|i\s+would\s+like\s+to|my\s+goal\s+is\s+to|my\s+focus\s+is\s+to|my\s+priority\s+is\s+to)\s+(?:specifically\s+)?(?:focus\s+on|prioritize|analyze|evaluate|choose|decide|audit)",
+        r"\b(?:prioritize|specifically\s+analyze|specifically\s+evaluate|perform\s+an?\s+audit|conduct\s+an?\s+audit|run\s+an?\s+audit)\b",
     ]
 
-    USER_TECHNICAL_REQUEST_KEYWORDS = [
-        "segurança", "privacidade", "criptografia", "security", "privacy", "encryption",
-        "vazamento", "auditoria de segurança", "proteger dados", "sigilo",
-        "arquitetura técnica", "infraestrutura", "kubernetes", "k8s", "kafka", "reescrever em rust",
-        "migrar banco", "microserviços", "microservices", "infra", "devops", "cloud",
-        "migração técnica", "performance técnica", "stack de engenharia", "technical architecture",
-        "engineering requirement", "infrastructure requirement", "rust"
+    SECURITY_SUBJECT_PATTERNS = [
+        r"\b(?:segurança|seguranca|security|privacidade|privacy|criptografia|encryption|e2ee|rbac|pen\s*test|pentest|auditoria\s+de\s+segurança|auditoria\s+de\s+seguranca|security\s+audit|security\s+architecture|arquitetura\s+de\s+segurança|arquitetura\s+de\s+seguranca|riscos?\s+de\s+segurança|riscos?\s+de\s+seguranca)\b"
     ]
+
+    TECHNICAL_SUBJECT_PATTERNS = SECURITY_SUBJECT_PATTERNS + [
+        r"\b(?:arquitetura\s+técnica|arquitetura\s+tecnica|technical\s+architecture|arquitetura\s+do\s+backend|backend\s+architecture)\b",
+        r"\b(?:infraestrutura|infrastructure|kubernetes|k8s|kafka|microserviços?|microservicos?|microservices?|cluster|backend|devops|cloud|banco\s+de\s+dados)\b",
+    ]
+
+    STANDALONE_PRIVACY_SECURITY_PATTERNS = [
+        r"\bpii\b",
+        r"\bpersonally\s+identifiable\s+information\b",
+        r"\blgpd\b",
+        r"\bgdpr\b",
+        r"\bprivacidade\b",
+        r"\bprivacy\b",
+        r"\bsegurança\b",
+        r"\bseguranca\b",
+        r"\bsecurity\b",
+        r"\bcriptografia\b",
+        r"\bencryption\b",
+        r"\be2ee\b",
+        r"\baes\b",
+        r"\btls\b",
+        r"\brbac\b",
+        r"\bpen\s*test\b",
+        r"\bpentest\b",
+        r"\bvazamento\b",
+        r"\bdata\s+breach\b",
+        r"\bdata\s+leak(?:age)?\b",
+        r"\bcredential\s+leak(?:age)?\b",
+        r"\bvazamento\s+de\s+credencia(?:l|is)\b",
+        r"\bacesso\s+não\s+autorizado\b",
+        r"\bacesso\s+nao\s+autorizado\b",
+        r"\bunauthorized\s+access\b",
+        r"\bexposição\s+não\s+autorizada\b",
+        r"\bexposicao\s+nao\s+autorizada\b",
+    ]
+
+    DATA_NOUNS_PATTERN = r"(?:dados|informações|informacoes|informação|informacao|data|information|mensagens|mensagem|messages|registros|registro|records|conversas|conversa)"
+    SENSITIVE_QUALIFIERS_PATTERN = r"(?:sensíveis|sensiveis|sensível|sensivel|sensitive|pessoais|pessoal|personal|confidenciais|confidencial|confidential|identificável|identificavel|identifiable)"
+
+    DATA_SENSITIVE_RE = re.compile(
+        rf"\b{DATA_NOUNS_PATTERN}\b(?:\s+\w+){{0,4}}\s+\b{SENSITIVE_QUALIFIERS_PATTERN}\b|\b{SENSITIVE_QUALIFIERS_PATTERN}\b(?:\s+\w+){{0,4}}\s+\b{DATA_NOUNS_PATTERN}\b",
+        re.IGNORECASE
+    )
+
+    CUSTOMER_DATA_SENSITIVE_RE = re.compile(
+        rf"\b(?:cliente|clientes|usuário|usuarios|usuario|customer|customers|user|users)\b(?:\s+\w+){{0,4}}\s+\b{DATA_NOUNS_PATTERN}\b(?:\s+\w+){{0,4}}\s+\b{SENSITIVE_QUALIFIERS_PATTERN}\b|\b{DATA_NOUNS_PATTERN}\b(?:\s+\w+){{0,4}}\s+\b(?:de\s+clientes?|de\s+usuários?|de\s+usuarios?|customer|user)\b(?:\s+\w+){{0,4}}\s+\b{SENSITIVE_QUALIFIERS_PATTERN}\b",
+        re.IGNORECASE
+    )
+
+    STANDALONE_PRIVACY_RE = re.compile("|".join(STANDALONE_PRIVACY_SECURITY_PATTERNS), re.IGNORECASE)
+
+    @classmethod
+    def _strip_accents(cls, text: str) -> str:
+        if not text:
+            return ""
+        return "".join(c for c in unicodedata.normalize("NFD", text) if unicodedata.category(c) != "Mn")
+
+    @classmethod
+    def detect_user_requested_focus(cls, original_idea: str) -> UserRequestedFocus:
+        """
+        Detecta deterministamente o foco solicitado explicitamente pelo usuário (Seções 4 e 5).
+        Invariantes Centrais:
+        1. MENTION != REQUEST (Menção incidental de infraestrutura ou segurança não é pedido de priorização).
+        2. TECHNICAL_CONTENT != TECHNICAL_PRIORITY_REQUEST.
+        3. Exige semântica diretiva de solicitação/priorização combinada a assunto técnico.
+        """
+        if not original_idea:
+            return UserRequestedFocus()
+
+        req_re = re.compile("|".join(cls.REQUEST_DIRECTIVES), re.IGNORECASE)
+        sec_re = re.compile("|".join(cls.SECURITY_SUBJECT_PATTERNS), re.IGNORECASE)
+        tech_re = re.compile("|".join(cls.TECHNICAL_SUBJECT_PATTERNS), re.IGNORECASE)
+
+        sentences = re.split(r"[\n\.\?!;]+", original_idea)
+        for s in sentences:
+            s_clean = s.strip()
+            if not s_clean:
+                continue
+            s_norm = cls._strip_accents(s_clean.lower())
+            req_m = req_re.search(s_norm)
+            if req_m:
+                tech_m = tech_re.search(s_norm)
+                if tech_m:
+                    sec_m = sec_re.search(s_norm)
+                    focus_type = FocusType.SECURITY if sec_m else FocusType.TECHNICAL
+                    return UserRequestedFocus(
+                        focus_type=focus_type,
+                        basis=FocusBasis.USER_EXPLICIT,
+                        evidence_span=s_clean,
+                        is_technical=True,
+                    )
+
+        return UserRequestedFocus(
+            focus_type=FocusType.UNKNOWN,
+            basis=FocusBasis.DEFAULT,
+            evidence_span="",
+            is_technical=False,
+        )
 
     @classmethod
     def is_user_explicit_security_request(cls, original_idea: str) -> bool:
         """Verifica se o usuário humano explicitamente solicitou análise ou foco em segurança."""
-        lower_idea = original_idea.lower()
-        return any(kw in lower_idea for kw in cls.USER_SECURITY_REQUEST_KEYWORDS)
+        focus = cls.detect_user_requested_focus(original_idea)
+        return focus.basis == FocusBasis.USER_EXPLICIT and focus.focus_type == FocusType.SECURITY
 
     @classmethod
     def is_user_explicit_technical_request(cls, original_idea: str) -> bool:
         """Verifica se o usuário humano explicitamente solicitou análise ou foco técnico/engenharia/segurança."""
-        lower_idea = original_idea.lower()
-        return any(kw in lower_idea for kw in cls.USER_TECHNICAL_REQUEST_KEYWORDS)
+        focus = cls.detect_user_requested_focus(original_idea)
+        return focus.basis == FocusBasis.USER_EXPLICIT and focus.is_technical
 
     @classmethod
-    def infer_category(cls, vulnerability_text: str, declared_category: RiskCategory) -> RiskCategory:
-        """Inferência determinística de categoria se UNKNOWN."""
-        if declared_category != RiskCategory.UNKNOWN:
+    def is_sensitive_data_or_privacy_risk(cls, text: str) -> bool:
+        """
+        Detecta deterministamente e robustamente menções a dados sensíveis, dados pessoais,
+        PII, privacidade, violação de conformidade ou vazamento de dados.
+        Protege categoricamente contra falsos positivos em dados de negócio (sales data, market data, etc.).
+        """
+        if not text:
+            return False
+        norm = cls._strip_accents(text.lower())
+        if cls.STANDALONE_PRIVACY_RE.search(norm):
+            return True
+        if cls.DATA_SENSITIVE_RE.search(norm):
+            return True
+        if cls.CUSTOMER_DATA_SENSITIVE_RE.search(norm):
+            return True
+        return False
+
+    @classmethod
+    def infer_category(cls, vulnerability_text: str, declared_category: Any = RiskCategory.UNKNOWN) -> RiskCategory:
+        """
+        Inferência determinística de categoria de risco.
+        Regra primária: Se uma RiskCategory válida diferente de UNKNOWN foi declarada,
+        ela é preservada com prioridade máxima (STRUCTURED_CATEGORY_PRIMARY = YES).
+        Fallback léxico: Classificação robusta quando UNKNOWN.
+        """
+        if isinstance(declared_category, RiskCategory) and declared_category != RiskCategory.UNKNOWN:
             return declared_category
-        text_lower = vulnerability_text.lower()
+        if isinstance(declared_category, str):
+            try:
+                cat_enum = RiskCategory(declared_category)
+                if cat_enum != RiskCategory.UNKNOWN:
+                    return cat_enum
+            except ValueError:
+                pass
+
+        text_lower = (vulnerability_text or "").lower()
+
+        # 1. Detecção robusta de privacidade e dados sensíveis/pessoais
+        if cls.is_sensitive_data_or_privacy_risk(vulnerability_text):
+            norm = cls._strip_accents(text_lower)
+            if any(term in norm for term in ["seguranca", "security", "criptografia", "encryption", "pen test", "pentest", "rbac", "e2ee", "aes", "tls"]):
+                return RiskCategory.SECURITY
+            return RiskCategory.PRIVACY
+
+        # 2. Segurança ampla (sem dados pessoais)
         if any(kw in text_lower for kw in cls.SECURITY_KEYWORDS):
             return RiskCategory.SECURITY
+
+        # 3. Engenharia / Infraestrutura
         if any(kw in text_lower for kw in cls.ENGINEERING_KEYWORDS):
             return RiskCategory.ENGINEERING
+
+        # 4. Comportamento do Usuário
         if any(kw in text_lower for kw in ["abandono", "adesão", "retenção", "fadiga", "hábito", "disciplina"]):
             return RiskCategory.USER_BEHAVIOR
+
+        # 5. Modelo de Negócio
         if any(kw in text_lower for kw in ["pagar", "preço", "disposição a pagar", "monetização", "custo", "margem"]):
             return RiskCategory.BUSINESS_MODEL
+
+        # 6. Mercado
         if any(kw in text_lower for kw in ["mercado", "concorrente", "substituto", "nicho", "tamanho"]):
             return RiskCategory.MARKET
+
+        # 7. Viabilidade Técnica
         if any(kw in text_lower for kw in ["viabilidade", "impossível", "api", "hardware", "bloqueio técnico"]):
             return RiskCategory.TECHNICAL_FEASIBILITY
+
         return RiskCategory.PRODUCT
 
     @classmethod
@@ -530,18 +713,30 @@ class DecisionRelevancePolicy:
             return True
 
         # 2. Análise semântica / vocabulário técnico de fallback
-        cand_lower = candidate_text.lower()
-        orig_lower = original_mechanism.lower()
+        cand_lower = (candidate_text or "").lower()
+        orig_lower = (original_mechanism or "").lower()
+
+        # Se o texto candidato expressa explicitamente privacidade, criptografia, segurança ou engenharia
+        cand_cat = cls.infer_category(candidate_text, candidate_category or RiskCategory.UNKNOWN)
+        if cand_cat in cls.NON_PRODUCT_RISK_CATEGORIES:
+            orig_cat = cls.infer_category(original_mechanism, RiskCategory.UNKNOWN)
+            if orig_cat not in cls.NON_PRODUCT_RISK_CATEGORIES:
+                return True
 
         all_tech_terms = FalsePrecisionGuard.SECURITY_TECH_TERMS + [
             "kubernetes", "k8s", "kafka", "rabbitmq", "reescrever em rust", "rewrite in rust",
-            "microserviços", "microservices", "migrar banco", "database migration",
-            "cluster", "infraestrutura gpu", "gpu infrastructure"
+            "microserviços", "microserviço", "microservices", "migrar banco", "database migration",
+            "cluster", "infraestrutura gpu", "gpu infrastructure", "criptografia", "rbac",
+            "pen test", "pentest", "controle de acesso", "retenção de dados", "retencao de dados",
+            "anonimização", "anonimizacao"
         ]
 
-        tech_hits = sum(1 for term in all_tech_terms if term in cand_lower)
+        cand_norm = cls._strip_accents(cand_lower)
+        orig_norm = cls._strip_accents(orig_lower)
+
+        tech_hits = sum(1 for term in all_tech_terms if term in cand_norm)
         if tech_hits >= 1:
-            if not any(term in orig_lower for term in all_tech_terms):
+            if not any(term in orig_norm for term in all_tech_terms):
                 return True
         return False
 
