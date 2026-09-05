@@ -91,11 +91,14 @@ class LeanLoopRunner:
             "Analise a ideia original abaixo e produza uma estruturação mínima focada em intenção, mecanismo e riscos:\n"
             "IDEIA HUMANA:\n{idea}\n\n"
             "DIRETRIZES DE QUALIDADE E RELEVÂNCIA DECISÓRIA:\n"
-            "1. Identifique o estágio interpretado da ideia (idea_stage: DISCOVERY, VALIDATION, PROTOTYPE, MVP, PRE_PRODUCTION, etc.).\n"
+            "1. Identifique o estágio operacional atual da ideia (idea_stage: DISCOVERY, VALIDATION, PROTOTYPE, MVP, PRE_PRODUCTION, etc.).\n"
+            "   Atenção: MENTIONED_FUTURE_STAGE != CURRENT_IDEA_STAGE. Se a proposta menciona 'futuro MVP', 'planejamos no futuro lançar MVP', "
+            "'futura versão de produção' ou possui validação pendente/não executada, o estágio operacional atual é DISCOVERY/VALIDATION, NUNCA MVP ou PRE_PRODUCTION!\n"
             "2. Distinga severidade de prioridade imediata (Severity != Priority). Em estágio inicial (DISCOVERY/VALIDATION), "
-            "vulnerabilidades de segurança, privacidade ou conformidade devem ser registradas com severidade real (ex: HIGH), "
-            "mas sua relevância para a decisão imediata é LATER, priorizando incertezas que possam invalidar a hipótese central ou o problema.\n"
-            "3. Não permita que requisitos não-funcionais de engenharia ou segurança (ex: criptografia, protocolos de rede, infraestrutura) redefinam a hipótese de produto.\n"
+            "requisitos não-funcionais de infraestrutura/engenharia (ex: migrar para Kubernetes, reescrever em Rust, introduzir Kafka, microsserviços, cluster de banco) "
+            "e vulnerabilidades de segurança/privacidade/conformidade devem ser registrados com severidade real, "
+            "mas sua relevância decisória imediata é LATER, priorizando incertezas que possam invalidar a hipótese central de valor do produto.\n"
+            "3. Não permita que requisitos de infraestrutura técnica ou segurança redefinam ou mutem a hipótese de produto.\n"
             "4. Nunca introduza alegações numéricas precisas (métricas de tempo, latência, porcentagem, moeda ou multiplicadores) sem base de evidência declarada.\n"
             "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (ex: processos manuais, planilhas, ferramentas existentes, fazer nada).\n"
             "6. Forneça critérios de falseamento estruturados (hipótese, observação destrutiva, teste discriminativo de menor custo).\n"
@@ -186,7 +189,7 @@ class LeanLoopRunner:
                     "DIRETRIZES E LIMITES DE ESCOPO:\n"
                     "1. Resolva estritamente a incerteza especificada sem reescrever dimensões não relacionadas.\n"
                     "2. O alvo da escalação NÃO se torna automaticamente a prioridade global do projeto.\n"
-                    "3. Não converta mitigação ou requisito não-funcional em refinamento da proposta de produto sem justificativa.\n"
+                    "3. Não converta mitigação, arquitetura técnica (ex: Kubernetes, Kafka, Rust) ou requisito não-funcional em refinamento da proposta de produto sem justificativa.\n"
                     "4. Não invente métricas de desempenho ou custo sem medição.\n"
                     "5. Retorne candidato a próximo passo (candidate_updated_next_action), não ação final autoritativa.\n"
                 )
@@ -222,6 +225,8 @@ class LeanLoopRunner:
         # 5. Arbitragem determinística do Próximo Passo (Severity != Priority & Next Action Policy)
         stage = getattr(first_pass_output, "idea_stage", IdeaStage.UNKNOWN)
         cand_action = escalation_output.updated_next_action if escalation_output else None
+        cand_cat = getattr(gate_result, "escalation_risk_category", RiskCategory.UNKNOWN)
+        cand_req_type = DecisionRelevancePolicy.infer_requirement_type(cand_action, cand_cat) if cand_action else None
         final_next_action, next_action_chg = NextActionArbitrationPolicy.arbitrate(
             first_pass_next_action=first_pass_output.proposed_next_action,
             escalation_candidate_next_action=cand_action,
@@ -229,6 +234,8 @@ class LeanLoopRunner:
             original_idea=original_idea,
             requires_human_decision=human_decision_req,
             human_decision_description=first_pass_output.human_choice_description if first_pass_output else None,
+            candidate_risk_category=cand_cat,
+            candidate_requirement_type=cand_req_type,
         )
 
         # Atualiza a ação no escalation_output se foi arbitrada

@@ -9,7 +9,7 @@ import hashlib
 from datetime import datetime
 from enum import Enum
 from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator, PrivateAttr
 
 from src.idea_evolution.domain.state import OntologyState, PromotionAuthorityBasis
 from src.idea_evolution.domain.epistemic_contracts import SourceAnchor, SourceAnchorKind, NegativeKnowledgeRecord
@@ -21,6 +21,9 @@ from src.idea_evolution.domain.decision_relevance import (
     AlternativeCategory,
     FalsificationCriterion,
     EngineeringRequirement,
+    RequirementType,
+    IdeaStageAssessment,
+    IdeaStageGroundingPolicy,
     DecisionRelevancePolicy,
     FalsePrecisionGuard,
     NextActionArbitrationPolicy,
@@ -90,6 +93,15 @@ class LeanFirstPassOutput(BaseModel):
     idea_stage_justification: str = ""
     falsification_criteria: List[FalsificationCriterion] = Field(default_factory=list)
     engineering_requirements: List[str] = Field(default_factory=list)
+    _stage_assessment: Optional[IdeaStageAssessment] = PrivateAttr(default=None)
+
+    @property
+    def stage_assessment(self) -> Optional[IdeaStageAssessment]:
+        return self._stage_assessment
+
+    @stage_assessment.setter
+    def stage_assessment(self, value: Optional[IdeaStageAssessment]) -> None:
+        self._stage_assessment = value
 
 
 class FocusedEscalationOutput(BaseModel):
@@ -225,6 +237,8 @@ class GateEvaluationResult(BaseModel):
     rent_record: Optional[EpistemicRentRecord] = None
     attention_snapshot: Optional[AttentionSnapshot] = None
     explanation: str = ""
+    escalation_risk_category: RiskCategory = RiskCategory.UNKNOWN
+    stage_assessment: Optional[IdeaStageAssessment] = None
 
 
 
@@ -250,6 +264,18 @@ class EarlyEpistemicGate:
         grounding_records: List[GroundingRecord] = []
         authority_spoofing = False
         unsupported_count = 0
+
+        # 0. Ancoragem determinística de estágio operacional (Seções 9 a 13)
+        stage_declared = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN)
+        stage_just = getattr(first_pass, "idea_stage_justification", "")
+        stage_assessment = IdeaStageGroundingPolicy.ground_stage(
+            declared_stage=stage_declared,
+            declared_justification=stage_just,
+            source_text=original_text,
+        )
+        first_pass.stage_assessment = stage_assessment
+        first_pass.idea_stage = stage_assessment.current_stage
+        stage = stage_assessment.current_stage
 
         # 1. Auditar mecanismo primário contra autoridade e proveniência
         primary = first_pass.primary_mechanism
@@ -301,7 +327,6 @@ class EarlyEpistemicGate:
                 if neg_match:
                     break
 
-
         # 4. Verificar exigência de Autoridade Humana Normativa (Regra: Missing Human Authority -> STOP, No AI call)
         if first_pass.requires_human_normative_choice or any("normativo" in amb.lower() or "humano" in amb.lower() for amb in first_pass.material_ambiguities):
             return GateEvaluationResult(
@@ -311,22 +336,28 @@ class EarlyEpistemicGate:
                 authority_spoofing_detected=authority_spoofing,
                 unsupported_candidate_count=unsupported_count,
                 negative_knowledge_match=neg_match,
+                stage_assessment=stage_assessment,
                 explanation="A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.",
             )
 
         # 5. Avaliar vulnerabilidades com base em Relevância Decisória no Estágio (Severity != Priority)
-        stage = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN)
         severe_vulns = [v for v in first_pass.material_vulnerabilities if v.severity.upper() == "HIGH"]
         escalatable_vulns: List[Tuple[LeanVulnerability, DecisionRelevance]] = []
 
         for v in first_pass.material_vulnerabilities:
+            v_cat = getattr(v, "category", RiskCategory.UNKNOWN)
+            if v_cat == RiskCategory.UNKNOWN:
+                v_cat = DecisionRelevancePolicy.infer_category(v.vulnerability, v_cat)
+                v.category = v_cat
+            v_req_type = DecisionRelevancePolicy.infer_requirement_type(v.vulnerability, v_cat)
             rel = DecisionRelevancePolicy.evaluate_vulnerability_relevance(
                 vulnerability_text=v.vulnerability,
                 severity=v.severity,
-                category=getattr(v, "category", RiskCategory.UNKNOWN),
+                category=v_cat,
                 stage=stage,
                 original_idea=original_text,
                 explicit_relevance=getattr(v, "decision_relevance", DecisionRelevance.UNKNOWN),
+                requirement_type=v_req_type,
             )
             v.decision_relevance = rel
             if rel in (DecisionRelevance.CRITICAL_NOW, DecisionRelevance.HIGH_NOW):
@@ -334,6 +365,7 @@ class EarlyEpistemicGate:
 
         if escalatable_vulns:
             target_vuln, target_rel = escalatable_vulns[0]
+            target_cat = getattr(target_vuln, "category", RiskCategory.UNKNOWN)
             rent = EpistemicRentRecord(
                 record_id=f"RENT-{hashlib.sha256(target_vuln.vulnerability.encode()).hexdigest()[:8]}",
                 escalation_reason=EscalationReason.MATERIAL_VULNERABILITY,
@@ -350,6 +382,8 @@ class EarlyEpistemicGate:
                 unsupported_candidate_count=unsupported_count,
                 negative_knowledge_match=neg_match,
                 rent_record=rent,
+                escalation_risk_category=target_cat,
+                stage_assessment=stage_assessment,
                 explanation=f"Escalação justificada para crítica focada de vulnerabilidade com relevância decisória {target_rel.value} no estágio {stage.value}: {target_vuln.vulnerability}",
             )
 
@@ -371,6 +405,8 @@ class EarlyEpistemicGate:
                 unsupported_candidate_count=unsupported_count,
                 negative_knowledge_match=neg_match,
                 rent_record=rent,
+                escalation_risk_category=RiskCategory.PRODUCT,
+                stage_assessment=stage_assessment,
                 explanation="Escalação justificada para comparação focada entre mecanismos concorrentes.",
             )
 
@@ -392,6 +428,8 @@ class EarlyEpistemicGate:
                 unsupported_candidate_count=unsupported_count,
                 negative_knowledge_match=neg_match,
                 rent_record=rent,
+                escalation_risk_category=RiskCategory.TECHNICAL_FEASIBILITY,
+                stage_assessment=stage_assessment,
                 explanation="Escalação justificada para delineamento de teste empírico da realidade.",
             )
 
@@ -429,6 +467,7 @@ class EarlyEpistemicGate:
             unsupported_candidate_count=unsupported_count,
             negative_knowledge_match=neg_match,
             attention_snapshot=snapshot,
+            stage_assessment=stage_assessment,
             explanation="Ideia suficientemente estruturada sem bloqueios críticos imediatos. Retorno imediato após 1 chamada.",
         )
 

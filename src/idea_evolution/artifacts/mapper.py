@@ -24,6 +24,8 @@ from src.idea_evolution.domain.decision_relevance import (
     IdeaStage,
     RiskCategory,
     DecisionRelevance,
+    RequirementType,
+    IdeaStageGroundingPolicy,
     FalsePrecisionGuard,
     NextActionArbitrationPolicy,
     DecisionRelevancePolicy,
@@ -59,26 +61,37 @@ class EvolutionArtifactMapper:
         )
 
         # 2. Ideia Refinada Canônica (Separação entre Refinamento de Produto e Requisito Técnico)
-        stage = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN) if first_pass else IdeaStage.UNKNOWN
+        stage_assessment = getattr(first_pass, "stage_assessment", None) if first_pass else None
+        if not stage_assessment and first_pass:
+            stage_declared = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN)
+            stage_just = getattr(first_pass, "idea_stage_justification", "")
+            stage_assessment = IdeaStageGroundingPolicy.ground_stage(
+                declared_stage=stage_declared,
+                declared_justification=stage_just,
+                source_text=orig_idea,
+            )
+        stage = stage_assessment.current_stage if stage_assessment else IdeaStage.UNKNOWN
+
         base_mechanism = (
             first_pass.primary_mechanism.mechanism
             if first_pass and first_pass.primary_mechanism and first_pass.primary_mechanism.mechanism
             else orig_idea
         )
-        deferred_security_requirement: Optional[str] = None
+        deferred_engineering_requirement: Optional[str] = None
 
         refined_idea = ""
         if escalation and escalation.hypothesis_mutated and escalation.mutated_hypothesis_description:
-            # Em descoberta/validação, não permite que controles técnicos/segurança mutem a hipótese de produto
+            # Em descoberta/validação, não permite que controles técnicos/engenharia/segurança mutem a hipótese de produto
             if (
                 stage in (IdeaStage.DISCOVERY, IdeaStage.VALIDATION, IdeaStage.UNKNOWN)
-                and DecisionRelevancePolicy.is_engineering_security_override(
-                    escalation.mutated_hypothesis_description, base_mechanism
+                and DecisionRelevancePolicy.is_non_product_implementation_override(
+                    candidate_text=escalation.mutated_hypothesis_description,
+                    original_mechanism=base_mechanism,
                 )
-                and not DecisionRelevancePolicy.is_user_explicit_security_request(orig_idea)
+                and not DecisionRelevancePolicy.is_user_explicit_technical_request(orig_idea)
             ):
                 refined_idea = base_mechanism
-                deferred_security_requirement = escalation.mutated_hypothesis_description
+                deferred_engineering_requirement = escalation.mutated_hypothesis_description
             else:
                 refined_idea = escalation.mutated_hypothesis_description
         elif first_pass and first_pass.primary_mechanism and first_pass.primary_mechanism.mechanism:
@@ -129,13 +142,20 @@ class EvolutionArtifactMapper:
                     affected_aspect="Focalização",
                 )
             )
-        if deferred_security_requirement:
+        if deferred_engineering_requirement:
+            text_low = deferred_engineering_requirement.lower()
+            is_eng = any(term in text_low for term in ["rust", "kubernetes", "k8s", "kafka", "rabbitmq", "banco", "cluster", "microserviç"])
+            is_sec = not is_eng and any(
+                term in text_low
+                for term in ["segurança", "criptografia", "aes", "tls", "e2ee", "pinning", "autenticação", "privacy", "privacidade"]
+            )
+            req_label = "Requisito Técnico/Segurança Identificado" if is_sec else "Requisito Técnico/Engenharia Identificado"
             critique_items.append(
                 CritiqueItem(
-                    vulnerability=f"Requisito Técnico/Segurança Identificado: {deferred_security_requirement}",
+                    vulnerability=f"{req_label}: {deferred_engineering_requirement}",
                     severity="HIGH",
                     why_it_matters="Requisito de engenharia preservado como especificação técnica sem descaracterizar a proposta de produto em estágio inicial.",
-                    affected_aspect="Segurança / Infraestrutura",
+                    affected_aspect="Segurança / Infraestrutura" if is_sec else "Engenharia / Infraestrutura",
                 )
             )
 
@@ -183,6 +203,8 @@ class EvolutionArtifactMapper:
         else:
             fp_action = first_pass.proposed_next_action if first_pass else ""
             esc_action = escalation.updated_next_action if escalation else None
+            cand_cat = getattr(lean_res.gate_result, "escalation_risk_category", RiskCategory.UNKNOWN) if lean_res.gate_result else RiskCategory.UNKNOWN
+            cand_req_type = DecisionRelevancePolicy.infer_requirement_type(esc_action, cand_cat) if esc_action else None
             next_action, _ = NextActionArbitrationPolicy.arbitrate(
                 first_pass_next_action=fp_action,
                 escalation_candidate_next_action=esc_action,
@@ -190,6 +212,8 @@ class EvolutionArtifactMapper:
                 original_idea=orig_idea,
                 requires_human_decision=human_decision,
                 human_decision_description=human_desc,
+                candidate_risk_category=cand_cat,
+                candidate_requirement_type=cand_req_type,
             )
             if not next_action:
                 next_action = "Avaliar formulação refinada."

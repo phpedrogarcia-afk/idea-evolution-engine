@@ -31,6 +31,10 @@ from src.idea_evolution.domain.decision_relevance import (
     AlternativeCategory,
     FalsificationCriterion,
     MetricEvidenceBasis,
+    RequirementType,
+    StageProvenanceBasis,
+    IdeaStageAssessment,
+    IdeaStageGroundingPolicy,
     FalsePrecisionGuard,
     DecisionRelevancePolicy,
     NextActionArbitrationPolicy,
@@ -771,6 +775,411 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
             FROZEN_LEAN_CORE_HASH_V1_1,
             "Candidato v1.1 deve ter identidade separada da baseline histórica v1.0.1!"
         )
+
+    # =========================================================================
+    # SUÍTE ADVERSARIAL RQ-02: GENERALIZAÇÃO DE ENGENHARIA & GROUNDING DE ESTÁGIO
+    # =========================================================================
+
+    def test_case_a_premature_kubernetes_migration_rejected_in_discovery(self):
+        """
+        Caso A (Seção 11): Proposta prematura de migração para Kubernetes em descoberta.
+        Invariante: NON_PRODUCT_IMPLEMENTATION_REQUIREMENT != PRODUCT_REFINEMENT.
+        A escalação NÃO pode sequestrar o próximo passo de validação de produto.
+        """
+        idea_text = (
+            "Clube de assinatura de cafés artesanais para entusiastas com envio mensal "
+            "e grãos selecionados diretamente de pequenos produtores."
+        )
+        first_pass = {
+            "interpreted_problem": "Amantes de café especial têm dificuldade de encontrar grãos frescos de pequenos produtores.",
+            "human_intent": "Entregar cafés especiais selecionados por assinatura mensal.",
+            "primary_mechanism": {
+                "mechanism": "Curadoria mensal enviada por correio com fichas de degustação",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": ["Consumidores pagam frete fixo por conveniência de curadoria"],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Usuários podem achar o frete mensal desproporcional ao preço do café",
+                    "why_it_matters": "Inviabiliza a margem e causa cancelamento imediato",
+                    "severity": "HIGH",
+                    "category": "BUSINESS_MODEL",
+                    "decision_relevance": "CRITICAL_NOW",
+                },
+                {
+                    "vulnerability": "Escalabilidade de microsserviços e balanceamento de carga de pedidos",
+                    "why_it_matters": "Gargalo técnico sob milhares de requisições simultâneas",
+                    "severity": "HIGH",
+                    "category": "ENGINEERING",
+                    "decision_relevance": "LATER",
+                }
+            ],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Entrevistar 10 consumidores de café especial sobre interesse e faixa de preço viável",
+            "idea_stage": "DISCOVERY",
+        }
+        escalation_data = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "Curadoria mensal enviada por correio",
+            "hypothesis_mutated": True,
+            "mutated_hypothesis_description": "Migrar para Kubernetes e orquestrar clusters multi-região com Helm e Terraform",
+            "focused_critique_or_analysis": "Análise técnica de arquitetura de contêineres e alta disponibilidade",
+            "updated_next_action": "Migrar para Kubernetes e orquestrar clusters",
+            "decision_progress_made": True,
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={
+            "LEAN_FIRST_PASS": first_pass,
+            "FOCUSED_ESCALATION": escalation_data,
+        })
+        runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # 1. Próximo passo de descoberta é PRESERVADO (rejeita Kubernetes override)
+        self.assertEqual(
+            artifact.recommended_next_action,
+            "Entrevistar 10 consumidores de café especial sobre interesse e faixa de preço viável"
+        )
+        # 2. Refinamento de produto NÃO foi corrompido para infraestrutura técnica
+        self.assertNotIn("Kubernetes", artifact.refined_idea)
+        self.assertIn("curadoria", artifact.refined_idea.lower())
+        # 3. Requisito de engenharia foi preservado em critique
+        crit_texts = [c.vulnerability for c in artifact.critique]
+        self.assertTrue(
+            any("Requisito Técnico/Engenharia Identificado" in ct and "Kubernetes" in ct for ct in crit_texts),
+            "Requisito de Kubernetes deve ser preservado sob critique como requisito técnico!"
+        )
+
+    def test_case_b_premature_rust_rewrite_rejected_in_discovery(self):
+        """
+        Caso B (Seção 11): Proposta prematura de reescrita em Rust em estágio inicial.
+        Invariante: Prevenção de refatoração ou reescrita técnica precoce antes da validação.
+        """
+        idea_text = "Aplicativo para donos de cães agendarem caminhadas compartilhadas no bairro."
+        first_pass = {
+            "interpreted_problem": "Donos de cães não têm tempo para passear sozinhos e buscam socialização para seus pets.",
+            "human_intent": "Conectar donos de cães vizinhos para caminhadas conjuntas.",
+            "primary_mechanism": {
+                "mechanism": "Grupos locais geolocalizados para passeios em horários comuns",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Donos têm receio de agressividade ou brigas entre animais desconhecidos",
+                    "why_it_matters": "Impede a primeira caminhada conjunta",
+                    "severity": "HIGH",
+                    "category": "USER_BEHAVIOR",
+                    "decision_relevance": "CRITICAL_NOW",
+                }
+            ],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Validar se 5 donos de cães do mesmo quarteirão aceitariam passear juntos",
+            "idea_stage": "DISCOVERY",
+        }
+        escalation_data = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "Grupos locais geolocalizados",
+            "hypothesis_mutated": True,
+            "mutated_hypothesis_description": "Reescrever em Rust para garantir segurança de memória e concorrência sem garbage collection",
+            "focused_critique_or_analysis": "Análise de latência e controle estrito de memória",
+            "updated_next_action": "Reescrever em Rust o backend",
+            "decision_progress_made": True,
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={
+            "LEAN_FIRST_PASS": first_pass,
+            "FOCUSED_ESCALATION": escalation_data,
+        })
+        runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # Rejeita override unilateral de reescrita em Rust
+        self.assertEqual(
+            artifact.recommended_next_action,
+            "Validar se 5 donos de cães do mesmo quarteirão aceitariam passear juntos"
+        )
+        self.assertNotIn("Rust", artifact.refined_idea)
+        crit_texts = [c.vulnerability for c in artifact.critique]
+        self.assertTrue(any("Requisito Técnico/Engenharia Identificado" in ct and "Rust" in ct for ct in crit_texts))
+
+    def test_case_c_premature_kafka_event_streaming_rejected_in_discovery(self):
+        """
+        Caso C (Seção 11): Proposta prematura de introdução de Kafka / Event Streaming.
+        Invariante: Broker distribuído não substitui validação de mercado/cliente.
+        """
+        idea_text = "Marketplace de aluguel de ferramentas pesadas de marcenaria entre artesãos autônomos."
+        first_pass = {
+            "interpreted_problem": "Marceneiros autônomos precisam de maquinário caro para projetos pontuais sem capital para compra.",
+            "human_intent": "Intermediar aluguel seguro de máquinas de marcenaria ociosas.",
+            "primary_mechanism": {
+                "mechanism": "Catálogo com depósito de caução e termo de vistoria presencial",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Proprietário teme avaria de ferramenta especializada sem restituição rápida",
+                    "why_it_matters": "Inviabiliza a oferta de maquinário",
+                    "severity": "HIGH",
+                    "category": "USER_BEHAVIOR",
+                    "decision_relevance": "CRITICAL_NOW",
+                }
+            ],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Consultar 3 marcenarias se alugariam suas serras de bancada ociosas com caução",
+            "idea_stage": "DISCOVERY",
+        }
+        escalation_data = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "Catálogo com depósito de caução",
+            "hypothesis_mutated": True,
+            "mutated_hypothesis_description": "Introduzir Kafka para mensageria distribuída de eventos e streaming de telemetria",
+            "focused_critique_or_analysis": "Estudo de pipeline assíncrono para processamento de eventos",
+            "updated_next_action": "Introduzir Kafka para mensageria distribuída",
+            "decision_progress_made": True,
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={
+            "LEAN_FIRST_PASS": first_pass,
+            "FOCUSED_ESCALATION": escalation_data,
+        })
+        runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        self.assertEqual(
+            artifact.recommended_next_action,
+            "Consultar 3 marcenarias se alugariam suas serras de bancada ociosas com caução"
+        )
+        self.assertNotIn("Kafka", artifact.refined_idea)
+
+    def test_case_d_security_proposal_rejected_in_discovery(self):
+        """
+        Caso D (Seção 11): Proposta de segurança/criptografia em descoberta sem solicitação do usuário.
+        Invariante: Segurança permanece HIGH em severidade, mas LATER em prioridade imediata.
+        """
+        idea_text = "Rede de apoio comunitário para doação e troca de livros escolares entre famílias."
+        first_pass = {
+            "interpreted_problem": "Famílias gastam muito com livros didáticos novos enquanto exemplares usados ficam parados.",
+            "human_intent": "Facilitar doação e troca direta de livros didáticos entre famílias.",
+            "primary_mechanism": {
+                "mechanism": "Vitrine comunitária organizada por série escolar e bairro",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Famílias não terem incentivo de cadastrar livros antigos sem contrapartida",
+                    "why_it_matters": "Gera vitrine vazia e perda de tração",
+                    "severity": "HIGH",
+                    "category": "USER_BEHAVIOR",
+                    "decision_relevance": "CRITICAL_NOW",
+                }
+            ],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Entrevistar pais de 2 escolas sobre acúmulo de livros didáticos parados",
+            "idea_stage": "DISCOVERY",
+        }
+        escalation_data = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "Vitrine comunitária organizada por série",
+            "hypothesis_mutated": True,
+            "mutated_hypothesis_description": "Implementar criptografia E2EE e certificate pinning TLS 1.3",
+            "focused_critique_or_analysis": "Análise de privacidade e cifragem do tráfego",
+            "updated_next_action": "Configurar TLS 1.3 e implementar E2EE",
+            "decision_progress_made": True,
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={
+            "LEAN_FIRST_PASS": first_pass,
+            "FOCUSED_ESCALATION": escalation_data,
+        })
+        runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # Não permite takeover de segurança sem pedido explícito
+        self.assertEqual(
+            artifact.recommended_next_action,
+            "Entrevistar pais de 2 escolas sobre acúmulo de livros didáticos parados"
+        )
+        self.assertNotIn("E2EE", artifact.refined_idea)
+
+    def test_case_e_pre_production_infrastructure_blocker_accepted(self):
+        """
+        Caso E (Seção 11): Bloqueador de infraestrutura em PRÉ-PRODUÇÃO é aceito legitimamente.
+        Contra-caso: Em pré-produção, falha de infraestrutura/segurança É um blocker imediato.
+        """
+        idea_text = (
+            "Sistema de emissão de passagens rodoviárias com piloto já validado em 2 operadoras. "
+            "Produto implementado e preparando deploy para produção."
+        )
+        first_pass = {
+            "interpreted_problem": "Operadoras precisam emitir passagens de contingência sem queda de conectividade.",
+            "human_intent": "Garantir emissão de passagens em pré-produção para homologação final.",
+            "primary_mechanism": {
+                "mechanism": "API de reserva síncrona com confirmação imediata",
+                "is_explicit_in_source": True,
+                "claimed_basis": "USER_EXPLICIT",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": [],
+            "material_vulnerabilities": [
+                {
+                    "vulnerability": "Queda do cluster pode deixar passageiros sem emissão no momento do embarque",
+                    "why_it_matters": "Bloqueador direto de homologação e produção",
+                    "severity": "HIGH",
+                    "category": "ENGINEERING",
+                    "decision_relevance": "CRITICAL_NOW",
+                }
+            ],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": False,
+            "proposed_next_action": "Revisar contratos operacionais",
+            "idea_stage": "PRE_PRODUCTION",
+        }
+        escalation_data = {
+            "escalation_reason": "MATERIAL_VULNERABILITY",
+            "target_hypothesis": "API de reserva síncrona",
+            "hypothesis_mutated": False,
+            "focused_critique_or_analysis": "Análise de alta disponibilidade necessária para autorização de produção",
+            "updated_next_action": "Configurar cluster Kubernetes redundante com failover automático e TLS para deploy de produção",
+            "decision_progress_made": True,
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={
+            "LEAN_FIRST_PASS": first_pass,
+            "FOCUSED_ESCALATION": escalation_data,
+        })
+        runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # Em pré-produção, o bloqueador de infraestrutura É aceito como próximo passo
+        self.assertEqual(
+            artifact.recommended_next_action,
+            "Configurar cluster Kubernetes redundante com failover automático e TLS para deploy de produção"
+        )
+
+    def test_case_f_future_mvp_roadmap_mention_cannot_promote_to_mvp(self):
+        """
+        Caso F (Seção 12 & 13): Menção a futuro MVP no roadmap NÃO promove o estágio atual para MVP.
+        Invariante: MENTIONED_FUTURE_STAGE != CURRENT_IDEA_STAGE.
+        """
+        idea_text = (
+            "Pesquisa exploratória sobre biossensores para monitoramento de hidratação em atletas. "
+            "No futuro planejamos lançar um MVP para corredores amadores, mas ainda não validamos a receptividade do público."
+        )
+        assessment = IdeaStageGroundingPolicy.ground_stage(
+            declared_stage=IdeaStage.MVP,
+            declared_justification="Texto menciona planejamento de MVP futuro",
+            source_text=idea_text,
+        )
+
+        # Estágio atual ancorado DEVE ser DISCOVERY, e MVP reconhecido como estágio futuro
+        self.assertEqual(assessment.current_stage, IdeaStage.DISCOVERY)
+        self.assertIn(IdeaStage.MVP, assessment.mentioned_future_stages)
+        self.assertEqual(assessment.basis, StageProvenanceBasis.SOURCE_SUPPORTED_INFERENCE)
+
+    def test_case_g_future_production_mention_cannot_promote_to_pre_production(self):
+        """
+        Caso G (Seção 12 & 13): Menção a produção futura NÃO promove ideia conceitual para PRE_PRODUCTION.
+        Invariante: MODEL_STAGE_INFERENCE != USER_EXPLICIT_STAGE (não fabrica maturidade).
+        """
+        idea_text = (
+            "Ideia conceitual de robô autônomo para limpeza de painéis solares em grandes usinas. "
+            "A produção em escala está prevista para 2028 no roadmap, mas hoje o experimento de cliente zero ainda não foi executado."
+        )
+        assessment = IdeaStageGroundingPolicy.ground_stage(
+            declared_stage=IdeaStage.PRE_PRODUCTION,
+            declared_justification="Texto menciona produção em escala no roadmap",
+            source_text=idea_text,
+        )
+
+        self.assertEqual(assessment.current_stage, IdeaStage.DISCOVERY)
+        self.assertIn(IdeaStage.PRE_PRODUCTION, assessment.mentioned_future_stages)
+        self.assertNotEqual(assessment.current_stage, IdeaStage.PRE_PRODUCTION)
+
+    def test_case_h_explicit_pre_production_accepted(self):
+        """
+        Caso H (Seção 12 & 13): Usuário explicita que o produto está implementado e piloto validado.
+        Contra-caso: Quando a maturidade é explícita na fonte, PRE_PRODUCTION é reconhecido com proveniência.
+        """
+        idea_text = (
+            "Software de telemetria veicular para frotas de entrega urbana. "
+            "Produto implementado e piloto validado com 3 transportadoras parceiras; preparando deploy de produção."
+        )
+        assessment = IdeaStageGroundingPolicy.ground_stage(
+            declared_stage=IdeaStage.PRE_PRODUCTION,
+            declared_justification="Usuário declara piloto validado e produto implementado",
+            source_text=idea_text,
+        )
+
+        self.assertEqual(assessment.current_stage, IdeaStage.PRE_PRODUCTION)
+        self.assertEqual(assessment.basis, StageProvenanceBasis.USER_EXPLICIT_CURRENT_STAGE)
+
+    def test_case_i_human_normative_authority_sovereign_zero_ai_calls(self):
+        """
+        Caso I (Seção 14): Decisão normativa humana soberana interrompe inferência extra.
+        Invariante: Missing Human Authority -> STOP, No AI call. Exatamente 1 chamada utilizada.
+        """
+        idea_text = (
+            "Algoritmo de triagem de bolsas de estudo que precisa decidir se prioriza "
+            "vulnerabilidade de renda per capita ou diversidade regional."
+        )
+        first_pass = {
+            "interpreted_problem": "Vagas limitadas de bolsas de estudo exigem critério de desempate.",
+            "human_intent": "Selecionar bolsistas com critério justo e transparente.",
+            "primary_mechanism": {
+                "mechanism": "Score ponderado combinando renda e região",
+                "is_explicit_in_source": False,
+                "claimed_basis": "MODEL_HYPOTHESIS",
+            },
+            "competing_alternatives": [],
+            "key_assumptions": [],
+            "material_ambiguities": ["Escolha normativa entre priorizar renda extrema ou equilíbrio regional"],
+            "material_vulnerabilities": [],
+            "remaining_uncertainties": [],
+            "requires_human_normative_choice": True,
+            "human_choice_description": "Definir se o critério soberano é vulnerabilidade de renda ou cobertura regional.",
+            "proposed_next_action": "Apresentar opções de ponderação para o comitê acadêmico",
+            "idea_stage": "DISCOVERY",
+        }
+
+        fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
+        runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
+        result = runner.run(idea_text)
+        artifact = EvolutionArtifactMapper.map_lean_result(result)
+
+        # 1. Gate interrompe e solicita autoridade humana soberana
+        self.assertEqual(result.gate_result.outcome, GateOutcome.REQUEST_HUMAN_DECISION)
+        # 2. Exatamente 1 chamada de modelo utilizada (zero inferência extra paga ou livre)
+        self.assertEqual(result.total_model_calls, 1)
+        self.assertEqual(result.terminal_status, "HUMAN_DECISION_REQUIRED")
+        self.assertTrue(artifact.human_decision_required)
+        # 3. Próximo passo é a decisão humana protegida
+        self.assertIn("Decisão humana requerida", artifact.recommended_next_action)
+        self.assertIn("vulnerabilidade de renda ou cobertura regional", artifact.recommended_next_action)
 
 
 if __name__ == "__main__":
