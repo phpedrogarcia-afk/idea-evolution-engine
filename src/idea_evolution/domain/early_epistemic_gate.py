@@ -8,7 +8,7 @@ from __future__ import annotations
 import hashlib
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 from pydantic import BaseModel, Field, model_validator, PrivateAttr
 
 from src.idea_evolution.domain.state import OntologyState, PromotionAuthorityBasis
@@ -61,9 +61,42 @@ class LeanCandidateMechanism(BaseModel):
     mechanism: str
     is_explicit_in_source: bool = False
     claimed_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    authority_proof_ref: str = ""
     justification: str = ""
     tradeoffs: List[str] = Field(default_factory=list)
     alternative_category: AlternativeCategory = AlternativeCategory.OTHER
+    _gate_eligible: bool = PrivateAttr(default=False)
+
+    @property
+    def gate_eligible(self) -> bool:
+        return self._gate_eligible
+
+    @gate_eligible.setter
+    def gate_eligible(self, value: bool) -> None:
+        self._gate_eligible = value
+
+
+class GateAuthority(BaseModel):
+    """Procedência compacta e reutilizável para conteúdo que pode influenciar um gate."""
+    basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    support_ref: str = ""
+    derivation: str = ""
+
+
+def _compact_first_pass_schema(schema: Dict[str, Any]) -> None:
+    """Remove metadados não semânticos para respeitar o limite do transporte strict."""
+    def compact(node: Any) -> None:
+        if isinstance(node, dict):
+            node.pop("title", None)
+            node.pop("description", None)
+            node.pop("default", None)
+            for value in node.values():
+                compact(value)
+        elif isinstance(node, list):
+            for value in node:
+                compact(value)
+
+    compact(schema)
 
 
 class LeanVulnerability(BaseModel):
@@ -74,6 +107,25 @@ class LeanVulnerability(BaseModel):
     affected_aspect: str = ""
     category: RiskCategory = RiskCategory.UNKNOWN
     decision_relevance: DecisionRelevance = DecisionRelevance.UNKNOWN
+    authority: GateAuthority = Field(default_factory=GateAuthority)
+    _gate_eligible: bool = PrivateAttr(default=False)
+    _effective_severity: str = PrivateAttr(default="UNCONFIRMED")
+
+    @property
+    def gate_eligible(self) -> bool:
+        return self._gate_eligible
+
+    @gate_eligible.setter
+    def gate_eligible(self, value: bool) -> None:
+        self._gate_eligible = value
+
+    @property
+    def effective_severity(self) -> str:
+        return self._effective_severity
+
+    @effective_severity.setter
+    def effective_severity(self, value: str) -> None:
+        self._effective_severity = value
 
 
 class LeanFirstPassOutput(BaseModel):
@@ -86,14 +138,25 @@ class LeanFirstPassOutput(BaseModel):
     material_ambiguities: List[str] = Field(default_factory=list)
     material_vulnerabilities: List[LeanVulnerability] = Field(default_factory=list)
     remaining_uncertainties: List[str] = Field(default_factory=list)
+    uncertainty_authority: GateAuthority = Field(default_factory=GateAuthority)
     requires_human_normative_choice: bool = False
     human_choice_description: str = ""
+    normative_authority: GateAuthority = Field(default_factory=GateAuthority)
     proposed_next_action: str = ""
+    action_authority: GateAuthority = Field(default_factory=GateAuthority)
     idea_stage: IdeaStage = IdeaStage.UNKNOWN
     idea_stage_justification: str = ""
     falsification_criteria: List[FalsificationCriterion] = Field(default_factory=list)
     engineering_requirements: List[str] = Field(default_factory=list)
     _stage_assessment: Optional[IdeaStageAssessment] = PrivateAttr(default=None)
+    _normative_gate_eligible: bool = PrivateAttr(default=False)
+    _next_action_gate_eligible: bool = PrivateAttr(default=False)
+
+    @classmethod
+    def model_json_schema(cls, *args: Any, **kwargs: Any) -> Dict[str, Any]:
+        schema = super().model_json_schema(*args, **kwargs)
+        _compact_first_pass_schema(schema)
+        return schema
 
     @property
     def stage_assessment(self) -> Optional[IdeaStageAssessment]:
@@ -102,6 +165,22 @@ class LeanFirstPassOutput(BaseModel):
     @stage_assessment.setter
     def stage_assessment(self, value: Optional[IdeaStageAssessment]) -> None:
         self._stage_assessment = value
+
+    @property
+    def normative_gate_eligible(self) -> bool:
+        return self._normative_gate_eligible
+
+    @normative_gate_eligible.setter
+    def normative_gate_eligible(self, value: bool) -> None:
+        self._normative_gate_eligible = value
+
+    @property
+    def next_action_gate_eligible(self) -> bool:
+        return self._next_action_gate_eligible
+
+    @next_action_gate_eligible.setter
+    def next_action_gate_eligible(self, value: bool) -> None:
+        self._next_action_gate_eligible = value
 
 
 class FocusedEscalationOutput(BaseModel):
@@ -119,7 +198,9 @@ class FocusedEscalationOutput(BaseModel):
     decision_progress_made: bool = True
     updated_next_action: str = ""
     candidate_updated_next_action: Optional[str] = None
+    action_authority: GateAuthority = Field(default_factory=GateAuthority)
     falsification_criteria: List[FalsificationCriterion] = Field(default_factory=list)
+    _next_action_gate_eligible: bool = PrivateAttr(default=False)
 
     @model_validator(mode="after")
     def sync_candidate_next_action(self) -> FocusedEscalationOutput:
@@ -129,6 +210,14 @@ class FocusedEscalationOutput(BaseModel):
         elif not self.updated_next_action and self.candidate_updated_next_action:
             self.updated_next_action = self.candidate_updated_next_action
         return self
+
+    @property
+    def next_action_gate_eligible(self) -> bool:
+        return self._next_action_gate_eligible
+
+    @next_action_gate_eligible.setter
+    def next_action_gate_eligible(self, value: bool) -> None:
+        self._next_action_gate_eligible = value
 
 
 class DecisionDeltaEventType(str, Enum):
@@ -239,6 +328,7 @@ class GateEvaluationResult(BaseModel):
     explanation: str = ""
     escalation_risk_category: RiskCategory = RiskCategory.UNKNOWN
     stage_assessment: Optional[IdeaStageAssessment] = None
+    ineligible_gate_claims: List[str] = Field(default_factory=list)
 
 
 
@@ -264,6 +354,7 @@ class EarlyEpistemicGate:
         grounding_records: List[GroundingRecord] = []
         authority_spoofing = False
         unsupported_count = 0
+        ineligible_gate_claims: List[str] = []
 
         # 0. Ancoragem determinística de estágio operacional (Seções 9 a 13)
         stage_declared = getattr(first_pass, "idea_stage", IdeaStage.UNKNOWN)
@@ -279,19 +370,21 @@ class EarlyEpistemicGate:
 
         # 1. Auditar mecanismo primário contra autoridade e proveniência
         primary = first_pass.primary_mechanism
-        audit_prim = AuthorityProofValidator.audit_proposal_authority(
+        audit_prim = AuthorityProofValidator.audit_gate_claim(
             original_idea=original_text,
             human_intent=first_pass.human_intent,
-            proposal=primary.mechanism,
+            proposition=primary.mechanism,
             claimed_basis=primary.claimed_basis,
-            justification=primary.justification,
-            evidence_or_decision_basis="",
+            derivation_proof=primary.justification,
+            authority_proof_ref=primary.authority_proof_ref,
             human_intervention_flag=human_intervention_flag,
         )
         grounding_records.append(audit_prim)
+        primary.gate_eligible = audit_prim.is_valid
 
         if not audit_prim.is_valid:
-            # Se o modelo alegou USER_EXPLICIT ou dedução estrita sem fundamentação
+            # Hipóteses continuam permitidas, mas permanecem contabilizadas como
+            # elaboração sem âncora. Apenas bases elevadas inválidas são spoofing.
             if primary.claimed_basis in (PromotionAuthorityBasis.USER_EXPLICIT, PromotionAuthorityBasis.VALID_USER_DERIVATION):
                 authority_spoofing = True
             unsupported_count += 1
@@ -299,23 +392,49 @@ class EarlyEpistemicGate:
 
         # 2. Auditar alternativas concorrentes
         for alt in first_pass.competing_alternatives:
-            audit_alt = AuthorityProofValidator.audit_proposal_authority(
+            audit_alt = AuthorityProofValidator.audit_gate_claim(
                 original_idea=original_text,
                 human_intent=first_pass.human_intent,
-                proposal=alt.mechanism,
+                proposition=alt.mechanism,
                 claimed_basis=alt.claimed_basis,
-                justification=alt.justification,
-                evidence_or_decision_basis="",
+                derivation_proof=alt.justification,
+                authority_proof_ref=alt.authority_proof_ref,
                 human_intervention_flag=human_intervention_flag,
             )
             grounding_records.append(audit_alt)
+            alt.gate_eligible = audit_alt.is_valid
             if not audit_alt.is_valid:
                 if alt.claimed_basis in (PromotionAuthorityBasis.USER_EXPLICIT, PromotionAuthorityBasis.VALID_USER_DERIVATION):
                     authority_spoofing = True
                 unsupported_count += 1
                 alt.claimed_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
 
-        # 3. Verificar se há correspondência com Conhecimento Negativo (Negative Knowledge)
+        # 3. Auditar a ação proposta antes que ela possa ser escolhida como ação final.
+        if first_pass.proposed_next_action:
+            action_audit = AuthorityProofValidator.audit_gate_claim(
+                original_idea=original_text,
+                human_intent=first_pass.human_intent,
+                proposition=first_pass.proposed_next_action,
+                claimed_basis=first_pass.action_authority.basis,
+                derivation_proof=first_pass.action_authority.derivation,
+                authority_proof_ref=first_pass.action_authority.support_ref,
+                human_intervention_flag=human_intervention_flag,
+            )
+            grounding_records.append(action_audit)
+            first_pass.next_action_gate_eligible = action_audit.is_valid
+            if not action_audit.is_valid:
+                ineligible_gate_claims.append(
+                    f"NEXT_ACTION: {action_audit.failure_reason}"
+                )
+                if first_pass.action_authority.basis in (
+                    PromotionAuthorityBasis.USER_EXPLICIT,
+                    PromotionAuthorityBasis.VALID_USER_DERIVATION,
+                ):
+                    authority_spoofing = True
+                    unsupported_count += 1
+                first_pass.action_authority.basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
+        # 4. Verificar se há correspondência com Conhecimento Negativo (Negative Knowledge)
         neg_match: Optional[str] = None
         if negative_knowledge_pool:
             all_mechs = [primary.mechanism] + [a.mechanism for a in first_pass.competing_alternatives]
@@ -327,8 +446,43 @@ class EarlyEpistemicGate:
                 if neg_match:
                     break
 
-        # 4. Verificar exigência de Autoridade Humana Normativa (Regra: Missing Human Authority -> STOP, No AI call)
-        if first_pass.requires_human_normative_choice or any("normativo" in amb.lower() or "humano" in amb.lower() for amb in first_pass.material_ambiguities):
+        # 5. Autoridade normativa exige claim auditada; flag/linguagem do modelo não bastam.
+        normative_claimed = first_pass.requires_human_normative_choice or any(
+            "normativo" in amb.lower() or "humano" in amb.lower()
+            for amb in first_pass.material_ambiguities
+        )
+        if normative_claimed:
+            normative_proposition = (
+                first_pass.human_choice_description
+                or next(
+                    (amb for amb in first_pass.material_ambiguities if "normativo" in amb.lower() or "humano" in amb.lower()),
+                    "Escolha normativa humana",
+                )
+            )
+            normative_audit = AuthorityProofValidator.audit_gate_claim(
+                original_idea=original_text,
+                human_intent=first_pass.human_intent,
+                proposition=normative_proposition,
+                claimed_basis=first_pass.normative_authority.basis,
+                derivation_proof=first_pass.normative_authority.derivation,
+                authority_proof_ref=first_pass.normative_authority.support_ref,
+                human_intervention_flag=human_intervention_flag,
+            )
+            grounding_records.append(normative_audit)
+            first_pass.normative_gate_eligible = normative_audit.is_valid
+            if not normative_audit.is_valid:
+                ineligible_gate_claims.append(
+                    f"NORMATIVE_CHOICE: {normative_audit.failure_reason}"
+                )
+                if first_pass.normative_authority.basis in (
+                    PromotionAuthorityBasis.USER_EXPLICIT,
+                    PromotionAuthorityBasis.VALID_USER_DERIVATION,
+                ):
+                    authority_spoofing = True
+                    unsupported_count += 1
+                first_pass.normative_authority.basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
+        if normative_claimed and first_pass.normative_gate_eligible:
             return GateEvaluationResult(
                 outcome=GateOutcome.REQUEST_HUMAN_DECISION,
                 escalation_reason=EscalationReason.NONE,
@@ -337,14 +491,41 @@ class EarlyEpistemicGate:
                 unsupported_candidate_count=unsupported_count,
                 negative_knowledge_match=neg_match,
                 stage_assessment=stage_assessment,
+                ineligible_gate_claims=ineligible_gate_claims,
                 explanation="A transição exige escolha normativa/humana protegida. Mais raciocínio de IA não substitui autoridade humana.",
             )
 
-        # 5. Avaliar vulnerabilidades com base em Relevância Decisória no Estágio (Severity != Priority)
-        severe_vulns = [v for v in first_pass.material_vulnerabilities if v.severity.upper() == "HIGH"]
+        # 6. Vulnerabilidade só recebe severidade efetiva e relevância se sua procedência for elegível.
         escalatable_vulns: List[Tuple[LeanVulnerability, DecisionRelevance]] = []
 
         for v in first_pass.material_vulnerabilities:
+            vuln_audit = AuthorityProofValidator.audit_gate_claim(
+                original_idea=original_text,
+                human_intent=first_pass.human_intent,
+                proposition=v.vulnerability,
+                claimed_basis=v.authority.basis,
+                derivation_proof=v.authority.derivation or v.why_it_matters,
+                authority_proof_ref=v.authority.support_ref,
+                human_intervention_flag=human_intervention_flag,
+            )
+            grounding_records.append(vuln_audit)
+            v.gate_eligible = vuln_audit.is_valid
+            if not vuln_audit.is_valid:
+                v.effective_severity = "UNCONFIRMED"
+                v.decision_relevance = DecisionRelevance.UNKNOWN
+                ineligible_gate_claims.append(
+                    f"VULNERABILITY: {v.vulnerability} :: {vuln_audit.failure_reason}"
+                )
+                if v.authority.basis in (
+                    PromotionAuthorityBasis.USER_EXPLICIT,
+                    PromotionAuthorityBasis.VALID_USER_DERIVATION,
+                ):
+                    authority_spoofing = True
+                    unsupported_count += 1
+                v.authority.basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+                continue
+
+            v.effective_severity = v.severity.upper()
             v_cat = getattr(v, "category", RiskCategory.UNKNOWN)
             if v_cat == RiskCategory.UNKNOWN:
                 v_cat = DecisionRelevancePolicy.infer_category(v.vulnerability, v_cat)
@@ -362,6 +543,11 @@ class EarlyEpistemicGate:
             v.decision_relevance = rel
             if rel in (DecisionRelevance.CRITICAL_NOW, DecisionRelevance.HIGH_NOW):
                 escalatable_vulns.append((v, rel))
+
+        severe_vulns = [
+            v for v in first_pass.material_vulnerabilities
+            if v.gate_eligible and v.effective_severity in ("HIGH", "CRITICAL")
+        ]
 
         if escalatable_vulns:
             target_vuln, target_rel = escalatable_vulns[0]
@@ -384,11 +570,16 @@ class EarlyEpistemicGate:
                 rent_record=rent,
                 escalation_risk_category=target_cat,
                 stage_assessment=stage_assessment,
+                ineligible_gate_claims=ineligible_gate_claims,
                 explanation=f"Escalação justificada para crítica focada de vulnerabilidade com relevância decisória {target_rel.value} no estágio {stage.value}: {target_vuln.vulnerability}",
             )
 
         # 6. Avaliar múltiplos mecanismos técnicos concorrentes genuínos
-        if len(first_pass.competing_alternatives) >= 1 and any(len(a.tradeoffs) > 0 for a in first_pass.competing_alternatives):
+        eligible_alternatives = [
+            alternative for alternative in first_pass.competing_alternatives
+            if alternative.gate_eligible and alternative.tradeoffs
+        ]
+        if primary.gate_eligible and eligible_alternatives:
             rent = EpistemicRentRecord(
                 record_id=f"RENT-{hashlib.sha256(primary.mechanism.encode()).hexdigest()[:8]}",
                 escalation_reason=EscalationReason.COMPETING_MECHANISMS,
@@ -407,11 +598,43 @@ class EarlyEpistemicGate:
                 rent_record=rent,
                 escalation_risk_category=RiskCategory.PRODUCT,
                 stage_assessment=stage_assessment,
+                ineligible_gate_claims=ineligible_gate_claims,
                 explanation="Escalação justificada para comparação focada entre mecanismos concorrentes.",
             )
 
         # 7. Avaliar incertezas factuais ou de teste empírico (Reality Uncertainty)
-        if any("factual" in u.lower() or "hardware" in u.lower() or "restrito" in u.lower() for u in first_pass.remaining_uncertainties):
+        reality_uncertainty = next((
+            uncertainty for uncertainty in first_pass.remaining_uncertainties
+            if "factual" in uncertainty.lower()
+            or "hardware" in uncertainty.lower()
+            or "restrito" in uncertainty.lower()
+        ), None)
+        reality_uncertainty_eligible = False
+        if reality_uncertainty:
+            uncertainty_audit = AuthorityProofValidator.audit_gate_claim(
+                original_idea=original_text,
+                human_intent=first_pass.human_intent,
+                proposition=reality_uncertainty,
+                claimed_basis=first_pass.uncertainty_authority.basis,
+                derivation_proof=first_pass.uncertainty_authority.derivation,
+                authority_proof_ref=first_pass.uncertainty_authority.support_ref,
+                human_intervention_flag=human_intervention_flag,
+            )
+            grounding_records.append(uncertainty_audit)
+            reality_uncertainty_eligible = uncertainty_audit.is_valid
+            if not uncertainty_audit.is_valid:
+                ineligible_gate_claims.append(
+                    f"REALITY_UNCERTAINTY: {uncertainty_audit.failure_reason}"
+                )
+                if first_pass.uncertainty_authority.basis in (
+                    PromotionAuthorityBasis.USER_EXPLICIT,
+                    PromotionAuthorityBasis.VALID_USER_DERIVATION,
+                ):
+                    authority_spoofing = True
+                    unsupported_count += 1
+                first_pass.uncertainty_authority.basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
+        if reality_uncertainty and reality_uncertainty_eligible:
             rent = EpistemicRentRecord(
                 record_id=f"RENT-{hashlib.sha256(original_text.encode()).hexdigest()[:8]}",
                 escalation_reason=EscalationReason.REALITY_UNCERTAINTY,
@@ -430,6 +653,7 @@ class EarlyEpistemicGate:
                 rent_record=rent,
                 escalation_risk_category=RiskCategory.TECHNICAL_FEASIBILITY,
                 stage_assessment=stage_assessment,
+                ineligible_gate_claims=ineligible_gate_claims,
                 explanation="Escalação justificada para delineamento de teste empírico da realidade.",
             )
 
@@ -468,6 +692,6 @@ class EarlyEpistemicGate:
             negative_knowledge_match=neg_match,
             attention_snapshot=snapshot,
             stage_assessment=stage_assessment,
+            ineligible_gate_claims=ineligible_gate_claims,
             explanation="Ideia suficientemente estruturada sem bloqueios críticos imediatos. Retorno imediato após 1 chamada.",
         )
-

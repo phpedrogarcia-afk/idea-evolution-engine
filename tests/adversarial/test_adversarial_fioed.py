@@ -99,7 +99,16 @@ class TestAdversarialFioED(unittest.TestCase):
             "key_assumptions": [],
             "material_ambiguities": [],
             "material_vulnerabilities": [
-                {"vulnerability": "Vulnerabilidade X", "why_it_matters": "Grave", "severity": "HIGH", "affected_aspect": "Core"}
+                {
+                    "vulnerability": "Vulnerabilidade X",
+                    "why_it_matters": "Grave",
+                    "severity": "HIGH",
+                    "affected_aspect": "Core",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Vulnerabilidade X",
+                    },
+                }
             ],
             "remaining_uncertainties": [],
             "requires_human_normative_choice": False,
@@ -124,7 +133,7 @@ class TestAdversarialFioED(unittest.TestCase):
             }
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
-        result = lean_runner.run(self.standard_idea)
+        result = lean_runner.run(f"{self.standard_idea} Vulnerabilidade X.")
 
         # Investimento = 2 chamadas, mas a base continua sendo MODEL_HYPOTHESIS (sem evidência empírica)
         self.assertEqual(result.total_model_calls, 2)
@@ -148,12 +157,17 @@ class TestAdversarialFioED(unittest.TestCase):
             "material_vulnerabilities": [],
             "remaining_uncertainties": [],
             "requires_human_normative_choice": True,
+            "human_choice_description": "Decisão de responsabilidade legal médica",
+            "normative_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "Decisão de responsabilidade legal médica",
+            },
             "proposed_next_action": "Aguardar médico",
         }
 
         fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
-        result = lean_runner.run("Assistente de alta")
+        result = lean_runner.run("Assistente de alta. Decisão de responsabilidade legal médica.")
 
         self.assertEqual(result.total_model_calls, 1)
         self.assertEqual(result.gate_result.outcome, GateOutcome.REQUEST_HUMAN_DECISION)
@@ -184,7 +198,16 @@ class TestAdversarialFioED(unittest.TestCase):
             "key_assumptions": [],
             "material_ambiguities": [],
             "material_vulnerabilities": [
-                {"vulnerability": "Falha severa", "why_it_matters": "Grave", "severity": "HIGH", "affected_aspect": "Core"}
+                {
+                    "vulnerability": "Falha severa",
+                    "why_it_matters": "Grave",
+                    "severity": "HIGH",
+                    "affected_aspect": "Core",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Falha severa",
+                    },
+                }
             ],
             "remaining_uncertainties": [],
             "requires_human_normative_choice": False,
@@ -209,7 +232,7 @@ class TestAdversarialFioED(unittest.TestCase):
             }
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
-        result = lean_runner.run(self.standard_idea)
+        result = lean_runner.run(f"{self.standard_idea} Falha severa.")
 
         self.assertEqual(result.total_model_calls, 2)
         # O resultado contém o DecisionDeltaRecord reconciliado pós-escalação
@@ -313,6 +336,11 @@ class TestAdversarialFioED(unittest.TestCase):
             why_it_matters="Moto perpétuo é fisicamente impossível.",
             severity="HIGH",
             affected_aspect="Viabilidade Fundamental",
+            authority={
+                "basis": PromotionAuthorityBasis.EXTERNAL_EVIDENCE,
+                "support_ref": "DOI:THERMODYNAMICS-CONTROL",
+                "derivation": "Leis físicas estabelecidas contradizem a premissa.",
+            },
         )
         first_pass = LeanFirstPassOutput(
             interpreted_problem="Construir sistema de geração de energia infinita.",
@@ -336,4 +364,3 @@ class TestAdversarialFioED(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
-

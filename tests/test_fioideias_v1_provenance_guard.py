@@ -362,7 +362,7 @@ class TestProvenanceAndOntologyEnforcementP3(unittest.TestCase):
 
         self.assertIsNotNone(resp.artifact)
         self.assertEqual(resp.artifact.original_idea_authority, PromotionAuthorityBasis.USER_EXPLICIT)
-        self.assertEqual(resp.artifact.intent_provenance, PromotionAuthorityBasis.VALID_USER_DERIVATION)
+        self.assertEqual(resp.artifact.intent_provenance, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
         self.assertEqual(resp.artifact.refined_idea_authority, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
 
     def test_15_no_secret_material_in_provenance(self):
@@ -403,8 +403,8 @@ class TestProvenanceAndOntologyEnforcementP3(unittest.TestCase):
 
         self.assertEqual(receipt.unlabeled_semantic_item_count, 0)
         self.assertTrue(receipt.user_explicit_count >= 1)     # original_idea
-        self.assertTrue(receipt.valid_derivation_count >= 1)  # human_intent
-        self.assertTrue(receipt.model_candidate_count >= 2)   # refined_idea + assumptions + alternatives
+        self.assertEqual(receipt.valid_derivation_count, 0)   # nenhuma derivação é promovida sem prova
+        self.assertTrue(receipt.model_candidate_count >= 3)   # intent + refined_idea + assumptions + alternatives
         self.assertTrue(receipt.unknown_count >= 1)           # uncertainties
         self.assertTrue(receipt.is_epistemically_safe)
 

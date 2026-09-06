@@ -760,6 +760,49 @@ class NextActionArbitrationPolicy:
         "introduzir kafka", "migrar banco de dados", "adotar microserviços",
         "migrar para microserviços", "infraestrutura gpu", "configurar cluster"
     ]
+    GENERAL_IMPLEMENTATION_PREFIXES = (
+        "implementar", "construir", "desenvolver", "criar protótipo", "criar um protótipo",
+        "executar protótipo", "executar o protótipo", "rodar protótipo", "rodar o protótipo",
+        "programar", "fazer deploy", "lançar", "migrar", "adotar arquitetura",
+        "implement", "build", "develop", "create a prototype", "create prototype",
+        "execute prototype", "execute the prototype", "run prototype", "run the prototype",
+        "program", "deploy", "launch", "migrate", "adopt architecture",
+    )
+    EVIDENCE_SEEKING_PREFIXES = (
+        "testar", "validar", "comparar", "medir", "entrevistar", "investigar",
+        "falsificar", "observar", "verificar", "coletar evidência", "avaliar se", "injetar",
+        "test", "validate", "compare", "measure", "interview", "investigate",
+        "falsify", "observe", "verify", "collect evidence", "evaluate whether", "inject",
+    )
+
+    @classmethod
+    def is_implementation_action(cls, action: str) -> bool:
+        normalized = DecisionRelevancePolicy._strip_accents((action or "").lower()).strip()
+        return normalized.startswith(tuple(
+            DecisionRelevancePolicy._strip_accents(prefix) for prefix in cls.GENERAL_IMPLEMENTATION_PREFIXES
+        ))
+
+    @classmethod
+    def is_evidence_seeking_action(cls, action: str) -> bool:
+        normalized = DecisionRelevancePolicy._strip_accents((action or "").lower()).strip()
+        return normalized.startswith(tuple(
+            DecisionRelevancePolicy._strip_accents(prefix) for prefix in cls.EVIDENCE_SEEKING_PREFIXES
+        ))
+
+    @classmethod
+    def _uncertainty_reducing_action(
+        cls,
+        remaining_uncertainties: Optional[List[str]],
+        falsification_criteria: Optional[List[FalsificationCriterion]],
+    ) -> str:
+        for criterion in falsification_criteria or []:
+            test = getattr(criterion, "lowest_cost_discriminating_test", "")
+            if test and test.strip() and not cls.is_implementation_action(test):
+                return test.strip()
+        for uncertainty in remaining_uncertainties or []:
+            if uncertainty and uncertainty.strip():
+                return f"Investigar antes de implementar: {uncertainty.strip()}"
+        return "Validar com o usuário qual incerteza deve ser investigada antes de implementar."
 
     @classmethod
     def arbitrate(
@@ -773,6 +816,12 @@ class NextActionArbitrationPolicy:
         candidate_risk_category: RiskCategory = RiskCategory.UNKNOWN,
         candidate_requirement_type: Optional[RequirementType] = None,
         is_implementation_only: Optional[bool] = None,
+        first_pass_action_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.USER_EXPLICIT,
+        first_pass_action_gate_eligible: bool = True,
+        escalation_action_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.USER_EXPLICIT,
+        escalation_action_gate_eligible: bool = True,
+        remaining_uncertainties: Optional[List[str]] = None,
+        falsification_criteria: Optional[List[FalsificationCriterion]] = None,
     ) -> Tuple[str, bool]:
         """
         Arbitra deterministicamente o próximo passo final.
@@ -784,17 +833,48 @@ class NextActionArbitrationPolicy:
             desc = human_decision_description or "Decisão normativa de valor humano necessária antes de avançar."
             return f"Decisão humana requerida: {desc}", False
 
+        first_pass = (first_pass_next_action or "").strip()
+        first_pass_is_unanchored_model_action = (
+            first_pass_action_basis == PromotionAuthorityBasis.MODEL_HYPOTHESIS
+            and not first_pass_action_gate_eligible
+        )
+        safe_first_pass = first_pass
+        first_pass_replaced = False
+        if (
+            stage in (IdeaStage.DISCOVERY, IdeaStage.VALIDATION, IdeaStage.UNKNOWN)
+            and first_pass_is_unanchored_model_action
+            and cls.is_implementation_action(first_pass)
+        ):
+            safe_first_pass = cls._uncertainty_reducing_action(
+                remaining_uncertainties,
+                falsification_criteria,
+            )
+            first_pass_replaced = safe_first_pass != first_pass
+
         # 2. Se não houve escalação ou candidato está vazio
         if not escalation_candidate_next_action or not escalation_candidate_next_action.strip():
-            fallback = first_pass_next_action or "Validar proposta inicial com o usuário."
-            return fallback, False
+            fallback = safe_first_pass or "Validar proposta inicial com o usuário."
+            return fallback, first_pass_replaced
 
         candidate = escalation_candidate_next_action.strip()
-        first_pass = first_pass_next_action.strip()
+        candidate_is_unanchored_model_action = (
+            escalation_action_basis == PromotionAuthorityBasis.MODEL_HYPOTHESIS
+            and not escalation_action_gate_eligible
+        )
+
+        if (
+            stage in (IdeaStage.DISCOVERY, IdeaStage.VALIDATION, IdeaStage.UNKNOWN)
+            and candidate_is_unanchored_model_action
+            and not cls.is_evidence_seeking_action(candidate)
+        ):
+            return safe_first_pass or cls._uncertainty_reducing_action(
+                remaining_uncertainties,
+                falsification_criteria,
+            ), first_pass_replaced
 
         # Se forem idênticos, sem mudança
-        if candidate.lower() == first_pass.lower():
-            return first_pass, False
+        if candidate.lower() == safe_first_pass.lower():
+            return safe_first_pass, first_pass_replaced
 
         # 3. Determinar se o candidato é implementação não-produto
         cand_lower = candidate.lower()
@@ -820,7 +900,7 @@ class NextActionArbitrationPolicy:
                     return candidate, True
                 # Rejeita o override unilateral da escalação!
                 # Mantém o próximo passo de falseamento da hipótese de produto da primeira passada
-                return first_pass, False
+                return safe_first_pass, first_pass_replaced
 
         # 5. Em PRE_PRODUCTION / PRODUCTION / SCALE:
         # Bloqueadores de infraestrutura e segurança SÃO passos legítimos em pré-produção

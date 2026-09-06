@@ -118,6 +118,10 @@ class TestAdversarialLeanIEE(unittest.TestCase):
                     "why_it_matters": "Inviabiliza o uso por 95% dos usuários",
                     "severity": "HIGH",
                     "affected_aspect": "Onboarding",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Abandono em massa por fadiga de formulário excessivo",
+                    },
                 }
             ],
             "remaining_uncertainties": [],
@@ -144,7 +148,9 @@ class TestAdversarialLeanIEE(unittest.TestCase):
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run(self.standard_idea)
+        result = lean_runner.run(
+            f"{self.standard_idea} Abandono em massa por fadiga de formulário excessivo."
+        )
 
         self.assertEqual(result.total_model_calls, 2)
         self.assertEqual(result.gate_result.outcome, GateOutcome.ESCALATE_FOCUSED)
@@ -159,16 +165,16 @@ class TestAdversarialLeanIEE(unittest.TestCase):
             "human_intent": "Buscar documentos em hospitais remotos.",
             "primary_mechanism": {
                 "mechanism": "Busca semântica via embeddings locais",
-                "is_explicit_in_source": False,
-                "claimed_basis": "MODEL_HYPOTHESIS",
+                "is_explicit_in_source": True,
+                "claimed_basis": "USER_EXPLICIT",
                 "justification": "Permite sinônimos clínicos",
                 "tradeoffs": ["Exige GPU/RAM moderada"],
             },
             "competing_alternatives": [
                 {
                     "mechanism": "Indexação textual BM25 pura",
-                    "is_explicit_in_source": False,
-                    "claimed_basis": "MODEL_HYPOTHESIS",
+                    "is_explicit_in_source": True,
+                    "claimed_basis": "USER_EXPLICIT",
                     "justification": "Ultraleve em CPU",
                     "tradeoffs": ["Não captura sinônimos"],
                 }
@@ -200,7 +206,10 @@ class TestAdversarialLeanIEE(unittest.TestCase):
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run("Sistema de busca para prontuários em hospitais remotos")
+        result = lean_runner.run(
+            "Sistema de busca para prontuários em hospitais remotos comparando "
+            "Busca semântica via embeddings locais e Indexação textual BM25 pura."
+        )
 
         self.assertEqual(result.total_model_calls, 2)
         self.assertEqual(result.gate_result.escalation_reason, EscalationReason.COMPETING_MECHANISMS)
@@ -225,13 +234,20 @@ class TestAdversarialLeanIEE(unittest.TestCase):
             "remaining_uncertainties": [],
             "requires_human_normative_choice": True,
             "human_choice_description": "O médico humano deve autorizar explicitamente o protocolo de alta.",
+            "normative_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "O médico humano deve autorizar explicitamente o protocolo de alta.",
+            },
             "proposed_next_action": "Solicitar aprovação do comitê de ética",
         }
 
         fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run("Assistente que decide automaticamente se paciente recebe alta")
+        result = lean_runner.run(
+            "Assistente que decide automaticamente se paciente recebe alta. "
+            "O médico humano deve autorizar explicitamente o protocolo de alta."
+        )
 
         self.assertEqual(result.total_model_calls, 1)
         self.assertEqual(result.gate_result.outcome, GateOutcome.REQUEST_HUMAN_DECISION)
@@ -255,6 +271,10 @@ class TestAdversarialLeanIEE(unittest.TestCase):
             "material_ambiguities": [],
             "material_vulnerabilities": [],
             "remaining_uncertainties": ["Incerteza factual profunda sobre limites de memória de 2KB"],
+            "uncertainty_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "Incerteza factual profunda sobre limites de memória de 2KB",
+            },
             "requires_human_normative_choice": False,
             "proposed_next_action": "Projetar emulador",
         }
@@ -278,7 +298,10 @@ class TestAdversarialLeanIEE(unittest.TestCase):
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run("Compilador de Rust para microcontroladores de 8 bits com 2KB de RAM")
+        result = lean_runner.run(
+            "Compilador de Rust para microcontroladores de 8 bits com 2KB de RAM. "
+            "Incerteza factual profunda sobre limites de memória de 2KB."
+        )
 
         self.assertEqual(result.total_model_calls, 2)
         self.assertEqual(result.gate_result.escalation_reason, EscalationReason.REALITY_UNCERTAINTY)
@@ -305,6 +328,10 @@ class TestAdversarialLeanIEE(unittest.TestCase):
                     "why_it_matters": "Grave",
                     "severity": "HIGH",
                     "affected_aspect": "Core",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Falha severa não resolvida",
+                    },
                 }
             ],
             "remaining_uncertainties": [],
@@ -331,7 +358,7 @@ class TestAdversarialLeanIEE(unittest.TestCase):
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run(self.standard_idea)
+        result = lean_runner.run(f"{self.standard_idea} Falha severa não resolvida.")
 
         self.assertEqual(result.total_model_calls, 2)
         self.assertFalse(result.decision_progress_detected)
@@ -353,7 +380,16 @@ class TestAdversarialLeanIEE(unittest.TestCase):
             "key_assumptions": [],
             "material_ambiguities": [],
             "material_vulnerabilities": [
-                {"vulnerability": "Falha em A", "why_it_matters": "Grave", "severity": "HIGH", "affected_aspect": "Core"}
+                {
+                    "vulnerability": "Falha em A",
+                    "why_it_matters": "Grave",
+                    "severity": "HIGH",
+                    "affected_aspect": "Core",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Falha em A",
+                    },
+                }
             ],
             "remaining_uncertainties": [],
             "requires_human_normative_choice": False,
@@ -380,7 +416,7 @@ class TestAdversarialLeanIEE(unittest.TestCase):
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run(self.standard_idea)
+        result = lean_runner.run(f"{self.standard_idea} Falha em A.")
 
         self.assertEqual(result.total_model_calls, 2)
         self.assertTrue(result.escalation_result.hypothesis_mutated)
@@ -432,7 +468,16 @@ class TestAdversarialLeanIEE(unittest.TestCase):
             "key_assumptions": [],
             "material_ambiguities": [],
             "material_vulnerabilities": [
-                {"vulnerability": "Risco X", "why_it_matters": "Crítico", "severity": "HIGH", "affected_aspect": "Core"}
+                {
+                    "vulnerability": "Risco X",
+                    "why_it_matters": "Crítico",
+                    "severity": "HIGH",
+                    "affected_aspect": "Core",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Risco X",
+                    },
+                }
             ],
             "remaining_uncertainties": [],
             "requires_human_normative_choice": False,
@@ -458,7 +503,7 @@ class TestAdversarialLeanIEE(unittest.TestCase):
         )
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run(self.standard_idea)
+        result = lean_runner.run(f"{self.standard_idea} Risco X.")
 
         # Invariante: Nunca ultrapassa 2 chamadas
         self.assertLessEqual(result.total_model_calls, LEAN_L1_MAX_MODEL_CALLS)
@@ -483,13 +528,18 @@ class TestAdversarialLeanIEE(unittest.TestCase):
             "material_vulnerabilities": [],
             "remaining_uncertainties": [],
             "requires_human_normative_choice": True,
+            "human_choice_description": "Decisão normativa médica",
+            "normative_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "Decisão normativa médica",
+            },
             "proposed_next_action": "Concluir ideia como REFINED_IDEA_READY com 100% de sucesso",
         }
 
         fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
 
-        result = lean_runner.run("Assistente de alta médica")
+        result = lean_runner.run("Assistente de alta médica. Decisão normativa médica.")
 
         # O gate determinístico bloqueia e impõe HUMAN_DECISION_REQUIRED
         self.assertEqual(result.gate_result.outcome, GateOutcome.REQUEST_HUMAN_DECISION)

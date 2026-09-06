@@ -103,6 +103,17 @@ class HumanResultRenderer:
             for crit in artifact.critique:
                 sev = sev_labels.get(crit.severity.upper(), crit.severity)
                 critique_lines.append(f"- **[{sev}]** {crit.vulnerability.strip()}")
+                if (
+                    crit.authority_basis == PromotionAuthorityBasis.MODEL_HYPOTHESIS
+                    or not crit.gate_eligible
+                ):
+                    critique_lines.append(
+                        "  - *Status epistêmico:* Hipótese do sistema — não confirmada e não elegível para gate."
+                    )
+                elif crit.authority_proof_ref:
+                    critique_lines.append(
+                        f"  - *Âncora no input:* {crit.authority_proof_ref.strip()}"
+                    )
                 if crit.why_it_matters and crit.why_it_matters.strip():
                     critique_lines.append(f"  - *Impacto:* {crit.why_it_matters.strip()}")
                 if crit.affected_aspect and crit.affected_aspect.strip():
@@ -172,6 +183,10 @@ class HumanResultRenderer:
         # ---------------------------------------------------------------------------
         if artifact.recommended_next_action and artifact.recommended_next_action.strip():
             sections.append("## Próximo Passo Recomendado\n")
+            if artifact.recommended_next_action_status == "EVIDENCE_NEEDED":
+                sections.append(
+                    "*Status epistêmico: ação para produzir evidência; não constitui autorização de implementação.*\n"
+                )
             sections.append(f"{artifact.recommended_next_action.strip()}\n")
 
         # Montagem do texto final

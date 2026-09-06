@@ -31,7 +31,11 @@ class TestFioIdeiasV1ServiceBoundary(unittest.TestCase):
         self.runs_dir = self.test_dir / "runs"
         self.runs_dir.mkdir(parents=True, exist_ok=True)
 
-        self.sample_idea = "Criar um sistema simples de rodízio de tarefas diárias em uma cafeteria de 3 pessoas."
+        self.sample_idea = (
+            "Criar um sistema simples de rodízio de tarefas diárias em uma cafeteria de 3 pessoas. "
+            "Equipe pode rejeitar rodízio se as tarefas tiverem cargas horárias desiguais. "
+            "Decidir se penalidades por falta de cumprimento de tarefa devem existir."
+        )
 
         self.default_first_pass = {
             "interpreted_problem": "Cafeteria com 3 funcionários precisa de escala justa e sem atrito.",
@@ -131,6 +135,10 @@ class TestFioIdeiasV1ServiceBoundary(unittest.TestCase):
                 "why_it_matters": "Gera conflitos internos graves.",
                 "severity": "HIGH",
                 "affected_aspect": "Adesão",
+                "authority": {
+                    "basis": "USER_EXPLICIT",
+                    "support_ref": "Equipe pode rejeitar rodízio se as tarefas tiverem cargas horárias desiguais.",
+                },
             }
         ]
 
@@ -171,6 +179,10 @@ class TestFioIdeiasV1ServiceBoundary(unittest.TestCase):
         normative_first_pass = dict(self.default_first_pass)
         normative_first_pass["requires_human_normative_choice"] = True
         normative_first_pass["human_choice_description"] = "Decidir se penalidades por falta de cumprimento de tarefa devem existir."
+        normative_first_pass["normative_authority"] = {
+            "basis": "USER_EXPLICIT",
+            "support_ref": "Decidir se penalidades por falta de cumprimento de tarefa devem existir.",
+        }
 
         runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": normative_first_pass})
         service = IdeaEvolutionService(runner=runner, runs_dir=self.runs_dir)

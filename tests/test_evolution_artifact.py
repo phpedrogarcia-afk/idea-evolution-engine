@@ -40,7 +40,12 @@ class TestEvolutionArtifactP2(unittest.TestCase):
         self.runs_dir = self.test_dir / "runs"
         self.runs_dir.mkdir(parents=True, exist_ok=True)
 
-        self.sample_idea = "Criar um sistema de recomendação de livros baseado em micro-resenhas de leitores."
+        self.sample_idea = (
+            "Criar um sistema de recomendação de livros baseado em micro-resenhas de leitores. "
+            "Risco de resenhas vazias ou piadas diminuírem a qualidade da recomendação. "
+            "Permitir ou proibir resenhas patrocinadas por editoras? "
+            "Criar protótipo com regra de 3 upvotes."
+        )
 
         self.default_first_pass = {
             "interpreted_problem": "Leitores perdem tempo escolhendo livros longos sem saber se combinam com seu momento.",
@@ -69,6 +74,10 @@ class TestEvolutionArtifactP2(unittest.TestCase):
                     "why_it_matters": "Quebra a confiança na curadoria.",
                     "severity": "HIGH",
                     "affected_aspect": "Qualidade do Conteúdo",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Risco de resenhas vazias ou piadas diminuírem a qualidade da recomendação.",
+                    },
                 }
             ],
             "remaining_uncertainties": ["Qual a adesão mínima para relevância estatística?"],
@@ -111,6 +120,10 @@ class TestEvolutionArtifactP2(unittest.TestCase):
             "mutated_hypothesis_description": "Feed de micro-resenhas curadas por reputação comunitária",
             "decision_progress_made": True,
             "updated_next_action": "Criar protótipo com regra de 3 upvotes",
+            "action_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "Criar protótipo com regra de 3 upvotes.",
+            },
         }
 
         runner = FakeModelRunner(
@@ -136,6 +149,10 @@ class TestEvolutionArtifactP2(unittest.TestCase):
         normative_data = dict(self.default_first_pass)
         normative_data["requires_human_normative_choice"] = True
         normative_data["human_choice_description"] = "Permitir ou proibir resenhas patrocinadas por editoras?"
+        normative_data["normative_authority"] = {
+            "basis": "USER_EXPLICIT",
+            "support_ref": "Permitir ou proibir resenhas patrocinadas por editoras?",
+        }
 
         runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": normative_data})
         service = IdeaEvolutionService(runner=runner, runs_dir=self.runs_dir)
@@ -182,7 +199,7 @@ class TestEvolutionArtifactP2(unittest.TestCase):
         resp = service.evolve_idea(self.sample_idea)
 
         self.assertNotEqual(resp.artifact.intent_provenance, PromotionAuthorityBasis.USER_EXPLICIT)
-        self.assertEqual(resp.artifact.intent_provenance, PromotionAuthorityBasis.VALID_USER_DERIVATION)
+        self.assertEqual(resp.artifact.intent_provenance, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
 
     def test_07_model_candidates_remain_non_authoritative(self):
         """7: Candidatos propostos pelo sistema permanecem rotulados como MODEL_HYPOTHESIS."""

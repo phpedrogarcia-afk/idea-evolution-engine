@@ -161,6 +161,140 @@ class AuthorityProofValidator:
         return True, decision_ref, "Decisão humana formal confirmada no registro de execução."
 
     @classmethod
+    def detect_input_contradiction(cls, original_idea: str, proposition: str) -> Tuple[bool, str]:
+        """Detecta contradições explícitas que tornam uma claim inelegível para gates."""
+        source = _normalize_text(original_idea)
+        claim = _normalize_text(proposition)
+        if not source or not claim:
+            return False, ""
+
+        # Negação direta: a fonte diz explicitamente que a proposição não é verdadeira.
+        if f"nao {claim}" in source or f"not {claim}" in source:
+            return True, "INPUT_CONTRADICTION: a fonte nega explicitamente a proposição."
+
+        # Regressão RQ-07: múltiplas fontes externas + auto-observação contradizem
+        # dependência exclusiva/única de auto-observação.
+        exclusive_markers = (
+            "dependencia exclusiva", "exclusivamente", "somente", "apenas",
+            "unica fonte", "solely", "exclusively", "only source",
+        )
+        self_observation_markers = ("auto observacao", "self observation", "self monitoring")
+        plural_source_markers = (
+            "multiplas fontes", "fontes externas", "multiple sources", "external sources",
+            "testemunho humano", "telemetria", "runtime", "documentacao", "git",
+        )
+        if (
+            any(marker in claim for marker in exclusive_markers)
+            and any(marker in claim for marker in self_observation_markers)
+            and any(marker in source for marker in self_observation_markers)
+            and any(marker in source for marker in plural_source_markers)
+        ):
+            return True, (
+                "INPUT_CONTRADICTION: a fonte combina auto-observação com múltiplas fontes; "
+                "não sustenta dependência exclusiva de auto-observação."
+            )
+
+        return False, ""
+
+    @classmethod
+    def validate_traceable_user_derivation(
+        cls,
+        original_idea: str,
+        human_intent: str,
+        proposition: str,
+        derivation_proof: str,
+        authority_proof_ref: str,
+    ) -> Tuple[bool, str, str]:
+        """Exige uma referência rastreável à fonte além de uma justificativa de derivação."""
+        if not authority_proof_ref or not authority_proof_ref.strip():
+            return False, "", "MISSING_SOURCE_SUPPORT: derivação sem trecho rastreável do input."
+
+        source_norm = _normalize_text(original_idea)
+        support_norm = _normalize_text(authority_proof_ref)
+        if not support_norm or support_norm not in source_norm:
+            return False, "", "INVALID_SOURCE_SUPPORT: referência não encontrada no input humano."
+
+        is_valid, _, reason = cls.validate_user_derivation(
+            original_idea=original_idea,
+            human_intent=human_intent,
+            proposition=proposition,
+            derivation_proof=derivation_proof,
+        )
+        if not is_valid:
+            return False, "", reason
+
+        proposition_tokens = set(_extract_significant_tokens(proposition))
+        source_tokens = set(_extract_significant_tokens(authority_proof_ref))
+        if proposition_tokens and not proposition_tokens.intersection(source_tokens):
+            return False, "", (
+                "INVALID_DERIVATION: a conclusão não compartilha conceito material com a referência da fonte."
+            )
+
+        return True, authority_proof_ref, "Derivação sustentada por referência rastreável no input."
+
+    @classmethod
+    def audit_gate_claim(
+        cls,
+        original_idea: str,
+        human_intent: str,
+        proposition: str,
+        claimed_basis: PromotionAuthorityBasis,
+        derivation_proof: str = "",
+        authority_proof_ref: str = "",
+        human_intervention_flag: bool = False,
+    ) -> GroundingRecord:
+        """Audita claims materiais antes que possam influenciar severidade, gates ou ação."""
+        contradicted, contradiction_reason = cls.detect_input_contradiction(original_idea, proposition)
+        if contradicted:
+            return GroundingRecord(
+                proposition=proposition,
+                claimed_basis=claimed_basis,
+                is_valid=False,
+                grounding_source="ORIGINAL_HUMAN_INPUT",
+                evidence_or_span=authority_proof_ref,
+                failure_reason=contradiction_reason,
+            )
+
+        if claimed_basis == PromotionAuthorityBasis.VALID_USER_DERIVATION:
+            is_valid, span, reason = cls.validate_traceable_user_derivation(
+                original_idea=original_idea,
+                human_intent=human_intent,
+                proposition=proposition,
+                derivation_proof=derivation_proof,
+                authority_proof_ref=authority_proof_ref,
+            )
+            return GroundingRecord(
+                proposition=proposition,
+                claimed_basis=claimed_basis,
+                is_valid=is_valid,
+                grounding_source="TRACEABLE_USER_DERIVATION",
+                evidence_or_span=span,
+                failure_reason=reason if not is_valid else "",
+            )
+
+        if claimed_basis == PromotionAuthorityBasis.MODEL_HYPOTHESIS:
+            return GroundingRecord(
+                proposition=proposition,
+                claimed_basis=claimed_basis,
+                is_valid=False,
+                grounding_source="MODEL_SYNTHESIS",
+                failure_reason=(
+                    "MODEL_HYPOTHESIS_GATE_INELIGIBLE: hipótese pode permanecer exploratória, "
+                    "mas não possui autoridade para acionar gate."
+                ),
+            )
+
+        return cls.audit_proposal_authority(
+            original_idea=original_idea,
+            human_intent=human_intent,
+            proposal=proposition,
+            claimed_basis=claimed_basis,
+            justification=derivation_proof,
+            evidence_or_decision_basis=authority_proof_ref,
+            human_intervention_flag=human_intervention_flag,
+        )
+
+    @classmethod
     def audit_proposal_authority(
         cls,
         original_idea: str,

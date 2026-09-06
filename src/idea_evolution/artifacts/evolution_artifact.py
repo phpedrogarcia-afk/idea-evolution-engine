@@ -5,7 +5,7 @@ Artefato Canônico de Produto do FioIdeias V1 (M06 P2/P3).
 Representação estruturada, auditável e imutável do desfecho de maturação de uma ideia,
 preservando a distinção estrita e determinística entre:
 - O que o humano expressou (original_idea -> USER_EXPLICIT)
-- O que o sistema inferiu (human_intent -> VALID_USER_DERIVATION)
+- O que o sistema interpretou (human_intent -> MODEL_HYPOTHESIS por padrão)
 - O que o sistema propôs (refined_idea -> MODEL_HYPOTHESIS, candidate_possibilities)
 - O que permanece incerto (critique, assumptions, uncertainties, human_decision_required)
 
@@ -30,7 +30,7 @@ if TYPE_CHECKING:
 SCHEMA_VERSION_1_0 = "1.0"
 SCHEMA_VERSION_1_1 = "1.1"
 FROZEN_LEAN_CORE_HASH_V1_0 = "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600"
-FROZEN_LEAN_CORE_HASH_V1_1 = "b4f2bbddf2b52c163ce9f7055e9569356c7f42268067892192116be59058054a"
+FROZEN_LEAN_CORE_HASH_V1_1 = "3fa70e0ede15888ee5650fa08572508748eef1462de0a8bd01aa4a66a58b151f"
 FROZEN_LEAN_CORE_HASH = FROZEN_LEAN_CORE_HASH_V1_1
 
 
@@ -51,6 +51,8 @@ class CritiqueItem(BaseModel):
     why_it_matters: str = ""
     affected_aspect: str = ""
     authority_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    authority_proof_ref: str = ""
+    gate_eligible: bool = False
 
 
 class CandidatePossibility(BaseModel):
@@ -101,7 +103,7 @@ class EvolutionArtifact(BaseModel):
     original_idea: str
     original_idea_authority: PromotionAuthorityBasis = PromotionAuthorityBasis.USER_EXPLICIT
     human_intent: str
-    intent_provenance: PromotionAuthorityBasis = PromotionAuthorityBasis.VALID_USER_DERIVATION
+    intent_provenance: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
 
     # 3. Ideia Refinada e Mudanças Substanciais
     refined_idea: str
@@ -117,8 +119,13 @@ class EvolutionArtifact(BaseModel):
     # 5. Possibilidades e Próximos Passos
     candidate_possibilities: List[CandidatePossibility] = Field(default_factory=list)
     recommended_next_action: str = ""
+    recommended_next_action_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    recommended_next_action_support_ref: str = ""
+    recommended_next_action_status: str = "EVIDENCE_NEEDED"
     human_decision_required: bool = False
     human_decision_description: Optional[str] = None
+    human_decision_authority_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+    human_decision_support_ref: str = ""
 
     # 6. Proveniência e Auditoria Mínima
     source_anchor: Optional[SourceAnchor] = None

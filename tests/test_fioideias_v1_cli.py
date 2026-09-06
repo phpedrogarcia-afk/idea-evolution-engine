@@ -54,7 +54,10 @@ class TestFioIdeiasV1CliP5(unittest.TestCase):
 
     def setUp(self):
         self.temp_dir = Path(tempfile.mkdtemp(prefix="iee_cli_p5_"))
-        self.sample_idea = "Criar um sistema simples de rodízio de tarefas diárias em uma cafeteria de 3 pessoas."
+        self.sample_idea = (
+            "Criar um sistema simples de rodízio de tarefas diárias em uma cafeteria de 3 pessoas. "
+            "Decidir se penalidades devem existir na escala."
+        )
         self.default_first_pass = {
             "interpreted_problem": "Cafeteria com 3 funcionários precisa de escala justa e sem atrito.",
             "human_intent": "Distribuir tarefas diárias de cafeteria de forma equitativa.",
@@ -198,6 +201,10 @@ class TestFioIdeiasV1CliP5(unittest.TestCase):
         normative_first_pass = dict(self.default_first_pass)
         normative_first_pass["requires_human_normative_choice"] = True
         normative_first_pass["human_choice_description"] = "Decidir se penalidades devem existir na escala."
+        normative_first_pass["normative_authority"] = {
+            "basis": "USER_EXPLICIT",
+            "support_ref": "Decidir se penalidades devem existir na escala.",
+        }
 
         runner = self._create_fake_runner(custom_responses={"LEAN_FIRST_PASS": normative_first_pass})
         stdout = io.StringIO()

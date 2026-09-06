@@ -111,7 +111,11 @@ def evaluate_human_quality_rubric(artifact) -> Dict[str, str]:
     # 7. AUTHORITY_PRESERVATION
     if (
         artifact.original_idea_authority == PromotionAuthorityBasis.USER_EXPLICIT
-        and artifact.intent_provenance in (PromotionAuthorityBasis.VALID_USER_DERIVATION, PromotionAuthorityBasis.USER_EXPLICIT)
+        and artifact.intent_provenance in (
+            PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+            PromotionAuthorityBasis.VALID_USER_DERIVATION,
+            PromotionAuthorityBasis.USER_EXPLICIT,
+        )
         and artifact.refined_idea_authority == PromotionAuthorityBasis.MODEL_HYPOTHESIS
     ):
         judgments["AUTHORITY_PRESERVATION"] = "PASS_STRICT_BOUNDARIES"
@@ -128,7 +132,9 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         self.runs_dir = Path(self.temp_dir.name)
         self.whatsapp_idea = (
             "Um SaaS para ajudar pequenas empresas a recuperar orçamentos e cotações esquecidas no WhatsApp. "
-            "O vendedor marca uma mensagem com a tag de cotação e o sistema agenda lembretes de follow-up automáticos."
+            "O vendedor marca uma mensagem com a tag de cotação e o sistema agenda lembretes de follow-up automáticos. "
+            "Vazamento de conversas e conformidade LGPD no armazenamento de chats. "
+            "Falta de adesão do vendedor em marcar mensagens manualmente."
         )
 
     def tearDown(self):
@@ -187,6 +193,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     "affected_aspect": "Privacidade",
                     "category": "SECURITY",
                     "decision_relevance": "LATER",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Vazamento de conversas e conformidade LGPD no armazenamento de chats",
+                    },
                 },
                 {
                     "vulnerability": "Falta de adesão do vendedor em marcar mensagens manualmente",
@@ -195,6 +205,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     "affected_aspect": "Adoção do Usuário",
                     "category": "USER_BEHAVIOR",
                     "decision_relevance": "CRITICAL_NOW",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Falta de adesão do vendedor em marcar mensagens manualmente",
+                    },
                 },
             ],
             "remaining_uncertainties": [
@@ -313,6 +327,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     severity="HIGH",
                     category=RiskCategory.SECURITY,
                     decision_relevance=DecisionRelevance.UNKNOWN,
+                    authority={
+                        "basis": PromotionAuthorityBasis.USER_EXPLICIT,
+                        "support_ref": "Tokens de API de provedor e chaves privadas expostos em logs de auditoria",
+                    },
                 )
             ],
             remaining_uncertainties=[],
@@ -321,7 +339,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
             idea_stage=IdeaStage.PRE_PRODUCTION,
         )
 
-        anchor = SourceAnchor.create_human_input_anchor("Homologação de pagamentos médicos pré-produção")
+        anchor = SourceAnchor.create_human_input_anchor(
+            "Gateway de checkout com conciliação bancária em homologação de pagamentos médicos pré-produção. "
+            "Tokens de API de provedor e chaves privadas expostos em logs de auditoria."
+        )
         eval_result = EarlyEpistemicGate.evaluate(
             source_anchor=anchor,
             first_pass=first_pass,
@@ -354,12 +375,18 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     why_it_matters="Vulnerabilidade crítica de segurança",
                     severity="HIGH",
                     category=RiskCategory.SECURITY,
+                    authority={
+                        "basis": PromotionAuthorityBasis.USER_EXPLICIT,
+                        "support_ref": "Ausência de rotação de chaves e risco de interceptação",
+                    },
                 )
             ],
             idea_stage=IdeaStage.DISCOVERY,
         )
 
-        anchor = SourceAnchor.create_human_input_anchor(idea_with_security_prompt)
+        anchor = SourceAnchor.create_human_input_anchor(
+            f"{idea_with_security_prompt} Ausência de rotação de chaves e risco de interceptação."
+        )
         eval_result = EarlyEpistemicGate.evaluate(
             source_anchor=anchor,
             first_pass=first_pass,
@@ -388,12 +415,21 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     why_it_matters="Inviabiliza totalmente a operação do produto no dia 1",
                     severity="HIGH",
                     category=RiskCategory.TECHNICAL_FEASIBILITY,
+                    authority={
+                        "basis": PromotionAuthorityBasis.USER_EXPLICIT,
+                        "support_ref": (
+                            "Bloqueio imediato do chip e banimento permanente da conta pelo WhatsApp por tráfego não oficial"
+                        ),
+                    },
                 )
             ],
             idea_stage=IdeaStage.DISCOVERY,
         )
 
-        anchor = SourceAnchor.create_human_input_anchor("Automação de WhatsApp via interceptação de pacotes")
+        anchor = SourceAnchor.create_human_input_anchor(
+            "Automação de WhatsApp via interceptação de pacotes. "
+            "Bloqueio imediato do chip e banimento permanente da conta pelo WhatsApp por tráfego não oficial."
+        )
         eval_result = EarlyEpistemicGate.evaluate(
             source_anchor=anchor,
             first_pass=first_pass,
@@ -423,12 +459,19 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
             "remaining_uncertainties": [],
             "requires_human_normative_choice": True,
             "human_choice_description": "Definir se o modelo cobrará do contratante ou do prestador.",
+            "normative_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "Definir se o modelo cobrará do contratante ou do prestador.",
+            },
             "proposed_next_action": "Definir preferência de modelo.",
         }
 
         fake_runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
         lean_runner = LeanLoopRunner(runner=fake_runner, runs_dir=self.runs_dir)
-        result = lean_runner.run("Ideia de marketplace de serviços gerais")
+        result = lean_runner.run(
+            "Ideia de marketplace de serviços gerais. "
+            "Definir se o modelo cobrará do contratante ou do prestador."
+        )
 
         self.assertEqual(result.total_model_calls, 1)
         self.assertEqual(result.gate_result.outcome, GateOutcome.REQUEST_HUMAN_DECISION)
@@ -496,7 +539,7 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
 
         # Prova formal dos 5 invariantes inegociáveis
         self.assertEqual(artifact.original_idea_authority, PromotionAuthorityBasis.USER_EXPLICIT)
-        self.assertEqual(artifact.intent_provenance, PromotionAuthorityBasis.VALID_USER_DERIVATION)
+        self.assertEqual(artifact.intent_provenance, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
         self.assertEqual(artifact.refined_idea_authority, PromotionAuthorityBasis.MODEL_HYPOTHESIS)
         self.assertEqual(artifact.source_anchor.original_content, idea_text)
         self.assertTrue(result.total_model_calls <= LEAN_L1_MAX_MODEL_CALLS)
@@ -693,7 +736,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         - ENGINEERING_REQUIREMENT_PRESERVED = YES
         - ENGINEERING_REQUIREMENT_MUTATES_PRODUCT = NO
         """
-        idea_text = "Plataforma de delivery hiperlocal de quitandas de bairro."
+        idea_text = (
+            "Plataforma de delivery hiperlocal de quitandas de bairro. "
+            "Quitandeiros não têm tempo de alimentar o catálogo online no dia a dia."
+        )
         first_pass = {
             "interpreted_problem": "Quitandas locais perdem vendas para grandes redes.",
             "human_intent": "Conectar quitandas a clientes vizinhos.",
@@ -719,6 +765,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     "severity": "HIGH",
                     "category": "USER_BEHAVIOR",
                     "decision_relevance": "CRITICAL_NOW",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Quitandeiros não têm tempo de alimentar o catálogo online no dia a dia",
+                    },
                 }
             ],
             "remaining_uncertainties": [],
@@ -788,7 +838,8 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         """
         idea_text = (
             "Clube de assinatura de cafés artesanais para entusiastas com envio mensal "
-            "e grãos selecionados diretamente de pequenos produtores."
+            "e grãos selecionados diretamente de pequenos produtores. "
+            "Usuários podem achar o frete mensal desproporcional ao preço do café."
         )
         first_pass = {
             "interpreted_problem": "Amantes de café especial têm dificuldade de encontrar grãos frescos de pequenos produtores.",
@@ -808,6 +859,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     "severity": "HIGH",
                     "category": "BUSINESS_MODEL",
                     "decision_relevance": "CRITICAL_NOW",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Usuários podem achar o frete mensal desproporcional ao preço do café",
+                    },
                 },
                 {
                     "vulnerability": "Escalabilidade de microsserviços e balanceamento de carga de pedidos",
@@ -860,7 +915,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         Caso B (Seção 11): Proposta prematura de reescrita em Rust em estágio inicial.
         Invariante: Prevenção de refatoração ou reescrita técnica precoce antes da validação.
         """
-        idea_text = "Aplicativo para donos de cães agendarem caminhadas compartilhadas no bairro."
+        idea_text = (
+            "Aplicativo para donos de cães agendarem caminhadas compartilhadas no bairro. "
+            "Donos têm receio de agressividade ou brigas entre animais desconhecidos."
+        )
         first_pass = {
             "interpreted_problem": "Donos de cães não têm tempo para passear sozinhos e buscam socialização para seus pets.",
             "human_intent": "Conectar donos de cães vizinhos para caminhadas conjuntas.",
@@ -879,6 +937,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     "severity": "HIGH",
                     "category": "USER_BEHAVIOR",
                     "decision_relevance": "CRITICAL_NOW",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Donos têm receio de agressividade ou brigas entre animais desconhecidos",
+                    },
                 }
             ],
             "remaining_uncertainties": [],
@@ -1031,7 +1093,8 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         """
         idea_text = (
             "Sistema de emissão de passagens rodoviárias com piloto já validado em 2 operadoras. "
-            "Produto implementado e preparando deploy para produção."
+            "Produto implementado e preparando deploy para produção. "
+            "Queda do cluster pode deixar passageiros sem emissão no momento do embarque."
         )
         first_pass = {
             "interpreted_problem": "Operadoras precisam emitir passagens de contingência sem queda de conectividade.",
@@ -1051,6 +1114,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
                     "severity": "HIGH",
                     "category": "ENGINEERING",
                     "decision_relevance": "CRITICAL_NOW",
+                    "authority": {
+                        "basis": "USER_EXPLICIT",
+                        "support_ref": "Queda do cluster pode deixar passageiros sem emissão no momento do embarque",
+                    },
                 }
             ],
             "remaining_uncertainties": [],
@@ -1145,7 +1212,8 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         """
         idea_text = (
             "Algoritmo de triagem de bolsas de estudo que precisa decidir se prioriza "
-            "vulnerabilidade de renda per capita ou diversidade regional."
+            "vulnerabilidade de renda per capita ou diversidade regional. "
+            "Definir se o critério soberano é vulnerabilidade de renda ou cobertura regional."
         )
         first_pass = {
             "interpreted_problem": "Vagas limitadas de bolsas de estudo exigem critério de desempate.",
@@ -1162,6 +1230,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
             "remaining_uncertainties": [],
             "requires_human_normative_choice": True,
             "human_choice_description": "Definir se o critério soberano é vulnerabilidade de renda ou cobertura regional.",
+            "normative_authority": {
+                "basis": "USER_EXPLICIT",
+                "support_ref": "Definir se o critério soberano é vulnerabilidade de renda ou cobertura regional.",
+            },
             "proposed_next_action": "Apresentar opções de ponderação para o comitê acadêmico",
             "idea_stage": "DISCOVERY",
         }

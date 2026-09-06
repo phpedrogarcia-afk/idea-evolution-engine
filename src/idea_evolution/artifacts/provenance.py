@@ -80,6 +80,8 @@ def audit_artifact_provenance(artifact: EvolutionArtifact) -> ProvenanceReceipt:
         valid_derivation += 1
     elif artifact.intent_provenance == PromotionAuthorityBasis.USER_EXPLICIT:
         user_explicit += 1
+    elif artifact.intent_provenance == PromotionAuthorityBasis.MODEL_HYPOTHESIS:
+        model_candidate += 1
     elif artifact.intent_provenance is None:
         unlabeled += 1
     else:

@@ -32,6 +32,7 @@ from src.idea_evolution.domain.decision_relevance import (
     NextActionArbitrationPolicy,
     DecisionRelevancePolicy,
 )
+from src.idea_evolution.domain.grounding import AuthorityProofValidator
 from src.idea_evolution.providers.base import ModelRunner, ModelResponse
 from src.idea_evolution.tracing.tracer import RunTracer
 
@@ -102,6 +103,15 @@ class LeanLoopRunner:
             "4. Nunca introduza alegações numéricas precisas (métricas de tempo, latência, porcentagem, moeda ou multiplicadores) sem base de evidência declarada.\n"
             "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (ex: processos manuais, planilhas, ferramentas existentes, fazer nada).\n"
             "6. Forneça critérios de falseamento estruturados (hipótese, observação destrutiva, teste discriminativo de menor custo).\n"
+            "7. Para CADA vulnerabilidade declare authority={basis,support_ref,derivation}. "
+            "Use USER_EXPLICIT apenas para texto expresso na fonte; VALID_USER_DERIVATION exige trecho rastreável da fonte e derivação necessária; "
+            "caso contrário use MODEL_HYPOTHESIS. MODEL_HYPOTHESIS permanece possibilidade e não autoriza severidade efetiva ou gate.\n"
+            "8. Para escolha normativa declare normative_authority={basis,support_ref,derivation}. "
+            "Não marque requires_human_normative_choice apenas porque uma decisão humana existirá futuramente.\n"
+            "9. Para proposed_next_action declare action_authority={basis,support_ref,derivation}. "
+            "Em DISCOVERY/VALIDATION, prefira reduzir a incerteza decision-relevant antes de implementar.\n"
+            "10. Para remaining_uncertainties declare uncertainty_authority={basis,support_ref,derivation}. "
+            "Uma incerteza MODEL_HYPOTHESIS pode orientar exploração, mas não aciona escalação sozinha.\n"
         )
         user_prompt_1 = first_pass_prompt_template.replace("{idea}", original_idea)
 
@@ -192,6 +202,8 @@ class LeanLoopRunner:
                     "3. Não converta mitigação, arquitetura técnica (ex: Kubernetes, Kafka, Rust) ou requisito não-funcional em refinamento da proposta de produto sem justificativa.\n"
                     "4. Não invente métricas de desempenho ou custo sem medição.\n"
                     "5. Retorne candidato a próximo passo (candidate_updated_next_action), não ação final autoritativa.\n"
+                    "6. Declare action_authority={basis,support_ref,derivation} para updated_next_action; "
+                    "na ausência de âncora use MODEL_HYPOTHESIS e formule a ação como EVIDENCE_NEEDED, não implementação autoritativa.\n"
                 )
 
                 res_2: ModelResponse = self.runner.generate(
@@ -215,6 +227,30 @@ class LeanLoopRunner:
                         )
                         escalation_output.focused_critique_or_analysis = sanitized_crit
 
+                    if escalation_output.updated_next_action:
+                        escalation_action_audit = AuthorityProofValidator.audit_gate_claim(
+                            original_idea=original_idea,
+                            human_intent=first_pass_output.human_intent,
+                            proposition=escalation_output.updated_next_action,
+                            claimed_basis=escalation_output.action_authority.basis,
+                            derivation_proof=escalation_output.action_authority.derivation,
+                            authority_proof_ref=escalation_output.action_authority.support_ref,
+                            human_intervention_flag=human_intervention_flag,
+                        )
+                        escalation_output.next_action_gate_eligible = escalation_action_audit.is_valid
+                        gate_result.grounding_records.append(escalation_action_audit)
+                        if not escalation_action_audit.is_valid:
+                            gate_result.ineligible_gate_claims.append(
+                                f"ESCALATION_NEXT_ACTION: {escalation_action_audit.failure_reason}"
+                            )
+                            if escalation_output.action_authority.basis in (
+                                PromotionAuthorityBasis.USER_EXPLICIT,
+                                PromotionAuthorityBasis.VALID_USER_DERIVATION,
+                            ):
+                                gate_result.authority_spoofing_detected = True
+                                gate_result.unsupported_candidate_count += 1
+                            escalation_output.action_authority.basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+
                 # Harvest Magentic-One: Stall / Progress Detection
                 if escalation_output and not escalation_output.decision_progress_made:
                     decision_progress = False
@@ -236,6 +272,20 @@ class LeanLoopRunner:
             human_decision_description=first_pass_output.human_choice_description if first_pass_output else None,
             candidate_risk_category=cand_cat,
             candidate_requirement_type=cand_req_type,
+            first_pass_action_basis=first_pass_output.action_authority.basis,
+            first_pass_action_gate_eligible=first_pass_output.next_action_gate_eligible,
+            escalation_action_basis=(
+                escalation_output.action_authority.basis
+                if escalation_output else PromotionAuthorityBasis.MODEL_HYPOTHESIS
+            ),
+            escalation_action_gate_eligible=(
+                escalation_output.next_action_gate_eligible if escalation_output else False
+            ),
+            remaining_uncertainties=(
+                list(first_pass_output.remaining_uncertainties)
+                + list(first_pass_output.material_ambiguities)
+            ),
+            falsification_criteria=list(first_pass_output.falsification_criteria),
         )
 
         # Atualiza a ação no escalation_output se foi arbitrada
@@ -366,6 +416,11 @@ class LeanLoopRunner:
         lines.append(f"- **Explicação:** {gate_result.explanation}")
         lines.append(f"- **Autoridade Usurpada Detectada:** `{gate_result.authority_spoofing_detected}`")
         lines.append(f"- **Candidatos Não Ancorados:** {gate_result.unsupported_candidate_count}\n")
+        if gate_result.ineligible_gate_claims:
+            lines.append("- **Hipóteses sem autoridade de gate (EVIDENCE_NEEDED):**")
+            for claim in gate_result.ineligible_gate_claims:
+                lines.append(f"  - {claim}")
+            lines.append("")
 
         if escalation_output:
             lines.append("## 6. Resultado da Escalação Focada (Chamada 2)\n")
@@ -382,6 +437,16 @@ class LeanLoopRunner:
 
         lines.append("## 7. Próximo Passo Recomendado\n")
         chosen_action = final_next_action or (escalation_output.updated_next_action if (escalation_output and escalation_output.updated_next_action) else first_pass.proposed_next_action)
+        chosen_action_eligible = (
+            first_pass.next_action_gate_eligible
+            and chosen_action == first_pass.proposed_next_action
+        ) or (
+            escalation_output is not None
+            and escalation_output.next_action_gate_eligible
+            and chosen_action == escalation_output.updated_next_action
+        )
+        if not chosen_action_eligible and not gate_result.outcome == GateOutcome.REQUEST_HUMAN_DECISION:
+            lines.append("**Status epistêmico:** `EVIDENCE_NEEDED` (`MODEL_HYPOTHESIS`)\n")
         lines.append(f"{chosen_action or 'Validar protótipo diretamente com o usuário.'}\n")
 
         return "\n".join(lines)

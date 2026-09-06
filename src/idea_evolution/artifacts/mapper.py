@@ -54,8 +54,10 @@ class EvolutionArtifactMapper:
 
         # 1. Intenção Humana e Proveniência
         human_intent = first_pass.human_intent if first_pass else orig_idea
+        # A leitura de intenção produzida no first pass continua útil como
+        # interpretação, mas não possui prova rastreável só por existir.
         intent_prov = (
-            PromotionAuthorityBasis.VALID_USER_DERIVATION
+            PromotionAuthorityBasis.MODEL_HYPOTHESIS
             if first_pass
             else PromotionAuthorityBasis.USER_EXPLICIT
         )
@@ -127,19 +129,27 @@ class EvolutionArtifactMapper:
                 critique_items.append(
                     CritiqueItem(
                         vulnerability=v.vulnerability,
-                        severity=v.severity.upper() if v.severity else "MEDIUM",
+                        severity=v.effective_severity,
                         why_it_matters=v.why_it_matters or "",
                         affected_aspect=v.affected_aspect or "",
+                        authority_basis=v.authority.basis,
+                        authority_proof_ref=v.authority.support_ref if v.gate_eligible else "",
+                        gate_eligible=v.gate_eligible,
                     )
                 )
         if escalation and escalation.focused_critique_or_analysis:
-            sev = "HIGH" if escalation.escalation_reason.value == "MATERIAL_VULNERABILITY" else "MEDIUM"
             critique_items.append(
                 CritiqueItem(
                     vulnerability=f"Análise focada ({escalation.escalation_reason.value}): {escalation.focused_critique_or_analysis}",
-                    severity=sev,
-                    why_it_matters="Aprofundamento resultante de escalação epistêmica disparada pelo Gate.",
+                    severity="UNCONFIRMED",
+                    why_it_matters=(
+                        "Aprofundamento produzido pelo modelo após um gate; a autoridade do alvo "
+                        "não é herdada pelo novo conteúdo analítico."
+                    ),
                     affected_aspect="Focalização",
+                    authority_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+                    authority_proof_ref="",
+                    gate_eligible=False,
                 )
             )
         if deferred_engineering_requirement:
@@ -167,7 +177,15 @@ class EvolutionArtifactMapper:
             uncertainties.extend(first_pass.material_ambiguities)
             if first_pass.requires_human_normative_choice:
                 desc = first_pass.human_choice_description or "Decisão normativa de valor humano necessária"
-                uncertainties.append(f"Ponto de decisão humana: {desc}")
+                if first_pass.normative_gate_eligible:
+                    uncertainties.append(f"Ponto de decisão humana ancorado: {desc}")
+                else:
+                    uncertainties.append(f"Hipótese normativa não elegível para gate: {desc}")
+            if lean_res.gate_result and lean_res.gate_result.ineligible_gate_claims:
+                uncertainties.extend(
+                    f"EVIDENCE_NEEDED — {claim}"
+                    for claim in lean_res.gate_result.ineligible_gate_claims
+                )
 
         # 6. Possibilidades Concorrentes (Garantia de Não-Autoridade e Preservação de Status)
         candidates: List[CandidatePossibility] = []
@@ -192,9 +210,7 @@ class EvolutionArtifactMapper:
                 )
 
         # 7. Próximo Passo Recomendado e Autoridade Normativa (Arbitragem Determinística)
-        human_decision = lean_res.human_decision_requested or (
-            first_pass is not None and first_pass.requires_human_normative_choice
-        )
+        human_decision = lean_res.human_decision_requested
         human_desc = first_pass.human_choice_description if first_pass else None
 
         next_action = ""
@@ -214,9 +230,56 @@ class EvolutionArtifactMapper:
                 human_decision_description=human_desc,
                 candidate_risk_category=cand_cat,
                 candidate_requirement_type=cand_req_type,
+                first_pass_action_basis=(
+                    first_pass.action_authority.basis
+                    if first_pass else PromotionAuthorityBasis.MODEL_HYPOTHESIS
+                ),
+                first_pass_action_gate_eligible=(
+                    first_pass.next_action_gate_eligible if first_pass else False
+                ),
+                escalation_action_basis=(
+                    escalation.action_authority.basis
+                    if escalation else PromotionAuthorityBasis.MODEL_HYPOTHESIS
+                ),
+                escalation_action_gate_eligible=(
+                    escalation.next_action_gate_eligible if escalation else False
+                ),
+                remaining_uncertainties=(
+                    list(first_pass.remaining_uncertainties)
+                    + list(first_pass.material_ambiguities)
+                    if first_pass else []
+                ),
+                falsification_criteria=(
+                    list(first_pass.falsification_criteria) if first_pass else []
+                ),
             )
             if not next_action:
                 next_action = "Avaliar formulação refinada."
+
+        next_action_basis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
+        next_action_support_ref = ""
+        next_action_status = "EVIDENCE_NEEDED"
+        if human_decision and first_pass:
+            next_action_basis = first_pass.normative_authority.basis
+            next_action_support_ref = first_pass.normative_authority.support_ref
+            next_action_status = "AUTHORITY_ANCHORED"
+        elif first_pass and next_action == first_pass.proposed_next_action and first_pass.next_action_gate_eligible:
+            next_action_basis = first_pass.action_authority.basis
+            next_action_support_ref = first_pass.action_authority.support_ref
+            next_action_status = "AUTHORITY_ANCHORED"
+        elif escalation and next_action == escalation.updated_next_action and escalation.next_action_gate_eligible:
+            next_action_basis = escalation.action_authority.basis
+            next_action_support_ref = escalation.action_authority.support_ref
+            next_action_status = "AUTHORITY_ANCHORED"
+        elif first_pass:
+            next_action_support_ref = next(
+                (
+                    criterion.lowest_cost_discriminating_test
+                    for criterion in first_pass.falsification_criteria
+                    if criterion.lowest_cost_discriminating_test
+                ),
+                next((u for u in first_pass.remaining_uncertainties if u), ""),
+            )
 
         return EvolutionArtifact(
             artifact_id=f"ART-{run_id}",
@@ -236,8 +299,19 @@ class EvolutionArtifactMapper:
             uncertainties=uncertainties,
             candidate_possibilities=candidates,
             recommended_next_action=next_action,
+            recommended_next_action_basis=next_action_basis,
+            recommended_next_action_support_ref=next_action_support_ref,
+            recommended_next_action_status=next_action_status,
             human_decision_required=human_decision,
             human_decision_description=human_desc,
+            human_decision_authority_basis=(
+                first_pass.normative_authority.basis
+                if human_decision and first_pass else PromotionAuthorityBasis.MODEL_HYPOTHESIS
+            ),
+            human_decision_support_ref=(
+                first_pass.normative_authority.support_ref
+                if human_decision and first_pass else ""
+            ),
             source_anchor=lean_res.source_anchor,
             scientific_core_hash=FROZEN_LEAN_CORE_HASH,
             model_name=model_name,
