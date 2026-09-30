@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "ART-RUN-20260930_111619",
+  "run_id": "RUN-20260930_111619",
+  "treatment_mode": "LEAN_L1",
+  "terminal_status": "COMPLETED_DIRECT_ONE_PASS",
+  "created_at": "2026-09-30T11:16:20.761614",
+  "original_idea": "Criar uma ROM personalizada para o POCO M3 Pro 5G.echo.echo Em vez de necessariamente criar tudo do zero, gostaria de estudar ROMs personalizadas que ja existem e aproveitar trabalho pronto quando isso fizer sentido.echo.echo A ROM deveria ser eficiente, leve e pensada para permitir que inteligencia artificial participe mais profundamente do sistema operacional, com integracao entre IA, automacoes e funcoes do smartphone.echo.echo A ideia e explorar como a inteligencia artificial poderia fluir melhor pelo sistema operacional em vez de existir apenas como um aplicativo isolado.\n",
+  "original_idea_authority": "USER_EXPLICIT",
+  "human_intent": "Criar uma ROM customizada que facilite a presença de IA no nível do SO, indo além de aplicativos isolados, estudando ROMs já existentes e reutilizando componentes quando fizer sentido.",
+  "intent_provenance": "MODEL_HYPOTHESIS",
+  "refined_idea": "Adaptar e combinar componentes de ROMs Android customizadas existentes, inserindo módulos de IA (ex.: serviços de voz, automação, inferência on‑device) no framework do sistema operacional para permitir integração nativa.",
+  "refined_idea_authority": "MODEL_HYPOTHESIS",
+  "what_changed": [
+    "Nova opção: Manter a ROM padrão do POCO e usar apenas aplicativos de IA instalados via Play Store.",
+    "Nova opção: Instalar um launcher customizado que ofereça algumas funcionalidades de IA sem alterar a ROM."
+  ],
+  "critique": [
+    {
+      "vulnerability": "ROM customizada pode introduzir vulnerabilidades de segurança ao modificar componentes críticos do sistema",
+      "severity": "UNCONFIRMED",
+      "why_it_matters": "Falhas de segurança podem expor dados sensíveis dos usuários e comprometer a integridade do dispositivo",
+      "affected_aspect": "Security",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "authority_proof_ref": "",
+      "gate_eligible": false
+    },
+    {
+      "vulnerability": "Integração de IA pode coletar dados de uso sem consentimento explícito, gerando risco de privacidade",
+      "severity": "UNCONFIRMED",
+      "why_it_matters": "Violação de privacidade pode levar a questões legais e perda de confiança do usuário",
+      "affected_aspect": "Privacy",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "authority_proof_ref": "",
+      "gate_eligible": false
+    }
+  ],
+  "assumptions": [
+    "Existem ROMs customizadas compatíveis com o hardware do POCO M3 Pro 5G",
+    "Componentes de IA podem ser integrados ao Android Framework sem violar licenças",
+    "Usuários valorizam funcionalidades de IA mais integradas que apps isolados"
+  ],
+  "assumptions_authority": "MODEL_HYPOTHESIS",
+  "uncertainties": [
+    "Viabilidade técnica de integrar IA ao nível do kernel sem afetar estabilidade",
+    "Aceitação do usuário quanto a mudanças de ROM e possíveis riscos",
+    "Custos de licenciamento ou restrições de uso de componentes de IA de terceiros",
+    "Como integrar módulos de IA ao kernel e ao framework sem comprometer a assinatura do bootloader",
+    "Quais licenças de código aberto são aplicáveis aos componentes de IA que serão incorporados",
+    "Impacto real no consumo de bateria e desempenho ao executar IA on‑device",
+    "EVIDENCE_NEEDED — NEXT_ACTION: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [realizar, revisao, literatura, analise, android, customizadas, existentes, identificar, componentes, reutilizaveis, avaliar, viabilidade, integrar, modulos, framework].",
+    "EVIDENCE_NEEDED — VULNERABILITY: ROM customizada pode introduzir vulnerabilidades de segurança ao modificar componentes críticos do sistema :: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [customizada, pode, introduzir, vulnerabilidades, seguranca, modificar, componentes, criticos].",
+    "EVIDENCE_NEEDED — VULNERABILITY: Integração de IA pode coletar dados de uso sem consentimento explícito, gerando risco de privacidade :: SPOOFING_DETECTED: A proposição introduz conceitos não solicitados no input humano: [pode, coletar, dados, uso, consentimento, explicito, gerando, risco, privacidade]."
+  ],
+  "candidate_possibilities": [
+    {
+      "mechanism": "Manter a ROM padrão do POCO e usar apenas aplicativos de IA instalados via Play Store.",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "Solução de baixo esforço que evita riscos de estabilidade e segurança associados a ROMs customizadas.",
+      "tradeoffs": [
+        "Limitações de integração profunda",
+        "Dependência de permissões de apps"
+      ]
+    },
+    {
+      "mechanism": "Instalar um launcher customizado que ofereça algumas funcionalidades de IA sem alterar a ROM.",
+      "authority_basis": "MODEL_HYPOTHESIS",
+      "ontology_state": "CANDIDATE",
+      "justification": "Permite algumas automações e recursos de IA com menor risco que modificar a ROM completa.",
+      "tradeoffs": [
+        "Integração ainda limitada ao nível de UI",
+        "Possível consumo extra de bateria"
+      ]
+    }
+  ],
+  "recommended_next_action": "Realizar revisão de literatura e análise de ROMs Android customizadas existentes para identificar componentes reutilizáveis e avaliar a viabilidade de integrar módulos de IA ao framework do SO.",
+  "recommended_next_action_basis": "MODEL_HYPOTHESIS",
+  "recommended_next_action_support_ref": "Construir um protótipo em emulador Android, habilitar os módulos de IA e executar benchmarks de desempenho e testes de estabilidade",
+  "recommended_next_action_status": "EVIDENCE_NEEDED",
+  "human_decision_required": false,
+  "human_decision_description": "",
+  "human_decision_authority_basis": "MODEL_HYPOTHESIS",
+  "human_decision_support_ref": "",
+  "source_anchor": {
+    "source_id": "SRC-HUMAN-15c5ae26",
+    "source_kind": "HUMAN_INPUT",
+    "content_hash": "15c5ae262201fe27d96e41f5ed514349a8487c8a061b3569955111278aac7896",
+    "original_content": "Criar uma ROM personalizada para o POCO M3 Pro 5G.echo.echo Em vez de necessariamente criar tudo do zero, gostaria de estudar ROMs personalizadas que ja existem e aproveitar trabalho pronto quando isso fizer sentido.echo.echo A ROM deveria ser eficiente, leve e pensada para permitir que inteligencia artificial participe mais profundamente do sistema operacional, com integracao entre IA, automacoes e funcoes do smartphone.echo.echo A ideia e explorar como a inteligencia artificial poderia fluir melhor pelo sistema operacional em vez de existir apenas como um aplicativo isolado.",
+    "provenance": "Original human input prompt",
+    "created_at": "2026-09-30T11:16:19.132444",
+    "authority_class": "SOVEREIGN_HUMAN_INTENT"
+  },
+  "scientific_core_hash": "3fa70e0ede15888ee5650fa08572508748eef1462de0a8bd01aa4a66a58b151f",
+  "model_name": null,
+  "provider": null,
+  "total_model_calls": 1
+}
