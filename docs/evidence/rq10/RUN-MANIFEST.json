@@ -1,0 +1,132 @@
+{
+  "mission_id": "FIOIDEIAS-V1.1-RQ-10-FINAL-PROSPECTIVE-BLIND-RELEASE-GATE",
+  "date": "2026-09-30",
+  "candidate": {
+    "head_before": "571bcdf97aeea9bdd5cc6ad8a8de92cf443f92a4",
+    "head_after_scientific_execution": "571bcdf97aeea9bdd5cc6ad8a8de92cf443f92a4",
+    "branch": "DETACHED",
+    "worktree_clean_after_cleanup": true,
+    "worktree_clean_after_runtime_cache_restore": true,
+    "product_files_changed": false
+  },
+  "interrupted_attempt": {
+    "occurred": true,
+    "interrupted_before_case_execution": true,
+    "cause": "baseline suite generated five untracked runs directories and modified tracked Python bytecode files",
+    "blind_input_consumed": false,
+    "case_d_runs": 0,
+    "case_e_runs": 0,
+    "case_f_runs": 0
+  },
+  "authorized_cleanup": {
+    "authorized": true,
+    "head_after_cleanup": "571bcdf97aeea9bdd5cc6ad8a8de92cf443f92a4",
+    "worktree_clean_after_cleanup": true,
+    "tracked_pyc_restored": 24,
+    "baseline_reused": true,
+    "baseline_result": "529 passed, 0 failed, 1 PytestCollectionWarning, exit 0",
+    "baseline_rerun": false,
+    "archive_root": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Baseline_Test_Artifacts_20260930\\runs",
+    "archive_copy_sha256_verified": true,
+    "archived_run_directories": [
+      {"source": "runs/RUN-20260930_173006-15f85498", "destination": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Baseline_Test_Artifacts_20260930\\runs\\RUN-20260930_173006-15f85498", "files": 15},
+      {"source": "runs/RUN-20260930_173007-1acc5be0", "destination": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Baseline_Test_Artifacts_20260930\\runs\\RUN-20260930_173007-1acc5be0", "files": 15},
+      {"source": "runs/RUN-20260930_173007-3c6d7838", "destination": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Baseline_Test_Artifacts_20260930\\runs\\RUN-20260930_173007-3c6d7838", "files": 15},
+      {"source": "runs/RUN-20260930_173009-909491be", "destination": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Baseline_Test_Artifacts_20260930\\runs\\RUN-20260930_173009-909491be", "files": 3},
+      {"source": "runs/RUN-20260930_173009-df58f8d2", "destination": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Baseline_Test_Artifacts_20260930\\runs\\RUN-20260930_173009-df58f8d2", "files": 3}
+    ],
+    "total_archived_files": 51,
+    "only_authorized_generated_artifacts_removed": true
+  },
+  "inputs": {
+    "classification": "PROSPECTIVE_BLIND_INPUTS",
+    "pre_existing_true_holdout": false,
+    "generated_after_candidate_freeze": true,
+    "manual_semantic_edits": false,
+    "generator_had_project_context": false,
+    "sha256": {
+      "D": "58cccb3a7efbf49294b6a9cdf98c31af973088846a0037786a0c57b6218881e0",
+      "E": "a40c4d4bc5538f2ae142ede1807b0ac6b300e6b5e3cbeac272e1ddc27d4d8b29",
+      "F": "5a3c3acb4b474928c20330ff212b365494432ebfbdab97c204f3e988eb016bb1"
+    }
+  },
+  "baseline_reused": {
+    "yes": true,
+    "result": "529 passed, 0 failed, 1 PytestCollectionWarning, exit 0",
+    "same_candidate_head": true,
+    "rerun": false
+  },
+  "case_runs": [
+    {
+      "case": "D",
+      "order": 1,
+      "run_count": 1,
+      "run_id": "RUN-20260930_173247",
+      "started_at": "2026-09-30T17:32:46.8259373-03:00",
+      "ended_at": "2026-09-30T17:32:49.5455810-03:00",
+      "status": "COMPLETED_DIRECT_ONE_PASS",
+      "logical_model_calls_reported": 1,
+      "stdout_artifact": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Result\\case-D\\stdout.txt",
+      "stdout_bytes": 8477,
+      "stdout_sha256": "55FCE97B90F74FCCBAE3D30A3A5BBDA2FCCCA43735CBB3CA113BAEA80BB9C627",
+      "stderr_bytes": 0,
+      "stderr_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "case": "E",
+      "order": 2,
+      "run_count": 1,
+      "run_id": "RUN-20260930_173423",
+      "started_at": "2026-09-30T17:34:22.8221280-03:00",
+      "ended_at": "2026-09-30T17:34:25.0381038-03:00",
+      "status": "COMPLETED_DIRECT_ONE_PASS",
+      "logical_model_calls_reported": 1,
+      "stdout_artifact": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Result\\case-E\\stdout.txt",
+      "stdout_bytes": 7951,
+      "stdout_sha256": "F92FB80AB453420DDED18D7E479F898AD7C310C532A79EAB1A6E65F334D2BB27",
+      "stderr_bytes": 0,
+      "stderr_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "case": "F",
+      "order": 3,
+      "run_count": 1,
+      "run_id": "RUN-20260930_173440",
+      "started_at": "2026-09-30T17:34:40.5916681-03:00",
+      "ended_at": "2026-09-30T17:34:42.9657652-03:00",
+      "status": "COMPLETED_DIRECT_ONE_PASS",
+      "logical_model_calls_reported": 1,
+      "stdout_artifact": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Result\\case-F\\stdout.txt",
+      "stdout_bytes": 8313,
+      "stdout_sha256": "6043C3052F3044103A036C6B79CFCBB759C8CC14CA5DC548B7A6CA31E1DF95BB",
+      "stderr_bytes": 0,
+      "stderr_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  ],
+  "run_order": ["D", "E", "F"],
+  "reruns": false,
+  "raw_http_transcript_available": false,
+  "provider_request_count": "UNKNOWN_NOT_INDEPENDENTLY_VERIFIED",
+  "provider_and_model_attribution": "UNVERIFIED_IN_FINAL_ARTIFACTS; environment routing configuration only",
+  "credential_value_in_evidence": false,
+  "evaluators": {
+    "count": 3,
+    "contexts_separate": true,
+    "os_or_filesystem_isolation_claimed": false,
+    "meta_audit_after_all_three_reports_frozen": true
+  },
+  "access": {
+    "h01_h08_accessed": false,
+    "reveal_accessed": false,
+    "input_text_in_manifest": false
+  },
+  "verdict": {
+    "meta_audit_protocol_valid": true,
+    "case_e_material_blocker": true,
+    "case_f_classification_error": true,
+    "case_f_release_blocker_in_this_envelope": false,
+    "final_scientific_verdict": "FAIL",
+    "product_fix_performed": false,
+    "release_merge_or_tag_performed": false
+  }
+}
