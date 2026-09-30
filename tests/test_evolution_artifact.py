@@ -244,7 +244,8 @@ class TestEvolutionArtifactP2(unittest.TestCase):
 
         resp = service.evolve_idea(self.sample_idea)
 
-        self.assertEqual(resp.artifact.recommended_next_action, "Validar interesse com 20 leitores ativos")
+        self.assertIn("Validar interesse com 20 leitores ativos", resp.artifact.recommended_next_action)
+        self.assertIn("PROVISIONAL_HEURISTIC", resp.artifact.recommended_next_action)
 
     def test_11_source_anchor_and_provenance_survive(self):
         """11: SourceAnchor e hash de núcleo científico sobrevivem no artefato."""

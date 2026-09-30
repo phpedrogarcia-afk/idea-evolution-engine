@@ -303,6 +303,30 @@ class FalsePrecisionGuard:
     ]
     METRIC_PATTERN = re.compile("|".join(METRIC_PATTERNS), re.IGNORECASE)
 
+    # Claims that can look like decision thresholds even when they use plain
+    # counts rather than metric units (for example N>=30 users or 1-2 weeks).
+    NUMERIC_DECISION_PATTERN = re.compile(
+        r"(?<!\w)(?:(?:N\s*)?[<>≤≥~]\s*|"
+        r"(?:at least|at most|below|under|over|more than|less than|"
+        r"pelo menos|no mínimo|no máximo|abaixo de|acima de|inferior a|superior a|"
+        r"mais de|menos de)\s+)?"
+        r"(?:(?:R\$|\$|USD|EUR)\s*)?"
+        r"\d+(?:[.,]\d+)?"
+        r"(?:\s*(?:[-–—]\s*|\s+a\s+|\s+to\s+)(?:[<>≤≥~]\s*)?\d+(?:[.,]\d+)?)?"
+        r"(?:\s*(?:%|por cento|percent(?:age)?|ms|milliseconds?|milissegundos?|"
+        r"s|sec(?:onds?)?|segundos?|min(?:utes?)?|minutos?|h(?:ours?)?|horas?|"
+        r"days?|dias?|weeks?|semanas?|months?|meses?)(?!\w))?"
+        r"(?:\s+(?:potential\s+users?|potenciais?\s+usuários?|usuários?|users?|"
+        r"participants?|participantes?|people|pessoas?|interviews?|entrevistas?|"
+        r"readers?|leitores?|customers?|clientes?|books?|livros?|votes?|votos?|"
+        r"upvotes?|characters?|caracteres?|tasks?|tarefas?)(?!\w))?",
+        re.IGNORECASE,
+    )
+    PROVISIONAL_HEURISTIC_NOTICE = (
+        "[PROVISIONAL_HEURISTIC — sem vínculo textual com a fonte ou derivação verificada: {values}; "
+        "não é um corte validado para continuar ou abandonar.]"
+    )
+
     SUPPORTED_CONTEXT_TAGS = {
         MetricEvidenceBasis.DETERMINISTIC_CALCULATION: ["calculado", "determinístico", "calculation", "calculada"],
         MetricEvidenceBasis.MEASURED: ["medido", "medida", "measured", "benchmark", "telemetria"],
@@ -369,6 +393,67 @@ class FalsePrecisionGuard:
         for m in unsupported:
             sanitized = sanitized.replace(m, "[MÉTRICA NÃO MEDIDA: medição necessária]")
         return sanitized, True
+
+    @classmethod
+    def qualify_quantitative_decision_text(
+        cls,
+        text: str,
+        source_text: str = "",
+        evidence_basis: Optional[Union[str, MetricEvidenceBasis]] = None,
+    ) -> Tuple[str, bool]:
+        """Keep unsupported model numbers visible as provisional, never as validated cutoffs.
+
+        ``evidence_basis`` is a trusted, system-assigned value; do not populate it
+        from model-generated provenance. In the normal first-pass path, a numeric
+        value is supported only when its decision sentence is present in the
+        immutable user source; the same digits elsewhere do not authorize a new
+        threshold or decision relation.
+        """
+        if not text or not text.strip() or "PROVISIONAL_HEURISTIC" in text:
+            return text, False
+
+        basis_str = str(
+            evidence_basis.value if hasattr(evidence_basis, "value") else evidence_basis or ""
+        ).upper()
+        trusted_bases = {
+            MetricEvidenceBasis.USER_SUPPLIED.value,
+            MetricEvidenceBasis.DETERMINISTIC_CALCULATION.value,
+            MetricEvidenceBasis.MEASURED.value,
+            MetricEvidenceBasis.EXTERNAL_EVIDENCE.value,
+        }
+        if basis_str in trusted_bases:
+            return text, False
+
+        normalized_source = unicodedata.normalize("NFKC", " ".join((source_text or "").split())).casefold()
+        unsupported_values = []
+        sentence_boundaries = [
+            boundary.start()
+            for boundary in re.finditer(r"[!?;\n]|(?<!\d)\.(?!\d)", text)
+        ]
+        for match in cls.NUMERIC_DECISION_PATTERN.finditer(text):
+            value = " ".join(match.group(0).split())
+            left_boundary = max(
+                (position for position in sentence_boundaries if position < match.start()),
+                default=-1,
+            )
+            right_boundary = min(
+                (position for position in sentence_boundaries if position >= match.end()),
+                default=len(text),
+            )
+            decision_sentence = text[left_boundary + 1 : right_boundary + 1]
+            normalized_sentence = unicodedata.normalize(
+                "NFKC", " ".join(decision_sentence.split())
+            ).casefold()
+            if normalized_sentence and normalized_sentence in normalized_source:
+                continue
+            if value not in unsupported_values:
+                unsupported_values.append(value)
+
+        if not unsupported_values:
+            return text, False
+
+        values = ", ".join(unsupported_values)
+        return f"{text.rstrip()} {cls.PROVISIONAL_HEURISTIC_NOTICE.format(values=values)}", True
 
 
 class DecisionRelevancePolicy:

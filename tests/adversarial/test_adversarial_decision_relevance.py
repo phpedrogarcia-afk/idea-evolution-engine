@@ -896,10 +896,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         artifact = EvolutionArtifactMapper.map_lean_result(result)
 
         # 1. Próximo passo de descoberta é PRESERVADO (rejeita Kubernetes override)
-        self.assertEqual(
-            artifact.recommended_next_action,
+        self.assertTrue(artifact.recommended_next_action.startswith(
             "Entrevistar 10 consumidores de café especial sobre interesse e faixa de preço viável"
-        )
+        ))
+        self.assertIn("[PROVISIONAL_HEURISTIC", artifact.recommended_next_action)
         # 2. Refinamento de produto NÃO foi corrompido para infraestrutura técnica
         self.assertNotIn("Kubernetes", artifact.refined_idea)
         self.assertIn("curadoria", artifact.refined_idea.lower())
@@ -967,10 +967,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         artifact = EvolutionArtifactMapper.map_lean_result(result)
 
         # Rejeita override unilateral de reescrita em Rust
-        self.assertEqual(
-            artifact.recommended_next_action,
+        self.assertTrue(artifact.recommended_next_action.startswith(
             "Validar se 5 donos de cães do mesmo quarteirão aceitariam passear juntos"
-        )
+        ))
+        self.assertIn("[PROVISIONAL_HEURISTIC", artifact.recommended_next_action)
         self.assertNotIn("Rust", artifact.refined_idea)
         crit_texts = [c.vulnerability for c in artifact.critique]
         self.assertTrue(any("Requisito Técnico/Engenharia Identificado" in ct and "Rust" in ct for ct in crit_texts))
@@ -1024,10 +1024,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         result = runner.run(idea_text)
         artifact = EvolutionArtifactMapper.map_lean_result(result)
 
-        self.assertEqual(
-            artifact.recommended_next_action,
+        self.assertTrue(artifact.recommended_next_action.startswith(
             "Consultar 3 marcenarias se alugariam suas serras de bancada ociosas com caução"
-        )
+        ))
+        self.assertIn("[PROVISIONAL_HEURISTIC", artifact.recommended_next_action)
         self.assertNotIn("Kafka", artifact.refined_idea)
 
     def test_case_d_security_proposal_rejected_in_discovery(self):
@@ -1080,10 +1080,10 @@ class TestAdversarialDecisionRelevance(unittest.TestCase):
         artifact = EvolutionArtifactMapper.map_lean_result(result)
 
         # Não permite takeover de segurança sem pedido explícito
-        self.assertEqual(
-            artifact.recommended_next_action,
+        self.assertTrue(artifact.recommended_next_action.startswith(
             "Entrevistar pais de 2 escolas sobre acúmulo de livros didáticos parados"
-        )
+        ))
+        self.assertIn("[PROVISIONAL_HEURISTIC", artifact.recommended_next_action)
         self.assertNotIn("E2EE", artifact.refined_idea)
 
     def test_case_e_pre_production_infrastructure_blocker_accepted(self):

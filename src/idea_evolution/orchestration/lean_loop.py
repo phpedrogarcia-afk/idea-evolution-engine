@@ -78,6 +78,43 @@ class LeanLoopRunner:
         self.negative_knowledge_pool = negative_knowledge_pool or []
         self.runs_dir = runs_dir
 
+    @staticmethod
+    def _qualify_quantitative_decision_texts(output: Any, source_text: str) -> None:
+        """Mark model-generated numeric criteria/actions unless the source anchors them."""
+        for field_name in (
+            "proposed_next_action",
+            "updated_next_action",
+            "candidate_updated_next_action",
+        ):
+            value = getattr(output, field_name, None)
+            if isinstance(value, str) and value:
+                qualified, _ = FalsePrecisionGuard.qualify_quantitative_decision_text(
+                    value,
+                    source_text=source_text,
+                )
+                setattr(output, field_name, qualified)
+
+        for criterion in getattr(output, "falsification_criteria", []) or []:
+            for field_name in (
+                "hypothesis",
+                "what_would_kill_it",
+                "lowest_cost_discriminating_test",
+            ):
+                value = getattr(criterion, field_name, "")
+                if value:
+                    qualified, _ = FalsePrecisionGuard.qualify_quantitative_decision_text(
+                        value,
+                        source_text=source_text,
+                    )
+                    setattr(criterion, field_name, qualified)
+
+        for index, test in enumerate(getattr(output, "discriminating_tests", []) or []):
+            qualified, _ = FalsePrecisionGuard.qualify_quantitative_decision_text(
+                test,
+                source_text=source_text,
+            )
+            output.discriminating_tests[index] = qualified
+
     def run(self, original_idea: str, run_id: Optional[str] = None, human_intervention_flag: bool = False) -> LeanRunResult:
         tracer = RunTracer(run_id=run_id, runs_dir=self.runs_dir)
         tracer.record_input(original_idea, metadata={"topology": "LEAN_IEE_L1", "max_allowed_calls": LEAN_L1_MAX_MODEL_CALLS})
@@ -158,6 +195,10 @@ class LeanLoopRunner:
                 final_markdown=failed_md,
             )
 
+        # Qualify unsupported quantitative claims before any downstream gate,
+        # arbitration, persistence, or human-readable rendering can reuse them.
+        self._qualify_quantitative_decision_texts(first_pass_output, original_idea)
+
         # Sanitização de precisão numérica não ancorada na saída inicial
         sanitized_mech, _ = FalsePrecisionGuard.sanitize_unsupported_precision(
             first_pass_output.primary_mechanism.mechanism, source_text=original_idea
@@ -216,6 +257,7 @@ class LeanLoopRunner:
 
                 # Sanitização de precisão na resposta de escalação
                 if escalation_output:
+                    self._qualify_quantitative_decision_texts(escalation_output, original_idea)
                     if escalation_output.mutated_hypothesis_description:
                         sanitized_mut, _ = FalsePrecisionGuard.sanitize_unsupported_precision(
                             escalation_output.mutated_hypothesis_description, source_text=original_idea
