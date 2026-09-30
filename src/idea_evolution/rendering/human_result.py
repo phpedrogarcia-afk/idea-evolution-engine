@@ -158,6 +158,11 @@ class HumanResultRenderer:
             ]
             for cand in artifact.candidate_possibilities:
                 cand_lines.append(f"- **{cand.mechanism.strip()}**")
+                if cand.authority_basis == PromotionAuthorityBasis.MODEL_HYPOTHESIS:
+                    cand_lines.append(
+                        "  - *Status epistêmico:* Hipótese do sistema — mecanismo, justificativa e "
+                        "compensações não verificados; não devem ser lidos como fatos estabelecidos."
+                    )
                 if cand.justification and cand.justification.strip():
                     cand_lines.append(f"  - *Justificativa:* {cand.justification.strip()}")
                 if cand.tradeoffs:
