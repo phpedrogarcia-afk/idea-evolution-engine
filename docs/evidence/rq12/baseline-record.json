@@ -1,0 +1,26 @@
+{
+  "started_utc": "2026-09-30T23:39:28.3360639+00:00",
+  "remote_head_before": "f7fc33d975ba3007a9ac78b857f944da79c1601f",
+  "archive_root": "C:\\Users\\phped\\Documents\\FioIdeias_RQ12_Baseline_Artifacts",
+  "assertion_failures_in_errored_tests_established": false,
+  "classification": "ENVIRONMENT_INFRASTRUCTURE_FAILURE",
+  "restored_tracked_pyc_count": 24,
+  "checkout_head_unchanged": true,
+  "worktree_restored_after_baseline": true,
+  "worktree_clean_before": true,
+  "summary": "495 passed, 47 errors, 1 warning",
+  "error_class": "pytest tmp_path setup PermissionError WinError 5 at C:\\Users\\phped\\AppData\\Local\\Temp\\pytest-of-phped",
+  "exit_code": 1,
+  "candidate_head": "f7fc33d975ba3007a9ac78b857f944da79c1601f",
+  "mission_id": "FIOIDEAS-V1.1-RQ-12-FINAL-PROSPECTIVE-BLIND-RELEASE-GATE",
+  "archived_run_directories": [
+    "RUN-20260930_233930-5f47f4bf",
+    "RUN-20260930_233931-231cdfac",
+    "RUN-20260930_233931-848cd44f",
+    "RUN-20260930_233933-1a4ce64e",
+    "RUN-20260930_233933-e8fc44ee"
+  ],
+  "archived_file_count": 51,
+  "ended_utc": "2026-09-30T23:39:48.3184198+00:00",
+  "command": "python -m pytest -q"
+}

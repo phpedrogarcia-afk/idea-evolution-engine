@@ -1,0 +1,322 @@
+{
+  "file_count": 51,
+  "archive_root": "C:\\Users\\phped\\Documents\\FioIdeias_RQ12_Baseline_Artifacts",
+  "files": [
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "final.json",
+      "bytes": 824,
+      "sha256": "2b3ba95e7242a311452c9927e1372f5b79352e30bbefbb63594922a68570fe88"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "final.md",
+      "bytes": 2363,
+      "sha256": "cde55f9f2d08954c6ede2059eb33e96da9efa861e05c4e66e2d2cd39cc1eea22"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "input.json",
+      "bytes": 497,
+      "sha256": "dd693728080fad2a68b2c33c835400ff01773b725c694baf13c6a3f8af28978f"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\01_UNDERSTAND.json",
+      "bytes": 2662,
+      "sha256": "a5bded35067e2b9d231fcc887e75fd63c0a75320859fe037dc70242156990b02"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\02_ATTACK.json",
+      "bytes": 2960,
+      "sha256": "b95fab8845302bf6ddc29a7fa0f1d2789a495c8e0f257990a149431160fbdcf9"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\03_ALTERNATIVES.json",
+      "bytes": 2290,
+      "sha256": "41ad7fc1afd49f102ea59e4787cb37278da1f8a65624814722a1712204b6a824"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\04_SYNTHESIZE.json",
+      "bytes": 1458,
+      "sha256": "507d6296491671c1664fdffe35c5d8b6ee695188b8c7059beb55e82eb6d2b02f"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\05_REALITY_CHECK.json",
+      "bytes": 2490,
+      "sha256": "e88ac72f07f1de92bc431df0f3ee8403b6cc3219e0df45e915422ff08c9d55de"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\06_FINAL_REVIEW.json",
+      "bytes": 1201,
+      "sha256": "e859dd885c409010dccaecab038d677b2e964f2746c532695cb186f4f1012fed"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\07_ALTERNATIVES.json",
+      "bytes": 2290,
+      "sha256": "dbb4e366b4a045d4859eb799d0c6d35a0920c030b34b695c8fb49f430ef35f61"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\08_SYNTHESIZE.json",
+      "bytes": 1458,
+      "sha256": "795bab3994b8378485a1f9a538b92e6564dbb07a3df8492ca9c4f3e19645605c"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\09_REALITY_CHECK.json",
+      "bytes": 2490,
+      "sha256": "7516306cab9ecd92fc5d132d6a44e801fdbfd041629f6b5895f6e1b4b826374f"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "stages\\10_FINAL_REVIEW.json",
+      "bytes": 1202,
+      "sha256": "d0f7c8eb1763ad773b5c847ccfc5465567fce5c5f714500588c752cf3f1c4f8c"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "state.json",
+      "bytes": 11052,
+      "sha256": "d3be7b9ab377127cd00199e97cd0f8cbea087635af27cdd962d476a08be88d08"
+    },
+    {
+      "run_id": "RUN-20260930_233930-5f47f4bf",
+      "relative_path": "trace.json",
+      "bytes": 22261,
+      "sha256": "3d93c7d6207e1382982f887e5b3eb412feff164843d2fcb1bfef974b56193148"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "final.json",
+      "bytes": 831,
+      "sha256": "d5c30b548fe58eb1acd4eb43d8ad701d13248430cb802030343e0298e193245f"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "final.md",
+      "bytes": 2362,
+      "sha256": "8e20909697698be43f7db9c89177db1f0ef1d594dd000a1ad5b63a1883097cfe"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "input.json",
+      "bytes": 497,
+      "sha256": "b5466e10e33514f4d0ba29bbfc0071290da2e7fee86b87e1aacc42397c25b95e"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\01_UNDERSTAND.json",
+      "bytes": 2662,
+      "sha256": "982f29e1e2ca0561e544b490fdc5e08c5cf04e0262fe5c5b830521c2ace40a0a"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\02_ATTACK.json",
+      "bytes": 2960,
+      "sha256": "d1cca7f9425b91d6414afb057d996b13107127a892456a297ddc32f097f182fc"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\03_ALTERNATIVES.json",
+      "bytes": 2290,
+      "sha256": "7b5f74fb23499843be3fcf75c38a93c226dda29fdcd4d67f77619dd80740147c"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\04_SYNTHESIZE.json",
+      "bytes": 1454,
+      "sha256": "761e7e4f8812769d29a19bdd9e50c46b0ddf8af3c5a0d44fabce51ebb7aa0841"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\05_REALITY_CHECK.json",
+      "bytes": 2490,
+      "sha256": "1ce4104b0c948280e3beb27e211bad924e8364fc1eb1c2ab1a831ad4e8d552e9"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\06_FINAL_REVIEW.json",
+      "bytes": 1156,
+      "sha256": "42ef0f1ce01e715c609f6e10636e5c989ba725fef6b716d7035b4e4a851ced95"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\07_ALTERNATIVES.json",
+      "bytes": 2290,
+      "sha256": "80f2e5bdb7a24897f0e9f83de2f0e78579a1260a2b964421797fd06f144ced99"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\08_SYNTHESIZE.json",
+      "bytes": 1454,
+      "sha256": "bfe7d34acdddbc462988b98a196a080724be14109a57876ee4f90e855df6c1c2"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\09_REALITY_CHECK.json",
+      "bytes": 2490,
+      "sha256": "ea977871a2eea2d0dcc38d0f0cf8af8cc8e5f4e379b8b50e6955c40cd84d9ada"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "stages\\10_FINAL_REVIEW.json",
+      "bytes": 1157,
+      "sha256": "41ad4bb1d96479fa669aea8a1c8d084369cfdf6e3d7b365558683b6feabe6c6c"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "state.json",
+      "bytes": 11058,
+      "sha256": "e57e92f62af378e2dbb7f2b044d0c6c1de60a4d5661517ab04433833c6ac00d8"
+    },
+    {
+      "run_id": "RUN-20260930_233931-231cdfac",
+      "relative_path": "trace.json",
+      "bytes": 22163,
+      "sha256": "0a3cbf7dedaba413b105e30d8fd5afbe16b67a3a45a747592cb289238b64f765"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "final.json",
+      "bytes": 831,
+      "sha256": "70fde8da2469e5229cdc4c0806127d69c5c5dd5da50ef2bb50f1e747a3b431c1"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "final.md",
+      "bytes": 2362,
+      "sha256": "b06ece2de3af2f8cc0d43c3d1fc81b21694a86197e9f69052a0e489553c99b64"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "input.json",
+      "bytes": 497,
+      "sha256": "6bab99c69b3f53118ebe600a3e30a01febad0d8c75f08a076fe686a81e1fef48"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\01_UNDERSTAND.json",
+      "bytes": 2662,
+      "sha256": "379e790f0284701d49c085817dfeb29872e66d2608bd31382545146ec8925f7e"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\02_ATTACK.json",
+      "bytes": 2960,
+      "sha256": "ba9917cb746ed46fadfcdf7b51b505a35f753222dcc9029b4a8301ac54cd9079"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\03_ALTERNATIVES.json",
+      "bytes": 2290,
+      "sha256": "0ced8b4e838f3b3562fe9cf98d9455fc2ad13369b2264ac2ebff220e25cba18f"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\04_SYNTHESIZE.json",
+      "bytes": 1454,
+      "sha256": "28199572430ae80f46b2e55f06b4dcd9b696349df8bb5110d3092ba6a210d660"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\05_REALITY_CHECK.json",
+      "bytes": 2490,
+      "sha256": "c7c3c62572b31c397efd377061e88156527c1efa1b9cac9ffac54f5b698b71ca"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\06_FINAL_REVIEW.json",
+      "bytes": 1156,
+      "sha256": "2bec729d24c16971cbcbe5a4ad6151cd1223a15d7a6855b8687409a706f13e05"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\07_ALTERNATIVES.json",
+      "bytes": 2290,
+      "sha256": "83a568672bb86c7197bc4ad978b47aae9d08f847c45d0523139e1be10a1ca6df"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\08_SYNTHESIZE.json",
+      "bytes": 1454,
+      "sha256": "42e1e4bb79dfb7ee825ec9c038ab4d445dc56f9132845bfe4e5fc2bbd19c644f"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\09_REALITY_CHECK.json",
+      "bytes": 2490,
+      "sha256": "3cde2425e00aff841ad87aa422e0c966d6d9316b48a498b96ebb400fbc8c7d24"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "stages\\10_FINAL_REVIEW.json",
+      "bytes": 1157,
+      "sha256": "667d8161cf46d1bc631eda8ba27f1e092535da30fe9a299bcd34a9c4cfa82461"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "state.json",
+      "bytes": 11058,
+      "sha256": "d99699fc314edf844236394fb32cc81dfa0a89e4000f0c5b6aa8f2b001cea55b"
+    },
+    {
+      "run_id": "RUN-20260930_233931-848cd44f",
+      "relative_path": "trace.json",
+      "bytes": 22163,
+      "sha256": "e4fddd7f9d5dab700041cc1fa8d653c78cc31182b6be4c86f555110df79c6abe"
+    },
+    {
+      "run_id": "RUN-20260930_233933-1a4ce64e",
+      "relative_path": "final.json",
+      "bytes": 446,
+      "sha256": "d4982c9335ab2c10cbfab7425ddab20096d22fafb841e9c74e0d4bee83c6fc5f"
+    },
+    {
+      "run_id": "RUN-20260930_233933-1a4ce64e",
+      "relative_path": "final.md",
+      "bytes": 281,
+      "sha256": "9eb44243113390cdaff37b7e330464a133737d52d787f99d4c6978183838efe4"
+    },
+    {
+      "run_id": "RUN-20260930_233933-1a4ce64e",
+      "relative_path": "input.json",
+      "bytes": 334,
+      "sha256": "8806da555f06de9aee6e70ca1f90570eeb5604949f0fd5dcc809c400c9ab6005"
+    },
+    {
+      "run_id": "RUN-20260930_233933-e8fc44ee",
+      "relative_path": "final.json",
+      "bytes": 394,
+      "sha256": "5144dd78e1d2ebf461ae6b8b45025d1ef5b9b80a79e3bb7c425b7258b2f8aa09"
+    },
+    {
+      "run_id": "RUN-20260930_233933-e8fc44ee",
+      "relative_path": "final.md",
+      "bytes": 1484,
+      "sha256": "13feb07da9097a5239926d2f0128ac6777e0b4406e87f9516b031d60eac3c858"
+    },
+    {
+      "run_id": "RUN-20260930_233933-e8fc44ee",
+      "relative_path": "input.json",
+      "bytes": 334,
+      "sha256": "a93f79841e72ed5eaf4785ed3d0373404715fa10d88cb00feb1ff6ac298ae752"
+    }
+  ],
+  "source_runs_root": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Clean\\runs",
+  "mission_id": "FIOIDEIAS-V1.1-RQ-12-FINAL-PROSPECTIVE-BLIND-RELEASE-GATE",
+  "run_directories": [
+    "RUN-20260930_233930-5f47f4bf",
+    "RUN-20260930_233931-231cdfac",
+    "RUN-20260930_233931-848cd44f",
+    "RUN-20260930_233933-1a4ce64e",
+    "RUN-20260930_233933-e8fc44ee"
+  ],
+  "source_checkout": "C:\\Users\\phped\\Documents\\FioIdeias_RQ10_Clean"
+}

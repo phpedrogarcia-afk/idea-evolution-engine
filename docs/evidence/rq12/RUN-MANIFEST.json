@@ -1,0 +1,311 @@
+{
+  "baseline_archived_run_directories": [
+    "RUN-20260930_233930-5f47f4bf",
+    "RUN-20260930_233931-231cdfac",
+    "RUN-20260930_233931-848cd44f",
+    "RUN-20260930_233933-1a4ce64e",
+    "RUN-20260930_233933-e8fc44ee"
+  ],
+  "worktree_clean_before": true,
+  "mission_id": "FIOIDEIAS-V1.1-RQ-12-FINAL-PROSPECTIVE-BLIND-RELEASE-GATE",
+  "input_integrity": "PASS",
+  "baseline_was_not_rerun": true,
+  "prospective_blind_inputs": true,
+  "worktree_product_clean_after_execution": true,
+  "baseline_started_utc": "2026-09-30T23:39:28.3360639+00:00",
+  "final_scientific_verdict": "INCONCLUSIVE",
+  "input_sha256": {
+    "H": "8a864d4ba0be18f1b4120b6cc270da623db090e2503bdf618c365acc87dd1336",
+    "I": "fc6e0bc26b07cb72c5c83b44c073ca7f54ace340b7e15e5b4cc17232d9a90256",
+    "G": "823e163715103fa6703783a73aec6db2dd65ea43cbdd611095057205531f22e6"
+  },
+  "baseline_archived_file_count": 51,
+  "generator_provenance": "PASS",
+  "limitations": [
+    "No raw provider HTTP transcripts persisted by frozen candidate; no product changes made to add telemetry.",
+    "Baseline suite did not complete due Windows pytest temp-root permission error; it was not rerun."
+  ],
+  "remote_head_before": "f7fc33d975ba3007a9ac78b857f944da79c1601f",
+  "input_manifest_path": "C:\\Users\\phped\\Documents\\FioIdeias_RQ12_BlindSet\\RQ12_BLIND_INPUT_MANIFEST.json",
+  "baseline_failure_class": "ENVIRONMENT_INFRASTRUCTURE_FAILURE: PermissionError WinError 5 scanning pytest temp root",
+  "baseline_summary": "495 passed, 47 errors, 1 warning",
+  "branch": "DETACHED_HEAD",
+  "baseline_exit_code": 1,
+  "case_execution_order": [
+    "G",
+    "H",
+    "I"
+  ],
+  "baseline_artifact_archive": "C:\\Users\\phped\\Documents\\FioIdeias_RQ12_Baseline_Artifacts",
+  "meta_audit": "INCONCLUSIVE; PROTOCOL_INTEGRITY=INCOMPLETE; NO_MATERIAL_BLOCKER_DEMONSTRATED",
+  "baseline_expected": "542 passed, 0 failed, 1 known PytestCollectionWarning",
+  "baseline_command": "python -m pytest -q",
+  "baseline_ended_utc": "2026-09-30T23:39:48.3184198+00:00",
+  "tracked_pyc_restored": 24,
+  "cases": [
+    {
+      "logical_case_runs": 1,
+      "input_sha256": "823e163715103fa6703783a73aec6db2dd65ea43cbdd611095057205531f22e6",
+      "logical_output_complete": true,
+      "model_configured": "openai/gpt-oss-120b",
+      "provider_configured": "cerebras",
+      "case": "G",
+      "stdout_bytes": 6867,
+      "run_artifact_file_count": 3,
+      "total_model_calls": 1,
+      "files": [
+        {
+          "sha256": "823e163715103fa6703783a73aec6db2dd65ea43cbdd611095057205531f22e6",
+          "path": "evaluator_packet\\input.txt",
+          "bytes": 482
+        },
+        {
+          "sha256": "b345e961ad0c45f51ba9230deecb69522c81e8d784709242e08bdfe468d79f68",
+          "path": "evaluator_packet\\output.json",
+          "bytes": 6867
+        },
+        {
+          "sha256": "cf01a63a01d7ab7435b806f75217957458ecbd48f80154c1da0c83174875aa24",
+          "path": "evaluator_packet\\rendered_output.md",
+          "bytes": 4407
+        },
+        {
+          "sha256": "c0d6dd25cd549f9c36990ba37acb54c7d753f13c97f3cabd407990953563c5de",
+          "path": "evaluator_packet\\run_metadata.json",
+          "bytes": 883
+        },
+        {
+          "sha256": "34e622d6c352bc421e19c50758a2dfad4c2c8f470085a9ec5ea4f98ef74144f8",
+          "path": "evaluator_packet\\run_summary.json",
+          "bytes": 834
+        },
+        {
+          "sha256": "823e163715103fa6703783a73aec6db2dd65ea43cbdd611095057205531f22e6",
+          "path": "input.txt",
+          "bytes": 482
+        },
+        {
+          "sha256": "c0d6dd25cd549f9c36990ba37acb54c7d753f13c97f3cabd407990953563c5de",
+          "path": "invocation.json",
+          "bytes": 883
+        },
+        {
+          "sha256": "34e622d6c352bc421e19c50758a2dfad4c2c8f470085a9ec5ea4f98ef74144f8",
+          "path": "runs\\RUN-20260930_204631\\final.json",
+          "bytes": 834
+        },
+        {
+          "sha256": "cf01a63a01d7ab7435b806f75217957458ecbd48f80154c1da0c83174875aa24",
+          "path": "runs\\RUN-20260930_204631\\final.md",
+          "bytes": 4407
+        },
+        {
+          "sha256": "7599c518e08a65199023278c014108581fd8f705dd966fffc9b1c80383914366",
+          "path": "runs\\RUN-20260930_204631\\input.json",
+          "bytes": 775
+        },
+        {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "stderr.txt",
+          "bytes": 0
+        },
+        {
+          "sha256": "b345e961ad0c45f51ba9230deecb69522c81e8d784709242e08bdfe468d79f68",
+          "path": "stdout.json",
+          "bytes": 6867
+        }
+      ],
+      "ordinal": 1,
+      "terminal_status": "COMPLETED_DIRECT_ONE_PASS",
+      "credential_pattern_detected": false,
+      "provider_raw_http_transcript_available": false,
+      "exit_code": 0,
+      "run_id": "RUN-20260930_204631",
+      "stderr_bytes": 0,
+      "input_copy_sha256": "823e163715103fa6703783a73aec6db2dd65ea43cbdd611095057205531f22e6"
+    },
+    {
+      "logical_case_runs": 1,
+      "input_sha256": "8a864d4ba0be18f1b4120b6cc270da623db090e2503bdf618c365acc87dd1336",
+      "logical_output_complete": true,
+      "model_configured": "openai/gpt-oss-120b",
+      "provider_configured": "cerebras",
+      "case": "H",
+      "stdout_bytes": 6701,
+      "run_artifact_file_count": 3,
+      "total_model_calls": 1,
+      "files": [
+        {
+          "sha256": "8a864d4ba0be18f1b4120b6cc270da623db090e2503bdf618c365acc87dd1336",
+          "path": "evaluator_packet\\input.txt",
+          "bytes": 444
+        },
+        {
+          "sha256": "702f73fecf52fa138f6594ce44dbabb7cb0e207cb222b2a84e812d4b1a2ef008",
+          "path": "evaluator_packet\\output.json",
+          "bytes": 6701
+        },
+        {
+          "sha256": "57e2cca9049a951be027ad2b5acfa02fc150140a6ee6c2b800b41bea6a6693e2",
+          "path": "evaluator_packet\\rendered_output.md",
+          "bytes": 4540
+        },
+        {
+          "sha256": "a23e3baaa1552b46811439f9115c395286429b87b275a703152f731a9db2cd39",
+          "path": "evaluator_packet\\run_metadata.json",
+          "bytes": 792
+        },
+        {
+          "sha256": "995b4e2444b0cc022e9aba477b3fe1252ad913b35f3f07b41073ea3c3a72d06c",
+          "path": "evaluator_packet\\run_summary.json",
+          "bytes": 796
+        },
+        {
+          "sha256": "8a864d4ba0be18f1b4120b6cc270da623db090e2503bdf618c365acc87dd1336",
+          "path": "input.txt",
+          "bytes": 444
+        },
+        {
+          "sha256": "a23e3baaa1552b46811439f9115c395286429b87b275a703152f731a9db2cd39",
+          "path": "invocation.json",
+          "bytes": 792
+        },
+        {
+          "sha256": "995b4e2444b0cc022e9aba477b3fe1252ad913b35f3f07b41073ea3c3a72d06c",
+          "path": "runs\\RUN-20260930_204726\\final.json",
+          "bytes": 796
+        },
+        {
+          "sha256": "57e2cca9049a951be027ad2b5acfa02fc150140a6ee6c2b800b41bea6a6693e2",
+          "path": "runs\\RUN-20260930_204726\\final.md",
+          "bytes": 4540
+        },
+        {
+          "sha256": "ca6d433ec2eb3e9037161e0366f814a8dc7231e35a69e205cb839fe2e8b6454e",
+          "path": "runs\\RUN-20260930_204726\\input.json",
+          "bytes": 737
+        },
+        {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "stderr.txt",
+          "bytes": 0
+        },
+        {
+          "sha256": "702f73fecf52fa138f6594ce44dbabb7cb0e207cb222b2a84e812d4b1a2ef008",
+          "path": "stdout.json",
+          "bytes": 6701
+        }
+      ],
+      "ordinal": 2,
+      "terminal_status": "COMPLETED_DIRECT_ONE_PASS",
+      "credential_pattern_detected": false,
+      "provider_raw_http_transcript_available": false,
+      "exit_code": 0,
+      "run_id": "RUN-20260930_204726",
+      "stderr_bytes": 0,
+      "input_copy_sha256": "8a864d4ba0be18f1b4120b6cc270da623db090e2503bdf618c365acc87dd1336"
+    },
+    {
+      "logical_case_runs": 1,
+      "input_sha256": "fc6e0bc26b07cb72c5c83b44c073ca7f54ace340b7e15e5b4cc17232d9a90256",
+      "logical_output_complete": true,
+      "model_configured": "openai/gpt-oss-120b",
+      "provider_configured": "cerebras",
+      "case": "I",
+      "stdout_bytes": 8422,
+      "run_artifact_file_count": 3,
+      "total_model_calls": 1,
+      "files": [
+        {
+          "sha256": "fc6e0bc26b07cb72c5c83b44c073ca7f54ace340b7e15e5b4cc17232d9a90256",
+          "path": "evaluator_packet\\input.txt",
+          "bytes": 426
+        },
+        {
+          "sha256": "65ce1bddcdabc71722c417044590b805d7acc436f2ebdf93705f5500a35e5a60",
+          "path": "evaluator_packet\\output.json",
+          "bytes": 8422
+        },
+        {
+          "sha256": "ddbf81a508e9fc4b669f2f9e9345ab07b16f6f84d9a9a1058d3a155caa5c4cb9",
+          "path": "evaluator_packet\\rendered_output.md",
+          "bytes": 5548
+        },
+        {
+          "sha256": "ae861d0bae8fc31d24502288a1740a646ec6e28540befc780561036314cb0c57",
+          "path": "evaluator_packet\\run_metadata.json",
+          "bytes": 792
+        },
+        {
+          "sha256": "3adfa869670bbc2ca40270a701c7cd2d07a45343c77c9929b75f5b4aeb854059",
+          "path": "evaluator_packet\\run_summary.json",
+          "bytes": 778
+        },
+        {
+          "sha256": "fc6e0bc26b07cb72c5c83b44c073ca7f54ace340b7e15e5b4cc17232d9a90256",
+          "path": "input.txt",
+          "bytes": 426
+        },
+        {
+          "sha256": "ae861d0bae8fc31d24502288a1740a646ec6e28540befc780561036314cb0c57",
+          "path": "invocation.json",
+          "bytes": 792
+        },
+        {
+          "sha256": "3adfa869670bbc2ca40270a701c7cd2d07a45343c77c9929b75f5b4aeb854059",
+          "path": "runs\\RUN-20260930_204742\\final.json",
+          "bytes": 778
+        },
+        {
+          "sha256": "ddbf81a508e9fc4b669f2f9e9345ab07b16f6f84d9a9a1058d3a155caa5c4cb9",
+          "path": "runs\\RUN-20260930_204742\\final.md",
+          "bytes": 5548
+        },
+        {
+          "sha256": "3d3c66dec77f43b53bbd6aa122dafa690748572ab23862bb81bf8fad4a54ec21",
+          "path": "runs\\RUN-20260930_204742\\input.json",
+          "bytes": 718
+        },
+        {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "path": "stderr.txt",
+          "bytes": 0
+        },
+        {
+          "sha256": "65ce1bddcdabc71722c417044590b805d7acc436f2ebdf93705f5500a35e5a60",
+          "path": "stdout.json",
+          "bytes": 8422
+        }
+      ],
+      "ordinal": 3,
+      "terminal_status": "COMPLETED_DIRECT_ONE_PASS",
+      "credential_pattern_detected": false,
+      "provider_raw_http_transcript_available": false,
+      "exit_code": 0,
+      "run_id": "RUN-20260930_204742",
+      "stderr_bytes": 0,
+      "input_copy_sha256": "fc6e0bc26b07cb72c5c83b44c073ca7f54ace340b7e15e5b4cc17232d9a90256"
+    }
+  ],
+  "candidate_head_after": "f7fc33d975ba3007a9ac78b857f944da79c1601f",
+  "evaluators": {
+    "G": {
+      "status": "COMPLETE; MATERIAL_BLOCKER_ALLEGED_BY_EVALUATOR; NONBLOCKING_BY_META_AUDIT",
+      "report_sha256": "AFB6D898A823FEDE6215124176C5359F7A31FB8644E41D48137193A4D70E0CBF"
+    },
+    "H": {
+      "status": "COMPLETE; NO_BLOCKER",
+      "report_sha256": "F92BEDAB340ECEBC77BD17D12E577FBE4B1C092A16646C64C67D3E7B1D2C41D1"
+    },
+    "I": {
+      "status": "COMPLETE; NO_BLOCKER",
+      "report_sha256": "B386B1E2489B27B756813836ED8CBC718DFDA1678722402F11FB7F4BCFD699F0"
+    }
+  },
+  "meta_audit_report_sha256": "D1CD357924B3A7AA5DCD4998B377248297D8AB2BE1D6A913686D40A71431CBAF",
+  "final_report_sha256": "C6D4DFE849A3546556FAA5456B07C9733CC4A384414F79382D43CEF9D1E666AC",
+  "protocol_integrity": "INCOMPLETE",
+  "material_blocker_demonstrated": false,
+  "release_gate_satisfied": false,
+  "candidate_head_before": "f7fc33d975ba3007a9ac78b857f944da79c1601f"
+}
