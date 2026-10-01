@@ -50,7 +50,7 @@ Fontes examinadas:
 - `docs/evidence/final-blind/CASE-A-EVALUATION.md`
 - `docs/evidence/final-blind/CASE-B-EVALUATION.md`
 - `docs/evidence/final-blind/CASE-C-EVALUATION.md`
-- Preserved stdout and artifacts under `runs/RQ08-FINAL-BLIND-20260930/`
+- Preserved stdout and artifacts, now byte-preserved in the external archive recorded by [FIOIDEIAS-V1.1-RELEASE-TREE-HYGIENE-ARCHIVE.md](FIOIDEIAS-V1.1-RELEASE-TREE-HYGIENE-ARCHIVE.md)
 
 ### Claims que materializaram o bloqueio
 
@@ -144,9 +144,12 @@ terminou com `RETURN_NOW` / `escalation_reason=NONE`.
 | B | `C9EB6C8E271D259E435DAE779BEA74B7B82CD6CBEA0A05115256CEC392D30DFE` | `RUN-20260930_122833` | `8BFE8E544C120CF5D4BD6DE834AB9939DF9DB35576FB959442D5FC0C7AC504C3` | Justificativas comparativas continuam exploráveis, mas são explicitamente marcadas como não verificadas. |
 | C | `4C740A4C16B82298E1D1F85DB7ECC723B6E319C5D9A89B94B9A5F7084C77EB49` | `RUN-20260930_122843` | `45167BC3115FE0D4D24BDD2A492389482F12D5675ADB339ACAC3FEBAEDD7698E` | A afirmação de prevalência (“método atualmente usado por muitos criadores”) e trade-offs de tempo/criatividade estão sob o status explícito de hipótese não verificada. |
 
-Artifacts preservados localmente em `runs/RUN-20260930_122821/`,
-`runs/RUN-20260930_122833/` e `runs/RUN-20260930_122843/`; `final.md`,
-`evolution_artifact.json`, `final.json` e `input.json` foram conferidos. Os
+Artifacts initially preserved in `runs/RUN-20260930_122821/`,
+`runs/RUN-20260930_122833/` e `runs/RUN-20260930_122843/` foram copiados sem
+alteração para o arquivo externo registrado em
+[FIOIDEIAS-V1.1-RELEASE-TREE-HYGIENE-ARCHIVE.md](FIOIDEIAS-V1.1-RELEASE-TREE-HYGIENE-ARCHIVE.md);
+`final.md`, `evolution_artifact.json`, `final.json` e `input.json` foram conferidos
+antes do arquivamento. Os
 artefatos estruturados mantêm as alternativas como `MODEL_HYPOTHESIS`, os três
 gates retornaram `RETURN_NOW` sem escalação, e nenhuma contradição de input foi
 promovida. As ações finais de A/B/C são sugestões de produção de evidência

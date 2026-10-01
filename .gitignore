@@ -37,6 +37,7 @@ htmlcov/
 .idea/
 
 # Local run outputs
+runs/
 runs_test_*/
 
 # Active secret reveal artifacts (must not be committed)

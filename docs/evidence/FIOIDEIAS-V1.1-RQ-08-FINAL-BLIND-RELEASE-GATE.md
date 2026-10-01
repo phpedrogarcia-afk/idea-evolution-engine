@@ -44,7 +44,7 @@ Fluxo usado: iee.cmd evolve --idea-file, sem instruções adicionais, tratamento
 | B | 0 | 1 | COMPLETED_DIRECT_ONE_PASS | RETURN_NOW | NONE | true | 6 | 73C381C3971569B1DFA73BF83DAFF8EFFF508E9F5BFDF3ADC666F65C384D291D |
 | C | 0 | 1 | COMPLETED_DIRECT_ONE_PASS | RETURN_NOW | NONE | true | 4 | 9A6BB8F25C699800C67A5BAABB9CF18D1767F80B3855CD0171FB894BC6DE9D20 |
 
-Foi criado exatamente um run novo por input, em ordem A, B, C; os três saíram com stderr vazio. Os rastros preservam stdout exato, input.json, final.json, final.md e evolution_artifact.json em runs/RQ08-FINAL-BLIND-20260930. Não houve rerun nem edição posterior dos outputs.
+Foi criado exatamente um run novo por input, em ordem A, B, C; os três saíram com stderr vazio. Os rastros preservavam stdout exato, input.json, final.json, final.md e evolution_artifact.json em `runs/RQ08-FINAL-BLIND-20260930`; esses 18 arquivos foram copiados sem alteração para o arquivo externo `C:\Users\phped\Documents\FioIdeias_V1.1_Run_Archive_20260930`. Caminhos, tamanhos, SHA-256 e proveniência estão em [FIOIDEIAS-V1.1-RELEASE-TREE-HYGIENE-ARCHIVE.md](FIOIDEIAS-V1.1-RELEASE-TREE-HYGIENE-ARCHIVE.md). Não houve rerun nem edição posterior dos outputs.
 
 Limite de rastreabilidade: o runner não persistiu corpo bruto da resposta HTTP nem prompts/transporte completos. O stdout exato do produto e os artefatos finais estruturados foram preservados; não se afirma que exista transcript bruto do provedor. Os campos provider e model_name dos artefatos finais estão nulos; a rota Cerebras/modelo foi verificada separadamente antes da execução pelo resolvedor do próprio produto.
 
