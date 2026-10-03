@@ -116,3 +116,6 @@ Para pesquisadores, desenvolvedores e auditores epistêmicos, a documentação p
 - [`docs/INDEX.md`](docs/INDEX.md): Índice mestre de toda a documentação.
 - [`docs/m06-productization/`](docs/m06-productization/): Registros formais de transição científica para produto, contratos de arquitetura e portões de aceitação do V1.
 - [`docs/GOVERNANCE-INVARIANTS.md`](docs/GOVERNANCE-INVARIANTS.md): Constituição epistêmica e regras invioláveis do repositório.
+# Interface local
+
+Instale o projeto e execute `iee ui` para abrir o laboratório em `http://127.0.0.1:8765` (`iee ui --port 8765` permite informar a porta explicitamente). A interface escuta somente no computador local. A inferência continua usando o provedor configurado e a política existente do FioIdeias; dependendo dessa configuração, a ideia pode ser enviada ao provedor e a execução pode gerar registros locais.

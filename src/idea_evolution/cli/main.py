@@ -42,6 +42,19 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 RUNS_DIR = REPO_ROOT / "runs"
 
 
+def create_evolution_service(
+    runner: ModelRunner,
+    treatment: TreatmentMode = TreatmentMode.LEAN_L1,
+    runs_dir: Optional[Path] = None,
+) -> IdeaEvolutionService:
+    """Constrói o serviço canônico compartilhado pela CLI e pela UI local."""
+    return IdeaEvolutionService(
+        runner=runner,
+        default_treatment=treatment,
+        runs_dir=runs_dir or RUNS_DIR,
+    )
+
+
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     """Configura o analisador de argumentos da CLI do FioIdeias V1."""
     parser = argparse.ArgumentParser(
@@ -141,7 +154,25 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     show_p = routes_sub.add_parser("show", help="Exibe o mapeamento de estágios para provedores/modelos")
     show_p.add_argument("--model-config", "-c", type=Path, default=None, help="Arquivo de configuração de rotas")
 
+    ui_p = subparsers.add_parser(
+        "ui",
+        help="Abre a interface local do laboratório FioIdeias",
+        description="Executa a interface local em 127.0.0.1; inferência segue a política existente do serviço.",
+    )
+    ui_p.add_argument("--port", type=_valid_ui_port, default=8765, help="Porta local da interface (padrão: 8765)")
+
     return parser.parse_args(argv)
+
+
+def _valid_ui_port(value: str) -> int:
+    """Aceita apenas portas TCP utilizáveis; o host permanece fixo em loopback."""
+    try:
+        port = int(value)
+    except (TypeError, ValueError) as exc:
+        raise argparse.ArgumentTypeError("a porta deve ser um inteiro entre 1 e 65535") from exc
+    if not 1 <= port <= 65535:
+        raise argparse.ArgumentTypeError("a porta deve estar entre 1 e 65535")
+    return port
 
 
 def resolve_runner(
@@ -236,11 +267,7 @@ def run_evolve(args: argparse.Namespace, runner: Optional[ModelRunner] = None) -
 
     # 5. Delegação estrita ao IdeaEvolutionService
     runs_dir = args.runs_dir or RUNS_DIR
-    service = IdeaEvolutionService(
-        runner=runner,
-        default_treatment=treatment,
-        runs_dir=runs_dir,
-    )
+    service = create_evolution_service(runner, treatment=treatment, runs_dir=runs_dir)
 
     req = EvolutionRequest(
         raw_idea=idea_text,
@@ -389,6 +416,29 @@ def run_routes_show(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_ui(args: argparse.Namespace, runner: Optional[ModelRunner] = None) -> int:
+    """Executa a UI local usando o mesmo runner e a mesma fronteira de serviço da CLI."""
+    from src.idea_evolution.ui.server import create_local_ui_server
+
+    def service_factory() -> IdeaEvolutionService:
+        active_runner = runner if runner is not None else resolve_runner()
+        return create_evolution_service(
+            active_runner,
+            treatment=TreatmentMode.LEAN_L1,
+            runs_dir=RUNS_DIR,
+        )
+
+    server = create_local_ui_server(service_factory=service_factory, port=args.port)
+    print(f"FioIdeias UI:\nhttp://127.0.0.1:{args.port}", flush=True)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nFioIdeias UI encerrada.", flush=True)
+    finally:
+        server.server_close()
+    return 0
+
+
 def main(argv: Optional[List[str]] = None, runner: Optional[ModelRunner] = None) -> int:
     """Ponto de entrada estável e canônico do CLI iee."""
     if sys.platform == "win32":
@@ -402,6 +452,8 @@ def main(argv: Optional[List[str]] = None, runner: Optional[ModelRunner] = None)
 
     if args.command == "evolve":
         return run_evolve(args, runner=runner)
+    elif args.command == "ui":
+        return run_ui(args, runner=runner)
     elif args.command == "compare":
         return run_compare(args)
     elif args.command == "inspect-run":

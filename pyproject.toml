@@ -20,3 +20,6 @@ iee = "src.idea_evolution.cli.main:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["src*"]
+
+[tool.setuptools.package-data]
+"src.idea_evolution.ui" = ["static/*.html", "static/*.css", "static/*.js", "static/*.svg"]

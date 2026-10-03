@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f0e2">
+    <title>FioIdeias — Laboratório de Ideias</title>
+    <link rel="icon" href="/flask.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="paper-shell">
+      <header class="masthead">
+        <div class="brand-lockup">
+          <img class="brand-flask" src="/flask.svg" alt="" width="42" height="48">
+          <div>
+            <p class="brand-name">FioIdeias</p>
+            <p class="brand-subtitle">Laboratório de Ideias</p>
+          </div>
+        </div>
+        <span class="local-mark"><span aria-hidden="true"></span> Interface local</span>
+      </header>
+
+      <main>
+        <section id="input-screen" class="screen input-screen" aria-labelledby="input-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Toda boa forma começa em algum lugar</p>
+            <h1 id="input-title">O que vamos criar?</h1>
+            <p class="intro-copy">Traga a ideia como ela está. A primeira versão não precisa estar pronta.</p>
+          </div>
+
+          <form id="idea-form" class="idea-form" novalidate>
+            <label for="idea-input">Sua ideia crua</label>
+            <textarea id="idea-input" name="idea" rows="7" placeholder="Escreva livremente… o que você gostaria de fazer, mudar ou descobrir?" autocomplete="off" spellcheck="true"></textarea>
+            <div class="input-footer">
+              <span>Escreva do seu jeito. A proposta final continua sendo sua para avaliar.</span>
+            </div>
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+            <button id="submit-button" class="primary-button" type="submit">
+              <span>Transmutar</span>
+              <span class="button-arrow" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <p class="execution-notice"><span class="notice-mark" aria-hidden="true">i</span> Dependendo da configuração atual, sua ideia pode ser enviada ao provedor de IA configurado. A execução também pode gerar registros locais do FioIdeias.</p>
+        </section>
+
+        <section id="processing-screen" class="screen processing-screen" aria-labelledby="processing-title" role="status" aria-live="polite" hidden>
+          <img class="processing-flask" src="/flask.svg" alt="" width="104" height="118">
+          <p class="eyebrow">O laboratório está em silêncio</p>
+          <h1 id="processing-title">Maturando a ideia…</h1>
+          <p>A proposta está sendo preparada. Isso pode levar um instante.</p>
+        </section>
+
+        <section id="result-screen" class="screen result-screen" aria-labelledby="result-heading" hidden>
+          <div class="result-heading">
+            <p class="eyebrow">Uma nova leitura para você considerar</p>
+            <h1 id="result-heading">Duas formas da mesma ideia</h1>
+          </div>
+
+          <div class="comparison">
+            <article id="raw-panel" class="idea-panel raw-panel">
+              <p class="panel-kicker"><span class="panel-symbol" aria-hidden="true">01</span> Prima Materia</p>
+              <h2>Ideia Crua</h2>
+              <p class="panel-caption">Sua formulação original</p>
+              <div id="raw-idea" class="idea-copy"></div>
+            </article>
+
+            <div class="comparison-arrow" aria-hidden="true"><span></span></div>
+
+            <article id="refined-panel" class="idea-panel refined-panel">
+              <p class="panel-kicker"><span class="panel-symbol" aria-hidden="true">02</span> Forma proposta</p>
+              <h2>Forma Atual</h2>
+              <p class="panel-caption">Proposta desta execução</p>
+              <div id="refined-idea" class="idea-copy refined-copy"></div>
+              <div id="human-decision-card" class="human-decision-card" hidden>
+                <h3>Decisão necessária</h3>
+                <p id="human-decision-description"></p>
+                <p class="decision-note">O sistema devolveu esta escolha para você; nenhuma opção foi selecionada automaticamente.</p>
+              </div>
+            </article>
+          </div>
+
+          <details id="laboratory-details" class="laboratory-details">
+            <summary><span>Ver laboratório</span><span class="summary-note">Leituras, possibilidades e pontos em aberto</span></summary>
+            <div class="detail-list" id="detail-list"></div>
+          </details>
+
+          <section class="transmutation-map" aria-labelledby="map-title">
+            <div class="map-heading">
+              <div>
+                <p class="eyebrow">Navegação conceitual</p>
+                <h2 id="map-title">Mapa da Transmutação</h2>
+              </div>
+              <p>Um jeito de percorrer o resultado — não representa etapas ou progresso do sistema.</p>
+            </div>
+            <nav class="map-nodes" aria-label="Mapa conceitual do resultado">
+              <button type="button" class="map-node" data-map-key="prima"><span class="map-index">01</span><span>Prima<br>Materia</span></button>
+              <button type="button" class="map-node" data-map-key="separatio"><span class="map-index">02</span><span>Separatio</span></button>
+              <button type="button" class="map-node" data-map-key="multiplicatio"><span class="map-index">03</span><span>Multiplicatio</span></button>
+              <button type="button" class="map-node" data-map-key="provacao"><span class="map-index">04</span><span>Provação</span></button>
+              <button type="button" class="map-node" data-map-key="transmutatio"><span class="map-index">05</span><span>Transmutatio</span></button>
+              <button type="button" class="map-node" data-map-key="coagulatio"><span class="map-index">06</span><span>Coagulatio</span></button>
+            </nav>
+          </section>
+
+          <button id="new-idea-button" class="text-button" type="button">Começar outra ideia</button>
+        </section>
+      </main>
+
+      <footer class="page-footer">
+        <span>Ideias em movimento, decisões nas suas mãos.</span>
+        <span class="footer-spark" aria-hidden="true"></span>
+      </footer>
+    </div>
+  </body>
+</html>

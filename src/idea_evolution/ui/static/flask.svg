@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 124" fill="none" role="img" aria-label="Frasco de laboratório desenhado à mão">
+  <path d="M42 9c9-2 20-2 29 0M46 12c-1 10 2 19 2 28L20 91c-5 10 2 22 14 23l44-1c12-1 17-13 11-23L65 40c1-10 3-18 2-28" stroke="#19344a" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42 14c8 2 21 2 29-1M48 43c7 2 14 2 20-1M27 83c16 7 41 8 62 0" stroke="#19344a" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M29 82c17 7 38 7 58 0l8 11c5 8-1 16-10 17l-49 1c-9 0-15-9-10-17z" fill="#e9a445" fill-opacity=".55" stroke="#c56d30" stroke-width="2.6" stroke-linejoin="round"/>
+  <circle cx="48" cy="93" r="3" fill="#c56d30"/><circle cx="63" cy="101" r="2.6" fill="#c56d30"/><circle cx="72" cy="90" r="2" fill="#c56d30"/>
+  <path d="M15 38l5-5m-9-7 7 1m70-9 4-5m5 12 7-3M15 71l-6 2m88 15 7 3" stroke="#d58b42" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
