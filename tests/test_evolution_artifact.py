@@ -19,6 +19,7 @@ from src.idea_evolution.artifacts.evolution_artifact import (
     CritiqueItem,
     CandidatePossibility,
     SCHEMA_VERSION_1_0,
+    SCHEMA_VERSION_1_1,
     FROZEN_LEAN_CORE_HASH,
 )
 from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
@@ -104,7 +105,7 @@ class TestEvolutionArtifactP2(unittest.TestCase):
         self.assertTrue(resp.success)
         self.assertIsNotNone(resp.artifact)
         self.assertIsInstance(resp.artifact, EvolutionArtifact)
-        self.assertEqual(resp.artifact.schema_version, SCHEMA_VERSION_1_0)
+        self.assertEqual(resp.artifact.schema_version, SCHEMA_VERSION_1_1)
         self.assertEqual(resp.artifact.terminal_status, "COMPLETED_DIRECT_ONE_PASS")
         self.assertEqual(resp.artifact.treatment_mode, TreatmentMode.LEAN_L1)
 
@@ -275,7 +276,7 @@ class TestEvolutionArtifactP2(unittest.TestCase):
         self.assertEqual(len(art.critique), len(reloaded.critique))
 
     def test_13_artifact_schema_version_exists(self):
-        """13: Versão canônica 1.0 declarada no artefato."""
+        """13: Novos artefatos usam o schema aditivo 1.1."""
         art = EvolutionArtifact(
             artifact_id="ART-TEST",
             run_id="RUN-TEST",
@@ -285,7 +286,7 @@ class TestEvolutionArtifactP2(unittest.TestCase):
             human_intent="Intenção",
             refined_idea="Ideia refinada",
         )
-        self.assertEqual(art.schema_version, "1.0")
+        self.assertEqual(art.schema_version, SCHEMA_VERSION_1_1)
 
     def test_14_no_model_call_occurs_during_mapping(self):
         """14: Mapper executa sem qualquer chamada de modelo (custo 0)."""

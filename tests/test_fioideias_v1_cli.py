@@ -153,7 +153,7 @@ class TestFioIdeiasV1CliP5(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         data = json.loads(stdout.getvalue())
         artifact = EvolutionArtifact.model_validate(data)
-        self.assertEqual(artifact.schema_version, "1.0")
+        self.assertEqual(artifact.schema_version, "1.1")
         self.assertEqual(artifact.treatment_mode, TreatmentMode.LEAN_L1)
 
     def test_06_original_idea_survives_lossless(self):

@@ -394,7 +394,7 @@ class TestFioIdeiasV1HumanRendererP6(unittest.TestCase):
             main(["evolve", self.sample_idea, "--json", "--runs-dir", str(self.temp_dir)], runner=runner)
 
         data = json.loads(stdout.getvalue())
-        self.assertEqual(data["schema_version"], "1.0")
+        self.assertEqual(data["schema_version"], "1.1")
         self.assertIn("artifact_id", data)
         self.assertIn("original_idea", data)
         self.assertIn("refined_idea", data)
