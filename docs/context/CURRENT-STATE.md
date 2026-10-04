@@ -3,20 +3,18 @@
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
 > Atualizado em: 2026-10-04 | Fase: V1.2 — MATURATION
 
-## Estado operacional vigente — FioIdeias V1.2 / M4
+## Estado operacional vigente — FioIdeias V1.2 / M5
 
 Este bloco supersede o snapshot M06/V1.0.1 abaixo, que permanece como histórico.
 
-- **Fase ativa:** V1.2 — maturação forte em uma passagem, gate de cobertura e uma oportunidade de reparo estrutural.
-- **Branch de trabalho:** `fioideias/v1.2-maturation`; M4 parte do HEAD aceito `4b6d04aa13b05d91e845646399a7c306a47439b4`.
-- **Topologia:** first pass → EarlyEpistemicGate e escalação opcional → mapper → gate M3 → reparo M4 opcional. Reparo usa o mesmo `ModelRunner`, modelo e guarda de custo existente.
-- **M1–M3:** contratos e semântica dos gates preservados; M4 não altera o pin do núcleo científico `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`.
-- **M4:** patch fechado e tipado, aplicação atômica e uma reavaliação M3; teto global de 2 chamadas lógicas inclui a escalação EarlyEpistemicGate. Esgotamento, reparo inválido ou incompleto resultam em `UNRESOLVED`, sem terceira chamada.
-- **Verificação:** 19 testes M4; suíte determinística `621 passed, 0 failed, 1 PytestCollectionWarning` em cópia temporária isolada. A primeira tentativa completa foi lançada no diretório de trabalho errado e encontrou 14 erros de permissão; a repetição na cópia correta passou.
-- **Limites:** `NO_BLOCKING_GAP_DETECTED` é estrutural, não prova preservação semântica nem detecta contradições em prosa. Reparo é uma proposta de modelo validada estruturalmente; não é revisão semântica independente.
-- **Limitação de representação:** o wire M2 representa `open_decisions` como texto e não inventa relações por similaridade; M4 pode adicionar vínculo explícito por ID no patch.
-- **Execução:** FakeModelRunner/determinístico; `PROVIDER_CALLS=0`, `QWEN_CALLS=0`; núcleo V1.1 e evidência científica permanecem inalterados.
-- **Próximo passo autorizado:** commit/push normal desta missão somente para `origin/fioideias/v1.2-maturation` e parar. M5 requer missão humana separada e não está autorizado automaticamente.
+- **Fase ativa:** projeção local dos resultados de maturação V1.2 na interface, sobre os contratos M1–M4 já congelados.
+- **Branch de trabalho:** `fioideias/v1.2-maturation`; M5 parte do HEAD aceito `544bb9a6884e7d98310e442d31dfb4fd1a8605cd`.
+- **M5:** a UI expõe Forma Atual, descobertas, possibilidades candidatas, incerteza/próximo passo, decisões abertas e detalhes do laboratório usando somente campos existentes do `EvolutionArtifact`; não altera prompts, serviço, autoridade ou semântica do núcleo.
+- **Compatibilidade:** artefatos schema 1.0 continuam mostrando cobertura como `NOT_EVALUATED`; artefatos schema 1.1 mantêm seu schema e projetam seus campos suportados sem mutação.
+- **Limites epistêmicos:** possibilidades continuam hipóteses; decisões abertas não são solicitações de autoridade humana; `NO_BLOCKING_GAP_DETECTED` é estrutural e não prova validade semântica. `UNRESOLVED` é destacado junto dos issues estruturais disponíveis.
+- **Verificação:** 46 testes focados; suíte determinística completa em cópia temporária isolada `637 passed, 0 failed, 1 PytestCollectionWarning`; inspeção visual Playwright offline em 1440×1000, 768×1024 e 390×844. `PROVIDER_CALLS=0`, `QWEN_CALLS=0`.
+- **Execução e autoridade:** navegador apontado somente a `127.0.0.1:8765` com serviço de fixtures; núcleo V1.1, prompts, provedor, Qwen, launcher desktop e holdouts não alterados.
+- **Próximo passo autorizado:** commit normal e push fast-forward somente para `origin/fioideias/v1.2-maturation`, então parar. M6 requer missão humana separada.
 - **Release V1.1:** inalterada.
 
 ---

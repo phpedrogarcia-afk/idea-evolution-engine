@@ -654,3 +654,11 @@
 - **O que mudou:** O serviço oferece uma única chamada `MATURATION_FOCUSED_REPAIR` quando M3 exige reparo e o orçamento lógico disponível permite. O modelo retorna patch fechado e tipado com alvos estruturais; candidato validado atomicamente, seguido por uma única reavaliação M3. Escalação existente e reparo compartilham o teto de duas chamadas. Falha, autoridade bloqueada, budget esgotado ou gaps restantes encerram em `UNRESOLVED`.
 - **Verificação:** 19 testes M4, integração M2/M3/service de 80 testes e suíte offline completa `621 passed, 0 failed, 1 PytestCollectionWarning` em cópia temporária isolada. Uma tentativa inicial no diretório protegido gerou 14 erros de permissão; corrigida a raiz de execução, a repetição passou. Zero chamadas de provedor/Qwen.
 - **Resultado:** `M4_PASS`; sem prova semântica, sem M5 iniciado, sem alteração do núcleo científico V1.1.
+
+### [FIOIDEIAS-V1.2-M5-UI-MATURATION-PROJECTION] Projeção de resultados de maturação na UI local
+- **Base:** `544bb9a6884e7d98310e442d31dfb4fd1a8605cd` na branch `fioideias/v1.2-maturation`.
+- **Mudança:** o adapter/UI projeta campos existentes de `EvolutionArtifact`: ledger de intenção, insights, possibilidades candidatas, decisões abertas, estado/issues de cobertura e incerteza-alvo do próximo passo. Seções ausentes permanecem ausentes; o mapa é navegação conceitual, não telemetria.
+- **Fronteira epistêmica:** candidatos continuam possibilidades; decisões abertas não são autoridade humana; `NO_BLOCKING_GAP_DETECTED` relata somente ausência de lacuna estrutural detectada. Artefatos schema 1.0 mantêm cobertura `NOT_EVALUATED`; schema e artefatos não são mutados pela UI.
+- **Verificação:** 46 testes focados; suíte completa em cópia temporária gravável `637 passed, 0 failed, 1 PytestCollectionWarning`. Playwright/Chromium local somente contra `127.0.0.1:8765` com fixtures offline, em 1440×1000, 768×1024 e 390×844. Capturas externas ao checkout em `%TEMP%\FioIdeias_M5_Screenshots`.
+- **Execução:** `PROVIDER_CALLS=0`, `QWEN_CALLS=0`; holdouts/reveal não acessados; launcher desktop não alterado; núcleo científico V1.1, prompts, autoridade e serviço de maturação não alterados.
+- **Resultado:** `M5_PASS` no envelope de projeção/compatibilidade/verificação visual; sem validação semântica de resultados ou avaliação com provedor.

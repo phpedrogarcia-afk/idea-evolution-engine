@@ -54,58 +54,86 @@
         </section>
 
         <section id="result-screen" class="screen result-screen" aria-labelledby="result-heading" hidden>
-          <div class="result-heading">
-            <p class="eyebrow">Uma nova leitura para você considerar</p>
-            <h1 id="result-heading">Duas formas da mesma ideia</h1>
-          </div>
+          <div class="result-layout">
+            <div class="result-primary-column">
+              <article id="refined-panel" class="idea-panel refined-panel" hidden>
+                <p class="eyebrow">Proposta desta execução</p>
+                <h1 id="result-heading" tabindex="-1">Forma Atual</h1>
+                <div id="refined-idea" class="idea-copy refined-copy"></div>
+              </article>
 
-          <div class="comparison">
-            <article id="raw-panel" class="idea-panel raw-panel">
-              <p class="panel-kicker"><span class="panel-symbol" aria-hidden="true">01</span> Prima Materia</p>
-              <h2>Ideia Crua</h2>
-              <p class="panel-caption">Sua formulação original</p>
-              <div id="raw-idea" class="idea-copy"></div>
-            </article>
-
-            <div class="comparison-arrow" aria-hidden="true"><span></span></div>
-
-            <article id="refined-panel" class="idea-panel refined-panel">
-              <p class="panel-kicker"><span class="panel-symbol" aria-hidden="true">02</span> Forma proposta</p>
-              <h2>Forma Atual</h2>
-              <p class="panel-caption">Proposta desta execução</p>
-              <div id="refined-idea" class="idea-copy refined-copy"></div>
-              <div id="human-decision-card" class="human-decision-card" hidden>
-                <h3>Decisão necessária</h3>
+              <section id="human-decision-card" class="human-decision-card" aria-labelledby="human-decision-title" hidden>
+                <h2 id="human-decision-title">Decisão necessária</h2>
                 <p id="human-decision-description"></p>
                 <p class="decision-note">O sistema devolveu esta escolha para você; nenhuma opção foi selecionada automaticamente.</p>
-              </div>
-            </article>
-          </div>
+              </section>
 
-          <details id="laboratory-details" class="laboratory-details">
-            <summary><span>Ver laboratório</span><span class="summary-note">Leituras, possibilidades e pontos em aberto</span></summary>
-            <div class="detail-list" id="detail-list"></div>
-          </details>
+              <section id="discoveries-section" class="result-section" aria-labelledby="discoveries-title" hidden>
+                <h2 id="discoveries-title">O que descobrimos</h2>
+                <div id="insights-list" class="insight-list"></div>
+              </section>
 
-          <section class="transmutation-map" aria-labelledby="map-title">
-            <div class="map-heading">
-              <div>
-                <p class="eyebrow">Navegação conceitual</p>
-                <h2 id="map-title">Mapa da Transmutação</h2>
-              </div>
-              <p>Um jeito de percorrer o resultado — não representa etapas ou progresso do sistema.</p>
+              <section id="candidate-paths-section" class="result-section" aria-labelledby="candidate-paths-title" hidden>
+                <h2 id="candidate-paths-title">Caminhos considerados</h2>
+                <div id="candidate-paths-list" class="candidate-path-list"></div>
+              </section>
+
+              <section id="next-step-section" class="next-step-section" aria-labelledby="next-step-title" hidden>
+                <p id="next-uncertainty-kicker" class="eyebrow" hidden>Precisamos descobrir</p>
+                <p id="next-uncertainty" class="next-uncertainty" hidden></p>
+                <h2 id="next-step-title">Próximo passo</h2>
+                <p id="next-step-copy"></p>
+                <p class="muted-note">Uma proposta para sua avaliação — não é autorização de execução.</p>
+              </section>
+
+              <section id="open-decisions-section" class="result-section open-decisions-section" aria-labelledby="open-decisions-title" hidden>
+                <h2 id="open-decisions-title">Decisões ainda abertas</h2>
+                <p class="muted-note">São perguntas em aberto; não significam que uma decisão humana obrigatória foi solicitada.</p>
+                <ul id="open-decisions-list"></ul>
+              </section>
+
+              <section id="coverage-notice" class="coverage-notice" role="note" hidden>
+                <p id="coverage-notice-copy"></p>
+                <button id="coverage-details-link" class="text-button" type="button">Ver o ponto no laboratório</button>
+              </section>
+
+              <details id="laboratory-details" class="laboratory-details" hidden>
+                <summary><span>Ver laboratório</span><span class="summary-note">Intenção, premissas e limites estruturais</span></summary>
+                <div class="detail-list" id="detail-list"></div>
+              </details>
+
+              <section class="transmutation-map" aria-labelledby="map-title">
+                <div class="map-heading">
+                  <div>
+                    <p class="eyebrow">Navegação conceitual</p>
+                    <h2 id="map-title">Mapa da Transmutação</h2>
+                  </div>
+                  <p>Um jeito de percorrer o resultado — não representa etapas ou progresso do sistema.</p>
+                </div>
+                <nav class="map-nodes" aria-label="Mapa conceitual do resultado">
+                  <button type="button" class="map-node" data-map-key="prima"><span class="map-index">01</span><span>Prima<br>Materia</span></button>
+                  <button type="button" class="map-node" data-map-key="separatio"><span class="map-index">02</span><span>Separatio</span></button>
+                  <button type="button" class="map-node" data-map-key="multiplicatio"><span class="map-index">03</span><span>Multiplicatio</span></button>
+                  <button type="button" class="map-node" data-map-key="provacao"><span class="map-index">04</span><span>Provação</span></button>
+                  <button type="button" class="map-node" data-map-key="transmutatio"><span class="map-index">05</span><span>Transmutatio</span></button>
+                  <button type="button" class="map-node" data-map-key="coagulatio"><span class="map-index">06</span><span>Coagulatio</span></button>
+                </nav>
+              </section>
+
+              <button id="new-idea-button" class="text-button" type="button">Começar outra ideia</button>
             </div>
-            <nav class="map-nodes" aria-label="Mapa conceitual do resultado">
-              <button type="button" class="map-node" data-map-key="prima"><span class="map-index">01</span><span>Prima<br>Materia</span></button>
-              <button type="button" class="map-node" data-map-key="separatio"><span class="map-index">02</span><span>Separatio</span></button>
-              <button type="button" class="map-node" data-map-key="multiplicatio"><span class="map-index">03</span><span>Multiplicatio</span></button>
-              <button type="button" class="map-node" data-map-key="provacao"><span class="map-index">04</span><span>Provação</span></button>
-              <button type="button" class="map-node" data-map-key="transmutatio"><span class="map-index">05</span><span>Transmutatio</span></button>
-              <button type="button" class="map-node" data-map-key="coagulatio"><span class="map-index">06</span><span>Coagulatio</span></button>
-            </nav>
-          </section>
 
-          <button id="new-idea-button" class="text-button" type="button">Começar outra ideia</button>
+            <aside class="raw-aside" aria-label="Formulação original">
+              <details id="raw-panel" class="idea-panel raw-panel" open>
+                <summary class="raw-summary">
+                  <span class="panel-kicker"><span class="panel-symbol" aria-hidden="true">01</span> Prima Materia</span>
+                  <span class="raw-title">Ideia Crua</span>
+                  <span class="panel-caption">Sua formulação original</span>
+                </summary>
+                <div id="raw-idea" class="idea-copy raw-copy"></div>
+              </details>
+            </aside>
+          </div>
         </section>
       </main>
 

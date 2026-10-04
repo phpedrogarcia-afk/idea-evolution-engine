@@ -234,7 +234,7 @@ def test_default_mappers_do_not_fabricate_m1_content_but_emit_schema_1_1():
     assert mapped.coverage_issues == []
 
 
-def test_existing_renderer_and_ui_adapter_accept_1_1_without_exposing_new_fields():
+def test_existing_renderer_and_ui_adapter_accept_1_1_and_project_supported_fields():
     result = artifact(
         intent_ledger=[item()],
         candidate_possibilities=[CandidatePossibility(mechanism="Mecanismo", path_id="P1", intent_ids=["I1"])],
@@ -254,6 +254,8 @@ def test_existing_renderer_and_ui_adapter_accept_1_1_without_exposing_new_fields
 
     assert rendered
     assert ui_data["artifact"]["refined_idea"] == result.refined_idea
-    assert "intent_ledger" not in ui_data["artifact"]
-    assert "open_decisions" not in ui_data["artifact"]
+    assert ui_data["artifact"]["schema_version"] == SCHEMA_VERSION_1_1
+    assert ui_data["artifact"]["intent_ledger"][0]["intent_id"] == "I1"
+    assert ui_data["artifact"]["candidate_possibilities"][0]["path_id"] == "P1"
+    assert ui_data["artifact"]["open_decisions"][0]["decision_id"] == "D1"
     assert result.intent_ledger[0].intent_id == "I1"

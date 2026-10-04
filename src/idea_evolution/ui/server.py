@@ -57,6 +57,46 @@ def _possibility_data(item: Any) -> dict[str, Any]:
         "ontology_state": _enum_value(item.ontology_state),
         "justification": item.justification,
         "tradeoffs": list(item.tradeoffs),
+        "path_id": item.path_id,
+        "intent_ids": list(item.intent_ids),
+    }
+
+
+def _intent_ledger_data(item: Any) -> dict[str, Any]:
+    return {
+        "intent_id": item.intent_id,
+        "source_quote": item.source_quote,
+        "interpretation": item.interpretation,
+        "importance": _enum_value(item.importance),
+        "origin_type": _enum_value(item.origin_type),
+        "treatment_in_current_form": item.treatment_in_current_form,
+        "status": _enum_value(item.status),
+    }
+
+
+def _useful_insight_data(item: Any) -> dict[str, Any]:
+    return {
+        "insight_id": item.insight_id,
+        "description": item.description,
+        "related_intent_ids": list(item.related_intent_ids),
+        "authority_basis": _enum_value(item.authority_basis),
+    }
+
+
+def _open_decision_data(item: Any) -> dict[str, Any]:
+    return {
+        "decision_id": item.decision_id,
+        "question": item.question,
+        "related_intent_ids": list(item.related_intent_ids),
+    }
+
+
+def _coverage_issue_data(item: Any) -> dict[str, Any]:
+    return {
+        "issue_type": _enum_value(item.issue_type),
+        "description": item.description,
+        "intent_id": item.intent_id,
+        "path_id": item.path_id,
     }
 
 
@@ -76,6 +116,7 @@ def evolution_response_to_ui_data(response: EvolutionResponse) -> dict[str, Any]
         return result
 
     result["artifact"] = {
+        "schema_version": artifact.schema_version,
         "original_idea": artifact.original_idea,
         "original_idea_authority": _enum_value(artifact.original_idea_authority),
         "human_intent": artifact.human_intent,
@@ -87,12 +128,19 @@ def evolution_response_to_ui_data(response: EvolutionResponse) -> dict[str, Any]
         "assumptions": list(artifact.assumptions),
         "assumptions_authority": _enum_value(artifact.assumptions_authority),
         "uncertainties": list(artifact.uncertainties),
+        "intent_ledger": [_intent_ledger_data(item) for item in artifact.intent_ledger],
+        "useful_insights": [_useful_insight_data(item) for item in artifact.useful_insights],
+        "open_decisions": [_open_decision_data(item) for item in artifact.open_decisions],
+        "coverage_status": _enum_value(artifact.coverage_status),
+        "coverage_issues": [_coverage_issue_data(item) for item in artifact.coverage_issues],
         "candidate_possibilities": [
             _possibility_data(item) for item in artifact.candidate_possibilities
         ],
         "recommended_next_action": artifact.recommended_next_action,
         "recommended_next_action_basis": _enum_value(artifact.recommended_next_action_basis),
         "recommended_next_action_status": artifact.recommended_next_action_status,
+        "recommended_next_action_support_ref": artifact.recommended_next_action_support_ref,
+        "recommended_next_action_target_uncertainty": artifact.recommended_next_action_target_uncertainty,
         "human_decision_required": bool(
             response.human_decision_requested
             or artifact.human_decision_required

@@ -16,13 +16,14 @@ O **Idea Evolution Engine (IEE)** é um sistema de investigação deliberativa g
 
 ## 2. Onde Estamos Hoje (Estado Operacional)
 - **Atualizado em:** 2026-10-04; este estado vigente supersede a cápsula histórica M05/M06 abaixo.
-- **Fase atual:** FioIdeias V1.2 M4 — primeira passagem forte, gate determinístico e um reparo focado limitado.
-- **Base M4:** HEAD inicial `4b6d04aa13b05d91e845646399a7c306a47439b4`; contratos e gates M1–M3 permanecem congelados.
-- **M4:** patch fechado por IDs, aplicação atômica, uma reavaliação M3 e teto global de 2 chamadas lógicas incluindo escalação. 19 testes dirigidos; suíte inteira `621 passed, 0 failed, 1 PytestCollectionWarning` offline.
+- **Fase atual:** FioIdeias V1.2 M5 — projeção local dos resultados de maturação na UI.
+- **Base M5:** HEAD inicial `544bb9a6884e7d98310e442d31dfb4fd1a8605cd`; contratos e gates M1–M4 e núcleo científico V1.1 permanecem congelados.
+- **M5:** adapter/UI projeta ledger de intenção, insights, caminhos candidatos, decisões abertas e cobertura estrutural; possibilidades e próximo passo mantêm seus rótulos epistêmicos; `UNRESOLVED` não se confunde com decisão humana.
+- **Verificação:** 46 testes focados, suíte determinística `637 passed, 0 failed, 1 PytestCollectionWarning`, Playwright local offline em desktop/tablet/mobile; zero chamadas a provedor/Qwen.
 - **Limite epistemológico:** `NO_BLOCKING_GAP_DETECTED` apenas informa ausência de defeito bloqueante entre checks estruturais; reparo não comprova preservação semântica nem detecta contradição em prosa.
 - **Limitação de representação:** wire M2 mantém decisões como strings sem relações; M4 só introduz uma relação explícita no patch estrutural, sem fuzzy match.
 - **Autoridade:** o mesmo runner e guarda de custo são reutilizados; nenhuma citação, autoridade, proveniência ou decisão humana é editável. Nenhuma chamada a provedor/Qwen nesta missão.
-- **Próximo passo:** o escopo M4 termina com commit/push normal somente nesta branch; depois, parar. M5 exige missão humana separada.
+- **Próximo passo:** concluir commit/push normal de M5 somente nesta branch e parar. M6 requer missão humana separada.
 
 ---
 
@@ -37,7 +38,7 @@ O **Idea Evolution Engine (IEE)** é um sistema de investigação deliberativa g
 ---
 
 ## 4. O Sistema de Continuidade e Checkpoints
-- **Último Checkpoint Imutável:** [`CP-20261004-003`](checkpoints/CP-20261004-003.md)
+- **Último Checkpoint Imutável:** [`CP-20261004-004`](checkpoints/CP-20261004-004.md)
 - **Manifesto Machine-Readable:** [`docs/context/context-manifest.json`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/context-manifest.json)
 - **Validador Determinístico:** Execute `python tools/context/validate_context.py` para verificar integridade da base.
 - **Fail-Closed on Conflict:** Se duas fontes documentais de mesmo nível divergirem, pare e registre o conflito em [`docs/context/CONTRADICTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTRADICTIONS.md).

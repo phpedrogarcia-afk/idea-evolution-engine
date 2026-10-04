@@ -1,0 +1,65 @@
+{
+  "checkpoint_id": "CP-20261004-004",
+  "created_at": "2026-10-04T14:49:50-03:00",
+  "author": "Codex",
+  "phase": "V1.2_M5_UI_MATURATION_PROJECTION",
+  "objective": "Project supported maturation artifact fields in the local UI without changing the V1.1 scientific core.",
+  "repository": {
+    "branch": "fioideias/v1.2-maturation",
+    "commit": "544bb9a6884e7d98310e442d31dfb4fd1a8605cd",
+    "worktree_state": "DIRTY"
+  },
+  "completed_tasks": [
+    "Mapped EvolutionResponse and EvolutionArtifact fields into the UI adapter without mutating artifacts or inventing data.",
+    "Reordered the result around current form, useful insights, candidate possibilities, next uncertainty/action and open decisions.",
+    "Kept the intent ledger, coverage issues and detailed epistemic data in progressive disclosures; preserved structural-only coverage claims and human authority distinction.",
+    "Added offline typed UI fixtures A-J, including schema 1.0, unresolved coverage, human decision and malicious text cases.",
+    "Verified empty, processing, rich, narrow, unresolved, human-decision and safe-error views in desktop, tablet and mobile browser sizes."
+  ],
+  "changed_files": [
+    "src/idea_evolution/ui/server.py",
+    "src/idea_evolution/ui/static/app.js",
+    "src/idea_evolution/ui/static/index.html",
+    "src/idea_evolution/ui/static/styles.css",
+    "tests/test_local_ui.py",
+    "tests/test_v12_m1_contract.py",
+    "tests/test_v12_m5_ui_projection.py",
+    "docs/context/CURRENT-STATE.md",
+    "docs/context/ACTIVE-QUEUE.md",
+    "docs/context/CONTINUITY-CAPSULE.md",
+    "docs/context/IMPLEMENTATION-HISTORY.md",
+    "docs/context/context-manifest.json",
+    "docs/context/checkpoints/CP-20261004-004.json",
+    "docs/context/checkpoints/CP-20261004-004.md"
+  ],
+  "new_decisions": [],
+  "tests_executed": [
+    "Focused UI, M1 compatibility and M5 projection tests: 46 passed.",
+    "Full deterministic suite in isolated writable copy: 637 passed, 0 failed, 1 known PytestCollectionWarning.",
+    "Local Playwright/Chromium visual and interaction verification against 127.0.0.1:8765 with offline fake fixtures at 1440x1000, 768x1024 and 390x844.",
+    "Duplicate submit blocked; no automatic retry; HTML-like result and error payloads rendered as text; no horizontal overflow in inspected viewports."
+  ],
+  "unresolved_questions": [
+    "The UI is a faithful projection of returned artifact fields; it does not independently establish semantic correctness or quality of a generated result."
+  ],
+  "known_contradictions": [
+    "NO_BLOCKING_GAP_DETECTED is structural-only and does not prove semantic validity or detect unstructured natural-language contradictions."
+  ],
+  "known_risks": [
+    "User-facing meaning remains bounded by the backend's existing artifact fields; absent concepts are intentionally omitted.",
+    "The full suite retains one existing PytestCollectionWarning for TestabilityBinding."
+  ],
+  "blockers": [],
+  "next_exact_action": "Run context integrity validation, inspect the intentional diff, commit normally and fast-forward push only origin/fioideias/v1.2-maturation, then stop.",
+  "authorized_next_scope": [
+    "Complete M5 verification and normal commit/non-force push to origin/fioideias/v1.2-maturation only.",
+    "No merge, tag, release, provider inference, Qwen invocation, holdout/reveal access, launcher modification or M6."
+  ],
+  "do_not_repeat": [
+    "Do not repeat the full deterministic suite without a material code or environment change.",
+    "Do not call a real provider or Qwen for UI verification.",
+    "Do not access confirmatory holdouts or reveal mappings.",
+    "Do not begin M6 automatically."
+  ],
+  "recovery_notes": "Resume in C:\\Users\\phped\\Documents\\FioIdeias_V1.2_Maturation on fioideias/v1.2-maturation. The base is 544bb9a6884e7d98310e442d31dfb4fd1a8605cd. Screenshots are outside the checkout under %TEMP%\\FioIdeias_M5_Screenshots. Full-suite tests ran in a separate writable temporary snapshot; no provider or Qwen activity occurred."
+}

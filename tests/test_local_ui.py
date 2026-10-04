@@ -193,11 +193,15 @@ def test_mapping_preserves_epistemic_labels_without_mutating_artifact():
     assert payload["artifact"]["intent_provenance"] == "MODEL_HYPOTHESIS"
     assert payload["artifact"]["assumptions_authority"] == "MODEL_HYPOTHESIS"
     expected_keys = {
-        "original_idea", "original_idea_authority", "human_intent", "intent_provenance",
+        "schema_version", "original_idea", "original_idea_authority", "human_intent", "intent_provenance",
         "refined_idea", "refined_idea_authority", "what_changed", "critique",
-        "assumptions", "assumptions_authority", "uncertainties", "candidate_possibilities",
+        "assumptions", "assumptions_authority", "uncertainties", "intent_ledger",
+        "useful_insights", "open_decisions", "coverage_status", "coverage_issues",
+        "candidate_possibilities",
         "recommended_next_action", "recommended_next_action_basis",
-        "recommended_next_action_status", "human_decision_required", "human_decision_description",
+        "recommended_next_action_status", "recommended_next_action_support_ref",
+        "recommended_next_action_target_uncertainty", "human_decision_required",
+        "human_decision_description",
     }
     assert set(payload["artifact"]) == expected_keys
     assert not {"quality_score", "maturity_percentage", "evidence_count", "risk_count", "dominant_question"} & set(payload["artifact"])
