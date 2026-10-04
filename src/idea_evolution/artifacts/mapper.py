@@ -17,6 +17,13 @@ from src.idea_evolution.artifacts.evolution_artifact import (
     EvolutionArtifact,
     CritiqueItem,
     CandidatePossibility,
+    IntentLedgerItem,
+    IntentImportance,
+    IntentOriginType,
+    IntentTreatmentStatus,
+    UsefulInsight,
+    OpenDecision,
+    CoverageStatus,
     TreatmentMode,
     FROZEN_LEAN_CORE_HASH,
 )
@@ -79,6 +86,11 @@ class EvolutionArtifactMapper:
             if first_pass and first_pass.primary_mechanism and first_pass.primary_mechanism.mechanism
             else orig_idea
         )
+        current_form = (
+            first_pass.current_form.strip()
+            if first_pass and first_pass.current_form and first_pass.current_form.strip()
+            else orig_idea
+        )
         deferred_engineering_requirement: Optional[str] = None
 
         refined_idea = ""
@@ -92,14 +104,12 @@ class EvolutionArtifactMapper:
                 )
                 and not DecisionRelevancePolicy.is_user_explicit_technical_request(orig_idea)
             ):
-                refined_idea = base_mechanism
+                refined_idea = current_form
                 deferred_engineering_requirement = escalation.mutated_hypothesis_description
             else:
                 refined_idea = escalation.mutated_hypothesis_description
-        elif first_pass and first_pass.primary_mechanism and first_pass.primary_mechanism.mechanism:
-            refined_idea = first_pass.primary_mechanism.mechanism
         else:
-            refined_idea = orig_idea
+            refined_idea = current_form
 
         # Sanitização de precisão numérica sem evidência declarada
         sanitized_refined, _ = FalsePrecisionGuard.sanitize_unsupported_precision(refined_idea, source_text=orig_idea)
@@ -194,7 +204,10 @@ class EvolutionArtifactMapper:
             rejected_options = [r.lower() for r in lean_res.decision_delta.rejected_options]
 
         if first_pass:
-            for alt in first_pass.competing_alternatives:
+            for path_index, alt in enumerate(
+                [first_pass.primary_mechanism, *first_pass.competing_alternatives],
+                start=1,
+            ):
                 is_rejected = any(
                     alt.mechanism.lower() in rej or rej in alt.mechanism.lower()
                     for rej in rejected_options
@@ -206,6 +219,10 @@ class EvolutionArtifactMapper:
                         ontology_state=OntologyState.REJECTED if is_rejected else OntologyState.CANDIDATE,
                         justification=alt.justification or "",
                         tradeoffs=list(alt.tradeoffs),
+                        # Path IDs are output-record identities, not model claims;
+                        # assign them deterministically after validating intent refs.
+                        path_id=f"PATH-{path_index:03d}",
+                        intent_ids=list(alt.intent_ids),
                     )
                 )
 
@@ -281,6 +298,43 @@ class EvolutionArtifactMapper:
                 next((u for u in first_pass.remaining_uncertainties if u), ""),
             )
 
+        intent_ledger = [
+            IntentLedgerItem(
+                intent_id=item.intent_id,
+                source_quote=item.source_quote,
+                interpretation=item.interpretation,
+                importance=IntentImportance(item.importance),
+                origin_type=IntentOriginType(item.origin_type),
+                treatment_in_current_form=item.treatment_in_current_form,
+                status=IntentTreatmentStatus(item.status),
+            )
+            for item in (first_pass.intent_ledger if first_pass else [])
+        ]
+        useful_insights = [
+            UsefulInsight(
+                insight_id=f"INSIGHT-{index:03d}",
+                description=item,
+                related_intent_ids=[],
+                authority_basis=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
+            )
+            for index, item in enumerate(first_pass.useful_insights if first_pass else [], start=1)
+        ]
+        open_decisions = [
+            OpenDecision(
+                decision_id=f"DECISION-{index:03d}",
+                question=item,
+                related_intent_ids=[],
+            )
+            for index, item in enumerate(first_pass.open_decisions if first_pass else [], start=1)
+        ]
+        action_target_uncertainty = None
+        if (
+            first_pass
+            and next_action == first_pass.proposed_next_action
+            and first_pass.proposed_next_action_target_uncertainty.strip()
+        ):
+            action_target_uncertainty = first_pass.proposed_next_action_target_uncertainty
+
         return EvolutionArtifact(
             artifact_id=f"ART-{run_id}",
             run_id=run_id,
@@ -297,11 +351,17 @@ class EvolutionArtifactMapper:
             assumptions=assumptions,
             assumptions_authority=PromotionAuthorityBasis.MODEL_HYPOTHESIS,
             uncertainties=uncertainties,
+            intent_ledger=intent_ledger,
+            useful_insights=useful_insights,
+            open_decisions=open_decisions,
+            coverage_status=CoverageStatus.NOT_EVALUATED,
+            coverage_issues=[],
             candidate_possibilities=candidates,
             recommended_next_action=next_action,
             recommended_next_action_basis=next_action_basis,
             recommended_next_action_support_ref=next_action_support_ref,
             recommended_next_action_status=next_action_status,
+            recommended_next_action_target_uncertainty=action_target_uncertainty,
             human_decision_required=human_decision,
             human_decision_description=human_desc,
             human_decision_authority_basis=(

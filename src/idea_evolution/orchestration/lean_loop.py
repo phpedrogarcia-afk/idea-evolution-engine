@@ -85,6 +85,7 @@ class LeanLoopRunner:
             "proposed_next_action",
             "updated_next_action",
             "candidate_updated_next_action",
+            "current_form",
         ):
             value = getattr(output, field_name, None)
             if isinstance(value, str) and value:
@@ -115,6 +116,37 @@ class LeanLoopRunner:
             )
             output.discriminating_tests[index] = qualified
 
+    @staticmethod
+    def _build_first_pass_prompt(idea: str) -> str:
+        first_pass_prompt_template = (
+            "Você é o analista do Lean Idea Evolution Engine.\n"
+            "Faça uma MATURAÇÃO FORTE em uma única primeira passagem. MATURAÇÃO NÃO É REESCRITA, NÃO É RESUMO e NÃO é apenas tornar a ideia mais concreta.\n"
+            "Preserve intenção, explore, distinga intenção de implementação, critique e sintetize provisoriamente sem decidir pelo usuário.\n\n"
+            "IDEIA HUMANA:\n{idea}\n\n"
+            "CONTRATO DE MATURAÇÃO:\n"
+            "1. Identifique intenção central (CORE_INTENT), subintenções materiais e restrições explícitas; separe o objetivo do usuário de mecanismos de implementação.\n"
+            "2. Preencha intent_ledger para cada item material. USER_EXPLICIT exige source_quote copiada exatamente e contígua da ideia original; não parafraseie nem normalize. Use MODEL_INTERPRETATION para inferências; nunca as apresente como texto explícito.\n"
+            "3. Antes de favorecer implementação, avalie se a ideia é OPEN ou NARROW. Em OPEN, explore caminhos materialmente distintos quando úteis; em NARROW, um caminho adequado basta. Não force exatamente três alternativas nem crie diversidade artificial.\n"
+            "4. primary_mechanism e competing_alternatives são candidate paths, não a definição da ideia nem decisões do usuário. Para cada um forneça intent_ids atendidos, mecanismo, justificativa e trade-offs. Mecanismos são MODEL_HYPOTHESIS; path_id é atribuído deterministicamente pelo adaptador.\n"
+            "5. Explique mecanismos, critique riscos e trade-offs, exponha pressupostos e incertezas. Busque ganho conceitual útil sem forçar novidade. Retorne useful_insights como descrições curtas; a lista pode ser vazia.\n"
+            "6. Produza current_form: síntese explícita, provisória e adequada para representar a ideia maturada. Preserve intenção e subintenções materiais; não transforme um candidate path em definição ou decisão final.\n"
+            "7. Use open_decisions como perguntas curtas apenas para escolhas genuinamente abertas; isso não significa HUMAN_DECISION_REQUIRED.\n"
+            "8. Proponha um próximo passo discriminativo ligado à incerteza que mais poderia mudar a direção. Copie-a exatamente em proposed_next_action_target_uncertainty; use string vazia se nenhuma incerteza aplicável existir.\n"
+            "9. Não declare cobertura aprovada: M2 sempre deixa coverage_status=NOT_EVALUATED. O auto-relato do modelo não prova cobertura, contradição ou verdade.\n\n"
+            "DIRETRIZES DE QUALIDADE E RELEVÂNCIA DECISÓRIA:\n"
+            "1. Identifique o estágio operacional atual da ideia (idea_stage: DISCOVERY, VALIDATION, PROTOTYPE, MVP, PRE_PRODUCTION, etc.). Atenção: MENTIONED_FUTURE_STAGE != CURRENT_IDEA_STAGE. Se menciona futuro MVP/produção ou há validação pendente/não executada, o estágio atual é DISCOVERY/VALIDATION, nunca MVP/PRE_PRODUCTION.\n"
+            "2. Distinga severidade de prioridade imediata (Severity != Priority). Em estágio inicial, requisitos não-funcionais de infraestrutura/engenharia e vulnerabilidades de segurança/privacidade/conformidade recebem severidade real, mas relevância decisória LATER; priorize incertezas que possam invalidar a hipótese central de valor.\n"
+            "3. Não permita que requisitos de infraestrutura técnica ou segurança redefinam ou mutem a hipótese de produto.\n"
+            "4. Nunca introduza alegações numéricas precisas (tempo, latência, porcentagem, moeda ou multiplicadores) sem base de evidência declarada.\n"
+            "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (processos manuais, planilhas, ferramentas existentes, fazer nada), quando pertinente.\n"
+            "6. Forneça critérios de falseamento estruturados: hipótese, observação destrutiva e teste discriminativo de menor custo.\n"
+            "7. Para CADA vulnerabilidade declare authority={basis,support_ref,derivation}. USER_EXPLICIT exige texto expresso; VALID_USER_DERIVATION exige trecho rastreável e derivação necessária; caso contrário use MODEL_HYPOTHESIS, que não autoriza severidade efetiva ou gate.\n"
+            "8. Para escolha normativa declare normative_authority={basis,support_ref,derivation}. Não marque requires_human_normative_choice apenas porque uma decisão humana existirá futuramente.\n"
+            "9. Para proposed_next_action declare action_authority={basis,support_ref,derivation}; em DISCOVERY/VALIDATION, prefira reduzir incerteza decision-relevant antes de implementar.\n"
+            "10. Para remaining_uncertainties declare uncertainty_authority={basis,support_ref,derivation}. MODEL_HYPOTHESIS pode orientar exploração, mas não aciona escalação sozinha.\n"
+        )
+        return first_pass_prompt_template.replace("{idea}", idea)
+
     def run(self, original_idea: str, run_id: Optional[str] = None, human_intervention_flag: bool = False) -> LeanRunResult:
         tracer = RunTracer(run_id=run_id, runs_dir=self.runs_dir)
         tracer.record_input(original_idea, metadata={"topology": "LEAN_IEE_L1", "max_allowed_calls": LEAN_L1_MAX_MODEL_CALLS})
@@ -124,33 +156,7 @@ class LeanLoopRunner:
         calls_used = 0
 
         # 2. Passo 1: Lean First Pass (Chamada 1)
-        first_pass_prompt_template = (
-            "Você é o analista do Lean Idea Evolution Engine.\n"
-            "Analise a ideia original abaixo e produza uma estruturação mínima focada em intenção, mecanismo e riscos:\n"
-            "IDEIA HUMANA:\n{idea}\n\n"
-            "DIRETRIZES DE QUALIDADE E RELEVÂNCIA DECISÓRIA:\n"
-            "1. Identifique o estágio operacional atual da ideia (idea_stage: DISCOVERY, VALIDATION, PROTOTYPE, MVP, PRE_PRODUCTION, etc.).\n"
-            "   Atenção: MENTIONED_FUTURE_STAGE != CURRENT_IDEA_STAGE. Se a proposta menciona 'futuro MVP', 'planejamos no futuro lançar MVP', "
-            "'futura versão de produção' ou possui validação pendente/não executada, o estágio operacional atual é DISCOVERY/VALIDATION, NUNCA MVP ou PRE_PRODUCTION!\n"
-            "2. Distinga severidade de prioridade imediata (Severity != Priority). Em estágio inicial (DISCOVERY/VALIDATION), "
-            "requisitos não-funcionais de infraestrutura/engenharia (ex: migrar para Kubernetes, reescrever em Rust, introduzir Kafka, microsserviços, cluster de banco) "
-            "e vulnerabilidades de segurança/privacidade/conformidade devem ser registrados com severidade real, "
-            "mas sua relevância decisória imediata é LATER, priorizando incertezas que possam invalidar a hipótese central de valor do produto.\n"
-            "3. Não permita que requisitos de infraestrutura técnica ou segurança redefinam ou mutem a hipótese de produto.\n"
-            "4. Nunca introduza alegações numéricas precisas (métricas de tempo, latência, porcentagem, moeda ou multiplicadores) sem base de evidência declarada.\n"
-            "5. Identifique alternativas concorrentes e a linha de base de status quo gratuito (ex: processos manuais, planilhas, ferramentas existentes, fazer nada).\n"
-            "6. Forneça critérios de falseamento estruturados (hipótese, observação destrutiva, teste discriminativo de menor custo).\n"
-            "7. Para CADA vulnerabilidade declare authority={basis,support_ref,derivation}. "
-            "Use USER_EXPLICIT apenas para texto expresso na fonte; VALID_USER_DERIVATION exige trecho rastreável da fonte e derivação necessária; "
-            "caso contrário use MODEL_HYPOTHESIS. MODEL_HYPOTHESIS permanece possibilidade e não autoriza severidade efetiva ou gate.\n"
-            "8. Para escolha normativa declare normative_authority={basis,support_ref,derivation}. "
-            "Não marque requires_human_normative_choice apenas porque uma decisão humana existirá futuramente.\n"
-            "9. Para proposed_next_action declare action_authority={basis,support_ref,derivation}. "
-            "Em DISCOVERY/VALIDATION, prefira reduzir a incerteza decision-relevant antes de implementar.\n"
-            "10. Para remaining_uncertainties declare uncertainty_authority={basis,support_ref,derivation}. "
-            "Uma incerteza MODEL_HYPOTHESIS pode orientar exploração, mas não aciona escalação sozinha.\n"
-        )
-        user_prompt_1 = first_pass_prompt_template.replace("{idea}", original_idea)
+        user_prompt_1 = self._build_first_pass_prompt(original_idea)
 
         calls_used += 1
         res_1: ModelResponse = self.runner.generate(
@@ -161,10 +167,17 @@ class LeanLoopRunner:
         )
 
         first_pass_output: Optional[LeanFirstPassOutput] = res_1.parsed  # type: ignore
+        first_pass_error = res_1.error
+        if first_pass_output is not None:
+            try:
+                first_pass_output.validate_strong_maturation(original_idea)
+            except (AttributeError, ValueError) as exc:
+                first_pass_error = f"Validação M2 do first pass: {exc}"
+                first_pass_output = None
 
         # Prevenção de falha por first_pass nulo (fail-closed sem dereferência indevida)
         if first_pass_output is None:
-            failed_md = f"# Pacote Lean de Maturação — Run {tracer.run_id}\n\n**Status:** `FIRST_PASS_FAILED` | **Chamadas de Modelo Utilizadas:** {calls_used} (Max: {LEAN_L1_MAX_MODEL_CALLS})\n\n---\n\n### Falha na Execução\nNão foi possível gerar a análise inicial da ideia: {res_1.error or 'Erro de validação ou geração estruturada.'}"
+            failed_md = f"# Pacote Lean de Maturação — Run {tracer.run_id}\n\n**Status:** `FIRST_PASS_FAILED` | **Chamadas de Modelo Utilizadas:** {calls_used} (Max: {LEAN_L1_MAX_MODEL_CALLS})\n\n---\n\n### Falha na Execução\nNão foi possível gerar a análise inicial da ideia: {first_pass_error or 'Erro de validação ou geração estruturada.'}"
             final_data = {
                 "run_id": tracer.run_id,
                 "topology": "LEAN_IEE_L1",
@@ -176,7 +189,7 @@ class LeanLoopRunner:
                 "unsupported_candidate_count": 0,
                 "terminal_status": "FIRST_PASS_FAILED",
                 "decision_progress_detected": False,
-                "error": res_1.error,
+                "error": first_pass_error,
             }
             (tracer.run_dir / "final.json").write_text(json.dumps(final_data, indent=2, ensure_ascii=False), encoding="utf-8")
             (tracer.run_dir / "final.md").write_text(failed_md, encoding="utf-8")

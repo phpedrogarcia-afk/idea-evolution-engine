@@ -59,6 +59,7 @@ class EpistemicRentDecision(str, Enum):
 class LeanCandidateMechanism(BaseModel):
     """Proposed candidate mechanism."""
     mechanism: str
+    intent_ids: List[str] = Field(default_factory=list)
     is_explicit_in_source: bool = False
     claimed_basis: PromotionAuthorityBasis = PromotionAuthorityBasis.MODEL_HYPOTHESIS
     authority_proof_ref: str = ""
@@ -74,6 +75,39 @@ class LeanCandidateMechanism(BaseModel):
     @gate_eligible.setter
     def gate_eligible(self, value: bool) -> None:
         self._gate_eligible = value
+
+
+class FirstPassIntentImportance(str, Enum):
+    CORE_INTENT = "CORE_INTENT"
+    MATERIAL_SUBINTENT = "MATERIAL_SUBINTENT"
+    EXPLICIT_CONSTRAINT = "EXPLICIT_CONSTRAINT"
+
+
+class FirstPassIntentOriginType(str, Enum):
+    USER_EXPLICIT = "USER_EXPLICIT"
+    MODEL_INTERPRETATION = "MODEL_INTERPRETATION"
+
+
+class FirstPassIntentTreatmentStatus(str, Enum):
+    PRESERVED = "PRESERVED"
+    EXPANDED = "EXPANDED"
+    PROVISIONALLY_MODIFIED = "PROVISIONALLY_MODIFIED"
+    DEFERRED = "DEFERRED"
+    CONFLICT_FOUND = "CONFLICT_FOUND"
+
+
+class FirstPassIntentItem(BaseModel):
+    """Model-produced intent claim, kept separate from its source authority."""
+
+    intent_id: str = Field(min_length=1)
+    source_quote: str
+    interpretation: str
+    # Plain strings keep the provider schema compact; validate_strong_maturation
+    # enforces the same closed vocabularies before any artifact is created.
+    importance: str
+    origin_type: str
+    treatment_in_current_form: str
+    status: str
 
 
 class GateAuthority(BaseModel):
@@ -129,10 +163,15 @@ class LeanVulnerability(BaseModel):
 
 
 class LeanFirstPassOutput(BaseModel):
-    """Lean first pass output contract."""
+    """Structured strong first-pass output; legacy constructors keep safe defaults."""
     interpreted_problem: str
     human_intent: str
     primary_mechanism: LeanCandidateMechanism
+    current_form: str = ""
+    intent_ledger: List[FirstPassIntentItem] = Field(default_factory=list)
+    useful_insights: List[str] = Field(default_factory=list)
+    open_decisions: List[str] = Field(default_factory=list)
+    proposed_next_action_target_uncertainty: str = ""
     competing_alternatives: List[LeanCandidateMechanism] = Field(default_factory=list)
     key_assumptions: List[str] = Field(default_factory=list)
     material_ambiguities: List[str] = Field(default_factory=list)
@@ -156,7 +195,90 @@ class LeanFirstPassOutput(BaseModel):
     def model_json_schema(cls, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         schema = super().model_json_schema(*args, **kwargs)
         _compact_first_pass_schema(schema)
+        # These are required for live M2 generation even though defaults retain
+        # compatibility for existing in-process gate/test constructors.
+        required = schema.setdefault("required", [])
+        for name in (
+            "current_form",
+            "intent_ledger",
+            "useful_insights",
+            "open_decisions",
+            "proposed_next_action",
+            "proposed_next_action_target_uncertainty",
+        ):
+            if name not in required:
+                required.append(name)
+        for definition in schema.get("$defs", {}).values():
+            if definition.get("title") == "LeanCandidateMechanism" or "mechanism" in definition.get("properties", {}):
+                mechanism_required = definition.setdefault("required", [])
+                for name in ("intent_ids",):
+                    if name not in mechanism_required:
+                        mechanism_required.append(name)
         return schema
+
+    def validate_strong_maturation(self, original_idea: str) -> None:
+        """Fail closed on missing M2 structure, bad anchors, IDs, or references."""
+        if not self.current_form.strip():
+            raise ValueError("LEAN_FIRST_PASS exige current_form explícito e não vazio.")
+        if not self.proposed_next_action.strip():
+            raise ValueError("LEAN_FIRST_PASS exige proposed_next_action não vazio.")
+        if not self.intent_ledger:
+            raise ValueError("LEAN_FIRST_PASS exige intent_ledger material.")
+
+        intent_ids = [item.intent_id for item in self.intent_ledger]
+        if len(intent_ids) != len(set(intent_ids)):
+            raise ValueError("LEAN_FIRST_PASS contém intent_id duplicado.")
+        known_intents = set(intent_ids)
+        for item in self.intent_ledger:
+            try:
+                FirstPassIntentImportance(item.importance)
+                FirstPassIntentOriginType(item.origin_type)
+                FirstPassIntentTreatmentStatus(item.status)
+            except ValueError as exc:
+                raise ValueError(f"IntentLedgerItem {item.intent_id}: enum M1/M2 inválido.") from exc
+            quote = item.source_quote
+            if item.origin_type == FirstPassIntentOriginType.USER_EXPLICIT and (not quote or quote not in original_idea):
+                raise ValueError(f"IntentLedgerItem {item.intent_id}: USER_EXPLICIT exige source_quote exata da ideia original.")
+            if quote and quote not in original_idea:
+                raise ValueError(f"IntentLedgerItem {item.intent_id}: source_quote não é substring exata da ideia original.")
+            if (
+                item.status in {
+                    FirstPassIntentTreatmentStatus.PRESERVED,
+                    FirstPassIntentTreatmentStatus.EXPANDED,
+                    FirstPassIntentTreatmentStatus.PROVISIONALLY_MODIFIED,
+                    FirstPassIntentTreatmentStatus.CONFLICT_FOUND,
+                }
+                and not item.treatment_in_current_form.strip()
+            ):
+                raise ValueError(f"IntentLedgerItem {item.intent_id}: tratamento no current_form está ausente.")
+
+        if not any(
+            FirstPassIntentImportance(item.importance) == FirstPassIntentImportance.CORE_INTENT
+            for item in self.intent_ledger
+        ):
+            raise ValueError("LEAN_FIRST_PASS intent_ledger deve representar CORE_INTENT.")
+
+        paths = [self.primary_mechanism, *self.competing_alternatives]
+        for path_index, path in enumerate(paths, start=1):
+            if not path.intent_ids:
+                raise ValueError(f"Candidate path {path_index} deve referenciar ao menos um intent_id.")
+            if len(path.intent_ids) != len(set(path.intent_ids)):
+                raise ValueError(f"Candidate path {path_index} contém intent_id duplicado.")
+            unknown = set(path.intent_ids) - known_intents
+            if unknown:
+                raise ValueError(f"Candidate path {path_index} referencia intent_id desconhecido: {sorted(unknown)}.")
+
+        if any(not insight.strip() for insight in self.useful_insights):
+            raise ValueError("LEAN_FIRST_PASS useful_insights não pode conter itens vazios.")
+        if any(not decision.strip() for decision in self.open_decisions):
+            raise ValueError("LEAN_FIRST_PASS open_decisions não pode conter itens vazios.")
+
+        known_uncertainties = set(self.remaining_uncertainties + self.material_ambiguities)
+        target = self.proposed_next_action_target_uncertainty.strip()
+        if known_uncertainties and not target:
+            raise ValueError("LEAN_FIRST_PASS exige próximo passo vinculado a uma incerteza existente.")
+        if target and target not in known_uncertainties:
+            raise ValueError("LEAN_FIRST_PASS next action aponta para incerteza inexistente.")
 
     @property
     def stage_assessment(self) -> Optional[IdeaStageAssessment]:

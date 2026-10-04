@@ -627,3 +627,12 @@
   - Emissão do Checkpoint `CP-20260827-027`.
 - **Resultado:** `ROOT_CAUSE_PROVEN` | `EXPERIMENT_INVALIDATED_BEFORE_REVIEW` | `REVEAL_SEALED` | `ZERO_HUMAN_EXPOSURE` | `171_TESTS_PASSING`.
 - **Evidência:** Traces brutos em `runs_b/`, `IDEA-01_condition_b.json` e 171 testes aprovados.
+
+---
+
+### [FIOIDEIAS-V1.2-M2-STRONG-FIRST-PASS] Maturação forte e população do contrato M1
+- **Data:** 2026-10-04
+- **Base:** `fioideias/v1.2-maturation` em `ceb8dc9df6f6f35c644345be068b8a9397c88351`.
+- **O que mudou:** Prompt de primeira passagem reforçado; `current_form` explícita; ledger com citações exatas e validação local fail-closed; caminhos ligados a intenções e tratados como hipóteses; insights/decisões mapeados sem autoridade; próximo passo ligado a incerteza; identidade de hash ativa V1.2 separada dos pins históricos.
+- **Verificação:** 15 testes M2 e regressões direcionadas passaram; suíte completa `587 passed, 0 failed, 1 PytestCollectionWarning`; `validate_context.py` passou após reconciliar no manifesto o hash stale do README (o README não foi alterado). Sem provedor/Qwen.
+- **Resultado:** `M2_PASS`; `coverage_status = NOT_EVALUATED`; M3 não iniciado.

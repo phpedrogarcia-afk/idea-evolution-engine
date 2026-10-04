@@ -251,8 +251,8 @@ class TestFioIdeiasV1ServiceBoundary(unittest.TestCase):
         self.assertIsNotNone(resp.baseline_result)
         self.assertTrue(resp.baseline_result["success"])
 
-    def test_10_scientific_core_hashes_remain_unchanged(self):
-        """11: Invariante do Núcleo Científico: Os 7 arquivos congelados mantêm o hash exato."""
+    def test_10_scientific_core_hash_matches_v12_pin(self):
+        """11: Os 7 arquivos do núcleo correspondem ao hash ativo V1.2."""
         core_files = {
             "domain/early_epistemic_gate.py": Path("src/idea_evolution/domain/early_epistemic_gate.py"),
             "domain/epistemic_contracts.py": Path("src/idea_evolution/domain/epistemic_contracts.py"),

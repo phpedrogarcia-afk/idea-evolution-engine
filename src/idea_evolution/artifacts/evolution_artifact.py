@@ -32,7 +32,10 @@ SCHEMA_VERSION_1_1 = "1.1"
 FROZEN_LEAN_CORE_HASH_V1_0 = "e6785bcaf5af291f438ab467386db640d4c0790e0f7012c40773dd25782e5600"
 FROZEN_LEAN_CORE_HASH_V1_1 = "3fa70e0ede15888ee5650fa08572508748eef1462de0a8bd01aa4a66a58b151f"
 FROZEN_LEAN_CORE_HASH_RQ11 = "1d294c2be6b9e52733e2e543b7b921b2f0fb64034ebced95aa08403b6504fa83"
-FROZEN_LEAN_CORE_HASH = FROZEN_LEAN_CORE_HASH_RQ11
+# M2 intentionally updates first-pass representation/prompt files in the hashed
+# bundle. Historical identities stay immutable; new artifacts use the V1.2 pin.
+FROZEN_LEAN_CORE_HASH_V1_2 = "cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a"
+FROZEN_LEAN_CORE_HASH = FROZEN_LEAN_CORE_HASH_V1_2
 
 
 class TreatmentMode(str, Enum):

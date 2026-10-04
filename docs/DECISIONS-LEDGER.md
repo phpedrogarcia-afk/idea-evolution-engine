@@ -191,5 +191,14 @@
 - **Decisão:** Selecionar a Candidata **L1 (Lean IEE + Early Gate)** como o alvo de prototipagem offline e teste comparativo futuro (M05.3). A arquitetura executa 1 chamada nominal de primeira passada + validação determinística de autoridade + no máximo 1 chamada de escalação seletiva sob gatilho de risco material.
 - **Consequências:** Redução de 80% a 90% no consumo de inferência para ideias simples, eliminação de desperdício epistêmico pré-gate e preservação estrita de todos os invariantes de autoridade e ontologia.
 
+---
+
+### <a id="adr-020"></a> ADR-020: First Pass Forte V1.2 com Schema Compatível e Cobertura Não Avaliada
+- **Data:** 2026-10-04
+- **Status:** `ACCEPTED_FOR_V1_2_M2`
+- **Contexto:** O first pass pedia estruturação mínima e o mapper equiparava o mecanismo primário à ideia refinada. Os novos campos M1 precisavam caber no limite strict de 5.000 caracteres do schema Cerebras.
+- **Decisão:** Substituir o prompt mínimo por uma maturação explícita em uma chamada; validar localmente os valores enumerados, âncoras de fonte e referências entre caminhos/intenção; representar insights e decisões como texto curto no wire format e atribuir IDs determinísticos no mapper; gerar `current_form` explicitamente. O artefato continua no schema 1.1 e `coverage_status` permanece `NOT_EVALUATED`; o pin atual do bundle é V1.2 e os hashes históricos não mudam.
+- **Consequências:** Caminhos permanecem `MODEL_HYPOTHESIS`, texto de citação não ganha autoridade, forma atual não é definida pelo mecanismo primário, e M3 continua separado. Relações semânticas insight/decisão→intenção não são inventadas quando não vêm no contrato de entrada.
+
 
 

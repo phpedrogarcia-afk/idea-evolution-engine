@@ -426,8 +426,8 @@ class TestFioIdeiasV1HumanRendererP6(unittest.TestCase):
         # O artefato e a execução não realizam chamadas adicionais
         self.assertEqual(art.total_model_calls, initial_calls)
 
-    def test_21_scientific_core_hash_remains_strictly_unchanged(self):
-        """21: Invariância inegociável do hash combinado SHA-256 do núcleo científico Lean L1."""
+    def test_21_scientific_core_hash_matches_v12_pin(self):
+        """21: Hash combinado do núcleo Lean corresponde ao pin ativo V1.2."""
         core_files = {
             "domain/early_epistemic_gate.py": Path("src/idea_evolution/domain/early_epistemic_gate.py"),
             "domain/epistemic_contracts.py": Path("src/idea_evolution/domain/epistemic_contracts.py"),

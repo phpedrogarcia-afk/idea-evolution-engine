@@ -187,10 +187,12 @@ class TestEvolutionArtifactP2(unittest.TestCase):
 
         resp = service.evolve_idea(self.sample_idea)
 
-        self.assertEqual(
-            resp.artifact.refined_idea,
-            "Feed de micro-resenhas com até 140 caracteres e tags temáticas",
+        self.assertTrue(
+            resp.artifact.refined_idea.startswith(
+                "Feed de micro-resenhas com até 140 caracteres e tags temáticas"
+            )
         )
+        self.assertIn("PROVISIONAL_HEURISTIC", resp.artifact.refined_idea)
 
     def test_06_human_intent_provenance_not_upgraded_silently(self):
         """6: human_intent derivado do modelo NÃO é rotulado como USER_EXPLICIT."""
@@ -390,8 +392,8 @@ class TestEvolutionArtifactP2(unittest.TestCase):
         self.assertNotIn("api_key", json_dump)
         self.assertNotIn("authorization", json_dump.lower())
 
-    def test_20_scientific_core_hash_remains_unchanged(self):
-        """20: Hash SHA-256 do núcleo científico Lean L1 permanece 100% inalterado."""
+    def test_20_scientific_core_hash_matches_v12_pin(self):
+        """20: Hash combinado dos arquivos Lean corresponde ao pin ativo V1.2."""
         core_files = {
             "domain/early_epistemic_gate.py": Path("src/idea_evolution/domain/early_epistemic_gate.py"),
             "domain/epistemic_contracts.py": Path("src/idea_evolution/domain/epistemic_contracts.py"),

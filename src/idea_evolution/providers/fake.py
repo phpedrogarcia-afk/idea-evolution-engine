@@ -4,6 +4,7 @@ Executor Fake/Mock para testes 100% determinísticos e offline do Simple Loop MV
 """
 
 from typing import Type, TypeVar, Optional, Dict, Any, Callable
+from copy import deepcopy
 import json
 import time
 from pydantic import BaseModel
@@ -48,6 +49,53 @@ class FakeModelRunner(ModelRunner):
         self.trigger_reconstruction = trigger_reconstruction
         self.trigger_essence_drift = trigger_essence_drift
         self.call_counts: Dict[str, int] = {}
+        self.prompt_history: Dict[str, list[str]] = {}
+
+    @staticmethod
+    def _legacy_first_pass_fixture_with_m2_fields(data: Dict[str, Any], prompt_text: str) -> Dict[str, Any]:
+        """Keep older focused fake fixtures usable while M2 tests provide explicit rich output."""
+        enriched = deepcopy(data)
+        marker = "IDEIA HUMANA:\n"
+        source_tail = prompt_text.split(marker, 1)[1] if marker in prompt_text else ""
+        original_idea = source_tail.split("\n\nCONTRATO DE MATURAÇÃO:", 1)[0]
+        if not original_idea:
+            original_idea = source_tail.split("\n\nDIRETRIZES DE QUALIDADE", 1)[0]
+        original_idea = original_idea.strip()
+
+        primary = enriched.get("primary_mechanism")
+        if not isinstance(primary, dict):
+            return enriched
+        first_intent_id = "I-CORE-1"
+        ledger = enriched.get("intent_ledger")
+        if ledger is None:
+            human_intent = enriched.get("human_intent") or original_idea or "Intenção da ideia de teste."
+            treatment = enriched.get("current_form") or primary.get("mechanism") or human_intent
+            ledger = [{
+                "intent_id": first_intent_id,
+                "source_quote": original_idea,
+                "interpretation": human_intent,
+                "importance": "CORE_INTENT",
+                "origin_type": "USER_EXPLICIT",
+                "treatment_in_current_form": treatment,
+                "status": "PRESERVED",
+            }]
+            enriched["intent_ledger"] = ledger
+        if ledger:
+            first_intent_id = ledger[0].get("intent_id", first_intent_id)
+
+        enriched.setdefault("current_form", primary.get("mechanism") or enriched.get("human_intent") or original_idea)
+        enriched.setdefault("useful_insights", [])
+        enriched.setdefault("open_decisions", [])
+        enriched.setdefault("proposed_next_action", "Investigar a incerteza mais relevante antes de implementar.")
+        uncertainties = enriched.get("remaining_uncertainties") or enriched.get("material_ambiguities") or []
+        if not enriched.get("proposed_next_action_target_uncertainty"):
+            enriched["proposed_next_action_target_uncertainty"] = uncertainties[0] if uncertainties else ""
+
+        primary.setdefault("intent_ids", [first_intent_id])
+        for alternative in enriched.get("competing_alternatives") or []:
+            if isinstance(alternative, dict):
+                alternative.setdefault("intent_ids", [first_intent_id])
+        return enriched
 
     def generate(
         self,
@@ -59,6 +107,7 @@ class FakeModelRunner(ModelRunner):
     ) -> ModelResponse:
         self.call_counts[stage_name] = self.call_counts.get(stage_name, 0) + 1
         call_idx = self.call_counts[stage_name]
+        self.prompt_history.setdefault(stage_name, []).append(prompt_text)
 
         # Simular falha de schema se solicitado
         fail_times = self.should_fail_schema_stages.get(stage_name, 0)
@@ -81,6 +130,8 @@ class FakeModelRunner(ModelRunner):
             if callable(data):
                 data = data(prompt_text, call_idx)
             if isinstance(data, dict):
+                if output_schema.__name__ == "LeanFirstPassOutput":
+                    data = self._legacy_first_pass_fixture_with_m2_fields(data, prompt_text)
                 parsed = output_schema.model_validate(data)
                 return ModelResponse(
                     parsed=parsed,
@@ -92,6 +143,11 @@ class FakeModelRunner(ModelRunner):
 
         # Respostas padrão determinísticas por tipo de schema
         default_obj = self._generate_default_for_schema(output_schema, stage_name, call_idx)
+        if output_schema.__name__ == "LeanFirstPassOutput":
+            default_data = self._legacy_first_pass_fixture_with_m2_fields(
+                default_obj.model_dump(exclude_defaults=True), prompt_text
+            )
+            default_obj = output_schema.model_validate(default_data)
         raw_text = default_obj.model_dump_json(indent=2)
         return ModelResponse(
             parsed=default_obj,

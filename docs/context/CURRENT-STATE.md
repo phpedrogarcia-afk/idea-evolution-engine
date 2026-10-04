@@ -1,7 +1,21 @@
 # docs/context/CURRENT-STATE.md — Snapshot Operacional Dinâmico
 
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
-> Atualizado em: 2026-09-04 | Fase: M06 — PRODUCTIZATION
+> Atualizado em: 2026-10-04 | Fase: V1.2 — MATURATION
+
+## Estado operacional vigente — FioIdeias V1.2 / M2
+
+Este bloco supersede o snapshot M06/V1.0.1 abaixo, que permanece como histórico.
+
+- **Fase ativa:** V1.2 — maturação forte em uma passagem.
+- **Branch de trabalho:** `fioideias/v1.2-maturation`; base M1 verificada: `ceb8dc9df6f6f35c644345be068b8a9397c88351`.
+- **Estado no checkpoint:** alterações M2 locais, verificadas, ainda no fechamento commit/push desta missão.
+- **M1:** contrato 1.1 `PASS` e congelado; a cobertura continua pertencendo a M3.
+- **M2:** implementação aprovada nos testes offline; suíte determinística completa: `587 passed, 0 failed, 1 PytestCollectionWarning`.
+- **Identidade do núcleo:** pin V1.2 `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`; pins históricos V1.1/RQ11 preservados.
+- **Limites:** `coverage_status = NOT_EVALUATED`; nenhuma chamada a provedor ou Qwen; nenhuma avaliação semântica real foi feita nesta missão.
+- **Próximo passo:** concluir commit/push M2 e parar. M3 exige missão separada; não está autorizada por este registro.
+- **Release V1.1:** inalterada.
 
 ---
 
@@ -47,7 +61,7 @@
 - **Status do Console Script:** `PROVEN` (`iee evolve`)
 - **Patch de Empacotamento:** `v1.0.1` (Inclusão de `src/__init__.py` e declaração de descoberta de pacotes em `pyproject.toml`)
 - **Status Global do Projeto V1:** `FINISHED`
-- **Último Checkpoint Imutável:** [`CP-20260901-015`](checkpoints/CP-20260901-015.md)
+- **Último Checkpoint Imutável:** [`CP-20261004-001`](checkpoints/CP-20261004-001.md)
 - **Último Estado Seguro (Last Known Good):** `v1.0.1`
 - **Git Branch:** `main`
 - **Worktree:** `CLEAN`

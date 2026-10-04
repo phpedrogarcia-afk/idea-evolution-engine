@@ -20,6 +20,7 @@ from src.idea_evolution.artifacts.evolution_artifact import (
     SCHEMA_VERSION_1_0,
     SCHEMA_VERSION_1_1,
     FROZEN_LEAN_CORE_HASH,
+    FROZEN_LEAN_CORE_HASH_V1_2,
 )
 from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
 from src.idea_evolution.artifacts.provenance import (
@@ -44,6 +45,7 @@ __all__ = [
     "SCHEMA_VERSION_1_0",
     "SCHEMA_VERSION_1_1",
     "FROZEN_LEAN_CORE_HASH",
+    "FROZEN_LEAN_CORE_HASH_V1_2",
     "EvolutionArtifactMapper",
     "ProvenanceReceipt",
     "audit_artifact_provenance",

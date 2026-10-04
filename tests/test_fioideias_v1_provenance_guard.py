@@ -20,7 +20,7 @@ Valida deterministicamente que:
 15. Chaves e segredos não vazam nos campos de proveniência e auditoria.
 16. Zero chamadas de modelo (custo 0, 100% determinístico).
 17. ProvenanceReceipt audita completude com unlabeled_semantic_item_count == 0.
-18. Hash do núcleo científico Lean L1 permanece estritamente idêntico.
+18. Hash do bundle de núcleo Lean corresponde à identidade ativa V1.2.
 """
 
 import unittest
@@ -434,8 +434,8 @@ class TestProvenanceAndOntologyEnforcementP3(unittest.TestCase):
             )
         self.assertIn("premissas (assumptions) não podem ter autoridade USER_EXPLICIT", str(ctx.exception))
 
-    def test_20_scientific_core_hash_remains_strictly_unchanged(self):
-        """20: Integridade inegociável do hash SHA-256 do núcleo científico Lean L1."""
+    def test_20_scientific_core_hash_matches_v12_pin(self):
+        """20: Hash combinado do núcleo Lean corresponde ao pin ativo V1.2."""
         core_files = {
             "domain/early_epistemic_gate.py": Path("src/idea_evolution/domain/early_epistemic_gate.py"),
             "domain/epistemic_contracts.py": Path("src/idea_evolution/domain/epistemic_contracts.py"),

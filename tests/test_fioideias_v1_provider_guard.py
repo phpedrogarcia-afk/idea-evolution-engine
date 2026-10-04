@@ -22,7 +22,7 @@ Valida deterministicamente que:
 17. IdeaEvolutionService permanece estritamente neutro em relação a provedores específicos.
 18. Separação explícita entre modelo científico e modelo de transporte é preservada.
 19. Zero chamadas reais de modelo durante os testes (custo zero de bolso).
-20. Integridade do hash do núcleo científico Lean L1 permanece estritamente idêntica.
+20. Hash do bundle de núcleo Lean corresponde à identidade ativa V1.2.
 """
 
 from __future__ import annotations
@@ -426,8 +426,8 @@ class TestFioIdeiasV1ProviderGuardP4(unittest.TestCase):
         self.assertEqual(resp.terminal_status, "COMPLETED_DIRECT_ONE_PASS")
         self.assertIsNotNone(resp.artifact)
 
-    def test_20_scientific_core_hash_remains_strictly_unchanged(self):
-        """20: Integridade inegociável do hash SHA-256 do núcleo científico Lean L1."""
+    def test_20_scientific_core_hash_matches_v12_pin(self):
+        """20: Hash combinado do núcleo Lean corresponde ao pin ativo V1.2."""
         core_files = {
             "domain/early_epistemic_gate.py": Path("src/idea_evolution/domain/early_epistemic_gate.py"),
             "domain/epistemic_contracts.py": Path("src/idea_evolution/domain/epistemic_contracts.py"),

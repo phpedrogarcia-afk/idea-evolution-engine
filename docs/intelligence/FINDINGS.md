@@ -286,6 +286,15 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Implications:** Proibido realizar avaliação humana sobre o pacote atual. O harness deve ser corrigido em missão dedicada (M05.4-P1R) com novo ID experimental, mantendo o protocolo pré-registrado e as 8 ideias holdout intactas.
 - **Related Decisions:** [M05.4-P1A AUDIT](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260827-027.md)
 
+---
+
+### [FINDING-029] Maturação Forte em Uma Passagem — V1.2 M2
+- **Claim:** O first pass deixa de pedir “estruturação mínima” e passa a produzir uma forma atual explícita, ledger de intenção ancorado em citações exatas, caminhos candidatos vinculados a intenções, insights e decisões abertas, e próximo passo ligado a incerteza. IDs de caminho/insight/decisão são atribuídos deterministicamente no mapper; insights/decisões sem referência semântica explícita permanecem sem `related_intent_ids`.
+- **Evidence:** `tests/test_v12_m2_strong_first_pass.py`; validação do schema strict Cerebras (`4,751 <= 5,000` caracteres); suíte determinística completa: `587 passed, 0 failed, 1 PytestCollectionWarning`; hash atual dos sete arquivos Lean confere com o pin V1.2 `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`.
+- **Status:** `IMPLEMENTED_AND_VERIFIED_OFFLINE`; `coverage_status = NOT_EVALUATED`.
+- **Limits:** Fiobase é regressão conhecida, não holdout cego. Nenhuma chamada real, avaliação semântica externa ou prova de cobertura foi feita. O M1/RQ11 hash permanece histórico e imutável.
+- **Implications:** A primeira chamada já pode separar intenção de implementação e evitar que `primary_mechanism` defina a ideia maturada; M3 continua responsável pela avaliação determinística de cobertura.
+
 
 
 

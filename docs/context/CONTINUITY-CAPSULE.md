@@ -15,11 +15,14 @@ O **Idea Evolution Engine (IEE)** é um sistema de investigação deliberativa g
 ---
 
 ## 2. Onde Estamos Hoje (Estado Operacional)
-- **Fase Atual:** **Fase 0 (Foundation & Continuity Hardening)** concluída com sucesso.
-- **O que Existe Fisicamente:** Toda a base constitucional, arquitetural, metodológica, glossário, políticas versionadas, sistema de checkpoints e validadores determinísticos em `tools/context/`.
-- **O que NÃO Existe:** Nenhum runtime de produto, zero código de produção, zero orquestradores de LLM ativos, zero chamadas a APIs pagas, zero dashboards ou UIs.
-- **Próximo Alvo de Produto Aprovado:** **Simple Idea Evolution Loop (MVP Heurístico)**: Um pipeline simples e determinístico (*Understand $\to$ Attack $\to$ Alternatives $\to$ Reality Check $\to$ Synthesize $\to$ Review*).
-- **Arquitetura Avançada (DCE Adaptativo, MCTS, RL, FioOS):** É classificada como `TARGET` / `FUTURE_RESEARCH` e NÃO deve ser implementada agora.
+- **Atualizado em:** 2026-10-04; este estado vigente supersede a cápsula histórica M05/M06 abaixo.
+- **Fase atual:** FioIdeias V1.2 M2 — primeira passagem forte, uma chamada, implementação verificada offline.
+- **Base M1:** commit `ceb8dc9df6f6f35c644345be068b8a9397c88351`; contrato 1.1 `PASS` e congelado.
+- **M2:** `587 passed, 0 failed, 1 PytestCollectionWarning`; schema estrito de first pass com 4.751 caracteres; pin V1.2 do núcleo `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`.
+- **Limite epistemológico:** `coverage_status = NOT_EVALUATED`; teste offline prova estrutura e regressões codificadas, não fidelidade semântica geral.
+- **Autoridade:** gates, proveniência e autoridade de decisão humana preservados; nenhuma chamada a provedor/Qwen nesta missão.
+- **Próximo passo:** concluir o commit/push M2 nesta branch e parar. M3 requer missão separada.
+- **Próximo marco candidato:** M3 — cobertura determinística do contrato M1; requer missão separada e não está autorizado por M2.
 
 ---
 
@@ -34,7 +37,7 @@ O **Idea Evolution Engine (IEE)** é um sistema de investigação deliberativa g
 ---
 
 ## 4. O Sistema de Continuidade e Checkpoints
-- **Último Checkpoint Imutável:** [`CP-20260826-001`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/checkpoints/CP-20260826-001.md)
+- **Último Checkpoint Imutável:** [`CP-20261004-001`](checkpoints/CP-20261004-001.md)
 - **Manifesto Machine-Readable:** [`docs/context/context-manifest.json`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/context-manifest.json)
 - **Validador Determinístico:** Execute `python tools/context/validate_context.py` para verificar integridade da base.
 - **Fail-Closed on Conflict:** Se duas fontes documentais de mesmo nível divergirem, pare e registre o conflito em [`docs/context/CONTRADICTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTRADICTIONS.md).

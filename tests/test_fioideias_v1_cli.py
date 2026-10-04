@@ -22,7 +22,7 @@ Valida deterministicamente as 20 asserções inegociáveis:
 17. Provedor ou modelo desconhecido falha fechado (fail-closed).
 18. Saída JSON (--json) contém artefato canônico de produto, não estruturas internas de laboratório.
 19. Fake runner executa perfeitamente em modo offline (custo zero de bolso).
-20. Hash combinado dos 7 arquivos congelados do núcleo científico permanece estritamente invariante.
+20. Hash combinado dos 7 arquivos do núcleo corresponde à identidade ativa V1.2.
 """
 
 from __future__ import annotations
@@ -387,8 +387,8 @@ class TestFioIdeiasV1CliP5(unittest.TestCase):
         output = stdout.getvalue()
         self.assertIn("FIOIDEIAS V1", output)
 
-    def test_20_scientific_core_hash_remains_strictly_unchanged(self):
-        """20: Integridade inegociável do hash SHA-256 do núcleo científico Lean L1."""
+    def test_20_scientific_core_hash_matches_v12_pin(self):
+        """20: Hash combinado do núcleo Lean corresponde ao pin ativo V1.2."""
         core_files = {
             "domain/early_epistemic_gate.py": Path("src/idea_evolution/domain/early_epistemic_gate.py"),
             "domain/epistemic_contracts.py": Path("src/idea_evolution/domain/epistemic_contracts.py"),

@@ -8,6 +8,7 @@ from src.idea_evolution.artifacts.evolution_artifact import (
     FROZEN_LEAN_CORE_HASH,
     FROZEN_LEAN_CORE_HASH_RQ11,
     FROZEN_LEAN_CORE_HASH_V1_1,
+    FROZEN_LEAN_CORE_HASH_V1_2,
     TreatmentMode,
 )
 from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
@@ -265,5 +266,7 @@ def test_rq09_unverified_claim_still_renders_as_hypothesis():
 
 def test_rq11_core_identity_preserves_historical_v1_1_hash():
     assert FROZEN_LEAN_CORE_HASH_V1_1 == PRE_RQ11_V1_1_CORE_HASH
-    assert FROZEN_LEAN_CORE_HASH_RQ11 == FROZEN_LEAN_CORE_HASH
+    assert FROZEN_LEAN_CORE_HASH_RQ11 == "1d294c2be6b9e52733e2e543b7b921b2f0fb64034ebced95aa08403b6504fa83"
     assert FROZEN_LEAN_CORE_HASH_RQ11 != FROZEN_LEAN_CORE_HASH_V1_1
+    assert FROZEN_LEAN_CORE_HASH == FROZEN_LEAN_CORE_HASH_V1_2
+    assert FROZEN_LEAN_CORE_HASH != FROZEN_LEAN_CORE_HASH_RQ11

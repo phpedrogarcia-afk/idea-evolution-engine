@@ -7,9 +7,13 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
  
-- [ ] **POST-V1-HUMAN-SOVEREIGN-DELIBERATION:** Com a conclusão formal do Programa M06 e o lançamento do FioIdeias V1 (`v1.0.0`), qualquer desenvolvimento adicional (V1.1, novas integrações ou expansões) aguarda decisão e autorização humana soberana.
+- [x] **FIOIDEIAS-V1.2-M2-STRONG-FIRST-PASS:** Implementação e verificação offline concluídas nesta missão; fechar commit/push apenas para `fioideias/v1.2-maturation`.
+- [ ] **V1.2-M3-DETERMINISTIC-COVERAGE:** Próximo marco candidato, somente em missão própria. Até M3, `coverage_status = NOT_EVALUATED`; não iniciar cobertura, reparo automático ou segunda chamada neste fechamento.
+- **Nota de autoridade:** a autorização específica para M2 não revoga o gate humano para outras expansões pós-release.
  
 ---
+
+> A fila M06/V1.0 preservada abaixo é histórica e não substitui o estado V1.2 acima.
  
 ## 🟡 NEXT (Condicionado à Autorização do Supervisor)
  
