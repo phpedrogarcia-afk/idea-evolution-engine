@@ -9,8 +9,9 @@
  
 - [x] **FIOIDEIAS-V1.2-M2-STRONG-FIRST-PASS:** Implementada, verificada e congelada na branch `fioideias/v1.2-maturation`.
 - [x] **FIOIDEIAS-V1.2-M3-DETERMINISTIC-COVERAGE-GATE:** Gate determinístico integrado após o mapper; estados `NO_BLOCKING_GAP_DETECTED` e `REPAIR_REQUIRED`; 15 testes M3 e suíte completa 602/602 aprovados offline.
-- [ ] **V1.2-M4-FOCUSED-REPAIR:** Marco candidato futuro; requer missão humana separada. Não executar reparo, segunda chamada ou expansão de UI automaticamente.
-- **Nota de autoridade:** esta autorização encerra somente M3; não autoriza M4, merge, tag ou release.
+- [x] **FIOIDEIAS-V1.2-M4-FOCUSED-REPAIR:** Patch tipado, uma oportunidade, teto global de 2 chamadas lógicas, gate M3 reexecutado uma vez; 19 testes M4 e suíte completa 621/621 aprovados offline.
+- [ ] **V1.2-M5:** Nenhuma missão ativa. Requer autorização humana específica; não iniciar UI, avaliação com provedor, score ou trabalho adicional automaticamente.
+- **Nota de autoridade:** esta autorização cobre somente M4, seu registro, commit e push nesta branch. Não autoriza merge, tag, release ou M5.
  
 ---
 

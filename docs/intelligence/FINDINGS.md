@@ -302,7 +302,16 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Evidence:** `src/idea_evolution/service/maturation_coverage_gate.py`, integração em `evolution_service.py`, ajuste de transição pendente em `evolution_artifact.py` e `tests/test_v12_m3_deterministic_coverage_gate.py` (15 testes). Suíte determinística completa: `602 passed, 0 failed, 1 PytestCollectionWarning`, executada em cópia temporária para isolar testes que escrevem artefatos; nenhuma chamada a provedor/Qwen.
 - **Status:** `IMPLEMENTED_AND_VERIFIED_OFFLINE`; baseline conhecido de M2 preservado, nenhum artefato histórico foi migrado.
 - **Limits:** `NO_BLOCKING_GAP_DETECTED` não prova correção semântica, preservação de intenção nem ausência de contradição em linguagem natural. Como `open_decisions` do wire M2 são strings sem relações, nenhuma decisão é associada por semelhança textual; provisional/deferred sem `related_intent_ids` estruturado ficam `REPAIR_REQUIRED`.
-- **Implications:** M4 poderá consumir issues tipadas, mas qualquer reparo ou extensão do vínculo no wire requer missão específica; M3 não amplia autoridade ou comportamento humano.
+- **Implications:** M4 consome issues tipadas sob uma missão separada; M3 não amplia autoridade ou comportamento humano.
+
+---
+
+### [FINDING-031] Reparo Focado M4 Limitado por Budget Global e Schema Fechado
+- **Claim:** Uma cobertura `REPAIR_REQUIRED` pode receber uma única proposta de patch tipado, limitada a intents, caminhos, decisões abertas, forma atual ou referência opcional de incerteza já implicados por issues M3. A cópia candidata é validada atomicamente e M3 roda uma vez; reparo inválido, bloqueado ou incompleto resulta em `UNRESOLVED`. O teto de 2 chamadas lógicas inclui a escalação EarlyEpistemicGate.
+- **Evidence:** `src/idea_evolution/service/maturation_focused_repair.py`, integração em `evolution_service.py`, telemetria tipada em `service/contracts.py` e `tests/test_v12_m4_focused_repair.py` (19 testes). Integração direcionada: 80 testes; suíte determinística isolada: `621 passed, 0 failed, 1 PytestCollectionWarning`. Nenhuma chamada real a provedor ou Qwen.
+- **Status:** `IMPLEMENTED_AND_VERIFIED_OFFLINE`.
+- **Limits:** O reparo não valida se a síntese preserva semanticamente a intenção; `NO_BLOCKING_GAP_DETECTED` continua restrito às verificações estruturais. O contrato limita chamadas lógicas `ModelRunner.generate`; retries transientes de transporte pré-existentes continuam sob a política do runner.
+- **Implications:** Corrige falhas mecânicas delimitadas sem reiniciar a ideação nem gastar uma terceira chamada; resultados incompletos continuam explícitos e não autoritativos.
 
 
 

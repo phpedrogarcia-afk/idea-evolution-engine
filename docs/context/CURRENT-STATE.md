@@ -3,20 +3,20 @@
 > **ESTE DOCUMENTO É A DECLARAÇÃO OPERACIONAL VIVA DO ESTADO DO REPOSITÓRIO.**
 > Atualizado em: 2026-10-04 | Fase: V1.2 — MATURATION
 
-## Estado operacional vigente — FioIdeias V1.2 / M3
+## Estado operacional vigente — FioIdeias V1.2 / M4
 
 Este bloco supersede o snapshot M06/V1.0.1 abaixo, que permanece como histórico.
 
-- **Fase ativa:** V1.2 — maturação forte em uma passagem com gate determinístico de cobertura.
-- **Branch de trabalho:** `fioideias/v1.2-maturation`; M3 parte do HEAD aceito `d2ed90345ab10c7273b0227aff856779c85dc00e`.
-- **Estado M3:** gate dedicado integrado após o mapper no serviço Lean; aceitação `PASS` em testes offline; esta missão autoriza commit/push normal como etapa final.
-- **M1:** contrato 1.1 preservado; estado de conflito pode permanecer `NOT_EVALUATED` até o gate M3 produzir a issue ligada.
-- **M2:** primeira passagem forte congelada; baseline anterior `587 passed, 0 failed, 1 PytestCollectionWarning` preservado.
-- **M3:** nova suíte direcionada `15 passed`; suíte determinística atual `602 passed, 0 failed, 1 PytestCollectionWarning` na cópia descartável isolada.
-- **Identidade do núcleo:** pin V1.2 `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`; pins históricos V1.1/RQ11 preservados.
-- **Limites:** novos artefatos Lean recebem `NO_BLOCKING_GAP_DETECTED` ou `REPAIR_REQUIRED`; o primeiro significa somente que as verificações determinísticas implementadas não encontraram defeito bloqueante. Não há detecção semântica de contradição, chamada de reparo, provedor ou Qwen.
-- **Limitação observada:** decisões abertas do wire M2 são texto sem relação de intenção; o mapper não inventa IDs. Sem `OpenDecision.related_intent_ids`, estados provisórios/deferidos ficam `REPAIR_REQUIRED`.
-- **Próximo passo:** a missão M3 encerra com commit/push normal e parada; M4 exige missão própria e não está iniciada.
+- **Fase ativa:** V1.2 — maturação forte em uma passagem, gate de cobertura e uma oportunidade de reparo estrutural.
+- **Branch de trabalho:** `fioideias/v1.2-maturation`; M4 parte do HEAD aceito `4b6d04aa13b05d91e845646399a7c306a47439b4`.
+- **Topologia:** first pass → EarlyEpistemicGate e escalação opcional → mapper → gate M3 → reparo M4 opcional. Reparo usa o mesmo `ModelRunner`, modelo e guarda de custo existente.
+- **M1–M3:** contratos e semântica dos gates preservados; M4 não altera o pin do núcleo científico `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`.
+- **M4:** patch fechado e tipado, aplicação atômica e uma reavaliação M3; teto global de 2 chamadas lógicas inclui a escalação EarlyEpistemicGate. Esgotamento, reparo inválido ou incompleto resultam em `UNRESOLVED`, sem terceira chamada.
+- **Verificação:** 19 testes M4; suíte determinística `621 passed, 0 failed, 1 PytestCollectionWarning` em cópia temporária isolada. A primeira tentativa completa foi lançada no diretório de trabalho errado e encontrou 14 erros de permissão; a repetição na cópia correta passou.
+- **Limites:** `NO_BLOCKING_GAP_DETECTED` é estrutural, não prova preservação semântica nem detecta contradições em prosa. Reparo é uma proposta de modelo validada estruturalmente; não é revisão semântica independente.
+- **Limitação de representação:** o wire M2 representa `open_decisions` como texto e não inventa relações por similaridade; M4 pode adicionar vínculo explícito por ID no patch.
+- **Execução:** FakeModelRunner/determinístico; `PROVIDER_CALLS=0`, `QWEN_CALLS=0`; núcleo V1.1 e evidência científica permanecem inalterados.
+- **Próximo passo autorizado:** commit/push normal desta missão somente para `origin/fioideias/v1.2-maturation` e parar. M5 requer missão humana separada e não está autorizado automaticamente.
 - **Release V1.1:** inalterada.
 
 ---

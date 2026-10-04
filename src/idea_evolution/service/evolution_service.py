@@ -12,7 +12,11 @@ from pathlib import Path
 from datetime import datetime
 
 from src.idea_evolution.providers.base import ModelRunner
-from src.idea_evolution.orchestration.lean_loop import LeanLoopRunner, LeanRunResult
+from src.idea_evolution.orchestration.lean_loop import (
+    LEAN_L1_MAX_MODEL_CALLS,
+    LeanLoopRunner,
+    LeanRunResult,
+)
 from src.idea_evolution.orchestration.baseline import BaselineRunner
 from src.idea_evolution.orchestration.simple_loop import SimpleLoopRunner
 from src.idea_evolution.domain.epistemic_contracts import NegativeKnowledgeRecord
@@ -21,9 +25,16 @@ from src.idea_evolution.service.contracts import (
     EvolutionResponse,
     TreatmentMode,
     ServiceFailureType,
+    MaturationRepairOutcome,
+    MaturationRepairTelemetry,
 )
 from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
 from src.idea_evolution.service.maturation_coverage_gate import MaturationCoverageGate
+from src.idea_evolution.service.maturation_focused_repair import (
+    MaturationFocusedRepair,
+    MaturationRepairPatch,
+    RepairPatchRejected,
+)
 from src.idea_evolution.config.catalog import ModelCatalog
 from src.idea_evolution.config.cost_policy import (
     ProviderConfig,
@@ -31,6 +42,9 @@ from src.idea_evolution.config.cost_policy import (
     ZeroCostGuard,
     sanitize_secret_text,
 )
+
+
+MAX_LOGICAL_MODEL_CALLS_PER_LEAN_RUN = 2
 
 
 class IdeaEvolutionService:
@@ -223,6 +237,120 @@ class IdeaEvolutionService:
             provider=getattr(self.runner, "provider", None),
         )
         artifact = MaturationCoverageGate.apply(artifact)
+        issues_before = list(artifact.coverage_issues)
+        logical_calls_used = lean_res.total_model_calls
+        repair_attempted = False
+        repair_applied = False
+        repair_outcome = MaturationRepairOutcome.NOT_NEEDED
+
+        if artifact.coverage_status.value == "REPAIR_REQUIRED":
+            call_ceiling = min(MAX_LOGICAL_MODEL_CALLS_PER_LEAN_RUN, LEAN_L1_MAX_MODEL_CALLS)
+            authority_allows_repair = (
+                not lean_res.human_decision_requested
+                and lean_res.terminal_status not in {"HUMAN_DECISION_REQUIRED", "STOP_NO_USEFUL_WORK"}
+                and not (
+                    lean_res.gate_result is not None
+                    and lean_res.gate_result.outcome.value == "REQUEST_HUMAN_DECISION"
+                )
+            )
+
+            if logical_calls_used >= call_ceiling:
+                artifact = MaturationFocusedRepair.mark_unresolved(
+                    artifact, issues_before, logical_calls_used
+                )
+                repair_outcome = MaturationRepairOutcome.CALL_BUDGET_EXHAUSTED
+            elif not authority_allows_repair:
+                artifact = MaturationFocusedRepair.mark_unresolved(
+                    artifact, issues_before, logical_calls_used
+                )
+                repair_outcome = MaturationRepairOutcome.AUTHORITY_POLICY_BLOCKED
+            else:
+                # evolve() has already accepted this exact provider configuration via
+                # ZeroCostGuard. The repair reuses the same runner/model and cannot
+                # select a new provider or bypass the existing policy boundary.
+                repair_attempted = True
+                logical_calls_used += 1
+                try:
+                    repair_response = self.runner.generate(
+                        prompt_text=MaturationFocusedRepair.build_prompt(artifact, issues_before),
+                        output_schema=MaturationRepairPatch,
+                        stage_name="MATURATION_FOCUSED_REPAIR",
+                        model_name=request.model_name,
+                        max_repairs=0,
+                    )
+                except Exception:
+                    artifact = MaturationFocusedRepair.mark_unresolved(
+                        artifact, issues_before, logical_calls_used
+                    )
+                    repair_outcome = MaturationRepairOutcome.REPAIR_CALL_FAILED
+                else:
+                    if repair_response.error or repair_response.parsed is None:
+                        artifact = MaturationFocusedRepair.mark_unresolved(
+                            artifact, issues_before, logical_calls_used
+                        )
+                        repair_outcome = (
+                            MaturationRepairOutcome.PATCH_REJECTED
+                            if repair_response.raw_text.strip()
+                            else MaturationRepairOutcome.REPAIR_CALL_FAILED
+                        )
+                    elif not isinstance(repair_response.parsed, MaturationRepairPatch):
+                        artifact = MaturationFocusedRepair.mark_unresolved(
+                            artifact, issues_before, logical_calls_used
+                        )
+                        repair_outcome = MaturationRepairOutcome.PATCH_REJECTED
+                    else:
+                        try:
+                            repair_candidate = MaturationFocusedRepair.apply_patch(
+                                artifact,
+                                repair_response.parsed,
+                                issues_before,
+                            )
+                        except RepairPatchRejected:
+                            artifact = MaturationFocusedRepair.mark_unresolved(
+                                artifact, issues_before, logical_calls_used
+                            )
+                            repair_outcome = MaturationRepairOutcome.PATCH_REJECTED
+                        else:
+                            try:
+                                # Exactly one fresh M3 evaluation follows an atomic,
+                                # schema-valid repair candidate.
+                                reevaluated = MaturationCoverageGate.apply(repair_candidate)
+                            except Exception:
+                                artifact = MaturationFocusedRepair.mark_unresolved(
+                                    artifact, issues_before, logical_calls_used
+                                )
+                                repair_outcome = MaturationRepairOutcome.PATCH_REJECTED
+                            else:
+                                repair_applied = True
+                                if reevaluated.coverage_status.value == "REPAIR_REQUIRED":
+                                    artifact = MaturationFocusedRepair.mark_unresolved(
+                                        reevaluated,
+                                        list(reevaluated.coverage_issues),
+                                        logical_calls_used,
+                                    )
+                                    repair_outcome = MaturationRepairOutcome.REPAIR_INCOMPLETE
+                                else:
+                                    artifact = reevaluated.model_copy(
+                                        update={"total_model_calls": logical_calls_used}
+                                    )
+                                    repair_outcome = MaturationRepairOutcome.REPAIR_APPLIED
+
+        # The optional repair is a logical Lean call and is reflected consistently
+        # in the service response, Lean result and product artifact.
+        if artifact.total_model_calls != logical_calls_used:
+            artifact = artifact.model_copy(update={"total_model_calls": logical_calls_used})
+        lean_res = lean_res.model_copy(update={"total_model_calls": logical_calls_used})
+        repair_telemetry = MaturationRepairTelemetry(
+            logical_model_calls_used=logical_calls_used,
+            repair_attempted=repair_attempted,
+            repair_applied=repair_applied,
+            final_coverage_status=artifact.coverage_status,
+            repair_outcome=repair_outcome,
+            issue_count_before=len(issues_before),
+            issue_types_before=[item.issue_type for item in issues_before],
+            issue_count_after=len(artifact.coverage_issues),
+            issue_types_after=[item.issue_type for item in artifact.coverage_issues],
+        )
 
         return EvolutionResponse(
             success=True,
@@ -230,12 +358,13 @@ class IdeaEvolutionService:
             treatment_used=TreatmentMode.LEAN_L1,
             raw_idea=request.raw_idea,
             terminal_status=status,
-            total_model_calls=lean_res.total_model_calls,
+            total_model_calls=logical_calls_used,
             human_decision_requested=human_req,
             decision_progress_detected=lean_res.decision_progress_detected,
             failure_type=fail_type,
             lean_result=lean_res,
             artifact=artifact,
+            maturation_repair=repair_telemetry,
             provider_config=provider_config,
         )
 

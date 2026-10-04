@@ -90,7 +90,12 @@ def _with_item(artifact, intent_id, **updates):
 
 
 def _service_response(idea, first_pass, tmp_path):
-    runner = FakeModelRunner(custom_responses={"LEAN_FIRST_PASS": first_pass})
+    # M3 only reports the initial finding; under M4, an intentionally malformed
+    # offline repair response proves that the service preserves it as UNRESOLVED.
+    runner = FakeModelRunner(
+        custom_responses={"LEAN_FIRST_PASS": first_pass},
+        should_fail_schema_stages={"MATURATION_FOCUSED_REPAIR": 1},
+    )
     service = IdeaEvolutionService(runner=runner, runs_dir=tmp_path / "runs")
     response = service.evolve_idea(idea, run_id="RUN-M3-SERVICE")
     return response, runner
@@ -114,9 +119,10 @@ def test_material_fiobase_subintent_without_treatment_requires_repair(tmp_path):
     response, runner = _service_response(FIOBASE_IDEA, response_data, tmp_path)
 
     assert response.success is True
-    assert response.artifact.coverage_status == CoverageStatus.REPAIR_REQUIRED
+    assert response.artifact.coverage_status == CoverageStatus.UNRESOLVED
     assert any(issue.issue_type == CoverageIssueType.MATERIAL_INTENT_UNTREATED for issue in response.artifact.coverage_issues)
-    assert runner.call_counts == {"LEAN_FIRST_PASS": 1}  # M3 reports; it does not repair or retry.
+    assert runner.call_counts == {"LEAN_FIRST_PASS": 1, "MATURATION_FOCUSED_REPAIR": 1}
+    assert response.maturation_repair.repair_attempted is True
 
 
 def test_explicit_fiobase_constraint_deferred_without_exposure_requires_repair(tmp_path):
@@ -127,7 +133,7 @@ def test_explicit_fiobase_constraint_deferred_without_exposure_requires_repair(t
     response, _ = _service_response(FIOBASE_IDEA, response_data, tmp_path)
 
     issue_types = {issue.issue_type for issue in response.artifact.coverage_issues}
-    assert response.artifact.coverage_status == CoverageStatus.REPAIR_REQUIRED
+    assert response.artifact.coverage_status == CoverageStatus.UNRESOLVED
     assert CoverageIssueType.EXPLICIT_CONSTRAINT_UNTREATED in issue_types
     assert CoverageIssueType.DEFERRED_ITEM_NOT_EXPOSED in issue_types
 
@@ -139,7 +145,7 @@ def test_hidden_provisional_modification_requires_linked_open_decision(tmp_path)
 
     response, _ = _service_response(FIOBASE_IDEA, response_data, tmp_path)
 
-    assert response.artifact.coverage_status == CoverageStatus.REPAIR_REQUIRED
+    assert response.artifact.coverage_status == CoverageStatus.UNRESOLVED
     assert any(issue.issue_type == CoverageIssueType.PROVISIONAL_MODIFICATION_NOT_EXPOSED for issue in response.artifact.coverage_issues)
     assert response.artifact.human_decision_required is False
 
@@ -151,12 +157,12 @@ def test_explicit_conflict_is_converted_to_linked_repair_issue(tmp_path):
 
     response, runner = _service_response(FIOBASE_IDEA, response_data, tmp_path)
 
-    assert response.artifact.coverage_status == CoverageStatus.REPAIR_REQUIRED
+    assert response.artifact.coverage_status == CoverageStatus.UNRESOLVED
     assert any(
         issue.issue_type == CoverageIssueType.CONFLICT_FOUND and issue.intent_id == "I-SCARS"
         for issue in response.artifact.coverage_issues
     )
-    assert runner.call_counts == {"LEAN_FIRST_PASS": 1}
+    assert runner.call_counts == {"LEAN_FIRST_PASS": 1, "MATURATION_FOCUSED_REPAIR": 1}
 
 
 def test_a_linked_open_decision_exposes_provisional_intent_without_requesting_authority():

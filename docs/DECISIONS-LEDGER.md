@@ -19,6 +19,7 @@
 - [ADR-012: Proibição de Missões de Fundação por Inércia e Transição Obrigatória para o MVP](#adr-012)
 - [ADR-013: Institucionalização da Doutrina Operacional de Construção e Preservação de Fonte](#adr-013)
 - [ADR-014: Exigência Obrigatória de Target Uncertainty e Stop Condition em Contratos de Tarefa](#adr-014)
+- [ADR-022: Reparo Focado Tipado com Teto Global de Duas Chamadas](#adr-022)
 
 ---
 
@@ -208,6 +209,15 @@
 - **Contexto:** M1 mantém cobertura como `NOT_EVALUATED` até haver avaliação. O mapper M2 representa `open_decisions` como texto e não inventa relações com intenções; além disso, a invariante anterior do artefato não permitia que um `CONFLICT_FOUND` tipado aguardasse essa avaliação.
 - **Decisão:** Avaliar um `MaturationCoverageGate` dedicado no serviço Lean imediatamente após o mapeamento. Usar apenas ledger, estados tipados, relações por ID, caminhos e referências de incerteza. Exigir vínculo por ID em `OpenDecision` para provar exposição de estado `PROVISIONALLY_MODIFIED`/`DEFERRED`; não inferir relações a partir da prosa. Permitir conflito explícito somente enquanto `NOT_EVALUATED`, exigindo vínculo exato status/issue em qualquer estado já avaliado.
 - **Consequências:** O resultado limpo significa apenas que os checks determinísticos implementados não acharam defeito bloqueante. Estados sem vínculo ficam `REPAIR_REQUIRED`; não há detecção semântica, nova chamada, reparo automático, elevação de autoridade ou alteração do comportamento do Early Epistemic Gate.
+
+---
+
+### <a id="adr-022"></a> ADR-022: Reparo Focado Tipado com Teto Global de Duas Chamadas
+- **Data:** 2026-10-04
+- **Status:** `ACCEPTED_FOR_V1_2_M4`
+- **Contexto:** M3 pode identificar defeitos estruturais corrigíveis, mas a escalação epistêmica existente já pode consumir a segunda chamada lógica do Lean.
+- **Decisão:** Permitir uma chamada de reparo somente em `REPAIR_REQUIRED`, com issues bloqueantes, budget lógico disponível e sem parada de autoridade humana. Reutilizar o mesmo `ModelRunner`, modelo e guarda de custo; emitir um patch Pydantic fechado com alvos por ID; aplicar a cópia candidata atomicamente e reexecutar M3 uma vez. Limitar a 2 chamadas lógicas totais, contando first pass, escalação e reparo. Desabilitar reparo semântico estruturado interno nessa chamada (`max_repairs=0`).
+- **Consequências:** Citações, identidade/proveniência de intents, autoridade, decisão humana, identidade do run e evidência do provedor não são editáveis pelo patch. Falha, patch inválido, gap remanescente, bloqueio de autoridade ou budget esgotado produzem `UNRESOLVED`, sem terceira chamada. A aprovação do gate continua estritamente estrutural; semântica e contradições em prosa não são provadas. Retries transientes de transporte já existentes no runner permanecem parte da política do provedor e não são novas chamadas lógicas Lean.
 
 
 

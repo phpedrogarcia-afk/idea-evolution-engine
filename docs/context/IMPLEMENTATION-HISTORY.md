@@ -645,3 +645,12 @@
 - **O que mudou:** Novo `MaturationCoverageGate` dedicado, aplicado pelo serviço após o mapper Lean; cobertura material/constraints, conflitos, exposição de provisional/deferred por relação explícita, referências de caminho, forma atual e alvo de incerteza; conflitos podem aguardar avaliação somente enquanto `NOT_EVALUATED`.
 - **Verificação:** 15 testes M3; suíte offline completa `602 passed, 0 failed, 1 PytestCollectionWarning` em cópia temporária isolada, pois a execução no checkout tentou gravar em artefatos protegidos. Nenhum provedor/Qwen, nenhuma execução cega.
 - **Resultado:** `M3_PASS`; `NO_BLOCKING_GAP_DETECTED` permanece um claim estrutural modesto; `REPAIR_REQUIRED` não dispara reparo ou chamada adicional.
+
+---
+
+### [FIOIDEIAS-V1.2-M4-FOCUSED-REPAIR] Reparo focado com budget global compartilhado
+- **Data:** 2026-10-04
+- **Base:** `fioideias/v1.2-maturation` em `4b6d04aa13b05d91e845646399a7c306a47439b4`.
+- **O que mudou:** O serviço oferece uma única chamada `MATURATION_FOCUSED_REPAIR` quando M3 exige reparo e o orçamento lógico disponível permite. O modelo retorna patch fechado e tipado com alvos estruturais; candidato validado atomicamente, seguido por uma única reavaliação M3. Escalação existente e reparo compartilham o teto de duas chamadas. Falha, autoridade bloqueada, budget esgotado ou gaps restantes encerram em `UNRESOLVED`.
+- **Verificação:** 19 testes M4, integração M2/M3/service de 80 testes e suíte offline completa `621 passed, 0 failed, 1 PytestCollectionWarning` em cópia temporária isolada. Uma tentativa inicial no diretório protegido gerou 14 erros de permissão; corrigida a raiz de execução, a repetição passou. Zero chamadas de provedor/Qwen.
+- **Resultado:** `M4_PASS`; sem prova semântica, sem M5 iniciado, sem alteração do núcleo científico V1.1.

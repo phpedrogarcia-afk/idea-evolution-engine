@@ -13,7 +13,12 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 from src.idea_evolution.orchestration.lean_loop import LeanRunResult
-from src.idea_evolution.artifacts.evolution_artifact import EvolutionArtifact, TreatmentMode
+from src.idea_evolution.artifacts.evolution_artifact import (
+    CoverageIssueType,
+    CoverageStatus,
+    EvolutionArtifact,
+    TreatmentMode,
+)
 from src.idea_evolution.config.cost_policy import ProviderConfig
 
 
@@ -29,6 +34,30 @@ class ServiceFailureType(str, Enum):
     STRUCTURED_OUTPUT_FAILURE = "STRUCTURED_OUTPUT_FAILURE"
     DOMAIN_DECISION_OR_STOP = "DOMAIN_DECISION_OR_STOP"
     INTERNAL_APPLICATION_FAILURE = "INTERNAL_APPLICATION_FAILURE"
+
+
+class MaturationRepairOutcome(str, Enum):
+    NOT_NEEDED = "NOT_NEEDED"
+    CALL_BUDGET_EXHAUSTED = "CALL_BUDGET_EXHAUSTED"
+    AUTHORITY_POLICY_BLOCKED = "AUTHORITY_POLICY_BLOCKED"
+    REPAIR_CALL_FAILED = "REPAIR_CALL_FAILED"
+    PATCH_REJECTED = "PATCH_REJECTED"
+    REPAIR_APPLIED = "REPAIR_APPLIED"
+    REPAIR_INCOMPLETE = "REPAIR_INCOMPLETE"
+
+
+class MaturationRepairTelemetry(BaseModel):
+    """Minimal, non-prompt execution record for M4's single repair opportunity."""
+
+    logical_model_calls_used: int = Field(ge=0, le=2)
+    repair_attempted: bool = False
+    repair_applied: bool = False
+    final_coverage_status: CoverageStatus
+    repair_outcome: MaturationRepairOutcome
+    issue_count_before: int = Field(ge=0)
+    issue_types_before: List[CoverageIssueType] = Field(default_factory=list)
+    issue_count_after: int = Field(ge=0)
+    issue_types_after: List[CoverageIssueType] = Field(default_factory=list)
 
 
 class EvolutionRequest(BaseModel):
@@ -71,5 +100,6 @@ class EvolutionResponse(BaseModel):
     lean_result: Optional[LeanRunResult] = None
     baseline_result: Optional[Dict[str, Any]] = None
     artifact: Optional[EvolutionArtifact] = None
+    maturation_repair: Optional[MaturationRepairTelemetry] = None
     provider_config: Optional[ProviderConfig] = None
     created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
