@@ -333,7 +333,15 @@ class EvolutionArtifact(BaseModel):
         conflicts = {item.intent_id for item in self.intent_ledger if item.status == IntentTreatmentStatus.CONFLICT_FOUND}
         conflict_issues = [issue for issue in self.coverage_issues if issue.issue_type == CoverageIssueType.CONFLICT_FOUND]
         issue_conflicts = {issue.intent_id for issue in conflict_issues}
-        if conflicts != issue_conflicts or any(issue.intent_id is None for issue in conflict_issues):
+        # A freshly mapped M1.1 artifact is deliberately NOT_EVALUATED until
+        # M3 runs. Allow it to carry an explicit conflict temporarily so that
+        # the dedicated coverage gate can translate that state into a linked
+        # CONFLICT_FOUND issue. Once evaluated, conflict and issue links must
+        # remain exact and fail closed.
+        if (
+            self.coverage_status != CoverageStatus.NOT_EVALUATED
+            and (conflicts != issue_conflicts or any(issue.intent_id is None for issue in conflict_issues))
+        ):
             raise ValueError("EvolutionArtifact: status CONFLICT_FOUND e coverage issue devem estar ligados de forma consistente.")
 
         if self.coverage_status == CoverageStatus.NOT_EVALUATED and self.coverage_issues:

@@ -16,13 +16,13 @@ O **Idea Evolution Engine (IEE)** é um sistema de investigação deliberativa g
 
 ## 2. Onde Estamos Hoje (Estado Operacional)
 - **Atualizado em:** 2026-10-04; este estado vigente supersede a cápsula histórica M05/M06 abaixo.
-- **Fase atual:** FioIdeias V1.2 M2 — primeira passagem forte, uma chamada, implementação verificada offline.
-- **Base M1:** commit `ceb8dc9df6f6f35c644345be068b8a9397c88351`; contrato 1.1 `PASS` e congelado.
-- **M2:** `587 passed, 0 failed, 1 PytestCollectionWarning`; schema estrito de first pass com 4.751 caracteres; pin V1.2 do núcleo `cc59c4ba350087f84398a030e5f6a25f5f7a8184ee848e7f494c6e1367ae962a`.
-- **Limite epistemológico:** `coverage_status = NOT_EVALUATED`; teste offline prova estrutura e regressões codificadas, não fidelidade semântica geral.
+- **Fase atual:** FioIdeias V1.2 M3 — primeira passagem forte seguida por gate determinístico de cobertura.
+- **Base M3:** HEAD inicial `d2ed90345ab10c7273b0227aff856779c85dc00e`; contrato M1.1, M1 e M2 permanecem congelados.
+- **M3:** gate separado do `EarlyEpistemicGate`, aplicado após mapear a resposta Lean; 15 testes dirigidos e suíte inteira `602 passed, 0 failed, 1 PytestCollectionWarning` offline.
+- **Limite epistemológico:** `NO_BLOCKING_GAP_DETECTED` só informa ausência de defeito bloqueante entre as verificações determinísticas implementadas. Não prova preservação semântica nem detecta contradição em prosa.
+- **Limitação de representação:** o wire M2 representa `open_decisions` como strings sem IDs de intenção. O mapper não infere relações; provisional/deferred só ficam expostos quando um `OpenDecision` traz a intenção ligada por ID, então os casos sem vínculo são `REPAIR_REQUIRED`.
 - **Autoridade:** gates, proveniência e autoridade de decisão humana preservados; nenhuma chamada a provedor/Qwen nesta missão.
-- **Próximo passo:** concluir o commit/push M2 nesta branch e parar. M3 requer missão separada.
-- **Próximo marco candidato:** M3 — cobertura determinística do contrato M1; requer missão separada e não está autorizado por M2.
+- **Próximo passo:** concluir commit/push M3 na mesma branch e parar. M4 requer missão humana separada; nenhuma correção é automática.
 
 ---
 
@@ -37,7 +37,7 @@ O **Idea Evolution Engine (IEE)** é um sistema de investigação deliberativa g
 ---
 
 ## 4. O Sistema de Continuidade e Checkpoints
-- **Último Checkpoint Imutável:** [`CP-20261004-001`](checkpoints/CP-20261004-001.md)
+- **Último Checkpoint Imutável:** [`CP-20261004-002`](checkpoints/CP-20261004-002.md)
 - **Manifesto Machine-Readable:** [`docs/context/context-manifest.json`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/context-manifest.json)
 - **Validador Determinístico:** Execute `python tools/context/validate_context.py` para verificar integridade da base.
 - **Fail-Closed on Conflict:** Se duas fontes documentais de mesmo nível divergirem, pare e registre o conflito em [`docs/context/CONTRADICTIONS.md`](file:///c:/Users/phped/Documents/ProjetoFioIedeias/docs/context/CONTRADICTIONS.md).

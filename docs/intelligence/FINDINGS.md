@@ -295,6 +295,15 @@ Uma IA que pergunte: *"Por que temos o modo Single Agent como default?"* consegu
 - **Limits:** Fiobase é regressão conhecida, não holdout cego. Nenhuma chamada real, avaliação semântica externa ou prova de cobertura foi feita. O M1/RQ11 hash permanece histórico e imutável.
 - **Implications:** A primeira chamada já pode separar intenção de implementação e evitar que `primary_mechanism` defina a ideia maturada; M3 continua responsável pela avaliação determinística de cobertura.
 
+---
+
+### [FINDING-030] Cobertura M3 Deve Ser Estrutural e Explicitamente Modesta
+- **Claim:** O serviço Lean agora avalia cada novo artefato schema 1.1 após o mapper. O gate recolhe tratamento ausente, conflito estruturado, exposição provisória/deferida sem decisão ligada por ID, referência de caminho inválida, ausência de forma atual, falta de CORE_INTENT e alvo de incerteza inválido. Sem issues retorna `NO_BLOCKING_GAP_DETECTED`; com qualquer issue retorna `REPAIR_REQUIRED`, sem nova chamada ou reparo.
+- **Evidence:** `src/idea_evolution/service/maturation_coverage_gate.py`, integração em `evolution_service.py`, ajuste de transição pendente em `evolution_artifact.py` e `tests/test_v12_m3_deterministic_coverage_gate.py` (15 testes). Suíte determinística completa: `602 passed, 0 failed, 1 PytestCollectionWarning`, executada em cópia temporária para isolar testes que escrevem artefatos; nenhuma chamada a provedor/Qwen.
+- **Status:** `IMPLEMENTED_AND_VERIFIED_OFFLINE`; baseline conhecido de M2 preservado, nenhum artefato histórico foi migrado.
+- **Limits:** `NO_BLOCKING_GAP_DETECTED` não prova correção semântica, preservação de intenção nem ausência de contradição em linguagem natural. Como `open_decisions` do wire M2 são strings sem relações, nenhuma decisão é associada por semelhança textual; provisional/deferred sem `related_intent_ids` estruturado ficam `REPAIR_REQUIRED`.
+- **Implications:** M4 poderá consumir issues tipadas, mas qualquer reparo ou extensão do vínculo no wire requer missão específica; M3 não amplia autoridade ou comportamento humano.
+
 
 
 

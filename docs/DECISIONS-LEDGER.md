@@ -200,5 +200,14 @@
 - **Decisão:** Substituir o prompt mínimo por uma maturação explícita em uma chamada; validar localmente os valores enumerados, âncoras de fonte e referências entre caminhos/intenção; representar insights e decisões como texto curto no wire format e atribuir IDs determinísticos no mapper; gerar `current_form` explicitamente. O artefato continua no schema 1.1 e `coverage_status` permanece `NOT_EVALUATED`; o pin atual do bundle é V1.2 e os hashes históricos não mudam.
 - **Consequências:** Caminhos permanecem `MODEL_HYPOTHESIS`, texto de citação não ganha autoridade, forma atual não é definida pelo mecanismo primário, e M3 continua separado. Relações semânticas insight/decisão→intenção não são inventadas quando não vêm no contrato de entrada.
 
+---
+
+### <a id="adr-021"></a> ADR-021: Gate Determinístico de Cobertura Após o Mapeamento Lean
+- **Data:** 2026-10-04
+- **Status:** `ACCEPTED_FOR_V1_2_M3`
+- **Contexto:** M1 mantém cobertura como `NOT_EVALUATED` até haver avaliação. O mapper M2 representa `open_decisions` como texto e não inventa relações com intenções; além disso, a invariante anterior do artefato não permitia que um `CONFLICT_FOUND` tipado aguardasse essa avaliação.
+- **Decisão:** Avaliar um `MaturationCoverageGate` dedicado no serviço Lean imediatamente após o mapeamento. Usar apenas ledger, estados tipados, relações por ID, caminhos e referências de incerteza. Exigir vínculo por ID em `OpenDecision` para provar exposição de estado `PROVISIONALLY_MODIFIED`/`DEFERRED`; não inferir relações a partir da prosa. Permitir conflito explícito somente enquanto `NOT_EVALUATED`, exigindo vínculo exato status/issue em qualquer estado já avaliado.
+- **Consequências:** O resultado limpo significa apenas que os checks determinísticos implementados não acharam defeito bloqueante. Estados sem vínculo ficam `REPAIR_REQUIRED`; não há detecção semântica, nova chamada, reparo automático, elevação de autoridade ou alteração do comportamento do Early Epistemic Gate.
+
 
 

@@ -636,3 +636,12 @@
 - **O que mudou:** Prompt de primeira passagem reforçado; `current_form` explícita; ledger com citações exatas e validação local fail-closed; caminhos ligados a intenções e tratados como hipóteses; insights/decisões mapeados sem autoridade; próximo passo ligado a incerteza; identidade de hash ativa V1.2 separada dos pins históricos.
 - **Verificação:** 15 testes M2 e regressões direcionadas passaram; suíte completa `587 passed, 0 failed, 1 PytestCollectionWarning`; `validate_context.py` passou após reconciliar no manifesto o hash stale do README (o README não foi alterado). Sem provedor/Qwen.
 - **Resultado:** `M2_PASS`; `coverage_status = NOT_EVALUATED`; M3 não iniciado.
+
+---
+
+### [FIOIDEIAS-V1.2-M3-DETERMINISTIC-COVERAGE-GATE] Cobertura estrutural determinística
+- **Data:** 2026-10-04
+- **Base:** `fioideias/v1.2-maturation` em `d2ed90345ab10c7273b0227aff856779c85dc00e`.
+- **O que mudou:** Novo `MaturationCoverageGate` dedicado, aplicado pelo serviço após o mapper Lean; cobertura material/constraints, conflitos, exposição de provisional/deferred por relação explícita, referências de caminho, forma atual e alvo de incerteza; conflitos podem aguardar avaliação somente enquanto `NOT_EVALUATED`.
+- **Verificação:** 15 testes M3; suíte offline completa `602 passed, 0 failed, 1 PytestCollectionWarning` em cópia temporária isolada, pois a execução no checkout tentou gravar em artefatos protegidos. Nenhum provedor/Qwen, nenhuma execução cega.
+- **Resultado:** `M3_PASS`; `NO_BLOCKING_GAP_DETECTED` permanece um claim estrutural modesto; `REPAIR_REQUIRED` não dispara reparo ou chamada adicional.

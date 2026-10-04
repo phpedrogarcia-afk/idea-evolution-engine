@@ -7,9 +7,10 @@
 
 ## 🟢 NOW (Próxima Decisão Imediata)
  
-- [x] **FIOIDEIAS-V1.2-M2-STRONG-FIRST-PASS:** Implementação e verificação offline concluídas nesta missão; fechar commit/push apenas para `fioideias/v1.2-maturation`.
-- [ ] **V1.2-M3-DETERMINISTIC-COVERAGE:** Próximo marco candidato, somente em missão própria. Até M3, `coverage_status = NOT_EVALUATED`; não iniciar cobertura, reparo automático ou segunda chamada neste fechamento.
-- **Nota de autoridade:** a autorização específica para M2 não revoga o gate humano para outras expansões pós-release.
+- [x] **FIOIDEIAS-V1.2-M2-STRONG-FIRST-PASS:** Implementada, verificada e congelada na branch `fioideias/v1.2-maturation`.
+- [x] **FIOIDEIAS-V1.2-M3-DETERMINISTIC-COVERAGE-GATE:** Gate determinístico integrado após o mapper; estados `NO_BLOCKING_GAP_DETECTED` e `REPAIR_REQUIRED`; 15 testes M3 e suíte completa 602/602 aprovados offline.
+- [ ] **V1.2-M4-FOCUSED-REPAIR:** Marco candidato futuro; requer missão humana separada. Não executar reparo, segunda chamada ou expansão de UI automaticamente.
+- **Nota de autoridade:** esta autorização encerra somente M3; não autoriza M4, merge, tag ou release.
  
 ---
 

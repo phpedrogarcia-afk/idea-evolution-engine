@@ -23,6 +23,7 @@ from src.idea_evolution.service.contracts import (
     ServiceFailureType,
 )
 from src.idea_evolution.artifacts.mapper import EvolutionArtifactMapper
+from src.idea_evolution.service.maturation_coverage_gate import MaturationCoverageGate
 from src.idea_evolution.config.catalog import ModelCatalog
 from src.idea_evolution.config.cost_policy import (
     ProviderConfig,
@@ -221,6 +222,7 @@ class IdeaEvolutionService:
             model_name=request.model_name or getattr(self.runner, "default_model", None),
             provider=getattr(self.runner, "provider", None),
         )
+        artifact = MaturationCoverageGate.apply(artifact)
 
         return EvolutionResponse(
             success=True,
